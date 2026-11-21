@@ -14,268 +14,97 @@
   "doc_date": null,
   "facts": [
     {
-      "fact_type": "oc_header",
+      "fact_type": "shipment_qty",
       "subject": {
-        "po_number": "4500318735"
+        "reference": "020-48113256",
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "po_number": "4500318735"
+        "reference": "020-48113256",
+        "material_id": "CMP-GAM-001"
       },
-      "attribute": "oc_number",
-      "value": "ded",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "section": "header"
-      },
-      "evidence": "ded",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_header",
-      "subject": {
-        "po_number": "4500318735"
-      },
-      "subject_raw": {
-        "po_number": "4500318735"
-      },
-      "attribute": "oc_date",
-      "value": "2026-11-21",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "section": "header"
-      },
-      "evidence": "2026-11-21",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318735",
-        "po_line": 0,
-        "item_key": "4fba490f4c0d"
-      },
-      "subject_raw": {
-        "po_number": "4500318735",
-        "po_line": 0,
-        "item_key": "4fba490f4c0d"
-      },
-      "attribute": "item_no_printed",
-      "value": "1",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 9
-      },
-      "evidence": "CMP-GAM-001\nGame Card 128 GB –\nGrand Heist 6\n48,000\n28,000\n20,000\n항공사 사정으로 ULD 2대가 선적되지 못했습니다. AWB 020-48113256: 28,000 pcs flown ICN–FRA today, 5 of 7 ULDs.\nTwo ULDs were offloaded by the carrier (capacity).\nBalance 20,000 pcs: next available flight ICN–FRA 2026-11-23, delivery to Hamburg 2026-11-24.\nSeo-yeon Kim, Hwaseong Memor",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318735",
-        "po_line": 0,
-        "item_key": "4fba490f4c0d"
-      },
-      "subject_raw": {
-        "po_number": "4500318735",
-        "po_line": 0,
-        "item_key": "4fba490f4c0d"
-      },
-      "attribute": "supplier_part_no",
-      "value": "CMP-GAM-001",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 9
-      },
-      "evidence": "CMP-GAM-001\nGame Card 128 GB –\nGrand Heist 6\n48,000\n28,000\n20,000\n항공사 사정으로 ULD 2대가 선적되지 못했습니다. AWB 020-48113256: 28,000 pcs flown ICN–FRA today, 5 of 7 ULDs.\nTwo ULDs were offloaded by the carrier (capacity).\nBalance 20,000 pcs: next available flight ICN–FRA 2026-11-23, delivery to Hamburg 2026-11-24.\nSeo-yeon Kim, Hwaseong Memor",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318735",
-        "po_line": 0,
-        "item_key": "4fba490f4c0d"
-      },
-      "subject_raw": {
-        "po_number": "4500318735",
-        "po_line": 0,
-        "item_key": "4fba490f4c0d"
-      },
-      "attribute": "qty",
+      "attribute": "qty_planned",
       "value": 48000,
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
-        "line": 9
+        "section": "shipping advice table"
       },
-      "evidence": "CMP-GAM-001\nGame Card 128 GB –\nGrand Heist 6\n48,000\n28,000\n20,000\n항공사 사정으로 ULD 2대가 선적되지 못했습니다. AWB 020-48113256: 28,000 pcs flown ICN–FRA today, 5 of 7 ULDs.\nTwo ULDs were offloaded by the carrier (capacity).\nBalance 20,000 pcs: next available flight ICN–FRA 2026-11-23, delivery to Hamburg 2026-11-24.\nSeo-yeon Kim, Hwaseong Memor",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318735",
-        "po_line": 0,
-        "item_key": "4fba490f4c0d"
-      },
-      "subject_raw": {
-        "po_number": "4500318735",
-        "po_line": 0,
-        "item_key": "4fba490f4c0d"
-      },
-      "attribute": "unit_price",
-      "value": 48000,
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 9
-      },
-      "evidence": "CMP-GAM-001\nGame Card 128 GB –\nGrand Heist 6\n48,000\n28,000\n20,000\n항공사 사정으로 ULD 2대가 선적되지 못했습니다. AWB 020-48113256: 28,000 pcs flown ICN–FRA today, 5 of 7 ULDs.\nTwo ULDs were offloaded by the carrier (capacity).\nBalance 20,000 pcs: next available flight ICN–FRA 2026-11-23, delivery to Hamburg 2026-11-24.\nSeo-yeon Kim, Hwaseong Memor",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318735",
-        "po_line": 0,
-        "item_key": "4fba490f4c0d"
-      },
-      "subject_raw": {
-        "po_number": "4500318735",
-        "po_line": 0,
-        "item_key": "4fba490f4c0d"
-      },
-      "attribute": "currency",
-      "value": "ULD",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 9
-      },
-      "evidence": "CMP-GAM-001\nGame Card 128 GB –\nGrand Heist 6\n48,000\n28,000\n20,000\n항공사 사정으로 ULD 2대가 선적되지 못했습니다. AWB 020-48113256: 28,000 pcs flown ICN–FRA today, 5 of 7 ULDs.\nTwo ULDs were offloaded by the carrier (capacity).\nBalance 20,000 pcs: next available flight ICN–FRA 2026-11-23, delivery to Hamburg 2026-11-24.\nSeo-yeon Kim, Hwaseong Memor",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318735",
-        "po_line": 0,
-        "item_key": "4fba490f4c0d"
-      },
-      "subject_raw": {
-        "po_number": "4500318735",
-        "po_line": 0,
-        "item_key": "4fba490f4c0d"
-      },
-      "attribute": "confirmed_date",
-      "value": "2026-11-23",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 9
-      },
-      "evidence": "CMP-GAM-001\nGame Card 128 GB –\nGrand Heist 6\n48,000\n28,000\n20,000\n항공사 사정으로 ULD 2대가 선적되지 못했습니다. AWB 020-48113256: 28,000 pcs flown ICN–FRA today, 5 of 7 ULDs.\nTwo ULDs were offloaded by the carrier (capacity).\nBalance 20,000 pcs: next available flight ICN–FRA 2026-11-23, delivery to Hamburg 2026-11-24.\nSeo-yeon Kim, Hwaseong Memor",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318735",
-        "po_line": 0,
-        "item_key": "4fba490f4c0d"
-      },
-      "subject_raw": {
-        "po_number": "4500318735",
-        "po_line": 0,
-        "item_key": "4fba490f4c0d"
-      },
-      "attribute": "material_id",
-      "value": "CMP-GAM-001",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 9
-      },
-      "evidence": "CMP-GAM-001\nGame Card 128 GB –\nGrand Heist 6\n48,000\n28,000\n20,000\n항공사 사정으로 ULD 2대가 선적되지 못했습니다. AWB 020-48113256: 28,000 pcs flown ICN–FRA today, 5 of 7 ULDs.\nTwo ULDs were offloaded by the carrier (capacity).\nBalance 20,000 pcs: next available flight ICN–FRA 2026-11-23, delivery to Hamburg 2026-11-24.\nSeo-yeon Kim, Hwaseong Memor",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "supplier_statement",
-      "subject": {
-        "statement_no": 1
-      },
-      "subject_raw": {
-        "statement_no": 1
-      },
-      "attribute": "kind",
-      "value": "quantity",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1
-      },
-      "evidence": "출하 통지서 / Shipping advice (short shipment)",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "supplier_statement",
-      "subject": {
-        "statement_no": 1
-      },
-      "subject_raw": {
-        "statement_no": 1
-      },
-      "attribute": "value",
-      "value": "출하 통지서 / Shipping advice (short shipment)",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1
-      },
-      "evidence": "출하 통지서 / Shipping advice (short shipment)",
+      "evidence": "qty_planned: 48000",
       "confidence": "high"
     },
     {
       "fact_type": "shipment_qty",
       "subject": {
-        "reference": "Shipping_advice_020-48113256_4500318735",
+        "reference": "020-48113256",
         "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "reference": "Shipping_advice_020-48113256_4500318735",
+        "reference": "020-48113256",
         "material_id": "CMP-GAM-001"
       },
       "attribute": "qty_shipped",
-      "value": 48000,
+      "value": 28000,
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "section": "shipping advice table"
       },
-      "evidence": "\nGame Card 128 GB –\nGrand Heist 6\n48,000\n28,000\n20,000\n항공사 사정으로 ULD 2대가 선적되지 못했습니다. AWB 020-48113256: 28,000 pcs flown ICN–FRA today, 5 of 7 ULDs.\nTwo ULDs were offloaded by the carrier (capacity).\nBalance 20,000 pcs: next available flight ICN–FRA 2026-11-23, delivery to Hamburg 2026-11-24.\nSeo-yeon",
+      "evidence": "qty_shipped: 28000",
       "confidence": "high"
     },
     {
       "fact_type": "shipment_qty",
       "subject": {
-        "reference": "Shipping_advice_020-48113256_4500318735",
+        "reference": "020-48113256",
         "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "reference": "Shipping_advice_020-48113256_4500318735",
+        "reference": "020-48113256",
+        "material_id": "CMP-GAM-001"
+      },
+      "attribute": "qty_balance",
+      "value": 20000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "shipping advice table"
+      },
+      "evidence": "qty_balance: 20000",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "shipment_qty",
+      "subject": {
+        "reference": "020-48113256",
+        "material_id": "CMP-GAM-001"
+      },
+      "subject_raw": {
+        "reference": "020-48113256",
+        "material_id": "CMP-GAM-001"
+      },
+      "attribute": "balance_eta",
+      "value": "2026-11-24",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "shipping advice table"
+      },
+      "evidence": "balance_eta: 2026-11-24",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "shipment_qty",
+      "subject": {
+        "reference": "020-48113256",
+        "material_id": "CMP-GAM-001"
+      },
+      "subject_raw": {
+        "reference": "020-48113256",
         "material_id": "CMP-GAM-001"
       },
       "attribute": "po_number",
@@ -283,9 +112,81 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "section": "shipping advice table"
       },
-      "evidence": "4500318735",
+      "evidence": "po_number: 4500318735",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "shipment_qty",
+      "subject": {
+        "reference": "020-48113256",
+        "material_id": "CMP-GAM-001"
+      },
+      "subject_raw": {
+        "reference": "020-48113256",
+        "material_id": "CMP-GAM-001"
+      },
+      "attribute": "reference",
+      "value": "020-48113256",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "shipping advice table"
+      },
+      "evidence": "reference: 020-48113256",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "statement_no": 1,
+        "po_number": "4500318735",
+        "reference": "020-48113256",
+        "material_id": "CMP-GAM-001"
+      },
+      "subject_raw": {
+        "statement_no": 1,
+        "po_number": "4500318735",
+        "reference": "020-48113256",
+        "material_id": "CMP-GAM-001"
+      },
+      "attribute": "kind",
+      "value": "short_shipment",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "remarks"
+      },
+      "evidence": "잔량 / Balance 항공사 사정으로 ULD 2대가 선적되지 못했습니다. AWB 020-48113256: 28,000 pcs flown ICN–FRA today, 5 of 7 ULDs. Two ULDs were offloaded by the carrier (capacity). Balance 20,000 pcs: next available flight ICN–FRA 2026-11-23, delivery to Hamburg 2026-11-24.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "statement_no": 1,
+        "po_number": "4500318735",
+        "reference": "020-48113256",
+        "material_id": "CMP-GAM-001"
+      },
+      "subject_raw": {
+        "statement_no": 1,
+        "po_number": "4500318735",
+        "reference": "020-48113256",
+        "material_id": "CMP-GAM-001"
+      },
+      "attribute": "value",
+      "value": "잔량 / Balance 항공사 사정으로 ULD 2대가 선적되지 못했습니다. AWB 020-48113256: 28,000 pcs flown ICN–FRA today, 5 of 7 ULDs. Two ULDs were offloaded by the carrier (capacity). Balance 20,000 pcs: next available flight ICN–FRA 2026-11-23, delivery to Hamburg 2026-11-24.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "remarks"
+      },
+      "evidence": "잔량 / Balance 항공사 사정으로 ULD 2대가 선적되지 못했습니다. AWB 020-48113256: 28,000 pcs flown ICN–FRA today, 5 of 7 ULDs. Two ULDs were offloaded by the carrier (capacity). Balance 20,000 pcs: next available flight ICN–FRA 2026-11-23, delivery to Hamburg 2026-11-24.",
       "confidence": "high"
     }
   ],

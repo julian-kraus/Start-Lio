@@ -14,16 +14,16 @@
   "doc_date": null,
   "facts": [
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "8fa2c0288fcd"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "8fa2c0288fcd"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "8fa2c0288fcd"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "8fa2c0288fcd"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Karton Nowak Sp. z o.o.",
       "unit": null,
       "as_of": null,
@@ -32,19 +32,20 @@
         "line": 1
       },
       "evidence": "Karton Nowak Sp. z o.o.",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "803243062b48"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "803243062b48"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "803243062b48"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "803243062b48"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Oferta: tryb ekspresowy / Offer: rush service",
       "unit": null,
       "as_of": null,
@@ -53,19 +54,20 @@
         "line": 2
       },
       "evidence": "Oferta: tryb ekspresowy / Offer: rush service",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "86305e9f6738"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "86305e9f6738"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "86305e9f6738"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "86305e9f6738"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Do / To: Soony Interactive GmbH · Poznań, 21.11.2026 · ważna 24 h / valid 24 h",
       "unit": null,
       "as_of": null,
@@ -74,19 +76,20 @@
         "line": 3
       },
       "evidence": "Do / To: Soony Interactive GmbH · Poznań, 21.11.2026 · ważna 24 h / valid 24 h",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "3aeb7de198e3"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "3aeb7de198e3"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "3aeb7de198e3"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "3aeb7de198e3"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Pozycja / Item",
       "unit": null,
       "as_of": null,
@@ -95,19 +98,20 @@
         "line": 4
       },
       "evidence": "Pozycja / Item",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "9cbcd09b28a2"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "9cbcd09b28a2"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "9cbcd09b28a2"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "9cbcd09b28a2"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Opis / Description",
       "unit": null,
       "as_of": null,
@@ -116,19 +120,20 @@
         "line": 5
       },
       "evidence": "Opis / Description",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "891178784615"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "891178784615"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "891178784615"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "891178784615"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Ilość / Quantity",
       "unit": null,
       "as_of": null,
@@ -137,19 +142,20 @@
         "line": 6
       },
       "evidence": "Ilość / Quantity",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "79baf6caaeee"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "79baf6caaeee"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "79baf6caaeee"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "79baf6caaeee"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Termin / Ready",
       "unit": null,
       "as_of": null,
@@ -158,19 +164,20 @@
         "line": 7
       },
       "evidence": "Termin / Ready",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "29746fc565ae"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "29746fc565ae"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "29746fc565ae"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "29746fc565ae"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Cena / Price",
       "unit": null,
       "as_of": null,
@@ -179,19 +186,20 @@
         "line": 8
       },
       "evidence": "Cena / Price",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "1df4cbc97263"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "1df4cbc97263"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "1df4cbc97263"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "1df4cbc97263"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "1",
       "unit": null,
       "as_of": null,
@@ -200,19 +208,20 @@
         "line": 9
       },
       "evidence": "1",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "a2f398028be5"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "a2f398028be5"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "a2f398028be5"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "a2f398028be5"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Druk ekspresowy wg",
       "unit": null,
       "as_of": null,
@@ -221,19 +230,20 @@
         "line": 10
       },
       "evidence": "Druk ekspresowy wg",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "ba6a03046a42"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "ba6a03046a42"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "ba6a03046a42"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "ba6a03046a42"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "§ 3.2 umowy: okładki,",
       "unit": null,
       "as_of": null,
@@ -242,19 +252,20 @@
         "line": 11
       },
       "evidence": "§ 3.2 umowy: okładki,",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "988fb1c8ae61"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "988fb1c8ae61"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "988fb1c8ae61"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "988fb1c8ae61"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "ulotki, plakaty / Rush",
       "unit": null,
       "as_of": null,
@@ -263,19 +274,20 @@
         "line": 12
       },
       "evidence": "ulotki, plakaty / Rush",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "8dda752c260e"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "8dda752c260e"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "8dda752c260e"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "8dda752c260e"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "print per § 3.2 of the",
       "unit": null,
       "as_of": null,
@@ -284,19 +296,20 @@
         "line": 13
       },
       "evidence": "print per § 3.2 of the",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "fd6745998b01"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "fd6745998b01"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "fd6745998b01"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "fd6745998b01"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "agreement: sleeves,",
       "unit": null,
       "as_of": null,
@@ -305,19 +318,20 @@
         "line": 14
       },
       "evidence": "agreement: sleeves,",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "9373441d6eda"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "9373441d6eda"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "9373441d6eda"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "9373441d6eda"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "leaflets, posters",
       "unit": null,
       "as_of": null,
@@ -326,19 +340,20 @@
         "line": 15
       },
       "evidence": "leaflets, posters",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "0e9fd7b2842e"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "0e9fd7b2842e"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "0e9fd7b2842e"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "0e9fd7b2842e"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "do 50 000 szt. / up to",
       "unit": null,
       "as_of": null,
@@ -347,19 +362,20 @@
         "line": 16
       },
       "evidence": "do 50 000 szt. / up to",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "af9392334145"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "af9392334145"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "af9392334145"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "af9392334145"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "50,000 pcs",
       "unit": null,
       "as_of": null,
@@ -368,19 +384,20 @@
         "line": 17
       },
       "evidence": "50,000 pcs",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "e6b967f6fa82"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "e6b967f6fa82"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "e6b967f6fa82"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "e6b967f6fa82"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "36 h od otrzymania",
       "unit": null,
       "as_of": null,
@@ -389,19 +406,20 @@
         "line": 18
       },
       "evidence": "36 h od otrzymania",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "531954107a13"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "531954107a13"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "531954107a13"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "531954107a13"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "pliku / 36 h from",
       "unit": null,
       "as_of": null,
@@ -410,19 +428,20 @@
         "line": 19
       },
       "evidence": "pliku / 36 h from",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "614efdce61ba"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "614efdce61ba"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "614efdce61ba"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "614efdce61ba"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "print-ready file",
       "unit": null,
       "as_of": null,
@@ -431,19 +450,20 @@
         "line": 20
       },
       "evidence": "print-ready file",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "bcd92de6089c"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "bcd92de6089c"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "bcd92de6089c"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "bcd92de6089c"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "cennik + 35 % / Annex",
       "unit": null,
       "as_of": null,
@@ -452,19 +472,20 @@
         "line": 21
       },
       "evidence": "cennik + 35 % / Annex",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "67f32c7166fe"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "67f32c7166fe"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "67f32c7166fe"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "67f32c7166fe"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "A price + 35 %",
       "unit": null,
       "as_of": null,
@@ -473,19 +494,20 @@
         "line": 22
       },
       "evidence": "A price + 35 %",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "5319196862c5"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "5319196862c5"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "5319196862c5"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "5319196862c5"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "2",
       "unit": null,
       "as_of": null,
@@ -494,19 +516,20 @@
         "line": 23
       },
       "evidence": "2",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "7752e08db27e"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "7752e08db27e"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "7752e08db27e"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "7752e08db27e"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "CMP-GAM-008 Art",
       "unit": null,
       "as_of": null,
@@ -515,19 +538,20 @@
         "line": 24
       },
       "evidence": "CMP-GAM-008 Art",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "a1eaf45dab25"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "a1eaf45dab25"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "a1eaf45dab25"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "a1eaf45dab25"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Book Grand Heist 6",
       "unit": null,
       "as_of": null,
@@ -536,19 +560,20 @@
         "line": 25
       },
       "evidence": "Book Grand Heist 6",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "d741ff2262f5"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "d741ff2262f5"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "d741ff2262f5"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "d741ff2262f5"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "(96 p, hardcover),",
       "unit": null,
       "as_of": null,
@@ -557,19 +582,20 @@
         "line": 26
       },
       "evidence": "(96 p, hardcover),",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "9f33c8cf409f"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "9f33c8cf409f"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "9f33c8cf409f"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "9f33c8cf409f"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "nadwyżka z produkcji,",
       "unit": null,
       "as_of": null,
@@ -578,19 +604,20 @@
         "line": 27
       },
       "evidence": "nadwyżka z produkcji,",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "22c9ba7653a6"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "22c9ba7653a6"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "22c9ba7653a6"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "22c9ba7653a6"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "na magazynie /",
       "unit": null,
       "as_of": null,
@@ -599,19 +626,20 @@
         "line": 28
       },
       "evidence": "na magazynie /",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "eaf640a31441"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "eaf640a31441"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "eaf640a31441"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "eaf640a31441"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "overrun from",
       "unit": null,
       "as_of": null,
@@ -620,19 +648,20 @@
         "line": 29
       },
       "evidence": "overrun from",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "44e656e826cb"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "44e656e826cb"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "44e656e826cb"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "44e656e826cb"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "production, in our",
       "unit": null,
       "as_of": null,
@@ -641,19 +670,20 @@
         "line": 30
       },
       "evidence": "production, in our",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "d72a9f6abdc0"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "d72a9f6abdc0"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "d72a9f6abdc0"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "d72a9f6abdc0"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "finished-goods store",
       "unit": null,
       "as_of": null,
@@ -662,19 +692,20 @@
         "line": 31
       },
       "evidence": "finished-goods store",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "6b90d81dbadb"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "6b90d81dbadb"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "6b90d81dbadb"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "6b90d81dbadb"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "8 000 szt. / 8,000 pcs",
       "unit": null,
       "as_of": null,
@@ -683,19 +714,20 @@
         "line": 32
       },
       "evidence": "8 000 szt. / 8,000 pcs",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "85044e8f25d6"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "85044e8f25d6"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "85044e8f25d6"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "85044e8f25d6"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "załadunek w 4 h od",
       "unit": null,
       "as_of": null,
@@ -704,19 +736,20 @@
         "line": 33
       },
       "evidence": "załadunek w 4 h od",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "c4cc520b2b26"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "c4cc520b2b26"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "c4cc520b2b26"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "c4cc520b2b26"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "zamówienia / loaded",
       "unit": null,
       "as_of": null,
@@ -725,19 +758,20 @@
         "line": 34
       },
       "evidence": "zamówienia / loaded",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "a0c4b8378bcb"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "a0c4b8378bcb"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "a0c4b8378bcb"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "a0c4b8378bcb"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "within 4 h of your",
       "unit": null,
       "as_of": null,
@@ -746,19 +780,20 @@
         "line": 35
       },
       "evidence": "within 4 h of your",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "98f5bcf3e5a7"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "98f5bcf3e5a7"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "98f5bcf3e5a7"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "98f5bcf3e5a7"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "order",
       "unit": null,
       "as_of": null,
@@ -767,19 +802,20 @@
         "line": 36
       },
       "evidence": "order",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "e0f6b36bd464"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "e0f6b36bd464"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "e0f6b36bd464"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "e0f6b36bd464"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "cennik / Annex A price",
       "unit": null,
       "as_of": null,
@@ -788,19 +824,20 @@
         "line": 37
       },
       "evidence": "cennik / Annex A price",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "95e99676a17b"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "95e99676a17b"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "95e99676a17b"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "95e99676a17b"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Transport: Warta Trans, Poznań – Hamburg ok. 9 h jazdy. / Truck Poznań – Hamburg about 9 h driving.",
       "unit": null,
       "as_of": null,
@@ -809,19 +846,20 @@
         "line": 38
       },
       "evidence": "Transport: Warta Trans, Poznań – Hamburg ok. 9 h jazdy. / Truck Poznań – Hamburg about 9 h driving.",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "306494a06f5f"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "306494a06f5f"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "306494a06f5f"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "306494a06f5f"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Uwaga: prosimy uwzględnić nasze zawiadomienie o przestoju technicznym. / Please note our notice of planned",
       "unit": null,
       "as_of": null,
@@ -830,19 +868,20 @@
         "line": 39
       },
       "evidence": "Uwaga: prosimy uwzględnić nasze zawiadomienie o przestoju technicznym. / Please note our notice of planned",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "91935fea0131"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "91935fea0131"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "91935fea0131"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "91935fea0131"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "downtime.",
       "unit": null,
       "as_of": null,
@@ -851,19 +890,20 @@
         "line": 40
       },
       "evidence": "downtime.",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "02bc69330f45"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "02bc69330f45"
       },
       "subject_raw": {
-        "scope": "Oferta_tryb_ekspresowy_2026-11-21",
-        "directive_key": "02bc69330f45"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Oferta_tryb_ekspresowy_2026-11-21.pdf",
+        "line_key": "02bc69330f45"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Agnieszka Nowak, Karton Nowak Sp. z o.o., +48 61 842 0101",
       "unit": null,
       "as_of": null,
@@ -872,7 +912,8 @@
         "line": 41
       },
       "evidence": "Agnieszka Nowak, Karton Nowak Sp. z o.o., +48 61 842 0101",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     }
   ],
   "unreadable": [],

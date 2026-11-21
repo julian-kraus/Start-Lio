@@ -11,67 +11,179 @@
   "columns": {
     "po_number": {
       "field": "po_number",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "po_line": {
       "field": "po_line",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "supplier_id": {
       "field": "supplier_id",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "material_id": {
       "field": "material_id",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "plant": {
       "field": "plant",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "quantity": {
       "field": "qty",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "unit_price": {
       "field": "unit_price",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "currency": {
       "field": "currency",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "order_date": {
       "field": "order_date",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "requested_date": {
       "field": "requested_date",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "promised_date": {
       "field": "promised_date",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "actual_delivery_date": {
       "field": "actual_delivery_date",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "status": {
       "field": "status",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "buyer": {
       "field": "buyer",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "incoterm": {
       "field": "incoterm",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "note": {
       "field": "note",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     }
   }
 }

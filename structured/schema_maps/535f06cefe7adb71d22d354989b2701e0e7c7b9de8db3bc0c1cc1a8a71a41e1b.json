@@ -10,79 +10,212 @@
   "columns": {
     "supplier_id": {
       "field": "supplier_id",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "name": {
       "field": "name",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "legal_name": {
       "field": "legal_name",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "category": {
       "field": "category",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "country": {
       "field": "country",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "city": {
       "field": "city",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "lat": {
       "field": "lat",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "lon": {
       "field": "lon",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "currency": {
       "field": "currency",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "payment_terms": {
       "field": "payment_terms",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "incoterm": {
       "field": "incoterm",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "supplier_since": {
       "field": "supplier_since",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "status": {
       "field": "status",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "qualification_status": {
       "field": "qualification_status",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "contact_name": {
       "field": "contact_name",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "contact_email": {
       "field": "contact_email",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "phone": {
       "field": "phone",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "preferred_language": {
       "field": "preferred_language",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "notes": {
       "field": "notes",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     }
   }
 }

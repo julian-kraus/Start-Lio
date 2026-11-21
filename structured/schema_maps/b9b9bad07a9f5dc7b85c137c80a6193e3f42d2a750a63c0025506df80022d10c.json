@@ -10,43 +10,113 @@
   "columns": {
     "product_id": {
       "field": "product_id",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "name": {
       "field": "name",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "product_line": {
       "field": "product_line",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "lifecycle": {
       "field": "lifecycle",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "launch_date": {
       "field": "launch_date",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "weekly_plan_qty": {
       "field": "weekly_plan_qty",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "day_one_qty": {
       "field": "day_one_qty",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "plants": {
       "field": "plants",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "std_cost_eur": {
       "field": "std_cost_eur",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "valid_from": {
       "field": "valid_from",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     }
   }
 }

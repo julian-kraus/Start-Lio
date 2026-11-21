@@ -5,41 +5,98 @@
   "sheet": null,
   "fact_type": "change_record",
   "subject": [
+    "entity",
     "material_id",
     "field"
   ],
   "columns": {
     "component_id": {
       "field": "material_id",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "supplier_id": {
       "field": "supplier_id",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "action": {
       "field": "action",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "lead_time_days_old": {
       "field": "lead_time_days_old",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "lead_time_days_new": {
       "field": "lead_time_days_new",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "share": {
       "field": "share",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "primary": {
       "field": "primary",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "note": {
       "field": "note",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     }
   }
 }

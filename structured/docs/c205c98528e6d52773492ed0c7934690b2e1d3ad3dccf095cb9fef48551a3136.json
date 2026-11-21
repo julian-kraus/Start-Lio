@@ -60,33 +60,14 @@
         "po_number": "4500318761"
       },
       "attribute": "incoterm",
-      "value": "DAP",
+      "value": "DAP Hamburg",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "section": "header"
       },
-      "evidence": "DAP",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_header",
-      "subject": {
-        "po_number": "4500318761"
-      },
-      "subject_raw": {
-        "po_number": "4500318761"
-      },
-      "attribute": "payment_terms",
-      "value": "NET30",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "section": "header"
-      },
-      "evidence": "NET30",
+      "evidence": "DAP Hamburg",
       "confidence": "high"
     },
     {
@@ -109,7 +90,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR\n2026-11-09\n00020",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
@@ -132,7 +113,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR\n2026-11-09\n00020",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
@@ -155,7 +136,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR\n2026-11-09\n00020",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
@@ -171,14 +152,14 @@
         "item_key": "53004b816dcd"
       },
       "attribute": "unit_price",
-      "value": 270000,
+      "value": 0.03,
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR\n2026-11-09\n00020",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
@@ -201,7 +182,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR\n2026-11-09\n00020",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
@@ -224,7 +205,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR\n2026-11-09\n00020",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
@@ -247,43 +228,43 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR\n2026-11-09\n00020",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318761",
-        "po_line": 1,
-        "item_key": "5f000337853b"
+        "po_line": 2,
+        "item_key": "c8cdc5ea2a5c"
       },
       "subject_raw": {
         "po_number": "4500318761",
-        "po_line": 1,
-        "item_key": "5f000337853b"
+        "po_line": 2,
+        "item_key": "c8cdc5ea2a5c"
       },
       "attribute": "item_no_printed",
-      "value": "00010",
+      "value": "00020",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR\n2026-11-06",
+      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318761",
-        "po_line": 1,
-        "item_key": "5f000337853b"
+        "po_line": 2,
+        "item_key": "c8cdc5ea2a5c"
       },
       "subject_raw": {
         "po_number": "4500318761",
-        "po_line": 1,
-        "item_key": "5f000337853b"
+        "po_line": 2,
+        "item_key": "c8cdc5ea2a5c"
       },
       "attribute": "supplier_part_no",
       "value": "CMP-GAM-009",
@@ -293,20 +274,20 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR\n2026-11-06",
+      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318761",
-        "po_line": 1,
-        "item_key": "5f000337853b"
+        "po_line": 2,
+        "item_key": "c8cdc5ea2a5c"
       },
       "subject_raw": {
         "po_number": "4500318761",
-        "po_line": 1,
-        "item_key": "5f000337853b"
+        "po_line": 2,
+        "item_key": "c8cdc5ea2a5c"
       },
       "attribute": "qty",
       "value": 24800,
@@ -316,43 +297,43 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR\n2026-11-06",
+      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318761",
-        "po_line": 1,
-        "item_key": "5f000337853b"
+        "po_line": 2,
+        "item_key": "c8cdc5ea2a5c"
       },
       "subject_raw": {
         "po_number": "4500318761",
-        "po_line": 1,
-        "item_key": "5f000337853b"
+        "po_line": 2,
+        "item_key": "c8cdc5ea2a5c"
       },
       "attribute": "unit_price",
-      "value": 24800,
+      "value": 0.22,
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR\n2026-11-06",
+      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318761",
-        "po_line": 1,
-        "item_key": "5f000337853b"
+        "po_line": 2,
+        "item_key": "c8cdc5ea2a5c"
       },
       "subject_raw": {
         "po_number": "4500318761",
-        "po_line": 1,
-        "item_key": "5f000337853b"
+        "po_line": 2,
+        "item_key": "c8cdc5ea2a5c"
       },
       "attribute": "currency",
       "value": "EUR",
@@ -362,20 +343,20 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR\n2026-11-06",
+      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318761",
-        "po_line": 1,
-        "item_key": "5f000337853b"
+        "po_line": 2,
+        "item_key": "c8cdc5ea2a5c"
       },
       "subject_raw": {
         "po_number": "4500318761",
-        "po_line": 1,
-        "item_key": "5f000337853b"
+        "po_line": 2,
+        "item_key": "c8cdc5ea2a5c"
       },
       "attribute": "confirmed_date",
       "value": "2026-11-06",
@@ -385,20 +366,20 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR\n2026-11-06",
+      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318761",
-        "po_line": 1,
-        "item_key": "5f000337853b"
+        "po_line": 2,
+        "item_key": "c8cdc5ea2a5c"
       },
       "subject_raw": {
         "po_number": "4500318761",
-        "po_line": 1,
-        "item_key": "5f000337853b"
+        "po_line": 2,
+        "item_key": "c8cdc5ea2a5c"
       },
       "attribute": "material_id",
       "value": "CMP-GAM-009",
@@ -408,7 +389,7 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR\n2026-11-06",
+      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR",
       "confidence": "high"
     }
   ],

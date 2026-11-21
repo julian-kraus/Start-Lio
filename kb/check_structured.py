@@ -18,6 +18,9 @@ from tracker.diff import detect_kind
 from .tabular import TABULAR_CONTAINERS, find_header, guess_header, read_tables, signature, table_to_facts
 
 ROW_ID = re.compile(r"^(row|line|r)[-_ ]?\d+$", re.IGNORECASE)
+STATEMENT_KINDS = {"on_hold", "term_rejected", "short_shipment", "artwork_rev", "approval_claim", "dispatch_info",
+                   "price_deviation", "handling_note", "other"}
+ARITHMETIC = [("shipment_qty", ("qty_shipped", "qty_balance"), "qty_planned")]
 MAP_KEYS = ("signature", "fact_type", "subject", "columns")
 
 
@@ -83,12 +86,25 @@ def check_envelopes(structured: Path) -> dict:
     records: dict[str, set] = defaultdict(set)
     statements_without_kind = 0
     stmt_kinds: dict[tuple, set] = defaultdict(set)
+    missing_keys, file_name_ids, bad_kinds, unanchored = Counter(), Counter(), Counter(), Counter()
+    by_record: dict[tuple, dict] = defaultdict(dict)
     seen: Counter = Counter()
     for path in sorted((structured / "docs").glob("*.json")):
         env = json.loads(path.read_text())
         src = env.get("source", {}).get("path", path.name)
+        stem = Path(src).stem
         for f in env.get("facts", []):
             ft, subj = f.get("fact_type"), f.get("subject") or {}
+            declared = (registry.get(ft) or {}).get("subject_keys") or []
+            if any(k not in subj for k in declared):
+                missing_keys[ft] += 1
+            if any(str(v) == stem for v in subj.values()):
+                file_name_ids[ft] += 1
+            if ft == "supplier_statement" and not (set(subj) - {"statement_no", "material_id"}):
+                unanchored[src] += 1
+            if ft == "supplier_statement" and f.get("attribute") == "kind" and f.get("value") not in STATEMENT_KINDS:
+                bad_kinds[str(f.get("value"))] += 1
+            by_record[(src, ft, json.dumps(subj, sort_keys=True))][f.get("attribute")] = f.get("value")
             if any(ROW_ID.match(str(v)) for v in subj.values()):
                 row_subjects[ft] += 1
             if ft not in registry and not str(ft).startswith("x_"):
@@ -103,6 +119,31 @@ def check_envelopes(structured: Path) -> dict:
             if ft == "supplier_statement":
                 stmt_kinds[(src, json.dumps(subj, sort_keys=True))].add(f.get("attribute"))
     statements_without_kind = sum(1 for attrs in stmt_kinds.values() if "kind" not in attrs)
+    # Cross-check: a confirmation item and the PO line with the same PO number and quantity name the same material.
+    po_lines = defaultdict(list)
+    for (src, ft, subj), attrs in by_record.items():
+        if ft == "po_line":
+            s = json.loads(subj)
+            po_lines[str(s.get("po_number"))].append(attrs)
+    material_mismatches = []
+    for (src, ft, subj), attrs in by_record.items():
+        if ft != "oc_line" or attrs.get("material_id") is None or attrs.get("qty") is None:
+            continue
+        s = json.loads(subj)
+        same_qty = [p for p in po_lines.get(str(s.get("po_number")), []) if str(p.get("qty")) == str(attrs["qty"])]
+        if len(same_qty) == 1 and same_qty[0].get("material_id") != attrs["material_id"]:
+            material_mismatches.append(f"{src}: item {attrs.get('supplier_part_no')} qty {attrs['qty']} -> "
+                                       f"{attrs['material_id']}, PO line with that qty is {same_qty[0].get('material_id')}")
+    arithmetic = []
+    for (src, ft, subj), attrs in by_record.items():
+        for afft, parts, total in ARITHMETIC:
+            if ft != afft or attrs.get(total) is None or any(attrs.get(p) is None for p in parts):
+                continue
+            try:
+                if abs(sum(float(attrs[p]) for p in parts) - float(attrs[total])) > 1e-6:
+                    arithmetic.append(f"{src}: {' + '.join(parts)} != {total} for {subj}")
+            except (TypeError, ValueError):
+                arithmetic.append(f"{src}: non-numeric {parts}/{total} for {subj}")
     coverage = {}
     for ft, spec in registry.items():
         attrs = list((spec.get("attributes") or {}).keys())
@@ -114,6 +155,13 @@ def check_envelopes(structured: Path) -> dict:
             "subject_collisions": dict(collisions),
             "unknown_fact_types": dict(unknown),
             "supplier_statements_without_kind": statements_without_kind,
+            "subjects_missing_declared_keys": dict(missing_keys),
+            "file_name_used_as_id": dict(file_name_ids),
+            "statement_kinds_outside_list": dict(bad_kinds),
+            "statements_without_document_key": len(unanchored),
+            "arithmetic_failures": arithmetic[:20],
+            "oc_material_vs_po": material_mismatches[:20],
+            "oc_material_vs_po_count": len(material_mismatches),
             "attribute_coverage": coverage}
 
 
@@ -135,4 +183,17 @@ def run(structured: Path, current: Path) -> dict:
         failures.append("supplier statements without a kind")
     if env["unknown_fact_types"]:
         failures.append("fact types outside the contract")
+    if env["subjects_missing_declared_keys"]:
+        failures.append("subjects miss keys that fact_types.json declares (records cannot be joined)")
+    if env["file_name_used_as_id"]:
+        failures.append("a file name is used as an entity ID")
+    if env["statements_without_document_key"]:
+        failures.append("supplier statements not linked to a PO, delivery note or shipment (subject is only a number)")
+    if env["statement_kinds_outside_list"]:
+        failures.append("supplier statement kinds outside the closed list")
+    if env["oc_material_vs_po_count"]:
+        failures.append("confirmation items name a different material than the PO line with the same quantity "
+                        "(check part-number cross-references)")
+    if env["arithmetic_failures"]:
+        failures.append("quantities that must add up do not (e.g. shipped + balance = ordered)")
     return {"ok": not failures, "failures": failures, "maps": maps, "envelopes": env}

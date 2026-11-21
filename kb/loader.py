@@ -111,6 +111,19 @@ def load_envelope(conn, env: dict, *, current_sha: str | None, confidence_map: d
     if parsed_sheets:
         items = [f for f in items if (f.get("locator") or {}).get("sheet") not in parsed_sheets]
     for f in items:
+        f["fact_id"] = facts_mod.fact_id(f)
+    if is_current and items and {f["fact_id"] for f in items} == before["fact_ids"]:
+        stored = {r["fact_id"]: r["value"] for r in conn.execute(
+            "SELECT fact_id, value FROM facts WHERE source_path = %s AND valid", (path,))}
+        if all(stored.get(f["fact_id"]) == f.get("value") for f in items):
+            return len(items)  # this exact extraction (ids and values) is already loaded and the only valid one
+    # A newer extraction of the same file version replaces the previous one of the same extractor family
+    # (a regenerated Codex pass, or a re-run of the live intake); facts it no longer contains stop counting.
+    family = (items[0]["extractor"] if items else envelope_facts({**env, "facts": [
+        {"fact_type": "x", "attribute": "x"}]}, confidence_map)[0]["extractor"]).split(":")[0] + ":%"
+    conn.execute("UPDATE facts SET valid = false WHERE source_path = %s AND source_sha256 = %s AND extractor LIKE %s "
+                 "AND valid", (path, sha, family))
+    for f in items:
         f["valid"] = is_current
     facts_mod.insert_facts(conn, items)
     status = conn.execute("SELECT status FROM documents WHERE path = %s AND sha256 = %s", (path, sha)).fetchone()

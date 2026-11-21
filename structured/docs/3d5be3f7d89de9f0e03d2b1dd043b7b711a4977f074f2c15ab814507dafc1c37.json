@@ -370,10 +370,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "WZ-261021-680"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "WZ-261021-680"
       },
       "attribute": "kind",
       "value": "handling_note",
@@ -389,10 +391,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "WZ-261021-680"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "WZ-261021-680"
       },
       "attribute": "value",
       "value": "Towar na paletach EUR, prosimy o zwrot",

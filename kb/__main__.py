@@ -82,6 +82,21 @@ def cmd_eval_extraction(args, s, conn):
         _print(result)
 
 
+def cmd_profiles(args, s, conn):
+    rows = conn.execute("SELECT supplier_id, profile, computed_at FROM supplier_profiles "
+                        "WHERE %s::text IS NULL OR supplier_id = %s ORDER BY supplier_id",
+                        (args.supplier, args.supplier)).fetchall()
+    if args.supplier or args.full:
+        _print(rows)
+        return
+    for r in rows:
+        p, d = r["profile"], r["profile"]["delivery"]
+        name = (p.get("master") or {}).get("name", "")
+        print(f"{r['supplier_id']:9} {name[:28]:28} late {d['late_lines']}/{d['delivered_lines']} "
+              f"({d['late_share']}) avg {d['avg_delay_days_when_late']} d | open lines {d['open_lines']} "
+              f"{d['open_value']} | open issues {p['issues']['open']} {p['issues']['by_severity']}")
+
+
 def cmd_review(args, s, conn):
     _print(registry.pending_review(conn))
 
@@ -230,6 +245,10 @@ def main(argv=None) -> int:
     p.add_argument("--limit", type=int, default=20, help="files per doc kind")
     p.add_argument("--full", action="store_true")
     p.set_defaults(func=cmd_eval_extraction)
+    p = sub.add_parser("profiles", help="supplier profiles (rebuilt on every reconcile)")
+    p.add_argument("supplier", nargs="?")
+    p.add_argument("--full", action="store_true")
+    p.set_defaults(func=cmd_profiles)
     sub.add_parser("review", help="what agents proposed and what failed the validation gate").set_defaults(
         func=cmd_review)
     for name in ("promote", "reject"):

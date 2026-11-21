@@ -32,7 +32,8 @@
         "line": 1
       },
       "evidence": "Karton Nowak Sp. z o.o.",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -53,7 +54,8 @@
         "line": 2
       },
       "evidence": "Zawiadomienie o planowanym przestoju technicznym",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -74,7 +76,8 @@
         "line": 3
       },
       "evidence": "Do: Soony Interactive GmbH, Dział Zakupów · Poznań, 09.11.2026",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -95,7 +98,8 @@
         "line": 4
       },
       "evidence": "Maszyna",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -116,7 +120,8 @@
         "line": 5
       },
       "evidence": "Przestój od",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -137,7 +142,8 @@
         "line": 6
       },
       "evidence": "Przestój do",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -158,7 +164,8 @@
         "line": 7
       },
       "evidence": "Zakres prac",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -179,7 +186,8 @@
         "line": 8
       },
       "evidence": "Moce w czasie",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -200,7 +208,8 @@
         "line": 9
       },
       "evidence": "przestoju",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -221,7 +230,8 @@
         "line": 10
       },
       "evidence": "Offset arkuszowy B1",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -242,7 +252,8 @@
         "line": 11
       },
       "evidence": "(linia 1)",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -263,7 +274,8 @@
         "line": 12
       },
       "evidence": "21.11.2026 14:00",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -284,7 +296,8 @@
         "line": 13
       },
       "evidence": "23.11.2026 06:00",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -305,7 +318,8 @@
         "line": 14
       },
       "evidence": "przegląd roczny,",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -326,7 +340,8 @@
         "line": 15
       },
       "evidence": "wymiana obciągów i",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -347,7 +362,8 @@
         "line": 16
       },
       "evidence": "wałków",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -368,7 +384,8 @@
         "line": 17
       },
       "evidence": "brak",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -389,7 +406,8 @@
         "line": 18
       },
       "evidence": "Druk cyfrowy B2 (linia",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -410,7 +428,8 @@
         "line": 19
       },
       "evidence": "3)",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -431,7 +450,8 @@
         "line": 20
       },
       "evidence": "—",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -452,7 +472,8 @@
         "line": 21
       },
       "evidence": "—",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -473,7 +494,8 @@
         "line": 22
       },
       "evidence": "praca bez zmian",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -494,7 +516,8 @@
         "line": 23
       },
       "evidence": "do 15 000 szt.",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -515,7 +538,8 @@
         "line": 24
       },
       "evidence": "okładek lub ulotek na",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -536,7 +560,8 @@
         "line": 25
       },
       "evidence": "36 h",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -557,7 +582,8 @@
         "line": 26
       },
       "evidence": "Introligatornia",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -578,7 +604,8 @@
         "line": 27
       },
       "evidence": "(oprawa twarda)",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -599,7 +626,8 @@
         "line": 28
       },
       "evidence": "21.11.2026 14:00",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -620,7 +648,8 @@
         "line": 29
       },
       "evidence": "23.11.2026 06:00",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -641,7 +670,8 @@
         "line": 30
       },
       "evidence": "serwis linii",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -662,7 +692,8 @@
         "line": 31
       },
       "evidence": "brak; wysyłka",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -683,7 +714,8 @@
         "line": 32
       },
       "evidence": "wyrobów gotowych z",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -704,7 +736,8 @@
         "line": 33
       },
       "evidence": "magazynu możliwa",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -725,7 +758,8 @@
         "line": 34
       },
       "evidence": "Szanowni Państwo, informujemy o planowanym przestoju technicznym w naszej drukarni w Poznaniu. W czasie",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -746,7 +780,8 @@
         "line": 35
       },
       "evidence": "przestoju zlecenia w trybie ekspresowym (§ 3.2 umowy) realizujemy wyłącznie na linii cyfrowej, w ilości podanej w tabeli.",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -767,7 +802,8 @@
         "line": 36
       },
       "evidence": "Zlecenia ekspresowe na linię offsetową przyjmujemy do 21.11.2026, godz. 09:00, z gotowym plikiem do druku.",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
       "fact_type": "x_document_line",
@@ -788,7 +824,8 @@
         "line": 37
       },
       "evidence": "Z poważaniem, Agnieszka Nowak, Karton Nowak Sp. z o.o., tel. +48 61 842 0101",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     }
   ],
   "unreadable": [],

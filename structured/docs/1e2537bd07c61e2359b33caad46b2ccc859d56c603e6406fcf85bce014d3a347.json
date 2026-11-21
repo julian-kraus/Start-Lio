@@ -82,7 +82,7 @@
         "shipment_id": "SHP-2026-04276"
       },
       "attribute": "supplier_id",
-      "value": "Guangzhou PackRight",
+      "value": "SUP-0029",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -102,7 +102,9 @@
         "shipment_id": "SHP-2026-04276"
       },
       "attribute": "po_numbers",
-      "value": "4500318738",
+      "value": [
+        "4500318738"
+      ],
       "unit": null,
       "as_of": null,
       "locator": {
@@ -302,7 +304,7 @@
         "shipment_id": "SHP-2026-04281"
       },
       "attribute": "supplier_id",
-      "value": "Hwaseong Memory",
+      "value": "SUP-0010",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -322,7 +324,10 @@
         "shipment_id": "SHP-2026-04281"
       },
       "attribute": "po_numbers",
-      "value": "4500318733, 4500318735",
+      "value": [
+        "4500318733",
+        "4500318735"
+      ],
       "unit": null,
       "as_of": null,
       "locator": {
@@ -502,7 +507,7 @@
         "shipment_id": "SHP-2026-04284"
       },
       "attribute": "supplier_id",
-      "value": "Hwaseong Memory",
+      "value": "SUP-0010",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -522,7 +527,9 @@
         "shipment_id": "SHP-2026-04284"
       },
       "attribute": "po_numbers",
-      "value": "4500318733",
+      "value": [
+        "4500318733"
+      ],
       "unit": null,
       "as_of": null,
       "locator": {
@@ -702,7 +709,7 @@
         "shipment_id": "SHP-2026-04289"
       },
       "attribute": "supplier_id",
-      "value": "Hwaseong Memory",
+      "value": "SUP-0010",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -722,7 +729,10 @@
         "shipment_id": "SHP-2026-04289"
       },
       "attribute": "po_numbers",
-      "value": "4500318741, 4500318748",
+      "value": [
+        "4500318741",
+        "4500318748"
+      ],
       "unit": null,
       "as_of": null,
       "locator": {
@@ -902,7 +912,7 @@
         "shipment_id": "SHP-2026-04292"
       },
       "attribute": "supplier_id",
-      "value": "Dongguan Precision Housings",
+      "value": "SUP-0019",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -922,7 +932,9 @@
         "shipment_id": "SHP-2026-04292"
       },
       "attribute": "po_numbers",
-      "value": "4500318719",
+      "value": [
+        "4500318719"
+      ],
       "unit": null,
       "as_of": null,
       "locator": {
@@ -1102,7 +1114,7 @@
         "shipment_id": "SHP-2026-04293"
       },
       "attribute": "supplier_id",
-      "value": "Guangzhou PackRight",
+      "value": "SUP-0029",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -1122,7 +1134,11 @@
         "shipment_id": "SHP-2026-04293"
       },
       "attribute": "po_numbers",
-      "value": "4500318747, 4500318752, 4500318763",
+      "value": [
+        "4500318747",
+        "4500318752",
+        "4500318763"
+      ],
       "unit": null,
       "as_of": null,
       "locator": {
@@ -1302,7 +1318,7 @@
         "shipment_id": "SHP-2026-04303"
       },
       "attribute": "supplier_id",
-      "value": "Pune Diecast Works",
+      "value": "SUP-0018",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -1322,7 +1338,10 @@
         "shipment_id": "SHP-2026-04303"
       },
       "attribute": "po_numbers",
-      "value": "4500318739, 4500318745",
+      "value": [
+        "4500318739",
+        "4500318745"
+      ],
       "unit": null,
       "as_of": null,
       "locator": {
@@ -1502,7 +1521,7 @@
         "shipment_id": "SHP-2026-04299"
       },
       "attribute": "supplier_id",
-      "value": "Guangzhou PackRight",
+      "value": "SUP-0029",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -1522,7 +1541,9 @@
         "shipment_id": "SHP-2026-04299"
       },
       "attribute": "po_numbers",
-      "value": "4500318752",
+      "value": [
+        "4500318752"
+      ],
       "unit": null,
       "as_of": null,
       "locator": {
@@ -1702,7 +1723,7 @@
         "shipment_id": "SHP-2026-04302"
       },
       "attribute": "supplier_id",
-      "value": "Hwaseong Memory",
+      "value": "SUP-0010",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -1722,7 +1743,10 @@
         "shipment_id": "SHP-2026-04302"
       },
       "attribute": "po_numbers",
-      "value": "4500318748, 4500318756",
+      "value": [
+        "4500318748",
+        "4500318756"
+      ],
       "unit": null,
       "as_of": null,
       "locator": {
@@ -1902,7 +1926,7 @@
         "shipment_id": "SHP-2026-04304"
       },
       "attribute": "supplier_id",
-      "value": "Dongguan Precision Housings",
+      "value": "SUP-0019",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -1922,7 +1946,10 @@
         "shipment_id": "SHP-2026-04304"
       },
       "attribute": "po_numbers",
-      "value": "4500318734, 4500318737",
+      "value": [
+        "4500318734",
+        "4500318737"
+      ],
       "unit": null,
       "as_of": null,
       "locator": {
@@ -2102,7 +2129,7 @@
         "shipment_id": "SHP-2026-04298"
       },
       "attribute": "supplier_id",
-      "value": "Dongguan Precision Housings",
+      "value": "SUP-0019",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -2122,7 +2149,10 @@
         "shipment_id": "SHP-2026-04298"
       },
       "attribute": "po_numbers",
-      "value": "4500318728, 4500318737",
+      "value": [
+        "4500318728",
+        "4500318737"
+      ],
       "unit": null,
       "as_of": null,
       "locator": {
@@ -2302,7 +2332,7 @@
         "shipment_id": "SHP-2026-04306"
       },
       "attribute": "supplier_id",
-      "value": "Guangzhou PackRight",
+      "value": "SUP-0029",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -2322,7 +2352,9 @@
         "shipment_id": "SHP-2026-04306"
       },
       "attribute": "po_numbers",
-      "value": "4500318765",
+      "value": [
+        "4500318765"
+      ],
       "unit": null,
       "as_of": null,
       "locator": {
@@ -2502,7 +2534,7 @@
         "shipment_id": "SHP-2026-04305"
       },
       "attribute": "supplier_id",
-      "value": "Hwaseong Memory",
+      "value": "SUP-0010",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -2522,7 +2554,10 @@
         "shipment_id": "SHP-2026-04305"
       },
       "attribute": "po_numbers",
-      "value": "4500318756, 4500318772",
+      "value": [
+        "4500318756",
+        "4500318772"
+      ],
       "unit": null,
       "as_of": null,
       "locator": {
@@ -2702,7 +2737,7 @@
         "shipment_id": "SHP-2026-04308"
       },
       "attribute": "supplier_id",
-      "value": "Dongguan Precision Housings",
+      "value": "SUP-0019",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -2722,7 +2757,10 @@
         "shipment_id": "SHP-2026-04308"
       },
       "attribute": "po_numbers",
-      "value": "4500318744, 4500318753",
+      "value": [
+        "4500318744",
+        "4500318753"
+      ],
       "unit": null,
       "as_of": null,
       "locator": {

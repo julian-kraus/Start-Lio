@@ -17,11 +17,11 @@
       "fact_type": "contract_term",
       "subject": {
         "supplier_id": "SUP-0029",
-        "contract_id": "SUP-0029_Framework_Supply_Agreement_2023"
+        "contract_id": "PC-0029-2023"
       },
       "subject_raw": {
         "supplier_id": "SUP-0029",
-        "contract_id": "SUP-0029_Framework_Supply_Agreement_2023"
+        "contract_id": "PC-0029-2023"
       },
       "attribute": "incoterm",
       "value": "FOB",
@@ -44,13 +44,14 @@
         "supplier_part_no": "PR-CC-0312"
       },
       "attribute": "material_id",
-      "value": "CMP-GAM-004",
+      "value": "CMP-GAM-003",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "section": "Annex C"
       },
-      "evidence": "PR-CC-0312\nCMP-GAM-004",
+      "evidence": "CMP-GAM-003\nPR-CC-0312",
       "confidence": "high"
     },
     {
@@ -62,46 +63,69 @@
       "subject_raw": {
         "supplier_id": "SUP-0029",
         "supplier_part_no": "PR-SL-0604"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-004",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "Annex C"
+      },
+      "evidence": "CMP-GAM-004\nPR-SL-0604",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0029",
+        "supplier_part_no": "PR-RB-2207"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029",
+        "supplier_part_no": "PR-RB-2207"
       },
       "attribute": "material_id",
       "value": "CMP-GAM-007",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "section": "Annex C"
       },
-      "evidence": "PR-SL-0604\nCMP-GAM-007",
+      "evidence": "CMP-GAM-007\nPR-RB-2207",
       "confidence": "high"
     },
     {
       "fact_type": "part_xref",
       "subject": {
         "supplier_id": "SUP-0029",
-        "supplier_part_no": "PR-RB-2207"
+        "supplier_part_no": "RM-N42-D0401"
       },
       "subject_raw": {
         "supplier_id": "SUP-0029",
-        "supplier_part_no": "PR-RB-2207"
+        "supplier_part_no": "RM-N42-D0401"
       },
       "attribute": "material_id",
       "value": "CMP-MAG-005",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "section": "Annex C"
       },
-      "evidence": "PR-RB-2207\nCMP-MAG-005",
+      "evidence": "CMP-MAG-005\nRM-N42-D0401",
       "confidence": "high"
     },
     {
       "fact_type": "contract_term",
       "subject": {
         "supplier_id": "SUP-0029",
-        "contract_id": "SUP-0029_Framework_Supply_Agreement_2023"
+        "contract_id": "PC-0029-2023"
       },
       "subject_raw": {
         "supplier_id": "SUP-0029",
-        "contract_id": "SUP-0029_Framework_Supply_Agreement_2023"
+        "contract_id": "PC-0029-2023"
       },
       "attribute": "expiry",
       "value": "2027-08-31",
@@ -117,11 +141,11 @@
       "fact_type": "contract_term",
       "subject": {
         "supplier_id": "SUP-0029",
-        "contract_id": "SUP-0029_Framework_Supply_Agreement_2023"
+        "contract_id": "PC-0029-2023"
       },
       "subject_raw": {
         "supplier_id": "SUP-0029",
-        "contract_id": "SUP-0029_Framework_Supply_Agreement_2023"
+        "contract_id": "PC-0029-2023"
       },
       "attribute": "penalty",
       "value": "0",

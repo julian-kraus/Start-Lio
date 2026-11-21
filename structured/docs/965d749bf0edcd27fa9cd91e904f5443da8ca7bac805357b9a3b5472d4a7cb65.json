@@ -16,10 +16,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-004",
         "material_id": "CMP-GAM-004",
         "field": "drawing_rev"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-004",
         "material_id": "CMP-GAM-004",
         "field": "drawing_rev"
       },
@@ -37,10 +39,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-004",
         "material_id": "CMP-GAM-004",
         "field": "drawing_rev"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-004",
         "material_id": "CMP-GAM-004",
         "field": "drawing_rev"
       },
@@ -58,10 +62,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-004",
         "material_id": "CMP-GAM-004",
         "field": "drawing_rev"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-004",
         "material_id": "CMP-GAM-004",
         "field": "drawing_rev"
       },
@@ -79,10 +85,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-004",
         "material_id": "CMP-GAM-004",
         "field": "drawing_rev"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-004",
         "material_id": "CMP-GAM-004",
         "field": "drawing_rev"
       },
@@ -100,10 +108,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-004",
         "material_id": "CMP-GAM-004",
         "field": "drawing_rev"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-004",
         "material_id": "CMP-GAM-004",
         "field": "drawing_rev"
       },
@@ -121,10 +131,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-009",
         "material_id": "CMP-GAM-009",
         "field": "drawing_rev"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-009",
         "material_id": "CMP-GAM-009",
         "field": "drawing_rev"
       },
@@ -142,10 +154,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-009",
         "material_id": "CMP-GAM-009",
         "field": "drawing_rev"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-009",
         "material_id": "CMP-GAM-009",
         "field": "drawing_rev"
       },
@@ -163,10 +177,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-009",
         "material_id": "CMP-GAM-009",
         "field": "drawing_rev"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-009",
         "material_id": "CMP-GAM-009",
         "field": "drawing_rev"
       },
@@ -184,10 +200,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-009",
         "material_id": "CMP-GAM-009",
         "field": "drawing_rev"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-009",
         "material_id": "CMP-GAM-009",
         "field": "drawing_rev"
       },
@@ -205,10 +223,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-009",
         "material_id": "CMP-GAM-009",
         "field": "drawing_rev"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-009",
         "material_id": "CMP-GAM-009",
         "field": "drawing_rev"
       },
@@ -226,10 +246,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-010",
         "material_id": "CMP-GAM-010",
         "field": "critical"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-010",
         "material_id": "CMP-GAM-010",
         "field": "critical"
       },
@@ -247,10 +269,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-010",
         "material_id": "CMP-GAM-010",
         "field": "critical"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-010",
         "material_id": "CMP-GAM-010",
         "field": "critical"
       },
@@ -268,10 +292,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-010",
         "material_id": "CMP-GAM-010",
         "field": "critical"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-010",
         "material_id": "CMP-GAM-010",
         "field": "critical"
       },
@@ -289,10 +315,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-010",
         "material_id": "CMP-GAM-010",
         "field": "critical"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-010",
         "material_id": "CMP-GAM-010",
         "field": "critical"
       },
@@ -310,10 +338,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-010",
         "material_id": "CMP-GAM-010",
         "field": "critical"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-010",
         "material_id": "CMP-GAM-010",
         "field": "critical"
       },
@@ -331,10 +361,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-001",
         "material_id": "CMP-GAM-001",
         "field": "abc_class"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-001",
         "material_id": "CMP-GAM-001",
         "field": "abc_class"
       },
@@ -352,10 +384,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-001",
         "material_id": "CMP-GAM-001",
         "field": "abc_class"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-001",
         "material_id": "CMP-GAM-001",
         "field": "abc_class"
       },
@@ -373,10 +407,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-001",
         "material_id": "CMP-GAM-001",
         "field": "abc_class"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-001",
         "material_id": "CMP-GAM-001",
         "field": "abc_class"
       },
@@ -394,10 +430,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-001",
         "material_id": "CMP-GAM-001",
         "field": "abc_class"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-001",
         "material_id": "CMP-GAM-001",
         "field": "abc_class"
       },
@@ -415,10 +453,12 @@
     {
       "fact_type": "change_record",
       "subject": {
+        "entity": "CMP-GAM-001",
         "material_id": "CMP-GAM-001",
         "field": "abc_class"
       },
       "subject_raw": {
+        "entity": "CMP-GAM-001",
         "material_id": "CMP-GAM-001",
         "field": "abc_class"
       },

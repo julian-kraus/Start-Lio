@@ -384,10 +384,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "WZ-261007-439"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "WZ-261007-439"
       },
       "attribute": "kind",
       "value": "handling_note",
@@ -403,10 +405,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "WZ-261007-439"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "WZ-261007-439"
       },
       "attribute": "value",
       "value": "Towar na paletach EUR, prosimy o zwrot",
@@ -791,10 +795,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 2
+        "statement_no": 2,
+        "delivery_note": "WZ-261007-439"
       },
       "subject_raw": {
-        "statement_no": 2
+        "statement_no": 2,
+        "delivery_note": "WZ-261007-439"
       },
       "attribute": "kind",
       "value": "handling_note",
@@ -810,10 +816,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 2
+        "statement_no": 2,
+        "delivery_note": "WZ-261007-439"
       },
       "subject_raw": {
-        "statement_no": 2
+        "statement_no": 2,
+        "delivery_note": "WZ-261007-439"
       },
       "attribute": "value",
       "value": "Towar na paletach EUR, prosimy o zwrot",

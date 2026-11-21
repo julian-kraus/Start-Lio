@@ -10,31 +10,80 @@
   "columns": {
     "component_id": {
       "field": "material_id",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "description": {
       "field": "description",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "category": {
       "field": "category",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "uom": {
       "field": "uom",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "abc_class": {
       "field": "abc_class",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "critical": {
       "field": "critical",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     },
     "drawing_rev": {
       "field": "drawing_rev",
-      "type": "text"
+      "type": "text",
+      "date_format": null,
+      "decimal_sep": null,
+      "thousands_sep": null,
+      "list_sep": null,
+      "id_template": null,
+      "enum": null,
+      "unit": null
     }
   }
 }

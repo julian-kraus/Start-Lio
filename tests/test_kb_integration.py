@@ -160,3 +160,36 @@ def test_fact_events_and_current_facts_view(env):
                         "WHERE attribute = 'qty'").fetchall()
     assert view == [{"path": "erp/receipts.csv", "sha256": sha(v2), "fact_type": "receipt",
                      "subject": {"rid": "R1"}, "attribute": "qty", "value": 90}]
+
+
+def test_supplier_profiles_are_built_on_reconcile(env):
+    conn, structured = env
+    po = b"po,line,supplier,promised,actual,qty,price,currency\nP1,1,S1,2030-01-01,2030-01-05,10,2,EUR\nP2,1,S1,2030-02-01,,5,3,EUR\n"
+    hdr = ["po", "line", "supplier", "promised", "actual", "qty", "price", "currency"]
+    cols = {"po": ("po_number", "text"), "line": ("po_line", "int"), "supplier": ("supplier_id", "text"),
+            "promised": ("promised_date", "date"), "actual": ("actual_delivery_date", "date"),
+            "qty": ("qty", "int"), "price": ("unit_price", "decimal"), "currency": ("currency", "text")}
+    conn.execute("INSERT INTO schema_maps (signature, format, mapping, origin) VALUES (%s, 'csv', %s, 'test')", (
+        signature(hdr), json.dumps({"signature": signature(hdr), "fact_type": "po_line",
+                                    "subject": ["po_number", "po_line"],
+                                    "columns": {c: {"field": f, "type": t} for c, (f, t) in cols.items()}})))
+    process_file(conn, "erp/po.csv", sha(po), po, structured)
+    conn.commit()
+    reconcile.run(conn, "test")
+    p = conn.execute("SELECT profile FROM supplier_profiles WHERE supplier_id = 'S1'").fetchone()["profile"]
+    assert p["delivery"]["delivered_lines"] == 1 and p["delivery"]["late_lines"] == 1
+    assert p["delivery"]["avg_delay_days_when_late"] == 4 and p["delivery"]["open_lines"] == 1
+    assert p["delivery"]["open_value"] == {"EUR": 15.0}
+
+
+def test_reloading_an_envelope_with_corrected_values_updates_them(env):
+    conn, structured = env
+    from kb.loader import load_envelope
+    pdf = make_pdf(["x"])
+    env1 = envelope("scans/a.pdf", pdf, "N1", 10)
+    load_envelope(conn, env1, current_sha=sha(pdf), confidence_map={"high": 0.9})
+    env2 = envelope("scans/a.pdf", pdf, "N1", 12)
+    load_envelope(conn, env2, current_sha=sha(pdf), confidence_map={"high": 0.9})
+    conn.commit()
+    rows = conn.execute("SELECT value FROM facts WHERE source_path = 'scans/a.pdf' AND valid").fetchall()
+    assert rows == [{"value": 12}]

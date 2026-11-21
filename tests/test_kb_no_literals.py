@@ -81,7 +81,6 @@ def test_no_data_values_in_application_code(values):
     assert not hits, "data values in code:\n" + "\n".join(hits)
 
 
-@pytest.mark.xfail(reason="Codex round 2 item 16: build_structured.py still contains scan contents", strict=False)
 def test_no_data_values_in_structured_build_code(values):
     hits = hits_in(code_files(ROOT / "structured"), values)
     assert not hits, f"{len(hits)} data values in structured/ code, e.g.:\n" + "\n".join(hits[:20])

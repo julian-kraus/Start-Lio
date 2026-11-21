@@ -40,8 +40,84 @@
       "subject_raw": {
         "gr_number": "5000413063"
       },
-      "attribute": "batch",
-      "value": "size",
+      "attribute": "lot_size",
+      "value": 5600,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "inspection"
+      },
+      "evidence": "Soony · DC-HAM · incoming inspection\nPage 1\nIncoming inspection report\nDC-HAM · Goods receipt 5000413063 of 2026-11-17 · PO 4500318727 · SUP-0018 Pune Diecast Works\nPart\nDescription\nLot size\nSample (AQL 1.0, level\nII)\nDefective\nAccept / reject\nnumber\nCMP-GAM-010\nStatue \"The Getaway\" (die-cast, 18 cm)\n5,600\n125\n9\n3 / 4\nFindings\n9 of 125 statues with paint defects on the base (runs, thin coverage on edges). Dimensions and weight within\ntolerance. Packaging undamaged.\nDecision\nLot does not meet AQL. Booked to stock as 'unrestricted' by receiving because the supplier is listed as active.\nBlocking requested from Supplier Quality. Use only under a concession signed by Supplier Quality and the\nCategory Lead.\nInspector: Schulz P. · Copy to: Daniel Okafor, Mei Lin\n",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "inspection_result",
+      "subject": {
+        "gr_number": "5000413063"
+      },
+      "subject_raw": {
+        "gr_number": "5000413063"
+      },
+      "attribute": "sample_size",
+      "value": 125,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "inspection"
+      },
+      "evidence": "Soony · DC-HAM · incoming inspection\nPage 1\nIncoming inspection report\nDC-HAM · Goods receipt 5000413063 of 2026-11-17 · PO 4500318727 · SUP-0018 Pune Diecast Works\nPart\nDescription\nLot size\nSample (AQL 1.0, level\nII)\nDefective\nAccept / reject\nnumber\nCMP-GAM-010\nStatue \"The Getaway\" (die-cast, 18 cm)\n5,600\n125\n9\n3 / 4\nFindings\n9 of 125 statues with paint defects on the base (runs, thin coverage on edges). Dimensions and weight within\ntolerance. Packaging undamaged.\nDecision\nLot does not meet AQL. Booked to stock as 'unrestricted' by receiving because the supplier is listed as active.\nBlocking requested from Supplier Quality. Use only under a concession signed by Supplier Quality and the\nCategory Lead.\nInspector: Schulz P. · Copy to: Daniel Okafor, Mei Lin\n",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "inspection_result",
+      "subject": {
+        "gr_number": "5000413063"
+      },
+      "subject_raw": {
+        "gr_number": "5000413063"
+      },
+      "attribute": "defects",
+      "value": 9,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "inspection"
+      },
+      "evidence": "Soony · DC-HAM · incoming inspection\nPage 1\nIncoming inspection report\nDC-HAM · Goods receipt 5000413063 of 2026-11-17 · PO 4500318727 · SUP-0018 Pune Diecast Works\nPart\nDescription\nLot size\nSample (AQL 1.0, level\nII)\nDefective\nAccept / reject\nnumber\nCMP-GAM-010\nStatue \"The Getaway\" (die-cast, 18 cm)\n5,600\n125\n9\n3 / 4\nFindings\n9 of 125 statues with paint defects on the base (runs, thin coverage on edges). Dimensions and weight within\ntolerance. Packaging undamaged.\nDecision\nLot does not meet AQL. Booked to stock as 'unrestricted' by receiving because the supplier is listed as active.\nBlocking requested from Supplier Quality. Use only under a concession signed by Supplier Quality and the\nCategory Lead.\nInspector: Schulz P. · Copy to: Daniel Okafor, Mei Lin\n",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "inspection_result",
+      "subject": {
+        "gr_number": "5000413063"
+      },
+      "subject_raw": {
+        "gr_number": "5000413063"
+      },
+      "attribute": "accept_number",
+      "value": 3,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "inspection"
+      },
+      "evidence": "Soony · DC-HAM · incoming inspection\nPage 1\nIncoming inspection report\nDC-HAM · Goods receipt 5000413063 of 2026-11-17 · PO 4500318727 · SUP-0018 Pune Diecast Works\nPart\nDescription\nLot size\nSample (AQL 1.0, level\nII)\nDefective\nAccept / reject\nnumber\nCMP-GAM-010\nStatue \"The Getaway\" (die-cast, 18 cm)\n5,600\n125\n9\n3 / 4\nFindings\n9 of 125 statues with paint defects on the base (runs, thin coverage on edges). Dimensions and weight within\ntolerance. Packaging undamaged.\nDecision\nLot does not meet AQL. Booked to stock as 'unrestricted' by receiving because the supplier is listed as active.\nBlocking requested from Supplier Quality. Use only under a concession signed by Supplier Quality and the\nCategory Lead.\nInspector: Schulz P. · Copy to: Daniel Okafor, Mei Lin\n",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "inspection_result",
+      "subject": {
+        "gr_number": "5000413063"
+      },
+      "subject_raw": {
+        "gr_number": "5000413063"
+      },
+      "attribute": "reject_number",
+      "value": 4,
       "unit": null,
       "as_of": null,
       "locator": {
@@ -80,6 +156,25 @@
       },
       "attribute": "blocking_requested",
       "value": true,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "inspection"
+      },
+      "evidence": "Soony · DC-HAM · incoming inspection\nPage 1\nIncoming inspection report\nDC-HAM · Goods receipt 5000413063 of 2026-11-17 · PO 4500318727 · SUP-0018 Pune Diecast Works\nPart\nDescription\nLot size\nSample (AQL 1.0, level\nII)\nDefective\nAccept / reject\nnumber\nCMP-GAM-010\nStatue \"The Getaway\" (die-cast, 18 cm)\n5,600\n125\n9\n3 / 4\nFindings\n9 of 125 statues with paint defects on the base (runs, thin coverage on edges). Dimensions and weight within\ntolerance. Packaging undamaged.\nDecision\nLot does not meet AQL. Booked to stock as 'unrestricted' by receiving because the supplier is listed as active.\nBlocking requested from Supplier Quality. Use only under a concession signed by Supplier Quality and the\nCategory Lead.\nInspector: Schulz P. · Copy to: Daniel Okafor, Mei Lin\n",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "inspection_result",
+      "subject": {
+        "gr_number": "5000413063"
+      },
+      "subject_raw": {
+        "gr_number": "5000413063"
+      },
+      "attribute": "release_requires",
+      "value": "Supplier Quality + Category Lead",
       "unit": null,
       "as_of": null,
       "locator": {

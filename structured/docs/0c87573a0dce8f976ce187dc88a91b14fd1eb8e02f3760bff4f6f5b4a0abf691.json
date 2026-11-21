@@ -60,33 +60,14 @@
         "po_number": "4500318693"
       },
       "attribute": "incoterm",
-      "value": "DAP",
+      "value": "DAP Hamburg",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "section": "header"
       },
-      "evidence": "DAP",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_header",
-      "subject": {
-        "po_number": "4500318693"
-      },
-      "subject_raw": {
-        "po_number": "4500318693"
-      },
-      "attribute": "payment_terms",
-      "value": "NET30",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "section": "header"
-      },
-      "evidence": "NET30",
+      "evidence": "DAP Hamburg",
       "confidence": "high"
     },
     {
@@ -109,7 +90,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n135,000\n0.06\nEUR\n2026-08-07",
+      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n135,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
@@ -132,7 +113,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n135,000\n0.06\nEUR\n2026-08-07",
+      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n135,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
@@ -155,7 +136,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n135,000\n0.06\nEUR\n2026-08-07",
+      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n135,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
@@ -171,14 +152,14 @@
         "item_key": "28beb4be05a4"
       },
       "attribute": "unit_price",
-      "value": 135000,
+      "value": 0.06,
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n135,000\n0.06\nEUR\n2026-08-07",
+      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n135,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
@@ -194,14 +175,14 @@
         "item_key": "28beb4be05a4"
       },
       "attribute": "currency",
-      "value": "USK",
+      "value": "EUR",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n135,000\n0.06\nEUR\n2026-08-07",
+      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n135,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
@@ -224,7 +205,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n135,000\n0.06\nEUR\n2026-08-07",
+      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n135,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
@@ -247,7 +228,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n135,000\n0.06\nEUR\n2026-08-07",
+      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n135,000\n0.06\nEUR",
       "confidence": "high"
     }
   ],

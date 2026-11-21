@@ -60,33 +60,14 @@
         "po_number": "4500318712"
       },
       "attribute": "incoterm",
-      "value": "DAP",
+      "value": "DAP Hamburg",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "section": "header"
       },
-      "evidence": "DAP",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_header",
-      "subject": {
-        "po_number": "4500318712"
-      },
-      "subject_raw": {
-        "po_number": "4500318712"
-      },
-      "attribute": "payment_terms",
-      "value": "NET30",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "section": "header"
-      },
-      "evidence": "NET30",
+      "evidence": "DAP Hamburg",
       "confidence": "high"
     },
     {
@@ -109,7 +90,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n28,000\n0.22\nEUR\n2026-09-10\n00020",
+      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n28,000\n0.22\nEUR",
       "confidence": "high"
     },
     {
@@ -132,7 +113,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n28,000\n0.22\nEUR\n2026-09-10\n00020",
+      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n28,000\n0.22\nEUR",
       "confidence": "high"
     },
     {
@@ -155,7 +136,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n28,000\n0.22\nEUR\n2026-09-10\n00020",
+      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n28,000\n0.22\nEUR",
       "confidence": "high"
     },
     {
@@ -171,14 +152,14 @@
         "item_key": "7efb5d102cb6"
       },
       "attribute": "unit_price",
-      "value": 28000,
+      "value": 0.22,
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n28,000\n0.22\nEUR\n2026-09-10\n00020",
+      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n28,000\n0.22\nEUR",
       "confidence": "high"
     },
     {
@@ -201,7 +182,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n28,000\n0.22\nEUR\n2026-09-10\n00020",
+      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n28,000\n0.22\nEUR",
       "confidence": "high"
     },
     {
@@ -224,7 +205,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n28,000\n0.22\nEUR\n2026-09-10\n00020",
+      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n28,000\n0.22\nEUR",
       "confidence": "high"
     },
     {
@@ -247,43 +228,43 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n28,000\n0.22\nEUR\n2026-09-10\n00020",
+      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n28,000\n0.22\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "8a36c7f2eee4"
+        "po_line": 2,
+        "item_key": "40c4199b14dd"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "8a36c7f2eee4"
+        "po_line": 2,
+        "item_key": "40c4199b14dd"
       },
       "attribute": "item_no_printed",
-      "value": "00050",
+      "value": "00020",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 23
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n400,000\n0.03\nEUR\n2026-09-10\n00010",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n400,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "8a36c7f2eee4"
+        "po_line": 2,
+        "item_key": "40c4199b14dd"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "8a36c7f2eee4"
+        "po_line": 2,
+        "item_key": "40c4199b14dd"
       },
       "attribute": "supplier_part_no",
       "value": "CMP-GAM-011",
@@ -293,20 +274,20 @@
         "page": 1,
         "line": 23
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n400,000\n0.03\nEUR\n2026-09-10\n00010",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n400,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "8a36c7f2eee4"
+        "po_line": 2,
+        "item_key": "40c4199b14dd"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "8a36c7f2eee4"
+        "po_line": 2,
+        "item_key": "40c4199b14dd"
       },
       "attribute": "qty",
       "value": 400000,
@@ -316,43 +297,43 @@
         "page": 1,
         "line": 23
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n400,000\n0.03\nEUR\n2026-09-10\n00010",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n400,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "8a36c7f2eee4"
+        "po_line": 2,
+        "item_key": "40c4199b14dd"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "8a36c7f2eee4"
+        "po_line": 2,
+        "item_key": "40c4199b14dd"
       },
       "attribute": "unit_price",
-      "value": 400000,
+      "value": 0.03,
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 23
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n400,000\n0.03\nEUR\n2026-09-10\n00010",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n400,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "8a36c7f2eee4"
+        "po_line": 2,
+        "item_key": "40c4199b14dd"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "8a36c7f2eee4"
+        "po_line": 2,
+        "item_key": "40c4199b14dd"
       },
       "attribute": "currency",
       "value": "EUR",
@@ -362,20 +343,20 @@
         "page": 1,
         "line": 23
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n400,000\n0.03\nEUR\n2026-09-10\n00010",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n400,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "8a36c7f2eee4"
+        "po_line": 2,
+        "item_key": "40c4199b14dd"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "8a36c7f2eee4"
+        "po_line": 2,
+        "item_key": "40c4199b14dd"
       },
       "attribute": "confirmed_date",
       "value": "2026-09-10",
@@ -385,20 +366,20 @@
         "page": 1,
         "line": 23
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n400,000\n0.03\nEUR\n2026-09-10\n00010",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n400,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "8a36c7f2eee4"
+        "po_line": 2,
+        "item_key": "40c4199b14dd"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "8a36c7f2eee4"
+        "po_line": 2,
+        "item_key": "40c4199b14dd"
       },
       "attribute": "material_id",
       "value": "CMP-GAM-011",
@@ -408,43 +389,43 @@
         "page": 1,
         "line": 23
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n400,000\n0.03\nEUR\n2026-09-10\n00010",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n400,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "85a534a40491"
+        "po_line": 1,
+        "item_key": "7cde6cdc0386"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "85a534a40491"
+        "po_line": 1,
+        "item_key": "7cde6cdc0386"
       },
       "attribute": "item_no_printed",
-      "value": "00050",
+      "value": "00010",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 31
       },
-      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n125,000\n0.06\nEUR\n2026-09-04\n00030",
+      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n125,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "85a534a40491"
+        "po_line": 1,
+        "item_key": "7cde6cdc0386"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "85a534a40491"
+        "po_line": 1,
+        "item_key": "7cde6cdc0386"
       },
       "attribute": "supplier_part_no",
       "value": "CMP-GAM-005",
@@ -454,20 +435,20 @@
         "page": 1,
         "line": 31
       },
-      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n125,000\n0.06\nEUR\n2026-09-04\n00030",
+      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n125,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "85a534a40491"
+        "po_line": 1,
+        "item_key": "7cde6cdc0386"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "85a534a40491"
+        "po_line": 1,
+        "item_key": "7cde6cdc0386"
       },
       "attribute": "qty",
       "value": 125000,
@@ -477,66 +458,66 @@
         "page": 1,
         "line": 31
       },
-      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n125,000\n0.06\nEUR\n2026-09-04\n00030",
+      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n125,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "85a534a40491"
+        "po_line": 1,
+        "item_key": "7cde6cdc0386"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "85a534a40491"
+        "po_line": 1,
+        "item_key": "7cde6cdc0386"
       },
       "attribute": "unit_price",
-      "value": 125000,
+      "value": 0.06,
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 31
       },
-      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n125,000\n0.06\nEUR\n2026-09-04\n00030",
+      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n125,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "85a534a40491"
+        "po_line": 1,
+        "item_key": "7cde6cdc0386"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "85a534a40491"
+        "po_line": 1,
+        "item_key": "7cde6cdc0386"
       },
       "attribute": "currency",
-      "value": "USK",
+      "value": "EUR",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 31
       },
-      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n125,000\n0.06\nEUR\n2026-09-04\n00030",
+      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n125,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "85a534a40491"
+        "po_line": 1,
+        "item_key": "7cde6cdc0386"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "85a534a40491"
+        "po_line": 1,
+        "item_key": "7cde6cdc0386"
       },
       "attribute": "confirmed_date",
       "value": "2026-09-04",
@@ -546,20 +527,20 @@
         "page": 1,
         "line": 31
       },
-      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n125,000\n0.06\nEUR\n2026-09-04\n00030",
+      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n125,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "85a534a40491"
+        "po_line": 1,
+        "item_key": "7cde6cdc0386"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 5,
-        "item_key": "85a534a40491"
+        "po_line": 1,
+        "item_key": "7cde6cdc0386"
       },
       "attribute": "material_id",
       "value": "CMP-GAM-005",
@@ -569,43 +550,43 @@
         "page": 1,
         "line": 31
       },
-      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n125,000\n0.06\nEUR\n2026-09-04\n00030",
+      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n125,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 2,
-        "item_key": "0966102be0f0"
+        "po_line": 3,
+        "item_key": "88fa295fbdde"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 2,
-        "item_key": "0966102be0f0"
+        "po_line": 3,
+        "item_key": "88fa295fbdde"
       },
       "attribute": "item_no_printed",
-      "value": "00020",
+      "value": "00030",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 40
       },
-      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n65,000\n0.06\nEUR\n2026-09-10\n00040",
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n65,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 2,
-        "item_key": "0966102be0f0"
+        "po_line": 3,
+        "item_key": "88fa295fbdde"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 2,
-        "item_key": "0966102be0f0"
+        "po_line": 3,
+        "item_key": "88fa295fbdde"
       },
       "attribute": "supplier_part_no",
       "value": "CMP-GAM-004",
@@ -615,20 +596,20 @@
         "page": 1,
         "line": 40
       },
-      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n65,000\n0.06\nEUR\n2026-09-10\n00040",
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n65,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 2,
-        "item_key": "0966102be0f0"
+        "po_line": 3,
+        "item_key": "88fa295fbdde"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 2,
-        "item_key": "0966102be0f0"
+        "po_line": 3,
+        "item_key": "88fa295fbdde"
       },
       "attribute": "qty",
       "value": 65000,
@@ -638,66 +619,66 @@
         "page": 1,
         "line": 40
       },
-      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n65,000\n0.06\nEUR\n2026-09-10\n00040",
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n65,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 2,
-        "item_key": "0966102be0f0"
+        "po_line": 3,
+        "item_key": "88fa295fbdde"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 2,
-        "item_key": "0966102be0f0"
+        "po_line": 3,
+        "item_key": "88fa295fbdde"
       },
       "attribute": "unit_price",
-      "value": 65000,
+      "value": 0.06,
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 40
       },
-      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n65,000\n0.06\nEUR\n2026-09-10\n00040",
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n65,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 2,
-        "item_key": "0966102be0f0"
+        "po_line": 3,
+        "item_key": "88fa295fbdde"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 2,
-        "item_key": "0966102be0f0"
+        "po_line": 3,
+        "item_key": "88fa295fbdde"
       },
       "attribute": "currency",
-      "value": "USK",
+      "value": "EUR",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 40
       },
-      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n65,000\n0.06\nEUR\n2026-09-10\n00040",
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n65,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 2,
-        "item_key": "0966102be0f0"
+        "po_line": 3,
+        "item_key": "88fa295fbdde"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 2,
-        "item_key": "0966102be0f0"
+        "po_line": 3,
+        "item_key": "88fa295fbdde"
       },
       "attribute": "confirmed_date",
       "value": "2026-09-10",
@@ -707,20 +688,20 @@
         "page": 1,
         "line": 40
       },
-      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n65,000\n0.06\nEUR\n2026-09-10\n00040",
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n65,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 2,
-        "item_key": "0966102be0f0"
+        "po_line": 3,
+        "item_key": "88fa295fbdde"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 2,
-        "item_key": "0966102be0f0"
+        "po_line": 3,
+        "item_key": "88fa295fbdde"
       },
       "attribute": "material_id",
       "value": "CMP-GAM-004",
@@ -730,43 +711,43 @@
         "page": 1,
         "line": 40
       },
-      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n65,000\n0.06\nEUR\n2026-09-10\n00040",
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n65,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 3,
-        "item_key": "1587823e8c1a"
+        "po_line": 4,
+        "item_key": "ee86d8a5525b"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 3,
-        "item_key": "1587823e8c1a"
+        "po_line": 4,
+        "item_key": "ee86d8a5525b"
       },
       "attribute": "item_no_printed",
-      "value": "00030",
+      "value": "00040",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 49
       },
-      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n11,500\n2.1\nEUR\n2026-09-22",
+      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n11,500\n2.1\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 3,
-        "item_key": "1587823e8c1a"
+        "po_line": 4,
+        "item_key": "ee86d8a5525b"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 3,
-        "item_key": "1587823e8c1a"
+        "po_line": 4,
+        "item_key": "ee86d8a5525b"
       },
       "attribute": "supplier_part_no",
       "value": "CMP-GAM-008",
@@ -776,20 +757,20 @@
         "page": 1,
         "line": 49
       },
-      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n11,500\n2.1\nEUR\n2026-09-22",
+      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n11,500\n2.1\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 3,
-        "item_key": "1587823e8c1a"
+        "po_line": 4,
+        "item_key": "ee86d8a5525b"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 3,
-        "item_key": "1587823e8c1a"
+        "po_line": 4,
+        "item_key": "ee86d8a5525b"
       },
       "attribute": "qty",
       "value": 11500,
@@ -799,43 +780,43 @@
         "page": 1,
         "line": 49
       },
-      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n11,500\n2.1\nEUR\n2026-09-22",
+      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n11,500\n2.1\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 3,
-        "item_key": "1587823e8c1a"
+        "po_line": 4,
+        "item_key": "ee86d8a5525b"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 3,
-        "item_key": "1587823e8c1a"
+        "po_line": 4,
+        "item_key": "ee86d8a5525b"
       },
       "attribute": "unit_price",
-      "value": 11500,
+      "value": 2.1,
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 49
       },
-      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n11,500\n2.1\nEUR\n2026-09-22",
+      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n11,500\n2.1\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 3,
-        "item_key": "1587823e8c1a"
+        "po_line": 4,
+        "item_key": "ee86d8a5525b"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 3,
-        "item_key": "1587823e8c1a"
+        "po_line": 4,
+        "item_key": "ee86d8a5525b"
       },
       "attribute": "currency",
       "value": "EUR",
@@ -845,20 +826,20 @@
         "page": 1,
         "line": 49
       },
-      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n11,500\n2.1\nEUR\n2026-09-22",
+      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n11,500\n2.1\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 3,
-        "item_key": "1587823e8c1a"
+        "po_line": 4,
+        "item_key": "ee86d8a5525b"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 3,
-        "item_key": "1587823e8c1a"
+        "po_line": 4,
+        "item_key": "ee86d8a5525b"
       },
       "attribute": "confirmed_date",
       "value": "2026-09-22",
@@ -868,20 +849,20 @@
         "page": 1,
         "line": 49
       },
-      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n11,500\n2.1\nEUR\n2026-09-22",
+      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n11,500\n2.1\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318712",
-        "po_line": 3,
-        "item_key": "1587823e8c1a"
+        "po_line": 4,
+        "item_key": "ee86d8a5525b"
       },
       "subject_raw": {
         "po_number": "4500318712",
-        "po_line": 3,
-        "item_key": "1587823e8c1a"
+        "po_line": 4,
+        "item_key": "ee86d8a5525b"
       },
       "attribute": "material_id",
       "value": "CMP-GAM-008",
@@ -891,7 +872,7 @@
         "page": 1,
         "line": 49
       },
-      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n11,500\n2.1\nEUR\n2026-09-22",
+      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n11,500\n2.1\nEUR",
       "confidence": "high"
     },
     {
@@ -914,7 +895,7 @@
         "page": 1,
         "line": 58
       },
-      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing 2026-08-07. /\nPrinted to artwork rev. C as received from Soony Marketing on 2026-08-07.",
+      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing",
       "confidence": "high"
     },
     {
@@ -937,30 +918,7 @@
         "page": 1,
         "line": 58
       },
-      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing 2026-08-07. /\nPrinted to artwork rev. C as received from Soony Marketing on 2026-08-07.",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318712",
-        "po_line": 4,
-        "item_key": "90312f6b6a9b"
-      },
-      "subject_raw": {
-        "po_number": "4500318712",
-        "po_line": 4,
-        "item_key": "90312f6b6a9b"
-      },
-      "attribute": "qty",
-      "value": 2026,
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 58
-      },
-      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing 2026-08-07. /\nPrinted to artwork rev. C as received from Soony Marketing on 2026-08-07.",
+      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing",
       "confidence": "high"
     },
     {
@@ -983,7 +941,7 @@
         "page": 1,
         "line": 58
       },
-      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing 2026-08-07. /\nPrinted to artwork rev. C as received from Soony Marketing on 2026-08-07.",
+      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing",
       "confidence": "high"
     },
     {
@@ -1006,16 +964,18 @@
         "page": 1,
         "line": 58
       },
-      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing 2026-08-07. /\nPrinted to artwork rev. C as received from Soony Marketing on 2026-08-07.",
+      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing",
       "confidence": "high"
     },
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318712"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318712"
       },
       "attribute": "kind",
       "value": "artwork_rev",
@@ -1030,10 +990,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318712"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318712"
       },
       "attribute": "value",
       "value": "Printed to artwork rev. C as received from Soony Marketing on 2026-08-07.",
@@ -1048,10 +1010,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318712"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318712"
       },
       "attribute": "revision",
       "value": "C",

@@ -13,6 +13,7 @@ from tracker.db import _jsonb_safe
 from . import db, rules as rules_mod
 from .engine import Issue, build_records, evaluate, issue_key
 from .facts import load_valid_facts
+from .profiles import build as build_profiles
 
 
 def _now(settings: dict) -> datetime:
@@ -141,6 +142,12 @@ def run(conn, trigger: str, detail: dict | None = None, version: int | None = No
         n_changed = len(changes["changed"]) + len(changes["reopened"])
         conn.execute("UPDATE runs SET finished_at = now(), n_issues = %s, n_new = %s, n_changed = %s, n_resolved = %s "
                      "WHERE run_id = %s", (len(issues), len(changes["new"]), n_changed, len(changes["resolved"]), run_id))
+        profiles = build_profiles(records, list(issues.values()), now.date())
+        conn.execute("DELETE FROM supplier_profiles")
+        with conn.cursor() as cur:
+            cur.executemany(
+                "INSERT INTO supplier_profiles (supplier_id, profile, rule_set_version, run_id) VALUES (%s, %s, %s, %s)",
+                [(sup, Jsonb(_jsonb_safe(p)), version, run_id) for sup, p in profiles.items()])
         if not preview and any(changes.values()):
             conn.execute("SELECT pg_notify(%s, %s)", (db.ISSUE_CHANNEL, json.dumps(
                 {"run_id": run_id, **{k: len(v) for k, v in changes.items()}})))

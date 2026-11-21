@@ -370,10 +370,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "SN-260915-889"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "SN-260915-889"
       },
       "attribute": "kind",
       "value": "handling_note",
@@ -389,10 +391,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "SN-260915-889"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "SN-260915-889"
       },
       "attribute": "value",
       "value": "请轻拿轻放",

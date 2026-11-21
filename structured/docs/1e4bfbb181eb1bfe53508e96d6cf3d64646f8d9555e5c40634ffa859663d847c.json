@@ -21,25 +21,6 @@
       "subject_raw": {
         "po_number": "4500318787"
       },
-      "attribute": "oc_number",
-      "value": "26397296",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "section": "header"
-      },
-      "evidence": "26397296",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_header",
-      "subject": {
-        "po_number": "4500318787"
-      },
-      "subject_raw": {
-        "po_number": "4500318787"
-      },
       "attribute": "oc_date",
       "value": "2026-11-10",
       "unit": null,
@@ -60,14 +41,14 @@
         "po_number": "4500318787"
       },
       "attribute": "incoterm",
-      "value": "EXW",
+      "value": "EXW Boise",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "section": "header"
       },
-      "evidence": "EXW",
+      "evidence": "EXW Boise",
       "confidence": "high"
     },
     {
@@ -109,7 +90,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n5,500\n6.11\nUSD\n2026-12-11\n00010",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n5,500\n6.11\nUSD",
       "confidence": "high"
     },
     {
@@ -132,7 +113,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n5,500\n6.11\nUSD\n2026-12-11\n00010",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n5,500\n6.11\nUSD",
       "confidence": "high"
     },
     {
@@ -155,7 +136,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n5,500\n6.11\nUSD\n2026-12-11\n00010",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n5,500\n6.11\nUSD",
       "confidence": "high"
     },
     {
@@ -171,14 +152,14 @@
         "item_key": "4b53d868ccb7"
       },
       "attribute": "unit_price",
-      "value": 5500,
+      "value": 6.11,
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n5,500\n6.11\nUSD\n2026-12-11\n00010",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n5,500\n6.11\nUSD",
       "confidence": "high"
     },
     {
@@ -201,7 +182,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n5,500\n6.11\nUSD\n2026-12-11\n00010",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n5,500\n6.11\nUSD",
       "confidence": "high"
     },
     {
@@ -224,7 +205,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n5,500\n6.11\nUSD\n2026-12-11\n00010",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n5,500\n6.11\nUSD",
       "confidence": "high"
     },
     {
@@ -247,43 +228,43 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n5,500\n6.11\nUSD\n2026-12-11\n00010",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n5,500\n6.11\nUSD",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318787",
-        "po_line": 2,
-        "item_key": "b30c65b56fe9"
+        "po_line": 1,
+        "item_key": "52f0c1132bdb"
       },
       "subject_raw": {
         "po_number": "4500318787",
-        "po_line": 2,
-        "item_key": "b30c65b56fe9"
+        "po_line": 1,
+        "item_key": "52f0c1132bdb"
       },
       "attribute": "item_no_printed",
-      "value": "00020",
+      "value": "00010",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n52,000\n10.93\nUSD\n2026-12-16\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.",
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n52,000\n10.93\nUSD",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318787",
-        "po_line": 2,
-        "item_key": "b30c65b56fe9"
+        "po_line": 1,
+        "item_key": "52f0c1132bdb"
       },
       "subject_raw": {
         "po_number": "4500318787",
-        "po_line": 2,
-        "item_key": "b30c65b56fe9"
+        "po_line": 1,
+        "item_key": "52f0c1132bdb"
       },
       "attribute": "supplier_part_no",
       "value": "CMP-GAM-001",
@@ -293,20 +274,20 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n52,000\n10.93\nUSD\n2026-12-16\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.",
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n52,000\n10.93\nUSD",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318787",
-        "po_line": 2,
-        "item_key": "b30c65b56fe9"
+        "po_line": 1,
+        "item_key": "52f0c1132bdb"
       },
       "subject_raw": {
         "po_number": "4500318787",
-        "po_line": 2,
-        "item_key": "b30c65b56fe9"
+        "po_line": 1,
+        "item_key": "52f0c1132bdb"
       },
       "attribute": "qty",
       "value": 52000,
@@ -316,43 +297,43 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n52,000\n10.93\nUSD\n2026-12-16\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.",
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n52,000\n10.93\nUSD",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318787",
-        "po_line": 2,
-        "item_key": "b30c65b56fe9"
+        "po_line": 1,
+        "item_key": "52f0c1132bdb"
       },
       "subject_raw": {
         "po_number": "4500318787",
-        "po_line": 2,
-        "item_key": "b30c65b56fe9"
+        "po_line": 1,
+        "item_key": "52f0c1132bdb"
       },
       "attribute": "unit_price",
-      "value": 52000,
+      "value": 10.93,
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n52,000\n10.93\nUSD\n2026-12-16\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.",
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n52,000\n10.93\nUSD",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318787",
-        "po_line": 2,
-        "item_key": "b30c65b56fe9"
+        "po_line": 1,
+        "item_key": "52f0c1132bdb"
       },
       "subject_raw": {
         "po_number": "4500318787",
-        "po_line": 2,
-        "item_key": "b30c65b56fe9"
+        "po_line": 1,
+        "item_key": "52f0c1132bdb"
       },
       "attribute": "currency",
       "value": "USD",
@@ -362,20 +343,20 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n52,000\n10.93\nUSD\n2026-12-16\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.",
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n52,000\n10.93\nUSD",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318787",
-        "po_line": 2,
-        "item_key": "b30c65b56fe9"
+        "po_line": 1,
+        "item_key": "52f0c1132bdb"
       },
       "subject_raw": {
         "po_number": "4500318787",
-        "po_line": 2,
-        "item_key": "b30c65b56fe9"
+        "po_line": 1,
+        "item_key": "52f0c1132bdb"
       },
       "attribute": "confirmed_date",
       "value": "2026-12-16",
@@ -385,20 +366,20 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n52,000\n10.93\nUSD\n2026-12-16\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.",
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n52,000\n10.93\nUSD",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318787",
-        "po_line": 2,
-        "item_key": "b30c65b56fe9"
+        "po_line": 1,
+        "item_key": "52f0c1132bdb"
       },
       "subject_raw": {
         "po_number": "4500318787",
-        "po_line": 2,
-        "item_key": "b30c65b56fe9"
+        "po_line": 1,
+        "item_key": "52f0c1132bdb"
       },
       "attribute": "material_id",
       "value": "CMP-GAM-001",
@@ -408,7 +389,7 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n52,000\n10.93\nUSD\n2026-12-16\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.",
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n52,000\n10.93\nUSD",
       "confidence": "high"
     }
   ],

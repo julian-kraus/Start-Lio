@@ -17,11 +17,11 @@
       "fact_type": "contract_term",
       "subject": {
         "supplier_id": "SUP-0028",
-        "contract_id": "SUP-0028_Supply_Agreement_2021"
+        "contract_id": "doca4e91da8a44d"
       },
       "subject_raw": {
         "supplier_id": "SUP-0028",
-        "contract_id": "SUP-0028_Supply_Agreement_2021"
+        "contract_id": "doca4e91da8a44d"
       },
       "attribute": "incoterm",
       "value": "DAP Hamburg",
@@ -33,17 +33,17 @@
       },
       "evidence": "DAP Hamburg",
       "confidence": "medium",
-      "note": "Read from rendered image-only PDF."
+      "note": "Reference envelope had no extractable contract number; doc plus sha256 prefix used."
     },
     {
       "fact_type": "contract_term",
       "subject": {
         "supplier_id": "SUP-0028",
-        "contract_id": "SUP-0028_Supply_Agreement_2021"
+        "contract_id": "doca4e91da8a44d"
       },
       "subject_raw": {
         "supplier_id": "SUP-0028",
-        "contract_id": "SUP-0028_Supply_Agreement_2021"
+        "contract_id": "doca4e91da8a44d"
       },
       "attribute": "expiry",
       "value": "2027-12-31",
@@ -55,17 +55,17 @@
       },
       "evidence": "2027-12-31",
       "confidence": "medium",
-      "note": "Read from rendered image-only PDF."
+      "note": "Reference envelope had no extractable contract number; doc plus sha256 prefix used."
     },
     {
       "fact_type": "contract_term",
       "subject": {
         "supplier_id": "SUP-0028",
-        "contract_id": "SUP-0028_Supply_Agreement_2021"
+        "contract_id": "doca4e91da8a44d"
       },
       "subject_raw": {
         "supplier_id": "SUP-0028",
-        "contract_id": "SUP-0028_Supply_Agreement_2021"
+        "contract_id": "doca4e91da8a44d"
       },
       "attribute": "rush_clause",
       "value": "Up to 50,000 printed parts within 36 hours; 35% surcharge; express truck",
@@ -77,17 +77,17 @@
       },
       "evidence": "Up to 50,000 printed parts within 36 hours; 35% surcharge; express truck",
       "confidence": "medium",
-      "note": "Read from rendered image-only PDF."
+      "note": "Reference envelope had no extractable contract number; doc plus sha256 prefix used."
     },
     {
       "fact_type": "contract_term",
       "subject": {
         "supplier_id": "SUP-0028",
-        "contract_id": "SUP-0028_Supply_Agreement_2021"
+        "contract_id": "doca4e91da8a44d"
       },
       "subject_raw": {
         "supplier_id": "SUP-0028",
-        "contract_id": "SUP-0028_Supply_Agreement_2021"
+        "contract_id": "doca4e91da8a44d"
       },
       "attribute": "penalty",
       "value": "0.5% of delayed order value per commenced week, capped at 5%",
@@ -99,7 +99,7 @@
       },
       "evidence": "0.5% of delayed order value per commenced week, capped at 5%",
       "confidence": "medium",
-      "note": "Read from rendered image-only PDF."
+      "note": "Reference envelope had no extractable contract number; doc plus sha256 prefix used."
     },
     {
       "fact_type": "part_xref",
