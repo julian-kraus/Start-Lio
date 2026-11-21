@@ -336,6 +336,12 @@ if (window.Notification && Notification.permission === "default") {
 (async () => {
   await refreshStatus();
   await load(true);
+  const linked = location.hash.match(/^#event-(\d+)$/);  // deep link: /#event-12 opens that change
+  if (linked) {
+    const el = document.querySelector(`.card[data-id="${linked[1]}"]`);
+    if (el) { el.querySelector(".row").click(); el.scrollIntoView({block: "start"}); }
+  }
+  if (new URLSearchParams(location.search).has("static")) return;  // snapshot mode: no live connection
   connect();
   setInterval(refreshStatus, 30000);
 })();
