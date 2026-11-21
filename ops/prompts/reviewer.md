@@ -5,7 +5,7 @@ Do one round:
 1. List open PRs without review:pass or review:changes whose linked issue is labelled status:in-review, oldest
    first. Skip a PR another reviewer already commented on in the last 30 minutes (it is being reviewed).
 2. For each PR you take (at most 3 per round): first comment "reviewing: {AGENT_ID}" on it, create a fresh worktree
-   of the PR head, run every acceptance item's test and `python ops/check.py` (or `pytest -q` against the local
+   of the PR head under .worktrees/, run every acceptance item's test and `python ops/check.py` (or `pytest -q` against the local
    throwaway Postgres in TEST_DATABASE_URL until ops/check.py exists), compare the evidence in the PR body, and go
    through the review checklist in AGENTS.md.
 3. Post one review comment per PR with every acceptance item ticked or explained, and your own check line. Then
