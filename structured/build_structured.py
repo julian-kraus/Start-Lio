@@ -128,6 +128,34 @@ def supplier_id(value):
     return text
 
 
+def resolved_supplier(value):
+    text = clean(value)
+    if not text:
+        return text
+    direct = supplier_id(text)
+    if direct != text or direct.startswith("SUP-"):
+        return direct
+    for profile in sorted((DATA / "suppliers").glob("*/profile.csv")):
+        for row in csv_rows(profile):
+            if str(row_get(row, "name") or "").casefold() == str(text).casefold():
+                return supplier_id(row_get(row, "supplier_id") or profile.parent.name.split("_")[0])
+    return text
+
+
+def resolved_carrier(value):
+    text = clean(value)
+    if not text:
+        return text
+    if text.startswith("LSP-"):
+        return text
+    path = DATA / "soony" / "master" / "logistics_providers.csv"
+    if path.is_file():
+        for row in csv_rows(path):
+            if str(row_get(row, "name") or "").casefold() == str(text).casefold():
+                return row_get(row, "carrier_id") or text
+    return text
+
+
 def fact(ft, subject, attribute, value, source, evidence, *, locator=None, unit=None,
          as_of=None, confidence="high", note=None, subject_raw=None):
     result = {
@@ -197,7 +225,7 @@ def write_map(headers, *, fmt, sheet, fact_type, subject, path, field_map, as_of
         if not str(header).strip():
             continue
         field = field_map.get(norm(header), norm(header) or "value")
-        spec = {"field": field, "type": "text"}
+        spec = {"field": field, "type": "text", "date_format": None, "decimal_sep": None, "thousands_sep": None, "list_sep": None, "id_template": None, "enum": None, "unit": None}
         if field in {"po_numbers", "material_ids", "regions", "tags", "modes"}:
             spec["type"] = "list"
             spec["list_sep"] = "|"
@@ -408,16 +436,21 @@ def parse_inspection(path, text):
         return found.group(1).strip() if found else None
     gr = match(r"(?:GR|goods receipt|receipt)\s*[:#]?\s*([A-Z0-9-]+)")
     material = match(r"\b((?:CMP|PR|PRM)-[A-Z0-9-]+)\b")
+    after_part = text[text.find(material) + len(material):] if material and material in text else text
+    table_values = re.search(r"\n\s*([\d.,]+)\s*\n\s*([\d.,]+)\s*\n\s*([\d.,]+)\s*\n\s*(\d+)\s*/\s*(\d+)", after_part)
+    quantities = table_values.groups()[:3] if table_values else re.findall(r"(?<![A-Za-z])(?:\d{1,3}(?:[,. ]\d{3})+|\d{1,7})(?![A-Za-z])", after_part)
+    acceptance = table_values if table_values else re.search(r"\b(\d+)\s*/\s*(\d+)\b", text)
     fields = {
         "material_id": material,
-        "lot_size": num(match(r"lot size\s*[:=]?\s*([\d.,\s]+)")),
-        "sample_size": num(match(r"sample size\s*[:=]?\s*([\d.,\s]+)")),
-        "defects": num(match(r"defects?\s*[:=]?\s*([\d.,\s]+)")),
-        "accept_number": num(match(r"(?:accept|accepted)\s*(?:number|count)?\s*[:=]?\s*(\d+)")),
-        "reject_number": num(match(r"(?:reject|rejected)\s*(?:number|count)?\s*[:=]?\s*(\d+)")),
-        "batch": match(r"(?:batch|lot)\s*[:#]?\s*([A-Z0-9-]+)"),
+        "lot_size": num(quantities[0]) if len(quantities) > 0 else None,
+        "sample_size": num(quantities[1]) if len(quantities) > 1 else None,
+        "defects": num(quantities[2]) if len(quantities) > 2 else None,
+        "accept_number": num(acceptance.group(4 if table_values else 1)) if acceptance else None,
+        "reject_number": num(acceptance.group(5 if table_values else 2)) if acceptance else None,
+        "batch": match(r"batch\s*[:#]?\s*([A-Z0-9-]+)"),
         "decision": "fail" if re.search(r"does not meet|reject|fail", text, re.I) else "pass",
         "blocking_requested": bool(re.search(r"blocking requested", text, re.I)),
+        "release_requires": "Supplier Quality + Category Lead" if re.search(r"Supplier Quality.*Category Lead", text, re.I | re.S) else None,
     }
     return [fact("inspection_result", {"gr_number": gr or path.stem}, key, value, path, text[:1200], locator={"page": 1, "section": "inspection"}) for key, value in fields.items() if value is not None]
 
@@ -475,7 +508,9 @@ def parse_order_like(path, text, kind):
         block = text[match.end():end]
         numbers = re.findall(r"(?<![A-Za-z])(?:\d{1,3}(?:[,. ]\d{3})+|\d{4,})(?![A-Za-z])", block)
         quantity = num(numbers[0]) if numbers else None
-        price_match = re.search(r"(?<![A-Za-z])\d+(?:[.,]\d{1,6})(?![A-Za-z])", block)
+        price_candidates = re.findall(r"(?<![A-Za-z])\d+(?:[.,]\d+)(?![A-Za-z])", block)
+        price_candidates = [candidate for candidate in price_candidates if not re.fullmatch(r"\d{1,3}[,.]\d{3}(?:[,.]\d{3})*", candidate)]
+        price_match = price_candidates[-1] if price_candidates else None
         currency_match = re.search(r"\b[A-Z]{3}\b", block)
         confirmed = next(iter(re.findall(r"\b\d{4}-\d{2}-\d{2}\b", block)), None)
         item_match = re.search(r"(?:^|\n)\s*(\d{5})\s*(?:\n|$)", text[max(0, match.start() - 160):match.start()])
@@ -484,7 +519,7 @@ def parse_order_like(path, text, kind):
         used[po_line] += 1
         evidence = (supplier_part + block[:320]).strip()
         subject = {"po_number": po_number or oc_number, "po_line": po_line, "item_key": hashlib.sha1(f"{item_printed}|{supplier_part}|{match.start()}".encode()).hexdigest()[:12]}
-        attrs = {"item_no_printed": item_printed, "supplier_part_no": supplier_part, "qty": quantity, "unit_price": num(price_match.group(0)) if price_match else None, "currency": currency_match.group(0) if currency_match else None, "confirmed_date": confirmed}
+        attrs = {"item_no_printed": item_printed, "supplier_part_no": supplier_part, "qty": quantity, "unit_price": num(price_match) if price_match else None, "currency": currency_match.group(0) if currency_match else None, "confirmed_date": confirmed}
         if supplier_part.startswith("CMP-"):
             attrs["material_id"] = supplier_part
         for attr, value in attrs.items():
@@ -550,6 +585,9 @@ def normalize_reference(path, facts):
             item["locator"]["region_hint"] = f"line {line} field"
             if item.get("attribute") in {"printed_qty", "handwritten_qty", "final_qty", "struck_through"} and item.get("note"):
                 item["evidence"] = item["note"]
+            if item.get("attribute") == "po_number" and isinstance(item.get("value"), list):
+                result.append(fact("delivery_note_line", item.get("subject", {}), "po_numbers", item["value"], path, item.get("evidence"), locator=item["locator"], confidence=item.get("confidence", "medium")))
+                item["value"] = None
         if item.get("fact_type") == "supplier_statement":
             if item.get("attribute") != "value":
                 continue
@@ -576,6 +614,21 @@ def resolve_scan_parts(facts, xrefs):
                 item["note"] = "No contract part cross-reference available; material_id remains null."
         if item.get("attribute") == "po_number" and isinstance(item.get("value"), list):
             item["value"] = None
+
+
+def resolve_order_parts(environments, xrefs):
+    for env in environments:
+        if env.get("doc_kind") != "order_confirmation":
+            continue
+        by_subject = defaultdict(dict)
+        for item in env.get("facts", []):
+            if item.get("fact_type") == "oc_line":
+                by_subject[json.dumps(item.get("subject", {}), sort_keys=True)][item.get("attribute")] = item.get("value")
+        for subject_text, values in by_subject.items():
+            part = values.get("supplier_part_no")
+            if part and not values.get("material_id") and part in xrefs:
+                subject = json.loads(subject_text)
+                env["facts"].append(fact("oc_line", subject, "material_id", xrefs[part], Path(DATA / env["source"]["path"]), part, locator={"page": 1, "section": "part cross-reference"}, confidence="medium", note="Resolved through the supplier contract part cross-reference."))
         if item.get("attribute") == "po_number" and item.get("value") in {"—", "-", ""}:
             item["value"] = None
 
@@ -681,6 +734,12 @@ def workbook_facts(path):
                 if attribute in subject:
                     continue
                 converted = num(value) if attribute in {"qty", "qty_planned", "qty_shipped", "qty_balance", "demand", "preorders", "packed", "still_to_pack", "rate_per_hour", "hours_needed", "hours_available", "need", "erp_stock", "due_before_launch", "cover", "hours", "lines", "old_price", "new_price"} else value
+                if attribute == "supplier_id":
+                    converted = resolved_supplier(converted)
+                elif attribute == "carrier_id":
+                    converted = resolved_carrier(converted)
+                elif attribute == "po_numbers":
+                    converted = [part.strip() for part in re.split(r"[|,]", str(converted)) if part.strip()]
                 allfacts.append(fact(ft, subject, attribute, converted, path, str(value), locator={"sheet": sheet, "row": row_number, "column": attribute}, as_of=as_of.get("value") if as_of else None, note=title or None))
     return workbook_kind(path), allfacts
 
@@ -861,6 +920,7 @@ def main():
             key = item["subject"].get("supplier_part_no")
             if key:
                 xrefs[key] = item["value"]
+    resolve_order_parts(environments, xrefs)
     for env in environments:
         if env["doc_kind"] == "delivery_note_scan":
             resolve_scan_parts(env["facts"], xrefs)

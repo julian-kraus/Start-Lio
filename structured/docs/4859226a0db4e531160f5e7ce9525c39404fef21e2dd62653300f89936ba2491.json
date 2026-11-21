@@ -2040,7 +2040,7 @@
         "material_id": "CMP-GAM-001"
       },
       "attribute": "supplier_id",
-      "value": "Hwaseong Memory",
+      "value": "SUP-0010",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -2172,7 +2172,7 @@
         "material_id": "CMP-GAM-004"
       },
       "attribute": "supplier_id",
-      "value": "Karton Nowak",
+      "value": "SUP-0028",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -2304,7 +2304,7 @@
         "material_id": "CMP-GAM-003"
       },
       "attribute": "supplier_id",
-      "value": "Guangzhou PackRight",
+      "value": "SUP-0029",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -2458,7 +2458,7 @@
         "material_id": "CMP-GAM-001"
       },
       "attribute": "supplier_id",
-      "value": "Boise Semi",
+      "value": "SUP-0011",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -2590,7 +2590,7 @@
         "material_id": "CMP-GAM-001"
       },
       "attribute": "supplier_id",
-      "value": "Hwaseong Memory",
+      "value": "SUP-0010",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -2722,7 +2722,7 @@
         "material_id": "CMP-GAM-010"
       },
       "attribute": "supplier_id",
-      "value": "Dongguan Precision Housings",
+      "value": "SUP-0019",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -2854,7 +2854,7 @@
         "material_id": "CMP-GAM-004"
       },
       "attribute": "supplier_id",
-      "value": "Guangzhou PackRight",
+      "value": "SUP-0029",
       "unit": null,
       "as_of": null,
       "locator": {

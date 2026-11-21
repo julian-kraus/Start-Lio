@@ -132,29 +132,6 @@
         "po_line": 0,
         "item_key": "4fba490f4c0d"
       },
-      "attribute": "unit_price",
-      "value": 48000,
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 9
-      },
-      "evidence": "CMP-GAM-001\nGame Card 128 GB –\nGrand Heist 6\n48,000\n28,000\n20,000\n항공사 사정으로 ULD 2대가 선적되지 못했습니다. AWB 020-48113256: 28,000 pcs flown ICN–FRA today, 5 of 7 ULDs.\nTwo ULDs were offloaded by the carrier (capacity).\nBalance 20,000 pcs: next available flight ICN–FRA 2026-11-23, delivery to Hamburg 2026-11-24.\nSeo-yeon Kim, Hwaseong Memor",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318735",
-        "po_line": 0,
-        "item_key": "4fba490f4c0d"
-      },
-      "subject_raw": {
-        "po_number": "4500318735",
-        "po_line": 0,
-        "item_key": "4fba490f4c0d"
-      },
       "attribute": "currency",
       "value": "ULD",
       "unit": null,

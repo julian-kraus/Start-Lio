@@ -171,7 +171,7 @@
         "item_key": "7efb5d102cb6"
       },
       "attribute": "unit_price",
-      "value": 28000,
+      "value": 0.22,
       "unit": null,
       "as_of": null,
       "locator": {
@@ -332,7 +332,7 @@
         "item_key": "8a36c7f2eee4"
       },
       "attribute": "unit_price",
-      "value": 400000,
+      "value": 0.03,
       "unit": null,
       "as_of": null,
       "locator": {
@@ -493,7 +493,7 @@
         "item_key": "85a534a40491"
       },
       "attribute": "unit_price",
-      "value": 125000,
+      "value": 0.06,
       "unit": null,
       "as_of": null,
       "locator": {
@@ -654,7 +654,7 @@
         "item_key": "0966102be0f0"
       },
       "attribute": "unit_price",
-      "value": 65000,
+      "value": 0.06,
       "unit": null,
       "as_of": null,
       "locator": {
@@ -815,7 +815,7 @@
         "item_key": "1587823e8c1a"
       },
       "attribute": "unit_price",
-      "value": 11500,
+      "value": 2.1,
       "unit": null,
       "as_of": null,
       "locator": {

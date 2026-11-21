@@ -171,7 +171,7 @@
         "item_key": "1f8d285bb7b9"
       },
       "attribute": "unit_price",
-      "value": 140000,
+      "value": 0.4143,
       "unit": null,
       "as_of": null,
       "locator": {
@@ -326,6 +326,54 @@
       },
       "evidence": "Artwork PR-SL-0604: rev. B (GH6_sleeve_revB.pdf), per Soony drawing on file.",
       "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "item_key": "1f8d285bb7b9",
+        "po_line": 1,
+        "po_number": "4500318774"
+      },
+      "subject_raw": {
+        "item_key": "1f8d285bb7b9",
+        "po_line": 1,
+        "po_number": "4500318774"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-007",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "part cross-reference"
+      },
+      "evidence": "PR-SL-0604",
+      "confidence": "medium",
+      "note": "Resolved through the supplier contract part cross-reference."
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "item_key": "897ec11dd89f",
+        "po_line": 1,
+        "po_number": "4500318774"
+      },
+      "subject_raw": {
+        "item_key": "897ec11dd89f",
+        "po_line": 1,
+        "po_number": "4500318774"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-007",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "part cross-reference"
+      },
+      "evidence": "PR-SL-0604",
+      "confidence": "medium",
+      "note": "Resolved through the supplier contract part cross-reference."
     }
   ],
   "unreadable": [],

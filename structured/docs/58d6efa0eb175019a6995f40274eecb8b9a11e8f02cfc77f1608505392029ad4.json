@@ -171,7 +171,7 @@
         "item_key": "7425d67a943c"
       },
       "attribute": "unit_price",
-      "value": 12000,
+      "value": 5.4,
       "unit": null,
       "as_of": null,
       "locator": {
@@ -332,7 +332,7 @@
         "item_key": "727badb7609b"
       },
       "attribute": "unit_price",
-      "value": 10000,
+      "value": 5.4,
       "unit": null,
       "as_of": null,
       "locator": {
@@ -493,7 +493,7 @@
         "item_key": "5c6c7a22ce87"
       },
       "attribute": "unit_price",
-      "value": 70000,
+      "value": 9.8,
       "unit": null,
       "as_of": null,
       "locator": {

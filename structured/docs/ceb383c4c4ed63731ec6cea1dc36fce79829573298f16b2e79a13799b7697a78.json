@@ -170,29 +170,6 @@
         "po_line": 1,
         "item_key": "e541843492b0"
       },
-      "attribute": "unit_price",
-      "value": 2600,
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 13
-      },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR\n2026-12-07\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318745",
-        "po_line": 1,
-        "item_key": "e541843492b0"
-      },
-      "subject_raw": {
-        "po_number": "4500318745",
-        "po_line": 1,
-        "item_key": "e541843492b0"
-      },
       "attribute": "currency",
       "value": "INR",
       "unit": null,

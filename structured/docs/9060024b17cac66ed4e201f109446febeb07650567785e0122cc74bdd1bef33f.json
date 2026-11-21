@@ -171,7 +171,7 @@
         "item_key": "1f8d285bb7b9"
       },
       "attribute": "unit_price",
-      "value": 145000,
+      "value": 0.4143,
       "unit": null,
       "as_of": null,
       "locator": {
@@ -309,7 +309,7 @@
         "item_key": "c7302143699d"
       },
       "attribute": "unit_price",
-      "value": 150000,
+      "value": 0.4143,
       "unit": null,
       "as_of": null,
       "locator": {
@@ -464,6 +464,78 @@
       },
       "evidence": "Artwork PR-SL-0604: rev. B (GH6_sleeve_revB.pdf), per Soony drawing on file.",
       "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "item_key": "1f8d285bb7b9",
+        "po_line": 1,
+        "po_number": "4500318752"
+      },
+      "subject_raw": {
+        "item_key": "1f8d285bb7b9",
+        "po_line": 1,
+        "po_number": "4500318752"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-007",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "part cross-reference"
+      },
+      "evidence": "PR-SL-0604",
+      "confidence": "medium",
+      "note": "Resolved through the supplier contract part cross-reference."
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "item_key": "c7302143699d",
+        "po_line": 1,
+        "po_number": "4500318752"
+      },
+      "subject_raw": {
+        "item_key": "c7302143699d",
+        "po_line": 1,
+        "po_number": "4500318752"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-007",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "part cross-reference"
+      },
+      "evidence": "PR-SL-0604",
+      "confidence": "medium",
+      "note": "Resolved through the supplier contract part cross-reference."
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "item_key": "d00c608ad4a4",
+        "po_line": 2,
+        "po_number": "4500318752"
+      },
+      "subject_raw": {
+        "item_key": "d00c608ad4a4",
+        "po_line": 2,
+        "po_number": "4500318752"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-007",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "part cross-reference"
+      },
+      "evidence": "PR-SL-0604",
+      "confidence": "medium",
+      "note": "Resolved through the supplier contract part cross-reference."
     }
   ],
   "unreadable": [],

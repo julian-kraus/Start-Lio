@@ -1,6 +1,6 @@
 {
   "spec_version": "codex-2026-11-21-v1",
-  "generated_at": "2026-11-21T18:46:24",
+  "generated_at": "2026-11-21T18:49:09",
   "documents": [
     {
       "path": "soony/context/approval_policy_PP-07.pdf",
@@ -851,7 +851,7 @@
       "doc_kind": "inspection_report",
       "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 9,
       "unreadable": []
     },
     {
@@ -1441,7 +1441,7 @@
       "doc_kind": "shipping_advice",
       "role": "extraction",
       "status": "ok",
-      "facts": 13,
+      "facts": 12,
       "unreadable": []
     },
     {
@@ -2041,7 +2041,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 20,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2051,7 +2051,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 20,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2061,7 +2061,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 13,
+      "facts": 12,
       "unreadable": []
     },
     {
@@ -2071,7 +2071,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 13,
+      "facts": 12,
       "unreadable": []
     },
     {
@@ -2081,7 +2081,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 13,
+      "facts": 12,
       "unreadable": []
     },
     {
@@ -2091,7 +2091,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 13,
+      "facts": 12,
       "unreadable": []
     },
     {
@@ -2925,7 +2925,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 10,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2935,7 +2935,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 10,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2945,7 +2945,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 10,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2955,7 +2955,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 10,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2965,7 +2965,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 10,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2975,7 +2975,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 10,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2985,7 +2985,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 10,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2995,7 +2995,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 12,
+      "facts": 14,
       "unreadable": []
     },
     {
@@ -3005,7 +3005,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 21,
+      "facts": 24,
       "unreadable": []
     },
     {
@@ -3015,7 +3015,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 12,
+      "facts": 14,
       "unreadable": []
     },
     {
@@ -3025,7 +3025,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 10,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -3035,7 +3035,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 10,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -3045,7 +3045,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 10,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -3055,7 +3055,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 10,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -3065,7 +3065,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 29,
+      "facts": 34,
       "unreadable": []
     },
     {
@@ -3075,7 +3075,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 21,
+      "facts": 24,
       "unreadable": []
     },
     {
@@ -3085,7 +3085,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 10,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -3095,7 +3095,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 10,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -3105,7 +3105,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 12,
+      "facts": 14,
       "unreadable": []
     },
     {
@@ -3115,7 +3115,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 12,
+      "facts": 14,
       "unreadable": []
     },
     {
@@ -3125,7 +3125,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 10,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -3135,7 +3135,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 23,
+      "facts": 27,
       "unreadable": []
     },
     {
@@ -3145,7 +3145,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 18,
+      "facts": 21,
       "unreadable": []
     },
     {
@@ -3155,7 +3155,7 @@
       "doc_kind": "order_confirmation",
       "role": "extraction",
       "status": "ok",
-      "facts": 15,
+      "facts": 17,
       "unreadable": []
     },
     {
@@ -3193,7 +3193,7 @@
   ],
   "counts": {
     "documents": 318,
-    "facts": 16861,
+    "facts": 16899,
     "doc_kinds": {
       "policy_document": 1,
       "launch_plan_workbook": 1,
@@ -3241,11 +3241,11 @@
       "x_news_record": 14,
       "delivery_note_line": 966,
       "supplier_statement": 105,
-      "inspection_result": 4,
+      "inspection_result": 9,
       "supplier_part": 154,
       "contract_term": 18,
       "oc_header": 810,
-      "oc_line": 2089,
+      "oc_line": 2122,
       "supplier": 109,
       "price_change": 65,
       "part_xref": 35,

@@ -171,7 +171,7 @@
         "item_key": "e123ca5c5c26"
       },
       "attribute": "unit_price",
-      "value": 25000,
+      "value": 25.62,
       "unit": null,
       "as_of": null,
       "locator": {
@@ -272,6 +272,54 @@
       },
       "evidence": "PR-RB-2207: lid closure magnets RM-N42-D0401 (4 pcs per box) are fitted in our plant and included in the unit price.",
       "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "item_key": "e123ca5c5c26",
+        "po_line": 1,
+        "po_number": "4500318747"
+      },
+      "subject_raw": {
+        "item_key": "e123ca5c5c26",
+        "po_line": 1,
+        "po_number": "4500318747"
+      },
+      "attribute": "material_id",
+      "value": "CMP-MAG-005",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "part cross-reference"
+      },
+      "evidence": "PR-RB-2207",
+      "confidence": "medium",
+      "note": "Resolved through the supplier contract part cross-reference."
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "item_key": "441196c0a91f",
+        "po_line": 1,
+        "po_number": "4500318747"
+      },
+      "subject_raw": {
+        "item_key": "441196c0a91f",
+        "po_line": 1,
+        "po_number": "4500318747"
+      },
+      "attribute": "material_id",
+      "value": "CMP-MAG-005",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "part cross-reference"
+      },
+      "evidence": "PR-RB-2207",
+      "confidence": "medium",
+      "note": "Resolved through the supplier contract part cross-reference."
     }
   ],
   "unreadable": [],
