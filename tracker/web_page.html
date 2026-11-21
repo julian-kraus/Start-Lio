@@ -86,6 +86,25 @@ th { color: var(--muted); font-weight: 600; }
 .empty { text-align: center; color: var(--muted); padding: 56px 16px; border: 1px dashed var(--border); border-radius: 10px; }
 details summary { cursor: pointer; color: var(--muted); font-size: 12px; margin-top: 12px; }
 .more { display: flex; justify-content: center; margin-top: 16px; }
+.tabs { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 8px; }
+.tab { border: 0; background: var(--surface); color: var(--muted); font: inherit; font-size: 13px; padding: 6px 14px; cursor: pointer; }
+.tab + .tab { border-left: 1px solid var(--border); }
+.tab[aria-selected="true"] { color: var(--accent); font-weight: 600; background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
+.tab .count { color: var(--muted); font-weight: 400; margin-left: 4px; }
+.section-title { font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 22px 0 8px; }
+.s-open, .s-waiting_reply { color: var(--changed); background: var(--changed-bg); }
+.s-replied { color: var(--added); background: var(--added-bg); }
+.s-bounced { color: var(--removed); background: var(--removed-bg); }
+.s-closed, .s-unmatched { color: var(--muted); background: var(--bg); }
+.msg { border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; margin-top: 10px; }
+.msg.out { border-left: 3px solid var(--accent); }
+.msg.in { border-left: 3px solid var(--added); }
+.msg-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; }
+.msg-head .who { font-weight: 600; overflow-wrap: anywhere; }
+.msg .body { white-space: pre-wrap; overflow-wrap: anywhere; margin: 8px 0 0; font-size: 13.5px; }
+.tagline { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+.tag { font-size: 11px; border: 1px solid var(--border); border-radius: 999px; padding: 1px 8px; color: var(--muted); }
+.tag.warn { color: var(--removed); border-color: var(--removed); }
 @media (max-width: 600px) {
   .row { grid-template-columns: 1fr; gap: 6px; }
   .badge { justify-self: start; }
@@ -97,7 +116,11 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12px; margin-
 <div class="wrap">
   <header>
     <div>
-      <h1>Portal changes</h1>
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" data-view="portal" aria-selected="true">Portal changes</button>
+        <button class="tab" role="tab" data-view="mail" aria-selected="false">Mail<span class="count" id="mail-count"></span></button>
+      </div>
+      <h1 id="title">Portal changes</h1>
       <div class="status" id="status">Loading…</div>
     </div>
     <div style="display:flex; gap:8px; align-items:center">
@@ -106,17 +129,26 @@ details summary { cursor: pointer; color: var(--muted); font-size: 12px; margin-
     </div>
   </header>
 
+  <section id="view-portal">
   <div class="toolbar" id="toolbar">
     <button class="chip" data-kind="" aria-pressed="true">All</button>
     <button class="chip" data-kind="added,renamed" aria-pressed="false">New files</button>
     <button class="chip" data-kind="changed" aria-pressed="false">Changed</button>
     <button class="chip" data-kind="removed" aria-pressed="false">Removed</button>
     <button class="chip" data-kind="stale,recovered" aria-pressed="false">Gone quiet</button>
-    <input type="search" id="q" placeholder="Filter by path or content, e.g. SUP-0028 or eta">
+    <input type="search" id="q" placeholder="Filter by path or content, e.g. a supplier ID or eta">
   </div>
 
   <div class="feed" id="feed"></div>
   <div class="more"><button class="btn" id="more" hidden>Load older changes</button></div>
+  </section>
+
+  <section id="view-mail" hidden>
+    <div class="section-title">Threads</div>
+    <div class="feed" id="threads"></div>
+    <div class="section-title">Not matched to a thread</div>
+    <div class="feed" id="unmatched"></div>
+  </section>
 </div>
 
 <script>
@@ -280,6 +312,7 @@ async function refreshStatus() {
   try {
     const s = await (await fetch("/api/status")).json();
     state.baseline = s.baseline_at;
+    if (view !== "portal") return;
     const lp = s.last_poll;
     const failed = lp && lp.ok === false;
     $("#status").innerHTML = [
@@ -288,7 +321,7 @@ async function refreshStatus() {
       lp?.failed?.length ? `<span style="color:var(--changed)" title="${esc(lp.failed.map(f => f.path + ": " + f.error).join("\n"))}">${lp.failed.length} file${lp.failed.length > 1 ? "s" : ""} could not be fetched, retrying</span>` : null,
       `${s.files} files tracked`, `${s.versions} versions kept`, `${s.events} changes`,
     ].filter(Boolean).join(" · ");
-  } catch { $("#status").textContent = "Status unavailable"; }
+  } catch { if (view === "portal") $("#status").textContent = "Status unavailable"; }
 }
 
 function connect() {
@@ -309,6 +342,120 @@ function connect() {
       new Notification(`${LABEL[ev.kind] || ev.kind}: ${ev.path.split("/").pop()}`, {body: ev.summary});
   });
 }
+
+// ---- Mail view: read-only, refreshed every 30 s (the mail worker polls Gmail every 30 s) ----
+const STATUS_LABEL = {open: "Open", waiting_reply: "Waiting", replied: "Replied", bounced: "Bounced", closed: "Closed"};
+const mail = {data: null, lastInbound: null, threads: new Map()};
+
+function msgHtml(m) {
+  const who = m.direction === "out" ? "Sent to " + (m.to_addrs || []).join(", ") : (m.from_name ? `${m.from_name} <${m.from_addr}>` : m.from_addr);
+  const tags = [m.kind, m.lang && `lang ${m.lang}`, m.supplier_id, m.trust !== "supplier_contact" && m.direction === "in" ? m.trust : null]
+    .filter(Boolean).map(t => `<span class="tag${t === "unknown_sender" ? " warn" : ""}">${esc(t)}</span>`).join("")
+    + (m.flags || []).map(f => `<span class="tag warn">${esc(f)}</span>`).join("");
+  const translated = m.body_en && m.body_en !== m.body_text;
+  const files = (m.attachments || []).map(a => `${a.filename} (${Math.max(1, Math.round(a.bytes / 1024))} KB)`);
+  return `<div class="msg ${m.direction === "out" ? "out" : "in"}">
+    <div class="msg-head"><span class="who">${esc(who)}</span><time class="time" title="${esc(fmtFull(m.received_at))}">${esc(fmtTime(m.received_at))}</time></div>
+    <div class="note">${esc(m.subject || "(no subject)")}</div>
+    <div class="tagline">${tags}</div>
+    <div class="body">${esc((translated ? m.body_en : m.body_text) || "")}</div>
+    ${translated ? `<details><summary>Original (${esc(m.lang || "source language")})</summary><div class="body">${esc(m.body_text || "")}</div></details>` : ""}
+    ${files.length ? `<div class="note" style="margin-top:8px">Attachments: ${esc(files.join(", "))}</div>` : ""}
+  </div>`;
+}
+
+function draftHtml(d) {
+  return `<div class="msg out"><div class="msg-head"><span class="who">Draft (${esc(d.status)}) to ${esc((d.to_addrs || []).join(", "))}</span>
+    <time class="time" title="${esc(fmtFull(d.updated_at))}">${esc(fmtTime(d.updated_at))}</time></div>
+    <div class="note">${esc(d.subject)} · by ${esc(d.created_by)}</div>
+    <div class="body">${esc(d.body_en)}</div>
+    ${d.lang !== "en" ? `<details><summary>As sent (${esc(d.lang)})</summary><div class="body">${esc(d.body_local)}</div></details>` : ""}</div>`;
+}
+
+function threadCard(t) {
+  const el = document.createElement("article");
+  el.className = "card";
+  el.dataset.thread = t.thread_id;
+  const meta = [t.supplier_id || "unknown supplier", t.tag, `${t.n_messages} message${t.n_messages === 1 ? "" : "s"}`,
+    t.open_drafts ? `${t.open_drafts} draft${t.open_drafts > 1 ? "s" : ""} awaiting approval` : null,
+    t.po_numbers?.length ? "PO " + t.po_numbers.join(", ") : null].filter(Boolean).join(" · ");
+  el.innerHTML = `<div class="row" role="button" tabindex="0" aria-expanded="false">
+      <span class="badge s-${esc(t.status)}">${esc(STATUS_LABEL[t.status] || t.status)}</span>
+      <div><div class="summary" style="margin:0;font-weight:600">${esc(t.subject)}</div><div class="note">${esc(meta)}</div></div>
+      <time class="time" title="${esc(t.last_message_at ? fmtFull(t.last_message_at) : "")}">${esc(t.last_message_at ? fmtTime(t.last_message_at) : "")}</time>
+    </div><div class="detail"></div>`;
+  const row = $(".row", el);
+  const toggle = () => openThread(el, t.thread_id);
+  row.addEventListener("click", toggle);
+  row.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+  return el;
+}
+
+async function openThread(el, id, keepOpen) {
+  const open = keepOpen || !el.classList.contains("open");
+  el.classList.toggle("open", open);
+  $(".row", el).setAttribute("aria-expanded", open);
+  if (!open) return;
+  const box = $(".detail", el);
+  if (!mail.threads.has(id)) box.innerHTML = `<div class="note">Loading…</div>`;
+  const res = await fetch(`/api/mail/threads/${id}`);
+  const t = await res.json();
+  mail.threads.set(id, t);
+  box.innerHTML = (t.messages || []).map(msgHtml).join("") + (t.drafts || []).map(draftHtml).join("")
+    || `<div class="note">No messages in this thread.</div>`;
+}
+
+function unmatchedCard(m) {
+  const el = document.createElement("article");
+  el.className = "card open";
+  el.innerHTML = `<div class="detail" style="border-top:0">${msgHtml(m)}</div>`;
+  return el;
+}
+
+function mailStatus() {
+  const d = mail.data;
+  if (!d) return "Loading…";
+  if (!d.available) return "No mail data in this database yet";
+  return [d.last_inbound ? `Last inbound mail ${esc(fmtTime(d.last_inbound))}` : "No inbound mail yet",
+    `${d.threads.length} threads`, `${d.inbound} received`, `${d.sent} sent`,
+    d.unmatched.length ? `<span style="color:var(--changed)">${d.unmatched.length} not matched</span>` : null].filter(Boolean).join(" · ");
+}
+
+async function loadMail() {
+  try {
+    const d = await (await fetch("/api/mail")).json();
+    const fresh = mail.lastInbound && d.last_inbound && d.last_inbound > mail.lastInbound;
+    mail.data = d;
+    mail.lastInbound = d.last_inbound || mail.lastInbound;
+    $("#mail-count").textContent = d.available ? ` ${d.threads.length + d.unmatched.length}` : "";
+    if (fresh && window.Notification?.permission === "granted" && document.hidden) new Notification("New supplier mail", {body: "Open the Mail tab"});
+    if (view !== "mail") return;
+    $("#status").innerHTML = mailStatus();
+    const openIds = [...document.querySelectorAll("#threads .card.open")].map(c => c.dataset.thread);
+    const threads = $("#threads"), unmatched = $("#unmatched");
+    threads.innerHTML = ""; unmatched.innerHTML = "";
+    if (!d.available) { threads.innerHTML = `<div class="empty">No mail data in this database yet.</div>`; return; }
+    for (const t of d.threads) {
+      const el = threads.appendChild(threadCard(t));
+      if (openIds.includes(t.thread_id)) openThread(el, t.thread_id, true);
+    }
+    if (!d.threads.length) threads.innerHTML = `<div class="empty">No threads yet.</div>`;
+    for (const m of d.unmatched) unmatched.appendChild(unmatchedCard(m));
+    if (!d.unmatched.length) unmatched.innerHTML = `<div class="note">Every inbound message belongs to a thread.</div>`;
+  } catch { if (view === "mail") $("#status").textContent = "Mail unavailable"; }
+}
+
+let view = "portal";
+function setView(v) {
+  view = v;
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.view === v));
+  $("#view-portal").hidden = v !== "portal";
+  $("#view-mail").hidden = v !== "mail";
+  $("#title").textContent = v === "mail" ? "Supplier mail" : "Portal changes";
+  if (v === "mail") { $("#status").innerHTML = mailStatus(); loadMail(); } else refreshStatus();
+  history.replaceState(null, "", v === "mail" ? "#mail" : location.pathname + location.search);
+}
+document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => setView(t.dataset.view)));
 
 document.addEventListener("visibilitychange", () => {
   if (!document.hidden) { state.unseen = 0; document.title = "Portal Changes"; }
@@ -341,9 +488,11 @@ if (window.Notification && Notification.permission === "default") {
     const el = document.querySelector(`.card[data-id="${linked[1]}"]`);
     if (el) { el.querySelector(".row").click(); el.scrollIntoView({block: "start"}); }
   }
+  if (location.hash === "#mail") setView("mail"); else loadMail();  // loadMail fills the tab count
   if (new URLSearchParams(location.search).has("static")) return;  // snapshot mode: no live connection
   connect();
   setInterval(refreshStatus, 30000);
+  setInterval(loadMail, 30000);
 })();
 </script>
 </body>

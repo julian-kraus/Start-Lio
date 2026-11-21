@@ -6,6 +6,8 @@ GET /api/events          newest first; ?before=<id>&limit=&kind=&q=
 GET /api/events/<id>     one event with its full diff
 GET /api/stream          Server-Sent Events, one message per new event (resumes via Last-Event-ID)
 GET /api/blob/<sha256>   raw content of a stored file version
+GET /api/mail            supplier mail: threads, unmatched inbound messages, counts (empty if no mail schema)
+GET /api/mail/threads/<uuid>  one thread with its messages, attachments (names only) and drafts
 """
 
 from __future__ import annotations
@@ -19,6 +21,7 @@ import queue
 import re
 import threading
 import time
+import uuid
 from datetime import date, datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -35,11 +38,17 @@ PAGE = Path(__file__).with_name("web_page.html")
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
 LIST_COLUMNS = "id, at, kind, path, old_path, old_sha, new_sha, summary"
 HEARTBEAT = 15
+UUID_RE = r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+# Never select messages.raw (full RFC 822 bytes): the page only needs headers and text.
+MAIL_MESSAGE_COLUMNS = ("id, message_id, thread_id, direction, kind, from_addr, from_name, to_addrs, subject, "
+                        "date_header, received_at, supplier_id, trust, lang, flags, body_text, body_en")
 
 
 def _json_default(value):
     if isinstance(value, (datetime, date)):
         return value.isoformat()
+    if isinstance(value, uuid.UUID):
+        return str(value)
     raise TypeError(f"not serializable: {type(value).__name__}")
 
 
@@ -147,6 +156,53 @@ class App:
     def event(self, event_id: int) -> dict | None:
         return self.conn().execute("SELECT * FROM events WHERE id = %s", (event_id,)).fetchone()
 
+    def _has_mail(self, c) -> bool:
+        return c.execute("SELECT to_regclass('mail.threads') IS NOT NULL AS ok").fetchone()["ok"]
+
+    def mail(self) -> dict:
+        c = self.conn()
+        if not self._has_mail(c):
+            return {"available": False}
+        threads = c.execute(
+            """SELECT t.thread_id, t.tag, t.supplier_id, t.subject, t.status, t.po_numbers, t.last_message_at,
+                      (SELECT count(*) FROM mail.messages m WHERE m.thread_id = t.thread_id) AS n_messages,
+                      (SELECT count(*) FROM mail.drafts d WHERE d.thread_id = t.thread_id AND d.status = 'draft') AS open_drafts,
+                      (SELECT m.kind FROM mail.messages m WHERE m.thread_id = t.thread_id AND m.direction = 'in'
+                        ORDER BY m.received_at DESC LIMIT 1) AS last_inbound_kind
+               FROM mail.threads t ORDER BY t.last_message_at DESC NULLS LAST, t.created_at DESC LIMIT 200"""
+        ).fetchall()
+        unmatched = c.execute(
+            f"""SELECT {MAIL_MESSAGE_COLUMNS} FROM mail.messages
+                WHERE thread_id IS NULL AND direction = 'in' ORDER BY received_at DESC LIMIT 100"""
+        ).fetchall()
+        counts = c.execute(
+            """SELECT (SELECT count(*) FROM mail.messages) AS messages,
+                      (SELECT count(*) FROM mail.messages WHERE direction = 'in') AS inbound,
+                      (SELECT count(*) FROM mail.sends WHERE state = 'sent') AS sent,
+                      (SELECT max(received_at) FROM mail.messages WHERE direction = 'in') AS last_inbound"""
+        ).fetchone()
+        return {"available": True, "threads": threads, "unmatched": unmatched, **counts}
+
+    def mail_thread(self, thread_id: str) -> dict | None:
+        c = self.conn()
+        if not self._has_mail(c):
+            return None
+        thread = c.execute("SELECT * FROM mail.threads WHERE thread_id = %s", (thread_id,)).fetchone()
+        if not thread:
+            return None
+        thread["messages"] = c.execute(
+            f"""SELECT {MAIL_MESSAGE_COLUMNS},
+                       coalesce((SELECT json_agg(json_build_object('filename', a.filename, 'bytes', a.bytes,
+                                 'content_type', a.content_type) ORDER BY a.id)
+                                 FROM mail.attachments a WHERE a.message_pk = m.id), '[]') AS attachments
+                FROM mail.messages m WHERE m.thread_id = %s ORDER BY m.received_at""", (thread_id,)
+        ).fetchall()
+        thread["drafts"] = c.execute(
+            """SELECT draft_id, status, subject, lang, to_addrs, body_local, body_en, created_by, created_at, updated_at
+               FROM mail.drafts WHERE thread_id = %s ORDER BY created_at""", (thread_id,)
+        ).fetchall()
+        return thread
+
 
 def make_handler(app: App):
     class Handler(BaseHTTPRequestHandler):
@@ -180,6 +236,11 @@ def make_handler(app: App):
                     return self._send(200 if row else 404, dumps(row or {"error": "not found"}))
                 if m := re.fullmatch(r"/api/blob/([0-9a-f]{64})", url.path):
                     return self._blob(m.group(1), params.get("name", ""))
+                if url.path == "/api/mail":
+                    return self._send(200, dumps(app.mail()))
+                if m := re.fullmatch(rf"/api/mail/threads/({UUID_RE})", url.path):
+                    row = app.mail_thread(m.group(1))
+                    return self._send(200 if row else 404, dumps(row or {"error": "not found"}))
                 if url.path == "/api/stream":
                     return self._stream(params)
                 self._send(404, dumps({"error": "not found"}))
