@@ -1,7 +1,17 @@
+import os
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+# Tests run only against a local throwaway Postgres. A managed or pooled URL (Supabase, a connection pooler)
+# would mean a test is about to hit shared infrastructure, so refuse to collect at all.
+_FORBIDDEN = ("supabase", "pooler")
+for _var in ("TEST_DATABASE_URL", "DATABASE_URL"):
+    _url = os.environ.get(_var, "").lower()
+    if any(bad in _url for bad in _FORBIDDEN):
+        raise RuntimeError(
+            f"{_var} points at a managed or pooled database; tests run only against a local throwaway Postgres")
 
 
 def make_pdf(lines: list[str]) -> bytes:
