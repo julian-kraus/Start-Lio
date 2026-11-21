@@ -33,14 +33,19 @@ code may name a part, supplier or scenario. Every number shown comes from `sourc
    A rejected push means someone else holds it: pick another issue. After a successful push, fetch and check
    that the tip of `origin/i<n>` is your claim. Then run `python ops/gh_status.py claim <n> <agent-id>`
    (assigns you, sets `status:claimed`, comments, updates the project).
-3. Work only in a fresh worktree for this issue: `git worktree add ../wt/i<n> i<n>`. Never in the main
-   checkout, never in another issue's worktree. Restart case: if the last claim on `origin/i<n>` is yours,
-   continue in its worktree.
+3. Work only in a fresh worktree for this issue, inside the repo: `git worktree add .worktrees/i<n> i<n>`
+   (`.worktrees/` is git-ignored; paths outside the repo are not writable for headless agents). Never in the
+   main checkout, never in another issue's worktree. Restart case: if the last claim on `origin/i<n>` is yours,
+   continue in `.worktrees/i<n>`. Reviewers and coordinators also create their worktrees under `.worktrees/`.
 4. Before writing code, read the issue, its comments, and the code you depend on. Check interfaces, do not
    assume them.
-5. Write only the files the issue owns, plus new files inside your package. Anything else: stop, comment
-   `needs-decision`, pick another issue.
-6. Commit and push at least every 30 minutes; comment progress on the issue every 30 minutes.
+5. Write only the files the issue owns, plus new files inside your package. Exception, shared files: you may
+   append lines to `requirements.txt`, `.gitignore` and `docker-compose.yml` (new service or env line) and add a
+   subcommand registration to a package `__main__.py`, never edit or remove existing lines there; conflicts are
+   resolved by rebase. Anything else: stop, comment `needs-decision`, pick another issue.
+6. Start every round with a short comment on your issue (`working: <agent-id>`), then commit and push at least
+   every 30 minutes and comment progress every 30 minutes. A claim with no push and no comment for 120 minutes
+   is released by a coordinator.
 7. Before the PR: `git rebase origin/main`, then `python ops/check.py` (once issue R1 has added it; until then
    `pytest -q` with `TEST_DATABASE_URL` set to a local throwaway Postgres). Paste the summary line.
 8. Open the PR from `i<n>` with a body that starts with `Closes #<n>` and repeats the issue's acceptance
@@ -57,7 +62,7 @@ code may name a part, supplier or scenario. Every number shown comes from `sourc
 - Push to `main`, force-push anything except your own branch with `--force-with-lease`, reset or delete
   branches you did not create, close other people's issues or PRs, merge (only coordinators merge, and only PRs a reviewer passed).
 - Drop, rename or retype tables or columns in the `public`, `kb` or `mail` schemas. Shared schema changes are
-  additive and labelled `contract-change`.
+  additive and labelled `contract-change`; a coordinator merges them only if the issue is labelled `preapproved`.
 - Put values from the Soony data (IDs, quantities, names, roles, dates) into code, config or prompts. Read them
   from kb facts. Tests may use synthetic values; expected outputs may live in test fixtures.
 - Write a code file longer than 400 lines. Split by responsibility. `structured/build_structured.py` and
@@ -101,6 +106,11 @@ code may name a part, supplier or scenario. Every number shown comes from `sourc
 5. No secrets, no live DB, no send path, no AI-tool mentions, no TODOs, no file over 400 lines.
 6. Post `CHECK PASS <sha>` from your own run, then `python ops/gh_status.py pass <pr>` or `changes <pr>`.
    Never review a PR written by your own agent id.
+
+## Real data on the machine
+The portal data is git-ignored and stays on team machines. Where `data/current` exists in the agents' clone
+(copied there by a human), run `tests/test_kb_no_literals.py` and the golden quantity tests against it before a
+PR and say so in the PR. Never commit or print data files.
 
 ## Agent ids and starting the loops
 Agent ids are generated from the machine name, role and number (for example `julians-macbook-pro-worker-1`), so

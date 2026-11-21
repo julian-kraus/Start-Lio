@@ -2,6 +2,7 @@
 back off on rate limits, wait when there is no work, stop on the stop signal.
 
 usage: python3 ops/agent_loop.py --role worker|reviewer|coordinator [--index 1] [--agent-id ID] [--model M]
+       [--issue N] [--once]
        [--idle-wait 10] [--round-timeout 100] [--stop-at 09:30] [--cli <agent command>]
 Stop signals: the label `night:stop` on the status issue, a file ops/STOP, or the --stop-at time.
 """
@@ -45,14 +46,17 @@ def stop_requested(stop_at: dt.time) -> str | None:
     return None
 
 
-def prompt_for(role: str, agent_id: str) -> str:
+def prompt_for(role: str, agent_id: str, issue: int | None = None) -> str:
     text = (ROOT / "ops" / "prompts" / f"{role}.md").read_text()
-    return text.replace("{AGENT_ID}", agent_id).replace("{NO_WORK}", NO_WORK)
+    text = text.replace("{AGENT_ID}", agent_id).replace("{NO_WORK}", NO_WORK)
+    if issue:
+        text += f"\n\nThis round, work only on issue #{issue}; do not pick any other issue."
+    return text
 
 
 def run_round(args, log_dir: Path) -> tuple[int, str]:
-    cmd = [args.cli, "-p", prompt_for(args.role, args.agent_id), "--output-format", "json",
-           "--permission-mode", "auto", "--settings", str(ROOT / "ops" / "agent-settings.json"),
+    cmd = [args.cli, "-p", prompt_for(args.role, args.agent_id, args.issue), "--output-format", "json",
+           "--permission-mode", "auto", "--settings", str(ROOT / "ops" / "settings" / f"{args.role}.json"),
            "--setting-sources", "project,local"]
     if args.model:
         cmd += ["--model", args.model]
@@ -81,6 +85,8 @@ def main() -> None:
     ap.add_argument("--idle-wait", type=float, default=10.0, help="minutes to wait when there is no work")
     ap.add_argument("--round-timeout", type=float, default=100.0, help="minutes before a round is killed")
     ap.add_argument("--stop-at", default="09:30")
+    ap.add_argument("--issue", type=int, help="work only on this issue (test runs, targeted fixes)")
+    ap.add_argument("--once", action="store_true", help="run a single round and exit")
     args = ap.parse_args()
     args.agent_id = args.agent_id or default_agent_id(args.role, args.index)
     stop_at = dt.time.fromisoformat(args.stop_at)
@@ -95,6 +101,9 @@ def main() -> None:
         code, result = run_round(args, log_dir)
         heartbeat.write_text(json.dumps({"at": dt.datetime.now().isoformat(timespec="seconds"), "exit": code,
                                          "result": result[-500:]}))
+        if args.once:
+            print(f"{args.agent_id}: one round done, exit {code}: {result[-300:]}", flush=True)
+            return
         lowered = result.lower()
         if code != 0 and any(h in lowered for h in RATE_HINTS):
             wait = 20
