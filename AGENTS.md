@@ -1,6 +1,6 @@
 # Rules for coding agents in this repo
 
-Several agents work in parallel on different laptops until Sunday 22 Nov. Humans are asleep until 08:00.
+Several agents work in parallel on one or more machines until Sunday 22 Nov. Humans are asleep until 08:00.
 Hand-in is Sunday 12:00; code freeze on `main` is 10:30. Work is tracked in GitHub issues, the project
 "Lookahead night", and the pinned issue "[STATUS] Night status".
 
@@ -27,7 +27,7 @@ code may name a part, supplier or scenario. Every number shown comes from `sourc
 1. Pick the highest-priority issue labelled `status:ready` whose blocking issues are closed and whose
    "Files owned" do not overlap an issue labelled `status:claimed`. Never invent work; ideas go into a new
    issue labelled `proposed`. Nothing to pick: fix your own PRs labelled `review:changes`, review other
-   laptops' PRs if you are a reviewer, then wait `IDLE_WAIT` minutes and look again.
+   agents' PRs if you are a reviewer, then wait `IDLE_WAIT` minutes and look again.
 2. Claim with the git lock (never force):
    `git fetch origin && git switch -c i<n> origin/main && git commit --allow-empty -m "claim #<n> <agent-id>" && git push origin i<n>`
    A rejected push means someone else holds it: pick another issue. After a successful push, fetch and check
@@ -55,8 +55,7 @@ code may name a part, supplier or scenario. Every number shown comes from `sourc
 - Read `secrets/`, `.env` or any credential file. Commit secrets, data (`data/`, `mail_data/`, `exports/`) or
   raw portal documents.
 - Push to `main`, force-push anything except your own branch with `--force-with-lease`, reset or delete
-  branches you did not create, close other people's issues or PRs, merge (only coordinators merge: each laptop runs one, and it merges
-  only PRs from its own laptop's agents after a reviewer from the other laptop passed them).
+  branches you did not create, close other people's issues or PRs, merge (only coordinators merge, and only PRs a reviewer passed).
 - Drop, rename or retype tables or columns in the `public`, `kb` or `mail` schemas. Shared schema changes are
   additive and labelled `contract-change`.
 - Put values from the Soony data (IDs, quantities, names, roles, dates) into code, config or prompts. Read them
@@ -101,7 +100,13 @@ code may name a part, supplier or scenario. Every number shown comes from `sourc
 4. Shared schemas additive only; contract examples still validate.
 5. No secrets, no live DB, no send path, no AI-tool mentions, no TODOs, no file over 400 lines.
 6. Post `CHECK PASS <sha>` from your own run, then `python ops/gh_status.py pass <pr>` or `changes <pr>`.
-   Never review a PR from your own laptop.
+   Never review a PR written by your own agent id.
+
+## Agent ids and starting the loops
+Agent ids are generated from the machine name, role and number (for example `julians-macbook-pro-worker-1`), so
+the setup is the same on every machine: `python3 ops/start_agents.py` starts two workers, one reviewer and one
+coordinator; `python3 ops/start_agents.py --stop` stops them. Your id is given in your prompt; use it in claim
+commits, claim comments and the `Agent:` line of PRs.
 
 ## Writing
 Plain English. No em dashes. No emoji. Short PR bodies with facts and commands.
