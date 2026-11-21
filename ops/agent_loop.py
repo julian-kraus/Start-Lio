@@ -1,7 +1,7 @@
 """Run one agent role unattended: start a fresh headless session per round, log it, restart on exit,
 back off on rate limits, wait when there is no work, stop on the stop signal.
 
-usage: python3 ops/agent_loop.py --role worker|reviewer|coordinator --agent-id L1-W1 [--model M]
+usage: python3 ops/agent_loop.py --role worker|reviewer|coordinator [--index 1] [--agent-id ID] [--model M]
        [--idle-wait 10] [--round-timeout 100] [--stop-at 09:30] [--cli <agent command>]
 Stop signals: the label `night:stop` on the status issue, a file ops/STOP, or the --stop-at time.
 """
@@ -10,6 +10,8 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import re
+import socket
 import subprocess
 import sys
 import time
@@ -20,6 +22,12 @@ REPO = "julian-kraus/Start-Lio"
 ROLE_SLEEP = {"worker": 0, "reviewer": 20, "coordinator": 30}   # minutes between rounds when work was done
 NO_WORK = "NO_WORK"
 RATE_HINTS = ("rate limit", "usage limit", "429", "overloaded")
+
+
+def default_agent_id(role: str, index: int) -> str:
+    """Unique per machine, role and index, e.g. julians-mbp-worker-1. Nothing to configure per laptop."""
+    host = re.sub(r"[^a-z0-9-]+", "-", socket.gethostname().split(".")[0].lower()).strip("-") or "host"
+    return f"{host}-{role}-{index}"
 
 
 def stop_requested(stop_at: dt.time) -> str | None:
@@ -66,13 +74,15 @@ def run_round(args, log_dir: Path) -> tuple[int, str]:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--role", required=True, choices=sorted(ROLE_SLEEP))
-    ap.add_argument("--agent-id", required=True)
+    ap.add_argument("--index", type=int, default=1, help="number of this agent within its role on this machine")
+    ap.add_argument("--agent-id", help="override the generated id (default: <host>-<role>-<index>)")
     ap.add_argument("--model")
     ap.add_argument("--cli", default="claude")
     ap.add_argument("--idle-wait", type=float, default=10.0, help="minutes to wait when there is no work")
     ap.add_argument("--round-timeout", type=float, default=100.0, help="minutes before a round is killed")
     ap.add_argument("--stop-at", default="09:30")
     args = ap.parse_args()
+    args.agent_id = args.agent_id or default_agent_id(args.role, args.index)
     stop_at = dt.time.fromisoformat(args.stop_at)
     log_dir = ROOT / "logs" / "agents" / args.agent_id
     log_dir.mkdir(parents=True, exist_ok=True)
