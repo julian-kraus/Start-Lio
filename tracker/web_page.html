@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portal Changes</title>
+<style>
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --border: #e3e6eb; --text: #14171c; --muted: #646b76;
+  --accent: #5b5bd6; --added: #1f8a4c; --added-bg: #e7f6ed; --removed: #c4372f; --removed-bg: #fdecea;
+  --changed: #8a5a00; --changed-bg: #fff4dc; --renamed: #2f6fc4; --renamed-bg: #e8f0fc;
+  --stale: #7a4fc4; --stale-bg: #f1ebfc; --recovered: #1f8a4c; --recovered-bg: #e7f6ed;
+  --flash: #fffbe6; --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1115; --surface: #171a20; --border: #2a2f38; --text: #e8eaee; --muted: #9aa1ad;
+    --accent: #8f8ff0; --added: #5ccf8b; --added-bg: #15301f; --removed: #f08a82; --removed-bg: #3a1a18;
+    --changed: #f0c060; --changed-bg: #33290f; --renamed: #7fb0f0; --renamed-bg: #172638;
+    --stale: #b897f0; --stale-bg: #261d38; --recovered: #5ccf8b; --recovered-bg: #15301f; --flash: #2c2a16;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1115; --surface: #171a20; --border: #2a2f38; --text: #e8eaee; --muted: #9aa1ad;
+  --accent: #8f8ff0; --added: #5ccf8b; --added-bg: #15301f; --removed: #f08a82; --removed-bg: #3a1a18;
+  --changed: #f0c060; --changed-bg: #33290f; --renamed: #7fb0f0; --renamed-bg: #172638;
+  --stale: #b897f0; --stale-bg: #261d38; --recovered: #5ccf8b; --recovered-bg: #15301f; --flash: #2c2a16;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 24px 16px 64px; }
+header { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+h1 { font-size: 20px; margin: 0 0 4px; letter-spacing: -0.01em; }
+.status { color: var(--muted); font-size: 13px; }
+.live { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted);
+  border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; background: var(--surface); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+.live.on .dot { background: var(--added); box-shadow: 0 0 0 3px var(--added-bg); }
+.live.off .dot { background: var(--removed); }
+.toolbar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 20px 0 12px; }
+.chip { border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 999px;
+  padding: 5px 12px; font: inherit; font-size: 13px; cursor: pointer; }
+.chip[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+input[type=search] { flex: 1; min-width: 180px; border: 1px solid var(--border); background: var(--surface);
+  color: var(--text); border-radius: 8px; padding: 7px 10px; font: inherit; }
+.btn { border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 8px;
+  padding: 6px 12px; font: inherit; font-size: 13px; cursor: pointer; text-decoration: none; display: inline-block; }
+.btn:hover, .chip:hover { border-color: var(--accent); }
+.feed { display: flex; flex-direction: column; gap: 8px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.card.new { animation: flash 2.5s ease-out; }
+@keyframes flash { from { background: var(--flash); } to { background: var(--surface); } }
+.row { display: grid; grid-template-columns: 92px 1fr auto; gap: 12px; padding: 12px 14px; cursor: pointer; align-items: start; }
+.row:hover { background: color-mix(in srgb, var(--bg) 50%, transparent); }
+.badge { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+  border-radius: 6px; padding: 3px 8px; text-align: center; }
+.k-added { color: var(--added); background: var(--added-bg); }
+.k-removed { color: var(--removed); background: var(--removed-bg); }
+.k-changed { color: var(--changed); background: var(--changed-bg); }
+.k-renamed { color: var(--renamed); background: var(--renamed-bg); }
+.k-stale { color: var(--stale); background: var(--stale-bg); }
+.k-recovered { color: var(--recovered); background: var(--recovered-bg); }
+.path { font-family: var(--mono); font-size: 13px; word-break: break-all; }
+.path .dir { color: var(--muted); }
+.summary { margin-top: 3px; color: var(--text); overflow-wrap: anywhere; }
+.time { color: var(--muted); font-size: 12px; white-space: nowrap; text-align: right; }
+.detail { border-top: 1px solid var(--border); padding: 12px 14px 16px; display: none; }
+.card.open .detail { display: block; }
+.detail h4 { margin: 14px 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+.detail h4:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--border); vertical-align: top; overflow-wrap: anywhere; }
+th { color: var(--muted); font-weight: 600; }
+.scroll { overflow-x: auto; }
+.scroll th, .scroll td { overflow-wrap: normal; white-space: nowrap; }
+.scroll td:last-child { white-space: normal; min-width: 240px; }
+.old { color: var(--removed); text-decoration: line-through; text-decoration-thickness: 1px; }
+.new { color: var(--added); font-weight: 600; }
+.lines { font-family: var(--mono); font-size: 12.5px; white-space: pre-wrap; margin: 0; padding: 8px 10px;
+  border-radius: 6px; background: var(--bg); max-height: 360px; overflow: auto; }
+.lines .a { color: var(--added); } .lines .r { color: var(--removed); }
+.actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+.note { color: var(--muted); font-size: 13px; }
+.empty { text-align: center; color: var(--muted); padding: 56px 16px; border: 1px dashed var(--border); border-radius: 10px; }
+details summary { cursor: pointer; color: var(--muted); font-size: 12px; margin-top: 12px; }
+.more { display: flex; justify-content: center; margin-top: 16px; }
+@media (max-width: 600px) {
+  .row { grid-template-columns: 1fr; gap: 6px; }
+  .badge { justify-self: start; }
+  .time { text-align: left; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Portal changes</h1>
+      <div class="status" id="status">Loading…</div>
+    </div>
+    <div style="display:flex; gap:8px; align-items:center">
+      <button class="btn" id="notify" hidden>Enable alerts</button>
+      <span class="live" id="live"><span class="dot"></span><span id="live-text">Connecting</span></span>
+    </div>
+  </header>
+
+  <div class="toolbar" id="toolbar">
+    <button class="chip" data-kind="" aria-pressed="true">All</button>
+    <button class="chip" data-kind="added,renamed" aria-pressed="false">New files</button>
+    <button class="chip" data-kind="changed" aria-pressed="false">Changed</button>
+    <button class="chip" data-kind="removed" aria-pressed="false">Removed</button>
+    <button class="chip" data-kind="stale,recovered" aria-pressed="false">Gone quiet</button>
+    <input type="search" id="q" placeholder="Filter by path or content, e.g. SUP-0028 or eta">
+  </div>
+
+  <div class="feed" id="feed"></div>
+  <div class="more"><button class="btn" id="more" hidden>Load older changes</button></div>
+</div>
+
+<script>
+const $ = (s, el = document) => el.querySelector(s);
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const TZ = "Europe/Berlin";
+const fmtTime = iso => new Date(iso).toLocaleString("en-GB", {timeZone: TZ, weekday: "short", hour: "2-digit", minute: "2-digit"});
+const fmtFull = iso => new Date(iso).toLocaleString("en-GB", {timeZone: TZ, dateStyle: "medium", timeStyle: "medium"}) + " Berlin";
+const LABEL = {added: "New", changed: "Changed", removed: "Removed", renamed: "Moved", stale: "Quiet", recovered: "Back"};
+const state = {kind: "", q: "", oldest: null, newest: 0, unseen: 0, details: new Map()};
+
+function pathHtml(p) {
+  const i = p.lastIndexOf("/");
+  return `<span class="dir">${esc(p.slice(0, i + 1))}</span>${esc(p.slice(i + 1))}`;
+}
+
+function matches(ev) {
+  if (state.kind && !state.kind.split(",").includes(ev.kind)) return false;
+  const q = state.q.toLowerCase();
+  return !q || ev.path.toLowerCase().includes(q) || (ev.summary || "").toLowerCase().includes(q);
+}
+
+function card(ev, isNew) {
+  const el = document.createElement("article");
+  el.className = "card" + (isNew ? " new" : "");
+  el.dataset.id = ev.id;
+  el.innerHTML = `
+    <div class="row" role="button" tabindex="0" aria-expanded="false">
+      <span class="badge k-${esc(ev.kind)}">${esc(LABEL[ev.kind] || ev.kind)}</span>
+      <div>
+        <div class="path">${pathHtml(ev.path)}</div>
+        ${ev.old_path ? `<div class="note">from ${esc(ev.old_path)}</div>` : ""}
+        <div class="summary">${esc(ev.summary)}</div>
+      </div>
+      <time class="time" title="${esc(fmtFull(ev.at))}">${esc(fmtTime(ev.at))}</time>
+    </div>
+    <div class="detail"></div>`;
+  const row = $(".row", el);
+  const toggle = () => openCard(el, ev);
+  row.addEventListener("click", toggle);
+  row.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+  return el;
+}
+
+async function openCard(el, ev) {
+  const open = !el.classList.contains("open");
+  el.classList.toggle("open", open);
+  $(".row", el).setAttribute("aria-expanded", open);
+  if (!open) return;
+  const box = $(".detail", el);
+  if (!state.details.has(ev.id)) {
+    box.innerHTML = `<div class="note">Loading…</div>`;
+    const res = await fetch(`/api/events/${ev.id}`);
+    state.details.set(ev.id, await res.json());
+  }
+  box.innerHTML = renderDetail(state.details.get(ev.id));
+}
+
+function valueCell(v) { return v === "" || v == null ? `<span class="note">empty</span>` : esc(typeof v === "object" ? JSON.stringify(v) : v); }
+
+function changeTable(rows) {
+  return `<table><thead><tr><th>Row</th><th>Field</th><th>Before</th><th>After</th></tr></thead><tbody>${
+    rows.flatMap(r => Object.entries(r.changes).map(([f, [a, b]], i) =>
+      `<tr><td>${i ? "" : esc(r.key)}</td><td>${esc(f)}</td><td class="old">${valueCell(a)}</td><td class="new">${valueCell(b)}</td></tr>`)).join("")
+  }</tbody></table>`;
+}
+
+function rowList(rows) {
+  return `<table><tbody>${rows.map(r => `<tr><td><strong>${esc(r.key)}</strong></td><td>${
+    esc(Object.entries(r.row).filter(([, v]) => v).slice(0, 8).map(([k, v]) => `${k}: ${v}`).join(" · "))}</td></tr>`).join("")}</tbody></table>`;
+}
+
+function tableDiff(d) {
+  let h = "";
+  if (d.rows_changed?.length) h += `<h4>Changed rows</h4>` + changeTable(d.rows_changed);
+  if (d.rows_added?.length) h += `<h4>Added rows</h4>` + rowList(d.rows_added);
+  if (d.rows_removed?.length) h += `<h4>Removed rows</h4>` + rowList(d.rows_removed);
+  if (d.added_column_values) h += `<h4>New columns</h4><table><tbody>${Object.entries(d.added_column_values).map(([c, vals]) =>
+    `<tr><td><strong>${esc(c)}</strong></td><td>${esc(Object.entries(vals).filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`).join(" · "))}</td></tr>`).join("")}</tbody></table>`;
+  const s = d.schema || {};
+  const notes = [];
+  if (s.columns_renamed && Object.keys(s.columns_renamed).length) notes.push("Renamed columns: " + Object.entries(s.columns_renamed).map(([a, b]) => `${a} → ${b}`).join(", "));
+  if (s.columns_removed?.length) notes.push("Removed columns: " + s.columns_removed.join(", "));
+  if (d.format) notes.push("File format: " + Object.entries(d.format).map(([k, [a, b]]) => `${k} ${JSON.stringify(a)} → ${JSON.stringify(b)}`).join(", "));
+  if (d.format_only_changes) notes.push("Only the format changed (same values) in: " + Object.entries(d.format_only_changes).map(([c, n]) => `${c} (${n})`).join(", "));
+  if (d.key) notes.push(`Rows matched by ${d.key.join(" + ")}`);
+  if (d.truncated) notes.push("Showing the first changes only.");
+  if (notes.length) h += `<h4>Notes</h4><div class="note">${notes.map(esc).join("<br>")}</div>`;
+  return h;
+}
+
+function renderDetail(ev) {
+  const d = ev.diff || {};
+  let h = "";
+  if (d.rows_changed || d.rows_added || d.rows_removed) h += tableDiff(d);
+  if (d.cells) for (const [sheet, cells] of Object.entries(d.cells)) {
+    h += `<h4>Sheet “${esc(sheet)}”</h4><table><thead><tr><th>Cell</th><th>Row</th><th>Column</th><th>Before</th><th>After</th></tr></thead><tbody>${
+      cells.map(c => `<tr><td>${esc(c.cell)}</td><td>${valueCell(c.row_label)}</td><td>${valueCell(c.column_label)}</td><td class="old">${valueCell(c.old)}</td><td class="new">${valueCell(c.new)}</td></tr>`).join("")}</tbody></table>`;
+  }
+  if (d.sheets_added?.length) h += `<div class="note">Sheets added: ${esc(d.sheets_added.join(", "))}</div>`;
+  if (d.sheets_removed?.length) h += `<div class="note">Sheets removed: ${esc(d.sheets_removed.join(", "))}</div>`;
+  if (d.lines_added || d.lines_removed) {
+    h += `<h4>Text changes</h4><pre class="lines">${(d.lines_removed || []).map(l => `<span class="r">− ${esc(l)}</span>`).join("\n")}${
+      d.lines_removed?.length && d.lines_added?.length ? "\n" : ""}${(d.lines_added || []).map(l => `<span class="a">+ ${esc(l)}</span>`).join("\n")}</pre>`;
+  }
+  if (d.unified_diff) h += `<h4>Text changes</h4><pre class="lines">${d.unified_diff.map(l =>
+    l.startsWith("+") ? `<span class="a">${esc(l)}</span>` : l.startsWith("-") ? `<span class="r">${esc(l)}</span>` : esc(l)).join("\n")}</pre>`;
+  if (d.changes?.length) h += `<h4>Changed values</h4><table><tbody>${d.changes.map(c =>
+    `<tr><td>${esc(c.path)}</td><td class="old">${valueCell(c.old)}</td><td class="new">${valueCell(c.new)}</td></tr>`).join("")}</tbody></table>`;
+  if (d.tables) for (const [p, t] of Object.entries(d.tables)) h += `<h4>${esc(p)}</h4>` + tableDiff(t);
+  if (d.text_preview) h += `<h4>Content</h4><pre class="lines">${esc(d.text_preview)}</pre>`;
+  if (d.preview?.length) {
+    h += `<h4>Content${d.rows > d.preview.length ? ` (first ${d.preview.length} of ${d.rows} rows)` : ""}</h4><div class="scroll"><table><thead><tr>${
+      d.columns.map(c => `<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${
+      d.preview.map(r => `<tr>${d.columns.map(c => `<td>${esc(r[c])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+  } else if (d.columns && ev.kind === "added") h += `<h4>Columns</h4><div class="note">${esc(d.columns.join(", "))} · ${esc(d.rows)} rows</div>`;
+  if (d.sheet_preview) for (const [sheet, grid] of Object.entries(d.sheet_preview)) {
+    if (!grid.length) continue;
+    h += `<h4>Sheet “${esc(sheet)}”</h4><div class="scroll"><table><tbody>${
+      grid.map(r => `<tr>${r.map(v => `<td>${v == null ? "" : esc(v)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+  }
+  if (d.scan) h += `<div class="note">This is a scan without a text layer. Open it to read it.</div>`;
+  if (ev.kind === "stale") h += `<div class="note">Last change ${esc(fmtFull(d.last_change))}. Silence can mean a feed stopped updating.</div>`;
+  if (d.history_import) h += `<div class="note">Found before live tracking started, by comparing with the first download of the portal data. The exact time of the change is unknown; the time shown is when tracking started.</div>`;
+  if (d.diff_error || d.parse_error) h += `<div class="note">Could not read the file contents: ${esc(d.diff_error || d.parse_error)}</div>`;
+  if (!h) h = `<div class="note">No content details for this change.</div>`;
+  const name = encodeURIComponent(ev.path);
+  const oldName = encodeURIComponent(ev.old_path || ev.path);
+  h += `<div class="actions">${ev.new_sha ? `<a class="btn" target="_blank" href="/api/blob/${ev.new_sha}?name=${name}">Open current version</a>` : ""}${
+    ev.old_sha ? `<a class="btn" target="_blank" href="/api/blob/${ev.old_sha}?name=${oldName}">Open previous version</a>` : ""}</div>`;
+  h += `<details><summary>Raw event</summary><pre class="lines">${esc(JSON.stringify(ev, null, 2))}</pre></details>`;
+  return h;
+}
+
+function renderEmpty() {
+  const feed = $("#feed");
+  if (feed.children.length) return;
+  const filtered = state.kind || state.q;
+  feed.innerHTML = `<div class="empty">${filtered ? "No changes match this filter." :
+    `No changes yet${state.baseline ? " since tracking started on " + esc(fmtFull(state.baseline)) : ""}.<br>The portal is checked every minute; new changes appear here instantly.`}</div>`;
+}
+
+async function load(reset) {
+  const params = new URLSearchParams({limit: 50});
+  if (state.kind) params.set("kind", state.kind);
+  if (state.q) params.set("q", state.q);
+  if (!reset && state.oldest) params.set("before", state.oldest);
+  const rows = await (await fetch(`/api/events?${params}`)).json();
+  const feed = $("#feed");
+  if (reset) feed.innerHTML = "";
+  for (const ev of rows) feed.appendChild(card(ev, false));
+  if (rows.length) {
+    state.oldest = rows[rows.length - 1].id;
+    state.newest = Math.max(state.newest, rows[0].id);
+  }
+  $("#more").hidden = rows.length < 50;
+  renderEmpty();
+}
+
+async function refreshStatus() {
+  try {
+    const s = await (await fetch("/api/status")).json();
+    state.baseline = s.baseline_at;
+    const lp = s.last_poll;
+    const failed = lp && lp.ok === false;
+    $("#status").innerHTML = [
+      s.last_ok ? `Last check ${esc(fmtTime(s.last_ok))}` : "Waiting for the first check",
+      failed ? `<span style="color:var(--removed)">last check failed: ${esc(lp.error || "unknown error")}</span>` : null,
+      lp?.failed?.length ? `<span style="color:var(--changed)" title="${esc(lp.failed.map(f => f.path + ": " + f.error).join("\n"))}">${lp.failed.length} file${lp.failed.length > 1 ? "s" : ""} could not be fetched, retrying</span>` : null,
+      `${s.files} files tracked`, `${s.versions} versions kept`, `${s.events} changes`,
+    ].filter(Boolean).join(" · ");
+  } catch { $("#status").textContent = "Status unavailable"; }
+}
+
+function connect() {
+  const es = new EventSource(`/api/stream?after=${state.newest}`);
+  const live = $("#live");
+  es.onopen = () => { live.className = "live on"; $("#live-text").textContent = "Live"; };
+  es.onerror = () => { live.className = "live off"; $("#live-text").textContent = "Reconnecting"; };
+  es.addEventListener("change", msg => {
+    const ev = JSON.parse(msg.data);
+    if (ev.id <= state.newest) return;
+    state.newest = ev.id;
+    refreshStatus();
+    if (!matches(ev)) return;
+    $(".empty")?.remove();
+    $("#feed").prepend(card(ev, true));
+    if (document.hidden) { state.unseen++; document.title = `(${state.unseen}) Portal Changes`; }
+    if (window.Notification?.permission === "granted" && document.hidden)
+      new Notification(`${LABEL[ev.kind] || ev.kind}: ${ev.path.split("/").pop()}`, {body: ev.summary});
+  });
+}
+
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) { state.unseen = 0; document.title = "Portal Changes"; }
+});
+
+$("#toolbar").addEventListener("click", e => {
+  const chip = e.target.closest(".chip");
+  if (!chip) return;
+  document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c === chip));
+  state.kind = chip.dataset.kind; state.oldest = null; load(true);
+});
+let qTimer;
+$("#q").addEventListener("input", e => {
+  clearTimeout(qTimer);
+  qTimer = setTimeout(() => { state.q = e.target.value.trim(); state.oldest = null; load(true); }, 250);
+});
+$("#more").addEventListener("click", () => load(false));
+
+if (window.Notification && Notification.permission === "default") {
+  const b = $("#notify");
+  b.hidden = false;
+  b.addEventListener("click", async () => { await Notification.requestPermission(); b.hidden = true; });
+}
+
+(async () => {
+  await refreshStatus();
+  await load(true);
+  connect();
+  setInterval(refreshStatus, 30000);
+})();
+</script>
+</body>
+</html>

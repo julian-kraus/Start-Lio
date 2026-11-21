@@ -1,0 +1,11 @@
+.env
+.env.*
+.git
+.venv
+data
+challenge
+analysis
+tests
+**/__pycache__
+.pytest_cache
+secrets
