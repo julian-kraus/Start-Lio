@@ -1,0 +1,1273 @@
+{
+  "source": {
+    "path": "soony/master/ports.csv",
+    "sha256": "fdfdda21df527a1eef9e439e18537d256f63f3759dad87258502ef22d4a4508e",
+    "bytes": 494
+  },
+  "doc_kind": "master_table",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-2"
+      },
+      "subject_raw": {
+        "id": "row-2"
+      },
+      "attribute": "locode",
+      "value": "KRPUS",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "locode"
+      },
+      "evidence": "row 2: locode=KRPUS",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-2"
+      },
+      "subject_raw": {
+        "id": "row-2"
+      },
+      "attribute": "name",
+      "value": "Busan",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "name"
+      },
+      "evidence": "row 2: name=Busan",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-2"
+      },
+      "subject_raw": {
+        "id": "row-2"
+      },
+      "attribute": "country",
+      "value": "KR",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "country"
+      },
+      "evidence": "row 2: country=KR",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-2"
+      },
+      "subject_raw": {
+        "id": "row-2"
+      },
+      "attribute": "lat",
+      "value": 35.1028,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "lat"
+      },
+      "evidence": "row 2: lat=35.1028",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-2"
+      },
+      "subject_raw": {
+        "id": "row-2"
+      },
+      "attribute": "lon",
+      "value": 129.0403,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "lon"
+      },
+      "evidence": "row 2: lon=129.0403",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-2"
+      },
+      "subject_raw": {
+        "id": "row-2"
+      },
+      "attribute": "mode",
+      "value": "sea",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "mode"
+      },
+      "evidence": "row 2: mode=sea",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-3"
+      },
+      "subject_raw": {
+        "id": "row-3"
+      },
+      "attribute": "locode",
+      "value": "CNYTN",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "locode"
+      },
+      "evidence": "row 3: locode=CNYTN",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-3"
+      },
+      "subject_raw": {
+        "id": "row-3"
+      },
+      "attribute": "name",
+      "value": "Yantian (Shenzhen)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "name"
+      },
+      "evidence": "row 3: name=Yantian (Shenzhen)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-3"
+      },
+      "subject_raw": {
+        "id": "row-3"
+      },
+      "attribute": "country",
+      "value": "CN",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "country"
+      },
+      "evidence": "row 3: country=CN",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-3"
+      },
+      "subject_raw": {
+        "id": "row-3"
+      },
+      "attribute": "lat",
+      "value": 22.5667,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "lat"
+      },
+      "evidence": "row 3: lat=22.5667",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-3"
+      },
+      "subject_raw": {
+        "id": "row-3"
+      },
+      "attribute": "lon",
+      "value": 114.2667,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "lon"
+      },
+      "evidence": "row 3: lon=114.2667",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-3"
+      },
+      "subject_raw": {
+        "id": "row-3"
+      },
+      "attribute": "mode",
+      "value": "sea",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "mode"
+      },
+      "evidence": "row 3: mode=sea",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-4"
+      },
+      "subject_raw": {
+        "id": "row-4"
+      },
+      "attribute": "locode",
+      "value": "INNSA",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "locode"
+      },
+      "evidence": "row 4: locode=INNSA",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-4"
+      },
+      "subject_raw": {
+        "id": "row-4"
+      },
+      "attribute": "name",
+      "value": "Nhava Sheva (Mumbai)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "name"
+      },
+      "evidence": "row 4: name=Nhava Sheva (Mumbai)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-4"
+      },
+      "subject_raw": {
+        "id": "row-4"
+      },
+      "attribute": "country",
+      "value": "IN",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "country"
+      },
+      "evidence": "row 4: country=IN",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-4"
+      },
+      "subject_raw": {
+        "id": "row-4"
+      },
+      "attribute": "lat",
+      "value": 18.95,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "lat"
+      },
+      "evidence": "row 4: lat=18.95",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-4"
+      },
+      "subject_raw": {
+        "id": "row-4"
+      },
+      "attribute": "lon",
+      "value": 72.95,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "lon"
+      },
+      "evidence": "row 4: lon=72.95",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-4"
+      },
+      "subject_raw": {
+        "id": "row-4"
+      },
+      "attribute": "mode",
+      "value": "sea",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "mode"
+      },
+      "evidence": "row 4: mode=sea",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-5"
+      },
+      "subject_raw": {
+        "id": "row-5"
+      },
+      "attribute": "locode",
+      "value": "DEHAM",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "locode"
+      },
+      "evidence": "row 5: locode=DEHAM",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-5"
+      },
+      "subject_raw": {
+        "id": "row-5"
+      },
+      "attribute": "name",
+      "value": "Hamburg",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "name"
+      },
+      "evidence": "row 5: name=Hamburg",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-5"
+      },
+      "subject_raw": {
+        "id": "row-5"
+      },
+      "attribute": "country",
+      "value": "DE",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "country"
+      },
+      "evidence": "row 5: country=DE",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-5"
+      },
+      "subject_raw": {
+        "id": "row-5"
+      },
+      "attribute": "lat",
+      "value": 53.54,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "lat"
+      },
+      "evidence": "row 5: lat=53.54",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-5"
+      },
+      "subject_raw": {
+        "id": "row-5"
+      },
+      "attribute": "lon",
+      "value": 9.98,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "lon"
+      },
+      "evidence": "row 5: lon=9.98",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-5"
+      },
+      "subject_raw": {
+        "id": "row-5"
+      },
+      "attribute": "mode",
+      "value": "sea",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "mode"
+      },
+      "evidence": "row 5: mode=sea",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-6"
+      },
+      "subject_raw": {
+        "id": "row-6"
+      },
+      "attribute": "locode",
+      "value": "NLRTM",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 6,
+        "column": "locode"
+      },
+      "evidence": "row 6: locode=NLRTM",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-6"
+      },
+      "subject_raw": {
+        "id": "row-6"
+      },
+      "attribute": "name",
+      "value": "Rotterdam",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 6,
+        "column": "name"
+      },
+      "evidence": "row 6: name=Rotterdam",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-6"
+      },
+      "subject_raw": {
+        "id": "row-6"
+      },
+      "attribute": "country",
+      "value": "NL",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 6,
+        "column": "country"
+      },
+      "evidence": "row 6: country=NL",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-6"
+      },
+      "subject_raw": {
+        "id": "row-6"
+      },
+      "attribute": "lat",
+      "value": 51.95,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 6,
+        "column": "lat"
+      },
+      "evidence": "row 6: lat=51.95",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-6"
+      },
+      "subject_raw": {
+        "id": "row-6"
+      },
+      "attribute": "lon",
+      "value": 4.14,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 6,
+        "column": "lon"
+      },
+      "evidence": "row 6: lon=4.14",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-6"
+      },
+      "subject_raw": {
+        "id": "row-6"
+      },
+      "attribute": "mode",
+      "value": "sea",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 6,
+        "column": "mode"
+      },
+      "evidence": "row 6: mode=sea",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-7"
+      },
+      "subject_raw": {
+        "id": "row-7"
+      },
+      "attribute": "locode",
+      "value": "ICN",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 7,
+        "column": "locode"
+      },
+      "evidence": "row 7: locode=ICN",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-7"
+      },
+      "subject_raw": {
+        "id": "row-7"
+      },
+      "attribute": "name",
+      "value": "Incheon",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 7,
+        "column": "name"
+      },
+      "evidence": "row 7: name=Incheon",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-7"
+      },
+      "subject_raw": {
+        "id": "row-7"
+      },
+      "attribute": "country",
+      "value": "KR",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 7,
+        "column": "country"
+      },
+      "evidence": "row 7: country=KR",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-7"
+      },
+      "subject_raw": {
+        "id": "row-7"
+      },
+      "attribute": "lat",
+      "value": 37.4602,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 7,
+        "column": "lat"
+      },
+      "evidence": "row 7: lat=37.4602",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-7"
+      },
+      "subject_raw": {
+        "id": "row-7"
+      },
+      "attribute": "lon",
+      "value": 126.4407,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 7,
+        "column": "lon"
+      },
+      "evidence": "row 7: lon=126.4407",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-7"
+      },
+      "subject_raw": {
+        "id": "row-7"
+      },
+      "attribute": "mode",
+      "value": "air",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 7,
+        "column": "mode"
+      },
+      "evidence": "row 7: mode=air",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-8"
+      },
+      "subject_raw": {
+        "id": "row-8"
+      },
+      "attribute": "locode",
+      "value": "CAN",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 8,
+        "column": "locode"
+      },
+      "evidence": "row 8: locode=CAN",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-8"
+      },
+      "subject_raw": {
+        "id": "row-8"
+      },
+      "attribute": "name",
+      "value": "Guangzhou Baiyun",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 8,
+        "column": "name"
+      },
+      "evidence": "row 8: name=Guangzhou Baiyun",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-8"
+      },
+      "subject_raw": {
+        "id": "row-8"
+      },
+      "attribute": "country",
+      "value": "CN",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 8,
+        "column": "country"
+      },
+      "evidence": "row 8: country=CN",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-8"
+      },
+      "subject_raw": {
+        "id": "row-8"
+      },
+      "attribute": "lat",
+      "value": 23.3924,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 8,
+        "column": "lat"
+      },
+      "evidence": "row 8: lat=23.3924",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-8"
+      },
+      "subject_raw": {
+        "id": "row-8"
+      },
+      "attribute": "lon",
+      "value": 113.2988,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 8,
+        "column": "lon"
+      },
+      "evidence": "row 8: lon=113.2988",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-8"
+      },
+      "subject_raw": {
+        "id": "row-8"
+      },
+      "attribute": "mode",
+      "value": "air",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 8,
+        "column": "mode"
+      },
+      "evidence": "row 8: mode=air",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-9"
+      },
+      "subject_raw": {
+        "id": "row-9"
+      },
+      "attribute": "locode",
+      "value": "ORD",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 9,
+        "column": "locode"
+      },
+      "evidence": "row 9: locode=ORD",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-9"
+      },
+      "subject_raw": {
+        "id": "row-9"
+      },
+      "attribute": "name",
+      "value": "Chicago O'Hare",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 9,
+        "column": "name"
+      },
+      "evidence": "row 9: name=Chicago O'Hare",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-9"
+      },
+      "subject_raw": {
+        "id": "row-9"
+      },
+      "attribute": "country",
+      "value": "US",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 9,
+        "column": "country"
+      },
+      "evidence": "row 9: country=US",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-9"
+      },
+      "subject_raw": {
+        "id": "row-9"
+      },
+      "attribute": "lat",
+      "value": 41.9742,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 9,
+        "column": "lat"
+      },
+      "evidence": "row 9: lat=41.9742",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-9"
+      },
+      "subject_raw": {
+        "id": "row-9"
+      },
+      "attribute": "lon",
+      "value": -87.9073,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 9,
+        "column": "lon"
+      },
+      "evidence": "row 9: lon=-87.9073",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-9"
+      },
+      "subject_raw": {
+        "id": "row-9"
+      },
+      "attribute": "mode",
+      "value": "air",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 9,
+        "column": "mode"
+      },
+      "evidence": "row 9: mode=air",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-10"
+      },
+      "subject_raw": {
+        "id": "row-10"
+      },
+      "attribute": "locode",
+      "value": "BOM",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 10,
+        "column": "locode"
+      },
+      "evidence": "row 10: locode=BOM",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-10"
+      },
+      "subject_raw": {
+        "id": "row-10"
+      },
+      "attribute": "name",
+      "value": "Mumbai Chhatrapati Shivaji",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 10,
+        "column": "name"
+      },
+      "evidence": "row 10: name=Mumbai Chhatrapati Shivaji",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-10"
+      },
+      "subject_raw": {
+        "id": "row-10"
+      },
+      "attribute": "country",
+      "value": "IN",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 10,
+        "column": "country"
+      },
+      "evidence": "row 10: country=IN",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-10"
+      },
+      "subject_raw": {
+        "id": "row-10"
+      },
+      "attribute": "lat",
+      "value": 19.0896,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 10,
+        "column": "lat"
+      },
+      "evidence": "row 10: lat=19.0896",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-10"
+      },
+      "subject_raw": {
+        "id": "row-10"
+      },
+      "attribute": "lon",
+      "value": 72.8656,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 10,
+        "column": "lon"
+      },
+      "evidence": "row 10: lon=72.8656",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-10"
+      },
+      "subject_raw": {
+        "id": "row-10"
+      },
+      "attribute": "mode",
+      "value": "air",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 10,
+        "column": "mode"
+      },
+      "evidence": "row 10: mode=air",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-11"
+      },
+      "subject_raw": {
+        "id": "row-11"
+      },
+      "attribute": "locode",
+      "value": "FRA",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 11,
+        "column": "locode"
+      },
+      "evidence": "row 11: locode=FRA",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-11"
+      },
+      "subject_raw": {
+        "id": "row-11"
+      },
+      "attribute": "name",
+      "value": "Frankfurt",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 11,
+        "column": "name"
+      },
+      "evidence": "row 11: name=Frankfurt",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-11"
+      },
+      "subject_raw": {
+        "id": "row-11"
+      },
+      "attribute": "country",
+      "value": "DE",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 11,
+        "column": "country"
+      },
+      "evidence": "row 11: country=DE",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-11"
+      },
+      "subject_raw": {
+        "id": "row-11"
+      },
+      "attribute": "lat",
+      "value": 50.0379,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 11,
+        "column": "lat"
+      },
+      "evidence": "row 11: lat=50.0379",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-11"
+      },
+      "subject_raw": {
+        "id": "row-11"
+      },
+      "attribute": "lon",
+      "value": 8.5622,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 11,
+        "column": "lon"
+      },
+      "evidence": "row 11: lon=8.5622",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-11"
+      },
+      "subject_raw": {
+        "id": "row-11"
+      },
+      "attribute": "mode",
+      "value": "air",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 11,
+        "column": "mode"
+      },
+      "evidence": "row 11: mode=air",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-12"
+      },
+      "subject_raw": {
+        "id": "row-12"
+      },
+      "attribute": "locode",
+      "value": "PLPOZ",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 12,
+        "column": "locode"
+      },
+      "evidence": "row 12: locode=PLPOZ",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-12"
+      },
+      "subject_raw": {
+        "id": "row-12"
+      },
+      "attribute": "name",
+      "value": "Poznań",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 12,
+        "column": "name"
+      },
+      "evidence": "row 12: name=Poznań",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-12"
+      },
+      "subject_raw": {
+        "id": "row-12"
+      },
+      "attribute": "country",
+      "value": "PL",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 12,
+        "column": "country"
+      },
+      "evidence": "row 12: country=PL",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-12"
+      },
+      "subject_raw": {
+        "id": "row-12"
+      },
+      "attribute": "lat",
+      "value": 52.4064,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 12,
+        "column": "lat"
+      },
+      "evidence": "row 12: lat=52.4064",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-12"
+      },
+      "subject_raw": {
+        "id": "row-12"
+      },
+      "attribute": "lon",
+      "value": 16.9252,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 12,
+        "column": "lon"
+      },
+      "evidence": "row 12: lon=16.9252",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "port",
+      "subject": {
+        "id": "row-12"
+      },
+      "subject_raw": {
+        "id": "row-12"
+      },
+      "attribute": "mode",
+      "value": "road",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 12,
+        "column": "mode"
+      },
+      "evidence": "row 12: mode=road",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

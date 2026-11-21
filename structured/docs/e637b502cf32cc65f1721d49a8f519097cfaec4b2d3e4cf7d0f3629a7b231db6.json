@@ -1,0 +1,399 @@
+{
+  "source": {
+    "path": "soony/master/logistics_providers.csv",
+    "sha256": "e637b502cf32cc65f1721d49a8f519097cfaec4b2d3e4cf7d0f3629a7b231db6",
+    "bytes": 237
+  },
+  "doc_kind": "master_table",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-2"
+      },
+      "subject_raw": {
+        "id": "row-2"
+      },
+      "attribute": "carrier_id",
+      "value": "LSP-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "carrier_id"
+      },
+      "evidence": "row 2: carrier_id=LSP-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-2"
+      },
+      "subject_raw": {
+        "id": "row-2"
+      },
+      "attribute": "name",
+      "value": "Nordhav Shipping A/S",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "name"
+      },
+      "evidence": "row 2: name=Nordhav Shipping A/S",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-2"
+      },
+      "subject_raw": {
+        "id": "row-2"
+      },
+      "attribute": "city",
+      "value": "Copenhagen",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "city"
+      },
+      "evidence": "row 2: city=Copenhagen",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-2"
+      },
+      "subject_raw": {
+        "id": "row-2"
+      },
+      "attribute": "country",
+      "value": "DK",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "country"
+      },
+      "evidence": "row 2: country=DK",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-2"
+      },
+      "subject_raw": {
+        "id": "row-2"
+      },
+      "attribute": "modes",
+      "value": "ocean",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "modes"
+      },
+      "evidence": "row 2: modes=ocean",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-3"
+      },
+      "subject_raw": {
+        "id": "row-3"
+      },
+      "attribute": "carrier_id",
+      "value": "LSP-02",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "carrier_id"
+      },
+      "evidence": "row 3: carrier_id=LSP-02",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-3"
+      },
+      "subject_raw": {
+        "id": "row-3"
+      },
+      "attribute": "name",
+      "value": "Alpen Air Cargo GmbH",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "name"
+      },
+      "evidence": "row 3: name=Alpen Air Cargo GmbH",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-3"
+      },
+      "subject_raw": {
+        "id": "row-3"
+      },
+      "attribute": "city",
+      "value": "Munich",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "city"
+      },
+      "evidence": "row 3: city=Munich",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-3"
+      },
+      "subject_raw": {
+        "id": "row-3"
+      },
+      "attribute": "country",
+      "value": "DE",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "country"
+      },
+      "evidence": "row 3: country=DE",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-3"
+      },
+      "subject_raw": {
+        "id": "row-3"
+      },
+      "attribute": "modes",
+      "value": "air",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "modes"
+      },
+      "evidence": "row 3: modes=air",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-4"
+      },
+      "subject_raw": {
+        "id": "row-4"
+      },
+      "attribute": "carrier_id",
+      "value": "LSP-03",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "carrier_id"
+      },
+      "evidence": "row 4: carrier_id=LSP-03",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-4"
+      },
+      "subject_raw": {
+        "id": "row-4"
+      },
+      "attribute": "name",
+      "value": "Sahyadri Freight Forwarders Pvt. Ltd.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "name"
+      },
+      "evidence": "row 4: name=Sahyadri Freight Forwarders Pvt. Ltd.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-4"
+      },
+      "subject_raw": {
+        "id": "row-4"
+      },
+      "attribute": "city",
+      "value": "Mumbai",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "city"
+      },
+      "evidence": "row 4: city=Mumbai",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-4"
+      },
+      "subject_raw": {
+        "id": "row-4"
+      },
+      "attribute": "country",
+      "value": "IN",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "country"
+      },
+      "evidence": "row 4: country=IN",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-4"
+      },
+      "subject_raw": {
+        "id": "row-4"
+      },
+      "attribute": "modes",
+      "value": "ocean",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "modes"
+      },
+      "evidence": "row 4: modes=ocean",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-5"
+      },
+      "subject_raw": {
+        "id": "row-5"
+      },
+      "attribute": "carrier_id",
+      "value": "LSP-04",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "carrier_id"
+      },
+      "evidence": "row 5: carrier_id=LSP-04",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-5"
+      },
+      "subject_raw": {
+        "id": "row-5"
+      },
+      "attribute": "name",
+      "value": "Warta Trans Sp. z o.o.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "name"
+      },
+      "evidence": "row 5: name=Warta Trans Sp. z o.o.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-5"
+      },
+      "subject_raw": {
+        "id": "row-5"
+      },
+      "attribute": "city",
+      "value": "Poznań",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "city"
+      },
+      "evidence": "row 5: city=Poznań",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-5"
+      },
+      "subject_raw": {
+        "id": "row-5"
+      },
+      "attribute": "country",
+      "value": "PL",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "country"
+      },
+      "evidence": "row 5: country=PL",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "carrier",
+      "subject": {
+        "id": "row-5"
+      },
+      "subject_raw": {
+        "id": "row-5"
+      },
+      "attribute": "modes",
+      "value": "road",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "modes"
+      },
+      "evidence": "row 5: modes=road",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

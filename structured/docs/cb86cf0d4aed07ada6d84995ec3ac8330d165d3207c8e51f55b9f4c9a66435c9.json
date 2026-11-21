@@ -1,0 +1,118 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0018_Pune_Diecast_Works/order_confirmations/OA26507225_4500318739.pdf",
+    "sha256": "cb86cf0d4aed07ada6d84995ec3ac8330d165d3207c8e51f55b9f4c9a66435c9",
+    "bytes": 2226
+  },
+  "doc_kind": "order_confirmation",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318739",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318739",
+        "po_line": 1
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,400\n1037\nINR\n2026-12-01\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318739",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318739",
+        "po_line": 1
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,400\n1037\nINR\n2026-12-01\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318739",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318739",
+        "po_line": 1
+      },
+      "attribute": "qty",
+      "value": 2400,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,400\n1037\nINR\n2026-12-01\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318739"
+      },
+      "subject_raw": {
+        "po_number": "4500318739"
+      },
+      "attribute": "value",
+      "value": "Customer: Soony Interactive GmbH · Your order 4500318739 of 2026-09-17 · Incoterms FOB Nhava Sheva · Payment",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318739 of 2026-09-17 · Incoterms FOB Nhava Sheva · Payment",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318739"
+      },
+      "subject_raw": {
+        "po_number": "4500318739"
+      },
+      "attribute": "value",
+      "value": "Supplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Supplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

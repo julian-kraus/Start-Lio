@@ -1,0 +1,235 @@
+{
+  "source": {
+    "path": "soony/context/org_chart_v2.pdf",
+    "sha256": "3c4b977283aa73e0e5a47d42acc90aeed3ee2ad1a91208dee205e6f8d26d6343",
+    "bytes": 64121
+  },
+  "doc_kind": "org_chart",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "x_org_chart_entry",
+      "subject": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "subject_raw": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "attribute": "entry",
+      "value": "Head of Procurement",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Head of Procurement",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_org_chart_entry",
+      "subject": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "subject_raw": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "attribute": "entry",
+      "value": "Category Lead Game Media",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Category Lead Game Media",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_org_chart_entry",
+      "subject": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "subject_raw": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "attribute": "entry",
+      "value": "Senior Buyer (Game Cards)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Senior Buyer (Game Cards)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_org_chart_entry",
+      "subject": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "subject_raw": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "attribute": "entry",
+      "value": "Category Lead Print & Packaging",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Category Lead Print & Packaging",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_org_chart_entry",
+      "subject": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "subject_raw": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "attribute": "entry",
+      "value": "Buyer (Print & Packaging)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Buyer (Print & Packaging)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_org_chart_entry",
+      "subject": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "subject_raw": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "attribute": "entry",
+      "value": "Category Lead Collector's Items",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Category Lead Collector's Items",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_org_chart_entry",
+      "subject": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "subject_raw": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "attribute": "entry",
+      "value": "Buyer (Collector's Items)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Buyer (Collector's Items)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_org_chart_entry",
+      "subject": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "subject_raw": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "attribute": "entry",
+      "value": "Supplier Quality Lead",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Supplier Quality Lead",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_org_chart_entry",
+      "subject": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "subject_raw": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "attribute": "entry",
+      "value": "Logistics Planner",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Logistics Planner",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_org_chart_entry",
+      "subject": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "subject_raw": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "attribute": "entry",
+      "value": "Distribution Center Hamburg (dotted line to Head of Procurement)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Distribution Center Hamburg (dotted line to Head of Procurement)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_org_chart_entry",
+      "subject": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "subject_raw": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "attribute": "entry",
+      "value": "Site Lead DC Hamburg",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Site Lead DC Hamburg",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_org_chart_entry",
+      "subject": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "subject_raw": {
+        "source_path": "soony/context/org_chart_v2.pdf"
+      },
+      "attribute": "entry",
+      "value": "Also: Nils Berger (IT & Systems Lead (Procurement)), Clara Weiss (Quality & Compliance Manager), Henrik Dahl (Chief Financial Officer)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Also: Nils Berger (IT & Systems Lead (Procurement)), Clara Weiss (Quality & Compliance Manager), Henrik Dahl (Chief Financial Officer)",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

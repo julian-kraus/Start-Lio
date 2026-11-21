@@ -1,0 +1,15 @@
+{
+  "signature": "b172ae57d844ee3051391f0c0fe2f8e4365eb48ba6e317a1ae5e926f03c03755",
+  "format": "xlsx",
+  "sheet": "Shifts",
+  "columns": {
+    "day": "Day",
+    "shift": "Shift",
+    "hours": "Hours",
+    "lines": "Lines"
+  },
+  "header_detection": {
+    "row": 1,
+    "title_rows": []
+  }
+}

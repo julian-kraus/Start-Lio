@@ -1,0 +1,25 @@
+{
+  "signature": "08e7a07391d1555d09a574b1d805b455db71f6dc038af17aa167edb2e1c07676",
+  "format": "csv",
+  "sheet": null,
+  "columns": {
+    "po_number": "po_number",
+    "po_line": "po_line",
+    "supplier_id": "supplier_id",
+    "material_id": "material_id",
+    "plant": "plant",
+    "quantity": "quantity",
+    "unit_price": "unit_price",
+    "currency": "currency",
+    "order_date": "order_date",
+    "requested_date": "requested_date",
+    "promised_date": "promised_date",
+    "actual_delivery_date": "actual_delivery_date",
+    "status": "status",
+    "buyer": "buyer",
+    "incoterm": "incoterm",
+    "note": "note"
+  },
+  "fact_type": "po_line",
+  "row_count": 318
+}

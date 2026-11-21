@@ -1,0 +1,437 @@
+{
+  "source": {
+    "path": "soony/master/bom_delta_2026-11-21.csv",
+    "sha256": "00c848c9fd86d8192299b8e054335d5f61ab81620f6f3fe2d05ccf8701e232fc",
+    "bytes": 348
+  },
+  "doc_kind": "change_record_table",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-STD"
+      },
+      "attribute": "change_id",
+      "value": "ECN-2026-118",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "change_id"
+      },
+      "evidence": "row 2: change_id=ECN-2026-118",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-STD"
+      },
+      "attribute": "parent_id",
+      "value": "FG-GH6-STD",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "parent_id"
+      },
+      "evidence": "row 2: parent_id=FG-GH6-STD",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-STD"
+      },
+      "attribute": "child_id",
+      "value": "CMP-GAM-004",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "child_id"
+      },
+      "evidence": "row 2: child_id=CMP-GAM-004",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-STD"
+      },
+      "attribute": "action",
+      "value": "revision",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "action"
+      },
+      "evidence": "row 2: action=revision",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-STD"
+      },
+      "attribute": "qty_per_old",
+      "value": "1",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "qty_per_old"
+      },
+      "evidence": "row 2: qty_per_old=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-STD"
+      },
+      "attribute": "qty_per_new",
+      "value": "1",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "qty_per_new"
+      },
+      "evidence": "row 2: qty_per_new=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-STD"
+      },
+      "attribute": "rev_old",
+      "value": "B",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "rev_old"
+      },
+      "evidence": "row 2: rev_old=B",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-STD"
+      },
+      "attribute": "rev_new",
+      "value": "C",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "rev_new"
+      },
+      "evidence": "row 2: rev_new=C",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-STD"
+      },
+      "attribute": "use_up_old_rev",
+      "value": "N",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "use_up_old_rev"
+      },
+      "evidence": "row 2: use_up_old_rev=N",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-STD"
+      },
+      "attribute": "effective_from",
+      "value": "2026-11-21",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "effective_from"
+      },
+      "evidence": "row 2: effective_from=2026-11-21",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-STD"
+      },
+      "attribute": "reason",
+      "value": "new age-rating mark (USK 2026); parts to rev B must not be packed",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "reason"
+      },
+      "evidence": "row 2: reason=new age-rating mark (USK 2026); parts to rev B must not be packed",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-CE"
+      },
+      "attribute": "change_id",
+      "value": "ECN-2026-119",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "change_id"
+      },
+      "evidence": "row 3: change_id=ECN-2026-119",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-CE"
+      },
+      "attribute": "parent_id",
+      "value": "FG-GH6-CE",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "parent_id"
+      },
+      "evidence": "row 3: parent_id=FG-GH6-CE",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-CE"
+      },
+      "attribute": "child_id",
+      "value": "CMP-GAM-009",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "child_id"
+      },
+      "evidence": "row 3: child_id=CMP-GAM-009",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-CE"
+      },
+      "attribute": "action",
+      "value": "revision",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "action"
+      },
+      "evidence": "row 3: action=revision",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-CE"
+      },
+      "attribute": "qty_per_old",
+      "value": "1",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "qty_per_old"
+      },
+      "evidence": "row 3: qty_per_old=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-CE"
+      },
+      "attribute": "qty_per_new",
+      "value": "1",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "qty_per_new"
+      },
+      "evidence": "row 3: qty_per_new=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-CE"
+      },
+      "attribute": "rev_old",
+      "value": "A",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "rev_old"
+      },
+      "evidence": "row 3: rev_old=A",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-CE"
+      },
+      "attribute": "rev_new",
+      "value": "B",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "rev_new"
+      },
+      "evidence": "row 3: rev_new=B",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-CE"
+      },
+      "attribute": "use_up_old_rev",
+      "value": "Y",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "use_up_old_rev"
+      },
+      "evidence": "row 3: use_up_old_rev=Y",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-CE"
+      },
+      "attribute": "effective_from",
+      "value": "2026-11-21",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "effective_from"
+      },
+      "evidence": "row 3: effective_from=2026-11-21",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "entity": "FG-GH6-CE"
+      },
+      "attribute": "reason",
+      "value": "fold pattern changed; use up rev A",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "reason"
+      },
+      "evidence": "row 3: reason=fold pattern changed; use up rev A",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

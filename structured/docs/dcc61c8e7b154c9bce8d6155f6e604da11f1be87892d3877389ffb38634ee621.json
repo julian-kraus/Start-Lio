@@ -1,0 +1,121 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0029_Guangzhou_PackRight/order_confirmations/OA26182346_4500318738.pdf",
+    "sha256": "dcc61c8e7b154c9bce8d6155f6e604da11f1be87892d3877389ffb38634ee621",
+    "bytes": 64153
+  },
+  "doc_kind": "order_confirmation",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318738",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318738",
+        "po_line": 2
+      },
+      "attribute": "supplier_part_no",
+      "value": "PR-CC-0312",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n350,000\n1.44\nCNY\n2026-11-21\n00010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318738",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318738",
+        "po_line": 2
+      },
+      "attribute": "qty",
+      "value": 350000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n350,000\n1.44\nCNY\n2026-11-21\n00010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318738",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318738",
+        "po_line": 2
+      },
+      "attribute": "supplier_part_no",
+      "value": "PR-SL-0604",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 20
+      },
+      "evidence": "PR-SL-0604\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n64,000\n0.4143\nCNY\n2026-11-16\nArtwork",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318738",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318738",
+        "po_line": 2
+      },
+      "attribute": "qty",
+      "value": 64000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 20
+      },
+      "evidence": "PR-SL-0604\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n64,000\n0.4143\nCNY\n2026-11-16\nArtwork",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318738"
+      },
+      "subject_raw": {
+        "po_number": "4500318738"
+      },
+      "attribute": "value",
+      "value": "Customer: Soony Interactive GmbH · Your order 4500318738 of 2026-09-16 · Incoterms FOB Yantian · Payment NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318738 of 2026-09-16 · Incoterms FOB Yantian · Payment NET30",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

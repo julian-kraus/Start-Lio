@@ -1,0 +1,103 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0011_Boise_Semi/notices/Price_list_20250301.xlsx",
+    "sha256": "aca7aa50d8e8e946278b063be0e4cdfba354a16ad251721b6cb0edfc04bf1645",
+    "bytes": 5171
+  },
+  "doc_kind": "price_list",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
+      },
+      "attribute": "old_price",
+      "value": 10.2,
+      "unit": "source currency",
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 2
+      },
+      "evidence": "CMP-GAM-001 | Game Card 128 GB – Grand Heist 6 | 10.2 | 10.61 | USD | 2025-03-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
+      },
+      "attribute": "new_price",
+      "value": 10.61,
+      "unit": "source currency",
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 2
+      },
+      "evidence": "CMP-GAM-001 | Game Card 128 GB – Grand Heist 6 | 10.2 | 10.61 | USD | 2025-03-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
+      },
+      "attribute": "old_price",
+      "value": 5.7,
+      "unit": "source currency",
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 3
+      },
+      "evidence": "CMP-GAM-002 | Game Card 64 GB – Grand Heist 5 | 5.7 | 5.93 | USD | 2025-03-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
+      },
+      "attribute": "new_price",
+      "value": 5.93,
+      "unit": "source currency",
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 3
+      },
+      "evidence": "CMP-GAM-002 | Game Card 64 GB – Grand Heist 5 | 5.7 | 5.93 | USD | 2025-03-01",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

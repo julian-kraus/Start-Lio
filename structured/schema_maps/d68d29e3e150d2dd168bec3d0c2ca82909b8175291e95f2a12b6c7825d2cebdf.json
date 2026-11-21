@@ -1,0 +1,22 @@
+{
+  "signature": "d68d29e3e150d2dd168bec3d0c2ca82909b8175291e95f2a12b6c7825d2cebdf",
+  "format": "csv",
+  "sheet": null,
+  "columns": {
+    "ebeln": "EBELN",
+    "ebelp": "EBELP",
+    "lifnr": "LIFNR",
+    "matnr": "MATNR",
+    "werks": "WERKS",
+    "menge": "MENGE",
+    "netpr": "NETPR",
+    "bedat": "BEDAT",
+    "eindt": "EINDT",
+    "zzconf": "ZZCONF",
+    "wedat": "WEDAT",
+    "zzstat": "ZZSTAT",
+    "ernam": "ERNAM"
+  },
+  "fact_type": "po_line",
+  "row_count": 129
+}

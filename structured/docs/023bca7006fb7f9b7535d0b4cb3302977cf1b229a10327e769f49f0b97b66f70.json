@@ -1,0 +1,163 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0010_Hwaseong_Memory/order_confirmations/OA26648613_4500318725.pdf",
+    "sha256": "023bca7006fb7f9b7535d0b4cb3302977cf1b229a10327e769f49f0b97b66f70",
+    "bytes": 63637
+  },
+  "doc_kind": "order_confirmation",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318725",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318725",
+        "po_line": 1
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-001",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n96,000\n9.8\nUSD\n2026-11-04\n00020",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318725",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318725",
+        "po_line": 1
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-001",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n96,000\n9.8\nUSD\n2026-11-04\n00020",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318725",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318725",
+        "po_line": 1
+      },
+      "attribute": "qty",
+      "value": 96000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n96,000\n9.8\nUSD\n2026-11-04\n00020",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318725",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318725",
+        "po_line": 1
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-001",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 21
+      },
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n88,000\n9.8\nUSD\n2026-11-06",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318725",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318725",
+        "po_line": 1
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-001",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 21
+      },
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n88,000\n9.8\nUSD\n2026-11-06",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318725",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318725",
+        "po_line": 1
+      },
+      "attribute": "qty",
+      "value": 88000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 21
+      },
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n88,000\n9.8\nUSD\n2026-11-06",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318725"
+      },
+      "subject_raw": {
+        "po_number": "4500318725"
+      },
+      "attribute": "value",
+      "value": "Customer: Soony Interactive GmbH · Your order 4500318725 of 2026-09-01 · Incoterms FOB Busan · Payment NET45",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318725 of 2026-09-01 · Incoterms FOB Busan · Payment NET45",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

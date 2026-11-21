@@ -1,0 +1,253 @@
+{
+  "source": {
+    "path": "soony/context/approval_policy_PP-07.pdf",
+    "sha256": "b4da302942d505b4e35265c5c6019d6a9038e56a69359406baba3b80e6df5ac7",
+    "bytes": 63547
+  },
+  "doc_kind": "policy_document",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy"
+      },
+      "subject_raw": {
+        "scope": "approval_policy"
+      },
+      "attribute": "directive",
+      "value": "Soony · PP-07 Approval policy · v3.2",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Soony · PP-07 Approval policy · v3.2",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy"
+      },
+      "subject_raw": {
+        "scope": "approval_policy"
+      },
+      "attribute": "directive",
+      "value": "Procurement Policy PP-07 · Approval of purchase orders and",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Procurement Policy PP-07 · Approval of purchase orders and",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy"
+      },
+      "subject_raw": {
+        "scope": "approval_policy"
+      },
+      "attribute": "directive",
+      "value": "This policy defines who may approve purchase orders (POs), supplier releases and air-freight spend.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "This policy defines who may approve purchase orders (POs), supplier releases and air-freight spend.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy"
+      },
+      "subject_raw": {
+        "scope": "approval_policy"
+      },
+      "attribute": "directive",
+      "value": "2. Approval limits by value (per PO, in EUR)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "2. Approval limits by value (per PO, in EUR)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy"
+      },
+      "subject_raw": {
+        "scope": "approval_policy"
+      },
+      "attribute": "directive",
+      "value": "Role",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Role",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy"
+      },
+      "subject_raw": {
+        "scope": "approval_policy"
+      },
+      "attribute": "directive",
+      "value": "Limit per PO",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Limit per PO",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy"
+      },
+      "subject_raw": {
+        "scope": "approval_policy"
+      },
+      "attribute": "directive",
+      "value": "POs delivered to a Soony site require, in addition to the value approval, a booked dock slot released by the site",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "POs delivered to a Soony site require, in addition to the value approval, a booked dock slot released by the site",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy"
+      },
+      "subject_raw": {
+        "scope": "approval_policy"
+      },
+      "attribute": "directive",
+      "value": "4. Air freight",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "4. Air freight",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy"
+      },
+      "subject_raw": {
+        "scope": "approval_policy"
+      },
+      "attribute": "directive",
+      "value": "Unplanned air freight up to EUR 200,000 per calendar month and category is approved by the responsible",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Unplanned air freight up to EUR 200,000 per calendar month and category is approved by the responsible",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy"
+      },
+      "subject_raw": {
+        "scope": "approval_policy"
+      },
+      "attribute": "directive",
+      "value": "Category Lead. Above that, approval by the CPO is required before booking.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Category Lead. Above that, approval by the CPO is required before booking.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy"
+      },
+      "subject_raw": {
+        "scope": "approval_policy"
+      },
+      "attribute": "directive",
+      "value": "Quality Lead and the responsible Category Lead. Conditional releases are limited to 90 days from the date of",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Quality Lead and the responsible Category Lead. Conditional releases are limited to 90 days from the date of",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy"
+      },
+      "subject_raw": {
+        "scope": "approval_policy"
+      },
+      "attribute": "directive",
+      "value": "release. POs placed after a conditional release has expired are held in status 'awaiting approval'. A conditional",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "release. POs placed after a conditional release has expired are held in status 'awaiting approval'. A conditional",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy"
+      },
+      "subject_raw": {
+        "scope": "approval_policy"
+      },
+      "attribute": "directive",
+      "value": "Exceptions must be documented and approved by the Head of Procurement.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Exceptions must be documented and approved by the Head of Procurement.",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

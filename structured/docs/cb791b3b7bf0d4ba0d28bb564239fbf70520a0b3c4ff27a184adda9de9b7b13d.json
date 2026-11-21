@@ -1,0 +1,79 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0029_Guangzhou_PackRight/order_confirmations/OA26741565_4500318763.pdf",
+    "sha256": "cb791b3b7bf0d4ba0d28bb564239fbf70520a0b3c4ff27a184adda9de9b7b13d",
+    "bytes": 63944
+  },
+  "doc_kind": "order_confirmation",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318763",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318763",
+        "po_line": 1
+      },
+      "attribute": "supplier_part_no",
+      "value": "PR-CC-0312",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n460,000\n1.44\nCNY\n2026-12-02",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318763",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318763",
+        "po_line": 1
+      },
+      "attribute": "qty",
+      "value": 460000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n460,000\n1.44\nCNY\n2026-12-02",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318763"
+      },
+      "subject_raw": {
+        "po_number": "4500318763"
+      },
+      "attribute": "value",
+      "value": "Customer: Soony Interactive GmbH · Your order 4500318763 of 2026-10-06 · Incoterms FOB Yantian · Payment NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318763 of 2026-10-06 · Incoterms FOB Yantian · Payment NET30",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

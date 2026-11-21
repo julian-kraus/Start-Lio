@@ -1,0 +1,163 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0019_Dongguan_Precision_Housings/order_confirmations/OA26176173_4500318776.pdf",
+    "sha256": "7eb25b802b1301017174ed6d65789df3eb7806842178162f67feb5c84310bb32",
+    "bytes": 64055
+  },
+  "doc_kind": "order_confirmation",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318776",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318776",
+        "po_line": 2
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n9,000\n88.38\nCNY\n2027-01-18\n00010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318776",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318776",
+        "po_line": 2
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n9,000\n88.38\nCNY\n2027-01-18\n00010",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318776",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318776",
+        "po_line": 2
+      },
+      "attribute": "qty",
+      "value": 9000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n9,000\n88.38\nCNY\n2027-01-18\n00010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318776",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318776",
+        "po_line": 2
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-006",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 22
+      },
+      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n24,000\n22.29\nCNY\n2027-01-11",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318776",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318776",
+        "po_line": 2
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-006",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 22
+      },
+      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n24,000\n22.29\nCNY\n2027-01-11",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318776",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318776",
+        "po_line": 2
+      },
+      "attribute": "qty",
+      "value": 24000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 22
+      },
+      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n24,000\n22.29\nCNY\n2027-01-11",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318776"
+      },
+      "subject_raw": {
+        "po_number": "4500318776"
+      },
+      "attribute": "value",
+      "value": "Customer: Soony Interactive GmbH · Your order 4500318776 of 2026-10-27 · Incoterms FOB Yantian · Payment NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318776 of 2026-10-27 · Incoterms FOB Yantian · Payment NET30",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

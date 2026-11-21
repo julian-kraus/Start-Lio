@@ -1,0 +1,20 @@
+{
+  "signature": "a19158a87f4166e1d5f67c0b282d4d620e9a71b535adc969d7bbffba1f20afaf",
+  "format": "csv",
+  "sheet": null,
+  "columns": {
+    "change_id": "change_id",
+    "parent_id": "parent_id",
+    "child_id": "child_id",
+    "action": "action",
+    "qty_per_old": "qty_per_old",
+    "qty_per_new": "qty_per_new",
+    "rev_old": "rev_old",
+    "rev_new": "rev_new",
+    "use_up_old_rev": "use_up_old_rev",
+    "effective_from": "effective_from",
+    "reason": "reason"
+  },
+  "fact_type": "change_record",
+  "row_count": 2
+}

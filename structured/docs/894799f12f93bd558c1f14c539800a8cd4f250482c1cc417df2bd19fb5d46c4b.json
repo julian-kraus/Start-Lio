@@ -1,0 +1,1699 @@
+{
+  "source": {
+    "path": "soony/master/bom.csv",
+    "sha256": "894799f12f93bd558c1f14c539800a8cd4f250482c1cc417df2bd19fb5d46c4b",
+    "bytes": 808
+  },
+  "doc_kind": "master_table",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-002"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-002"
+      },
+      "attribute": "parent_id",
+      "value": "FG-GH5-STD",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "parent_id"
+      },
+      "evidence": "row 2: parent_id=FG-GH5-STD",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-002"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-002"
+      },
+      "attribute": "child_id",
+      "value": "CMP-GAM-002",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "child_id"
+      },
+      "evidence": "row 2: child_id=CMP-GAM-002",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-002"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-002"
+      },
+      "attribute": "qty_per",
+      "value": 1,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "qty_per"
+      },
+      "evidence": "row 2: qty_per=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-002"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-002"
+      },
+      "attribute": "valid_from",
+      "value": "2024-01-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "valid_from"
+      },
+      "evidence": "row 2: valid_from=2024-01-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-002"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-002"
+      },
+      "attribute": "valid_to",
+      "value": "9999-12-31",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "valid_to"
+      },
+      "evidence": "row 2: valid_to=9999-12-31",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "attribute": "parent_id",
+      "value": "FG-GH5-STD",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "parent_id"
+      },
+      "evidence": "row 3: parent_id=FG-GH5-STD",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "attribute": "child_id",
+      "value": "CMP-GAM-003",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "child_id"
+      },
+      "evidence": "row 3: child_id=CMP-GAM-003",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "attribute": "qty_per",
+      "value": 1,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "qty_per"
+      },
+      "evidence": "row 3: qty_per=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "attribute": "valid_from",
+      "value": "2024-01-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "valid_from"
+      },
+      "evidence": "row 3: valid_from=2024-01-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "attribute": "valid_to",
+      "value": "9999-12-31",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "valid_to"
+      },
+      "evidence": "row 3: valid_to=9999-12-31",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-005"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-005"
+      },
+      "attribute": "parent_id",
+      "value": "FG-GH5-STD",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "parent_id"
+      },
+      "evidence": "row 4: parent_id=FG-GH5-STD",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-005"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-005"
+      },
+      "attribute": "child_id",
+      "value": "CMP-GAM-005",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "child_id"
+      },
+      "evidence": "row 4: child_id=CMP-GAM-005",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-005"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-005"
+      },
+      "attribute": "qty_per",
+      "value": 1,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "qty_per"
+      },
+      "evidence": "row 4: qty_per=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-005"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-005"
+      },
+      "attribute": "valid_from",
+      "value": "2024-01-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "valid_from"
+      },
+      "evidence": "row 4: valid_from=2024-01-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-005"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-005"
+      },
+      "attribute": "valid_to",
+      "value": "9999-12-31",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "valid_to"
+      },
+      "evidence": "row 4: valid_to=9999-12-31",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "attribute": "parent_id",
+      "value": "FG-GH5-STD",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "parent_id"
+      },
+      "evidence": "row 5: parent_id=FG-GH5-STD",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "attribute": "child_id",
+      "value": "CMP-GAM-011",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "child_id"
+      },
+      "evidence": "row 5: child_id=CMP-GAM-011",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "attribute": "qty_per",
+      "value": 1,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "qty_per"
+      },
+      "evidence": "row 5: qty_per=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "attribute": "valid_from",
+      "value": "2024-01-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "valid_from"
+      },
+      "evidence": "row 5: valid_from=2024-01-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH5-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "attribute": "valid_to",
+      "value": "9999-12-31",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "valid_to"
+      },
+      "evidence": "row 5: valid_to=9999-12-31",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-001"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-001"
+      },
+      "attribute": "parent_id",
+      "value": "FG-GH6-STD",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 6,
+        "column": "parent_id"
+      },
+      "evidence": "row 6: parent_id=FG-GH6-STD",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-001"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-001"
+      },
+      "attribute": "child_id",
+      "value": "CMP-GAM-001",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 6,
+        "column": "child_id"
+      },
+      "evidence": "row 6: child_id=CMP-GAM-001",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-001"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-001"
+      },
+      "attribute": "qty_per",
+      "value": 1,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 6,
+        "column": "qty_per"
+      },
+      "evidence": "row 6: qty_per=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-001"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-001"
+      },
+      "attribute": "valid_from",
+      "value": "2024-01-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 6,
+        "column": "valid_from"
+      },
+      "evidence": "row 6: valid_from=2024-01-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-001"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-001"
+      },
+      "attribute": "valid_to",
+      "value": "9999-12-31",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 6,
+        "column": "valid_to"
+      },
+      "evidence": "row 6: valid_to=9999-12-31",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "attribute": "parent_id",
+      "value": "FG-GH6-STD",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 7,
+        "column": "parent_id"
+      },
+      "evidence": "row 7: parent_id=FG-GH6-STD",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "attribute": "child_id",
+      "value": "CMP-GAM-003",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 7,
+        "column": "child_id"
+      },
+      "evidence": "row 7: child_id=CMP-GAM-003",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "attribute": "qty_per",
+      "value": 1,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 7,
+        "column": "qty_per"
+      },
+      "evidence": "row 7: qty_per=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "attribute": "valid_from",
+      "value": "2024-01-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 7,
+        "column": "valid_from"
+      },
+      "evidence": "row 7: valid_from=2024-01-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-003"
+      },
+      "attribute": "valid_to",
+      "value": "9999-12-31",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 7,
+        "column": "valid_to"
+      },
+      "evidence": "row 7: valid_to=9999-12-31",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004"
+      },
+      "attribute": "parent_id",
+      "value": "FG-GH6-STD",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 8,
+        "column": "parent_id"
+      },
+      "evidence": "row 8: parent_id=FG-GH6-STD",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004"
+      },
+      "attribute": "child_id",
+      "value": "CMP-GAM-004",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 8,
+        "column": "child_id"
+      },
+      "evidence": "row 8: child_id=CMP-GAM-004",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004"
+      },
+      "attribute": "qty_per",
+      "value": 1,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 8,
+        "column": "qty_per"
+      },
+      "evidence": "row 8: qty_per=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004"
+      },
+      "attribute": "valid_from",
+      "value": "2024-01-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 8,
+        "column": "valid_from"
+      },
+      "evidence": "row 8: valid_from=2024-01-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004"
+      },
+      "attribute": "valid_to",
+      "value": "9999-12-31",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 8,
+        "column": "valid_to"
+      },
+      "evidence": "row 8: valid_to=9999-12-31",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "attribute": "parent_id",
+      "value": "FG-GH6-STD",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 9,
+        "column": "parent_id"
+      },
+      "evidence": "row 9: parent_id=FG-GH6-STD",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "attribute": "child_id",
+      "value": "CMP-GAM-011",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 9,
+        "column": "child_id"
+      },
+      "evidence": "row 9: child_id=CMP-GAM-011",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "attribute": "qty_per",
+      "value": 1,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 9,
+        "column": "qty_per"
+      },
+      "evidence": "row 9: qty_per=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "attribute": "valid_from",
+      "value": "2024-01-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 9,
+        "column": "valid_from"
+      },
+      "evidence": "row 9: valid_from=2024-01-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-011"
+      },
+      "attribute": "valid_to",
+      "value": "9999-12-31",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 9,
+        "column": "valid_to"
+      },
+      "evidence": "row 9: valid_to=9999-12-31",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-001"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-001"
+      },
+      "attribute": "parent_id",
+      "value": "FG-GH6-CE",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 10,
+        "column": "parent_id"
+      },
+      "evidence": "row 10: parent_id=FG-GH6-CE",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-001"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-001"
+      },
+      "attribute": "child_id",
+      "value": "CMP-GAM-001",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 10,
+        "column": "child_id"
+      },
+      "evidence": "row 10: child_id=CMP-GAM-001",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-001"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-001"
+      },
+      "attribute": "qty_per",
+      "value": 1,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 10,
+        "column": "qty_per"
+      },
+      "evidence": "row 10: qty_per=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-001"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-001"
+      },
+      "attribute": "valid_from",
+      "value": "2024-01-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 10,
+        "column": "valid_from"
+      },
+      "evidence": "row 10: valid_from=2024-01-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-001"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-001"
+      },
+      "attribute": "valid_to",
+      "value": "9999-12-31",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 10,
+        "column": "valid_to"
+      },
+      "evidence": "row 10: valid_to=9999-12-31",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-006"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-006"
+      },
+      "attribute": "parent_id",
+      "value": "FG-GH6-CE",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 11,
+        "column": "parent_id"
+      },
+      "evidence": "row 11: parent_id=FG-GH6-CE",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-006"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-006"
+      },
+      "attribute": "child_id",
+      "value": "CMP-GAM-006",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 11,
+        "column": "child_id"
+      },
+      "evidence": "row 11: child_id=CMP-GAM-006",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-006"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-006"
+      },
+      "attribute": "qty_per",
+      "value": 1,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 11,
+        "column": "qty_per"
+      },
+      "evidence": "row 11: qty_per=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-006"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-006"
+      },
+      "attribute": "valid_from",
+      "value": "2024-01-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 11,
+        "column": "valid_from"
+      },
+      "evidence": "row 11: valid_from=2024-01-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-006"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-006"
+      },
+      "attribute": "valid_to",
+      "value": "9999-12-31",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 11,
+        "column": "valid_to"
+      },
+      "evidence": "row 11: valid_to=9999-12-31",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-007"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-007"
+      },
+      "attribute": "parent_id",
+      "value": "FG-GH6-CE",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 12,
+        "column": "parent_id"
+      },
+      "evidence": "row 12: parent_id=FG-GH6-CE",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-007"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-007"
+      },
+      "attribute": "child_id",
+      "value": "CMP-GAM-007",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 12,
+        "column": "child_id"
+      },
+      "evidence": "row 12: child_id=CMP-GAM-007",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-007"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-007"
+      },
+      "attribute": "qty_per",
+      "value": 1,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 12,
+        "column": "qty_per"
+      },
+      "evidence": "row 12: qty_per=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-007"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-007"
+      },
+      "attribute": "valid_from",
+      "value": "2024-01-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 12,
+        "column": "valid_from"
+      },
+      "evidence": "row 12: valid_from=2024-01-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-007"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-007"
+      },
+      "attribute": "valid_to",
+      "value": "9999-12-31",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 12,
+        "column": "valid_to"
+      },
+      "evidence": "row 12: valid_to=9999-12-31",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-008"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-008"
+      },
+      "attribute": "parent_id",
+      "value": "FG-GH6-CE",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 13,
+        "column": "parent_id"
+      },
+      "evidence": "row 13: parent_id=FG-GH6-CE",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-008"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-008"
+      },
+      "attribute": "child_id",
+      "value": "CMP-GAM-008",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 13,
+        "column": "child_id"
+      },
+      "evidence": "row 13: child_id=CMP-GAM-008",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-008"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-008"
+      },
+      "attribute": "qty_per",
+      "value": 1,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 13,
+        "column": "qty_per"
+      },
+      "evidence": "row 13: qty_per=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-008"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-008"
+      },
+      "attribute": "valid_from",
+      "value": "2024-01-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 13,
+        "column": "valid_from"
+      },
+      "evidence": "row 13: valid_from=2024-01-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-008"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-008"
+      },
+      "attribute": "valid_to",
+      "value": "9999-12-31",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 13,
+        "column": "valid_to"
+      },
+      "evidence": "row 13: valid_to=9999-12-31",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009"
+      },
+      "attribute": "parent_id",
+      "value": "FG-GH6-CE",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 14,
+        "column": "parent_id"
+      },
+      "evidence": "row 14: parent_id=FG-GH6-CE",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009"
+      },
+      "attribute": "child_id",
+      "value": "CMP-GAM-009",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 14,
+        "column": "child_id"
+      },
+      "evidence": "row 14: child_id=CMP-GAM-009",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009"
+      },
+      "attribute": "qty_per",
+      "value": 1,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 14,
+        "column": "qty_per"
+      },
+      "evidence": "row 14: qty_per=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009"
+      },
+      "attribute": "valid_from",
+      "value": "2024-01-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 14,
+        "column": "valid_from"
+      },
+      "evidence": "row 14: valid_from=2024-01-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009"
+      },
+      "attribute": "valid_to",
+      "value": "9999-12-31",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 14,
+        "column": "valid_to"
+      },
+      "evidence": "row 14: valid_to=9999-12-31",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-010"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-010"
+      },
+      "attribute": "parent_id",
+      "value": "FG-GH6-CE",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 15,
+        "column": "parent_id"
+      },
+      "evidence": "row 15: parent_id=FG-GH6-CE",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-010"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-010"
+      },
+      "attribute": "child_id",
+      "value": "CMP-GAM-010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 15,
+        "column": "child_id"
+      },
+      "evidence": "row 15: child_id=CMP-GAM-010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-010"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-010"
+      },
+      "attribute": "qty_per",
+      "value": 1,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 15,
+        "column": "qty_per"
+      },
+      "evidence": "row 15: qty_per=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-010"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-010"
+      },
+      "attribute": "valid_from",
+      "value": "2024-01-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 15,
+        "column": "valid_from"
+      },
+      "evidence": "row 15: valid_from=2024-01-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-010"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-010"
+      },
+      "attribute": "valid_to",
+      "value": "9999-12-31",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 15,
+        "column": "valid_to"
+      },
+      "evidence": "row 15: valid_to=9999-12-31",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-011"
+      },
+      "attribute": "parent_id",
+      "value": "FG-GH6-CE",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 16,
+        "column": "parent_id"
+      },
+      "evidence": "row 16: parent_id=FG-GH6-CE",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-011"
+      },
+      "attribute": "child_id",
+      "value": "CMP-GAM-011",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 16,
+        "column": "child_id"
+      },
+      "evidence": "row 16: child_id=CMP-GAM-011",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-011"
+      },
+      "attribute": "qty_per",
+      "value": 1,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 16,
+        "column": "qty_per"
+      },
+      "evidence": "row 16: qty_per=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-011"
+      },
+      "attribute": "valid_from",
+      "value": "2024-01-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 16,
+        "column": "valid_from"
+      },
+      "evidence": "row 16: valid_from=2024-01-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-011"
+      },
+      "attribute": "valid_to",
+      "value": "9999-12-31",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 16,
+        "column": "valid_to"
+      },
+      "evidence": "row 16: valid_to=9999-12-31",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-MAG-005"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-MAG-005"
+      },
+      "attribute": "parent_id",
+      "value": "FG-GH6-CE",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 17,
+        "column": "parent_id"
+      },
+      "evidence": "row 17: parent_id=FG-GH6-CE",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-MAG-005"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-MAG-005"
+      },
+      "attribute": "child_id",
+      "value": "CMP-MAG-005",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 17,
+        "column": "child_id"
+      },
+      "evidence": "row 17: child_id=CMP-MAG-005",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-MAG-005"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-MAG-005"
+      },
+      "attribute": "qty_per",
+      "value": 4,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 17,
+        "column": "qty_per"
+      },
+      "evidence": "row 17: qty_per=4",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-MAG-005"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-MAG-005"
+      },
+      "attribute": "valid_from",
+      "value": "2024-01-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 17,
+        "column": "valid_from"
+      },
+      "evidence": "row 17: valid_from=2024-01-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "bom_line",
+      "subject": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-MAG-005"
+      },
+      "subject_raw": {
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-MAG-005"
+      },
+      "attribute": "valid_to",
+      "value": "9999-12-31",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 17,
+        "column": "valid_to"
+      },
+      "evidence": "row 17: valid_to=9999-12-31",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

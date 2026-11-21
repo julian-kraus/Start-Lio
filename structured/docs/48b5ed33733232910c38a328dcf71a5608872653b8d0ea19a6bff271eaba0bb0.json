@@ -1,0 +1,59 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0011_Boise_Semi/contracts/SUP-0011_Sales_Agreement_2023.pdf",
+    "sha256": "48b5ed33733232910c38a328dcf71a5608872653b8d0ea19a6bff271eaba0bb0",
+    "bytes": 65393
+  },
+  "doc_kind": "contract",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "contract_term",
+      "subject": {
+        "supplier_id": "SUP-0011",
+        "contract_id": "SUP-0011_Sales_Agreement_2023"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011",
+        "contract_id": "SUP-0011_Sales_Agreement_2023"
+      },
+      "attribute": "incoterm",
+      "value": "EXW",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "EXW",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "contract_term",
+      "subject": {
+        "supplier_id": "SUP-0011",
+        "contract_id": "SUP-0011_Sales_Agreement_2023"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011",
+        "contract_id": "SUP-0011_Sales_Agreement_2023"
+      },
+      "attribute": "incoterm",
+      "value": "EXW",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "EXW",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

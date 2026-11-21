@@ -1,0 +1,14 @@
+{
+  "signature": "4373f1ee9f47022720ce6282c546be2f580a493c6f7b42334932911d67e9fcdc",
+  "format": "csv",
+  "sheet": null,
+  "columns": {
+    "component_id": "component_id",
+    "field": "field",
+    "old": "old",
+    "new": "new",
+    "changed_by": "changed_by"
+  },
+  "fact_type": "change_record",
+  "row_count": 4
+}

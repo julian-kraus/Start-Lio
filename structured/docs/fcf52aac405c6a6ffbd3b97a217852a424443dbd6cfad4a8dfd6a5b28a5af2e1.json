@@ -1,0 +1,147 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0029_Guangzhou_PackRight/order_confirmations/PL_NHMU7718206_4500318752.pdf",
+    "sha256": "fcf52aac405c6a6ffbd3b97a217852a424443dbd6cfad4a8dfd6a5b28a5af2e1",
+    "bytes": 203853
+  },
+  "doc_kind": "packing_list",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "shipment_qty",
+      "subject": {
+        "reference": "NHMU7718206",
+        "material_id": "PR-SL-0604"
+      },
+      "subject_raw": {
+        "reference": "NHMU7718206",
+        "material_id": "PR-SL-0604"
+      },
+      "attribute": "qty_planned",
+      "value": 150000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "goods"
+      },
+      "evidence": "Customer PO 4500318752; Container NHMU7718206; PR-SL-0604; Quantity 150,000 pcs",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "shipment_qty",
+      "subject": {
+        "reference": "NHMU7718206",
+        "material_id": "PR-SL-0604"
+      },
+      "subject_raw": {
+        "reference": "NHMU7718206",
+        "material_id": "PR-SL-0604"
+      },
+      "attribute": "qty_shipped",
+      "value": 150000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "goods"
+      },
+      "evidence": "Customer PO 4500318752; Container NHMU7718206; PR-SL-0604; Quantity 150,000 pcs",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "shipment_qty",
+      "subject": {
+        "reference": "NHMU7718206",
+        "material_id": "PR-SL-0604"
+      },
+      "subject_raw": {
+        "reference": "NHMU7718206",
+        "material_id": "PR-SL-0604"
+      },
+      "attribute": "qty_balance",
+      "value": 0,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "goods"
+      },
+      "evidence": "Customer PO 4500318752; Container NHMU7718206; PR-SL-0604; Quantity 150,000 pcs",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "shipment_qty",
+      "subject": {
+        "reference": "NHMU7718206",
+        "material_id": "PR-SL-0604"
+      },
+      "subject_raw": {
+        "reference": "NHMU7718206",
+        "material_id": "PR-SL-0604"
+      },
+      "attribute": "balance_eta",
+      "value": null,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "goods"
+      },
+      "evidence": "Customer PO 4500318752; Container NHMU7718206; PR-SL-0604; Quantity 150,000 pcs",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318752",
+        "material_id": "PR-SL-0604"
+      },
+      "subject_raw": {
+        "po_number": "4500318752",
+        "material_id": "PR-SL-0604"
+      },
+      "attribute": "value",
+      "value": "Artwork rev. B (GH6_sleeve_revB.pdf); 300 cartons; 15 pallets; gross 3,600 kg",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Artwork rev. B (GH6_sleeve_revB.pdf); 300 cartons; 15 pallets; gross 3,600 kg",
+      "confidence": "medium",
+      "note": "Read from rendered image-only PDF."
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318752",
+        "material_id": "PR-SL-0604"
+      },
+      "subject_raw": {
+        "po_number": "4500318752",
+        "material_id": "PR-SL-0604"
+      },
+      "attribute": "kind",
+      "value": "packing_list",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "packing_list",
+      "confidence": "medium",
+      "note": "Read from rendered image-only PDF."
+    }
+  ],
+  "unreadable": [
+    "PDF has no usable text layer; visually inspected as image."
+  ],
+  "proposed_fact_types": []
+}

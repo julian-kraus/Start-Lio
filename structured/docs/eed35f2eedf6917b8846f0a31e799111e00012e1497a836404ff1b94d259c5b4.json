@@ -1,0 +1,39 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0018_Pune_Diecast_Works/contracts/SUP-0018_Framework_Supply_Agreement_2026.pdf",
+    "sha256": "eed35f2eedf6917b8846f0a31e799111e00012e1497a836404ff1b94d259c5b4",
+    "bytes": 66387
+  },
+  "doc_kind": "contract",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "contract_term",
+      "subject": {
+        "supplier_id": "SUP-0018",
+        "contract_id": "SUP-0018_Framework_Supply_Agreement_2026"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0018",
+        "contract_id": "SUP-0018_Framework_Supply_Agreement_2026"
+      },
+      "attribute": "incoterm",
+      "value": "FOB",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "FOB",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

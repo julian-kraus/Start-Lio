@@ -1,0 +1,374 @@
+{
+  "source": {
+    "path": "soony/receiving/DC-HAM/20261117_SN-261014-585.jpg",
+    "sha256": "9066aa05fcbb61b96ef4f53636ce5ba03b8e27e9237f5da49528b1c48912d1e8",
+    "bytes": 239722
+  },
+  "doc_kind": "delivery_note_scan",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en",
+    "pl",
+    "zh",
+    "ko"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261014-585",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261014-585",
+        "line": 1,
+        "supplier_part_no": "PR-SL-0604",
+        "po_number": [
+          "4500318738"
+        ]
+      },
+      "attribute": "po_number",
+      "value": [
+        "4500318738"
+      ],
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "['4500318738']",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261014-585",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261014-585",
+        "line": 1,
+        "supplier_part_no": "PR-SL-0604",
+        "po_number": [
+          "4500318738"
+        ]
+      },
+      "attribute": "supplier_part_no",
+      "value": "PR-SL-0604",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "PR-SL-0604",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261014-585",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261014-585",
+        "line": 1,
+        "supplier_part_no": "PR-SL-0604",
+        "po_number": [
+          "4500318738"
+        ]
+      },
+      "attribute": "material_id",
+      "value": null,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "None",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261014-585",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261014-585",
+        "line": 1,
+        "supplier_part_no": "PR-SL-0604",
+        "po_number": [
+          "4500318738"
+        ]
+      },
+      "attribute": "printed_qty",
+      "value": 64000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "64000",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261014-585",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261014-585",
+        "line": 1,
+        "supplier_part_no": "PR-SL-0604",
+        "po_number": [
+          "4500318738"
+        ]
+      },
+      "attribute": "handwritten_qty",
+      "value": null,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "None",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261014-585",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261014-585",
+        "line": 1,
+        "supplier_part_no": "PR-SL-0604",
+        "po_number": [
+          "4500318738"
+        ]
+      },
+      "attribute": "struck_through",
+      "value": false,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "False",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261014-585",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261014-585",
+        "line": 1,
+        "supplier_part_no": "PR-SL-0604",
+        "po_number": [
+          "4500318738"
+        ]
+      },
+      "attribute": "final_qty",
+      "value": 64000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "64000",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261014-585",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261014-585",
+        "line": 1,
+        "supplier_part_no": "PR-SL-0604",
+        "po_number": [
+          "4500318738"
+        ]
+      },
+      "attribute": "uom",
+      "value": "PCS",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "PCS",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261014-585",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261014-585",
+        "line": 1,
+        "supplier_part_no": "PR-SL-0604",
+        "po_number": [
+          "4500318738"
+        ]
+      },
+      "attribute": "packages",
+      "value": 12,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "12",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261014-585",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261014-585",
+        "line": 1,
+        "supplier_part_no": "PR-SL-0604",
+        "po_number": [
+          "4500318738"
+        ]
+      },
+      "attribute": "carrier",
+      "value": "Nordhav Shipping A/S",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "Nordhav Shipping A/S",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261014-585",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261014-585",
+        "line": 1,
+        "supplier_part_no": "PR-SL-0604",
+        "po_number": [
+          "4500318738"
+        ]
+      },
+      "attribute": "note_date",
+      "value": "2026-10-14",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "2026-10-14",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261014-585",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261014-585",
+        "line": 1,
+        "supplier_part_no": "PR-SL-0604",
+        "po_number": [
+          "4500318738"
+        ]
+      },
+      "attribute": "received_stamp_date",
+      "value": null,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "None",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261014-585",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261014-585",
+        "line": 1,
+        "supplier_part_no": "PR-SL-0604",
+        "po_number": [
+          "4500318738"
+        ]
+      },
+      "attribute": "receiver_signature_present",
+      "value": true,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "True",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261014-585",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261014-585",
+        "line": 1,
+        "supplier_part_no": "PR-SL-0604",
+        "po_number": [
+          "4500318738"
+        ]
+      },
+      "attribute": "gross_weight",
+      "value": 168,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "168",
+      "confidence": "medium"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

@@ -1,0 +1,226 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0010_Hwaseong_Memory/order_confirmations/OA26748424_4500318756.pdf",
+    "sha256": "5d8c9967a3556572c6014149c90f0a8cb1d40397be2454c385a8b84342a27b74",
+    "bytes": 63728
+  },
+  "doc_kind": "order_confirmation",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318756",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318756",
+        "po_line": 2
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-002",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n14,000\n5.4\nUSD\n2026-12-09\n00010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318756",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318756",
+        "po_line": 2
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-002",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n14,000\n5.4\nUSD\n2026-12-09\n00010",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318756",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318756",
+        "po_line": 2
+      },
+      "attribute": "qty",
+      "value": 14000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n14,000\n5.4\nUSD\n2026-12-09\n00010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318756",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318756",
+        "po_line": 2
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-001",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 21
+      },
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n120,000\n9.8\nUSD\n2026-12-18\n00030",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318756",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318756",
+        "po_line": 2
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-001",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 21
+      },
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n120,000\n9.8\nUSD\n2026-12-18\n00030",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318756",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318756",
+        "po_line": 2
+      },
+      "attribute": "qty",
+      "value": 120000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 21
+      },
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n120,000\n9.8\nUSD\n2026-12-18\n00030",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318756",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318756",
+        "po_line": 1
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-002",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 30
+      },
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n13,000\n5.4\nUSD\n2026-12-15",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318756",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318756",
+        "po_line": 1
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-002",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 30
+      },
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n13,000\n5.4\nUSD\n2026-12-15",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318756",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318756",
+        "po_line": 1
+      },
+      "attribute": "qty",
+      "value": 13000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 30
+      },
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n13,000\n5.4\nUSD\n2026-12-15",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318756"
+      },
+      "subject_raw": {
+        "po_number": "4500318756"
+      },
+      "attribute": "value",
+      "value": "Customer: Soony Interactive GmbH · Your order 4500318756 of 2026-10-05 · Incoterms FOB Busan · Payment NET45",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318756 of 2026-10-05 · Incoterms FOB Busan · Payment NET45",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

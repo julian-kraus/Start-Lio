@@ -1,0 +1,532 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0019_Dongguan_Precision_Housings/components.csv",
+    "sha256": "23b73e405b5903909a76c92fb636c1fb0d920760f06c873d48103fbfbdbe2dc7",
+    "bytes": 353
+  },
+  "doc_kind": "master_table",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "component_id",
+      "value": "CMP-GAM-003",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "component_id"
+      },
+      "evidence": "row 2: component_id=CMP-GAM-003",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "description",
+      "value": "Game Card Case (clear)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "description"
+      },
+      "evidence": "row 2: description=Game Card Case (clear)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "category",
+      "value": "Print & Packaging",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "category"
+      },
+      "evidence": "row 2: category=Print & Packaging",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "share",
+      "value": 0.4,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "share"
+      },
+      "evidence": "row 2: share=0.4",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "unit_price",
+      "value": 1.52,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "unit_price"
+      },
+      "evidence": "row 2: unit_price=1.52",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "currency",
+      "value": "CNY",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "currency"
+      },
+      "evidence": "row 2: currency=CNY",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "lead_time_days",
+      "value": 70,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "lead_time_days"
+      },
+      "evidence": "row 2: lead_time_days=70",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "moq",
+      "value": 20000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "moq"
+      },
+      "evidence": "row 2: moq=20000",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "primary",
+      "value": "N",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "primary"
+      },
+      "evidence": "row 2: primary=N",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-3"
+      },
+      "subject_raw": {
+        "material_id": "row-3"
+      },
+      "attribute": "component_id",
+      "value": "CMP-GAM-006",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "component_id"
+      },
+      "evidence": "row 3: component_id=CMP-GAM-006",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-3"
+      },
+      "subject_raw": {
+        "material_id": "row-3"
+      },
+      "attribute": "description",
+      "value": "Steel Case Grand Heist 6",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "description"
+      },
+      "evidence": "row 3: description=Steel Case Grand Heist 6",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-3"
+      },
+      "subject_raw": {
+        "material_id": "row-3"
+      },
+      "attribute": "category",
+      "value": "Collector's Items",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "category"
+      },
+      "evidence": "row 3: category=Collector's Items",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-3"
+      },
+      "subject_raw": {
+        "material_id": "row-3"
+      },
+      "attribute": "share",
+      "value": 1,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "share"
+      },
+      "evidence": "row 3: share=1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-3"
+      },
+      "subject_raw": {
+        "material_id": "row-3"
+      },
+      "attribute": "unit_price",
+      "value": 21.01,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "unit_price"
+      },
+      "evidence": "row 3: unit_price=21.01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-3"
+      },
+      "subject_raw": {
+        "material_id": "row-3"
+      },
+      "attribute": "currency",
+      "value": "CNY",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "currency"
+      },
+      "evidence": "row 3: currency=CNY",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-3"
+      },
+      "subject_raw": {
+        "material_id": "row-3"
+      },
+      "attribute": "lead_time_days",
+      "value": 70,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "lead_time_days"
+      },
+      "evidence": "row 3: lead_time_days=70",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-3"
+      },
+      "subject_raw": {
+        "material_id": "row-3"
+      },
+      "attribute": "moq",
+      "value": 10000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "moq"
+      },
+      "evidence": "row 3: moq=10000",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-3"
+      },
+      "subject_raw": {
+        "material_id": "row-3"
+      },
+      "attribute": "primary",
+      "value": "Y",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "primary"
+      },
+      "evidence": "row 3: primary=Y",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-4"
+      },
+      "subject_raw": {
+        "material_id": "row-4"
+      },
+      "attribute": "component_id",
+      "value": "CMP-GAM-010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "component_id"
+      },
+      "evidence": "row 4: component_id=CMP-GAM-010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-4"
+      },
+      "subject_raw": {
+        "material_id": "row-4"
+      },
+      "attribute": "description",
+      "value": "Statue \"The Getaway\" (die-cast, 18 cm)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "description"
+      },
+      "evidence": "row 4: description=Statue \"The Getaway\" (die-cast, 18 cm)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-4"
+      },
+      "subject_raw": {
+        "material_id": "row-4"
+      },
+      "attribute": "category",
+      "value": "Collector's Items",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "category"
+      },
+      "evidence": "row 4: category=Collector's Items",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-4"
+      },
+      "subject_raw": {
+        "material_id": "row-4"
+      },
+      "attribute": "share",
+      "value": 0.8,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "share"
+      },
+      "evidence": "row 4: share=0.8",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-4"
+      },
+      "subject_raw": {
+        "material_id": "row-4"
+      },
+      "attribute": "unit_price",
+      "value": 83.31,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "unit_price"
+      },
+      "evidence": "row 4: unit_price=83.31",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-4"
+      },
+      "subject_raw": {
+        "material_id": "row-4"
+      },
+      "attribute": "currency",
+      "value": "CNY",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "currency"
+      },
+      "evidence": "row 4: currency=CNY",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-4"
+      },
+      "subject_raw": {
+        "material_id": "row-4"
+      },
+      "attribute": "lead_time_days",
+      "value": 77,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "lead_time_days"
+      },
+      "evidence": "row 4: lead_time_days=77",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-4"
+      },
+      "subject_raw": {
+        "material_id": "row-4"
+      },
+      "attribute": "moq",
+      "value": 5000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "moq"
+      },
+      "evidence": "row 4: moq=5000",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-4"
+      },
+      "subject_raw": {
+        "material_id": "row-4"
+      },
+      "attribute": "primary",
+      "value": "Y",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "primary"
+      },
+      "evidence": "row 4: primary=Y",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

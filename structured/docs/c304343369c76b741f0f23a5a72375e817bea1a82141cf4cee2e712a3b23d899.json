@@ -1,0 +1,39 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0010_Hwaseong_Memory/contracts/SUP-0010_LTA_2022.pdf",
+    "sha256": "c304343369c76b741f0f23a5a72375e817bea1a82141cf4cee2e712a3b23d899",
+    "bytes": 66596
+  },
+  "doc_kind": "contract",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "contract_term",
+      "subject": {
+        "supplier_id": "SUP-0010",
+        "contract_id": "SUP-0010_LTA_2022"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0010",
+        "contract_id": "SUP-0010_LTA_2022"
+      },
+      "attribute": "incoterm",
+      "value": "FOB",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "FOB",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

@@ -1,0 +1,1102 @@
+{
+  "fact_types": [
+    {
+      "name": "po_line",
+      "description": "Purchase-order line",
+      "subject_keys": [
+        "po_number",
+        "po_line"
+      ],
+      "attributes": {
+        "supplier_id": {
+          "description": "supplier_id",
+          "type": "string"
+        },
+        "material_id": {
+          "description": "material_id",
+          "type": "string"
+        },
+        "qty": {
+          "description": "qty",
+          "type": "number"
+        },
+        "unit_price": {
+          "description": "unit_price",
+          "type": "string"
+        },
+        "currency": {
+          "description": "currency",
+          "type": "string"
+        },
+        "order_date": {
+          "description": "order_date",
+          "type": "string"
+        },
+        "requested_date": {
+          "description": "requested_date",
+          "type": "string"
+        },
+        "promised_date": {
+          "description": "promised_date",
+          "type": "string"
+        },
+        "actual_delivery_date": {
+          "description": "actual_delivery_date",
+          "type": "string"
+        },
+        "status": {
+          "description": "status",
+          "type": "string"
+        },
+        "incoterm": {
+          "description": "incoterm",
+          "type": "string"
+        },
+        "buyer": {
+          "description": "buyer",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "goods_receipt",
+      "description": "Goods receipt",
+      "subject_keys": [
+        "gr_number"
+      ],
+      "attributes": {
+        "po_number": {
+          "description": "po_number",
+          "type": "string"
+        },
+        "po_line": {
+          "description": "po_line",
+          "type": "string"
+        },
+        "supplier_id": {
+          "description": "supplier_id",
+          "type": "string"
+        },
+        "material_id": {
+          "description": "material_id",
+          "type": "string"
+        },
+        "qty_ordered": {
+          "description": "qty_ordered",
+          "type": "number"
+        },
+        "qty_received": {
+          "description": "qty_received",
+          "type": "number"
+        },
+        "gr_date": {
+          "description": "gr_date",
+          "type": "string"
+        },
+        "delivery_note": {
+          "description": "delivery_note",
+          "type": "string"
+        },
+        "inspector": {
+          "description": "inspector",
+          "type": "string"
+        },
+        "remark": {
+          "description": "remark",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "stock_batch",
+      "description": "Stock snapshot batch",
+      "subject_keys": [
+        "material_id",
+        "batch"
+      ],
+      "attributes": {
+        "qty": {
+          "description": "qty",
+          "type": "number"
+        },
+        "uom": {
+          "description": "uom",
+          "type": "string"
+        },
+        "snapshot_date": {
+          "description": "snapshot_date",
+          "type": "string"
+        },
+        "last_count": {
+          "description": "last_count",
+          "type": "string"
+        },
+        "site": {
+          "description": "site",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "packout",
+      "description": "Packout log",
+      "subject_keys": [
+        "date",
+        "product_id"
+      ],
+      "attributes": {
+        "units_packed": {
+          "description": "units_packed",
+          "type": "string"
+        },
+        "line": {
+          "description": "line",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "bom_line",
+      "description": "Bill-of-material line",
+      "subject_keys": [
+        "parent_id",
+        "child_id"
+      ],
+      "attributes": {
+        "qty_per": {
+          "description": "qty_per",
+          "type": "string"
+        },
+        "valid_from": {
+          "description": "valid_from",
+          "type": "string"
+        },
+        "valid_to": {
+          "description": "valid_to",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "component",
+      "description": "Component master",
+      "subject_keys": [
+        "material_id"
+      ],
+      "attributes": {
+        "description": {
+          "description": "description",
+          "type": "string"
+        },
+        "category": {
+          "description": "category",
+          "type": "string"
+        },
+        "uom": {
+          "description": "uom",
+          "type": "string"
+        },
+        "critical": {
+          "description": "critical",
+          "type": "string"
+        },
+        "drawing_rev": {
+          "description": "drawing_rev",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "product",
+      "description": "Product master",
+      "subject_keys": [
+        "product_id"
+      ],
+      "attributes": {
+        "lifecycle": {
+          "description": "lifecycle",
+          "type": "string"
+        },
+        "launch_date": {
+          "description": "launch_date",
+          "type": "string"
+        },
+        "plan_weekly_units": {
+          "description": "plan_weekly_units",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "route",
+      "description": "Transport route",
+      "subject_keys": [
+        "id"
+      ],
+      "attributes": {
+        "transit_days": {
+          "description": "transit_days",
+          "type": "string"
+        },
+        "mode": {
+          "description": "mode",
+          "type": "string"
+        },
+        "origin": {
+          "description": "origin",
+          "type": "string"
+        },
+        "destination": {
+          "description": "destination",
+          "type": "string"
+        },
+        "via": {
+          "description": "via",
+          "type": "string"
+        },
+        "carrier_id": {
+          "description": "carrier_id",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "carrier",
+      "description": "Logistics provider",
+      "subject_keys": [
+        "id"
+      ],
+      "attributes": {
+        "name": {
+          "description": "name",
+          "type": "string"
+        },
+        "city": {
+          "description": "city",
+          "type": "string"
+        },
+        "country": {
+          "description": "country",
+          "type": "string"
+        },
+        "modes": {
+          "description": "modes",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "port",
+      "description": "Port master",
+      "subject_keys": [
+        "id"
+      ],
+      "attributes": {
+        "name": {
+          "description": "name",
+          "type": "string"
+        },
+        "country": {
+          "description": "country",
+          "type": "string"
+        },
+        "lat": {
+          "description": "lat",
+          "type": "string"
+        },
+        "lon": {
+          "description": "lon",
+          "type": "string"
+        },
+        "mode": {
+          "description": "mode",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "site",
+      "description": "Site master",
+      "subject_keys": [
+        "id"
+      ],
+      "attributes": {
+        "name": {
+          "description": "name",
+          "type": "string"
+        },
+        "operator": {
+          "description": "operator",
+          "type": "string"
+        },
+        "type": {
+          "description": "type",
+          "type": "string"
+        },
+        "country": {
+          "description": "country",
+          "type": "string"
+        },
+        "city": {
+          "description": "city",
+          "type": "string"
+        },
+        "lat": {
+          "description": "lat",
+          "type": "string"
+        },
+        "lon": {
+          "description": "lon",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "supplier",
+      "description": "Supplier profile",
+      "subject_keys": [
+        "supplier_id"
+      ],
+      "attributes": {
+        "name": {
+          "description": "name",
+          "type": "string"
+        },
+        "legal_name": {
+          "description": "legal_name",
+          "type": "string"
+        },
+        "country": {
+          "description": "country",
+          "type": "string"
+        },
+        "currency": {
+          "description": "currency",
+          "type": "string"
+        },
+        "incoterm": {
+          "description": "incoterm",
+          "type": "string"
+        },
+        "qualification_status": {
+          "description": "qualification_status",
+          "type": "string"
+        },
+        "contact_email": {
+          "description": "contact_email",
+          "type": "string"
+        },
+        "language": {
+          "description": "language",
+          "type": "string"
+        },
+        "notes": {
+          "description": "notes",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "supplier_part",
+      "description": "Supplier component offer",
+      "subject_keys": [
+        "supplier_id",
+        "material_id"
+      ],
+      "attributes": {
+        "share": {
+          "description": "share",
+          "type": "string"
+        },
+        "unit_price": {
+          "description": "unit_price",
+          "type": "string"
+        },
+        "lead_time_days": {
+          "description": "lead_time_days",
+          "type": "string"
+        },
+        "moq": {
+          "description": "moq",
+          "type": "string"
+        },
+        "primary": {
+          "description": "primary",
+          "type": "string"
+        },
+        "note": {
+          "description": "note",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "component_flag",
+      "description": "Component handling flag",
+      "subject_keys": [
+        "material_id"
+      ],
+      "attributes": {
+        "phantom_in": {
+          "description": "phantom_in",
+          "type": "string"
+        },
+        "not_stocked": {
+          "description": "not_stocked",
+          "type": "string"
+        },
+        "reason": {
+          "description": "reason",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "shipment",
+      "description": "Shipment tracking row",
+      "subject_keys": [
+        "shipment_id"
+      ],
+      "attributes": {
+        "carrier": {
+          "description": "carrier",
+          "type": "string"
+        },
+        "mode": {
+          "description": "mode",
+          "type": "string"
+        },
+        "reference": {
+          "description": "reference",
+          "type": "string"
+        },
+        "po_numbers": {
+          "description": "po_numbers",
+          "type": "string"
+        },
+        "material_ids": {
+          "description": "material_ids",
+          "type": "string"
+        },
+        "route_id": {
+          "description": "route_id",
+          "type": "string"
+        },
+        "etd": {
+          "description": "etd",
+          "type": "string"
+        },
+        "eta": {
+          "description": "eta",
+          "type": "string"
+        },
+        "status": {
+          "description": "status",
+          "type": "string"
+        },
+        "note": {
+          "description": "note",
+          "type": "string"
+        },
+        "updated_at": {
+          "description": "updated_at",
+          "type": "string"
+        },
+        "source_system": {
+          "description": "source_system",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "shipment_qty",
+      "description": "Shipment quantity claim",
+      "subject_keys": [
+        "reference",
+        "material_id"
+      ],
+      "attributes": {
+        "qty_planned": {
+          "description": "qty_planned",
+          "type": "string"
+        },
+        "qty_shipped": {
+          "description": "qty_shipped",
+          "type": "string"
+        },
+        "qty_balance": {
+          "description": "qty_balance",
+          "type": "string"
+        },
+        "balance_eta": {
+          "description": "balance_eta",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "oc_line",
+      "description": "Order-confirmation line",
+      "subject_keys": [
+        "po_number",
+        "po_line"
+      ],
+      "attributes": {
+        "supplier_part_no": {
+          "description": "supplier_part_no",
+          "type": "string"
+        },
+        "material_id": {
+          "description": "material_id",
+          "type": "string"
+        },
+        "qty": {
+          "description": "qty",
+          "type": "number"
+        },
+        "unit_price": {
+          "description": "unit_price",
+          "type": "string"
+        },
+        "currency": {
+          "description": "currency",
+          "type": "string"
+        },
+        "confirmed_date": {
+          "description": "confirmed_date",
+          "type": "string"
+        },
+        "incoterm": {
+          "description": "incoterm",
+          "type": "string"
+        },
+        "payment_terms": {
+          "description": "payment_terms",
+          "type": "string"
+        },
+        "oc_number": {
+          "description": "oc_number",
+          "type": "string"
+        },
+        "oc_date": {
+          "description": "oc_date",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "supplier_statement",
+      "description": "Supplier statement",
+      "subject_keys": [
+        "po_number or supplier_id"
+      ],
+      "attributes": {
+        "kind": {
+          "description": "kind",
+          "type": "string"
+        },
+        "value": {
+          "description": "value",
+          "type": "string"
+        },
+        "condition_to_release": {
+          "description": "condition_to_release",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "delivery_note_line",
+      "description": "Delivery-note line",
+      "subject_keys": [
+        "delivery_note",
+        "line"
+      ],
+      "attributes": {
+        "po_number": {
+          "description": "po_number",
+          "type": "string"
+        },
+        "supplier_part_no": {
+          "description": "supplier_part_no",
+          "type": "string"
+        },
+        "material_id": {
+          "description": "material_id",
+          "type": "string"
+        },
+        "printed_qty": {
+          "description": "printed_qty",
+          "type": "number"
+        },
+        "handwritten_qty": {
+          "description": "handwritten_qty",
+          "type": "string"
+        },
+        "struck_through": {
+          "description": "struck_through",
+          "type": "string"
+        },
+        "final_qty": {
+          "description": "final_qty",
+          "type": "number"
+        },
+        "uom": {
+          "description": "uom",
+          "type": "string"
+        },
+        "packages": {
+          "description": "packages",
+          "type": "string"
+        },
+        "carrier": {
+          "description": "carrier",
+          "type": "string"
+        },
+        "note_date": {
+          "description": "note_date",
+          "type": "string"
+        },
+        "received_stamp_date": {
+          "description": "received_stamp_date",
+          "type": "string"
+        },
+        "receiver_signature_present": {
+          "description": "receiver_signature_present",
+          "type": "string"
+        },
+        "gross_weight": {
+          "description": "gross_weight",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "inspection_result",
+      "description": "Inspection result",
+      "subject_keys": [
+        "gr_number"
+      ],
+      "attributes": {
+        "material_id": {
+          "description": "material_id",
+          "type": "string"
+        },
+        "lot_size": {
+          "description": "lot_size",
+          "type": "string"
+        },
+        "sample_size": {
+          "description": "sample_size",
+          "type": "string"
+        },
+        "defects": {
+          "description": "defects",
+          "type": "string"
+        },
+        "accept_reject": {
+          "description": "accept_reject",
+          "type": "string"
+        },
+        "decision": {
+          "description": "decision",
+          "type": "string"
+        },
+        "blocking_requested": {
+          "description": "blocking_requested",
+          "type": "string"
+        },
+        "release_requires": {
+          "description": "release_requires",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "capacity_window",
+      "description": "Capacity window",
+      "subject_keys": [
+        "supplier_id",
+        "resource"
+      ],
+      "attributes": {
+        "start": {
+          "description": "start",
+          "type": "string"
+        },
+        "end": {
+          "description": "end",
+          "type": "string"
+        },
+        "capacity_during": {
+          "description": "capacity_during",
+          "type": "string"
+        },
+        "unit": {
+          "description": "unit",
+          "type": "string"
+        },
+        "scope_note": {
+          "description": "scope_note",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "offer",
+      "description": "Supplier offer",
+      "subject_keys": [
+        "supplier_id",
+        "offer_ref",
+        "item"
+      ],
+      "attributes": {
+        "material_id": {
+          "description": "material_id",
+          "type": "string"
+        },
+        "qty": {
+          "description": "qty",
+          "type": "number"
+        },
+        "price_basis": {
+          "description": "price_basis",
+          "type": "string"
+        },
+        "lead_time": {
+          "description": "lead_time",
+          "type": "string"
+        },
+        "valid_from": {
+          "description": "valid_from",
+          "type": "string"
+        },
+        "valid_until": {
+          "description": "valid_until",
+          "type": "string"
+        },
+        "transport_time": {
+          "description": "transport_time",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "price_change",
+      "description": "Price change",
+      "subject_keys": [
+        "supplier_id",
+        "material_id"
+      ],
+      "attributes": {
+        "old_price": {
+          "description": "old_price",
+          "type": "string"
+        },
+        "new_price": {
+          "description": "new_price",
+          "type": "string"
+        },
+        "currency": {
+          "description": "currency",
+          "type": "string"
+        },
+        "valid_from": {
+          "description": "valid_from",
+          "type": "string"
+        },
+        "reason": {
+          "description": "reason",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "bank_details",
+      "description": "Bank details",
+      "subject_keys": [
+        "supplier_id"
+      ],
+      "attributes": {
+        "iban": {
+          "description": "iban",
+          "type": "string"
+        },
+        "bic": {
+          "description": "bic",
+          "type": "string"
+        },
+        "account_holder": {
+          "description": "account_holder",
+          "type": "string"
+        },
+        "effective_date": {
+          "description": "effective_date",
+          "type": "string"
+        },
+        "signer": {
+          "description": "signer",
+          "type": "string"
+        },
+        "channel": {
+          "description": "channel",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "part_xref",
+      "description": "Supplier part cross-reference",
+      "subject_keys": [
+        "supplier_id",
+        "supplier_part_no"
+      ],
+      "attributes": {
+        "material_id": {
+          "description": "material_id",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "contract_term",
+      "description": "Contract term",
+      "subject_keys": [
+        "supplier_id",
+        "contract_id"
+      ],
+      "attributes": {
+        "incoterm": {
+          "description": "incoterm",
+          "type": "string"
+        },
+        "price_per_material": {
+          "description": "price_per_material",
+          "type": "string"
+        },
+        "price_revision_rule": {
+          "description": "price_revision_rule",
+          "type": "string"
+        },
+        "expiry": {
+          "description": "expiry",
+          "type": "string"
+        },
+        "rush_clause": {
+          "description": "rush_clause",
+          "type": "string"
+        },
+        "penalty": {
+          "description": "penalty",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "plan_edition",
+      "description": "Launch edition plan claim",
+      "subject_keys": [
+        "product_id"
+      ],
+      "attributes": {
+        "demand": {
+          "description": "demand",
+          "type": "number"
+        },
+        "preorders": {
+          "description": "preorders",
+          "type": "string"
+        },
+        "packed": {
+          "description": "packed",
+          "type": "number"
+        },
+        "still_to_pack": {
+          "description": "still_to_pack",
+          "type": "string"
+        },
+        "rate_per_hour": {
+          "description": "rate_per_hour",
+          "type": "string"
+        },
+        "hours_available": {
+          "description": "hours_available",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "change_record",
+      "description": "Field-level change record",
+      "subject_keys": [
+        "entity"
+      ],
+      "attributes": {
+        "field": {
+          "description": "field",
+          "type": "string"
+        },
+        "old": {
+          "description": "old",
+          "type": "string"
+        },
+        "new": {
+          "description": "new",
+          "type": "string"
+        },
+        "effective_from": {
+          "description": "effective_from",
+          "type": "string"
+        },
+        "change_id": {
+          "description": "change_id",
+          "type": "string"
+        },
+        "reason": {
+          "description": "reason",
+          "type": "string"
+        },
+        "changed_by": {
+          "description": "changed_by",
+          "type": "string"
+        },
+        "use_up_old": {
+          "description": "use_up_old",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "policy_directive",
+      "description": "Policy directive",
+      "subject_keys": [
+        "scope"
+      ],
+      "attributes": {
+        "directive": {
+          "description": "directive",
+          "type": "string"
+        },
+        "issued_by": {
+          "description": "issued_by",
+          "type": "string"
+        },
+        "valid_until": {
+          "description": "valid_until",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "plan_part",
+      "description": "Launch part plan claim",
+      "subject_keys": [
+        "material_id"
+      ],
+      "attributes": {
+        "need": {
+          "description": "need",
+          "type": "number"
+        },
+        "erp_stock": {
+          "description": "erp_stock",
+          "type": "number"
+        },
+        "due_before_launch": {
+          "description": "due_before_launch",
+          "type": "string"
+        },
+        "cover": {
+          "description": "cover",
+          "type": "string"
+        },
+        "status": {
+          "description": "status",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "shift",
+      "description": "Launch shift",
+      "subject_keys": [
+        "day"
+      ],
+      "attributes": {
+        "start": {
+          "description": "start",
+          "type": "string"
+        },
+        "end": {
+          "description": "end",
+          "type": "string"
+        },
+        "hours": {
+          "description": "hours",
+          "type": "string"
+        },
+        "lines": {
+          "description": "lines",
+          "type": "string"
+        },
+        "note": {
+          "description": "note",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "doc_freshness",
+      "description": "Document freshness",
+      "subject_keys": [
+        "source_path"
+      ],
+      "attributes": {
+        "max_updated_at": {
+          "description": "max_updated_at",
+          "type": "string"
+        },
+        "row_count": {
+          "description": "row_count",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "x_org_chart_entry",
+      "description": "An org-chart relationship or entry not covered by the initial vocabulary.",
+      "attributes": {
+        "entry": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "x_document_line",
+      "description": "Grounded text line from a document not covered by a specialized extractor.",
+      "attributes": {
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "x_workbook_row",
+      "description": "Unclassified workbook row retained for losslessness.",
+      "attributes": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "x_context_note",
+      "description": "Context note retained as source evidence.",
+      "attributes": {
+        "content": {
+          "type": "string"
+        }
+      }
+    }
+  ]
+}

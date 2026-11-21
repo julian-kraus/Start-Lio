@@ -1,0 +1,190 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0018_Pune_Diecast_Works/components.csv",
+    "sha256": "55b9fa3e45d1127666aa305cf3dd0f5dc7fe3cbef49c33221ccdd851e2469369",
+    "bytes": 193
+  },
+  "doc_kind": "master_table",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "component_id",
+      "value": "CMP-GAM-010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "component_id"
+      },
+      "evidence": "row 2: component_id=CMP-GAM-010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "description",
+      "value": "Statue \"The Getaway\" (die-cast, 18 cm)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "description"
+      },
+      "evidence": "row 2: description=Statue \"The Getaway\" (die-cast, 18 cm)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "category",
+      "value": "Collector's Items",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "category"
+      },
+      "evidence": "row 2: category=Collector's Items",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "share",
+      "value": 0.2,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "share"
+      },
+      "evidence": "row 2: share=0.2",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "unit_price",
+      "value": 1037,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "unit_price"
+      },
+      "evidence": "row 2: unit_price=1037",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "currency",
+      "value": "INR",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "currency"
+      },
+      "evidence": "row 2: currency=INR",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "lead_time_days",
+      "value": 70,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "lead_time_days"
+      },
+      "evidence": "row 2: lead_time_days=70",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "moq",
+      "value": 2000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "moq"
+      },
+      "evidence": "row 2: moq=2000",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "primary",
+      "value": "N",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "primary"
+      },
+      "evidence": "row 2: primary=N",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

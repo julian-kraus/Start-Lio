@@ -1,0 +1,361 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0029_Guangzhou_PackRight/profile.csv",
+    "sha256": "e6d5fb238d91d843289397d0a2dad58c1a1f3964babcff47236d8422b85dcf89",
+    "bytes": 436
+  },
+  "doc_kind": "supplier_profile",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0029"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029"
+      },
+      "attribute": "supplier_id",
+      "value": "SUP-0029",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "supplier_id"
+      },
+      "evidence": "row 2: supplier_id=SUP-0029",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0029"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029"
+      },
+      "attribute": "name",
+      "value": "Guangzhou PackRight",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "name"
+      },
+      "evidence": "row 2: name=Guangzhou PackRight",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0029"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029"
+      },
+      "attribute": "legal_name",
+      "value": "Guangzhou PackRight Packaging Co., Ltd.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "legal_name"
+      },
+      "evidence": "row 2: legal_name=Guangzhou PackRight Packaging Co., Ltd.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0029"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029"
+      },
+      "attribute": "category",
+      "value": "Print & Packaging",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "category"
+      },
+      "evidence": "row 2: category=Print & Packaging",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0029"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029"
+      },
+      "attribute": "country",
+      "value": "CN",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "country"
+      },
+      "evidence": "row 2: country=CN",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0029"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029"
+      },
+      "attribute": "city",
+      "value": "Guangzhou",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "city"
+      },
+      "evidence": "row 2: city=Guangzhou",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0029"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029"
+      },
+      "attribute": "lat",
+      "value": 23.1291,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "lat"
+      },
+      "evidence": "row 2: lat=23.1291",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0029"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029"
+      },
+      "attribute": "lon",
+      "value": 113.2644,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "lon"
+      },
+      "evidence": "row 2: lon=113.2644",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0029"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029"
+      },
+      "attribute": "currency",
+      "value": "CNY",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "currency"
+      },
+      "evidence": "row 2: currency=CNY",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0029"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029"
+      },
+      "attribute": "payment_terms",
+      "value": "NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "payment_terms"
+      },
+      "evidence": "row 2: payment_terms=NET30",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0029"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029"
+      },
+      "attribute": "incoterm",
+      "value": "FOB Yantian",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "incoterm"
+      },
+      "evidence": "row 2: incoterm=FOB Yantian",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0029"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029"
+      },
+      "attribute": "supplier_since",
+      "value": "2019-09-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "supplier_since"
+      },
+      "evidence": "row 2: supplier_since=2019-09-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0029"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029"
+      },
+      "attribute": "status",
+      "value": "active",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "status"
+      },
+      "evidence": "row 2: status=active",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0029"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029"
+      },
+      "attribute": "qualification_status",
+      "value": "qualified",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "qualification_status"
+      },
+      "evidence": "row 2: qualification_status=qualified",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0029"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029"
+      },
+      "attribute": "contact_name",
+      "value": "Lin Hui",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "contact_name"
+      },
+      "evidence": "row 2: contact_name=Lin Hui",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0029"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029"
+      },
+      "attribute": "contact_email",
+      "value": "lin.hui.packright@suppliers.juliansibbing.de",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "contact_email"
+      },
+      "evidence": "row 2: contact_email=lin.hui.packright@suppliers.juliansibbing.de",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0029"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029"
+      },
+      "attribute": "phone",
+      "value": "+86 20 8200 1100",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "phone"
+      },
+      "evidence": "row 2: phone=+86 20 8200 1100",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0029"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029"
+      },
+      "attribute": "preferred_language",
+      "value": "zh",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "preferred_language"
+      },
+      "evidence": "row 2: preferred_language=zh",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

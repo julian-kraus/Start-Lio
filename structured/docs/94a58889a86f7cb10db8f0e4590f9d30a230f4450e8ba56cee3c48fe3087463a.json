@@ -1,0 +1,374 @@
+{
+  "source": {
+    "path": "soony/receiving/DC-HAM/20261111_SN-261007-850.jpg",
+    "sha256": "94a58889a86f7cb10db8f0e4590f9d30a230f4450e8ba56cee3c48fe3087463a",
+    "bytes": 210440
+  },
+  "doc_kind": "delivery_note_scan",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en",
+    "pl",
+    "zh",
+    "ko"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261007-850",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261007-850",
+        "line": 1,
+        "supplier_part_no": "PR-RB-2207",
+        "po_number": [
+          "4500318726"
+        ]
+      },
+      "attribute": "po_number",
+      "value": [
+        "4500318726"
+      ],
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "['4500318726']",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261007-850",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261007-850",
+        "line": 1,
+        "supplier_part_no": "PR-RB-2207",
+        "po_number": [
+          "4500318726"
+        ]
+      },
+      "attribute": "supplier_part_no",
+      "value": "PR-RB-2207",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "PR-RB-2207",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261007-850",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261007-850",
+        "line": 1,
+        "supplier_part_no": "PR-RB-2207",
+        "po_number": [
+          "4500318726"
+        ]
+      },
+      "attribute": "material_id",
+      "value": null,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "None",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261007-850",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261007-850",
+        "line": 1,
+        "supplier_part_no": "PR-RB-2207",
+        "po_number": [
+          "4500318726"
+        ]
+      },
+      "attribute": "printed_qty",
+      "value": 21800,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "21800",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261007-850",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261007-850",
+        "line": 1,
+        "supplier_part_no": "PR-RB-2207",
+        "po_number": [
+          "4500318726"
+        ]
+      },
+      "attribute": "handwritten_qty",
+      "value": null,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "None",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261007-850",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261007-850",
+        "line": 1,
+        "supplier_part_no": "PR-RB-2207",
+        "po_number": [
+          "4500318726"
+        ]
+      },
+      "attribute": "struck_through",
+      "value": false,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "False",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261007-850",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261007-850",
+        "line": 1,
+        "supplier_part_no": "PR-RB-2207",
+        "po_number": [
+          "4500318726"
+        ]
+      },
+      "attribute": "final_qty",
+      "value": 21800,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "21800",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261007-850",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261007-850",
+        "line": 1,
+        "supplier_part_no": "PR-RB-2207",
+        "po_number": [
+          "4500318726"
+        ]
+      },
+      "attribute": "uom",
+      "value": "PCS",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "PCS",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261007-850",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261007-850",
+        "line": 1,
+        "supplier_part_no": "PR-RB-2207",
+        "po_number": [
+          "4500318726"
+        ]
+      },
+      "attribute": "packages",
+      "value": 4,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "4",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261007-850",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261007-850",
+        "line": 1,
+        "supplier_part_no": "PR-RB-2207",
+        "po_number": [
+          "4500318726"
+        ]
+      },
+      "attribute": "carrier",
+      "value": "Nordhav Shipping A/S",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "Nordhav Shipping A/S",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261007-850",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261007-850",
+        "line": 1,
+        "supplier_part_no": "PR-RB-2207",
+        "po_number": [
+          "4500318726"
+        ]
+      },
+      "attribute": "note_date",
+      "value": "2026-10-07",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "2026-10-07",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261007-850",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261007-850",
+        "line": 1,
+        "supplier_part_no": "PR-RB-2207",
+        "po_number": [
+          "4500318726"
+        ]
+      },
+      "attribute": "received_stamp_date",
+      "value": "2026-11-11",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "2026-11-11",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261007-850",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261007-850",
+        "line": 1,
+        "supplier_part_no": "PR-RB-2207",
+        "po_number": [
+          "4500318726"
+        ]
+      },
+      "attribute": "receiver_signature_present",
+      "value": false,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "False",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261007-850",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261007-850",
+        "line": 1,
+        "supplier_part_no": "PR-RB-2207",
+        "po_number": [
+          "4500318726"
+        ]
+      },
+      "attribute": "gross_weight",
+      "value": 80,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "80",
+      "confidence": "medium"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

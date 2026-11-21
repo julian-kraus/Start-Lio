@@ -1,0 +1,344 @@
+{
+  "source": {
+    "path": "soony/receiving/DC-HAM/20261111_SN-261008-884.jpg",
+    "sha256": "7f9ee23ac04bedb45da837b2f7869235e711c1f97901c2e4bf54027b9f7efdf7",
+    "bytes": 165816
+  },
+  "doc_kind": "delivery_note_scan",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en",
+    "pl",
+    "zh",
+    "ko"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261008-884",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261008-884",
+        "line": 1,
+        "supplier_part_no": "PRM-GH6-PIN",
+        "po_number": "—"
+      },
+      "attribute": "po_number",
+      "value": null,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "None",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261008-884",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261008-884",
+        "line": 1,
+        "supplier_part_no": "PRM-GH6-PIN",
+        "po_number": "—"
+      },
+      "attribute": "supplier_part_no",
+      "value": "PRM-GH6-PIN",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "PRM-GH6-PIN",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261008-884",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261008-884",
+        "line": 1,
+        "supplier_part_no": "PRM-GH6-PIN",
+        "po_number": "—"
+      },
+      "attribute": "material_id",
+      "value": null,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "None",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261008-884",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261008-884",
+        "line": 1,
+        "supplier_part_no": "PRM-GH6-PIN",
+        "po_number": "—"
+      },
+      "attribute": "printed_qty",
+      "value": 30000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "30000",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261008-884",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261008-884",
+        "line": 1,
+        "supplier_part_no": "PRM-GH6-PIN",
+        "po_number": "—"
+      },
+      "attribute": "handwritten_qty",
+      "value": null,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "None",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261008-884",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261008-884",
+        "line": 1,
+        "supplier_part_no": "PRM-GH6-PIN",
+        "po_number": "—"
+      },
+      "attribute": "struck_through",
+      "value": false,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "False",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261008-884",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261008-884",
+        "line": 1,
+        "supplier_part_no": "PRM-GH6-PIN",
+        "po_number": "—"
+      },
+      "attribute": "final_qty",
+      "value": 30000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "30000",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261008-884",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261008-884",
+        "line": 1,
+        "supplier_part_no": "PRM-GH6-PIN",
+        "po_number": "—"
+      },
+      "attribute": "uom",
+      "value": "PCS",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "PCS",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261008-884",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261008-884",
+        "line": 1,
+        "supplier_part_no": "PRM-GH6-PIN",
+        "po_number": "—"
+      },
+      "attribute": "packages",
+      "value": 15,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "15",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261008-884",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261008-884",
+        "line": 1,
+        "supplier_part_no": "PRM-GH6-PIN",
+        "po_number": "—"
+      },
+      "attribute": "carrier",
+      "value": "Nordhav Shipping A/S",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "Nordhav Shipping A/S",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261008-884",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261008-884",
+        "line": 1,
+        "supplier_part_no": "PRM-GH6-PIN",
+        "po_number": "—"
+      },
+      "attribute": "note_date",
+      "value": "2026-10-08",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "2026-10-08",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261008-884",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261008-884",
+        "line": 1,
+        "supplier_part_no": "PRM-GH6-PIN",
+        "po_number": "—"
+      },
+      "attribute": "received_stamp_date",
+      "value": "2026-11-11",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "2026-11-11",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261008-884",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261008-884",
+        "line": 1,
+        "supplier_part_no": "PRM-GH6-PIN",
+        "po_number": "—"
+      },
+      "attribute": "receiver_signature_present",
+      "value": true,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "True",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "SN-261008-884",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "SN-261008-884",
+        "line": 1,
+        "supplier_part_no": "PRM-GH6-PIN",
+        "po_number": "—"
+      },
+      "attribute": "gross_weight",
+      "value": 315,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "315",
+      "confidence": "medium"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

@@ -1,0 +1,1615 @@
+{
+  "source": {
+    "path": "soony/master/components.csv",
+    "sha256": "059cc988a9de3d97abf6423f4a859defb3e9448d7f72a230ae0dda73b41c4342",
+    "bytes": 958
+  },
+  "doc_kind": "master_table",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "component_id",
+      "value": "CMP-GAM-001",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "component_id"
+      },
+      "evidence": "row 2: component_id=CMP-GAM-001",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "description",
+      "value": "Game Card 128 GB – Grand Heist 6",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "description"
+      },
+      "evidence": "row 2: description=Game Card 128 GB – Grand Heist 6",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "category",
+      "value": "Game Media",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "category"
+      },
+      "evidence": "row 2: category=Game Media",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "uom",
+      "value": "PC",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "uom"
+      },
+      "evidence": "row 2: uom=PC",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "abc_class",
+      "value": "A",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "abc_class"
+      },
+      "evidence": "row 2: abc_class=A",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "critical",
+      "value": "Y",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "critical"
+      },
+      "evidence": "row 2: critical=Y",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-2"
+      },
+      "subject_raw": {
+        "material_id": "row-2"
+      },
+      "attribute": "drawing_rev",
+      "value": "A",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "drawing_rev"
+      },
+      "evidence": "row 2: drawing_rev=A",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-3"
+      },
+      "subject_raw": {
+        "material_id": "row-3"
+      },
+      "attribute": "component_id",
+      "value": "CMP-GAM-002",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "component_id"
+      },
+      "evidence": "row 3: component_id=CMP-GAM-002",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-3"
+      },
+      "subject_raw": {
+        "material_id": "row-3"
+      },
+      "attribute": "description",
+      "value": "Game Card 64 GB – Grand Heist 5",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "description"
+      },
+      "evidence": "row 3: description=Game Card 64 GB – Grand Heist 5",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-3"
+      },
+      "subject_raw": {
+        "material_id": "row-3"
+      },
+      "attribute": "category",
+      "value": "Game Media",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "category"
+      },
+      "evidence": "row 3: category=Game Media",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-3"
+      },
+      "subject_raw": {
+        "material_id": "row-3"
+      },
+      "attribute": "uom",
+      "value": "PC",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "uom"
+      },
+      "evidence": "row 3: uom=PC",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-3"
+      },
+      "subject_raw": {
+        "material_id": "row-3"
+      },
+      "attribute": "abc_class",
+      "value": "A",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "abc_class"
+      },
+      "evidence": "row 3: abc_class=A",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-3"
+      },
+      "subject_raw": {
+        "material_id": "row-3"
+      },
+      "attribute": "critical",
+      "value": "N",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "critical"
+      },
+      "evidence": "row 3: critical=N",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-3"
+      },
+      "subject_raw": {
+        "material_id": "row-3"
+      },
+      "attribute": "drawing_rev",
+      "value": "A",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "drawing_rev"
+      },
+      "evidence": "row 3: drawing_rev=A",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-4"
+      },
+      "subject_raw": {
+        "material_id": "row-4"
+      },
+      "attribute": "component_id",
+      "value": "CMP-GAM-003",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "component_id"
+      },
+      "evidence": "row 4: component_id=CMP-GAM-003",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-4"
+      },
+      "subject_raw": {
+        "material_id": "row-4"
+      },
+      "attribute": "description",
+      "value": "Game Card Case (clear)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "description"
+      },
+      "evidence": "row 4: description=Game Card Case (clear)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-4"
+      },
+      "subject_raw": {
+        "material_id": "row-4"
+      },
+      "attribute": "category",
+      "value": "Print & Packaging",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "category"
+      },
+      "evidence": "row 4: category=Print & Packaging",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-4"
+      },
+      "subject_raw": {
+        "material_id": "row-4"
+      },
+      "attribute": "uom",
+      "value": "PC",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "uom"
+      },
+      "evidence": "row 4: uom=PC",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-4"
+      },
+      "subject_raw": {
+        "material_id": "row-4"
+      },
+      "attribute": "abc_class",
+      "value": "C",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "abc_class"
+      },
+      "evidence": "row 4: abc_class=C",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-4"
+      },
+      "subject_raw": {
+        "material_id": "row-4"
+      },
+      "attribute": "critical",
+      "value": "N",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "critical"
+      },
+      "evidence": "row 4: critical=N",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-4"
+      },
+      "subject_raw": {
+        "material_id": "row-4"
+      },
+      "attribute": "drawing_rev",
+      "value": "A",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "drawing_rev"
+      },
+      "evidence": "row 4: drawing_rev=A",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-5"
+      },
+      "subject_raw": {
+        "material_id": "row-5"
+      },
+      "attribute": "component_id",
+      "value": "CMP-GAM-004",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "component_id"
+      },
+      "evidence": "row 5: component_id=CMP-GAM-004",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-5"
+      },
+      "subject_raw": {
+        "material_id": "row-5"
+      },
+      "attribute": "description",
+      "value": "Cover Sleeve Grand Heist 6 (USK/PEGI)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "description"
+      },
+      "evidence": "row 5: description=Cover Sleeve Grand Heist 6 (USK/PEGI)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-5"
+      },
+      "subject_raw": {
+        "material_id": "row-5"
+      },
+      "attribute": "category",
+      "value": "Print & Packaging",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "category"
+      },
+      "evidence": "row 5: category=Print & Packaging",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-5"
+      },
+      "subject_raw": {
+        "material_id": "row-5"
+      },
+      "attribute": "uom",
+      "value": "PC",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "uom"
+      },
+      "evidence": "row 5: uom=PC",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-5"
+      },
+      "subject_raw": {
+        "material_id": "row-5"
+      },
+      "attribute": "abc_class",
+      "value": "B",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "abc_class"
+      },
+      "evidence": "row 5: abc_class=B",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-5"
+      },
+      "subject_raw": {
+        "material_id": "row-5"
+      },
+      "attribute": "critical",
+      "value": "Y",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "critical"
+      },
+      "evidence": "row 5: critical=Y",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-5"
+      },
+      "subject_raw": {
+        "material_id": "row-5"
+      },
+      "attribute": "drawing_rev",
+      "value": "B",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "drawing_rev"
+      },
+      "evidence": "row 5: drawing_rev=B",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-6"
+      },
+      "subject_raw": {
+        "material_id": "row-6"
+      },
+      "attribute": "component_id",
+      "value": "CMP-GAM-005",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 6,
+        "column": "component_id"
+      },
+      "evidence": "row 6: component_id=CMP-GAM-005",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-6"
+      },
+      "subject_raw": {
+        "material_id": "row-6"
+      },
+      "attribute": "description",
+      "value": "Cover Sleeve Grand Heist 5 (USK/PEGI)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 6,
+        "column": "description"
+      },
+      "evidence": "row 6: description=Cover Sleeve Grand Heist 5 (USK/PEGI)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-6"
+      },
+      "subject_raw": {
+        "material_id": "row-6"
+      },
+      "attribute": "category",
+      "value": "Print & Packaging",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 6,
+        "column": "category"
+      },
+      "evidence": "row 6: category=Print & Packaging",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-6"
+      },
+      "subject_raw": {
+        "material_id": "row-6"
+      },
+      "attribute": "uom",
+      "value": "PC",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 6,
+        "column": "uom"
+      },
+      "evidence": "row 6: uom=PC",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-6"
+      },
+      "subject_raw": {
+        "material_id": "row-6"
+      },
+      "attribute": "abc_class",
+      "value": "C",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 6,
+        "column": "abc_class"
+      },
+      "evidence": "row 6: abc_class=C",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-6"
+      },
+      "subject_raw": {
+        "material_id": "row-6"
+      },
+      "attribute": "critical",
+      "value": "N",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 6,
+        "column": "critical"
+      },
+      "evidence": "row 6: critical=N",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-6"
+      },
+      "subject_raw": {
+        "material_id": "row-6"
+      },
+      "attribute": "drawing_rev",
+      "value": "A",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 6,
+        "column": "drawing_rev"
+      },
+      "evidence": "row 6: drawing_rev=A",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-7"
+      },
+      "subject_raw": {
+        "material_id": "row-7"
+      },
+      "attribute": "component_id",
+      "value": "CMP-GAM-006",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 7,
+        "column": "component_id"
+      },
+      "evidence": "row 7: component_id=CMP-GAM-006",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-7"
+      },
+      "subject_raw": {
+        "material_id": "row-7"
+      },
+      "attribute": "description",
+      "value": "Steel Case Grand Heist 6",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 7,
+        "column": "description"
+      },
+      "evidence": "row 7: description=Steel Case Grand Heist 6",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-7"
+      },
+      "subject_raw": {
+        "material_id": "row-7"
+      },
+      "attribute": "category",
+      "value": "Collector's Items",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 7,
+        "column": "category"
+      },
+      "evidence": "row 7: category=Collector's Items",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-7"
+      },
+      "subject_raw": {
+        "material_id": "row-7"
+      },
+      "attribute": "uom",
+      "value": "PC",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 7,
+        "column": "uom"
+      },
+      "evidence": "row 7: uom=PC",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-7"
+      },
+      "subject_raw": {
+        "material_id": "row-7"
+      },
+      "attribute": "abc_class",
+      "value": "B",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 7,
+        "column": "abc_class"
+      },
+      "evidence": "row 7: abc_class=B",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-7"
+      },
+      "subject_raw": {
+        "material_id": "row-7"
+      },
+      "attribute": "critical",
+      "value": "N",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 7,
+        "column": "critical"
+      },
+      "evidence": "row 7: critical=N",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-7"
+      },
+      "subject_raw": {
+        "material_id": "row-7"
+      },
+      "attribute": "drawing_rev",
+      "value": "A",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 7,
+        "column": "drawing_rev"
+      },
+      "evidence": "row 7: drawing_rev=A",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-8"
+      },
+      "subject_raw": {
+        "material_id": "row-8"
+      },
+      "attribute": "component_id",
+      "value": "CMP-GAM-007",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 8,
+        "column": "component_id"
+      },
+      "evidence": "row 8: component_id=CMP-GAM-007",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-8"
+      },
+      "subject_raw": {
+        "material_id": "row-8"
+      },
+      "attribute": "description",
+      "value": "Collector's Box Grand Heist 6 (rigid, magnetic lid)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 8,
+        "column": "description"
+      },
+      "evidence": "row 8: description=Collector's Box Grand Heist 6 (rigid, magnetic lid)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-8"
+      },
+      "subject_raw": {
+        "material_id": "row-8"
+      },
+      "attribute": "category",
+      "value": "Print & Packaging",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 8,
+        "column": "category"
+      },
+      "evidence": "row 8: category=Print & Packaging",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-8"
+      },
+      "subject_raw": {
+        "material_id": "row-8"
+      },
+      "attribute": "uom",
+      "value": "PC",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 8,
+        "column": "uom"
+      },
+      "evidence": "row 8: uom=PC",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-8"
+      },
+      "subject_raw": {
+        "material_id": "row-8"
+      },
+      "attribute": "abc_class",
+      "value": "B",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 8,
+        "column": "abc_class"
+      },
+      "evidence": "row 8: abc_class=B",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-8"
+      },
+      "subject_raw": {
+        "material_id": "row-8"
+      },
+      "attribute": "critical",
+      "value": "N",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 8,
+        "column": "critical"
+      },
+      "evidence": "row 8: critical=N",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-8"
+      },
+      "subject_raw": {
+        "material_id": "row-8"
+      },
+      "attribute": "drawing_rev",
+      "value": "A",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 8,
+        "column": "drawing_rev"
+      },
+      "evidence": "row 8: drawing_rev=A",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-9"
+      },
+      "subject_raw": {
+        "material_id": "row-9"
+      },
+      "attribute": "component_id",
+      "value": "CMP-GAM-008",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 9,
+        "column": "component_id"
+      },
+      "evidence": "row 9: component_id=CMP-GAM-008",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-9"
+      },
+      "subject_raw": {
+        "material_id": "row-9"
+      },
+      "attribute": "description",
+      "value": "Art Book Grand Heist 6 (96 p, hardcover)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 9,
+        "column": "description"
+      },
+      "evidence": "row 9: description=Art Book Grand Heist 6 (96 p, hardcover)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-9"
+      },
+      "subject_raw": {
+        "material_id": "row-9"
+      },
+      "attribute": "category",
+      "value": "Print & Packaging",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 9,
+        "column": "category"
+      },
+      "evidence": "row 9: category=Print & Packaging",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-9"
+      },
+      "subject_raw": {
+        "material_id": "row-9"
+      },
+      "attribute": "uom",
+      "value": "PC",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 9,
+        "column": "uom"
+      },
+      "evidence": "row 9: uom=PC",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-9"
+      },
+      "subject_raw": {
+        "material_id": "row-9"
+      },
+      "attribute": "abc_class",
+      "value": "B",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 9,
+        "column": "abc_class"
+      },
+      "evidence": "row 9: abc_class=B",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-9"
+      },
+      "subject_raw": {
+        "material_id": "row-9"
+      },
+      "attribute": "critical",
+      "value": "N",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 9,
+        "column": "critical"
+      },
+      "evidence": "row 9: critical=N",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-9"
+      },
+      "subject_raw": {
+        "material_id": "row-9"
+      },
+      "attribute": "drawing_rev",
+      "value": "A",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 9,
+        "column": "drawing_rev"
+      },
+      "evidence": "row 9: drawing_rev=A",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-10"
+      },
+      "subject_raw": {
+        "material_id": "row-10"
+      },
+      "attribute": "component_id",
+      "value": "CMP-GAM-009",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 10,
+        "column": "component_id"
+      },
+      "evidence": "row 10: component_id=CMP-GAM-009",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-10"
+      },
+      "subject_raw": {
+        "material_id": "row-10"
+      },
+      "attribute": "description",
+      "value": "City Map Poster Grand Heist 6 (folded)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 10,
+        "column": "description"
+      },
+      "evidence": "row 10: description=City Map Poster Grand Heist 6 (folded)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-10"
+      },
+      "subject_raw": {
+        "material_id": "row-10"
+      },
+      "attribute": "category",
+      "value": "Print & Packaging",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 10,
+        "column": "category"
+      },
+      "evidence": "row 10: category=Print & Packaging",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-10"
+      },
+      "subject_raw": {
+        "material_id": "row-10"
+      },
+      "attribute": "uom",
+      "value": "PC",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 10,
+        "column": "uom"
+      },
+      "evidence": "row 10: uom=PC",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-10"
+      },
+      "subject_raw": {
+        "material_id": "row-10"
+      },
+      "attribute": "abc_class",
+      "value": "C",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 10,
+        "column": "abc_class"
+      },
+      "evidence": "row 10: abc_class=C",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-10"
+      },
+      "subject_raw": {
+        "material_id": "row-10"
+      },
+      "attribute": "critical",
+      "value": "N",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 10,
+        "column": "critical"
+      },
+      "evidence": "row 10: critical=N",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-10"
+      },
+      "subject_raw": {
+        "material_id": "row-10"
+      },
+      "attribute": "drawing_rev",
+      "value": "A",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 10,
+        "column": "drawing_rev"
+      },
+      "evidence": "row 10: drawing_rev=A",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-11"
+      },
+      "subject_raw": {
+        "material_id": "row-11"
+      },
+      "attribute": "component_id",
+      "value": "CMP-GAM-010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 11,
+        "column": "component_id"
+      },
+      "evidence": "row 11: component_id=CMP-GAM-010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-11"
+      },
+      "subject_raw": {
+        "material_id": "row-11"
+      },
+      "attribute": "description",
+      "value": "Statue \"The Getaway\" (die-cast, 18 cm)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 11,
+        "column": "description"
+      },
+      "evidence": "row 11: description=Statue \"The Getaway\" (die-cast, 18 cm)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-11"
+      },
+      "subject_raw": {
+        "material_id": "row-11"
+      },
+      "attribute": "category",
+      "value": "Collector's Items",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 11,
+        "column": "category"
+      },
+      "evidence": "row 11: category=Collector's Items",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-11"
+      },
+      "subject_raw": {
+        "material_id": "row-11"
+      },
+      "attribute": "uom",
+      "value": "PC",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 11,
+        "column": "uom"
+      },
+      "evidence": "row 11: uom=PC",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-11"
+      },
+      "subject_raw": {
+        "material_id": "row-11"
+      },
+      "attribute": "abc_class",
+      "value": "A",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 11,
+        "column": "abc_class"
+      },
+      "evidence": "row 11: abc_class=A",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-11"
+      },
+      "subject_raw": {
+        "material_id": "row-11"
+      },
+      "attribute": "critical",
+      "value": "N",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 11,
+        "column": "critical"
+      },
+      "evidence": "row 11: critical=N",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-11"
+      },
+      "subject_raw": {
+        "material_id": "row-11"
+      },
+      "attribute": "drawing_rev",
+      "value": "A",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 11,
+        "column": "drawing_rev"
+      },
+      "evidence": "row 11: drawing_rev=A",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-12"
+      },
+      "subject_raw": {
+        "material_id": "row-12"
+      },
+      "attribute": "component_id",
+      "value": "CMP-GAM-011",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 12,
+        "column": "component_id"
+      },
+      "evidence": "row 12: component_id=CMP-GAM-011",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-12"
+      },
+      "subject_raw": {
+        "material_id": "row-12"
+      },
+      "attribute": "description",
+      "value": "Activation Code Leaflet",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 12,
+        "column": "description"
+      },
+      "evidence": "row 12: description=Activation Code Leaflet",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-12"
+      },
+      "subject_raw": {
+        "material_id": "row-12"
+      },
+      "attribute": "category",
+      "value": "Print & Packaging",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 12,
+        "column": "category"
+      },
+      "evidence": "row 12: category=Print & Packaging",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-12"
+      },
+      "subject_raw": {
+        "material_id": "row-12"
+      },
+      "attribute": "uom",
+      "value": "PC",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 12,
+        "column": "uom"
+      },
+      "evidence": "row 12: uom=PC",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-12"
+      },
+      "subject_raw": {
+        "material_id": "row-12"
+      },
+      "attribute": "abc_class",
+      "value": "C",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 12,
+        "column": "abc_class"
+      },
+      "evidence": "row 12: abc_class=C",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-12"
+      },
+      "subject_raw": {
+        "material_id": "row-12"
+      },
+      "attribute": "critical",
+      "value": "N",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 12,
+        "column": "critical"
+      },
+      "evidence": "row 12: critical=N",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-12"
+      },
+      "subject_raw": {
+        "material_id": "row-12"
+      },
+      "attribute": "drawing_rev",
+      "value": "A",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 12,
+        "column": "drawing_rev"
+      },
+      "evidence": "row 12: drawing_rev=A",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-13"
+      },
+      "subject_raw": {
+        "material_id": "row-13"
+      },
+      "attribute": "component_id",
+      "value": "CMP-MAG-005",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 13,
+        "column": "component_id"
+      },
+      "evidence": "row 13: component_id=CMP-MAG-005",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-13"
+      },
+      "subject_raw": {
+        "material_id": "row-13"
+      },
+      "attribute": "description",
+      "value": "NdFeB Disc Magnet 4x1 (lid closure)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 13,
+        "column": "description"
+      },
+      "evidence": "row 13: description=NdFeB Disc Magnet 4x1 (lid closure)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-13"
+      },
+      "subject_raw": {
+        "material_id": "row-13"
+      },
+      "attribute": "category",
+      "value": "Magnets",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 13,
+        "column": "category"
+      },
+      "evidence": "row 13: category=Magnets",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-13"
+      },
+      "subject_raw": {
+        "material_id": "row-13"
+      },
+      "attribute": "uom",
+      "value": "PC",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 13,
+        "column": "uom"
+      },
+      "evidence": "row 13: uom=PC",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-13"
+      },
+      "subject_raw": {
+        "material_id": "row-13"
+      },
+      "attribute": "abc_class",
+      "value": "C",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 13,
+        "column": "abc_class"
+      },
+      "evidence": "row 13: abc_class=C",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-13"
+      },
+      "subject_raw": {
+        "material_id": "row-13"
+      },
+      "attribute": "critical",
+      "value": "N",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 13,
+        "column": "critical"
+      },
+      "evidence": "row 13: critical=N",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "component",
+      "subject": {
+        "material_id": "row-13"
+      },
+      "subject_raw": {
+        "material_id": "row-13"
+      },
+      "attribute": "drawing_rev",
+      "value": "A",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 13,
+        "column": "drawing_rev"
+      },
+      "evidence": "row 13: drawing_rev=A",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

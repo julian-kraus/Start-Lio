@@ -1,0 +1,145 @@
+{
+  "source": {
+    "path": "soony/context/memo_launch_priorities.docx",
+    "sha256": "10faff7f2e0f48b6ca54a7070f8e3c582a32b4e668269293ad480b05fe4738ae",
+    "bytes": 37271
+  },
+  "doc_kind": "memo",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "Grand Heist 6 launch",
+        "issued_by": "Jonas Lindqvist"
+      },
+      "subject_raw": {
+        "scope": "Grand Heist 6 launch",
+        "issued_by": "Jonas Lindqvist"
+      },
+      "attribute": "directive",
+      "value": "Effective immediately and until Grand Heist 6 is on sale (Sunday 20:00), the following applies:",
+      "unit": null,
+      "as_of": "2026-11-21",
+      "locator": {
+        "section": "memo"
+      },
+      "evidence": "Effective immediately and until Grand Heist 6 is on sale (Sunday 20:00), the following applies:",
+      "confidence": "high",
+      "note": "English source text."
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "Grand Heist 6 launch",
+        "issued_by": "Jonas Lindqvist"
+      },
+      "subject_raw": {
+        "scope": "Grand Heist 6 launch",
+        "issued_by": "Jonas Lindqvist"
+      },
+      "attribute": "directive",
+      "value": "Collector's Edition first. All 72,000 copies are pre-ordered and numbered. Where a part is short, it goes to the Collector's cell before the Standard lines. This includes game cards.",
+      "unit": null,
+      "as_of": "2026-11-21",
+      "locator": {
+        "section": "memo"
+      },
+      "evidence": "Collector's Edition first. All 72,000 copies are pre-ordered and numbered. Where a part is short, it goes to the Collector's cell before the Standard lines. This includes game cards.",
+      "confidence": "high",
+      "note": "English source text."
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "Grand Heist 6 launch",
+        "issued_by": "Jonas Lindqvist"
+      },
+      "subject_raw": {
+        "scope": "Grand Heist 6 launch",
+        "issued_by": "Jonas Lindqvist"
+      },
+      "attribute": "directive",
+      "value": "No copy leaves Hamburg with a part that is not released. Quality & Compliance has the last word, not the pack-out plan.",
+      "unit": null,
+      "as_of": "2026-11-21",
+      "locator": {
+        "section": "memo"
+      },
+      "evidence": "No copy leaves Hamburg with a part that is not released. Quality & Compliance has the last word, not the pack-out plan.",
+      "confidence": "high",
+      "note": "English source text."
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "Grand Heist 6 launch",
+        "issued_by": "Jonas Lindqvist"
+      },
+      "subject_raw": {
+        "scope": "Grand Heist 6 launch",
+        "issued_by": "Jonas Lindqvist"
+      },
+      "attribute": "directive",
+      "value": "Air freight and rush orders above the policy limits reach me the same hour, with cost against copies gained.",
+      "unit": null,
+      "as_of": "2026-11-21",
+      "locator": {
+        "section": "memo"
+      },
+      "evidence": "Air freight and rush orders above the policy limits reach me the same hour, with cost against copies gained.",
+      "confidence": "high",
+      "note": "English source text."
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "Grand Heist 6 launch",
+        "issued_by": "Jonas Lindqvist"
+      },
+      "subject_raw": {
+        "scope": "Grand Heist 6 launch",
+        "issued_by": "Jonas Lindqvist"
+      },
+      "attribute": "directive",
+      "value": "After the launch I want a second source for every part that has one supplier today. Proposals by the end of next week.",
+      "unit": null,
+      "as_of": "2026-11-21",
+      "locator": {
+        "section": "memo"
+      },
+      "evidence": "After the launch I want a second source for every part that has one supplier today. Proposals by the end of next week.",
+      "confidence": "high",
+      "note": "English source text."
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "Grand Heist 6 launch",
+        "issued_by": "Jonas Lindqvist"
+      },
+      "subject_raw": {
+        "scope": "Grand Heist 6 launch",
+        "issued_by": "Jonas Lindqvist"
+      },
+      "attribute": "directive",
+      "value": "One page per day on what can stop a line. Not forty dashboards.",
+      "unit": null,
+      "as_of": "2026-11-21",
+      "locator": {
+        "section": "memo"
+      },
+      "evidence": "One page per day on what can stop a line. Not forty dashboards.",
+      "confidence": "high",
+      "note": "English source text."
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

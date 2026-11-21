@@ -1,0 +1,163 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0011_Boise_Semi/order_confirmations/OA25717212_4500318533.pdf",
+    "sha256": "ae5ead6aba1236e41a07cc23fec44ab442f561f6dde84a527a77c144016dce03",
+    "bytes": 62684
+  },
+  "doc_kind": "order_confirmation",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318533",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318533",
+        "po_line": 2
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-002",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n9,000\n6.11\nUSD\n2025-09-01\n00010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318533",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318533",
+        "po_line": 2
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-002",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n9,000\n6.11\nUSD\n2025-09-01\n00010",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318533",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318533",
+        "po_line": 2
+      },
+      "attribute": "qty",
+      "value": 9000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n9,000\n6.11\nUSD\n2025-09-01\n00010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318533",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318533",
+        "po_line": 2
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-002",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 21
+      },
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n9,000\n6.29\nUSD\n2025-08-21\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318533",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318533",
+        "po_line": 2
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-002",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 21
+      },
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n9,000\n6.29\nUSD\n2025-08-21\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318533",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318533",
+        "po_line": 2
+      },
+      "attribute": "qty",
+      "value": 9000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 21
+      },
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n9,000\n6.29\nUSD\n2025-08-21\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318533"
+      },
+      "subject_raw": {
+        "po_number": "4500318533"
+      },
+      "attribute": "value",
+      "value": "Customer: Soony Interactive GmbH · Your order 4500318533 of 2025-07-22 · Incoterms EXW Boise · Payment NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318533 of 2025-07-22 · Incoterms EXW Boise · Payment NET30",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

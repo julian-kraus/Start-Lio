@@ -1,0 +1,808 @@
+{
+  "source": {
+    "path": "soony/receiving/DC-HAM/20261008_WZ-261007-439.jpg",
+    "sha256": "fe0fb95b8c358e540e6aba460d07c5c74a030cc963ac139d76c5c0f801490e91",
+    "bytes": 308940
+  },
+  "doc_kind": "delivery_note_scan",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en",
+    "pl",
+    "zh",
+    "ko"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-008",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "po_number",
+      "value": [
+        "4500318722",
+        "4500318731"
+      ],
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "['4500318722', '4500318731']",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-008",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-008",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "CMP-GAM-008",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-008",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-008",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "CMP-GAM-008",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-008",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "printed_qty",
+      "value": 12500,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "12500",
+      "confidence": "medium",
+      "note": "Towar na paletach EUR, prosimy o zwrot"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-008",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "handwritten_qty",
+      "value": null,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "None",
+      "confidence": "medium",
+      "note": "Towar na paletach EUR, prosimy o zwrot"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-008",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "struck_through",
+      "value": false,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "False",
+      "confidence": "medium",
+      "note": "Towar na paletach EUR, prosimy o zwrot"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-008",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "final_qty",
+      "value": 12500,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "12500",
+      "confidence": "medium",
+      "note": "Towar na paletach EUR, prosimy o zwrot"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-008",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "uom",
+      "value": "PCS",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "PCS",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-008",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "packages",
+      "value": 25,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "25",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-008",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "carrier",
+      "value": "PO 24687",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "PO 24687",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-008",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "note_date",
+      "value": "2026-10-07",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "2026-10-07",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-008",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "received_stamp_date",
+      "value": null,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "None",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-008",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "receiver_signature_present",
+      "value": true,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "True",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-008",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "gross_weight",
+      "value": 1134,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "1134",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318722",
+        "material_id": "CMP-GAM-008"
+      },
+      "subject_raw": {
+        "po_number": "4500318722",
+        "material_id": "CMP-GAM-008"
+      },
+      "attribute": "value",
+      "value": "Towar na paletach EUR, prosimy o zwrot",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1 remarks"
+      },
+      "evidence": "Towar na paletach EUR, prosimy o zwrot",
+      "confidence": "high",
+      "note": "Original-language note preserved; English translation is in the note."
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2,
+        "supplier_part_no": "CMP-GAM-011",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "po_number",
+      "value": [
+        "4500318722",
+        "4500318731"
+      ],
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 2"
+      },
+      "evidence": "['4500318722', '4500318731']",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2,
+        "supplier_part_no": "CMP-GAM-011",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-011",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 2"
+      },
+      "evidence": "CMP-GAM-011",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2,
+        "supplier_part_no": "CMP-GAM-011",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-011",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 2"
+      },
+      "evidence": "CMP-GAM-011",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2,
+        "supplier_part_no": "CMP-GAM-011",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "printed_qty",
+      "value": 280000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 2"
+      },
+      "evidence": "280000",
+      "confidence": "medium",
+      "note": "Towar na paletach EUR, prosimy o zwrot"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2,
+        "supplier_part_no": "CMP-GAM-011",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "handwritten_qty",
+      "value": null,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 2"
+      },
+      "evidence": "None",
+      "confidence": "medium",
+      "note": "Towar na paletach EUR, prosimy o zwrot"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2,
+        "supplier_part_no": "CMP-GAM-011",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "struck_through",
+      "value": false,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 2"
+      },
+      "evidence": "False",
+      "confidence": "medium",
+      "note": "Towar na paletach EUR, prosimy o zwrot"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2,
+        "supplier_part_no": "CMP-GAM-011",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "final_qty",
+      "value": 280000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 2"
+      },
+      "evidence": "280000",
+      "confidence": "medium",
+      "note": "Towar na paletach EUR, prosimy o zwrot"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2,
+        "supplier_part_no": "CMP-GAM-011",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "uom",
+      "value": "PCS",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 2"
+      },
+      "evidence": "PCS",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2,
+        "supplier_part_no": "CMP-GAM-011",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "packages",
+      "value": 56,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 2"
+      },
+      "evidence": "56",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2,
+        "supplier_part_no": "CMP-GAM-011",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "carrier",
+      "value": "PO 24687",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 2"
+      },
+      "evidence": "PO 24687",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2,
+        "supplier_part_no": "CMP-GAM-011",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "note_date",
+      "value": "2026-10-07",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 2"
+      },
+      "evidence": "2026-10-07",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2,
+        "supplier_part_no": "CMP-GAM-011",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "received_stamp_date",
+      "value": null,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 2"
+      },
+      "evidence": "None",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2,
+        "supplier_part_no": "CMP-GAM-011",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "receiver_signature_present",
+      "value": true,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 2"
+      },
+      "evidence": "True",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2
+      },
+      "subject_raw": {
+        "delivery_note": "WZ-261007-439",
+        "line": 2,
+        "supplier_part_no": "CMP-GAM-011",
+        "po_number": [
+          "4500318722",
+          "4500318731"
+        ]
+      },
+      "attribute": "gross_weight",
+      "value": 1134,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 2"
+      },
+      "evidence": "1134",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318722",
+        "material_id": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "po_number": "4500318722",
+        "material_id": "CMP-GAM-011"
+      },
+      "attribute": "value",
+      "value": "Towar na paletach EUR, prosimy o zwrot",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 2 remarks"
+      },
+      "evidence": "Towar na paletach EUR, prosimy o zwrot",
+      "confidence": "high",
+      "note": "Original-language note preserved; English translation is in the note."
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

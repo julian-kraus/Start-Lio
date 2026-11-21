@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Codex extraction envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source",
+    "doc_kind",
+    "doc_kind_confidence",
+    "languages",
+    "spec_version",
+    "extracted_by",
+    "doc_date",
+    "facts",
+    "unreadable",
+    "proposed_fact_types"
+  ],
+  "properties": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "doc_kind": {
+      "type": "string"
+    },
+    "doc_kind_confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "spec_version": {
+      "type": "string"
+    },
+    "extracted_by": {
+      "type": "string"
+    },
+    "doc_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/fact"
+      }
+    },
+    "unreadable": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "proposed_fact_types": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "$defs": {
+    "fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fact_type",
+        "subject",
+        "subject_raw",
+        "attribute",
+        "value",
+        "unit",
+        "as_of",
+        "locator",
+        "evidence",
+        "confidence"
+      ],
+      "properties": {
+        "fact_type": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "object"
+        },
+        "subject_raw": {
+          "type": "object"
+        },
+        "attribute": {
+          "type": "string"
+        },
+        "value": {},
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "as_of": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "locator": {
+          "type": "object"
+        },
+        "evidence": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": [
+            "string",
+            "number"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

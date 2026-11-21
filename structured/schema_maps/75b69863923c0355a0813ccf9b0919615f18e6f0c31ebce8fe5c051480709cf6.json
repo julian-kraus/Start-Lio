@@ -1,0 +1,28 @@
+{
+  "signature": "75b69863923c0355a0813ccf9b0919615f18e6f0c31ebce8fe5c051480709cf6",
+  "format": "csv",
+  "sheet": null,
+  "columns": {
+    "shipment_id": "shipment_id",
+    "carrier_id": "carrier_id",
+    "mode": "mode",
+    "reference": "reference",
+    "supplier_id": "supplier_id",
+    "po_numbers": "po_numbers",
+    "material_ids": "material_ids",
+    "route_id": "route_id",
+    "origin": "origin",
+    "destination": "destination",
+    "via": "via",
+    "dest_site": "dest_site",
+    "etd": "etd",
+    "eta": "eta",
+    "status": "status",
+    "last_lat": "last_lat",
+    "last_lon": "last_lon",
+    "updated_at": "updated_at",
+    "note": "note"
+  },
+  "fact_type": "shipment",
+  "row_count": 25
+}

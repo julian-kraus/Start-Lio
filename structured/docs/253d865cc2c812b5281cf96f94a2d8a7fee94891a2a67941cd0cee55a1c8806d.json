@@ -1,0 +1,100 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0028_Karton_Nowak/order_confirmations/OA26648753_4500318633.pdf",
+    "sha256": "253d865cc2c812b5281cf96f94a2d8a7fee94891a2a67941cd0cee55a1c8806d",
+    "bytes": 2128
+  },
+  "doc_kind": "order_confirmation",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318633",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318633",
+        "po_line": 1
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-011",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n140,000\n0.03\nEUR\n2026-03-27",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318633",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318633",
+        "po_line": 1
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-011",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n140,000\n0.03\nEUR\n2026-03-27",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318633",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318633",
+        "po_line": 1
+      },
+      "attribute": "qty",
+      "value": 140000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n140,000\n0.03\nEUR\n2026-03-27",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318633"
+      },
+      "subject_raw": {
+        "po_number": "4500318633"
+      },
+      "attribute": "value",
+      "value": "Customer: Soony Interactive GmbH · Your order 4500318633 of 2026-03-06 · Incoterms DAP Hamburg · Payment",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318633 of 2026-03-06 · Incoterms DAP Hamburg · Payment",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

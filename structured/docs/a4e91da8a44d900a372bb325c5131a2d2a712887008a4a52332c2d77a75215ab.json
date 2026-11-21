@@ -1,0 +1,505 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0028_Karton_Nowak/contracts/SUP-0028_Supply_Agreement_2021.pdf",
+    "sha256": "a4e91da8a44d900a372bb325c5131a2d2a712887008a4a52332c2d77a75215ab",
+    "bytes": 654307
+  },
+  "doc_kind": "contract",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "contract_term",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "contract_id": "SUP-0028_Supply_Agreement_2021"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "contract_id": "SUP-0028_Supply_Agreement_2021"
+      },
+      "attribute": "incoterm",
+      "value": "DAP Hamburg",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "DAP Hamburg",
+      "confidence": "medium",
+      "note": "Read from rendered image-only PDF."
+    },
+    {
+      "fact_type": "contract_term",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "contract_id": "SUP-0028_Supply_Agreement_2021"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "contract_id": "SUP-0028_Supply_Agreement_2021"
+      },
+      "attribute": "expiry",
+      "value": "2027-12-31",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "2027-12-31",
+      "confidence": "medium",
+      "note": "Read from rendered image-only PDF."
+    },
+    {
+      "fact_type": "contract_term",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "contract_id": "SUP-0028_Supply_Agreement_2021"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "contract_id": "SUP-0028_Supply_Agreement_2021"
+      },
+      "attribute": "rush_clause",
+      "value": "Up to 50,000 printed parts within 36 hours; 35% surcharge; express truck",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Up to 50,000 printed parts within 36 hours; 35% surcharge; express truck",
+      "confidence": "medium",
+      "note": "Read from rendered image-only PDF."
+    },
+    {
+      "fact_type": "contract_term",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "contract_id": "SUP-0028_Supply_Agreement_2021"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "contract_id": "SUP-0028_Supply_Agreement_2021"
+      },
+      "attribute": "penalty",
+      "value": "0.5% of delayed order value per commenced week, capped at 5%",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "0.5% of delayed order value per commenced week, capped at 5%",
+      "confidence": "medium",
+      "note": "Read from rendered image-only PDF."
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-004"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-004"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-004",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-004 0.06 EUR MOQ 50000 LT 21d",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-004"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-004"
+      },
+      "attribute": "price_per_material",
+      "value": 0.06,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-004 0.06 EUR MOQ 50000 LT 21d",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-004"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-004"
+      },
+      "attribute": "moq",
+      "value": 50000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-004 0.06 EUR MOQ 50000 LT 21d",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-004"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-004"
+      },
+      "attribute": "lead_time_days",
+      "value": 21,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-004 0.06 EUR MOQ 50000 LT 21d",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-005"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-005"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-005",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-005 0.06 EUR MOQ 50000 LT 21d",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-005"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-005"
+      },
+      "attribute": "price_per_material",
+      "value": 0.06,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-005 0.06 EUR MOQ 50000 LT 21d",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-005"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-005"
+      },
+      "attribute": "moq",
+      "value": 50000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-005 0.06 EUR MOQ 50000 LT 21d",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-005"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-005"
+      },
+      "attribute": "lead_time_days",
+      "value": 21,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-005 0.06 EUR MOQ 50000 LT 21d",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-008"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-008"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-008",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-008 2.1 EUR MOQ 5000 LT 35d",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-008"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-008"
+      },
+      "attribute": "price_per_material",
+      "value": 2.1,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-008 2.1 EUR MOQ 5000 LT 35d",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-008"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-008"
+      },
+      "attribute": "moq",
+      "value": 5000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-008 2.1 EUR MOQ 5000 LT 35d",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-008"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-008"
+      },
+      "attribute": "lead_time_days",
+      "value": 35,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-008 2.1 EUR MOQ 5000 LT 35d",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-009"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-009"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-009",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-009 0.22 EUR MOQ 20000 LT 21d",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-009"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-009"
+      },
+      "attribute": "price_per_material",
+      "value": 0.22,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-009 0.22 EUR MOQ 20000 LT 21d",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-009"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-009"
+      },
+      "attribute": "moq",
+      "value": 20000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-009 0.22 EUR MOQ 20000 LT 21d",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-009"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-009"
+      },
+      "attribute": "lead_time_days",
+      "value": 21,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-009 0.22 EUR MOQ 20000 LT 21d",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-011"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-011",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-011 0.03 EUR MOQ 100000 LT 21d",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-011"
+      },
+      "attribute": "price_per_material",
+      "value": 0.03,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-011 0.03 EUR MOQ 100000 LT 21d",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-011"
+      },
+      "attribute": "moq",
+      "value": 100000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-011 0.03 EUR MOQ 100000 LT 21d",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028",
+        "supplier_part_no": "CMP-GAM-011"
+      },
+      "attribute": "lead_time_days",
+      "value": 21,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 2
+      },
+      "evidence": "Annex A CMP-GAM-011 0.03 EUR MOQ 100000 LT 21d",
+      "confidence": "medium"
+    }
+  ],
+  "unreadable": [
+    "PDF has no usable text layer; visually inspected as image."
+  ],
+  "proposed_fact_types": []
+}

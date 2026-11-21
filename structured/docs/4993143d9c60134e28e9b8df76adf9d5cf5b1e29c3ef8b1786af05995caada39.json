@@ -1,0 +1,361 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0019_Dongguan_Precision_Housings/profile.csv",
+    "sha256": "4993143d9c60134e28e9b8df76adf9d5cf5b1e29c3ef8b1786af05995caada39",
+    "bytes": 447
+  },
+  "doc_kind": "supplier_profile",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0019"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019"
+      },
+      "attribute": "supplier_id",
+      "value": "SUP-0019",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "supplier_id"
+      },
+      "evidence": "row 2: supplier_id=SUP-0019",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0019"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019"
+      },
+      "attribute": "name",
+      "value": "Dongguan Precision Housings",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "name"
+      },
+      "evidence": "row 2: name=Dongguan Precision Housings",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0019"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019"
+      },
+      "attribute": "legal_name",
+      "value": "Dongguan Precision Housings Co., Ltd.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "legal_name"
+      },
+      "evidence": "row 2: legal_name=Dongguan Precision Housings Co., Ltd.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0019"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019"
+      },
+      "attribute": "category",
+      "value": "Collector's Items",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "category"
+      },
+      "evidence": "row 2: category=Collector's Items",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0019"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019"
+      },
+      "attribute": "country",
+      "value": "CN",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "country"
+      },
+      "evidence": "row 2: country=CN",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0019"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019"
+      },
+      "attribute": "city",
+      "value": "Dongguan",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "city"
+      },
+      "evidence": "row 2: city=Dongguan",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0019"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019"
+      },
+      "attribute": "lat",
+      "value": 23.0207,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "lat"
+      },
+      "evidence": "row 2: lat=23.0207",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0019"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019"
+      },
+      "attribute": "lon",
+      "value": 113.7518,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "lon"
+      },
+      "evidence": "row 2: lon=113.7518",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0019"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019"
+      },
+      "attribute": "currency",
+      "value": "CNY",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "currency"
+      },
+      "evidence": "row 2: currency=CNY",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0019"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019"
+      },
+      "attribute": "payment_terms",
+      "value": "NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "payment_terms"
+      },
+      "evidence": "row 2: payment_terms=NET30",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0019"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019"
+      },
+      "attribute": "incoterm",
+      "value": "FOB Yantian",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "incoterm"
+      },
+      "evidence": "row 2: incoterm=FOB Yantian",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0019"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019"
+      },
+      "attribute": "supplier_since",
+      "value": "2018-03-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "supplier_since"
+      },
+      "evidence": "row 2: supplier_since=2018-03-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0019"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019"
+      },
+      "attribute": "status",
+      "value": "active",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "status"
+      },
+      "evidence": "row 2: status=active",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0019"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019"
+      },
+      "attribute": "qualification_status",
+      "value": "qualified",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "qualification_status"
+      },
+      "evidence": "row 2: qualification_status=qualified",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0019"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019"
+      },
+      "attribute": "contact_name",
+      "value": "Chen Jie",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "contact_name"
+      },
+      "evidence": "row 2: contact_name=Chen Jie",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0019"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019"
+      },
+      "attribute": "contact_email",
+      "value": "chen.jie.dg-precision@suppliers.juliansibbing.de",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "contact_email"
+      },
+      "evidence": "row 2: contact_email=chen.jie.dg-precision@suppliers.juliansibbing.de",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0019"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019"
+      },
+      "attribute": "phone",
+      "value": "+86 769 2200 8800",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "phone"
+      },
+      "evidence": "row 2: phone=+86 769 2200 8800",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0019"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019"
+      },
+      "attribute": "preferred_language",
+      "value": "zh",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "preferred_language"
+      },
+      "evidence": "row 2: preferred_language=zh",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

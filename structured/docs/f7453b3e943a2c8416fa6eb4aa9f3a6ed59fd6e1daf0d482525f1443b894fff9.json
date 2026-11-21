@@ -1,0 +1,325 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0028_Karton_Nowak/order_confirmations/OA26837842_4500318768.pdf",
+    "sha256": "f7453b3e943a2c8416fa6eb4aa9f3a6ed59fd6e1daf0d482525f1443b894fff9",
+    "bytes": 2479
+  },
+  "doc_kind": "order_confirmation",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318768",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318768",
+        "po_line": 2
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-004",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n74,000\n0.06\nEUR\n2026-11-12\n00010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318768",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318768",
+        "po_line": 2
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-004",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n74,000\n0.06\nEUR\n2026-11-12\n00010",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318768",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318768",
+        "po_line": 2
+      },
+      "attribute": "qty",
+      "value": 74000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n74,000\n0.06\nEUR\n2026-11-12\n00010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318768",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318768",
+        "po_line": 2
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-004",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 22
+      },
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n75,000\n0.06\nEUR\n2026-11-04\n00030",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318768",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318768",
+        "po_line": 2
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-004",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 22
+      },
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n75,000\n0.06\nEUR\n2026-11-04\n00030",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318768",
+        "po_line": 2
+      },
+      "subject_raw": {
+        "po_number": "4500318768",
+        "po_line": 2
+      },
+      "attribute": "qty",
+      "value": 75000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 22
+      },
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n75,000\n0.06\nEUR\n2026-11-04\n00030",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318768",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318768",
+        "po_line": 1
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-008",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 31
+      },
+      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n8,000\n2.1\nEUR\n2026-11-20",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318768",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318768",
+        "po_line": 1
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-008",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 31
+      },
+      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n8,000\n2.1\nEUR\n2026-11-20",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318768",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318768",
+        "po_line": 1
+      },
+      "attribute": "qty",
+      "value": 8000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 31
+      },
+      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n8,000\n2.1\nEUR\n2026-11-20",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318768",
+        "po_line": 3
+      },
+      "subject_raw": {
+        "po_number": "4500318768",
+        "po_line": 3
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-004",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 40
+      },
+      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing 2026-08-07. /\nPrinted to artwork rev. C as received from Soony Marketing on 2026-08-07.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318768",
+        "po_line": 3
+      },
+      "subject_raw": {
+        "po_number": "4500318768",
+        "po_line": 3
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-004",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 40
+      },
+      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing 2026-08-07. /\nPrinted to artwork rev. C as received from Soony Marketing on 2026-08-07.",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318768",
+        "po_line": 3
+      },
+      "subject_raw": {
+        "po_number": "4500318768",
+        "po_line": 3
+      },
+      "attribute": "qty",
+      "value": 2026,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 40
+      },
+      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing 2026-08-07. /\nPrinted to artwork rev. C as received from Soony Marketing on 2026-08-07.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318768"
+      },
+      "subject_raw": {
+        "po_number": "4500318768"
+      },
+      "attribute": "value",
+      "value": "Customer: Soony Interactive GmbH · Your order 4500318768 of 2026-10-13 · Incoterms DAP Hamburg · Payment",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318768 of 2026-10-13 · Incoterms DAP Hamburg · Payment",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318768"
+      },
+      "subject_raw": {
+        "po_number": "4500318768"
+      },
+      "attribute": "value",
+      "value": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing 2026-08-07. /",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing 2026-08-07. /",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318768"
+      },
+      "subject_raw": {
+        "po_number": "4500318768"
+      },
+      "attribute": "value",
+      "value": "Printed to artwork rev. C as received from Soony Marketing on 2026-08-07.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Printed to artwork rev. C as received from Soony Marketing on 2026-08-07.",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

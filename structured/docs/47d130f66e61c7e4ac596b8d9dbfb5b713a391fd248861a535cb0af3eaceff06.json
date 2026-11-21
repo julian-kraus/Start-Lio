@@ -1,0 +1,163 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0029_Guangzhou_PackRight/order_confirmations/OA26540657_4500318786.pdf",
+    "sha256": "47d130f66e61c7e4ac596b8d9dbfb5b713a391fd248861a535cb0af3eaceff06",
+    "bytes": 64385
+  },
+  "doc_kind": "order_confirmation",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318786",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318786",
+        "po_line": 1
+      },
+      "attribute": "supplier_part_no",
+      "value": "PR-CC-0312",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n465,000\n1.44\nCNY\n2027-01-04\n00030",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318786",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318786",
+        "po_line": 1
+      },
+      "attribute": "qty",
+      "value": 465000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n465,000\n1.44\nCNY\n2027-01-04\n00030",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318786",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318786",
+        "po_line": 1
+      },
+      "attribute": "supplier_part_no",
+      "value": "PR-RB-2207",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 20
+      },
+      "evidence": "PR-RB-2207\nCollector's Box\nGrand Heist 6\n(rigid,\nmagnetic lid)\n24,500\n25.62\nCNY\n2027-01-15\n00020",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318786",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318786",
+        "po_line": 1
+      },
+      "attribute": "qty",
+      "value": 24500,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 20
+      },
+      "evidence": "PR-RB-2207\nCollector's Box\nGrand Heist 6\n(rigid,\nmagnetic lid)\n24,500\n25.62\nCNY\n2027-01-15\n00020",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318786",
+        "po_line": 3
+      },
+      "subject_raw": {
+        "po_number": "4500318786",
+        "po_line": 3
+      },
+      "attribute": "supplier_part_no",
+      "value": "PR-SL-0604",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 30
+      },
+      "evidence": "PR-SL-0604\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n115,000\n0.4143\nCNY\n2027-01-11\nArtwork",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318786",
+        "po_line": 3
+      },
+      "subject_raw": {
+        "po_number": "4500318786",
+        "po_line": 3
+      },
+      "attribute": "qty",
+      "value": 115000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 30
+      },
+      "evidence": "PR-SL-0604\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n115,000\n0.4143\nCNY\n2027-01-11\nArtwork",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318786"
+      },
+      "subject_raw": {
+        "po_number": "4500318786"
+      },
+      "attribute": "value",
+      "value": "Customer: Soony Interactive GmbH · Your order 4500318786 of 2026-11-09 · Incoterms FOB Yantian · Payment NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318786 of 2026-11-09 · Incoterms FOB Yantian · Payment NET30",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

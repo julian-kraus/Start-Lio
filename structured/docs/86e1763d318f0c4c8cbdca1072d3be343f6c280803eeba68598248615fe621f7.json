@@ -1,0 +1,100 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0019_Dongguan_Precision_Housings/order_confirmations/OA26751816_4500318684.pdf",
+    "sha256": "86e1763d318f0c4c8cbdca1072d3be343f6c280803eeba68598248615fe621f7",
+    "bytes": 63942
+  },
+  "doc_kind": "order_confirmation",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318684",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318684",
+        "po_line": 1
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-006",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n23,000\n21.01\nCNY\n2026-09-04",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318684",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318684",
+        "po_line": 1
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-006",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n23,000\n21.01\nCNY\n2026-09-04",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318684",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318684",
+        "po_line": 1
+      },
+      "attribute": "qty",
+      "value": 23000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n23,000\n21.01\nCNY\n2026-09-04",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318684"
+      },
+      "subject_raw": {
+        "po_number": "4500318684"
+      },
+      "attribute": "value",
+      "value": "Customer: Soony Interactive GmbH · Your order 4500318684 of 2026-06-22 · Incoterms FOB Yantian · Payment NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318684 of 2026-06-22 · Incoterms FOB Yantian · Payment NET30",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

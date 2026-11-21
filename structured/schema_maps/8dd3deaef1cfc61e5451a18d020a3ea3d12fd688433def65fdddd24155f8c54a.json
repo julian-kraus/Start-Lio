@@ -1,0 +1,18 @@
+{
+  "signature": "8dd3deaef1cfc61e5451a18d020a3ea3d12fd688433def65fdddd24155f8c54a",
+  "format": "csv",
+  "sheet": null,
+  "columns": {
+    "snapshot_date": "snapshot_date",
+    "site": "site",
+    "material_id": "material_id",
+    "batch": "batch",
+    "quantity": "quantity",
+    "uom": "uom",
+    "safety_stock": "safety_stock",
+    "weeks_of_cover": "weeks_of_cover",
+    "last_count": "last_count"
+  },
+  "fact_type": "stock_batch",
+  "row_count": 35
+}

@@ -1,0 +1,20 @@
+{
+  "signature": "fefc200971b42a96d52ebc23c345a3ca834b98bc7acee9d1292eae3eaa22e601",
+  "format": "xlsx",
+  "sheet": "Parts",
+  "columns": {
+    "parts_for_the_remaining_pack_out_erp_stock_not_counted": "Parts for the remaining pack-out (ERP stock, not counted)",
+    "column_2": "column_2",
+    "column_3": "column_3",
+    "column_4": "column_4",
+    "column_5": "column_5",
+    "column_6": "column_6",
+    "column_7": "column_7",
+    "column_8": "column_8",
+    "column_9": "column_9"
+  },
+  "header_detection": {
+    "row": 1,
+    "title_rows": []
+  }
+}

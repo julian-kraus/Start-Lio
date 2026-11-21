@@ -1,0 +1,399 @@
+{
+  "source": {
+    "path": "soony/master/components_update_2026-11-21.csv",
+    "sha256": "965d749bf0edcd27fa9cd91e904f5443da8ca7bac805357b9a3b5472d4a7cb65",
+    "bytes": 204
+  },
+  "doc_kind": "change_record_table",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-2"
+      },
+      "subject_raw": {
+        "entity": "row-2"
+      },
+      "attribute": "component_id",
+      "value": "CMP-GAM-004",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "component_id"
+      },
+      "evidence": "row 2: component_id=CMP-GAM-004",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-2"
+      },
+      "subject_raw": {
+        "entity": "row-2"
+      },
+      "attribute": "field",
+      "value": "drawing_rev",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "field"
+      },
+      "evidence": "row 2: field=drawing_rev",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-2"
+      },
+      "subject_raw": {
+        "entity": "row-2"
+      },
+      "attribute": "old",
+      "value": "B",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "old"
+      },
+      "evidence": "row 2: old=B",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-2"
+      },
+      "subject_raw": {
+        "entity": "row-2"
+      },
+      "attribute": "new",
+      "value": "C",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "new"
+      },
+      "evidence": "row 2: new=C",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-2"
+      },
+      "subject_raw": {
+        "entity": "row-2"
+      },
+      "attribute": "changed_by",
+      "value": "Sofia Marchetti",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "changed_by"
+      },
+      "evidence": "row 2: changed_by=Sofia Marchetti",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-3"
+      },
+      "subject_raw": {
+        "entity": "row-3"
+      },
+      "attribute": "component_id",
+      "value": "CMP-GAM-009",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "component_id"
+      },
+      "evidence": "row 3: component_id=CMP-GAM-009",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-3"
+      },
+      "subject_raw": {
+        "entity": "row-3"
+      },
+      "attribute": "field",
+      "value": "drawing_rev",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "field"
+      },
+      "evidence": "row 3: field=drawing_rev",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-3"
+      },
+      "subject_raw": {
+        "entity": "row-3"
+      },
+      "attribute": "old",
+      "value": "A",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "old"
+      },
+      "evidence": "row 3: old=A",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-3"
+      },
+      "subject_raw": {
+        "entity": "row-3"
+      },
+      "attribute": "new",
+      "value": "B",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "new"
+      },
+      "evidence": "row 3: new=B",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-3"
+      },
+      "subject_raw": {
+        "entity": "row-3"
+      },
+      "attribute": "changed_by",
+      "value": "Sofia Marchetti",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "changed_by"
+      },
+      "evidence": "row 3: changed_by=Sofia Marchetti",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-4"
+      },
+      "subject_raw": {
+        "entity": "row-4"
+      },
+      "attribute": "component_id",
+      "value": "CMP-GAM-010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "component_id"
+      },
+      "evidence": "row 4: component_id=CMP-GAM-010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-4"
+      },
+      "subject_raw": {
+        "entity": "row-4"
+      },
+      "attribute": "field",
+      "value": "critical",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "field"
+      },
+      "evidence": "row 4: field=critical",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-4"
+      },
+      "subject_raw": {
+        "entity": "row-4"
+      },
+      "attribute": "old",
+      "value": "N",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "old"
+      },
+      "evidence": "row 4: old=N",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-4"
+      },
+      "subject_raw": {
+        "entity": "row-4"
+      },
+      "attribute": "new",
+      "value": "Y",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "new"
+      },
+      "evidence": "row 4: new=Y",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-4"
+      },
+      "subject_raw": {
+        "entity": "row-4"
+      },
+      "attribute": "changed_by",
+      "value": "Mei Lin",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "changed_by"
+      },
+      "evidence": "row 4: changed_by=Mei Lin",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-5"
+      },
+      "subject_raw": {
+        "entity": "row-5"
+      },
+      "attribute": "component_id",
+      "value": "CMP-GAM-001",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "component_id"
+      },
+      "evidence": "row 5: component_id=CMP-GAM-001",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-5"
+      },
+      "subject_raw": {
+        "entity": "row-5"
+      },
+      "attribute": "field",
+      "value": "abc_class",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "field"
+      },
+      "evidence": "row 5: field=abc_class",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-5"
+      },
+      "subject_raw": {
+        "entity": "row-5"
+      },
+      "attribute": "old",
+      "value": "A",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "old"
+      },
+      "evidence": "row 5: old=A",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-5"
+      },
+      "subject_raw": {
+        "entity": "row-5"
+      },
+      "attribute": "new",
+      "value": "A",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "new"
+      },
+      "evidence": "row 5: new=A",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "entity": "row-5"
+      },
+      "subject_raw": {
+        "entity": "row-5"
+      },
+      "attribute": "changed_by",
+      "value": "Felix Brunner",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 5,
+        "column": "changed_by"
+      },
+      "evidence": "row 5: changed_by=Felix Brunner",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

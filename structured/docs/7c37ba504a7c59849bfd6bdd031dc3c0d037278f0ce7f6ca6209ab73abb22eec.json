@@ -1,0 +1,99 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0029_Guangzhou_PackRight/contracts/SUP-0029_Framework_Supply_Agreement_2023.pdf",
+    "sha256": "7c37ba504a7c59849bfd6bdd031dc3c0d037278f0ce7f6ca6209ab73abb22eec",
+    "bytes": 67108
+  },
+  "doc_kind": "contract",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "contract_term",
+      "subject": {
+        "supplier_id": "SUP-0029",
+        "contract_id": "SUP-0029_Framework_Supply_Agreement_2023"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029",
+        "contract_id": "SUP-0029_Framework_Supply_Agreement_2023"
+      },
+      "attribute": "incoterm",
+      "value": "FOB",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "FOB",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0029",
+        "supplier_part_no": "PR-CC-0312"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029",
+        "supplier_part_no": "PR-CC-0312"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-004",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "PR-CC-0312\nCMP-GAM-004",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0029",
+        "supplier_part_no": "PR-SL-0604"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029",
+        "supplier_part_no": "PR-SL-0604"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-007",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "PR-SL-0604\nCMP-GAM-007",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "part_xref",
+      "subject": {
+        "supplier_id": "SUP-0029",
+        "supplier_part_no": "PR-RB-2207"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029",
+        "supplier_part_no": "PR-RB-2207"
+      },
+      "attribute": "material_id",
+      "value": "CMP-MAG-005",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "PR-RB-2207\nCMP-MAG-005",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

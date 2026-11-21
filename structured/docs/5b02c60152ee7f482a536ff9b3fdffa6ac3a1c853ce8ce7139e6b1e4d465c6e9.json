@@ -1,0 +1,79 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0029_Guangzhou_PackRight/order_confirmations/OA26985895_4500318774.pdf",
+    "sha256": "5b02c60152ee7f482a536ff9b3fdffa6ac3a1c853ce8ce7139e6b1e4d465c6e9",
+    "bytes": 64056
+  },
+  "doc_kind": "order_confirmation",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318774",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318774",
+        "po_line": 1
+      },
+      "attribute": "supplier_part_no",
+      "value": "PR-SL-0604",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-SL-0604\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n140,000\n0.4143\nCNY\n2026-12-28\nArtwork",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318774",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318774",
+        "po_line": 1
+      },
+      "attribute": "qty",
+      "value": 140000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-SL-0604\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n140,000\n0.4143\nCNY\n2026-12-28\nArtwork",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318774"
+      },
+      "subject_raw": {
+        "po_number": "4500318774"
+      },
+      "attribute": "value",
+      "value": "Customer: Soony Interactive GmbH · Your order 4500318774 of 2026-10-26 · Incoterms FOB Yantian · Payment NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318774 of 2026-10-26 · Incoterms FOB Yantian · Payment NET30",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

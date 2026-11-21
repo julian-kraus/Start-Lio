@@ -1,0 +1,12 @@
+{
+  "signature": "7bcb779d67f3cd1f32642304ad2ccfa18532d0c66fb244521e22425312a97dae",
+  "format": "xlsx",
+  "sheet": "Notes",
+  "columns": {
+    "note": "Note"
+  },
+  "header_detection": {
+    "row": 1,
+    "title_rows": []
+  }
+}

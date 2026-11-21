@@ -1,0 +1,145 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Price_list_20250624.xlsx",
+    "sha256": "355bacd8e004e0c8a2d7d9601c65e52eb1ad0fb6bbec2a600ea0ae4320f3efcf",
+    "bytes": 5256
+  },
+  "doc_kind": "price_list",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0029",
+        "material_id": "PR-CC-0312"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029",
+        "material_id": "PR-CC-0312"
+      },
+      "attribute": "old_price",
+      "value": 1.38,
+      "unit": "source currency",
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 2
+      },
+      "evidence": "PR-CC-0312 | Game Card Case (clear) | 1.38 | 1.44 | CNY | 2025-06-24",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0029",
+        "material_id": "PR-CC-0312"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029",
+        "material_id": "PR-CC-0312"
+      },
+      "attribute": "new_price",
+      "value": 1.44,
+      "unit": "source currency",
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 2
+      },
+      "evidence": "PR-CC-0312 | Game Card Case (clear) | 1.38 | 1.44 | CNY | 2025-06-24",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0029",
+        "material_id": "PR-SL-0604"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029",
+        "material_id": "PR-SL-0604"
+      },
+      "attribute": "old_price",
+      "value": 0.3984,
+      "unit": "source currency",
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 3
+      },
+      "evidence": "PR-SL-0604 | Cover Sleeve Grand Heist 6 (USK/PEGI) | 0.3984 | 0.4143 | CNY | 2025-06-24",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0029",
+        "material_id": "PR-SL-0604"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029",
+        "material_id": "PR-SL-0604"
+      },
+      "attribute": "new_price",
+      "value": 0.4143,
+      "unit": "source currency",
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 3
+      },
+      "evidence": "PR-SL-0604 | Cover Sleeve Grand Heist 6 (USK/PEGI) | 0.3984 | 0.4143 | CNY | 2025-06-24",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0029",
+        "material_id": "PR-RB-2207"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029",
+        "material_id": "PR-RB-2207"
+      },
+      "attribute": "old_price",
+      "value": 24.63,
+      "unit": "source currency",
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 4
+      },
+      "evidence": "PR-RB-2207 | Collector's Box Grand Heist 6 (rigid, magnetic lid) | 24.63 | 25.62 | CNY | 2025-06-24",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0029",
+        "material_id": "PR-RB-2207"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029",
+        "material_id": "PR-RB-2207"
+      },
+      "attribute": "new_price",
+      "value": 25.62,
+      "unit": "source currency",
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 4
+      },
+      "evidence": "PR-RB-2207 | Collector's Box Grand Heist 6 (rigid, magnetic lid) | 24.63 | 25.62 | CNY | 2025-06-24",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

@@ -1,0 +1,570 @@
+{
+  "source": {
+    "path": "soony/master/products.csv",
+    "sha256": "b9d487bb6051dac24016377116a3c07497a2869e94ccfdf1a90a552fa978c714",
+    "bytes": 470
+  },
+  "doc_kind": "master_table",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH5-STD"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH5-STD"
+      },
+      "attribute": "product_id",
+      "value": "FG-GH5-STD",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "product_id"
+      },
+      "evidence": "row 2: product_id=FG-GH5-STD",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH5-STD"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH5-STD"
+      },
+      "attribute": "name",
+      "value": "Grand Heist 5 – Standard Edition (game card)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "name"
+      },
+      "evidence": "row 2: name=Grand Heist 5 – Standard Edition (game card)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH5-STD"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH5-STD"
+      },
+      "attribute": "product_line",
+      "value": "Grand Heist",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "product_line"
+      },
+      "evidence": "row 2: product_line=Grand Heist",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH5-STD"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH5-STD"
+      },
+      "attribute": "lifecycle",
+      "value": "running",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "lifecycle"
+      },
+      "evidence": "row 2: lifecycle=running",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH5-STD"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH5-STD"
+      },
+      "attribute": "launch_date",
+      "value": "2013-09-17",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "launch_date"
+      },
+      "evidence": "row 2: launch_date=2013-09-17",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH5-STD"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH5-STD"
+      },
+      "attribute": "weekly_plan_qty",
+      "value": "30000",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "weekly_plan_qty"
+      },
+      "evidence": "row 2: weekly_plan_qty=30000",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH5-STD"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH5-STD"
+      },
+      "attribute": "plants",
+      "value": "DC-HAM",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "plants"
+      },
+      "evidence": "row 2: plants=DC-HAM",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH5-STD"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH5-STD"
+      },
+      "attribute": "std_cost_eur",
+      "value": "7.8",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "std_cost_eur"
+      },
+      "evidence": "row 2: std_cost_eur=7.8",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH5-STD"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH5-STD"
+      },
+      "attribute": "valid_from",
+      "value": "2026-11-21",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "valid_from"
+      },
+      "evidence": "row 2: valid_from=2026-11-21",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-STD"
+      },
+      "attribute": "product_id",
+      "value": "FG-GH6-STD",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "product_id"
+      },
+      "evidence": "row 3: product_id=FG-GH6-STD",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-STD"
+      },
+      "attribute": "name",
+      "value": "Grand Heist 6 – Standard Edition (game card)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "name"
+      },
+      "evidence": "row 3: name=Grand Heist 6 – Standard Edition (game card)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-STD"
+      },
+      "attribute": "product_line",
+      "value": "Grand Heist",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "product_line"
+      },
+      "evidence": "row 3: product_line=Grand Heist",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-STD"
+      },
+      "attribute": "lifecycle",
+      "value": "launch",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "lifecycle"
+      },
+      "evidence": "row 3: lifecycle=launch",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-STD"
+      },
+      "attribute": "launch_date",
+      "value": "2026-11-22",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "launch_date"
+      },
+      "evidence": "row 3: launch_date=2026-11-22",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-STD"
+      },
+      "attribute": "weekly_plan_qty",
+      "value": "160000",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "weekly_plan_qty"
+      },
+      "evidence": "row 3: weekly_plan_qty=160000",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-STD"
+      },
+      "attribute": "day_one_qty",
+      "value": "640000",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "day_one_qty"
+      },
+      "evidence": "row 3: day_one_qty=640000",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-STD"
+      },
+      "attribute": "plants",
+      "value": "DC-HAM",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "plants"
+      },
+      "evidence": "row 3: plants=DC-HAM",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-STD"
+      },
+      "attribute": "std_cost_eur",
+      "value": "11.9",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "std_cost_eur"
+      },
+      "evidence": "row 3: std_cost_eur=11.9",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-STD"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-STD"
+      },
+      "attribute": "valid_from",
+      "value": "2026-11-21",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "valid_from"
+      },
+      "evidence": "row 3: valid_from=2026-11-21",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-CE"
+      },
+      "attribute": "product_id",
+      "value": "FG-GH6-CE",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "product_id"
+      },
+      "evidence": "row 4: product_id=FG-GH6-CE",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-CE"
+      },
+      "attribute": "name",
+      "value": "Grand Heist 6 – Collector's Edition",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "name"
+      },
+      "evidence": "row 4: name=Grand Heist 6 – Collector's Edition",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-CE"
+      },
+      "attribute": "product_line",
+      "value": "Grand Heist",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "product_line"
+      },
+      "evidence": "row 4: product_line=Grand Heist",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-CE"
+      },
+      "attribute": "lifecycle",
+      "value": "launch",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "lifecycle"
+      },
+      "evidence": "row 4: lifecycle=launch",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-CE"
+      },
+      "attribute": "launch_date",
+      "value": "2026-11-22",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "launch_date"
+      },
+      "evidence": "row 4: launch_date=2026-11-22",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-CE"
+      },
+      "attribute": "weekly_plan_qty",
+      "value": "12000",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "weekly_plan_qty"
+      },
+      "evidence": "row 4: weekly_plan_qty=12000",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-CE"
+      },
+      "attribute": "day_one_qty",
+      "value": "72000",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "day_one_qty"
+      },
+      "evidence": "row 4: day_one_qty=72000",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-CE"
+      },
+      "attribute": "plants",
+      "value": "DC-HAM",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "plants"
+      },
+      "evidence": "row 4: plants=DC-HAM",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-CE"
+      },
+      "attribute": "std_cost_eur",
+      "value": "34.5",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "std_cost_eur"
+      },
+      "evidence": "row 4: std_cost_eur=34.5",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "product",
+      "subject": {
+        "product_id": "FG-GH6-CE"
+      },
+      "subject_raw": {
+        "product_id": "FG-GH6-CE"
+      },
+      "attribute": "valid_from",
+      "value": "2026-11-21",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 4,
+        "column": "valid_from"
+      },
+      "evidence": "row 4: valid_from=2026-11-21",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

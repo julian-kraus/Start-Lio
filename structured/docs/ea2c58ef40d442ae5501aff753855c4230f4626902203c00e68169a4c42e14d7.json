@@ -1,0 +1,374 @@
+{
+  "source": {
+    "path": "soony/receiving/DC-HAM/20260916_DN-260913-768.jpg",
+    "sha256": "ea2c58ef40d442ae5501aff753855c4230f4626902203c00e68169a4c42e14d7",
+    "bytes": 222696
+  },
+  "doc_kind": "delivery_note_scan",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en",
+    "pl",
+    "zh",
+    "ko"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "DN-260913-768",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "DN-260913-768",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-002",
+        "po_number": [
+          "4500318714"
+        ]
+      },
+      "attribute": "po_number",
+      "value": [
+        "4500318714"
+      ],
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "['4500318714']",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "DN-260913-768",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "DN-260913-768",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-002",
+        "po_number": [
+          "4500318714"
+        ]
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-002",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "CMP-GAM-002",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "DN-260913-768",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "DN-260913-768",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-002",
+        "po_number": [
+          "4500318714"
+        ]
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-002",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "CMP-GAM-002",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "DN-260913-768",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "DN-260913-768",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-002",
+        "po_number": [
+          "4500318714"
+        ]
+      },
+      "attribute": "printed_qty",
+      "value": 8500,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "8500",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "DN-260913-768",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "DN-260913-768",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-002",
+        "po_number": [
+          "4500318714"
+        ]
+      },
+      "attribute": "handwritten_qty",
+      "value": null,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "None",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "DN-260913-768",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "DN-260913-768",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-002",
+        "po_number": [
+          "4500318714"
+        ]
+      },
+      "attribute": "struck_through",
+      "value": false,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "False",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "DN-260913-768",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "DN-260913-768",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-002",
+        "po_number": [
+          "4500318714"
+        ]
+      },
+      "attribute": "final_qty",
+      "value": 8500,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "8500",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "DN-260913-768",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "DN-260913-768",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-002",
+        "po_number": [
+          "4500318714"
+        ]
+      },
+      "attribute": "uom",
+      "value": "PCS",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "PCS",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "DN-260913-768",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "DN-260913-768",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-002",
+        "po_number": [
+          "4500318714"
+        ]
+      },
+      "attribute": "packages",
+      "value": 4,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "4",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "DN-260913-768",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "DN-260913-768",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-002",
+        "po_number": [
+          "4500318714"
+        ]
+      },
+      "attribute": "carrier",
+      "value": "Alpen Air Cargo GmbH",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "Alpen Air Cargo GmbH",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "DN-260913-768",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "DN-260913-768",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-002",
+        "po_number": [
+          "4500318714"
+        ]
+      },
+      "attribute": "note_date",
+      "value": "2026-09-13",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "2026-09-13",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "DN-260913-768",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "DN-260913-768",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-002",
+        "po_number": [
+          "4500318714"
+        ]
+      },
+      "attribute": "received_stamp_date",
+      "value": "2026-09-16",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "2026-09-16",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "DN-260913-768",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "DN-260913-768",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-002",
+        "po_number": [
+          "4500318714"
+        ]
+      },
+      "attribute": "receiver_signature_present",
+      "value": true,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "True",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "delivery_note_line",
+      "subject": {
+        "delivery_note": "DN-260913-768",
+        "line": 1
+      },
+      "subject_raw": {
+        "delivery_note": "DN-260913-768",
+        "line": 1,
+        "supplier_part_no": "CMP-GAM-002",
+        "po_number": [
+          "4500318714"
+        ]
+      },
+      "attribute": "gross_weight",
+      "value": 76,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "line 1"
+      },
+      "evidence": "76",
+      "confidence": "medium"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

@@ -1,0 +1,37 @@
+{
+  "source": {
+    "path": "soony/context/onboarding_notes.md",
+    "sha256": "e7efcc11e89d9fedf8a642ee044f17670f78ec2b5324fe3ce1f39171ddc4086c",
+    "bytes": 2460
+  },
+  "doc_kind": "context_note",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "x_context_note",
+      "subject": {
+        "source_path": "soony/context/onboarding_notes.md"
+      },
+      "subject_raw": {
+        "source_path": "soony/context/onboarding_notes.md"
+      },
+      "attribute": "content",
+      "value": "# Kickoff with Soony – onboarding notes\n\nDate: 2026-11-11\nAttendees: Jonas Lindqvist (CPO), Dr. Maren Vogt (Head of Procurement), Raj Patel (Logistics), us\n\n## What they said\n\n- Grand Heist 6 goes on sale on Sunday 22 November 2026 at 20:00. The date is fixed by retail and by 487,000 pre-orders. \"Produced\" means packed at the distribution center in Hamburg (DC-HAM).\n- Two editions. Standard: game card, case, sleeve, leaflet. Collector's: numbered, 72,000 copies, all pre-ordered, with steel case, art book, poster and a statue.\n- The developer finished the game master late. Programmed game cards only started arriving three weeks ago, so Hamburg packs until the last hour.\n- Since the first game cards arrived it has been crisis mode: buyers chasing suppliers by phone every day, freight rebooked from sea to air and back, every shift packing whatever arrived that day. Maren: \"We get through by working around problems, not by solving them. The team is exhausted.\"\n- The last 20 % will have no buffer. Jonas: \"One late pallet on launch weekend and fans who paid for a numbered Collector's Edition get nothing.\"\n- Why us: no time for a tender or a big vendor project. They need help now, before the launch, not next quarter. Jonas: \"We cannot afford a single surprise in the last days before the launch.\"\n- Six suppliers, and procurement knows them through paper: contracts, order confirmations, delivery notes. Every supplier has its own folder now. \"Half of what we know is in a PDF somebody scanned.\"\n- SAP holds the purchase orders, nothing else. There are two exports because the interface changed in mid-2025.\n- Maren: suppliers tell them about problems too late. \"We find out at the dock.\"\n- Raj: about 20 open shipments, tracked in a shared spreadsheet that is updated when someone remembers.\n- Delivery notes are scanned by the receiving team in Hamburg. Receiving books what is on the paper.\n- Suppliers write in their own language. Nobody in procurement reads Polish or Korean.\n- The Category Lead for Collector's Items left in the summer. The position is open.\n\n## Open questions we did not get to\n\n- What does a missing copy cost on day one? (Maren: \"ask me at the booth\")\n- Who signs off on air freight?\n- Which parts have only one source?\n- Why does the stock list show no lid magnets?\n\n## Data they gave us\n\nSee the portal: one folder per supplier under `suppliers/`, Soony's own data under `soony/`. They warned us: \"It is what it is.\"\n",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "section": "document"
+      },
+      "evidence": "# Kickoff with Soony – onboarding notes\n\nDate: 2026-11-11\nAttendees: Jonas Lindqvist (CPO), Dr. Maren Vogt (Head of Procurement), Raj Patel (Logistics), us\n\n## What they said\n\n- Grand Heist 6 goes on sale on Sunday 22 November 2026 at 20:00. The date is fixed by retail and by 487,000 pre-orders. \"Produced\" means packed at the distribution center in Hamburg (DC-HAM).\n- Two editions. Standard: game card, case, sleeve, leaflet. Collector's: numbered, 72,000 copies, all pre-ordered, with steel case, art book, poster and a statue.\n- The developer finished the game master late. Programmed game cards only started arriving three weeks ago, so Hamburg packs until the last hour.\n- Since the first game cards arrived it has been crisis mode: buyers chasing suppliers by phone every day, freight rebooked from sea to air and back, every shift packing whatever arrived that day. Maren: \"We get through by working around problems, not by solving them. The team is exhausted.\"\n- The last 20 % will have no ",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

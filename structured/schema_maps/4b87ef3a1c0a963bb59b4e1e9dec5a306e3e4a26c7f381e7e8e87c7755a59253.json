@@ -1,0 +1,23 @@
+{
+  "signature": "4b87ef3a1c0a963bb59b4e1e9dec5a306e3e4a26c7f381e7e8e87c7755a59253",
+  "format": "xlsx",
+  "sheet": "Tracker",
+  "columns": {
+    "shipment": "Shipment",
+    "carrier": "Carrier",
+    "mode": "Mode",
+    "container_awb": "Container/AWB",
+    "supplier": "Supplier",
+    "pos": "POs",
+    "from": "From",
+    "to": "To",
+    "etd": "ETD",
+    "eta": "ETA",
+    "status": "Status",
+    "comment": "Comment"
+  },
+  "header_detection": {
+    "row": 1,
+    "title_rows": []
+  }
+}

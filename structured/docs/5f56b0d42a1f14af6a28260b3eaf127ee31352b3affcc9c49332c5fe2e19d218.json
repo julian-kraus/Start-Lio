@@ -1,0 +1,100 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0019_Dongguan_Precision_Housings/order_confirmations/OA25102676_4500318574.pdf",
+    "sha256": "5f56b0d42a1f14af6a28260b3eaf127ee31352b3affcc9c49332c5fe2e19d218",
+    "bytes": 63943
+  },
+  "doc_kind": "order_confirmation",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318574",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318574",
+        "po_line": 1
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-003",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY\n2026-01-21",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318574",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318574",
+        "po_line": 1
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-003",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY\n2026-01-21",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318574",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318574",
+        "po_line": 1
+      },
+      "attribute": "qty",
+      "value": 44000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY\n2026-01-21",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318574"
+      },
+      "subject_raw": {
+        "po_number": "4500318574"
+      },
+      "attribute": "value",
+      "value": "Customer: Soony Interactive GmbH · Your order 4500318574 of 2025-11-05 · Incoterms FOB Yantian · Payment NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318574 of 2025-11-05 · Incoterms FOB Yantian · Payment NET30",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

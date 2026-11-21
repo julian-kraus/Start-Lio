@@ -1,0 +1,361 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0010_Hwaseong_Memory/profile.csv",
+    "sha256": "939b598690becbf4ef2181708a94d890e1546d8a5beb0b985eba3f802a7fe10a",
+    "bytes": 417
+  },
+  "doc_kind": "supplier_profile",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0010"
+      },
+      "attribute": "supplier_id",
+      "value": "SUP-0010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "supplier_id"
+      },
+      "evidence": "row 2: supplier_id=SUP-0010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0010"
+      },
+      "attribute": "name",
+      "value": "Hwaseong Memory",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "name"
+      },
+      "evidence": "row 2: name=Hwaseong Memory",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0010"
+      },
+      "attribute": "legal_name",
+      "value": "Hwaseong Memory Co., Ltd.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "legal_name"
+      },
+      "evidence": "row 2: legal_name=Hwaseong Memory Co., Ltd.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0010"
+      },
+      "attribute": "category",
+      "value": "Game Media",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "category"
+      },
+      "evidence": "row 2: category=Game Media",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0010"
+      },
+      "attribute": "country",
+      "value": "KR",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "country"
+      },
+      "evidence": "row 2: country=KR",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0010"
+      },
+      "attribute": "city",
+      "value": "Hwaseong",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "city"
+      },
+      "evidence": "row 2: city=Hwaseong",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0010"
+      },
+      "attribute": "lat",
+      "value": 37.1995,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "lat"
+      },
+      "evidence": "row 2: lat=37.1995",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0010"
+      },
+      "attribute": "lon",
+      "value": 126.8311,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "lon"
+      },
+      "evidence": "row 2: lon=126.8311",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0010"
+      },
+      "attribute": "currency",
+      "value": "USD",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "currency"
+      },
+      "evidence": "row 2: currency=USD",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0010"
+      },
+      "attribute": "payment_terms",
+      "value": "NET45",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "payment_terms"
+      },
+      "evidence": "row 2: payment_terms=NET45",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0010"
+      },
+      "attribute": "incoterm",
+      "value": "FOB Busan",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "incoterm"
+      },
+      "evidence": "row 2: incoterm=FOB Busan",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0010"
+      },
+      "attribute": "supplier_since",
+      "value": "2019-01-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "supplier_since"
+      },
+      "evidence": "row 2: supplier_since=2019-01-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0010"
+      },
+      "attribute": "status",
+      "value": "active",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "status"
+      },
+      "evidence": "row 2: status=active",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0010"
+      },
+      "attribute": "qualification_status",
+      "value": "qualified",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "qualification_status"
+      },
+      "evidence": "row 2: qualification_status=qualified",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0010"
+      },
+      "attribute": "contact_name",
+      "value": "Seo-yeon Kim",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "contact_name"
+      },
+      "evidence": "row 2: contact_name=Seo-yeon Kim",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0010"
+      },
+      "attribute": "contact_email",
+      "value": "sy.kim.hwaseong-memory@suppliers.juliansibbing.de",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "contact_email"
+      },
+      "evidence": "row 2: contact_email=sy.kim.hwaseong-memory@suppliers.juliansibbing.de",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0010"
+      },
+      "attribute": "phone",
+      "value": "+82 31 200 3300",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "phone"
+      },
+      "evidence": "row 2: phone=+82 31 200 3300",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0010"
+      },
+      "attribute": "preferred_language",
+      "value": "ko",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "preferred_language"
+      },
+      "evidence": "row 2: preferred_language=ko",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

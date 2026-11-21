@@ -1,0 +1,361 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0011_Boise_Semi/profile.csv",
+    "sha256": "d33e9635665500bc7c5038f4fea25480bc0a2b9fe16aa0e5a1f23db4c13a5ae6",
+    "bytes": 401
+  },
+  "doc_kind": "supplier_profile",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011"
+      },
+      "attribute": "supplier_id",
+      "value": "SUP-0011",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "supplier_id"
+      },
+      "evidence": "row 2: supplier_id=SUP-0011",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011"
+      },
+      "attribute": "name",
+      "value": "Boise Semi",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "name"
+      },
+      "evidence": "row 2: name=Boise Semi",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011"
+      },
+      "attribute": "legal_name",
+      "value": "Boise Semiconductor Inc.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "legal_name"
+      },
+      "evidence": "row 2: legal_name=Boise Semiconductor Inc.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011"
+      },
+      "attribute": "category",
+      "value": "Game Media",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "category"
+      },
+      "evidence": "row 2: category=Game Media",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011"
+      },
+      "attribute": "country",
+      "value": "US",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "country"
+      },
+      "evidence": "row 2: country=US",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011"
+      },
+      "attribute": "city",
+      "value": "Boise",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "city"
+      },
+      "evidence": "row 2: city=Boise",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011"
+      },
+      "attribute": "lat",
+      "value": 43615,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "lat"
+      },
+      "evidence": "row 2: lat=43615",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011"
+      },
+      "attribute": "lon",
+      "value": -116.2023,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "lon"
+      },
+      "evidence": "row 2: lon=-116.2023",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011"
+      },
+      "attribute": "currency",
+      "value": "USD",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "currency"
+      },
+      "evidence": "row 2: currency=USD",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011"
+      },
+      "attribute": "payment_terms",
+      "value": "NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "payment_terms"
+      },
+      "evidence": "row 2: payment_terms=NET30",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011"
+      },
+      "attribute": "incoterm",
+      "value": "EXW Boise",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "incoterm"
+      },
+      "evidence": "row 2: incoterm=EXW Boise",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011"
+      },
+      "attribute": "supplier_since",
+      "value": "2023-05-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "supplier_since"
+      },
+      "evidence": "row 2: supplier_since=2023-05-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011"
+      },
+      "attribute": "status",
+      "value": "active",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "status"
+      },
+      "evidence": "row 2: status=active",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011"
+      },
+      "attribute": "qualification_status",
+      "value": "qualified",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "qualification_status"
+      },
+      "evidence": "row 2: qualification_status=qualified",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011"
+      },
+      "attribute": "contact_name",
+      "value": "Megan Ortiz",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "contact_name"
+      },
+      "evidence": "row 2: contact_name=Megan Ortiz",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011"
+      },
+      "attribute": "contact_email",
+      "value": "m.ortiz.boise-semi@suppliers.juliansibbing.de",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "contact_email"
+      },
+      "evidence": "row 2: contact_email=m.ortiz.boise-semi@suppliers.juliansibbing.de",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011"
+      },
+      "attribute": "phone",
+      "value": "+1 208 362 0144",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "phone"
+      },
+      "evidence": "row 2: phone=+1 208 362 0144",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0011"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0011"
+      },
+      "attribute": "preferred_language",
+      "value": "en",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "preferred_language"
+      },
+      "evidence": "row 2: preferred_language=en",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

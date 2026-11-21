@@ -1,0 +1,18 @@
+{
+  "signature": "830297aa737632d7ab9c3d213e2a42e750e5f5f6eb17fd61348018297868aa47",
+  "format": "xlsx",
+  "sheet": "Launch status",
+  "columns": {
+    "grand_heist_6_launch_status_saturday_13_00_confidential": "Grand Heist 6 launch status · Saturday 13:00 · CONFIDENTIAL",
+    "column_2": "column_2",
+    "column_3": "column_3",
+    "column_4": "column_4",
+    "column_5": "column_5",
+    "column_6": "column_6",
+    "column_7": "column_7"
+  },
+  "header_detection": {
+    "row": 1,
+    "title_rows": []
+  }
+}

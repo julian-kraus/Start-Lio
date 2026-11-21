@@ -1,0 +1,100 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0028_Karton_Nowak/order_confirmations/OA25558873_4500318572.pdf",
+    "sha256": "8fae5fdb7587e23b4acb96c898f59cf5bc395e02f7ecec7b1f58700586c0868d",
+    "bytes": 2154
+  },
+  "doc_kind": "order_confirmation",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318572",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318572",
+        "po_line": 1
+      },
+      "attribute": "supplier_part_no",
+      "value": "CMP-GAM-005",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n115,000\n0.06\nEUR\n2025-11-27",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318572",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318572",
+        "po_line": 1
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-005",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n115,000\n0.06\nEUR\n2025-11-27",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318572",
+        "po_line": 1
+      },
+      "subject_raw": {
+        "po_number": "4500318572",
+        "po_line": 1
+      },
+      "attribute": "qty",
+      "value": 115000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-005\nCover Sleeve\nGrand Heist 5\n(USK/PEGI)\n115,000\n0.06\nEUR\n2025-11-27",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "po_number": "4500318572"
+      },
+      "subject_raw": {
+        "po_number": "4500318572"
+      },
+      "attribute": "value",
+      "value": "Customer: Soony Interactive GmbH · Your order 4500318572 of 2025-10-31 · Incoterms DAP Hamburg · Payment",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318572 of 2025-10-31 · Incoterms DAP Hamburg · Payment",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

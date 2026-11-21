@@ -1,0 +1,361 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0028_Karton_Nowak/profile.csv",
+    "sha256": "9a9365b44a43ed35870af4e2b692ae71d62a814f8460eaae6f919d44a686af22",
+    "bytes": 418
+  },
+  "doc_kind": "supplier_profile",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0028"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028"
+      },
+      "attribute": "supplier_id",
+      "value": "SUP-0028",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "supplier_id"
+      },
+      "evidence": "row 2: supplier_id=SUP-0028",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0028"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028"
+      },
+      "attribute": "name",
+      "value": "Karton Nowak",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "name"
+      },
+      "evidence": "row 2: name=Karton Nowak",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0028"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028"
+      },
+      "attribute": "legal_name",
+      "value": "Karton Nowak Sp. z o.o.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "legal_name"
+      },
+      "evidence": "row 2: legal_name=Karton Nowak Sp. z o.o.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0028"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028"
+      },
+      "attribute": "category",
+      "value": "Print & Packaging",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "category"
+      },
+      "evidence": "row 2: category=Print & Packaging",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0028"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028"
+      },
+      "attribute": "country",
+      "value": "PL",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "country"
+      },
+      "evidence": "row 2: country=PL",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0028"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028"
+      },
+      "attribute": "city",
+      "value": "Poznań",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "city"
+      },
+      "evidence": "row 2: city=Poznań",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0028"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028"
+      },
+      "attribute": "lat",
+      "value": 52.4064,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "lat"
+      },
+      "evidence": "row 2: lat=52.4064",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0028"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028"
+      },
+      "attribute": "lon",
+      "value": 16.9252,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "lon"
+      },
+      "evidence": "row 2: lon=16.9252",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0028"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028"
+      },
+      "attribute": "currency",
+      "value": "EUR",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "currency"
+      },
+      "evidence": "row 2: currency=EUR",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0028"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028"
+      },
+      "attribute": "payment_terms",
+      "value": "NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "payment_terms"
+      },
+      "evidence": "row 2: payment_terms=NET30",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0028"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028"
+      },
+      "attribute": "incoterm",
+      "value": "DAP Hamburg",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "incoterm"
+      },
+      "evidence": "row 2: incoterm=DAP Hamburg",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0028"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028"
+      },
+      "attribute": "supplier_since",
+      "value": "2021-01-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "supplier_since"
+      },
+      "evidence": "row 2: supplier_since=2021-01-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0028"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028"
+      },
+      "attribute": "status",
+      "value": "active",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "status"
+      },
+      "evidence": "row 2: status=active",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0028"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028"
+      },
+      "attribute": "qualification_status",
+      "value": "qualified",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "qualification_status"
+      },
+      "evidence": "row 2: qualification_status=qualified",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0028"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028"
+      },
+      "attribute": "contact_name",
+      "value": "Agnieszka Nowak",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "contact_name"
+      },
+      "evidence": "row 2: contact_name=Agnieszka Nowak",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0028"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028"
+      },
+      "attribute": "contact_email",
+      "value": "a.nowak.karton-nowak@suppliers.juliansibbing.de",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "contact_email"
+      },
+      "evidence": "row 2: contact_email=a.nowak.karton-nowak@suppliers.juliansibbing.de",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0028"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028"
+      },
+      "attribute": "phone",
+      "value": "+48 61 842 0101",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "phone"
+      },
+      "evidence": "row 2: phone=+48 61 842 0101",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier",
+      "subject": {
+        "supplier_id": "SUP-0028"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0028"
+      },
+      "attribute": "preferred_language",
+      "value": "pl",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "preferred_language"
+      },
+      "evidence": "row 2: preferred_language=pl",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

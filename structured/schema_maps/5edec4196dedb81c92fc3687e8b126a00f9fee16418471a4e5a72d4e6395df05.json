@@ -1,0 +1,20 @@
+{
+  "signature": "5edec4196dedb81c92fc3687e8b126a00f9fee16418471a4e5a72d4e6395df05",
+  "format": "xlsx",
+  "sheet": "Inbound",
+  "columns": {
+    "supplier": "Supplier",
+    "part": "Part",
+    "quantity": "Quantity",
+    "mode": "Mode",
+    "reference": "Reference",
+    "etd": "ETD",
+    "eta": "ETA",
+    "status": "Status",
+    "comment": "Comment"
+  },
+  "header_detection": {
+    "row": 1,
+    "title_rows": []
+  }
+}

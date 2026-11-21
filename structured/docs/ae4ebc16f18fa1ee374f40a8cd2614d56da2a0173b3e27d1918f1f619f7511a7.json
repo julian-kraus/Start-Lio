@@ -1,0 +1,145 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0019_Dongguan_Precision_Housings/notices/Price_list_20260824.xlsx",
+    "sha256": "ae4ebc16f18fa1ee374f40a8cd2614d56da2a0173b3e27d1918f1f619f7511a7",
+    "bytes": 5235
+  },
+  "doc_kind": "price_list",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-003"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-003"
+      },
+      "attribute": "old_price",
+      "value": 1.57,
+      "unit": "source currency",
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 2
+      },
+      "evidence": "CMP-GAM-003 | Game Card Case (clear) | 1.57 | 1.61 | CNY | 2026-08-24",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-003"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-003"
+      },
+      "attribute": "new_price",
+      "value": 1.61,
+      "unit": "source currency",
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 2
+      },
+      "evidence": "CMP-GAM-003 | Game Card Case (clear) | 1.57 | 1.61 | CNY | 2026-08-24",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-006"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-006"
+      },
+      "attribute": "old_price",
+      "value": 21.64,
+      "unit": "source currency",
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 3
+      },
+      "evidence": "CMP-GAM-006 | Steel Case Grand Heist 6 | 21.64 | 22.29 | CNY | 2026-08-24",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-006"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-006"
+      },
+      "attribute": "new_price",
+      "value": 22.29,
+      "unit": "source currency",
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 3
+      },
+      "evidence": "CMP-GAM-006 | Steel Case Grand Heist 6 | 21.64 | 22.29 | CNY | 2026-08-24",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-010"
+      },
+      "attribute": "old_price",
+      "value": 85.81,
+      "unit": "source currency",
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 4
+      },
+      "evidence": "CMP-GAM-010 | Statue \"The Getaway\" (die-cast, 18 cm) | 85.81 | 88.38 | CNY | 2026-08-24",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-010"
+      },
+      "attribute": "new_price",
+      "value": 88.38,
+      "unit": "source currency",
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 4
+      },
+      "evidence": "CMP-GAM-010 | Statue \"The Getaway\" (die-cast, 18 cm) | 85.81 | 88.38 | CNY | 2026-08-24",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

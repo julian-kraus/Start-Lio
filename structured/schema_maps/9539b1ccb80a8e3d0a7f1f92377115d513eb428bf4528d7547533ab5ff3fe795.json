@@ -1,0 +1,19 @@
+{
+  "signature": "9539b1ccb80a8e3d0a7f1f92377115d513eb428bf4528d7547533ab5ff3fe795",
+  "format": "csv",
+  "sheet": null,
+  "columns": {
+    "product_id": "product_id",
+    "name": "name",
+    "product_line": "product_line",
+    "lifecycle": "lifecycle",
+    "launch_date": "launch_date",
+    "weekly_plan_qty": "weekly_plan_qty",
+    "day_one_qty": "day_one_qty",
+    "plants": "plants",
+    "std_cost_eur": "std_cost_eur",
+    "valid_from": "valid_from"
+  },
+  "fact_type": "product",
+  "row_count": 3
+}

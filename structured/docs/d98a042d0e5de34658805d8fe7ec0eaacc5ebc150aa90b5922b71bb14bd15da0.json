@@ -1,0 +1,171 @@
+{
+  "source": {
+    "path": "soony/master/sites.csv",
+    "sha256": "d98a042d0e5de34658805d8fe7ec0eaacc5ebc150aa90b5922b71bb14bd15da0",
+    "bytes": 126
+  },
+  "doc_kind": "master_table",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+visual-review",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "site",
+      "subject": {
+        "id": "row-2"
+      },
+      "subject_raw": {
+        "id": "row-2"
+      },
+      "attribute": "site_id",
+      "value": "DC-HAM",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "site_id"
+      },
+      "evidence": "row 2: site_id=DC-HAM",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "site",
+      "subject": {
+        "id": "row-2"
+      },
+      "subject_raw": {
+        "id": "row-2"
+      },
+      "attribute": "name",
+      "value": "Soony Distribution Center Hamburg",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "name"
+      },
+      "evidence": "row 2: name=Soony Distribution Center Hamburg",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "site",
+      "subject": {
+        "id": "row-2"
+      },
+      "subject_raw": {
+        "id": "row-2"
+      },
+      "attribute": "operator",
+      "value": "Soony",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "operator"
+      },
+      "evidence": "row 2: operator=Soony",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "site",
+      "subject": {
+        "id": "row-2"
+      },
+      "subject_raw": {
+        "id": "row-2"
+      },
+      "attribute": "type",
+      "value": "dc",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "type"
+      },
+      "evidence": "row 2: type=dc",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "site",
+      "subject": {
+        "id": "row-2"
+      },
+      "subject_raw": {
+        "id": "row-2"
+      },
+      "attribute": "country",
+      "value": "DE",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "country"
+      },
+      "evidence": "row 2: country=DE",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "site",
+      "subject": {
+        "id": "row-2"
+      },
+      "subject_raw": {
+        "id": "row-2"
+      },
+      "attribute": "city",
+      "value": "Hamburg",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "city"
+      },
+      "evidence": "row 2: city=Hamburg",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "site",
+      "subject": {
+        "id": "row-2"
+      },
+      "subject_raw": {
+        "id": "row-2"
+      },
+      "attribute": "lat",
+      "value": 53.5511,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "lat"
+      },
+      "evidence": "row 2: lat=53.5511",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "site",
+      "subject": {
+        "id": "row-2"
+      },
+      "subject_raw": {
+        "id": "row-2"
+      },
+      "attribute": "lon",
+      "value": 9.9937,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "lon"
+      },
+      "evidence": "row 2: lon=9.9937",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

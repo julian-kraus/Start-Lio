@@ -1,0 +1,37 @@
+{
+  "checks": {
+    "delivery_note_vs_goods_receipt": {
+      "compared_fields": 0,
+      "agree": 0,
+      "agreement_rate": null,
+      "note": "No comparable join is not treated as agreement."
+    },
+    "oc_line_join": {
+      "oc_quantity_lines": 224,
+      "joined": 224,
+      "item_rule": "exact",
+      "exact_hits": 224,
+      "div10_hits": 0,
+      "agreement_rate": 1.0
+    },
+    "pdf_numeric_grounding": {
+      "tested": 1148,
+      "grounded": 1148,
+      "agreement_rate": 1.0,
+      "method": "numeric fact values are checked against normalized text layers; image-only PDFs excluded"
+    },
+    "shipment_arithmetic": {
+      "tested": 1,
+      "passed": 1,
+      "agreement_rate": 1.0,
+      "note": "Only rows with all three source quantities are tested."
+    }
+  },
+  "disagreements": [],
+  "new_fact_types": [
+    "x_context_note",
+    "x_document_line",
+    "x_org_chart_entry",
+    "x_workbook_row"
+  ]
+}
