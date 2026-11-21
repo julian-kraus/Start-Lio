@@ -7,3 +7,5 @@ secrets/
 .venv/
 .pytest_cache/
 exports/
+mail_data/
+.DS_Store

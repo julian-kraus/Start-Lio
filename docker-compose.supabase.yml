@@ -1,0 +1,23 @@
+# Run tracker and web against the shared Supabase database instead of the local `db` service.
+#   docker compose -f docker-compose.yml -f docker-compose.supabase.yml up -d tracker web
+# Fall back to local Postgres: docker compose up -d tracker web   (without this file)
+# DATABASE_URL in secrets/supabase.env takes precedence over the POSTGRES_* settings.
+# Only one tracker may poll at a time; a second one waits on the database lock.
+services:
+  tracker:
+    env_file:
+      - .env
+      - secrets/db.env
+      - secrets/supabase.env
+    environment:
+      # libpq looks for a client certificate in $HOME/.postgresql, which the container user cannot read.
+      PGSSLCERT: /tmp/no-client-cert.crt
+      PGSSLKEY: /tmp/no-client-cert.key
+  web:
+    env_file:
+      - secrets/db.env
+      - secrets/supabase.env
+    environment:
+      # libpq looks for a client certificate in $HOME/.postgresql, which the container user cannot read.
+      PGSSLCERT: /tmp/no-client-cert.crt
+      PGSSLKEY: /tmp/no-client-cert.key
