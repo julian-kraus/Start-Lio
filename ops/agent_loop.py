@@ -16,6 +16,7 @@ import socket
 import subprocess
 import sys
 import time
+import uuid
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -25,10 +26,19 @@ NO_WORK = "NO_WORK"
 RATE_HINTS = ("rate limit", "usage limit", "429", "overloaded")
 
 
+def machine_tag() -> str:
+    """Short host name plus a random suffix stored once per clone, so two machines with the same host name
+    (for example two Macs both called "mac") never share agent ids."""
+    tag_file = ROOT / ".agent-machine-id"
+    if not tag_file.exists():
+        host = re.sub(r"[^a-z0-9-]+", "-", socket.gethostname().split(".")[0].lower()).strip("-") or "host"
+        tag_file.write_text(f"{host[:20]}-{uuid.uuid4().hex[:4]}\n")
+    return tag_file.read_text().strip()
+
+
 def default_agent_id(role: str, index: int) -> str:
-    """Unique per machine, role and index, e.g. julians-mbp-worker-1. Nothing to configure per laptop."""
-    host = re.sub(r"[^a-z0-9-]+", "-", socket.gethostname().split(".")[0].lower()).strip("-") or "host"
-    return f"{host}-{role}-{index}"
+    """Unique per clone, role and index, e.g. mac-3f9a-worker-1. Nothing to configure per machine."""
+    return f"{machine_tag()}-{role}-{index}"
 
 
 def stop_requested(stop_at: dt.time) -> str | None:

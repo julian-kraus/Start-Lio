@@ -113,7 +113,7 @@ The portal data is git-ignored and stays on team machines. Where `data/current` 
 PR and say so in the PR. Never commit or print data files.
 
 ## Agent ids and starting the loops
-Agent ids are generated from the machine name, role and number (for example `julians-macbook-pro-worker-1`), so
+Agent ids are generated from the machine name, role and number (for example `mac-3f9a-worker-1`: host name plus a random suffix kept in `.agent-machine-id`), so
 the setup is the same on every machine: `python3 ops/start_agents.py` starts two workers, one reviewer and one
 coordinator; `python3 ops/start_agents.py --stop` stops them. Your id is given in your prompt; use it in claim
 commits, claim comments and the `Agent:` line of PRs.
