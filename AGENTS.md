@@ -55,7 +55,8 @@ code may name a part, supplier or scenario. Every number shown comes from `sourc
 - Read `secrets/`, `.env` or any credential file. Commit secrets, data (`data/`, `mail_data/`, `exports/`) or
   raw portal documents.
 - Push to `main`, force-push anything except your own branch with `--force-with-lease`, reset or delete
-  branches you did not create, close other people's issues or PRs, merge (only the coordinator merges).
+  branches you did not create, close other people's issues or PRs, merge (only coordinators merge: each laptop runs one, and it merges
+  only PRs from its own laptop's agents after a reviewer from the other laptop passed them).
 - Drop, rename or retype tables or columns in the `public`, `kb` or `mail` schemas. Shared schema changes are
   additive and labelled `contract-change`.
 - Put values from the Soony data (IDs, quantities, names, roles, dates) into code, config or prompts. Read them
