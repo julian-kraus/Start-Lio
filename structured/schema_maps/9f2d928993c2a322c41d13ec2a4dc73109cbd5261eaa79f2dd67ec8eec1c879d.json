@@ -1,0 +1,65 @@
+{
+  "signature": "9f2d928993c2a322c41d13ec2a4dc73109cbd5261eaa79f2dd67ec8eec1c879d",
+  "example_path": "soony/erp/purchase_orders_legacy_2024-2025H1.csv",
+  "format": "csv",
+  "sheet": null,
+  "fact_type": "po_line",
+  "subject": [
+    "po_number",
+    "po_line"
+  ],
+  "columns": {
+    "EBELN": {
+      "field": "po_number",
+      "type": "text"
+    },
+    "EBELP": {
+      "field": "po_line",
+      "type": "text"
+    },
+    "LIFNR": {
+      "field": "supplier_id",
+      "type": "text"
+    },
+    "MATNR": {
+      "field": "material_id",
+      "type": "text"
+    },
+    "WERKS": {
+      "field": "werks",
+      "type": "text"
+    },
+    "MENGE": {
+      "field": "qty",
+      "type": "text"
+    },
+    "NETPR": {
+      "field": "unit_price",
+      "type": "text"
+    },
+    "BEDAT": {
+      "field": "order_date",
+      "type": "text"
+    },
+    "EINDT": {
+      "field": "requested_date",
+      "type": "text"
+    },
+    "ZZCONF": {
+      "field": "promised_date",
+      "type": "text"
+    },
+    "WEDAT": {
+      "field": "actual_delivery_date",
+      "type": "text"
+    },
+    "ZZSTAT": {
+      "field": "status",
+      "type": "text"
+    },
+    "ERNAM": {
+      "field": "buyer",
+      "type": "text"
+    }
+  }
+}

@@ -10,16 +10,16 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-2"
+        "route_id": "RT-001"
       },
       "subject_raw": {
-        "id": "row-2"
+        "route_id": "RT-001"
       },
       "attribute": "route_id",
       "value": "RT-001",
@@ -29,16 +29,16 @@
         "row": 2,
         "column": "route_id"
       },
-      "evidence": "row 2: route_id=RT-001",
+      "evidence": "route_id=RT-001",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-2"
+        "route_id": "RT-001"
       },
       "subject_raw": {
-        "id": "row-2"
+        "route_id": "RT-001"
       },
       "attribute": "origin",
       "value": "KRPUS",
@@ -48,16 +48,16 @@
         "row": 2,
         "column": "origin"
       },
-      "evidence": "row 2: origin=KRPUS",
+      "evidence": "origin=KRPUS",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-2"
+        "route_id": "RT-001"
       },
       "subject_raw": {
-        "id": "row-2"
+        "route_id": "RT-001"
       },
       "attribute": "destination",
       "value": "DEHAM",
@@ -67,16 +67,16 @@
         "row": 2,
         "column": "destination"
       },
-      "evidence": "row 2: destination=DEHAM",
+      "evidence": "destination=DEHAM",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-2"
+        "route_id": "RT-001"
       },
       "subject_raw": {
-        "id": "row-2"
+        "route_id": "RT-001"
       },
       "attribute": "mode",
       "value": "sea",
@@ -86,16 +86,16 @@
         "row": 2,
         "column": "mode"
       },
-      "evidence": "row 2: mode=sea",
+      "evidence": "mode=sea",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-2"
+        "route_id": "RT-001"
       },
       "subject_raw": {
-        "id": "row-2"
+        "route_id": "RT-001"
       },
       "attribute": "carrier_id",
       "value": "LSP-01",
@@ -105,16 +105,16 @@
         "row": 2,
         "column": "carrier_id"
       },
-      "evidence": "row 2: carrier_id=LSP-01",
+      "evidence": "carrier_id=LSP-01",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-2"
+        "route_id": "RT-001"
       },
       "subject_raw": {
-        "id": "row-2"
+        "route_id": "RT-001"
       },
       "attribute": "transit_days",
       "value": 36,
@@ -124,16 +124,16 @@
         "row": 2,
         "column": "transit_days"
       },
-      "evidence": "row 2: transit_days=36",
+      "evidence": "transit_days=36",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-2"
+        "route_id": "RT-001"
       },
       "subject_raw": {
-        "id": "row-2"
+        "route_id": "RT-001"
       },
       "attribute": "via",
       "value": "SGSIN",
@@ -143,16 +143,16 @@
         "row": 2,
         "column": "via"
       },
-      "evidence": "row 2: via=SGSIN",
+      "evidence": "via=SGSIN",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-3"
+        "route_id": "RT-002"
       },
       "subject_raw": {
-        "id": "row-3"
+        "route_id": "RT-002"
       },
       "attribute": "route_id",
       "value": "RT-002",
@@ -162,16 +162,16 @@
         "row": 3,
         "column": "route_id"
       },
-      "evidence": "row 3: route_id=RT-002",
+      "evidence": "route_id=RT-002",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-3"
+        "route_id": "RT-002"
       },
       "subject_raw": {
-        "id": "row-3"
+        "route_id": "RT-002"
       },
       "attribute": "origin",
       "value": "CNYTN",
@@ -181,16 +181,16 @@
         "row": 3,
         "column": "origin"
       },
-      "evidence": "row 3: origin=CNYTN",
+      "evidence": "origin=CNYTN",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-3"
+        "route_id": "RT-002"
       },
       "subject_raw": {
-        "id": "row-3"
+        "route_id": "RT-002"
       },
       "attribute": "destination",
       "value": "DEHAM",
@@ -200,16 +200,16 @@
         "row": 3,
         "column": "destination"
       },
-      "evidence": "row 3: destination=DEHAM",
+      "evidence": "destination=DEHAM",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-3"
+        "route_id": "RT-002"
       },
       "subject_raw": {
-        "id": "row-3"
+        "route_id": "RT-002"
       },
       "attribute": "mode",
       "value": "sea",
@@ -219,16 +219,16 @@
         "row": 3,
         "column": "mode"
       },
-      "evidence": "row 3: mode=sea",
+      "evidence": "mode=sea",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-3"
+        "route_id": "RT-002"
       },
       "subject_raw": {
-        "id": "row-3"
+        "route_id": "RT-002"
       },
       "attribute": "carrier_id",
       "value": "LSP-01",
@@ -238,16 +238,16 @@
         "row": 3,
         "column": "carrier_id"
       },
-      "evidence": "row 3: carrier_id=LSP-01",
+      "evidence": "carrier_id=LSP-01",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-3"
+        "route_id": "RT-002"
       },
       "subject_raw": {
-        "id": "row-3"
+        "route_id": "RT-002"
       },
       "attribute": "transit_days",
       "value": 32,
@@ -257,16 +257,16 @@
         "row": 3,
         "column": "transit_days"
       },
-      "evidence": "row 3: transit_days=32",
+      "evidence": "transit_days=32",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-3"
+        "route_id": "RT-002"
       },
       "subject_raw": {
-        "id": "row-3"
+        "route_id": "RT-002"
       },
       "attribute": "via",
       "value": "SGSIN",
@@ -276,16 +276,16 @@
         "row": 3,
         "column": "via"
       },
-      "evidence": "row 3: via=SGSIN",
+      "evidence": "via=SGSIN",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-4"
+        "route_id": "RT-003"
       },
       "subject_raw": {
-        "id": "row-4"
+        "route_id": "RT-003"
       },
       "attribute": "route_id",
       "value": "RT-003",
@@ -295,16 +295,16 @@
         "row": 4,
         "column": "route_id"
       },
-      "evidence": "row 4: route_id=RT-003",
+      "evidence": "route_id=RT-003",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-4"
+        "route_id": "RT-003"
       },
       "subject_raw": {
-        "id": "row-4"
+        "route_id": "RT-003"
       },
       "attribute": "origin",
       "value": "INNSA",
@@ -314,16 +314,16 @@
         "row": 4,
         "column": "origin"
       },
-      "evidence": "row 4: origin=INNSA",
+      "evidence": "origin=INNSA",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-4"
+        "route_id": "RT-003"
       },
       "subject_raw": {
-        "id": "row-4"
+        "route_id": "RT-003"
       },
       "attribute": "destination",
       "value": "DEHAM",
@@ -333,16 +333,16 @@
         "row": 4,
         "column": "destination"
       },
-      "evidence": "row 4: destination=DEHAM",
+      "evidence": "destination=DEHAM",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-4"
+        "route_id": "RT-003"
       },
       "subject_raw": {
-        "id": "row-4"
+        "route_id": "RT-003"
       },
       "attribute": "mode",
       "value": "sea",
@@ -352,16 +352,16 @@
         "row": 4,
         "column": "mode"
       },
-      "evidence": "row 4: mode=sea",
+      "evidence": "mode=sea",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-4"
+        "route_id": "RT-003"
       },
       "subject_raw": {
-        "id": "row-4"
+        "route_id": "RT-003"
       },
       "attribute": "carrier_id",
       "value": "LSP-03",
@@ -371,16 +371,16 @@
         "row": 4,
         "column": "carrier_id"
       },
-      "evidence": "row 4: carrier_id=LSP-03",
+      "evidence": "carrier_id=LSP-03",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-4"
+        "route_id": "RT-003"
       },
       "subject_raw": {
-        "id": "row-4"
+        "route_id": "RT-003"
       },
       "attribute": "transit_days",
       "value": 24,
@@ -390,16 +390,16 @@
         "row": 4,
         "column": "transit_days"
       },
-      "evidence": "row 4: transit_days=24",
+      "evidence": "transit_days=24",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-5"
+        "route_id": "RT-004"
       },
       "subject_raw": {
-        "id": "row-5"
+        "route_id": "RT-004"
       },
       "attribute": "route_id",
       "value": "RT-004",
@@ -409,16 +409,16 @@
         "row": 5,
         "column": "route_id"
       },
-      "evidence": "row 5: route_id=RT-004",
+      "evidence": "route_id=RT-004",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-5"
+        "route_id": "RT-004"
       },
       "subject_raw": {
-        "id": "row-5"
+        "route_id": "RT-004"
       },
       "attribute": "origin",
       "value": "CNYTN",
@@ -428,16 +428,16 @@
         "row": 5,
         "column": "origin"
       },
-      "evidence": "row 5: origin=CNYTN",
+      "evidence": "origin=CNYTN",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-5"
+        "route_id": "RT-004"
       },
       "subject_raw": {
-        "id": "row-5"
+        "route_id": "RT-004"
       },
       "attribute": "destination",
       "value": "NLRTM",
@@ -447,16 +447,16 @@
         "row": 5,
         "column": "destination"
       },
-      "evidence": "row 5: destination=NLRTM",
+      "evidence": "destination=NLRTM",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-5"
+        "route_id": "RT-004"
       },
       "subject_raw": {
-        "id": "row-5"
+        "route_id": "RT-004"
       },
       "attribute": "mode",
       "value": "sea",
@@ -466,16 +466,16 @@
         "row": 5,
         "column": "mode"
       },
-      "evidence": "row 5: mode=sea",
+      "evidence": "mode=sea",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-5"
+        "route_id": "RT-004"
       },
       "subject_raw": {
-        "id": "row-5"
+        "route_id": "RT-004"
       },
       "attribute": "carrier_id",
       "value": "LSP-01",
@@ -485,16 +485,16 @@
         "row": 5,
         "column": "carrier_id"
       },
-      "evidence": "row 5: carrier_id=LSP-01",
+      "evidence": "carrier_id=LSP-01",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-5"
+        "route_id": "RT-004"
       },
       "subject_raw": {
-        "id": "row-5"
+        "route_id": "RT-004"
       },
       "attribute": "transit_days",
       "value": 30,
@@ -504,16 +504,16 @@
         "row": 5,
         "column": "transit_days"
       },
-      "evidence": "row 5: transit_days=30",
+      "evidence": "transit_days=30",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-5"
+        "route_id": "RT-004"
       },
       "subject_raw": {
-        "id": "row-5"
+        "route_id": "RT-004"
       },
       "attribute": "via",
       "value": "SGSIN",
@@ -523,16 +523,16 @@
         "row": 5,
         "column": "via"
       },
-      "evidence": "row 5: via=SGSIN",
+      "evidence": "via=SGSIN",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-6"
+        "route_id": "RT-005"
       },
       "subject_raw": {
-        "id": "row-6"
+        "route_id": "RT-005"
       },
       "attribute": "route_id",
       "value": "RT-005",
@@ -542,16 +542,16 @@
         "row": 6,
         "column": "route_id"
       },
-      "evidence": "row 6: route_id=RT-005",
+      "evidence": "route_id=RT-005",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-6"
+        "route_id": "RT-005"
       },
       "subject_raw": {
-        "id": "row-6"
+        "route_id": "RT-005"
       },
       "attribute": "origin",
       "value": "ICN",
@@ -561,16 +561,16 @@
         "row": 6,
         "column": "origin"
       },
-      "evidence": "row 6: origin=ICN",
+      "evidence": "origin=ICN",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-6"
+        "route_id": "RT-005"
       },
       "subject_raw": {
-        "id": "row-6"
+        "route_id": "RT-005"
       },
       "attribute": "destination",
       "value": "FRA",
@@ -580,16 +580,16 @@
         "row": 6,
         "column": "destination"
       },
-      "evidence": "row 6: destination=FRA",
+      "evidence": "destination=FRA",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-6"
+        "route_id": "RT-005"
       },
       "subject_raw": {
-        "id": "row-6"
+        "route_id": "RT-005"
       },
       "attribute": "mode",
       "value": "air",
@@ -599,16 +599,16 @@
         "row": 6,
         "column": "mode"
       },
-      "evidence": "row 6: mode=air",
+      "evidence": "mode=air",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-6"
+        "route_id": "RT-005"
       },
       "subject_raw": {
-        "id": "row-6"
+        "route_id": "RT-005"
       },
       "attribute": "carrier_id",
       "value": "LSP-02",
@@ -618,16 +618,16 @@
         "row": 6,
         "column": "carrier_id"
       },
-      "evidence": "row 6: carrier_id=LSP-02",
+      "evidence": "carrier_id=LSP-02",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-6"
+        "route_id": "RT-005"
       },
       "subject_raw": {
-        "id": "row-6"
+        "route_id": "RT-005"
       },
       "attribute": "transit_days",
       "value": 2,
@@ -637,16 +637,16 @@
         "row": 6,
         "column": "transit_days"
       },
-      "evidence": "row 6: transit_days=2",
+      "evidence": "transit_days=2",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-7"
+        "route_id": "RT-006"
       },
       "subject_raw": {
-        "id": "row-7"
+        "route_id": "RT-006"
       },
       "attribute": "route_id",
       "value": "RT-006",
@@ -656,16 +656,16 @@
         "row": 7,
         "column": "route_id"
       },
-      "evidence": "row 7: route_id=RT-006",
+      "evidence": "route_id=RT-006",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-7"
+        "route_id": "RT-006"
       },
       "subject_raw": {
-        "id": "row-7"
+        "route_id": "RT-006"
       },
       "attribute": "origin",
       "value": "CAN",
@@ -675,16 +675,16 @@
         "row": 7,
         "column": "origin"
       },
-      "evidence": "row 7: origin=CAN",
+      "evidence": "origin=CAN",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-7"
+        "route_id": "RT-006"
       },
       "subject_raw": {
-        "id": "row-7"
+        "route_id": "RT-006"
       },
       "attribute": "destination",
       "value": "FRA",
@@ -694,16 +694,16 @@
         "row": 7,
         "column": "destination"
       },
-      "evidence": "row 7: destination=FRA",
+      "evidence": "destination=FRA",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-7"
+        "route_id": "RT-006"
       },
       "subject_raw": {
-        "id": "row-7"
+        "route_id": "RT-006"
       },
       "attribute": "mode",
       "value": "air",
@@ -713,16 +713,16 @@
         "row": 7,
         "column": "mode"
       },
-      "evidence": "row 7: mode=air",
+      "evidence": "mode=air",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-7"
+        "route_id": "RT-006"
       },
       "subject_raw": {
-        "id": "row-7"
+        "route_id": "RT-006"
       },
       "attribute": "carrier_id",
       "value": "LSP-02",
@@ -732,16 +732,16 @@
         "row": 7,
         "column": "carrier_id"
       },
-      "evidence": "row 7: carrier_id=LSP-02",
+      "evidence": "carrier_id=LSP-02",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-7"
+        "route_id": "RT-006"
       },
       "subject_raw": {
-        "id": "row-7"
+        "route_id": "RT-006"
       },
       "attribute": "transit_days",
       "value": 2,
@@ -751,16 +751,16 @@
         "row": 7,
         "column": "transit_days"
       },
-      "evidence": "row 7: transit_days=2",
+      "evidence": "transit_days=2",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-8"
+        "route_id": "RT-007"
       },
       "subject_raw": {
-        "id": "row-8"
+        "route_id": "RT-007"
       },
       "attribute": "route_id",
       "value": "RT-007",
@@ -770,16 +770,16 @@
         "row": 8,
         "column": "route_id"
       },
-      "evidence": "row 8: route_id=RT-007",
+      "evidence": "route_id=RT-007",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-8"
+        "route_id": "RT-007"
       },
       "subject_raw": {
-        "id": "row-8"
+        "route_id": "RT-007"
       },
       "attribute": "origin",
       "value": "ORD",
@@ -789,16 +789,16 @@
         "row": 8,
         "column": "origin"
       },
-      "evidence": "row 8: origin=ORD",
+      "evidence": "origin=ORD",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-8"
+        "route_id": "RT-007"
       },
       "subject_raw": {
-        "id": "row-8"
+        "route_id": "RT-007"
       },
       "attribute": "destination",
       "value": "FRA",
@@ -808,16 +808,16 @@
         "row": 8,
         "column": "destination"
       },
-      "evidence": "row 8: destination=FRA",
+      "evidence": "destination=FRA",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-8"
+        "route_id": "RT-007"
       },
       "subject_raw": {
-        "id": "row-8"
+        "route_id": "RT-007"
       },
       "attribute": "mode",
       "value": "air",
@@ -827,16 +827,16 @@
         "row": 8,
         "column": "mode"
       },
-      "evidence": "row 8: mode=air",
+      "evidence": "mode=air",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-8"
+        "route_id": "RT-007"
       },
       "subject_raw": {
-        "id": "row-8"
+        "route_id": "RT-007"
       },
       "attribute": "carrier_id",
       "value": "LSP-02",
@@ -846,16 +846,16 @@
         "row": 8,
         "column": "carrier_id"
       },
-      "evidence": "row 8: carrier_id=LSP-02",
+      "evidence": "carrier_id=LSP-02",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-8"
+        "route_id": "RT-007"
       },
       "subject_raw": {
-        "id": "row-8"
+        "route_id": "RT-007"
       },
       "attribute": "transit_days",
       "value": 2,
@@ -865,16 +865,16 @@
         "row": 8,
         "column": "transit_days"
       },
-      "evidence": "row 8: transit_days=2",
+      "evidence": "transit_days=2",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-9"
+        "route_id": "RT-008"
       },
       "subject_raw": {
-        "id": "row-9"
+        "route_id": "RT-008"
       },
       "attribute": "route_id",
       "value": "RT-008",
@@ -884,16 +884,16 @@
         "row": 9,
         "column": "route_id"
       },
-      "evidence": "row 9: route_id=RT-008",
+      "evidence": "route_id=RT-008",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-9"
+        "route_id": "RT-008"
       },
       "subject_raw": {
-        "id": "row-9"
+        "route_id": "RT-008"
       },
       "attribute": "origin",
       "value": "BOM",
@@ -903,16 +903,16 @@
         "row": 9,
         "column": "origin"
       },
-      "evidence": "row 9: origin=BOM",
+      "evidence": "origin=BOM",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-9"
+        "route_id": "RT-008"
       },
       "subject_raw": {
-        "id": "row-9"
+        "route_id": "RT-008"
       },
       "attribute": "destination",
       "value": "FRA",
@@ -922,16 +922,16 @@
         "row": 9,
         "column": "destination"
       },
-      "evidence": "row 9: destination=FRA",
+      "evidence": "destination=FRA",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-9"
+        "route_id": "RT-008"
       },
       "subject_raw": {
-        "id": "row-9"
+        "route_id": "RT-008"
       },
       "attribute": "mode",
       "value": "air",
@@ -941,16 +941,16 @@
         "row": 9,
         "column": "mode"
       },
-      "evidence": "row 9: mode=air",
+      "evidence": "mode=air",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-9"
+        "route_id": "RT-008"
       },
       "subject_raw": {
-        "id": "row-9"
+        "route_id": "RT-008"
       },
       "attribute": "carrier_id",
       "value": "LSP-02",
@@ -960,16 +960,16 @@
         "row": 9,
         "column": "carrier_id"
       },
-      "evidence": "row 9: carrier_id=LSP-02",
+      "evidence": "carrier_id=LSP-02",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-9"
+        "route_id": "RT-008"
       },
       "subject_raw": {
-        "id": "row-9"
+        "route_id": "RT-008"
       },
       "attribute": "transit_days",
       "value": 2,
@@ -979,16 +979,16 @@
         "row": 9,
         "column": "transit_days"
       },
-      "evidence": "row 9: transit_days=2",
+      "evidence": "transit_days=2",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-10"
+        "route_id": "RT-009"
       },
       "subject_raw": {
-        "id": "row-10"
+        "route_id": "RT-009"
       },
       "attribute": "route_id",
       "value": "RT-009",
@@ -998,16 +998,16 @@
         "row": 10,
         "column": "route_id"
       },
-      "evidence": "row 10: route_id=RT-009",
+      "evidence": "route_id=RT-009",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-10"
+        "route_id": "RT-009"
       },
       "subject_raw": {
-        "id": "row-10"
+        "route_id": "RT-009"
       },
       "attribute": "origin",
       "value": "FRA",
@@ -1017,16 +1017,16 @@
         "row": 10,
         "column": "origin"
       },
-      "evidence": "row 10: origin=FRA",
+      "evidence": "origin=FRA",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-10"
+        "route_id": "RT-009"
       },
       "subject_raw": {
-        "id": "row-10"
+        "route_id": "RT-009"
       },
       "attribute": "destination",
       "value": "DC-HAM",
@@ -1036,16 +1036,16 @@
         "row": 10,
         "column": "destination"
       },
-      "evidence": "row 10: destination=DC-HAM",
+      "evidence": "destination=DC-HAM",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-10"
+        "route_id": "RT-009"
       },
       "subject_raw": {
-        "id": "row-10"
+        "route_id": "RT-009"
       },
       "attribute": "mode",
       "value": "road",
@@ -1055,16 +1055,16 @@
         "row": 10,
         "column": "mode"
       },
-      "evidence": "row 10: mode=road",
+      "evidence": "mode=road",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-10"
+        "route_id": "RT-009"
       },
       "subject_raw": {
-        "id": "row-10"
+        "route_id": "RT-009"
       },
       "attribute": "carrier_id",
       "value": "LSP-02",
@@ -1074,16 +1074,16 @@
         "row": 10,
         "column": "carrier_id"
       },
-      "evidence": "row 10: carrier_id=LSP-02",
+      "evidence": "carrier_id=LSP-02",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-10"
+        "route_id": "RT-009"
       },
       "subject_raw": {
-        "id": "row-10"
+        "route_id": "RT-009"
       },
       "attribute": "transit_days",
       "value": 1,
@@ -1093,16 +1093,16 @@
         "row": 10,
         "column": "transit_days"
       },
-      "evidence": "row 10: transit_days=1",
+      "evidence": "transit_days=1",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-11"
+        "route_id": "RT-010"
       },
       "subject_raw": {
-        "id": "row-11"
+        "route_id": "RT-010"
       },
       "attribute": "route_id",
       "value": "RT-010",
@@ -1112,16 +1112,16 @@
         "row": 11,
         "column": "route_id"
       },
-      "evidence": "row 11: route_id=RT-010",
+      "evidence": "route_id=RT-010",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-11"
+        "route_id": "RT-010"
       },
       "subject_raw": {
-        "id": "row-11"
+        "route_id": "RT-010"
       },
       "attribute": "origin",
       "value": "PLPOZ",
@@ -1131,16 +1131,16 @@
         "row": 11,
         "column": "origin"
       },
-      "evidence": "row 11: origin=PLPOZ",
+      "evidence": "origin=PLPOZ",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-11"
+        "route_id": "RT-010"
       },
       "subject_raw": {
-        "id": "row-11"
+        "route_id": "RT-010"
       },
       "attribute": "destination",
       "value": "DC-HAM",
@@ -1150,16 +1150,16 @@
         "row": 11,
         "column": "destination"
       },
-      "evidence": "row 11: destination=DC-HAM",
+      "evidence": "destination=DC-HAM",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-11"
+        "route_id": "RT-010"
       },
       "subject_raw": {
-        "id": "row-11"
+        "route_id": "RT-010"
       },
       "attribute": "mode",
       "value": "road",
@@ -1169,16 +1169,16 @@
         "row": 11,
         "column": "mode"
       },
-      "evidence": "row 11: mode=road",
+      "evidence": "mode=road",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-11"
+        "route_id": "RT-010"
       },
       "subject_raw": {
-        "id": "row-11"
+        "route_id": "RT-010"
       },
       "attribute": "carrier_id",
       "value": "LSP-04",
@@ -1188,16 +1188,16 @@
         "row": 11,
         "column": "carrier_id"
       },
-      "evidence": "row 11: carrier_id=LSP-04",
+      "evidence": "carrier_id=LSP-04",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-11"
+        "route_id": "RT-010"
       },
       "subject_raw": {
-        "id": "row-11"
+        "route_id": "RT-010"
       },
       "attribute": "transit_days",
       "value": 1,
@@ -1207,16 +1207,16 @@
         "row": 11,
         "column": "transit_days"
       },
-      "evidence": "row 11: transit_days=1",
+      "evidence": "transit_days=1",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-12"
+        "route_id": "RT-011"
       },
       "subject_raw": {
-        "id": "row-12"
+        "route_id": "RT-011"
       },
       "attribute": "route_id",
       "value": "RT-011",
@@ -1226,16 +1226,16 @@
         "row": 12,
         "column": "route_id"
       },
-      "evidence": "row 12: route_id=RT-011",
+      "evidence": "route_id=RT-011",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-12"
+        "route_id": "RT-011"
       },
       "subject_raw": {
-        "id": "row-12"
+        "route_id": "RT-011"
       },
       "attribute": "origin",
       "value": "DEHAM",
@@ -1245,16 +1245,16 @@
         "row": 12,
         "column": "origin"
       },
-      "evidence": "row 12: origin=DEHAM",
+      "evidence": "origin=DEHAM",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-12"
+        "route_id": "RT-011"
       },
       "subject_raw": {
-        "id": "row-12"
+        "route_id": "RT-011"
       },
       "attribute": "destination",
       "value": "DC-HAM",
@@ -1264,16 +1264,16 @@
         "row": 12,
         "column": "destination"
       },
-      "evidence": "row 12: destination=DC-HAM",
+      "evidence": "destination=DC-HAM",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-12"
+        "route_id": "RT-011"
       },
       "subject_raw": {
-        "id": "row-12"
+        "route_id": "RT-011"
       },
       "attribute": "mode",
       "value": "road",
@@ -1283,16 +1283,16 @@
         "row": 12,
         "column": "mode"
       },
-      "evidence": "row 12: mode=road",
+      "evidence": "mode=road",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-12"
+        "route_id": "RT-011"
       },
       "subject_raw": {
-        "id": "row-12"
+        "route_id": "RT-011"
       },
       "attribute": "carrier_id",
       "value": "LSP-01",
@@ -1302,16 +1302,16 @@
         "row": 12,
         "column": "carrier_id"
       },
-      "evidence": "row 12: carrier_id=LSP-01",
+      "evidence": "carrier_id=LSP-01",
       "confidence": "high"
     },
     {
       "fact_type": "route",
       "subject": {
-        "id": "row-12"
+        "route_id": "RT-011"
       },
       "subject_raw": {
-        "id": "row-12"
+        "route_id": "RT-011"
       },
       "attribute": "transit_days",
       "value": 1,
@@ -1321,7 +1321,7 @@
         "row": 12,
         "column": "transit_days"
       },
-      "evidence": "row 12: transit_days=1",
+      "evidence": "transit_days=1",
       "confidence": "high"
     }
   ],

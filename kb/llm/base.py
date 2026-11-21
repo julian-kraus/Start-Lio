@@ -1,44 +1,87 @@
-"""The extraction interface every LLM provider adapter implements, plus the queue worker that uses it.
+"""The interface every LLM provider adapter implements. No provider is wired in yet.
 
-An adapter is configured with KB_LLM_ADAPTER="package.module:ClassName". Until one exists, documents wait in
-kb.extraction_queue and show up as `pending_extraction` issues; nothing is skipped silently.
+Three roles, matching the ingestion flow:
+- classify: survey a file the cheap checks could not route (known doc kind, nothing fits, ambiguous);
+- extract:  read one document into an envelope that follows the contract (structuring agent);
+- design:   propose a new structure (doc kind or table schema map) for something unknown (structure designer).
+
+An adapter may implement a subset; `supports()` tells the pipeline which roles are available. Adapters are selected
+with KB_LLM_ADAPTER="package.module:ClassName".
 """
 
 from __future__ import annotations
 
 import importlib
 import io
-import json
-from abc import ABC, abstractmethod
+from abc import ABC
 from dataclasses import dataclass, field
-from pathlib import Path
 
 from pypdf import PdfReader
 
 from tracker.diff import _docx_text
 
-from .. import facts as facts_mod
-from ..loader import load_envelope
+ROLES = ("classify", "extract", "design")
 
 
 @dataclass
 class Document:
-    """A source file prepared so that any vision-capable model can read it."""
+    """A source file prepared so that any model can read it: text layer and/or page images."""
     path: str
     sha256: str
     container: str
-    text: str | None = None                       # text layer or plain text, if any
+    text: str | None = None
     images: list[tuple[str, bytes]] = field(default_factory=list)   # (media type, bytes) per page or image
     pages_without_text: list[int] = field(default_factory=list)
 
 
-class LLMClient(ABC):
-    """One method: read a document and return an envelope dict that follows the contract schema."""
-    name: str = "llm"
+@dataclass
+class Structure:
+    """A doc kind from the registry: the 'structure file' the structuring agent follows."""
+    name: str
+    description: str
+    recognise: dict | None = None
+    status: str = "core"
 
-    @abstractmethod
-    def extract(self, document: Document, schema: dict, instructions: str) -> dict:
-        ...
+
+@dataclass
+class Routing:
+    decision: str            # kind | none | ambiguous
+    kind: str | None
+    reason: str
+    by: str                  # rules | llm:<adapter> | reuse
+
+
+@dataclass
+class StructureProposal:
+    target: str              # doc_kind | schema_map
+    name: str
+    reason: str
+    description: str | None = None        # doc_kind: markdown with reading rules
+    recognise: dict | None = None         # doc_kind: path_globs / any_phrases / container
+    schema_map: dict | None = None        # schema_map: same format as structured/schema_maps
+
+
+class LLMClient(ABC):
+    name: str = "llm"
+    model: str | None = None
+    needs_images: bool = True    # False lets the pipeline skip rendering PDF pages
+
+    def classify(self, document: Document, kinds: list[Structure]) -> Routing:
+        raise NotImplementedError
+
+    def extract(self, document: Document, structure: Structure, schema: dict, contract: dict) -> dict:
+        raise NotImplementedError
+
+    def design(self, document: Document, similar: list[Structure], contract: dict,
+               sample_rows: list[list[str]] | None = None) -> StructureProposal:
+        raise NotImplementedError
+
+    def supports(self, role: str) -> bool:
+        return getattr(type(self), role) is not getattr(LLMClient, role)
+
+    @property
+    def label(self) -> str:
+        return f"llm:{self.name}" + (f"/{self.model}" if self.model else "")
 
 
 def render_pdf_pages(data: bytes) -> list[bytes]:
@@ -56,22 +99,26 @@ def render_pdf_pages(data: bytes) -> list[bytes]:
     return out
 
 
-def normalise(path: str, sha: str, container: str, data: bytes, *, render: bool = True) -> Document:
-    doc = Document(path, sha, container)
+def text_of(container: str, data: bytes) -> tuple[str | None, list[int]]:
+    """Text layer (PDF), document text (docx) or plain text; images have none."""
     if container == "pdf":
         reader = PdfReader(io.BytesIO(data))
         texts = [(page.extract_text() or "") for page in reader.pages]
-        doc.text = "\n\f\n".join(texts)
-        doc.pages_without_text = [i + 1 for i, t in enumerate(texts) if len(t.strip()) < 20]
-        if render:
-            doc.images = [("image/png", png) for png in render_pdf_pages(data)]
+        return "\n\f\n".join(texts), [i + 1 for i, t in enumerate(texts) if len(t.strip()) < 20]
+    if container == "docx":
+        return _docx_text(data), []
+    if container in ("image", "binary", "zip"):
+        return None, []
+    return data.decode("utf-8", errors="replace"), []
+
+
+def normalise(path: str, sha: str, container: str, data: bytes, *, render: bool = True) -> Document:
+    text, empty_pages = text_of(container, data)
+    doc = Document(path, sha, container, text=text, pages_without_text=empty_pages)
+    if container == "pdf" and render:
+        doc.images = [("image/png", png) for png in render_pdf_pages(data)]
     elif container == "image":
-        media = "image/png" if data.startswith(b"\x89PNG") else "image/jpeg"
-        doc.images = [(media, data)]
-    elif container == "docx":
-        doc.text = _docx_text(data)
-    else:
-        doc.text = data.decode("utf-8", errors="replace")
+        doc.images = [("image/png" if data.startswith(b"\x89PNG") else "image/jpeg", data)]
     return doc
 
 
@@ -86,48 +133,3 @@ def load_adapter(spec: str | None) -> LLMClient | None:
     if not isinstance(client, LLMClient):
         raise SystemExit(f"{spec} does not implement kb.llm.base.LLMClient")
     return client
-
-
-def instructions_for(conn, structured: Path) -> str:
-    """The doc-kind registry and the learnings are the instructions; nothing about the data lives in code."""
-    parts = ["Classify the document against these document kinds and extract facts as the matching kind describes. "
-             "If no kind fits, propose a new kind in doc_kind and use x_<name> fact types."]
-    for row in conn.execute("SELECT name, description FROM doc_kinds ORDER BY name"):
-        parts.append(f"## Document kind: {row['name']}\n{row['description']}")
-    learnings = structured / "LEARNINGS.md"
-    if learnings.is_file():
-        parts.append("## Learnings from earlier extraction\n" + learnings.read_text())
-    return "\n\n".join(parts)
-
-
-def drain_queue(conn, client: LLMClient, read_bytes, structured: Path, confidence_map: dict,
-                limit: int = 20) -> dict:
-    schema_path = structured / "contract" / "envelope.schema.json"
-    if not schema_path.is_file():
-        raise SystemExit(f"{schema_path} is missing; the contract must exist before LLM extraction")
-    schema = json.loads(schema_path.read_text())
-    instructions = instructions_for(conn, structured)
-    counts = {"done": 0, "failed": 0}
-    items = conn.execute("SELECT path, sha256, container FROM extraction_queue WHERE state = 'pending' "
-                         "ORDER BY enqueued_at LIMIT %s", (limit,)).fetchall()
-    for item in items:
-        try:
-            doc = normalise(item["path"], item["sha256"], item["container"], read_bytes(item["sha256"], item["path"]))
-            env = client.extract(doc, schema, instructions)
-            env["source"] = {"path": item["path"], "sha256": item["sha256"]}
-            env["extracted_by"] = f"llm-{client.name}"
-            load_envelope(conn, env, current_sha=item["sha256"], confidence_map=confidence_map)
-            facts_mod.upsert_document(conn, item["path"], item["sha256"], container=item["container"],
-                                      status="loaded", extractor=f"llm:{client.name}", doc_kind=env.get("doc_kind"))
-            conn.execute("UPDATE extraction_queue SET state = 'done', updated_at = now() WHERE path = %s AND sha256 = %s",
-                         (item["path"], item["sha256"]))
-            counts["done"] += 1
-        except Exception as exc:  # one bad document must not stop the queue
-            conn.rollback()
-            conn.execute(
-                "UPDATE extraction_queue SET attempts = attempts + 1, last_error = %s, updated_at = now(), "
-                "state = CASE WHEN attempts + 1 >= 3 THEN 'failed' ELSE state END WHERE path = %s AND sha256 = %s",
-                (f"{type(exc).__name__}: {exc}"[:2000], item["path"], item["sha256"]))
-            counts["failed"] += 1
-        conn.commit()
-    return counts

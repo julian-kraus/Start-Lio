@@ -1,3 +1,8 @@
+recognise:
+  path_globs: ["**/*contract*"]
+  any_phrases: ["agreement", "contract"]
+  container: pdf
+
 # contract
 
-Extract incoterms, terms and supplier-part to Soony-material cross references; image-only annexes remain reviewable.
+Extract grounded fields, preserve source-language evidence, and retain unresolved joins explicitly.

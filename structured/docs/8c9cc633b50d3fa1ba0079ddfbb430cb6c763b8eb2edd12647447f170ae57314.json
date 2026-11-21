@@ -10,7 +10,7 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
@@ -28,7 +28,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "region_hint": "paper field"
       },
       "evidence": "FOB Yantian",
       "confidence": "medium",
@@ -49,7 +50,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "2027-02-28",
       "confidence": "medium",
@@ -70,7 +72,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A prices in CNY; NET30 from receipt of a correct invoice",
       "confidence": "medium",
@@ -91,7 +94,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "0.5% of delayed order value per commenced week, capped at 5%",
       "confidence": "medium",
@@ -112,7 +116,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-003 1.52 CNY MOQ 20000 LT 70d",
       "confidence": "medium"
@@ -132,7 +137,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-003 1.52 CNY MOQ 20000 LT 70d",
       "confidence": "medium"
@@ -152,7 +158,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-003 1.52 CNY MOQ 20000 LT 70d",
       "confidence": "medium"
@@ -172,7 +179,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-003 1.52 CNY MOQ 20000 LT 70d",
       "confidence": "medium"
@@ -192,7 +200,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-006 21.01 CNY MOQ 10000 LT 70d",
       "confidence": "medium"
@@ -212,7 +221,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-006 21.01 CNY MOQ 10000 LT 70d",
       "confidence": "medium"
@@ -232,7 +242,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-006 21.01 CNY MOQ 10000 LT 70d",
       "confidence": "medium"
@@ -252,7 +263,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-006 21.01 CNY MOQ 10000 LT 70d",
       "confidence": "medium"
@@ -272,7 +284,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-010 83.31 CNY MOQ 5000 LT 77d",
       "confidence": "medium"
@@ -292,7 +305,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-010 83.31 CNY MOQ 5000 LT 77d",
       "confidence": "medium"
@@ -312,7 +326,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-010 83.31 CNY MOQ 5000 LT 77d",
       "confidence": "medium"
@@ -332,14 +347,15 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-010 83.31 CNY MOQ 5000 LT 77d",
       "confidence": "medium"
     }
   ],
   "unreadable": [
-    "PDF has no usable text layer; visually inspected as image."
+    "PDF has no usable text layer; reference envelope retained for visual review."
   ],
   "proposed_fact_types": []
 }

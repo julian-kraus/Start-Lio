@@ -10,7 +10,7 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
@@ -23,15 +23,38 @@
         "supplier_id": "SUP-0019",
         "material_id": "CMP-GAM-003"
       },
-      "attribute": "old_price",
-      "value": 1.52,
-      "unit": "source currency",
+      "attribute": "description",
+      "value": "Game Card Case (clear)",
+      "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Price list",
-        "row": 2
+        "row": 2,
+        "column": "description"
       },
-      "evidence": "CMP-GAM-003 | Game Card Case (clear) | 1.52 | 1.57 | CNY | 2026-07-01",
+      "evidence": "Game Card Case (clear)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-003"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-003"
+      },
+      "attribute": "current_price",
+      "value": 1.52,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 2,
+        "column": "current_price"
+      },
+      "evidence": "1.52",
       "confidence": "high"
     },
     {
@@ -46,13 +69,58 @@
       },
       "attribute": "new_price",
       "value": 1.57,
-      "unit": "source currency",
+      "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Price list",
-        "row": 2
+        "row": 2,
+        "column": "new_price"
       },
-      "evidence": "CMP-GAM-003 | Game Card Case (clear) | 1.52 | 1.57 | CNY | 2026-07-01",
+      "evidence": "1.57",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-003"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-003"
+      },
+      "attribute": "currency",
+      "value": "CNY",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 2,
+        "column": "currency"
+      },
+      "evidence": "CNY",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-003"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-003"
+      },
+      "attribute": "valid_from",
+      "value": "2026-07-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 2,
+        "column": "valid_from"
+      },
+      "evidence": "2026-07-01",
       "confidence": "high"
     },
     {
@@ -65,15 +133,38 @@
         "supplier_id": "SUP-0019",
         "material_id": "CMP-GAM-006"
       },
-      "attribute": "old_price",
-      "value": 21.01,
-      "unit": "source currency",
+      "attribute": "description",
+      "value": "Steel Case Grand Heist 6",
+      "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Price list",
-        "row": 3
+        "row": 3,
+        "column": "description"
       },
-      "evidence": "CMP-GAM-006 | Steel Case Grand Heist 6 | 21.01 | 21.64 | CNY | 2026-07-01",
+      "evidence": "Steel Case Grand Heist 6",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-006"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-006"
+      },
+      "attribute": "current_price",
+      "value": 21.01,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 3,
+        "column": "current_price"
+      },
+      "evidence": "21.01",
       "confidence": "high"
     },
     {
@@ -88,13 +179,58 @@
       },
       "attribute": "new_price",
       "value": 21.64,
-      "unit": "source currency",
+      "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Price list",
-        "row": 3
+        "row": 3,
+        "column": "new_price"
       },
-      "evidence": "CMP-GAM-006 | Steel Case Grand Heist 6 | 21.01 | 21.64 | CNY | 2026-07-01",
+      "evidence": "21.64",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-006"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-006"
+      },
+      "attribute": "currency",
+      "value": "CNY",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 3,
+        "column": "currency"
+      },
+      "evidence": "CNY",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-006"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-006"
+      },
+      "attribute": "valid_from",
+      "value": "2026-07-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 3,
+        "column": "valid_from"
+      },
+      "evidence": "2026-07-01",
       "confidence": "high"
     },
     {
@@ -107,15 +243,38 @@
         "supplier_id": "SUP-0019",
         "material_id": "CMP-GAM-010"
       },
-      "attribute": "old_price",
-      "value": 83.31,
-      "unit": "source currency",
+      "attribute": "description",
+      "value": "Statue \"The Getaway\" (die-cast, 18 cm)",
+      "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Price list",
-        "row": 4
+        "row": 4,
+        "column": "description"
       },
-      "evidence": "CMP-GAM-010 | Statue \"The Getaway\" (die-cast, 18 cm) | 83.31 | 85.81 | CNY | 2026-07-01",
+      "evidence": "Statue \"The Getaway\" (die-cast, 18 cm)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-010"
+      },
+      "attribute": "current_price",
+      "value": 83.31,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 4,
+        "column": "current_price"
+      },
+      "evidence": "83.31",
       "confidence": "high"
     },
     {
@@ -130,13 +289,58 @@
       },
       "attribute": "new_price",
       "value": 85.81,
-      "unit": "source currency",
+      "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Price list",
-        "row": 4
+        "row": 4,
+        "column": "new_price"
       },
-      "evidence": "CMP-GAM-010 | Statue \"The Getaway\" (die-cast, 18 cm) | 83.31 | 85.81 | CNY | 2026-07-01",
+      "evidence": "85.81",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-010"
+      },
+      "attribute": "currency",
+      "value": "CNY",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 4,
+        "column": "currency"
+      },
+      "evidence": "CNY",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "price_change",
+      "subject": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-010"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0019",
+        "material_id": "CMP-GAM-010"
+      },
+      "attribute": "valid_from",
+      "value": "2026-07-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "sheet": "Price list",
+        "row": 4,
+        "column": "valid_from"
+      },
+      "evidence": "2026-07-01",
       "confidence": "high"
     }
   ],

@@ -7,13 +7,10 @@
   "doc_kind": "delivery_note_scan",
   "doc_kind_confidence": "high",
   "languages": [
-    "en",
-    "pl",
-    "zh",
-    "ko"
+    "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
@@ -31,14 +28,12 @@
         ]
       },
       "attribute": "po_number",
-      "value": [
-        "4500318682"
-      ],
+      "value": null,
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "['4500318682']",
       "confidence": "medium"
@@ -63,7 +58,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "CMP-GAM-010",
       "confidence": "medium"
@@ -88,7 +83,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "CMP-GAM-010",
       "confidence": "medium"
@@ -113,7 +108,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "13500",
       "confidence": "medium"
@@ -138,7 +133,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "None",
       "confidence": "medium"
@@ -163,7 +158,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "False",
       "confidence": "medium"
@@ -188,7 +183,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "13500",
       "confidence": "medium"
@@ -213,7 +208,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "PCS",
       "confidence": "medium"
@@ -238,7 +233,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "6",
       "confidence": "medium"
@@ -263,7 +258,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "Nordhav Shipping A/S",
       "confidence": "medium"
@@ -288,7 +283,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "2026-08-05",
       "confidence": "medium"
@@ -313,7 +308,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "None",
       "confidence": "medium"
@@ -338,7 +333,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "True",
       "confidence": "medium"
@@ -363,7 +358,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "132",
       "confidence": "medium"

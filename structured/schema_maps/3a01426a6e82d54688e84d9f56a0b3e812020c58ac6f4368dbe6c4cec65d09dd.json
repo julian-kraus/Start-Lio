@@ -1,0 +1,53 @@
+{
+  "signature": "3a01426a6e82d54688e84d9f56a0b3e812020c58ac6f4368dbe6c4cec65d09dd",
+  "example_path": "suppliers/SUP-0029_Guangzhou_PackRight/components.csv",
+  "format": "csv",
+  "sheet": null,
+  "fact_type": "supplier_part",
+  "subject": [
+    "supplier_id",
+    "material_id"
+  ],
+  "columns": {
+    "component_id": {
+      "field": "material_id",
+      "type": "text"
+    },
+    "description": {
+      "field": "description",
+      "type": "text"
+    },
+    "category": {
+      "field": "category",
+      "type": "text"
+    },
+    "share": {
+      "field": "share",
+      "type": "text"
+    },
+    "unit_price": {
+      "field": "unit_price",
+      "type": "text"
+    },
+    "currency": {
+      "field": "currency",
+      "type": "text"
+    },
+    "lead_time_days": {
+      "field": "lead_time_days",
+      "type": "text"
+    },
+    "moq": {
+      "field": "moq",
+      "type": "text"
+    },
+    "primary": {
+      "field": "primary",
+      "type": "text"
+    },
+    "note": {
+      "field": "note",
+      "type": "text"
+    }
+  }
+}

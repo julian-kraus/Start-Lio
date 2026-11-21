@@ -1,0 +1,292 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+    "sha256": "0251401ec2bb23acc247213debd3011bfec3eab9393e587b858c112ff317524c",
+    "bytes": 73532
+  },
+  "doc_kind": "other_document",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+source-envelope",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "x_document_line",
+      "subject": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "5c97238899ba"
+      },
+      "subject_raw": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "5c97238899ba"
+      },
+      "attribute": "text",
+      "value": "Guangzhou PackRight Packaging Co., Ltd.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 1
+      },
+      "evidence": "Guangzhou PackRight Packaging Co., Ltd.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_document_line",
+      "subject": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "5ca075dd1743"
+      },
+      "subject_raw": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "5ca075dd1743"
+      },
+      "attribute": "text",
+      "value": "供货通知 / Supply notice: rare-earth export licence",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 2
+      },
+      "evidence": "供货通知 / Supply notice: rare-earth export licence",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_document_line",
+      "subject": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "3fb48f2d47dd"
+      },
+      "subject_raw": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "3fb48f2d47dd"
+      },
+      "attribute": "text",
+      "value": "To: Soony Interactive GmbH, Procurement · Guangzhou, 2026-11-21",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 3
+      },
+      "evidence": "To: Soony Interactive GmbH, Procurement · Guangzhou, 2026-11-21",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_document_line",
+      "subject": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "725cb0fe8f6d"
+      },
+      "subject_raw": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "725cb0fe8f6d"
+      },
+      "attribute": "text",
+      "value": "尊敬的客户：我司磁铁供应商 Jiangxi RareMag Materials Co., Ltd.（Ganzhou,",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 4
+      },
+      "evidence": "尊敬的客户：我司磁铁供应商 Jiangxi RareMag Materials Co., Ltd.（Ganzhou,",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_document_line",
+      "subject": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "e29ffca781c0"
+      },
+      "subject_raw": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "e29ffca781c0"
+      },
+      "attribute": "text",
+      "value": "CN）通知，受稀土出口许可新规影响，其磁铁出货须重新申请许可。",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 5
+      },
+      "evidence": "CN）通知，受稀土出口许可新规影响，其磁铁出货须重新申请许可。",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_document_line",
+      "subject": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "25990aaa8cc7"
+      },
+      "subject_raw": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "25990aaa8cc7"
+      },
+      "attribute": "text",
+      "value": "Our magnet supplier Jiangxi RareMag Materials Co., Ltd. (Ganzhou, CN) has informed us that under the new licensing",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 6
+      },
+      "evidence": "Our magnet supplier Jiangxi RareMag Materials Co., Ltd. (Ganzhou, CN) has informed us that under the new licensing",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_document_line",
+      "subject": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "2c4cf3c43895"
+      },
+      "subject_raw": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "2c4cf3c43895"
+      },
+      "attribute": "text",
+      "value": "rules for rare-earth products its shipments of RM-N42-D0401 are suspended until a licence is granted. We hold magnets",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 7
+      },
+      "evidence": "rules for rare-earth products its shipments of RM-N42-D0401 are suspended until a licence is granted. We hold magnets",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_document_line",
+      "subject": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "bc363f1daced"
+      },
+      "subject_raw": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "bc363f1daced"
+      },
+      "attribute": "text",
+      "value": "for the boxes already confirmed for November.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 8
+      },
+      "evidence": "for the boxes already confirmed for November.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_document_line",
+      "subject": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "adadab0c4cd9"
+      },
+      "subject_raw": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "adadab0c4cd9"
+      },
+      "attribute": "text",
+      "value": "Affected: PR-RB-2207 production from December. Our confirmed dates for PR-RB-2207 with delivery after 2026-12-01",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 9
+      },
+      "evidence": "Affected: PR-RB-2207 production from December. Our confirmed dates for PR-RB-2207 with delivery after 2026-12-01",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_document_line",
+      "subject": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "9ee155ef1357"
+      },
+      "subject_raw": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "9ee155ef1357"
+      },
+      "attribute": "text",
+      "value": "move out by 6 weeks. Printed parts without magnets are not affected.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 10
+      },
+      "evidence": "move out by 6 weeks. Printed parts without magnets are not affected.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_document_line",
+      "subject": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "458ee04fb8a1"
+      },
+      "subject_raw": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "458ee04fb8a1"
+      },
+      "attribute": "text",
+      "value": "We ask for your understanding and will update you when the licence status changes. Alternative closures (ferrite magnet,",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 11
+      },
+      "evidence": "We ask for your understanding and will update you when the licence status changes. Alternative closures (ferrite magnet,",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_document_line",
+      "subject": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "e0694c84536d"
+      },
+      "subject_raw": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "e0694c84536d"
+      },
+      "attribute": "text",
+      "value": "ribbon) can be sampled within 10 days on request.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "ribbon) can be sampled within 10 days on request.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "x_document_line",
+      "subject": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "a7adcc1ed987"
+      },
+      "subject_raw": {
+        "source_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+        "line_key": "a7adcc1ed987"
+      },
+      "attribute": "text",
+      "value": "Lin Hui, Guangzhou PackRight Packaging Co., Ltd., +86 20 8200 1100",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "Lin Hui, Guangzhou PackRight Packaging Co., Ltd., +86 20 8200 1100",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

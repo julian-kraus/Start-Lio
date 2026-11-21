@@ -4,34 +4,27 @@
       "compared_fields": 0,
       "agree": 0,
       "agreement_rate": null,
-      "note": "No comparable join is not treated as agreement."
+      "join": "goods_receipt.delivery_note + material_id"
     },
     "oc_line_join": {
-      "oc_quantity_lines": 224,
-      "joined": 224,
+      "oc_quantity_lines": 217,
+      "joined": 216,
       "item_rule": "exact",
-      "exact_hits": 224,
+      "exact_hits": 216,
       "div10_hits": 0,
-      "agreement_rate": 1.0
-    },
-    "pdf_numeric_grounding": {
-      "tested": 1148,
-      "grounded": 1148,
-      "agreement_rate": 1.0,
-      "method": "numeric fact values are checked against normalized text layers; image-only PDFs excluded"
+      "agreement_rate": 0.9954
     },
     "shipment_arithmetic": {
       "tested": 1,
       "passed": 1,
-      "agreement_rate": 1.0,
-      "note": "Only rows with all three source quantities are tested."
+      "agreement_rate": 1.0
     }
   },
   "disagreements": [],
   "new_fact_types": [
     "x_context_note",
     "x_document_line",
-    "x_org_chart_entry",
+    "x_news_record",
     "x_workbook_row"
   ]
 }

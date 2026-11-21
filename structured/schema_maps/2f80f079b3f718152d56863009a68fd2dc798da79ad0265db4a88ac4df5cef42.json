@@ -1,0 +1,40 @@
+{
+  "signature": "2f80f079b3f718152d56863009a68fd2dc798da79ad0265db4a88ac4df5cef42",
+  "example_path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Price_list_20250624.xlsx",
+  "format": "xlsx",
+  "sheet": "Price list",
+  "fact_type": "price_change",
+  "subject": [
+    "material_id"
+  ],
+  "columns": {
+    "Material": {
+      "field": "material_id",
+      "type": "text"
+    },
+    "Description": {
+      "field": "description",
+      "type": "text"
+    },
+    "Current price": {
+      "field": "current_price",
+      "type": "text"
+    },
+    "New price": {
+      "field": "new_price",
+      "type": "text"
+    },
+    "Currency": {
+      "field": "currency",
+      "type": "text"
+    },
+    "Valid from": {
+      "field": "valid_from",
+      "type": "text"
+    }
+  },
+  "header_detection": {
+    "row": 1,
+    "title_rows": []
+  }
+}

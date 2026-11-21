@@ -1,0 +1,40 @@
+{
+  "signature": "2f84320e9a3d6f773bbb86b84cce2b9708783fb43a809f35aec7f6b1d4a76dab",
+  "example_path": "soony/master/routes.csv",
+  "format": "csv",
+  "sheet": null,
+  "fact_type": "route",
+  "subject": [
+    "route_id"
+  ],
+  "columns": {
+    "route_id": {
+      "field": "route_id",
+      "type": "text"
+    },
+    "origin": {
+      "field": "origin",
+      "type": "text"
+    },
+    "destination": {
+      "field": "destination",
+      "type": "text"
+    },
+    "mode": {
+      "field": "mode",
+      "type": "text"
+    },
+    "carrier_id": {
+      "field": "carrier_id",
+      "type": "text"
+    },
+    "transit_days": {
+      "field": "transit_days",
+      "type": "text"
+    },
+    "via": {
+      "field": "via",
+      "type": "text"
+    }
+  }
+}

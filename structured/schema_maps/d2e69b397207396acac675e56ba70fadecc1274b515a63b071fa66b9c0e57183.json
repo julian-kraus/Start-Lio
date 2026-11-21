@@ -1,0 +1,47 @@
+{
+  "signature": "d2e69b397207396acac675e56ba70fadecc1274b515a63b071fa66b9c0e57183",
+  "example_path": "soony/context/launch_status.xlsx",
+  "format": "xlsx",
+  "sheet": "Launch status",
+  "fact_type": "plan_edition",
+  "subject": [
+    "product_id"
+  ],
+  "columns": {
+    "Name": {
+      "field": "name",
+      "type": "text"
+    },
+    "Product": {
+      "field": "product_id",
+      "type": "text"
+    },
+    "Day-one demand": {
+      "field": "demand",
+      "type": "text"
+    },
+    "Packed": {
+      "field": "packed",
+      "type": "text"
+    },
+    "Still to pack": {
+      "field": "still_to_pack",
+      "type": "text"
+    },
+    "Rate per hour": {
+      "field": "rate_per_hour",
+      "type": "text"
+    },
+    "Line status": {
+      "field": "line_status",
+      "type": "text"
+    }
+  },
+  "header_detection": {
+    "row": 4,
+    "title_rows": [
+      1,
+      3
+    ]
+  }
+}

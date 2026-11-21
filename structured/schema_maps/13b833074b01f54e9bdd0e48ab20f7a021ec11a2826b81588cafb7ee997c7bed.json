@@ -1,0 +1,57 @@
+{
+  "signature": "13b833074b01f54e9bdd0e48ab20f7a021ec11a2826b81588cafb7ee997c7bed",
+  "example_path": "soony/context/launch_plan_GH6.xlsx",
+  "format": "xlsx",
+  "sheet": "Editions",
+  "fact_type": "plan_edition",
+  "subject": [
+    "product_id"
+  ],
+  "columns": {
+    "Edition": {
+      "field": "edition_name",
+      "type": "text"
+    },
+    "Product": {
+      "field": "product_id",
+      "type": "text"
+    },
+    "Day-one demand": {
+      "field": "demand",
+      "type": "text"
+    },
+    "of which pre-orders": {
+      "field": "preorders",
+      "type": "text"
+    },
+    "Packed": {
+      "field": "packed",
+      "type": "text"
+    },
+    "Still to pack": {
+      "field": "still_to_pack",
+      "type": "text"
+    },
+    "Rate per hour": {
+      "field": "rate_per_hour",
+      "type": "text"
+    },
+    "Hours needed": {
+      "field": "hours_needed",
+      "type": "text"
+    },
+    "Hours available": {
+      "field": "hours_available",
+      "type": "text"
+    }
+  },
+  "as_of": {
+    "value": "2026-11-20T18:00"
+  },
+  "header_detection": {
+    "row": 3,
+    "title_rows": [
+      1
+    ]
+  }
+}

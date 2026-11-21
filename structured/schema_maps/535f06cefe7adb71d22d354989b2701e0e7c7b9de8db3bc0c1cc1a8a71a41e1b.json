@@ -1,0 +1,88 @@
+{
+  "signature": "535f06cefe7adb71d22d354989b2701e0e7c7b9de8db3bc0c1cc1a8a71a41e1b",
+  "example_path": "suppliers/SUP-0029_Guangzhou_PackRight/profile.csv",
+  "format": "csv",
+  "sheet": null,
+  "fact_type": "supplier",
+  "subject": [
+    "supplier_id"
+  ],
+  "columns": {
+    "supplier_id": {
+      "field": "supplier_id",
+      "type": "text"
+    },
+    "name": {
+      "field": "name",
+      "type": "text"
+    },
+    "legal_name": {
+      "field": "legal_name",
+      "type": "text"
+    },
+    "category": {
+      "field": "category",
+      "type": "text"
+    },
+    "country": {
+      "field": "country",
+      "type": "text"
+    },
+    "city": {
+      "field": "city",
+      "type": "text"
+    },
+    "lat": {
+      "field": "lat",
+      "type": "text"
+    },
+    "lon": {
+      "field": "lon",
+      "type": "text"
+    },
+    "currency": {
+      "field": "currency",
+      "type": "text"
+    },
+    "payment_terms": {
+      "field": "payment_terms",
+      "type": "text"
+    },
+    "incoterm": {
+      "field": "incoterm",
+      "type": "text"
+    },
+    "supplier_since": {
+      "field": "supplier_since",
+      "type": "text"
+    },
+    "status": {
+      "field": "status",
+      "type": "text"
+    },
+    "qualification_status": {
+      "field": "qualification_status",
+      "type": "text"
+    },
+    "contact_name": {
+      "field": "contact_name",
+      "type": "text"
+    },
+    "contact_email": {
+      "field": "contact_email",
+      "type": "text"
+    },
+    "phone": {
+      "field": "phone",
+      "type": "text"
+    },
+    "preferred_language": {
+      "field": "preferred_language",
+      "type": "text"
+    },
+    "notes": {
+      "field": "notes",
+      "type": "text"
+    }
+  }
+}

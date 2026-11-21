@@ -7,13 +7,10 @@
   "doc_kind": "delivery_note_scan",
   "doc_kind_confidence": "high",
   "languages": [
-    "en",
-    "pl",
-    "zh",
-    "ko"
+    "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
@@ -32,15 +29,12 @@
         ]
       },
       "attribute": "po_number",
-      "value": [
-        "4500318722",
-        "4500318731"
-      ],
+      "value": null,
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "['4500318722', '4500318731']",
       "confidence": "medium"
@@ -66,7 +60,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "CMP-GAM-008",
       "confidence": "medium"
@@ -92,7 +86,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "CMP-GAM-008",
       "confidence": "medium"
@@ -118,9 +112,9 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
-      "evidence": "12500",
+      "evidence": "Towar na paletach EUR, prosimy o zwrot",
       "confidence": "medium",
       "note": "Towar na paletach EUR, prosimy o zwrot"
     },
@@ -145,9 +139,9 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
-      "evidence": "None",
+      "evidence": "Towar na paletach EUR, prosimy o zwrot",
       "confidence": "medium",
       "note": "Towar na paletach EUR, prosimy o zwrot"
     },
@@ -172,9 +166,9 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
-      "evidence": "False",
+      "evidence": "Towar na paletach EUR, prosimy o zwrot",
       "confidence": "medium",
       "note": "Towar na paletach EUR, prosimy o zwrot"
     },
@@ -199,9 +193,9 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
-      "evidence": "12500",
+      "evidence": "Towar na paletach EUR, prosimy o zwrot",
       "confidence": "medium",
       "note": "Towar na paletach EUR, prosimy o zwrot"
     },
@@ -226,7 +220,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "PCS",
       "confidence": "medium"
@@ -252,7 +246,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "25",
       "confidence": "medium"
@@ -278,7 +272,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "PO 24687",
       "confidence": "medium"
@@ -304,7 +298,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "2026-10-07",
       "confidence": "medium"
@@ -330,7 +324,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "None",
       "confidence": "medium"
@@ -356,7 +350,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "True",
       "confidence": "medium"
@@ -382,7 +376,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "1134",
       "confidence": "medium"
@@ -390,12 +384,29 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "po_number": "4500318722",
-        "material_id": "CMP-GAM-008"
+        "statement_no": 1
       },
       "subject_raw": {
-        "po_number": "4500318722",
-        "material_id": "CMP-GAM-008"
+        "statement_no": 1
+      },
+      "attribute": "kind",
+      "value": "handling_note",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "handling note"
+      },
+      "evidence": "Towar na paletach EUR, prosimy o zwrot",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "statement_no": 1
+      },
+      "subject_raw": {
+        "statement_no": 1
       },
       "attribute": "value",
       "value": "Towar na paletach EUR, prosimy o zwrot",
@@ -403,11 +414,11 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1 remarks"
+        "region_hint": "handling note"
       },
       "evidence": "Towar na paletach EUR, prosimy o zwrot",
       "confidence": "high",
-      "note": "Original-language note preserved; English translation is in the note."
+      "note": "Original-language handling note preserved from the reference envelope."
     },
     {
       "fact_type": "delivery_note_line",
@@ -425,15 +436,12 @@
         ]
       },
       "attribute": "po_number",
-      "value": [
-        "4500318722",
-        "4500318731"
-      ],
+      "value": null,
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "['4500318722', '4500318731']",
       "confidence": "medium"
@@ -459,7 +467,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "CMP-GAM-011",
       "confidence": "medium"
@@ -485,7 +493,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "CMP-GAM-011",
       "confidence": "medium"
@@ -511,9 +519,9 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
-      "evidence": "280000",
+      "evidence": "Towar na paletach EUR, prosimy o zwrot",
       "confidence": "medium",
       "note": "Towar na paletach EUR, prosimy o zwrot"
     },
@@ -538,9 +546,9 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
-      "evidence": "None",
+      "evidence": "Towar na paletach EUR, prosimy o zwrot",
       "confidence": "medium",
       "note": "Towar na paletach EUR, prosimy o zwrot"
     },
@@ -565,9 +573,9 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
-      "evidence": "False",
+      "evidence": "Towar na paletach EUR, prosimy o zwrot",
       "confidence": "medium",
       "note": "Towar na paletach EUR, prosimy o zwrot"
     },
@@ -592,9 +600,9 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
-      "evidence": "280000",
+      "evidence": "Towar na paletach EUR, prosimy o zwrot",
       "confidence": "medium",
       "note": "Towar na paletach EUR, prosimy o zwrot"
     },
@@ -619,7 +627,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "PCS",
       "confidence": "medium"
@@ -645,7 +653,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "56",
       "confidence": "medium"
@@ -671,7 +679,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "PO 24687",
       "confidence": "medium"
@@ -697,7 +705,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "2026-10-07",
       "confidence": "medium"
@@ -723,7 +731,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "None",
       "confidence": "medium"
@@ -749,7 +757,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "True",
       "confidence": "medium"
@@ -775,7 +783,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "1134",
       "confidence": "medium"
@@ -783,12 +791,29 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "po_number": "4500318722",
-        "material_id": "CMP-GAM-011"
+        "statement_no": 2
       },
       "subject_raw": {
-        "po_number": "4500318722",
-        "material_id": "CMP-GAM-011"
+        "statement_no": 2
+      },
+      "attribute": "kind",
+      "value": "handling_note",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "handling note"
+      },
+      "evidence": "Towar na paletach EUR, prosimy o zwrot",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "statement_no": 2
+      },
+      "subject_raw": {
+        "statement_no": 2
       },
       "attribute": "value",
       "value": "Towar na paletach EUR, prosimy o zwrot",
@@ -796,11 +821,11 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2 remarks"
+        "region_hint": "handling note"
       },
       "evidence": "Towar na paletach EUR, prosimy o zwrot",
       "confidence": "high",
-      "note": "Original-language note preserved; English translation is in the note."
+      "note": "Original-language handling note preserved from the reference envelope."
     }
   ],
   "unreadable": [],

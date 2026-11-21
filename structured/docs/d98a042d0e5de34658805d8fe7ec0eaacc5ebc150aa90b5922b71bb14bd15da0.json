@@ -10,16 +10,16 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
       "fact_type": "site",
       "subject": {
-        "id": "row-2"
+        "site_id": "DC-HAM"
       },
       "subject_raw": {
-        "id": "row-2"
+        "site_id": "DC-HAM"
       },
       "attribute": "site_id",
       "value": "DC-HAM",
@@ -29,16 +29,16 @@
         "row": 2,
         "column": "site_id"
       },
-      "evidence": "row 2: site_id=DC-HAM",
+      "evidence": "site_id=DC-HAM",
       "confidence": "high"
     },
     {
       "fact_type": "site",
       "subject": {
-        "id": "row-2"
+        "site_id": "DC-HAM"
       },
       "subject_raw": {
-        "id": "row-2"
+        "site_id": "DC-HAM"
       },
       "attribute": "name",
       "value": "Soony Distribution Center Hamburg",
@@ -48,16 +48,16 @@
         "row": 2,
         "column": "name"
       },
-      "evidence": "row 2: name=Soony Distribution Center Hamburg",
+      "evidence": "name=Soony Distribution Center Hamburg",
       "confidence": "high"
     },
     {
       "fact_type": "site",
       "subject": {
-        "id": "row-2"
+        "site_id": "DC-HAM"
       },
       "subject_raw": {
-        "id": "row-2"
+        "site_id": "DC-HAM"
       },
       "attribute": "operator",
       "value": "Soony",
@@ -67,16 +67,16 @@
         "row": 2,
         "column": "operator"
       },
-      "evidence": "row 2: operator=Soony",
+      "evidence": "operator=Soony",
       "confidence": "high"
     },
     {
       "fact_type": "site",
       "subject": {
-        "id": "row-2"
+        "site_id": "DC-HAM"
       },
       "subject_raw": {
-        "id": "row-2"
+        "site_id": "DC-HAM"
       },
       "attribute": "type",
       "value": "dc",
@@ -86,16 +86,16 @@
         "row": 2,
         "column": "type"
       },
-      "evidence": "row 2: type=dc",
+      "evidence": "type=dc",
       "confidence": "high"
     },
     {
       "fact_type": "site",
       "subject": {
-        "id": "row-2"
+        "site_id": "DC-HAM"
       },
       "subject_raw": {
-        "id": "row-2"
+        "site_id": "DC-HAM"
       },
       "attribute": "country",
       "value": "DE",
@@ -105,16 +105,16 @@
         "row": 2,
         "column": "country"
       },
-      "evidence": "row 2: country=DE",
+      "evidence": "country=DE",
       "confidence": "high"
     },
     {
       "fact_type": "site",
       "subject": {
-        "id": "row-2"
+        "site_id": "DC-HAM"
       },
       "subject_raw": {
-        "id": "row-2"
+        "site_id": "DC-HAM"
       },
       "attribute": "city",
       "value": "Hamburg",
@@ -124,16 +124,16 @@
         "row": 2,
         "column": "city"
       },
-      "evidence": "row 2: city=Hamburg",
+      "evidence": "city=Hamburg",
       "confidence": "high"
     },
     {
       "fact_type": "site",
       "subject": {
-        "id": "row-2"
+        "site_id": "DC-HAM"
       },
       "subject_raw": {
-        "id": "row-2"
+        "site_id": "DC-HAM"
       },
       "attribute": "lat",
       "value": 53.5511,
@@ -143,16 +143,16 @@
         "row": 2,
         "column": "lat"
       },
-      "evidence": "row 2: lat=53.5511",
+      "evidence": "lat=53.5511",
       "confidence": "high"
     },
     {
       "fact_type": "site",
       "subject": {
-        "id": "row-2"
+        "site_id": "DC-HAM"
       },
       "subject_raw": {
-        "id": "row-2"
+        "site_id": "DC-HAM"
       },
       "attribute": "lon",
       "value": 9.9937,
@@ -162,7 +162,7 @@
         "row": 2,
         "column": "lon"
       },
-      "evidence": "row 2: lon=9.9937",
+      "evidence": "lon=9.9937",
       "confidence": "high"
     }
   ],

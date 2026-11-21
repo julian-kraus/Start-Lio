@@ -10,546 +10,268 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
-      "fact_type": "x_workbook_row",
+      "fact_type": "plan_edition",
       "subject": {
-        "sheet": "Launch status",
-        "row": 2
+        "product_id": "FG-GH6-STD"
       },
       "subject_raw": {
-        "sheet": "Launch status",
-        "row": 2
+        "product_id": "FG-GH6-STD"
       },
-      "attribute": "grand_heist_6_launch_status_saturday_13_00_confidential",
-      "value": "Edition",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Launch status",
-        "row": 2,
-        "column": "grand_heist_6_launch_status_saturday_13_00_confidential"
-      },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': 'Edition', 'column_3': 'Copies', 'column_6': 'Pack-out'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "x_workbook_row",
-      "subject": {
-        "sheet": "Launch status",
-        "row": 2
-      },
-      "subject_raw": {
-        "sheet": "Launch status",
-        "row": 2
-      },
-      "attribute": "column_3",
-      "value": "Copies",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Launch status",
-        "row": 2,
-        "column": "column_3"
-      },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': 'Edition', 'column_3': 'Copies', 'column_6': 'Pack-out'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "x_workbook_row",
-      "subject": {
-        "sheet": "Launch status",
-        "row": 2
-      },
-      "subject_raw": {
-        "sheet": "Launch status",
-        "row": 2
-      },
-      "attribute": "column_6",
-      "value": "Pack-out",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Launch status",
-        "row": 2,
-        "column": "column_6"
-      },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': 'Edition', 'column_3': 'Copies', 'column_6': 'Pack-out'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "x_workbook_row",
-      "subject": {
-        "sheet": "Launch status",
-        "row": 3
-      },
-      "subject_raw": {
-        "sheet": "Launch status",
-        "row": 3
-      },
-      "attribute": "grand_heist_6_launch_status_saturday_13_00_confidential",
-      "value": "Name",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Launch status",
-        "row": 3,
-        "column": "grand_heist_6_launch_status_saturday_13_00_confidential"
-      },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': 'Name', 'column_2': 'Product', 'column_3': 'Day-one demand', 'column_4': 'Packed', 'column_5': 'Still to pack', 'column_6': 'Rate per hour', 'column_7': 'Line status'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "x_workbook_row",
-      "subject": {
-        "sheet": "Launch status",
-        "row": 3
-      },
-      "subject_raw": {
-        "sheet": "Launch status",
-        "row": 3
-      },
-      "attribute": "column_2",
-      "value": "Product",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Launch status",
-        "row": 3,
-        "column": "column_2"
-      },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': 'Name', 'column_2': 'Product', 'column_3': 'Day-one demand', 'column_4': 'Packed', 'column_5': 'Still to pack', 'column_6': 'Rate per hour', 'column_7': 'Line status'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "x_workbook_row",
-      "subject": {
-        "sheet": "Launch status",
-        "row": 3
-      },
-      "subject_raw": {
-        "sheet": "Launch status",
-        "row": 3
-      },
-      "attribute": "column_3",
-      "value": "Day-one demand",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Launch status",
-        "row": 3,
-        "column": "column_3"
-      },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': 'Name', 'column_2': 'Product', 'column_3': 'Day-one demand', 'column_4': 'Packed', 'column_5': 'Still to pack', 'column_6': 'Rate per hour', 'column_7': 'Line status'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "x_workbook_row",
-      "subject": {
-        "sheet": "Launch status",
-        "row": 3
-      },
-      "subject_raw": {
-        "sheet": "Launch status",
-        "row": 3
-      },
-      "attribute": "column_4",
-      "value": "Packed",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Launch status",
-        "row": 3,
-        "column": "column_4"
-      },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': 'Name', 'column_2': 'Product', 'column_3': 'Day-one demand', 'column_4': 'Packed', 'column_5': 'Still to pack', 'column_6': 'Rate per hour', 'column_7': 'Line status'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "x_workbook_row",
-      "subject": {
-        "sheet": "Launch status",
-        "row": 3
-      },
-      "subject_raw": {
-        "sheet": "Launch status",
-        "row": 3
-      },
-      "attribute": "column_5",
-      "value": "Still to pack",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Launch status",
-        "row": 3,
-        "column": "column_5"
-      },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': 'Name', 'column_2': 'Product', 'column_3': 'Day-one demand', 'column_4': 'Packed', 'column_5': 'Still to pack', 'column_6': 'Rate per hour', 'column_7': 'Line status'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "x_workbook_row",
-      "subject": {
-        "sheet": "Launch status",
-        "row": 3
-      },
-      "subject_raw": {
-        "sheet": "Launch status",
-        "row": 3
-      },
-      "attribute": "column_6",
-      "value": "Rate per hour",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Launch status",
-        "row": 3,
-        "column": "column_6"
-      },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': 'Name', 'column_2': 'Product', 'column_3': 'Day-one demand', 'column_4': 'Packed', 'column_5': 'Still to pack', 'column_6': 'Rate per hour', 'column_7': 'Line status'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "x_workbook_row",
-      "subject": {
-        "sheet": "Launch status",
-        "row": 3
-      },
-      "subject_raw": {
-        "sheet": "Launch status",
-        "row": 3
-      },
-      "attribute": "column_7",
-      "value": "Line status",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Launch status",
-        "row": 3,
-        "column": "column_7"
-      },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': 'Name', 'column_2': 'Product', 'column_3': 'Day-one demand', 'column_4': 'Packed', 'column_5': 'Still to pack', 'column_6': 'Rate per hour', 'column_7': 'Line status'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "x_workbook_row",
-      "subject": {
-        "sheet": "Launch status",
-        "row": 4
-      },
-      "subject_raw": {
-        "sheet": "Launch status",
-        "row": 4
-      },
-      "attribute": "grand_heist_6_launch_status_saturday_13_00_confidential",
+      "attribute": "name",
       "value": "Standard",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Launch status",
-        "row": 4,
-        "column": "grand_heist_6_launch_status_saturday_13_00_confidential"
+        "row": 5,
+        "column": "name"
       },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': 'Standard', 'column_2': 'FG-GH6-STD', 'column_3': '640.000', 'column_4': '554.000', 'column_5': '86.000', 'column_6': 6000, 'column_7': 'running'}",
-      "confidence": "high"
+      "evidence": "Standard",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch status · Saturday 13:00 · CONFIDENTIAL Edition Copies Pack-out"
     },
     {
-      "fact_type": "x_workbook_row",
+      "fact_type": "plan_edition",
       "subject": {
-        "sheet": "Launch status",
-        "row": 4
+        "product_id": "FG-GH6-STD"
       },
       "subject_raw": {
-        "sheet": "Launch status",
-        "row": 4
+        "product_id": "FG-GH6-STD"
       },
-      "attribute": "column_2",
-      "value": "FG-GH6-STD",
+      "attribute": "demand",
+      "value": 640000,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Launch status",
-        "row": 4,
-        "column": "column_2"
+        "row": 5,
+        "column": "demand"
       },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': 'Standard', 'column_2': 'FG-GH6-STD', 'column_3': '640.000', 'column_4': '554.000', 'column_5': '86.000', 'column_6': 6000, 'column_7': 'running'}",
-      "confidence": "high"
+      "evidence": "640.000",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch status · Saturday 13:00 · CONFIDENTIAL Edition Copies Pack-out"
     },
     {
-      "fact_type": "x_workbook_row",
+      "fact_type": "plan_edition",
       "subject": {
-        "sheet": "Launch status",
-        "row": 4
+        "product_id": "FG-GH6-STD"
       },
       "subject_raw": {
-        "sheet": "Launch status",
-        "row": 4
+        "product_id": "FG-GH6-STD"
       },
-      "attribute": "column_3",
-      "value": "640.000",
+      "attribute": "packed",
+      "value": 554000,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Launch status",
-        "row": 4,
-        "column": "column_3"
+        "row": 5,
+        "column": "packed"
       },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': 'Standard', 'column_2': 'FG-GH6-STD', 'column_3': '640.000', 'column_4': '554.000', 'column_5': '86.000', 'column_6': 6000, 'column_7': 'running'}",
-      "confidence": "high"
+      "evidence": "554.000",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch status · Saturday 13:00 · CONFIDENTIAL Edition Copies Pack-out"
     },
     {
-      "fact_type": "x_workbook_row",
+      "fact_type": "plan_edition",
       "subject": {
-        "sheet": "Launch status",
-        "row": 4
+        "product_id": "FG-GH6-STD"
       },
       "subject_raw": {
-        "sheet": "Launch status",
-        "row": 4
+        "product_id": "FG-GH6-STD"
       },
-      "attribute": "column_4",
-      "value": "554.000",
+      "attribute": "still_to_pack",
+      "value": 86000,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Launch status",
-        "row": 4,
-        "column": "column_4"
+        "row": 5,
+        "column": "still_to_pack"
       },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': 'Standard', 'column_2': 'FG-GH6-STD', 'column_3': '640.000', 'column_4': '554.000', 'column_5': '86.000', 'column_6': 6000, 'column_7': 'running'}",
-      "confidence": "high"
+      "evidence": "86.000",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch status · Saturday 13:00 · CONFIDENTIAL Edition Copies Pack-out"
     },
     {
-      "fact_type": "x_workbook_row",
+      "fact_type": "plan_edition",
       "subject": {
-        "sheet": "Launch status",
-        "row": 4
+        "product_id": "FG-GH6-STD"
       },
       "subject_raw": {
-        "sheet": "Launch status",
-        "row": 4
+        "product_id": "FG-GH6-STD"
       },
-      "attribute": "column_5",
-      "value": "86.000",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Launch status",
-        "row": 4,
-        "column": "column_5"
-      },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': 'Standard', 'column_2': 'FG-GH6-STD', 'column_3': '640.000', 'column_4': '554.000', 'column_5': '86.000', 'column_6': 6000, 'column_7': 'running'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "x_workbook_row",
-      "subject": {
-        "sheet": "Launch status",
-        "row": 4
-      },
-      "subject_raw": {
-        "sheet": "Launch status",
-        "row": 4
-      },
-      "attribute": "column_6",
+      "attribute": "rate_per_hour",
       "value": 6000,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Launch status",
-        "row": 4,
-        "column": "column_6"
+        "row": 5,
+        "column": "rate_per_hour"
       },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': 'Standard', 'column_2': 'FG-GH6-STD', 'column_3': '640.000', 'column_4': '554.000', 'column_5': '86.000', 'column_6': 6000, 'column_7': 'running'}",
-      "confidence": "high"
+      "evidence": "6000",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch status · Saturday 13:00 · CONFIDENTIAL Edition Copies Pack-out"
     },
     {
-      "fact_type": "x_workbook_row",
+      "fact_type": "plan_edition",
       "subject": {
-        "sheet": "Launch status",
-        "row": 4
+        "product_id": "FG-GH6-STD"
       },
       "subject_raw": {
-        "sheet": "Launch status",
-        "row": 4
+        "product_id": "FG-GH6-STD"
       },
-      "attribute": "column_7",
+      "attribute": "line_status",
       "value": "running",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Launch status",
-        "row": 4,
-        "column": "column_7"
+        "row": 5,
+        "column": "line_status"
       },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': 'Standard', 'column_2': 'FG-GH6-STD', 'column_3': '640.000', 'column_4': '554.000', 'column_5': '86.000', 'column_6': 6000, 'column_7': 'running'}",
-      "confidence": "high"
+      "evidence": "running",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch status · Saturday 13:00 · CONFIDENTIAL Edition Copies Pack-out"
     },
     {
-      "fact_type": "x_workbook_row",
+      "fact_type": "plan_edition",
       "subject": {
-        "sheet": "Launch status",
-        "row": 5
+        "product_id": "FG-GH6-CE"
       },
       "subject_raw": {
-        "sheet": "Launch status",
-        "row": 5
+        "product_id": "FG-GH6-CE"
       },
-      "attribute": "grand_heist_6_launch_status_saturday_13_00_confidential",
+      "attribute": "name",
       "value": "Collector's",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Launch status",
-        "row": 5,
-        "column": "grand_heist_6_launch_status_saturday_13_00_confidential"
+        "row": 6,
+        "column": "name"
       },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': \"Collector's\", 'column_2': 'FG-GH6-CE', 'column_3': '72.000', 'column_4': '53.100', 'column_5': '18.900', 'column_6': 900, 'column_7': 'running'}",
-      "confidence": "high"
+      "evidence": "Collector's",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch status · Saturday 13:00 · CONFIDENTIAL Edition Copies Pack-out"
     },
     {
-      "fact_type": "x_workbook_row",
+      "fact_type": "plan_edition",
       "subject": {
-        "sheet": "Launch status",
-        "row": 5
+        "product_id": "FG-GH6-CE"
       },
       "subject_raw": {
-        "sheet": "Launch status",
-        "row": 5
+        "product_id": "FG-GH6-CE"
       },
-      "attribute": "column_2",
-      "value": "FG-GH6-CE",
+      "attribute": "demand",
+      "value": 72000,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Launch status",
-        "row": 5,
-        "column": "column_2"
+        "row": 6,
+        "column": "demand"
       },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': \"Collector's\", 'column_2': 'FG-GH6-CE', 'column_3': '72.000', 'column_4': '53.100', 'column_5': '18.900', 'column_6': 900, 'column_7': 'running'}",
-      "confidence": "high"
+      "evidence": "72.000",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch status · Saturday 13:00 · CONFIDENTIAL Edition Copies Pack-out"
     },
     {
-      "fact_type": "x_workbook_row",
+      "fact_type": "plan_edition",
       "subject": {
-        "sheet": "Launch status",
-        "row": 5
+        "product_id": "FG-GH6-CE"
       },
       "subject_raw": {
-        "sheet": "Launch status",
-        "row": 5
+        "product_id": "FG-GH6-CE"
       },
-      "attribute": "column_3",
-      "value": "72.000",
+      "attribute": "packed",
+      "value": 53100,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Launch status",
-        "row": 5,
-        "column": "column_3"
+        "row": 6,
+        "column": "packed"
       },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': \"Collector's\", 'column_2': 'FG-GH6-CE', 'column_3': '72.000', 'column_4': '53.100', 'column_5': '18.900', 'column_6': 900, 'column_7': 'running'}",
-      "confidence": "high"
+      "evidence": "53.100",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch status · Saturday 13:00 · CONFIDENTIAL Edition Copies Pack-out"
     },
     {
-      "fact_type": "x_workbook_row",
+      "fact_type": "plan_edition",
       "subject": {
-        "sheet": "Launch status",
-        "row": 5
+        "product_id": "FG-GH6-CE"
       },
       "subject_raw": {
-        "sheet": "Launch status",
-        "row": 5
+        "product_id": "FG-GH6-CE"
       },
-      "attribute": "column_4",
-      "value": "53.100",
+      "attribute": "still_to_pack",
+      "value": 18900,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Launch status",
-        "row": 5,
-        "column": "column_4"
+        "row": 6,
+        "column": "still_to_pack"
       },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': \"Collector's\", 'column_2': 'FG-GH6-CE', 'column_3': '72.000', 'column_4': '53.100', 'column_5': '18.900', 'column_6': 900, 'column_7': 'running'}",
-      "confidence": "high"
+      "evidence": "18.900",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch status · Saturday 13:00 · CONFIDENTIAL Edition Copies Pack-out"
     },
     {
-      "fact_type": "x_workbook_row",
+      "fact_type": "plan_edition",
       "subject": {
-        "sheet": "Launch status",
-        "row": 5
+        "product_id": "FG-GH6-CE"
       },
       "subject_raw": {
-        "sheet": "Launch status",
-        "row": 5
+        "product_id": "FG-GH6-CE"
       },
-      "attribute": "column_5",
-      "value": "18.900",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Launch status",
-        "row": 5,
-        "column": "column_5"
-      },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': \"Collector's\", 'column_2': 'FG-GH6-CE', 'column_3': '72.000', 'column_4': '53.100', 'column_5': '18.900', 'column_6': 900, 'column_7': 'running'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "x_workbook_row",
-      "subject": {
-        "sheet": "Launch status",
-        "row": 5
-      },
-      "subject_raw": {
-        "sheet": "Launch status",
-        "row": 5
-      },
-      "attribute": "column_6",
+      "attribute": "rate_per_hour",
       "value": 900,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Launch status",
-        "row": 5,
-        "column": "column_6"
+        "row": 6,
+        "column": "rate_per_hour"
       },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': \"Collector's\", 'column_2': 'FG-GH6-CE', 'column_3': '72.000', 'column_4': '53.100', 'column_5': '18.900', 'column_6': 900, 'column_7': 'running'}",
-      "confidence": "high"
+      "evidence": "900",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch status · Saturday 13:00 · CONFIDENTIAL Edition Copies Pack-out"
     },
     {
-      "fact_type": "x_workbook_row",
+      "fact_type": "plan_edition",
       "subject": {
-        "sheet": "Launch status",
-        "row": 5
+        "product_id": "FG-GH6-CE"
       },
       "subject_raw": {
-        "sheet": "Launch status",
-        "row": 5
+        "product_id": "FG-GH6-CE"
       },
-      "attribute": "column_7",
+      "attribute": "line_status",
       "value": "running",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Launch status",
-        "row": 5,
-        "column": "column_7"
+        "row": 6,
+        "column": "line_status"
       },
-      "evidence": "{'grand_heist_6_launch_status_saturday_13_00_confidential': \"Collector's\", 'column_2': 'FG-GH6-CE', 'column_3': '72.000', 'column_4': '53.100', 'column_5': '18.900', 'column_6': 900, 'column_7': 'running'}",
-      "confidence": "high"
+      "evidence": "running",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch status · Saturday 13:00 · CONFIDENTIAL Edition Copies Pack-out"
     },
     {
       "fact_type": "x_workbook_row",
       "subject": {
-        "sheet": "Notes",
-        "row": 2
+        "record_id": "b1642b397533"
       },
       "subject_raw": {
-        "sheet": "Notes",
-        "row": 2
+        "record_id": "b1642b397533"
       },
       "attribute": "note",
       "value": "Priority per CPO memo of today: Collector's pre-orders first.",
@@ -560,18 +282,16 @@
         "row": 2,
         "column": "note"
       },
-      "evidence": "{'note': \"Priority per CPO memo of today: Collector's pre-orders first.\"}",
+      "evidence": "Priority per CPO memo of today: Collector's pre-orders first.",
       "confidence": "high"
     },
     {
       "fact_type": "x_workbook_row",
       "subject": {
-        "sheet": "Notes",
-        "row": 3
+        "record_id": "271582528822"
       },
       "subject_raw": {
-        "sheet": "Notes",
-        "row": 3
+        "record_id": "271582528822"
       },
       "attribute": "note",
       "value": "Sleeve artwork rev. C is the released revision as of today (see components update).",
@@ -582,18 +302,16 @@
         "row": 3,
         "column": "note"
       },
-      "evidence": "{'note': 'Sleeve artwork rev. C is the released revision as of today (see components update).'}",
+      "evidence": "Sleeve artwork rev. C is the released revision as of today (see components update).",
       "confidence": "high"
     },
     {
       "fact_type": "x_workbook_row",
       "subject": {
-        "sheet": "Notes",
-        "row": 4
+        "record_id": "7aaa66e4320d"
       },
       "subject_raw": {
-        "sheet": "Notes",
-        "row": 4
+        "record_id": "7aaa66e4320d"
       },
       "attribute": "note",
       "value": "Stock figures: see ERP. No count since the last snapshot.",
@@ -604,7 +322,7 @@
         "row": 4,
         "column": "note"
       },
-      "evidence": "{'note': 'Stock figures: see ERP. No count since the last snapshot.'}",
+      "evidence": "Stock figures: see ERP. No count since the last snapshot.",
       "confidence": "high"
     }
   ],

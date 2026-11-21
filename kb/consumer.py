@@ -10,7 +10,8 @@ from tracker import db as tracker_db
 from . import db, reconcile
 from .config import KbSettings
 from .ingest import FileReader, process_file, remove_path, sync_current
-from .llm.base import drain_queue, load_adapter
+from .intake import drain
+from .llm.base import load_adapter
 from .loader import DEFAULT_CONFIDENCE, current_sha_by_path, load_contract
 from .rules import active_version, load_rule_set
 
@@ -32,7 +33,8 @@ def _current_sha(conn, path: str) -> str | None:
     return row["sha256"] if row else None
 
 
-def handle_event(conn, ev: dict, reader: FileReader, settings: KbSettings, confidence_map: dict) -> str | None:
+def handle_event(conn, ev: dict, reader: FileReader, settings: KbSettings, confidence_map: dict,
+                 llm=None) -> str | None:
     """Events can arrive late or twice; only the tracker's current version of a path is ever ingested."""
     kind, path = ev["kind"], ev["path"]
     current = _current_sha(conn, path)
@@ -42,7 +44,7 @@ def handle_event(conn, ev: dict, reader: FileReader, settings: KbSettings, confi
         sha = ev["new_sha"]
         if sha != current:
             return None
-        return process_file(conn, path, sha, reader(sha, path), settings.structured_dir, confidence_map)
+        return process_file(conn, path, sha, reader(sha, path), settings.structured_dir, confidence_map, llm)
     if kind == "removed":
         if current is not None:
             return None
@@ -61,7 +63,7 @@ def catch_up(conn, settings: KbSettings, reader: FileReader, llm) -> dict | None
     while rows := tracker_db.fetch_events(conn, cursor, BATCH):
         for ev in rows:
             try:
-                status = handle_event(conn, ev, reader, settings, confidence_map)
+                status = handle_event(conn, ev, reader, settings, confidence_map, llm)
                 if status:
                     paths.append({"path": ev["path"], "event": ev["kind"], "status": status})
             except Exception as exc:
@@ -73,7 +75,7 @@ def catch_up(conn, settings: KbSettings, reader: FileReader, llm) -> dict | None
             processed += 1
     stale_events = processed and not paths
     if llm is not None:
-        drained = drain_queue(conn, llm, reader, settings.structured_dir, confidence_map)
+        drained = drain(conn, llm, reader, settings.structured_dir, confidence_map)
         if drained["done"]:
             paths.append({"llm_extracted": drained["done"]})
     if paths or stale_events:
@@ -91,7 +93,7 @@ def run(settings: KbSettings, stop: threading.Event, idle_timeout: float = 5.0) 
         conn.commit()
         load_contract(conn, settings.structured_dir)
         counts = sync_current(conn, current_sha_by_path(conn, settings.data_dir), reader, settings.structured_dir,
-                              _confidence_map(conn))
+                              _confidence_map(conn), llm=llm)
         log.info("start-up sync: %s", counts)
         result = reconcile.run(conn, "startup_sync", {"sync": counts})
         log.info("reconcile run %s: %s issues", result["run_id"], result["issues"])

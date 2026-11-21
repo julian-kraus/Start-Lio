@@ -10,18 +10,119 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318761"
+      },
+      "subject_raw": {
+        "po_number": "4500318761"
+      },
+      "attribute": "oc_number",
+      "value": "OA26343158",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "OA26343158",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318761"
+      },
+      "subject_raw": {
+        "po_number": "4500318761"
+      },
+      "attribute": "oc_date",
+      "value": "2026-10-05",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "2026-10-05",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318761"
+      },
+      "subject_raw": {
+        "po_number": "4500318761"
+      },
+      "attribute": "incoterm",
+      "value": "DAP",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "DAP",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318761"
+      },
+      "subject_raw": {
+        "po_number": "4500318761"
+      },
+      "attribute": "payment_terms",
+      "value": "NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "NET30",
+      "confidence": "high"
+    },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318761",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "53004b816dcd"
       },
       "subject_raw": {
         "po_number": "4500318761",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "53004b816dcd"
+      },
+      "attribute": "item_no_printed",
+      "value": "00010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR\n2026-11-09\n00020",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "53004b816dcd"
+      },
+      "subject_raw": {
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "53004b816dcd"
       },
       "attribute": "supplier_part_no",
       "value": "CMP-GAM-011",
@@ -38,32 +139,13 @@
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318761",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "53004b816dcd"
       },
       "subject_raw": {
         "po_number": "4500318761",
-        "po_line": 1
-      },
-      "attribute": "material_id",
-      "value": "CMP-GAM-011",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 13
-      },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR\n2026-11-09\n00020",
-      "confidence": "medium"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318761",
-        "po_line": 1
-      },
-      "subject_raw": {
-        "po_number": "4500318761",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "53004b816dcd"
       },
       "attribute": "qty",
       "value": 270000,
@@ -80,11 +162,128 @@
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318761",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "53004b816dcd"
       },
       "subject_raw": {
         "po_number": "4500318761",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "53004b816dcd"
+      },
+      "attribute": "unit_price",
+      "value": 270000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR\n2026-11-09\n00020",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "53004b816dcd"
+      },
+      "subject_raw": {
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "53004b816dcd"
+      },
+      "attribute": "currency",
+      "value": "EUR",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR\n2026-11-09\n00020",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "53004b816dcd"
+      },
+      "subject_raw": {
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "53004b816dcd"
+      },
+      "attribute": "confirmed_date",
+      "value": "2026-11-09",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR\n2026-11-09\n00020",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "53004b816dcd"
+      },
+      "subject_raw": {
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "53004b816dcd"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-011",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n270,000\n0.03\nEUR\n2026-11-09\n00020",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "5f000337853b"
+      },
+      "subject_raw": {
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "5f000337853b"
+      },
+      "attribute": "item_no_printed",
+      "value": "00010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 21
+      },
+      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR\n2026-11-06",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "5f000337853b"
+      },
+      "subject_raw": {
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "5f000337853b"
       },
       "attribute": "supplier_part_no",
       "value": "CMP-GAM-009",
@@ -101,32 +300,13 @@
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318761",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "5f000337853b"
       },
       "subject_raw": {
         "po_number": "4500318761",
-        "po_line": 1
-      },
-      "attribute": "material_id",
-      "value": "CMP-GAM-009",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 21
-      },
-      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR\n2026-11-06",
-      "confidence": "medium"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318761",
-        "po_line": 1
-      },
-      "subject_raw": {
-        "po_number": "4500318761",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "5f000337853b"
       },
       "attribute": "qty",
       "value": 24800,
@@ -140,21 +320,95 @@
       "confidence": "high"
     },
     {
-      "fact_type": "supplier_statement",
+      "fact_type": "oc_line",
       "subject": {
-        "po_number": "4500318761"
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "5f000337853b"
       },
       "subject_raw": {
-        "po_number": "4500318761"
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "5f000337853b"
       },
-      "attribute": "value",
-      "value": "Customer: Soony Interactive GmbH · Your order 4500318761 of 2026-10-05 · Incoterms DAP Hamburg · Payment",
+      "attribute": "unit_price",
+      "value": 24800,
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 21
       },
-      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318761 of 2026-10-05 · Incoterms DAP Hamburg · Payment",
+      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR\n2026-11-06",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "5f000337853b"
+      },
+      "subject_raw": {
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "5f000337853b"
+      },
+      "attribute": "currency",
+      "value": "EUR",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 21
+      },
+      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR\n2026-11-06",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "5f000337853b"
+      },
+      "subject_raw": {
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "5f000337853b"
+      },
+      "attribute": "confirmed_date",
+      "value": "2026-11-06",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 21
+      },
+      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR\n2026-11-06",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "5f000337853b"
+      },
+      "subject_raw": {
+        "po_number": "4500318761",
+        "po_line": 1,
+        "item_key": "5f000337853b"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-009",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 21
+      },
+      "evidence": "CMP-GAM-009\nCity Map\nPoster Grand\nHeist 6\n(folded)\n24,800\n0.22\nEUR\n2026-11-06",
       "confidence": "high"
     }
   ],

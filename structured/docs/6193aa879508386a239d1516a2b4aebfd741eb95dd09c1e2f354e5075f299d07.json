@@ -10,18 +10,119 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318765"
+      },
+      "subject_raw": {
+        "po_number": "4500318765"
+      },
+      "attribute": "oc_number",
+      "value": "OA26869796",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "OA26869796",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318765"
+      },
+      "subject_raw": {
+        "po_number": "4500318765"
+      },
+      "attribute": "oc_date",
+      "value": "2026-10-12",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "2026-10-12",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318765"
+      },
+      "subject_raw": {
+        "po_number": "4500318765"
+      },
+      "attribute": "incoterm",
+      "value": "FOB",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "FOB",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318765"
+      },
+      "subject_raw": {
+        "po_number": "4500318765"
+      },
+      "attribute": "payment_terms",
+      "value": "NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "NET30",
+      "confidence": "high"
+    },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318765",
-        "po_line": 2
+        "po_line": 2,
+        "item_key": "730f65ca44f4"
       },
       "subject_raw": {
         "po_number": "4500318765",
-        "po_line": 2
+        "po_line": 2,
+        "item_key": "730f65ca44f4"
+      },
+      "attribute": "item_no_printed",
+      "value": "00020",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-RB-2207\nCollector's Box\nGrand Heist 6\n(rigid,\nmagnetic lid)\n23,000\n25.62\nCNY\n2026-12-14\n00010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318765",
+        "po_line": 2,
+        "item_key": "730f65ca44f4"
+      },
+      "subject_raw": {
+        "po_number": "4500318765",
+        "po_line": 2,
+        "item_key": "730f65ca44f4"
       },
       "attribute": "supplier_part_no",
       "value": "PR-RB-2207",
@@ -38,11 +139,13 @@
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318765",
-        "po_line": 2
+        "po_line": 2,
+        "item_key": "730f65ca44f4"
       },
       "subject_raw": {
         "po_number": "4500318765",
-        "po_line": 2
+        "po_line": 2,
+        "item_key": "730f65ca44f4"
       },
       "attribute": "qty",
       "value": 23000,
@@ -59,11 +162,105 @@
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318765",
-        "po_line": 2
+        "po_line": 2,
+        "item_key": "730f65ca44f4"
       },
       "subject_raw": {
         "po_number": "4500318765",
-        "po_line": 2
+        "po_line": 2,
+        "item_key": "730f65ca44f4"
+      },
+      "attribute": "unit_price",
+      "value": 23000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-RB-2207\nCollector's Box\nGrand Heist 6\n(rigid,\nmagnetic lid)\n23,000\n25.62\nCNY\n2026-12-14\n00010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318765",
+        "po_line": 2,
+        "item_key": "730f65ca44f4"
+      },
+      "subject_raw": {
+        "po_number": "4500318765",
+        "po_line": 2,
+        "item_key": "730f65ca44f4"
+      },
+      "attribute": "currency",
+      "value": "CNY",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-RB-2207\nCollector's Box\nGrand Heist 6\n(rigid,\nmagnetic lid)\n23,000\n25.62\nCNY\n2026-12-14\n00010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318765",
+        "po_line": 2,
+        "item_key": "730f65ca44f4"
+      },
+      "subject_raw": {
+        "po_number": "4500318765",
+        "po_line": 2,
+        "item_key": "730f65ca44f4"
+      },
+      "attribute": "confirmed_date",
+      "value": "2026-12-14",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-RB-2207\nCollector's Box\nGrand Heist 6\n(rigid,\nmagnetic lid)\n23,000\n25.62\nCNY\n2026-12-14\n00010",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318765",
+        "po_line": 2,
+        "item_key": "a5aa00aa31fe"
+      },
+      "subject_raw": {
+        "po_number": "4500318765",
+        "po_line": 2,
+        "item_key": "a5aa00aa31fe"
+      },
+      "attribute": "item_no_printed",
+      "value": "00020",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 22
+      },
+      "evidence": "PR-SL-0604\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n125,000\n0.4143\nCNY\n2026-12-14\nArtwork",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318765",
+        "po_line": 2,
+        "item_key": "a5aa00aa31fe"
+      },
+      "subject_raw": {
+        "po_number": "4500318765",
+        "po_line": 2,
+        "item_key": "a5aa00aa31fe"
       },
       "attribute": "supplier_part_no",
       "value": "PR-SL-0604",
@@ -80,11 +277,13 @@
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318765",
-        "po_line": 2
+        "po_line": 2,
+        "item_key": "a5aa00aa31fe"
       },
       "subject_raw": {
         "po_number": "4500318765",
-        "po_line": 2
+        "po_line": 2,
+        "item_key": "a5aa00aa31fe"
       },
       "attribute": "qty",
       "value": 125000,
@@ -98,21 +297,218 @@
       "confidence": "high"
     },
     {
-      "fact_type": "supplier_statement",
+      "fact_type": "oc_line",
       "subject": {
-        "po_number": "4500318765"
+        "po_number": "4500318765",
+        "po_line": 2,
+        "item_key": "a5aa00aa31fe"
       },
       "subject_raw": {
-        "po_number": "4500318765"
+        "po_number": "4500318765",
+        "po_line": 2,
+        "item_key": "a5aa00aa31fe"
       },
-      "attribute": "value",
-      "value": "Customer: Soony Interactive GmbH · Your order 4500318765 of 2026-10-12 · Incoterms FOB Yantian · Payment NET30",
+      "attribute": "unit_price",
+      "value": 125000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 22
+      },
+      "evidence": "PR-SL-0604\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n125,000\n0.4143\nCNY\n2026-12-14\nArtwork",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318765",
+        "po_line": 2,
+        "item_key": "a5aa00aa31fe"
+      },
+      "subject_raw": {
+        "po_number": "4500318765",
+        "po_line": 2,
+        "item_key": "a5aa00aa31fe"
+      },
+      "attribute": "currency",
+      "value": "USK",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 22
+      },
+      "evidence": "PR-SL-0604\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n125,000\n0.4143\nCNY\n2026-12-14\nArtwork",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318765",
+        "po_line": 2,
+        "item_key": "a5aa00aa31fe"
+      },
+      "subject_raw": {
+        "po_number": "4500318765",
+        "po_line": 2,
+        "item_key": "a5aa00aa31fe"
+      },
+      "attribute": "confirmed_date",
+      "value": "2026-12-14",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 22
+      },
+      "evidence": "PR-SL-0604\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n125,000\n0.4143\nCNY\n2026-12-14\nArtwork",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318765",
+        "po_line": 1,
+        "item_key": "9c0d69838a84"
+      },
+      "subject_raw": {
+        "po_number": "4500318765",
+        "po_line": 1,
+        "item_key": "9c0d69838a84"
+      },
+      "attribute": "item_no_printed",
+      "value": "00010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 30
+      },
+      "evidence": "PR-SL-0604: rev. B (GH6_sleeve_revB.pdf), per Soony drawing on file.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318765",
+        "po_line": 1,
+        "item_key": "9c0d69838a84"
+      },
+      "subject_raw": {
+        "po_number": "4500318765",
+        "po_line": 1,
+        "item_key": "9c0d69838a84"
+      },
+      "attribute": "supplier_part_no",
+      "value": "PR-SL-0604",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 30
+      },
+      "evidence": "PR-SL-0604: rev. B (GH6_sleeve_revB.pdf), per Soony drawing on file.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318765",
+        "po_line": 0,
+        "item_key": "2e73d6f56e93"
+      },
+      "subject_raw": {
+        "po_number": "4500318765",
+        "po_line": 0,
+        "item_key": "2e73d6f56e93"
+      },
+      "attribute": "item_no_printed",
+      "value": "4",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 31
+      },
+      "evidence": "PR-RB-2207: lid closure magnets RM-N42-D0401 (4 pcs per box) are fitted in our plant and included in the unit price.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318765",
+        "po_line": 0,
+        "item_key": "2e73d6f56e93"
+      },
+      "subject_raw": {
+        "po_number": "4500318765",
+        "po_line": 0,
+        "item_key": "2e73d6f56e93"
+      },
+      "attribute": "supplier_part_no",
+      "value": "PR-RB-2207",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 31
+      },
+      "evidence": "PR-RB-2207: lid closure magnets RM-N42-D0401 (4 pcs per box) are fitted in our plant and included in the unit price.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "statement_no": 1
+      },
+      "subject_raw": {
+        "statement_no": 1
+      },
+      "attribute": "kind",
+      "value": "artwork_rev",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1
       },
-      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318765 of 2026-10-12 · Incoterms FOB Yantian · Payment NET30",
+      "evidence": "Artwork PR-SL-0604: rev. B (GH6_sleeve_revB.pdf), per Soony drawing on file.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "statement_no": 1
+      },
+      "subject_raw": {
+        "statement_no": 1
+      },
+      "attribute": "value",
+      "value": "Artwork PR-SL-0604: rev. B (GH6_sleeve_revB.pdf), per Soony drawing on file.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Artwork PR-SL-0604: rev. B (GH6_sleeve_revB.pdf), per Soony drawing on file.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "statement_no": 1
+      },
+      "subject_raw": {
+        "statement_no": 1
+      },
+      "attribute": "revision",
+      "value": "B",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Artwork PR-SL-0604: rev. B (GH6_sleeve_revB.pdf), per Soony drawing on file.",
       "confidence": "high"
     }
   ],

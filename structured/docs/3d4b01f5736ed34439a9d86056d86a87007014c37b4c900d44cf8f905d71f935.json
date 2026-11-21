@@ -10,18 +10,119 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318640"
+      },
+      "subject_raw": {
+        "po_number": "4500318640"
+      },
+      "attribute": "oc_number",
+      "value": "OA26324322",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "OA26324322",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318640"
+      },
+      "subject_raw": {
+        "po_number": "4500318640"
+      },
+      "attribute": "oc_date",
+      "value": "2026-03-19",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "2026-03-19",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318640"
+      },
+      "subject_raw": {
+        "po_number": "4500318640"
+      },
+      "attribute": "incoterm",
+      "value": "FOB",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "FOB",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318640"
+      },
+      "subject_raw": {
+        "po_number": "4500318640"
+      },
+      "attribute": "payment_terms",
+      "value": "NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "NET30",
+      "confidence": "high"
+    },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318640",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "77b4a7d08d3f"
       },
       "subject_raw": {
         "po_number": "4500318640",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "77b4a7d08d3f"
+      },
+      "attribute": "item_no_printed",
+      "value": "00010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n80,000\n1.44\nCNY\n2026-05-18",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318640",
+        "po_line": 1,
+        "item_key": "77b4a7d08d3f"
+      },
+      "subject_raw": {
+        "po_number": "4500318640",
+        "po_line": 1,
+        "item_key": "77b4a7d08d3f"
       },
       "attribute": "supplier_part_no",
       "value": "PR-CC-0312",
@@ -38,11 +139,13 @@
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318640",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "77b4a7d08d3f"
       },
       "subject_raw": {
         "po_number": "4500318640",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "77b4a7d08d3f"
       },
       "attribute": "qty",
       "value": 80000,
@@ -56,21 +159,72 @@
       "confidence": "high"
     },
     {
-      "fact_type": "supplier_statement",
+      "fact_type": "oc_line",
       "subject": {
-        "po_number": "4500318640"
+        "po_number": "4500318640",
+        "po_line": 1,
+        "item_key": "77b4a7d08d3f"
       },
       "subject_raw": {
-        "po_number": "4500318640"
+        "po_number": "4500318640",
+        "po_line": 1,
+        "item_key": "77b4a7d08d3f"
       },
-      "attribute": "value",
-      "value": "Customer: Soony Interactive GmbH · Your order 4500318640 of 2026-03-19 · Incoterms FOB Yantian · Payment NET30",
+      "attribute": "unit_price",
+      "value": 80000,
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 12
       },
-      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318640 of 2026-03-19 · Incoterms FOB Yantian · Payment NET30",
+      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n80,000\n1.44\nCNY\n2026-05-18",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318640",
+        "po_line": 1,
+        "item_key": "77b4a7d08d3f"
+      },
+      "subject_raw": {
+        "po_number": "4500318640",
+        "po_line": 1,
+        "item_key": "77b4a7d08d3f"
+      },
+      "attribute": "currency",
+      "value": "CNY",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n80,000\n1.44\nCNY\n2026-05-18",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318640",
+        "po_line": 1,
+        "item_key": "77b4a7d08d3f"
+      },
+      "subject_raw": {
+        "po_number": "4500318640",
+        "po_line": 1,
+        "item_key": "77b4a7d08d3f"
+      },
+      "attribute": "confirmed_date",
+      "value": "2026-05-18",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n80,000\n1.44\nCNY\n2026-05-18",
       "confidence": "high"
     }
   ],

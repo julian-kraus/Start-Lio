@@ -10,7 +10,7 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
@@ -29,7 +29,7 @@
         "row": 2,
         "column": "supplier_id"
       },
-      "evidence": "row 2: supplier_id=SUP-0010",
+      "evidence": "supplier_id=SUP-0010",
       "confidence": "high"
     },
     {
@@ -48,7 +48,7 @@
         "row": 2,
         "column": "name"
       },
-      "evidence": "row 2: name=Hwaseong Memory",
+      "evidence": "name=Hwaseong Memory",
       "confidence": "high"
     },
     {
@@ -67,7 +67,7 @@
         "row": 2,
         "column": "legal_name"
       },
-      "evidence": "row 2: legal_name=Hwaseong Memory Co., Ltd.",
+      "evidence": "legal_name=Hwaseong Memory Co., Ltd.",
       "confidence": "high"
     },
     {
@@ -86,7 +86,7 @@
         "row": 2,
         "column": "category"
       },
-      "evidence": "row 2: category=Game Media",
+      "evidence": "category=Game Media",
       "confidence": "high"
     },
     {
@@ -105,7 +105,7 @@
         "row": 2,
         "column": "country"
       },
-      "evidence": "row 2: country=KR",
+      "evidence": "country=KR",
       "confidence": "high"
     },
     {
@@ -124,7 +124,7 @@
         "row": 2,
         "column": "city"
       },
-      "evidence": "row 2: city=Hwaseong",
+      "evidence": "city=Hwaseong",
       "confidence": "high"
     },
     {
@@ -143,7 +143,7 @@
         "row": 2,
         "column": "lat"
       },
-      "evidence": "row 2: lat=37.1995",
+      "evidence": "lat=37.1995",
       "confidence": "high"
     },
     {
@@ -162,7 +162,7 @@
         "row": 2,
         "column": "lon"
       },
-      "evidence": "row 2: lon=126.8311",
+      "evidence": "lon=126.8311",
       "confidence": "high"
     },
     {
@@ -181,7 +181,7 @@
         "row": 2,
         "column": "currency"
       },
-      "evidence": "row 2: currency=USD",
+      "evidence": "currency=USD",
       "confidence": "high"
     },
     {
@@ -200,7 +200,7 @@
         "row": 2,
         "column": "payment_terms"
       },
-      "evidence": "row 2: payment_terms=NET45",
+      "evidence": "payment_terms=NET45",
       "confidence": "high"
     },
     {
@@ -219,7 +219,7 @@
         "row": 2,
         "column": "incoterm"
       },
-      "evidence": "row 2: incoterm=FOB Busan",
+      "evidence": "incoterm=FOB Busan",
       "confidence": "high"
     },
     {
@@ -238,7 +238,7 @@
         "row": 2,
         "column": "supplier_since"
       },
-      "evidence": "row 2: supplier_since=2019-01-01",
+      "evidence": "supplier_since=2019-01-01",
       "confidence": "high"
     },
     {
@@ -257,7 +257,7 @@
         "row": 2,
         "column": "status"
       },
-      "evidence": "row 2: status=active",
+      "evidence": "status=active",
       "confidence": "high"
     },
     {
@@ -276,7 +276,7 @@
         "row": 2,
         "column": "qualification_status"
       },
-      "evidence": "row 2: qualification_status=qualified",
+      "evidence": "qualification_status=qualified",
       "confidence": "high"
     },
     {
@@ -295,7 +295,7 @@
         "row": 2,
         "column": "contact_name"
       },
-      "evidence": "row 2: contact_name=Seo-yeon Kim",
+      "evidence": "contact_name=Seo-yeon Kim",
       "confidence": "high"
     },
     {
@@ -314,7 +314,7 @@
         "row": 2,
         "column": "contact_email"
       },
-      "evidence": "row 2: contact_email=sy.kim.hwaseong-memory@suppliers.juliansibbing.de",
+      "evidence": "contact_email=sy.kim.hwaseong-memory@suppliers.juliansibbing.de",
       "confidence": "high"
     },
     {
@@ -333,7 +333,7 @@
         "row": 2,
         "column": "phone"
       },
-      "evidence": "row 2: phone=+82 31 200 3300",
+      "evidence": "phone=+82 31 200 3300",
       "confidence": "high"
     },
     {
@@ -352,7 +352,7 @@
         "row": 2,
         "column": "preferred_language"
       },
-      "evidence": "row 2: preferred_language=ko",
+      "evidence": "preferred_language=ko",
       "confidence": "high"
     }
   ],

@@ -10,18 +10,119 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318781"
+      },
+      "subject_raw": {
+        "po_number": "4500318781"
+      },
+      "attribute": "oc_number",
+      "value": "OA26692691",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "OA26692691",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318781"
+      },
+      "subject_raw": {
+        "po_number": "4500318781"
+      },
+      "attribute": "oc_date",
+      "value": "2026-11-02",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "2026-11-02",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318781"
+      },
+      "subject_raw": {
+        "po_number": "4500318781"
+      },
+      "attribute": "incoterm",
+      "value": "FOB",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "FOB",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318781"
+      },
+      "subject_raw": {
+        "po_number": "4500318781"
+      },
+      "attribute": "payment_terms",
+      "value": "NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "NET30",
+      "confidence": "high"
+    },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318781",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "e123ca5c5c26"
       },
       "subject_raw": {
         "po_number": "4500318781",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "e123ca5c5c26"
+      },
+      "attribute": "item_no_printed",
+      "value": "00010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-RB-2207\nCollector's Box\nGrand Heist 6\n(rigid,\nmagnetic lid)\n25,500\n25.62\nCNY\n2027-01-04",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318781",
+        "po_line": 1,
+        "item_key": "e123ca5c5c26"
+      },
+      "subject_raw": {
+        "po_number": "4500318781",
+        "po_line": 1,
+        "item_key": "e123ca5c5c26"
       },
       "attribute": "supplier_part_no",
       "value": "PR-RB-2207",
@@ -38,11 +139,13 @@
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318781",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "e123ca5c5c26"
       },
       "subject_raw": {
         "po_number": "4500318781",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "e123ca5c5c26"
       },
       "attribute": "qty",
       "value": 25500,
@@ -56,21 +159,118 @@
       "confidence": "high"
     },
     {
-      "fact_type": "supplier_statement",
+      "fact_type": "oc_line",
       "subject": {
-        "po_number": "4500318781"
+        "po_number": "4500318781",
+        "po_line": 1,
+        "item_key": "e123ca5c5c26"
       },
       "subject_raw": {
-        "po_number": "4500318781"
+        "po_number": "4500318781",
+        "po_line": 1,
+        "item_key": "e123ca5c5c26"
       },
-      "attribute": "value",
-      "value": "Customer: Soony Interactive GmbH · Your order 4500318781 of 2026-11-02 · Incoterms FOB Yantian · Payment NET30",
+      "attribute": "unit_price",
+      "value": 25500,
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 12
       },
-      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318781 of 2026-11-02 · Incoterms FOB Yantian · Payment NET30",
+      "evidence": "PR-RB-2207\nCollector's Box\nGrand Heist 6\n(rigid,\nmagnetic lid)\n25,500\n25.62\nCNY\n2027-01-04",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318781",
+        "po_line": 1,
+        "item_key": "e123ca5c5c26"
+      },
+      "subject_raw": {
+        "po_number": "4500318781",
+        "po_line": 1,
+        "item_key": "e123ca5c5c26"
+      },
+      "attribute": "currency",
+      "value": "CNY",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-RB-2207\nCollector's Box\nGrand Heist 6\n(rigid,\nmagnetic lid)\n25,500\n25.62\nCNY\n2027-01-04",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318781",
+        "po_line": 1,
+        "item_key": "e123ca5c5c26"
+      },
+      "subject_raw": {
+        "po_number": "4500318781",
+        "po_line": 1,
+        "item_key": "e123ca5c5c26"
+      },
+      "attribute": "confirmed_date",
+      "value": "2027-01-04",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-RB-2207\nCollector's Box\nGrand Heist 6\n(rigid,\nmagnetic lid)\n25,500\n25.62\nCNY\n2027-01-04",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318781",
+        "po_line": 1,
+        "item_key": "441196c0a91f"
+      },
+      "subject_raw": {
+        "po_number": "4500318781",
+        "po_line": 1,
+        "item_key": "441196c0a91f"
+      },
+      "attribute": "item_no_printed",
+      "value": "00010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 21
+      },
+      "evidence": "PR-RB-2207: lid closure magnets RM-N42-D0401 (4 pcs per box) are fitted in our plant and included in the unit price.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318781",
+        "po_line": 1,
+        "item_key": "441196c0a91f"
+      },
+      "subject_raw": {
+        "po_number": "4500318781",
+        "po_line": 1,
+        "item_key": "441196c0a91f"
+      },
+      "attribute": "supplier_part_no",
+      "value": "PR-RB-2207",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 21
+      },
+      "evidence": "PR-RB-2207: lid closure magnets RM-N42-D0401 (4 pcs per box) are fitted in our plant and included in the unit price.",
       "confidence": "high"
     }
   ],

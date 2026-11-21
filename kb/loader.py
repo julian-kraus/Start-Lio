@@ -14,7 +14,7 @@ from psycopg.types.json import Jsonb
 
 from tracker.db import _jsonb_safe
 
-from . import events
+from . import events, registry
 from . import facts as facts_mod
 from .tabular import TABULAR_CONTAINERS
 
@@ -42,24 +42,19 @@ def load_contract(conn, structured: Path, origin: str = "codex") -> dict:
                 (name, item.get("description"), Jsonb(_jsonb_safe(item.get("attributes"))), origin))
             counts["fact_types"] += 1
     for md in sorted((contract / "doc_kinds").glob("*.md")):
-        conn.execute(
-            """INSERT INTO doc_kinds (name, description, origin) VALUES (%s, %s, %s)
-               ON CONFLICT (name) DO UPDATE SET description = EXCLUDED.description, origin = EXCLUDED.origin,
-                 updated_at = now()""", (md.stem, md.read_text(), origin))
+        registry.upsert_doc_kind(conn, md.stem, md.read_text(), origin=origin, status="core")
         counts["doc_kinds"] += 1
     for path in sorted((structured / "schema_maps").glob("*.json")):
         try:
             mapping = json.loads(path.read_text())
             if not mapping.get("signature") or not mapping.get("fact_type") or "columns" not in mapping:
                 raise ValueError("needs signature, fact_type and columns")
+            if not all(isinstance(s, dict) and "field" in s for s in mapping["columns"].values()):
+                raise ValueError("every column must map to an object with a 'field'")
         except ValueError as exc:
             counts["schema_map_errors"].append(f"{path.name}: {exc}")
             continue
-        conn.execute(
-            """INSERT INTO schema_maps (signature, format, sheet, mapping, origin) VALUES (%s, %s, %s, %s, %s)
-               ON CONFLICT (signature) DO UPDATE SET format = EXCLUDED.format, sheet = EXCLUDED.sheet,
-                 mapping = EXCLUDED.mapping, origin = EXCLUDED.origin, updated_at = now()""",
-            (mapping["signature"], mapping.get("format"), mapping.get("sheet"), Jsonb(mapping), origin))
+        registry.upsert_schema_map(conn, mapping, origin=origin, status="core")
         counts["schema_maps"] += 1
     conn.commit()
     return counts
@@ -80,9 +75,13 @@ def current_sha_by_path(conn, data_dir: Path) -> dict[str, str]:
 
 def envelope_facts(env: dict, confidence_map: dict) -> list[dict]:
     src = env["source"]
-    extractor = f"{env.get('extracted_by') or 'codex'}:{env.get('spec_version', '0')}"
-    if not extractor.startswith("codex"):
-        extractor = "codex:" + extractor
+    by = env.get("extracted_by") or "codex"
+    if by.startswith("llm:"):
+        extractor = by                       # live intake: the adapter label
+    else:
+        extractor = f"{by}:{env.get('spec_version', '0')}"
+        if not extractor.startswith("codex"):
+            extractor = "codex:" + extractor  # first pass: Codex worker and spec version
     out = []
     for f in env.get("facts", []):
         if not f.get("fact_type") or not f.get("attribute"):
@@ -129,10 +128,10 @@ def load_envelope(conn, env: dict, *, current_sha: str | None, confidence_map: d
     for proposal in env.get("proposed_fact_types", []) or []:
         name = proposal.get("name") if isinstance(proposal, dict) else None
         if name:
-            conn.execute("INSERT INTO fact_types (name, description, attributes, origin) VALUES (%s, %s, %s, %s) "
-                         "ON CONFLICT (name) DO NOTHING",
+            conn.execute("INSERT INTO fact_types (name, description, attributes, origin, status) "
+                         "VALUES (%s, %s, %s, %s, 'proposed') ON CONFLICT (name) DO NOTHING",
                          (name, proposal.get("description"), Jsonb(_jsonb_safe(proposal.get("attributes"))),
-                          "proposed"))
+                          env.get("extracted_by") or "proposed"))
     return len(items)
 
 

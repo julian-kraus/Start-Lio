@@ -1,3 +1,8 @@
+recognise:
+  path_globs: ["**/*policy*document*"]
+  any_phrases: ["source document"]
+  container: pdf
+
 # policy_document
 
-Extract only the fields supported by the envelope contract; preserve source language in evidence and write translations in notes.
+Extract grounded fields, preserve source-language evidence, and retain unresolved joins explicitly.

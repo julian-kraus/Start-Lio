@@ -10,18 +10,119 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318716"
+      },
+      "subject_raw": {
+        "po_number": "4500318716"
+      },
+      "attribute": "oc_number",
+      "value": "OA26251647",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "OA26251647",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318716"
+      },
+      "subject_raw": {
+        "po_number": "4500318716"
+      },
+      "attribute": "oc_date",
+      "value": "2026-08-17",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "2026-08-17",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318716"
+      },
+      "subject_raw": {
+        "po_number": "4500318716"
+      },
+      "attribute": "incoterm",
+      "value": "FOB",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "FOB",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318716"
+      },
+      "subject_raw": {
+        "po_number": "4500318716"
+      },
+      "attribute": "payment_terms",
+      "value": "NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "NET30",
+      "confidence": "high"
+    },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318716",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "ae6827230294"
       },
       "subject_raw": {
         "po_number": "4500318716",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "ae6827230294"
+      },
+      "attribute": "item_no_printed",
+      "value": "00010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n122,000\n1.57\nCNY\n2026-11-05\n00020",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "ae6827230294"
+      },
+      "subject_raw": {
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "ae6827230294"
       },
       "attribute": "supplier_part_no",
       "value": "CMP-GAM-003",
@@ -38,32 +139,13 @@
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318716",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "ae6827230294"
       },
       "subject_raw": {
         "po_number": "4500318716",
-        "po_line": 1
-      },
-      "attribute": "material_id",
-      "value": "CMP-GAM-003",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 12
-      },
-      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n122,000\n1.57\nCNY\n2026-11-05\n00020",
-      "confidence": "medium"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318716",
-        "po_line": 1
-      },
-      "subject_raw": {
-        "po_number": "4500318716",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "ae6827230294"
       },
       "attribute": "qty",
       "value": 122000,
@@ -80,11 +162,128 @@
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318716",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "ae6827230294"
       },
       "subject_raw": {
         "po_number": "4500318716",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "ae6827230294"
+      },
+      "attribute": "unit_price",
+      "value": 122000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n122,000\n1.57\nCNY\n2026-11-05\n00020",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "ae6827230294"
+      },
+      "subject_raw": {
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "ae6827230294"
+      },
+      "attribute": "currency",
+      "value": "CNY",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n122,000\n1.57\nCNY\n2026-11-05\n00020",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "ae6827230294"
+      },
+      "subject_raw": {
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "ae6827230294"
+      },
+      "attribute": "confirmed_date",
+      "value": "2026-11-05",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n122,000\n1.57\nCNY\n2026-11-05\n00020",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "ae6827230294"
+      },
+      "subject_raw": {
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "ae6827230294"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-003",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n122,000\n1.57\nCNY\n2026-11-05\n00020",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "26aa9c35e1f9"
+      },
+      "subject_raw": {
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "26aa9c35e1f9"
+      },
+      "attribute": "item_no_printed",
+      "value": "00010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 20
+      },
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n14,600\n85.81\nCNY\n2026-11-13",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "26aa9c35e1f9"
+      },
+      "subject_raw": {
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "26aa9c35e1f9"
       },
       "attribute": "supplier_part_no",
       "value": "CMP-GAM-010",
@@ -101,32 +300,13 @@
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318716",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "26aa9c35e1f9"
       },
       "subject_raw": {
         "po_number": "4500318716",
-        "po_line": 1
-      },
-      "attribute": "material_id",
-      "value": "CMP-GAM-010",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 20
-      },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n14,600\n85.81\nCNY\n2026-11-13",
-      "confidence": "medium"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318716",
-        "po_line": 1
-      },
-      "subject_raw": {
-        "po_number": "4500318716",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "26aa9c35e1f9"
       },
       "attribute": "qty",
       "value": 14600,
@@ -140,21 +320,95 @@
       "confidence": "high"
     },
     {
-      "fact_type": "supplier_statement",
+      "fact_type": "oc_line",
       "subject": {
-        "po_number": "4500318716"
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "26aa9c35e1f9"
       },
       "subject_raw": {
-        "po_number": "4500318716"
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "26aa9c35e1f9"
       },
-      "attribute": "value",
-      "value": "Customer: Soony Interactive GmbH · Your order 4500318716 of 2026-08-17 · Incoterms FOB Yantian · Payment NET30",
+      "attribute": "unit_price",
+      "value": 14600,
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 20
       },
-      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318716 of 2026-08-17 · Incoterms FOB Yantian · Payment NET30",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n14,600\n85.81\nCNY\n2026-11-13",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "26aa9c35e1f9"
+      },
+      "subject_raw": {
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "26aa9c35e1f9"
+      },
+      "attribute": "currency",
+      "value": "CNY",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 20
+      },
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n14,600\n85.81\nCNY\n2026-11-13",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "26aa9c35e1f9"
+      },
+      "subject_raw": {
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "26aa9c35e1f9"
+      },
+      "attribute": "confirmed_date",
+      "value": "2026-11-13",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 20
+      },
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n14,600\n85.81\nCNY\n2026-11-13",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "26aa9c35e1f9"
+      },
+      "subject_raw": {
+        "po_number": "4500318716",
+        "po_line": 1,
+        "item_key": "26aa9c35e1f9"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 20
+      },
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n14,600\n85.81\nCNY\n2026-11-13",
       "confidence": "high"
     }
   ],

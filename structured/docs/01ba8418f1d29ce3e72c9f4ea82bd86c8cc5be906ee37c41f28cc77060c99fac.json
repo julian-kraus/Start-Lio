@@ -1,0 +1,18 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0018_Pune_Diecast_Works/profile.json",
+    "sha256": "01ba8418f1d29ce3e72c9f4ea82bd86c8cc5be906ee37c41f28cc77060c99fac",
+    "bytes": 1054
+  },
+  "doc_kind": "other_document",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+source-envelope",
+  "doc_date": null,
+  "facts": [],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

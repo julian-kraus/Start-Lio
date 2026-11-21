@@ -10,7 +10,7 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
@@ -29,7 +29,7 @@
         "row": 2,
         "column": "supplier_id"
       },
-      "evidence": "row 2: supplier_id=SUP-0018",
+      "evidence": "supplier_id=SUP-0018",
       "confidence": "high"
     },
     {
@@ -48,7 +48,7 @@
         "row": 2,
         "column": "name"
       },
-      "evidence": "row 2: name=Pune Diecast Works",
+      "evidence": "name=Pune Diecast Works",
       "confidence": "high"
     },
     {
@@ -67,7 +67,7 @@
         "row": 2,
         "column": "legal_name"
       },
-      "evidence": "row 2: legal_name=Pune Diecast Works Pvt. Ltd.",
+      "evidence": "legal_name=Pune Diecast Works Pvt. Ltd.",
       "confidence": "high"
     },
     {
@@ -86,7 +86,7 @@
         "row": 2,
         "column": "category"
       },
-      "evidence": "row 2: category=Collector's Items",
+      "evidence": "category=Collector's Items",
       "confidence": "high"
     },
     {
@@ -105,7 +105,7 @@
         "row": 2,
         "column": "country"
       },
-      "evidence": "row 2: country=IN",
+      "evidence": "country=IN",
       "confidence": "high"
     },
     {
@@ -124,7 +124,7 @@
         "row": 2,
         "column": "city"
       },
-      "evidence": "row 2: city=Pune",
+      "evidence": "city=Pune",
       "confidence": "high"
     },
     {
@@ -143,7 +143,7 @@
         "row": 2,
         "column": "lat"
       },
-      "evidence": "row 2: lat=18.5204",
+      "evidence": "lat=18.5204",
       "confidence": "high"
     },
     {
@@ -162,7 +162,7 @@
         "row": 2,
         "column": "lon"
       },
-      "evidence": "row 2: lon=73.8567",
+      "evidence": "lon=73.8567",
       "confidence": "high"
     },
     {
@@ -181,7 +181,7 @@
         "row": 2,
         "column": "currency"
       },
-      "evidence": "row 2: currency=INR",
+      "evidence": "currency=INR",
       "confidence": "high"
     },
     {
@@ -200,7 +200,7 @@
         "row": 2,
         "column": "payment_terms"
       },
-      "evidence": "row 2: payment_terms=NET30",
+      "evidence": "payment_terms=NET30",
       "confidence": "high"
     },
     {
@@ -219,7 +219,7 @@
         "row": 2,
         "column": "incoterm"
       },
-      "evidence": "row 2: incoterm=FOB Nhava Sheva",
+      "evidence": "incoterm=FOB Nhava Sheva",
       "confidence": "high"
     },
     {
@@ -238,7 +238,7 @@
         "row": 2,
         "column": "supplier_since"
       },
-      "evidence": "row 2: supplier_since=2026-08-01",
+      "evidence": "supplier_since=2026-08-01",
       "confidence": "high"
     },
     {
@@ -257,7 +257,7 @@
         "row": 2,
         "column": "status"
       },
-      "evidence": "row 2: status=active",
+      "evidence": "status=active",
       "confidence": "high"
     },
     {
@@ -276,7 +276,7 @@
         "row": 2,
         "column": "qualification_status"
       },
-      "evidence": "row 2: qualification_status=conditional",
+      "evidence": "qualification_status=conditional",
       "confidence": "high"
     },
     {
@@ -295,7 +295,7 @@
         "row": 2,
         "column": "contact_name"
       },
-      "evidence": "row 2: contact_name=Rohan Deshmukh",
+      "evidence": "contact_name=Rohan Deshmukh",
       "confidence": "high"
     },
     {
@@ -314,7 +314,7 @@
         "row": 2,
         "column": "contact_email"
       },
-      "evidence": "row 2: contact_email=rohan.d.pune-diecast@suppliers.juliansibbing.de",
+      "evidence": "contact_email=rohan.d.pune-diecast@suppliers.juliansibbing.de",
       "confidence": "high"
     },
     {
@@ -333,7 +333,7 @@
         "row": 2,
         "column": "phone"
       },
-      "evidence": "row 2: phone=+91 20 2600 1100",
+      "evidence": "phone=+91 20 2600 1100",
       "confidence": "high"
     },
     {
@@ -352,7 +352,7 @@
         "row": 2,
         "column": "preferred_language"
       },
-      "evidence": "row 2: preferred_language=en",
+      "evidence": "preferred_language=en",
       "confidence": "high"
     },
     {
@@ -371,7 +371,7 @@
         "row": 2,
         "column": "notes"
       },
-      "evidence": "row 2: notes=Second source for the statue. Conditional release, see PP-07.",
+      "evidence": "notes=Second source for the statue. Conditional release, see PP-07.",
       "confidence": "high"
     }
   ],

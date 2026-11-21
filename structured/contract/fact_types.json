@@ -231,7 +231,7 @@
       "name": "route",
       "description": "Transport route",
       "subject_keys": [
-        "id"
+        "route_id"
       ],
       "attributes": {
         "transit_days": {
@@ -264,7 +264,7 @@
       "name": "carrier",
       "description": "Logistics provider",
       "subject_keys": [
-        "id"
+        "carrier_id"
       ],
       "attributes": {
         "name": {
@@ -289,7 +289,7 @@
       "name": "port",
       "description": "Port master",
       "subject_keys": [
-        "id"
+        "locode"
       ],
       "attributes": {
         "name": {
@@ -318,7 +318,7 @@
       "name": "site",
       "description": "Site master",
       "subject_keys": [
-        "id"
+        "site_id"
       ],
       "attributes": {
         "name": {
@@ -404,6 +404,10 @@
         "material_id"
       ],
       "attributes": {
+        "supplier_part_no": {
+          "description": "supplier_part_no",
+          "type": "string"
+        },
         "share": {
           "description": "share",
           "type": "string"
@@ -431,35 +435,14 @@
       }
     },
     {
-      "name": "component_flag",
-      "description": "Component handling flag",
-      "subject_keys": [
-        "material_id"
-      ],
-      "attributes": {
-        "phantom_in": {
-          "description": "phantom_in",
-          "type": "string"
-        },
-        "not_stocked": {
-          "description": "not_stocked",
-          "type": "string"
-        },
-        "reason": {
-          "description": "reason",
-          "type": "string"
-        }
-      }
-    },
-    {
       "name": "shipment",
       "description": "Shipment tracking row",
       "subject_keys": [
         "shipment_id"
       ],
       "attributes": {
-        "carrier": {
-          "description": "carrier",
+        "carrier_id": {
+          "description": "carrier_id",
           "type": "string"
         },
         "mode": {
@@ -468,6 +451,10 @@
         },
         "reference": {
           "description": "reference",
+          "type": "string"
+        },
+        "supplier_id": {
+          "description": "supplier_id",
           "type": "string"
         },
         "po_numbers": {
@@ -480,6 +467,14 @@
         },
         "route_id": {
           "description": "route_id",
+          "type": "string"
+        },
+        "origin": {
+          "description": "origin",
+          "type": "string"
+        },
+        "destination": {
+          "description": "destination",
           "type": "string"
         },
         "etd": {
@@ -518,18 +513,47 @@
       "attributes": {
         "qty_planned": {
           "description": "qty_planned",
-          "type": "string"
+          "type": "number"
         },
         "qty_shipped": {
           "description": "qty_shipped",
-          "type": "string"
+          "type": "number"
         },
         "qty_balance": {
           "description": "qty_balance",
-          "type": "string"
+          "type": "number"
         },
         "balance_eta": {
           "description": "balance_eta",
+          "type": "string"
+        },
+        "po_number": {
+          "description": "po_number",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "oc_header",
+      "description": "Order-confirmation header",
+      "subject_keys": [
+        "po_number"
+      ],
+      "attributes": {
+        "oc_number": {
+          "description": "oc_number",
+          "type": "string"
+        },
+        "oc_date": {
+          "description": "oc_date",
+          "type": "string"
+        },
+        "incoterm": {
+          "description": "incoterm",
+          "type": "string"
+        },
+        "payment_terms": {
+          "description": "payment_terms",
           "type": "string"
         }
       }
@@ -542,12 +566,20 @@
         "po_line"
       ],
       "attributes": {
+        "item_no_printed": {
+          "description": "item_no_printed",
+          "type": "string"
+        },
         "supplier_part_no": {
           "description": "supplier_part_no",
           "type": "string"
         },
         "material_id": {
           "description": "material_id",
+          "type": "string"
+        },
+        "description": {
+          "description": "description",
           "type": "string"
         },
         "qty": {
@@ -565,22 +597,6 @@
         "confirmed_date": {
           "description": "confirmed_date",
           "type": "string"
-        },
-        "incoterm": {
-          "description": "incoterm",
-          "type": "string"
-        },
-        "payment_terms": {
-          "description": "payment_terms",
-          "type": "string"
-        },
-        "oc_number": {
-          "description": "oc_number",
-          "type": "string"
-        },
-        "oc_date": {
-          "description": "oc_date",
-          "type": "string"
         }
       }
     },
@@ -588,7 +604,7 @@
       "name": "supplier_statement",
       "description": "Supplier statement",
       "subject_keys": [
-        "po_number or supplier_id"
+        "statement_no"
       ],
       "attributes": {
         "kind": {
@@ -597,6 +613,14 @@
         },
         "value": {
           "description": "value",
+          "type": "string"
+        },
+        "material_id": {
+          "description": "material_id",
+          "type": "string"
+        },
+        "revision": {
+          "description": "revision",
           "type": "string"
         },
         "condition_to_release": {
@@ -617,6 +641,10 @@
           "description": "po_number",
           "type": "string"
         },
+        "po_numbers": {
+          "description": "po_numbers",
+          "type": "string"
+        },
         "supplier_part_no": {
           "description": "supplier_part_no",
           "type": "string"
@@ -627,7 +655,7 @@
         },
         "printed_qty": {
           "description": "printed_qty",
-          "type": "number"
+          "type": "string"
         },
         "handwritten_qty": {
           "description": "handwritten_qty",
@@ -639,7 +667,7 @@
         },
         "final_qty": {
           "description": "final_qty",
-          "type": "number"
+          "type": "string"
         },
         "uom": {
           "description": "uom",
@@ -684,18 +712,26 @@
         },
         "lot_size": {
           "description": "lot_size",
-          "type": "string"
+          "type": "number"
         },
         "sample_size": {
           "description": "sample_size",
-          "type": "string"
+          "type": "number"
         },
         "defects": {
           "description": "defects",
-          "type": "string"
+          "type": "number"
         },
-        "accept_reject": {
-          "description": "accept_reject",
+        "accept_number": {
+          "description": "accept_number",
+          "type": "number"
+        },
+        "reject_number": {
+          "description": "reject_number",
+          "type": "number"
+        },
+        "batch": {
+          "description": "batch",
           "type": "string"
         },
         "decision": {
@@ -899,6 +935,10 @@
         "product_id"
       ],
       "attributes": {
+        "edition_name": {
+          "description": "edition_name",
+          "type": "string"
+        },
         "demand": {
           "description": "demand",
           "type": "number"
@@ -919,8 +959,16 @@
           "description": "rate_per_hour",
           "type": "string"
         },
+        "hours_needed": {
+          "description": "hours_needed",
+          "type": "string"
+        },
         "hours_available": {
           "description": "hours_available",
+          "type": "string"
+        },
+        "line_status": {
+          "description": "line_status",
           "type": "string"
         }
       }
@@ -942,6 +990,10 @@
         },
         "new": {
           "description": "new",
+          "type": "string"
+        },
+        "action": {
+          "description": "action",
           "type": "string"
         },
         "effective_from": {
@@ -1023,6 +1075,10 @@
         "day"
       ],
       "attributes": {
+        "shift": {
+          "description": "shift",
+          "type": "string"
+        },
         "start": {
           "description": "start",
           "type": "string"
@@ -1046,54 +1102,77 @@
       }
     },
     {
-      "name": "doc_freshness",
-      "description": "Document freshness",
+      "name": "x_news_record",
+      "description": "News item retained as a source fact",
       "subject_keys": [
-        "source_path"
+        "id"
       ],
       "attributes": {
-        "max_updated_at": {
-          "description": "max_updated_at",
+        "generated_at": {
+          "description": "generated_at",
           "type": "string"
         },
-        "row_count": {
-          "description": "row_count",
+        "published_at": {
+          "description": "published_at",
           "type": "string"
-        }
-      }
-    },
-    {
-      "name": "x_org_chart_entry",
-      "description": "An org-chart relationship or entry not covered by the initial vocabulary.",
-      "attributes": {
-        "entry": {
+        },
+        "source": {
+          "description": "source",
           "type": "string"
-        }
-      }
-    },
-    {
-      "name": "x_document_line",
-      "description": "Grounded text line from a document not covered by a specialized extractor.",
-      "attributes": {
-        "text": {
+        },
+        "headline": {
+          "description": "headline",
+          "type": "string"
+        },
+        "summary": {
+          "description": "summary",
+          "type": "string"
+        },
+        "regions": {
+          "description": "regions",
+          "type": "string"
+        },
+        "tags": {
+          "description": "tags",
           "type": "string"
         }
       }
     },
     {
       "name": "x_workbook_row",
-      "description": "Unclassified workbook row retained for losslessness.",
+      "description": "Unclassified workbook row retained for losslessness",
+      "subject_keys": [
+        "record_id"
+      ],
       "attributes": {
         "value": {
+          "description": "value",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "x_document_line",
+      "description": "Grounded document line",
+      "subject_keys": [
+        "source_path"
+      ],
+      "attributes": {
+        "text": {
+          "description": "text",
           "type": "string"
         }
       }
     },
     {
       "name": "x_context_note",
-      "description": "Context note retained as source evidence.",
+      "description": "Context note",
+      "subject_keys": [
+        "source_path"
+      ],
       "attributes": {
         "content": {
+          "description": "content",
           "type": "string"
         }
       }

@@ -148,3 +148,4 @@ settings:
   change_record_fact_type: change_record
   evaluation_time: null        # null = now; set an ISO time to evaluate "as of" a moment
   max_issue_sides: 6
+  proposed_confidence_cap: 0.5   # facts from proposed doc kinds or fact types count at most this confident

@@ -1,0 +1,18 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0029_Guangzhou_PackRight/profile.json",
+    "sha256": "ce5c3eb5bb3291515dc8fd60f1f5956fe4fadfaf1e020e15e00acf9984cac773",
+    "bytes": 1006
+  },
+  "doc_kind": "other_document",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+source-envelope",
+  "doc_date": null,
+  "facts": [],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

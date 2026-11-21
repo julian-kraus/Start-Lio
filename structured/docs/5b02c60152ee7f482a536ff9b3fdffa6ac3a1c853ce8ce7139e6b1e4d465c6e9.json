@@ -10,18 +10,119 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318774"
+      },
+      "subject_raw": {
+        "po_number": "4500318774"
+      },
+      "attribute": "oc_number",
+      "value": "OA26985895",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "OA26985895",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318774"
+      },
+      "subject_raw": {
+        "po_number": "4500318774"
+      },
+      "attribute": "oc_date",
+      "value": "2026-10-26",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "2026-10-26",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318774"
+      },
+      "subject_raw": {
+        "po_number": "4500318774"
+      },
+      "attribute": "incoterm",
+      "value": "FOB",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "FOB",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318774"
+      },
+      "subject_raw": {
+        "po_number": "4500318774"
+      },
+      "attribute": "payment_terms",
+      "value": "NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "NET30",
+      "confidence": "high"
+    },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318774",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "1f8d285bb7b9"
       },
       "subject_raw": {
         "po_number": "4500318774",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "1f8d285bb7b9"
+      },
+      "attribute": "item_no_printed",
+      "value": "00010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-SL-0604\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n140,000\n0.4143\nCNY\n2026-12-28\nArtwork",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318774",
+        "po_line": 1,
+        "item_key": "1f8d285bb7b9"
+      },
+      "subject_raw": {
+        "po_number": "4500318774",
+        "po_line": 1,
+        "item_key": "1f8d285bb7b9"
       },
       "attribute": "supplier_part_no",
       "value": "PR-SL-0604",
@@ -38,11 +139,13 @@
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318774",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "1f8d285bb7b9"
       },
       "subject_raw": {
         "po_number": "4500318774",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "1f8d285bb7b9"
       },
       "attribute": "qty",
       "value": 140000,
@@ -56,21 +159,172 @@
       "confidence": "high"
     },
     {
-      "fact_type": "supplier_statement",
+      "fact_type": "oc_line",
       "subject": {
-        "po_number": "4500318774"
+        "po_number": "4500318774",
+        "po_line": 1,
+        "item_key": "1f8d285bb7b9"
       },
       "subject_raw": {
-        "po_number": "4500318774"
+        "po_number": "4500318774",
+        "po_line": 1,
+        "item_key": "1f8d285bb7b9"
       },
-      "attribute": "value",
-      "value": "Customer: Soony Interactive GmbH · Your order 4500318774 of 2026-10-26 · Incoterms FOB Yantian · Payment NET30",
+      "attribute": "unit_price",
+      "value": 140000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-SL-0604\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n140,000\n0.4143\nCNY\n2026-12-28\nArtwork",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318774",
+        "po_line": 1,
+        "item_key": "1f8d285bb7b9"
+      },
+      "subject_raw": {
+        "po_number": "4500318774",
+        "po_line": 1,
+        "item_key": "1f8d285bb7b9"
+      },
+      "attribute": "currency",
+      "value": "USK",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-SL-0604\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n140,000\n0.4143\nCNY\n2026-12-28\nArtwork",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318774",
+        "po_line": 1,
+        "item_key": "1f8d285bb7b9"
+      },
+      "subject_raw": {
+        "po_number": "4500318774",
+        "po_line": 1,
+        "item_key": "1f8d285bb7b9"
+      },
+      "attribute": "confirmed_date",
+      "value": "2026-12-28",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "PR-SL-0604\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n140,000\n0.4143\nCNY\n2026-12-28\nArtwork",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318774",
+        "po_line": 1,
+        "item_key": "897ec11dd89f"
+      },
+      "subject_raw": {
+        "po_number": "4500318774",
+        "po_line": 1,
+        "item_key": "897ec11dd89f"
+      },
+      "attribute": "item_no_printed",
+      "value": "00010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 20
+      },
+      "evidence": "PR-SL-0604: rev. B (GH6_sleeve_revB.pdf), per Soony drawing on file.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318774",
+        "po_line": 1,
+        "item_key": "897ec11dd89f"
+      },
+      "subject_raw": {
+        "po_number": "4500318774",
+        "po_line": 1,
+        "item_key": "897ec11dd89f"
+      },
+      "attribute": "supplier_part_no",
+      "value": "PR-SL-0604",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 20
+      },
+      "evidence": "PR-SL-0604: rev. B (GH6_sleeve_revB.pdf), per Soony drawing on file.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "statement_no": 1
+      },
+      "subject_raw": {
+        "statement_no": 1
+      },
+      "attribute": "kind",
+      "value": "artwork_rev",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1
       },
-      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318774 of 2026-10-26 · Incoterms FOB Yantian · Payment NET30",
+      "evidence": "Artwork PR-SL-0604: rev. B (GH6_sleeve_revB.pdf), per Soony drawing on file.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "statement_no": 1
+      },
+      "subject_raw": {
+        "statement_no": 1
+      },
+      "attribute": "value",
+      "value": "Artwork PR-SL-0604: rev. B (GH6_sleeve_revB.pdf), per Soony drawing on file.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Artwork PR-SL-0604: rev. B (GH6_sleeve_revB.pdf), per Soony drawing on file.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "statement_no": 1
+      },
+      "subject_raw": {
+        "statement_no": 1
+      },
+      "attribute": "revision",
+      "value": "B",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Artwork PR-SL-0604: rev. B (GH6_sleeve_revB.pdf), per Soony drawing on file.",
       "confidence": "high"
     }
   ],

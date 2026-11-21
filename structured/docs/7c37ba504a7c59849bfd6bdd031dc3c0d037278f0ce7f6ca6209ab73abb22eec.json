@@ -10,7 +10,7 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
@@ -91,6 +91,46 @@
         "page": 1
       },
       "evidence": "PR-RB-2207\nCMP-MAG-005",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "contract_term",
+      "subject": {
+        "supplier_id": "SUP-0029",
+        "contract_id": "SUP-0029_Framework_Supply_Agreement_2023"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029",
+        "contract_id": "SUP-0029_Framework_Supply_Agreement_2023"
+      },
+      "attribute": "expiry",
+      "value": "2027-08-31",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Expires 2027-08-31",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "contract_term",
+      "subject": {
+        "supplier_id": "SUP-0029",
+        "contract_id": "SUP-0029_Framework_Supply_Agreement_2023"
+      },
+      "subject_raw": {
+        "supplier_id": "SUP-0029",
+        "contract_id": "SUP-0029_Framework_Supply_Agreement_2023"
+      },
+      "attribute": "penalty",
+      "value": "0",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Late delivery: 0",
       "confidence": "high"
     }
   ],

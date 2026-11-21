@@ -10,62 +10,36 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
       "subject_raw": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
-      "attribute": "shipment",
-      "value": "SHP-2026-04276",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Tracker",
-        "row": 2,
-        "column": "shipment"
-      },
-      "evidence": "{'shipment': 'SHP-2026-04276', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4471921', 'supplier': 'Guangzhou PackRight', 'pos': '4500318738', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'in transit', 'comment': 'RP: call terminal'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
-      },
-      "subject_raw": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
-      },
-      "attribute": "carrier",
+      "attribute": "carrier_id",
       "value": "LSP-01",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 2,
-        "column": "carrier"
+        "column": "carrier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04276', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4471921', 'supplier': 'Guangzhou PackRight', 'pos': '4500318738', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'in transit', 'comment': 'RP: call terminal'}",
+      "evidence": "LSP-01",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
       "subject_raw": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
       "attribute": "mode",
       "value": "sea",
@@ -76,18 +50,16 @@
         "row": 2,
         "column": "mode"
       },
-      "evidence": "{'shipment': 'SHP-2026-04276', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4471921', 'supplier': 'Guangzhou PackRight', 'pos': '4500318738', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'in transit', 'comment': 'RP: call terminal'}",
+      "evidence": "sea",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
       "subject_raw": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
       "attribute": "reference",
       "value": "NHSU4471921",
@@ -96,108 +68,98 @@
       "locator": {
         "sheet": "Tracker",
         "row": 2,
-        "column": "container_awb"
+        "column": "reference"
       },
-      "evidence": "{'shipment': 'SHP-2026-04276', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4471921', 'supplier': 'Guangzhou PackRight', 'pos': '4500318738', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'in transit', 'comment': 'RP: call terminal'}",
+      "evidence": "NHSU4471921",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
       "subject_raw": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Guangzhou PackRight",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 2,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04276', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4471921', 'supplier': 'Guangzhou PackRight', 'pos': '4500318738', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'in transit', 'comment': 'RP: call terminal'}",
+      "evidence": "Guangzhou PackRight",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
       "subject_raw": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
-      "attribute": "pos",
+      "attribute": "po_numbers",
       "value": "4500318738",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 2,
-        "column": "pos"
+        "column": "po_numbers"
       },
-      "evidence": "{'shipment': 'SHP-2026-04276', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4471921', 'supplier': 'Guangzhou PackRight', 'pos': '4500318738', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'in transit', 'comment': 'RP: call terminal'}",
+      "evidence": "4500318738",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
       "subject_raw": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
-      "attribute": "from",
+      "attribute": "origin",
       "value": "CNYTN",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 2,
-        "column": "from"
+        "column": "origin"
       },
-      "evidence": "{'shipment': 'SHP-2026-04276', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4471921', 'supplier': 'Guangzhou PackRight', 'pos': '4500318738', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'in transit', 'comment': 'RP: call terminal'}",
+      "evidence": "CNYTN",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
       "subject_raw": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
-      "attribute": "to",
+      "attribute": "destination",
       "value": "DEHAM",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 2,
-        "column": "to"
+        "column": "destination"
       },
-      "evidence": "{'shipment': 'SHP-2026-04276', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4471921', 'supplier': 'Guangzhou PackRight', 'pos': '4500318738', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'in transit', 'comment': 'RP: call terminal'}",
+      "evidence": "DEHAM",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
       "subject_raw": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
       "attribute": "etd",
       "value": "2026-10-14",
@@ -208,18 +170,16 @@
         "row": 2,
         "column": "etd"
       },
-      "evidence": "{'shipment': 'SHP-2026-04276', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4471921', 'supplier': 'Guangzhou PackRight', 'pos': '4500318738', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'in transit', 'comment': 'RP: call terminal'}",
+      "evidence": "2026-10-14",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
       "subject_raw": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
       "attribute": "eta",
       "value": "2026-11-19",
@@ -230,18 +190,16 @@
         "row": 2,
         "column": "eta"
       },
-      "evidence": "{'shipment': 'SHP-2026-04276', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4471921', 'supplier': 'Guangzhou PackRight', 'pos': '4500318738', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'in transit', 'comment': 'RP: call terminal'}",
+      "evidence": "2026-11-19",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
       "subject_raw": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
       "attribute": "status",
       "value": "in transit",
@@ -252,84 +210,56 @@
         "row": 2,
         "column": "status"
       },
-      "evidence": "{'shipment': 'SHP-2026-04276', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4471921', 'supplier': 'Guangzhou PackRight', 'pos': '4500318738', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'in transit', 'comment': 'RP: call terminal'}",
+      "evidence": "in transit",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
       "subject_raw": {
-        "reference": "NHSU4471921",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04276"
       },
-      "attribute": "comment",
+      "attribute": "note",
       "value": "RP: call terminal",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 2,
-        "column": "comment"
+        "column": "note"
       },
-      "evidence": "{'shipment': 'SHP-2026-04276', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4471921', 'supplier': 'Guangzhou PackRight', 'pos': '4500318738', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'in transit', 'comment': 'RP: call terminal'}",
+      "evidence": "RP: call terminal",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
       "subject_raw": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
-      "attribute": "shipment",
-      "value": "SHP-2026-04281",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Tracker",
-        "row": 3,
-        "column": "shipment"
-      },
-      "evidence": "{'shipment': 'SHP-2026-04281', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU8213939', 'supplier': 'Hwaseong Memory', 'pos': '4500318733, 4500318735', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-15', 'eta': '2026-11-20', 'status': 'in transit'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
-      },
-      "subject_raw": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
-      },
-      "attribute": "carrier",
+      "attribute": "carrier_id",
       "value": "LSP-01",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 3,
-        "column": "carrier"
+        "column": "carrier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04281', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU8213939', 'supplier': 'Hwaseong Memory', 'pos': '4500318733, 4500318735', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-15', 'eta': '2026-11-20', 'status': 'in transit'}",
+      "evidence": "LSP-01",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
       "subject_raw": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
       "attribute": "mode",
       "value": "sea",
@@ -340,18 +270,16 @@
         "row": 3,
         "column": "mode"
       },
-      "evidence": "{'shipment': 'SHP-2026-04281', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU8213939', 'supplier': 'Hwaseong Memory', 'pos': '4500318733, 4500318735', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-15', 'eta': '2026-11-20', 'status': 'in transit'}",
+      "evidence": "sea",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
       "subject_raw": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
       "attribute": "reference",
       "value": "NHMU8213939",
@@ -360,108 +288,98 @@
       "locator": {
         "sheet": "Tracker",
         "row": 3,
-        "column": "container_awb"
+        "column": "reference"
       },
-      "evidence": "{'shipment': 'SHP-2026-04281', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU8213939', 'supplier': 'Hwaseong Memory', 'pos': '4500318733, 4500318735', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-15', 'eta': '2026-11-20', 'status': 'in transit'}",
+      "evidence": "NHMU8213939",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
       "subject_raw": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Hwaseong Memory",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 3,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04281', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU8213939', 'supplier': 'Hwaseong Memory', 'pos': '4500318733, 4500318735', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-15', 'eta': '2026-11-20', 'status': 'in transit'}",
+      "evidence": "Hwaseong Memory",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
       "subject_raw": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
-      "attribute": "pos",
+      "attribute": "po_numbers",
       "value": "4500318733, 4500318735",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 3,
-        "column": "pos"
+        "column": "po_numbers"
       },
-      "evidence": "{'shipment': 'SHP-2026-04281', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU8213939', 'supplier': 'Hwaseong Memory', 'pos': '4500318733, 4500318735', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-15', 'eta': '2026-11-20', 'status': 'in transit'}",
+      "evidence": "4500318733, 4500318735",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
       "subject_raw": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
-      "attribute": "from",
+      "attribute": "origin",
       "value": "KRPUS",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 3,
-        "column": "from"
+        "column": "origin"
       },
-      "evidence": "{'shipment': 'SHP-2026-04281', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU8213939', 'supplier': 'Hwaseong Memory', 'pos': '4500318733, 4500318735', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-15', 'eta': '2026-11-20', 'status': 'in transit'}",
+      "evidence": "KRPUS",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
       "subject_raw": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
-      "attribute": "to",
+      "attribute": "destination",
       "value": "DEHAM",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 3,
-        "column": "to"
+        "column": "destination"
       },
-      "evidence": "{'shipment': 'SHP-2026-04281', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU8213939', 'supplier': 'Hwaseong Memory', 'pos': '4500318733, 4500318735', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-15', 'eta': '2026-11-20', 'status': 'in transit'}",
+      "evidence": "DEHAM",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
       "subject_raw": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
       "attribute": "etd",
       "value": "2026-10-15",
@@ -472,18 +390,16 @@
         "row": 3,
         "column": "etd"
       },
-      "evidence": "{'shipment': 'SHP-2026-04281', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU8213939', 'supplier': 'Hwaseong Memory', 'pos': '4500318733, 4500318735', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-15', 'eta': '2026-11-20', 'status': 'in transit'}",
+      "evidence": "2026-10-15",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
       "subject_raw": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
       "attribute": "eta",
       "value": "2026-11-20",
@@ -494,18 +410,16 @@
         "row": 3,
         "column": "eta"
       },
-      "evidence": "{'shipment': 'SHP-2026-04281', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU8213939', 'supplier': 'Hwaseong Memory', 'pos': '4500318733, 4500318735', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-15', 'eta': '2026-11-20', 'status': 'in transit'}",
+      "evidence": "2026-11-20",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
       "subject_raw": {
-        "reference": "NHMU8213939",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04281"
       },
       "attribute": "status",
       "value": "in transit",
@@ -516,62 +430,36 @@
         "row": 3,
         "column": "status"
       },
-      "evidence": "{'shipment': 'SHP-2026-04281', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU8213939', 'supplier': 'Hwaseong Memory', 'pos': '4500318733, 4500318735', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-15', 'eta': '2026-11-20', 'status': 'in transit'}",
+      "evidence": "in transit",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
       "subject_raw": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
-      "attribute": "shipment",
-      "value": "SHP-2026-04284",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Tracker",
-        "row": 4,
-        "column": "shipment"
-      },
-      "evidence": "{'shipment': 'SHP-2026-04284', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU3390870', 'supplier': 'Hwaseong Memory', 'pos': '4500318733', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-17', 'eta': '2026-11-24', 'status': 'in transit'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
-      },
-      "subject_raw": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
-      },
-      "attribute": "carrier",
+      "attribute": "carrier_id",
       "value": "LSP-01",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 4,
-        "column": "carrier"
+        "column": "carrier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04284', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU3390870', 'supplier': 'Hwaseong Memory', 'pos': '4500318733', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-17', 'eta': '2026-11-24', 'status': 'in transit'}",
+      "evidence": "LSP-01",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
       "subject_raw": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
       "attribute": "mode",
       "value": "sea",
@@ -582,18 +470,16 @@
         "row": 4,
         "column": "mode"
       },
-      "evidence": "{'shipment': 'SHP-2026-04284', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU3390870', 'supplier': 'Hwaseong Memory', 'pos': '4500318733', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-17', 'eta': '2026-11-24', 'status': 'in transit'}",
+      "evidence": "sea",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
       "subject_raw": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
       "attribute": "reference",
       "value": "NHMU3390870",
@@ -602,108 +488,98 @@
       "locator": {
         "sheet": "Tracker",
         "row": 4,
-        "column": "container_awb"
+        "column": "reference"
       },
-      "evidence": "{'shipment': 'SHP-2026-04284', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU3390870', 'supplier': 'Hwaseong Memory', 'pos': '4500318733', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-17', 'eta': '2026-11-24', 'status': 'in transit'}",
+      "evidence": "NHMU3390870",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
       "subject_raw": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Hwaseong Memory",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 4,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04284', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU3390870', 'supplier': 'Hwaseong Memory', 'pos': '4500318733', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-17', 'eta': '2026-11-24', 'status': 'in transit'}",
+      "evidence": "Hwaseong Memory",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
       "subject_raw": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
-      "attribute": "pos",
+      "attribute": "po_numbers",
       "value": "4500318733",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 4,
-        "column": "pos"
+        "column": "po_numbers"
       },
-      "evidence": "{'shipment': 'SHP-2026-04284', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU3390870', 'supplier': 'Hwaseong Memory', 'pos': '4500318733', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-17', 'eta': '2026-11-24', 'status': 'in transit'}",
+      "evidence": "4500318733",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
       "subject_raw": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
-      "attribute": "from",
+      "attribute": "origin",
       "value": "KRPUS",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 4,
-        "column": "from"
+        "column": "origin"
       },
-      "evidence": "{'shipment': 'SHP-2026-04284', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU3390870', 'supplier': 'Hwaseong Memory', 'pos': '4500318733', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-17', 'eta': '2026-11-24', 'status': 'in transit'}",
+      "evidence": "KRPUS",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
       "subject_raw": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
-      "attribute": "to",
+      "attribute": "destination",
       "value": "DEHAM",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 4,
-        "column": "to"
+        "column": "destination"
       },
-      "evidence": "{'shipment': 'SHP-2026-04284', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU3390870', 'supplier': 'Hwaseong Memory', 'pos': '4500318733', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-17', 'eta': '2026-11-24', 'status': 'in transit'}",
+      "evidence": "DEHAM",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
       "subject_raw": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
       "attribute": "etd",
       "value": "2026-10-17",
@@ -714,18 +590,16 @@
         "row": 4,
         "column": "etd"
       },
-      "evidence": "{'shipment': 'SHP-2026-04284', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU3390870', 'supplier': 'Hwaseong Memory', 'pos': '4500318733', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-17', 'eta': '2026-11-24', 'status': 'in transit'}",
+      "evidence": "2026-10-17",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
       "subject_raw": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
       "attribute": "eta",
       "value": "2026-11-24",
@@ -736,18 +610,16 @@
         "row": 4,
         "column": "eta"
       },
-      "evidence": "{'shipment': 'SHP-2026-04284', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU3390870', 'supplier': 'Hwaseong Memory', 'pos': '4500318733', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-17', 'eta': '2026-11-24', 'status': 'in transit'}",
+      "evidence": "2026-11-24",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
       "subject_raw": {
-        "reference": "NHMU3390870",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04284"
       },
       "attribute": "status",
       "value": "in transit",
@@ -758,62 +630,36 @@
         "row": 4,
         "column": "status"
       },
-      "evidence": "{'shipment': 'SHP-2026-04284', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU3390870', 'supplier': 'Hwaseong Memory', 'pos': '4500318733', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-17', 'eta': '2026-11-24', 'status': 'in transit'}",
+      "evidence": "in transit",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
       "subject_raw": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
-      "attribute": "shipment",
-      "value": "SHP-2026-04289",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Tracker",
-        "row": 5,
-        "column": "shipment"
-      },
-      "evidence": "{'shipment': 'SHP-2026-04289', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4100767', 'supplier': 'Hwaseong Memory', 'pos': '4500318741, 4500318748', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-21', 'eta': '2026-11-26', 'status': 'in transit'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
-      },
-      "subject_raw": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
-      },
-      "attribute": "carrier",
+      "attribute": "carrier_id",
       "value": "LSP-01",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 5,
-        "column": "carrier"
+        "column": "carrier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04289', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4100767', 'supplier': 'Hwaseong Memory', 'pos': '4500318741, 4500318748', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-21', 'eta': '2026-11-26', 'status': 'in transit'}",
+      "evidence": "LSP-01",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
       "subject_raw": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
       "attribute": "mode",
       "value": "sea",
@@ -824,18 +670,16 @@
         "row": 5,
         "column": "mode"
       },
-      "evidence": "{'shipment': 'SHP-2026-04289', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4100767', 'supplier': 'Hwaseong Memory', 'pos': '4500318741, 4500318748', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-21', 'eta': '2026-11-26', 'status': 'in transit'}",
+      "evidence": "sea",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
       "subject_raw": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
       "attribute": "reference",
       "value": "NHSU4100767",
@@ -844,108 +688,98 @@
       "locator": {
         "sheet": "Tracker",
         "row": 5,
-        "column": "container_awb"
+        "column": "reference"
       },
-      "evidence": "{'shipment': 'SHP-2026-04289', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4100767', 'supplier': 'Hwaseong Memory', 'pos': '4500318741, 4500318748', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-21', 'eta': '2026-11-26', 'status': 'in transit'}",
+      "evidence": "NHSU4100767",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
       "subject_raw": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Hwaseong Memory",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 5,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04289', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4100767', 'supplier': 'Hwaseong Memory', 'pos': '4500318741, 4500318748', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-21', 'eta': '2026-11-26', 'status': 'in transit'}",
+      "evidence": "Hwaseong Memory",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
       "subject_raw": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
-      "attribute": "pos",
+      "attribute": "po_numbers",
       "value": "4500318741, 4500318748",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 5,
-        "column": "pos"
+        "column": "po_numbers"
       },
-      "evidence": "{'shipment': 'SHP-2026-04289', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4100767', 'supplier': 'Hwaseong Memory', 'pos': '4500318741, 4500318748', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-21', 'eta': '2026-11-26', 'status': 'in transit'}",
+      "evidence": "4500318741, 4500318748",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
       "subject_raw": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
-      "attribute": "from",
+      "attribute": "origin",
       "value": "KRPUS",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 5,
-        "column": "from"
+        "column": "origin"
       },
-      "evidence": "{'shipment': 'SHP-2026-04289', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4100767', 'supplier': 'Hwaseong Memory', 'pos': '4500318741, 4500318748', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-21', 'eta': '2026-11-26', 'status': 'in transit'}",
+      "evidence": "KRPUS",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
       "subject_raw": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
-      "attribute": "to",
+      "attribute": "destination",
       "value": "DEHAM",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 5,
-        "column": "to"
+        "column": "destination"
       },
-      "evidence": "{'shipment': 'SHP-2026-04289', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4100767', 'supplier': 'Hwaseong Memory', 'pos': '4500318741, 4500318748', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-21', 'eta': '2026-11-26', 'status': 'in transit'}",
+      "evidence": "DEHAM",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
       "subject_raw": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
       "attribute": "etd",
       "value": "2026-10-21",
@@ -956,18 +790,16 @@
         "row": 5,
         "column": "etd"
       },
-      "evidence": "{'shipment': 'SHP-2026-04289', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4100767', 'supplier': 'Hwaseong Memory', 'pos': '4500318741, 4500318748', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-21', 'eta': '2026-11-26', 'status': 'in transit'}",
+      "evidence": "2026-10-21",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
       "subject_raw": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
       "attribute": "eta",
       "value": "2026-11-26",
@@ -978,18 +810,16 @@
         "row": 5,
         "column": "eta"
       },
-      "evidence": "{'shipment': 'SHP-2026-04289', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4100767', 'supplier': 'Hwaseong Memory', 'pos': '4500318741, 4500318748', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-21', 'eta': '2026-11-26', 'status': 'in transit'}",
+      "evidence": "2026-11-26",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
       "subject_raw": {
-        "reference": "NHSU4100767",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04289"
       },
       "attribute": "status",
       "value": "in transit",
@@ -1000,62 +830,36 @@
         "row": 5,
         "column": "status"
       },
-      "evidence": "{'shipment': 'SHP-2026-04289', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU4100767', 'supplier': 'Hwaseong Memory', 'pos': '4500318741, 4500318748', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-10-21', 'eta': '2026-11-26', 'status': 'in transit'}",
+      "evidence": "in transit",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
       "subject_raw": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
-      "attribute": "shipment",
-      "value": "SHP-2026-04292",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Tracker",
-        "row": 6,
-        "column": "shipment"
-      },
-      "evidence": "{'shipment': 'SHP-2026-04292', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU6120458', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318719', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-24', 'eta': '2026-11-27', 'status': 'in transit'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
-      },
-      "subject_raw": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
-      },
-      "attribute": "carrier",
+      "attribute": "carrier_id",
       "value": "LSP-01",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 6,
-        "column": "carrier"
+        "column": "carrier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04292', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU6120458', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318719', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-24', 'eta': '2026-11-27', 'status': 'in transit'}",
+      "evidence": "LSP-01",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
       "subject_raw": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
       "attribute": "mode",
       "value": "sea",
@@ -1066,18 +870,16 @@
         "row": 6,
         "column": "mode"
       },
-      "evidence": "{'shipment': 'SHP-2026-04292', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU6120458', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318719', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-24', 'eta': '2026-11-27', 'status': 'in transit'}",
+      "evidence": "sea",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
       "subject_raw": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
       "attribute": "reference",
       "value": "NHSU6120458",
@@ -1086,108 +888,98 @@
       "locator": {
         "sheet": "Tracker",
         "row": 6,
-        "column": "container_awb"
+        "column": "reference"
       },
-      "evidence": "{'shipment': 'SHP-2026-04292', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU6120458', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318719', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-24', 'eta': '2026-11-27', 'status': 'in transit'}",
+      "evidence": "NHSU6120458",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
       "subject_raw": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Dongguan Precision Housings",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 6,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04292', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU6120458', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318719', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-24', 'eta': '2026-11-27', 'status': 'in transit'}",
+      "evidence": "Dongguan Precision Housings",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
       "subject_raw": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
-      "attribute": "pos",
+      "attribute": "po_numbers",
       "value": "4500318719",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 6,
-        "column": "pos"
+        "column": "po_numbers"
       },
-      "evidence": "{'shipment': 'SHP-2026-04292', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU6120458', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318719', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-24', 'eta': '2026-11-27', 'status': 'in transit'}",
+      "evidence": "4500318719",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
       "subject_raw": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
-      "attribute": "from",
+      "attribute": "origin",
       "value": "CNYTN",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 6,
-        "column": "from"
+        "column": "origin"
       },
-      "evidence": "{'shipment': 'SHP-2026-04292', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU6120458', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318719', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-24', 'eta': '2026-11-27', 'status': 'in transit'}",
+      "evidence": "CNYTN",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
       "subject_raw": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
-      "attribute": "to",
+      "attribute": "destination",
       "value": "DEHAM",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 6,
-        "column": "to"
+        "column": "destination"
       },
-      "evidence": "{'shipment': 'SHP-2026-04292', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU6120458', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318719', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-24', 'eta': '2026-11-27', 'status': 'in transit'}",
+      "evidence": "DEHAM",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
       "subject_raw": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
       "attribute": "etd",
       "value": "2026-10-24",
@@ -1198,18 +990,16 @@
         "row": 6,
         "column": "etd"
       },
-      "evidence": "{'shipment': 'SHP-2026-04292', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU6120458', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318719', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-24', 'eta': '2026-11-27', 'status': 'in transit'}",
+      "evidence": "2026-10-24",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
       "subject_raw": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
       "attribute": "eta",
       "value": "2026-11-27",
@@ -1220,18 +1010,16 @@
         "row": 6,
         "column": "eta"
       },
-      "evidence": "{'shipment': 'SHP-2026-04292', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU6120458', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318719', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-24', 'eta': '2026-11-27', 'status': 'in transit'}",
+      "evidence": "2026-11-27",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
       "subject_raw": {
-        "reference": "NHSU6120458",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04292"
       },
       "attribute": "status",
       "value": "in transit",
@@ -1242,62 +1030,36 @@
         "row": 6,
         "column": "status"
       },
-      "evidence": "{'shipment': 'SHP-2026-04292', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU6120458', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318719', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-24', 'eta': '2026-11-27', 'status': 'in transit'}",
+      "evidence": "in transit",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
       "subject_raw": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
-      "attribute": "shipment",
-      "value": "SHP-2026-04293",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Tracker",
-        "row": 7,
-        "column": "shipment"
-      },
-      "evidence": "{'shipment': 'SHP-2026-04293', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8269040', 'supplier': 'Guangzhou PackRight', 'pos': '4500318747, 4500318752, 4500318763', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-27', 'eta': '2026-11-28', 'status': 'in transit'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
-      },
-      "subject_raw": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
-      },
-      "attribute": "carrier",
+      "attribute": "carrier_id",
       "value": "LSP-01",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 7,
-        "column": "carrier"
+        "column": "carrier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04293', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8269040', 'supplier': 'Guangzhou PackRight', 'pos': '4500318747, 4500318752, 4500318763', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-27', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "LSP-01",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
       "subject_raw": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
       "attribute": "mode",
       "value": "sea",
@@ -1308,18 +1070,16 @@
         "row": 7,
         "column": "mode"
       },
-      "evidence": "{'shipment': 'SHP-2026-04293', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8269040', 'supplier': 'Guangzhou PackRight', 'pos': '4500318747, 4500318752, 4500318763', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-27', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "sea",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
       "subject_raw": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
       "attribute": "reference",
       "value": "NHSU8269040",
@@ -1328,108 +1088,98 @@
       "locator": {
         "sheet": "Tracker",
         "row": 7,
-        "column": "container_awb"
+        "column": "reference"
       },
-      "evidence": "{'shipment': 'SHP-2026-04293', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8269040', 'supplier': 'Guangzhou PackRight', 'pos': '4500318747, 4500318752, 4500318763', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-27', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "NHSU8269040",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
       "subject_raw": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Guangzhou PackRight",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 7,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04293', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8269040', 'supplier': 'Guangzhou PackRight', 'pos': '4500318747, 4500318752, 4500318763', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-27', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "Guangzhou PackRight",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
       "subject_raw": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
-      "attribute": "pos",
+      "attribute": "po_numbers",
       "value": "4500318747, 4500318752, 4500318763",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 7,
-        "column": "pos"
+        "column": "po_numbers"
       },
-      "evidence": "{'shipment': 'SHP-2026-04293', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8269040', 'supplier': 'Guangzhou PackRight', 'pos': '4500318747, 4500318752, 4500318763', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-27', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "4500318747, 4500318752, 4500318763",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
       "subject_raw": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
-      "attribute": "from",
+      "attribute": "origin",
       "value": "CNYTN",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 7,
-        "column": "from"
+        "column": "origin"
       },
-      "evidence": "{'shipment': 'SHP-2026-04293', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8269040', 'supplier': 'Guangzhou PackRight', 'pos': '4500318747, 4500318752, 4500318763', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-27', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "CNYTN",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
       "subject_raw": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
-      "attribute": "to",
+      "attribute": "destination",
       "value": "DEHAM",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 7,
-        "column": "to"
+        "column": "destination"
       },
-      "evidence": "{'shipment': 'SHP-2026-04293', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8269040', 'supplier': 'Guangzhou PackRight', 'pos': '4500318747, 4500318752, 4500318763', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-27', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "DEHAM",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
       "subject_raw": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
       "attribute": "etd",
       "value": "2026-10-27",
@@ -1440,18 +1190,16 @@
         "row": 7,
         "column": "etd"
       },
-      "evidence": "{'shipment': 'SHP-2026-04293', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8269040', 'supplier': 'Guangzhou PackRight', 'pos': '4500318747, 4500318752, 4500318763', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-27', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "2026-10-27",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
       "subject_raw": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
       "attribute": "eta",
       "value": "2026-11-28",
@@ -1462,18 +1210,16 @@
         "row": 7,
         "column": "eta"
       },
-      "evidence": "{'shipment': 'SHP-2026-04293', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8269040', 'supplier': 'Guangzhou PackRight', 'pos': '4500318747, 4500318752, 4500318763', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-27', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "2026-11-28",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
       "subject_raw": {
-        "reference": "NHSU8269040",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04293"
       },
       "attribute": "status",
       "value": "in transit",
@@ -1484,62 +1230,36 @@
         "row": 7,
         "column": "status"
       },
-      "evidence": "{'shipment': 'SHP-2026-04293', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8269040', 'supplier': 'Guangzhou PackRight', 'pos': '4500318747, 4500318752, 4500318763', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-27', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "in transit",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
       "subject_raw": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
-      "attribute": "shipment",
-      "value": "SHP-2026-04303",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Tracker",
-        "row": 8,
-        "column": "shipment"
-      },
-      "evidence": "{'shipment': 'SHP-2026-04303', 'carrier': 'LSP-03', 'mode': 'sea', 'container_awb': 'NHMU8536079', 'supplier': 'Pune Diecast Works', 'pos': '4500318739, 4500318745', 'from': 'INNSA', 'to': 'DEHAM', 'etd': '2026-11-04', 'eta': '2026-11-28', 'status': 'in transit'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
-      },
-      "subject_raw": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
-      },
-      "attribute": "carrier",
+      "attribute": "carrier_id",
       "value": "LSP-03",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 8,
-        "column": "carrier"
+        "column": "carrier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04303', 'carrier': 'LSP-03', 'mode': 'sea', 'container_awb': 'NHMU8536079', 'supplier': 'Pune Diecast Works', 'pos': '4500318739, 4500318745', 'from': 'INNSA', 'to': 'DEHAM', 'etd': '2026-11-04', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "LSP-03",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
       "subject_raw": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
       "attribute": "mode",
       "value": "sea",
@@ -1550,18 +1270,16 @@
         "row": 8,
         "column": "mode"
       },
-      "evidence": "{'shipment': 'SHP-2026-04303', 'carrier': 'LSP-03', 'mode': 'sea', 'container_awb': 'NHMU8536079', 'supplier': 'Pune Diecast Works', 'pos': '4500318739, 4500318745', 'from': 'INNSA', 'to': 'DEHAM', 'etd': '2026-11-04', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "sea",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
       "subject_raw": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
       "attribute": "reference",
       "value": "NHMU8536079",
@@ -1570,108 +1288,98 @@
       "locator": {
         "sheet": "Tracker",
         "row": 8,
-        "column": "container_awb"
+        "column": "reference"
       },
-      "evidence": "{'shipment': 'SHP-2026-04303', 'carrier': 'LSP-03', 'mode': 'sea', 'container_awb': 'NHMU8536079', 'supplier': 'Pune Diecast Works', 'pos': '4500318739, 4500318745', 'from': 'INNSA', 'to': 'DEHAM', 'etd': '2026-11-04', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "NHMU8536079",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
       "subject_raw": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Pune Diecast Works",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 8,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04303', 'carrier': 'LSP-03', 'mode': 'sea', 'container_awb': 'NHMU8536079', 'supplier': 'Pune Diecast Works', 'pos': '4500318739, 4500318745', 'from': 'INNSA', 'to': 'DEHAM', 'etd': '2026-11-04', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "Pune Diecast Works",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
       "subject_raw": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
-      "attribute": "pos",
+      "attribute": "po_numbers",
       "value": "4500318739, 4500318745",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 8,
-        "column": "pos"
+        "column": "po_numbers"
       },
-      "evidence": "{'shipment': 'SHP-2026-04303', 'carrier': 'LSP-03', 'mode': 'sea', 'container_awb': 'NHMU8536079', 'supplier': 'Pune Diecast Works', 'pos': '4500318739, 4500318745', 'from': 'INNSA', 'to': 'DEHAM', 'etd': '2026-11-04', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "4500318739, 4500318745",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
       "subject_raw": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
-      "attribute": "from",
+      "attribute": "origin",
       "value": "INNSA",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 8,
-        "column": "from"
+        "column": "origin"
       },
-      "evidence": "{'shipment': 'SHP-2026-04303', 'carrier': 'LSP-03', 'mode': 'sea', 'container_awb': 'NHMU8536079', 'supplier': 'Pune Diecast Works', 'pos': '4500318739, 4500318745', 'from': 'INNSA', 'to': 'DEHAM', 'etd': '2026-11-04', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "INNSA",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
       "subject_raw": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
-      "attribute": "to",
+      "attribute": "destination",
       "value": "DEHAM",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 8,
-        "column": "to"
+        "column": "destination"
       },
-      "evidence": "{'shipment': 'SHP-2026-04303', 'carrier': 'LSP-03', 'mode': 'sea', 'container_awb': 'NHMU8536079', 'supplier': 'Pune Diecast Works', 'pos': '4500318739, 4500318745', 'from': 'INNSA', 'to': 'DEHAM', 'etd': '2026-11-04', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "DEHAM",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
       "subject_raw": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
       "attribute": "etd",
       "value": "2026-11-04",
@@ -1682,18 +1390,16 @@
         "row": 8,
         "column": "etd"
       },
-      "evidence": "{'shipment': 'SHP-2026-04303', 'carrier': 'LSP-03', 'mode': 'sea', 'container_awb': 'NHMU8536079', 'supplier': 'Pune Diecast Works', 'pos': '4500318739, 4500318745', 'from': 'INNSA', 'to': 'DEHAM', 'etd': '2026-11-04', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "2026-11-04",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
       "subject_raw": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
       "attribute": "eta",
       "value": "2026-11-28",
@@ -1704,18 +1410,16 @@
         "row": 8,
         "column": "eta"
       },
-      "evidence": "{'shipment': 'SHP-2026-04303', 'carrier': 'LSP-03', 'mode': 'sea', 'container_awb': 'NHMU8536079', 'supplier': 'Pune Diecast Works', 'pos': '4500318739, 4500318745', 'from': 'INNSA', 'to': 'DEHAM', 'etd': '2026-11-04', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "2026-11-28",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
       "subject_raw": {
-        "reference": "NHMU8536079",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04303"
       },
       "attribute": "status",
       "value": "in transit",
@@ -1726,62 +1430,36 @@
         "row": 8,
         "column": "status"
       },
-      "evidence": "{'shipment': 'SHP-2026-04303', 'carrier': 'LSP-03', 'mode': 'sea', 'container_awb': 'NHMU8536079', 'supplier': 'Pune Diecast Works', 'pos': '4500318739, 4500318745', 'from': 'INNSA', 'to': 'DEHAM', 'etd': '2026-11-04', 'eta': '2026-11-28', 'status': 'in transit'}",
+      "evidence": "in transit",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
       "subject_raw": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
-      "attribute": "shipment",
-      "value": "SHP-2026-04299",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Tracker",
-        "row": 9,
-        "column": "shipment"
-      },
-      "evidence": "{'shipment': 'SHP-2026-04299', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU7718206', 'supplier': 'Guangzhou PackRight', 'pos': '4500318752', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-30', 'eta': '2026-12-03', 'status': 'in transit'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
-      },
-      "subject_raw": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
-      },
-      "attribute": "carrier",
+      "attribute": "carrier_id",
       "value": "LSP-01",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 9,
-        "column": "carrier"
+        "column": "carrier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04299', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU7718206', 'supplier': 'Guangzhou PackRight', 'pos': '4500318752', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-30', 'eta': '2026-12-03', 'status': 'in transit'}",
+      "evidence": "LSP-01",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
       "subject_raw": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
       "attribute": "mode",
       "value": "sea",
@@ -1792,18 +1470,16 @@
         "row": 9,
         "column": "mode"
       },
-      "evidence": "{'shipment': 'SHP-2026-04299', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU7718206', 'supplier': 'Guangzhou PackRight', 'pos': '4500318752', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-30', 'eta': '2026-12-03', 'status': 'in transit'}",
+      "evidence": "sea",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
       "subject_raw": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
       "attribute": "reference",
       "value": "NHMU7718206",
@@ -1812,108 +1488,98 @@
       "locator": {
         "sheet": "Tracker",
         "row": 9,
-        "column": "container_awb"
+        "column": "reference"
       },
-      "evidence": "{'shipment': 'SHP-2026-04299', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU7718206', 'supplier': 'Guangzhou PackRight', 'pos': '4500318752', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-30', 'eta': '2026-12-03', 'status': 'in transit'}",
+      "evidence": "NHMU7718206",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
       "subject_raw": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Guangzhou PackRight",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 9,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04299', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU7718206', 'supplier': 'Guangzhou PackRight', 'pos': '4500318752', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-30', 'eta': '2026-12-03', 'status': 'in transit'}",
+      "evidence": "Guangzhou PackRight",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
       "subject_raw": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
-      "attribute": "pos",
+      "attribute": "po_numbers",
       "value": "4500318752",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 9,
-        "column": "pos"
+        "column": "po_numbers"
       },
-      "evidence": "{'shipment': 'SHP-2026-04299', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU7718206', 'supplier': 'Guangzhou PackRight', 'pos': '4500318752', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-30', 'eta': '2026-12-03', 'status': 'in transit'}",
+      "evidence": "4500318752",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
       "subject_raw": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
-      "attribute": "from",
+      "attribute": "origin",
       "value": "CNYTN",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 9,
-        "column": "from"
+        "column": "origin"
       },
-      "evidence": "{'shipment': 'SHP-2026-04299', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU7718206', 'supplier': 'Guangzhou PackRight', 'pos': '4500318752', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-30', 'eta': '2026-12-03', 'status': 'in transit'}",
+      "evidence": "CNYTN",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
       "subject_raw": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
-      "attribute": "to",
+      "attribute": "destination",
       "value": "DEHAM",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 9,
-        "column": "to"
+        "column": "destination"
       },
-      "evidence": "{'shipment': 'SHP-2026-04299', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU7718206', 'supplier': 'Guangzhou PackRight', 'pos': '4500318752', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-30', 'eta': '2026-12-03', 'status': 'in transit'}",
+      "evidence": "DEHAM",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
       "subject_raw": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
       "attribute": "etd",
       "value": "2026-10-30",
@@ -1924,18 +1590,16 @@
         "row": 9,
         "column": "etd"
       },
-      "evidence": "{'shipment': 'SHP-2026-04299', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU7718206', 'supplier': 'Guangzhou PackRight', 'pos': '4500318752', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-30', 'eta': '2026-12-03', 'status': 'in transit'}",
+      "evidence": "2026-10-30",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
       "subject_raw": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
       "attribute": "eta",
       "value": "2026-12-03",
@@ -1946,18 +1610,16 @@
         "row": 9,
         "column": "eta"
       },
-      "evidence": "{'shipment': 'SHP-2026-04299', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU7718206', 'supplier': 'Guangzhou PackRight', 'pos': '4500318752', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-30', 'eta': '2026-12-03', 'status': 'in transit'}",
+      "evidence": "2026-12-03",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
       "subject_raw": {
-        "reference": "NHMU7718206",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04299"
       },
       "attribute": "status",
       "value": "in transit",
@@ -1968,62 +1630,36 @@
         "row": 9,
         "column": "status"
       },
-      "evidence": "{'shipment': 'SHP-2026-04299', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU7718206', 'supplier': 'Guangzhou PackRight', 'pos': '4500318752', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-30', 'eta': '2026-12-03', 'status': 'in transit'}",
+      "evidence": "in transit",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
       "subject_raw": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
-      "attribute": "shipment",
-      "value": "SHP-2026-04302",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Tracker",
-        "row": 10,
-        "column": "shipment"
-      },
-      "evidence": "{'shipment': 'SHP-2026-04302', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9029973', 'supplier': 'Hwaseong Memory', 'pos': '4500318748, 4500318756', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-01', 'eta': '2026-12-07', 'status': 'in transit'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
-      },
-      "subject_raw": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
-      },
-      "attribute": "carrier",
+      "attribute": "carrier_id",
       "value": "LSP-01",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 10,
-        "column": "carrier"
+        "column": "carrier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04302', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9029973', 'supplier': 'Hwaseong Memory', 'pos': '4500318748, 4500318756', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-01', 'eta': '2026-12-07', 'status': 'in transit'}",
+      "evidence": "LSP-01",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
       "subject_raw": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
       "attribute": "mode",
       "value": "sea",
@@ -2034,18 +1670,16 @@
         "row": 10,
         "column": "mode"
       },
-      "evidence": "{'shipment': 'SHP-2026-04302', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9029973', 'supplier': 'Hwaseong Memory', 'pos': '4500318748, 4500318756', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-01', 'eta': '2026-12-07', 'status': 'in transit'}",
+      "evidence": "sea",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
       "subject_raw": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
       "attribute": "reference",
       "value": "NHMU9029973",
@@ -2054,108 +1688,98 @@
       "locator": {
         "sheet": "Tracker",
         "row": 10,
-        "column": "container_awb"
+        "column": "reference"
       },
-      "evidence": "{'shipment': 'SHP-2026-04302', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9029973', 'supplier': 'Hwaseong Memory', 'pos': '4500318748, 4500318756', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-01', 'eta': '2026-12-07', 'status': 'in transit'}",
+      "evidence": "NHMU9029973",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
       "subject_raw": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Hwaseong Memory",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 10,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04302', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9029973', 'supplier': 'Hwaseong Memory', 'pos': '4500318748, 4500318756', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-01', 'eta': '2026-12-07', 'status': 'in transit'}",
+      "evidence": "Hwaseong Memory",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
       "subject_raw": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
-      "attribute": "pos",
+      "attribute": "po_numbers",
       "value": "4500318748, 4500318756",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 10,
-        "column": "pos"
+        "column": "po_numbers"
       },
-      "evidence": "{'shipment': 'SHP-2026-04302', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9029973', 'supplier': 'Hwaseong Memory', 'pos': '4500318748, 4500318756', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-01', 'eta': '2026-12-07', 'status': 'in transit'}",
+      "evidence": "4500318748, 4500318756",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
       "subject_raw": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
-      "attribute": "from",
+      "attribute": "origin",
       "value": "KRPUS",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 10,
-        "column": "from"
+        "column": "origin"
       },
-      "evidence": "{'shipment': 'SHP-2026-04302', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9029973', 'supplier': 'Hwaseong Memory', 'pos': '4500318748, 4500318756', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-01', 'eta': '2026-12-07', 'status': 'in transit'}",
+      "evidence": "KRPUS",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
       "subject_raw": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
-      "attribute": "to",
+      "attribute": "destination",
       "value": "DEHAM",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 10,
-        "column": "to"
+        "column": "destination"
       },
-      "evidence": "{'shipment': 'SHP-2026-04302', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9029973', 'supplier': 'Hwaseong Memory', 'pos': '4500318748, 4500318756', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-01', 'eta': '2026-12-07', 'status': 'in transit'}",
+      "evidence": "DEHAM",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
       "subject_raw": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
       "attribute": "etd",
       "value": "2026-11-01",
@@ -2166,18 +1790,16 @@
         "row": 10,
         "column": "etd"
       },
-      "evidence": "{'shipment': 'SHP-2026-04302', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9029973', 'supplier': 'Hwaseong Memory', 'pos': '4500318748, 4500318756', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-01', 'eta': '2026-12-07', 'status': 'in transit'}",
+      "evidence": "2026-11-01",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
       "subject_raw": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
       "attribute": "eta",
       "value": "2026-12-07",
@@ -2188,18 +1810,16 @@
         "row": 10,
         "column": "eta"
       },
-      "evidence": "{'shipment': 'SHP-2026-04302', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9029973', 'supplier': 'Hwaseong Memory', 'pos': '4500318748, 4500318756', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-01', 'eta': '2026-12-07', 'status': 'in transit'}",
+      "evidence": "2026-12-07",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
       "subject_raw": {
-        "reference": "NHMU9029973",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04302"
       },
       "attribute": "status",
       "value": "in transit",
@@ -2210,62 +1830,36 @@
         "row": 10,
         "column": "status"
       },
-      "evidence": "{'shipment': 'SHP-2026-04302', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9029973', 'supplier': 'Hwaseong Memory', 'pos': '4500318748, 4500318756', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-01', 'eta': '2026-12-07', 'status': 'in transit'}",
+      "evidence": "in transit",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
       "subject_raw": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
-      "attribute": "shipment",
-      "value": "SHP-2026-04304",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Tracker",
-        "row": 11,
-        "column": "shipment"
-      },
-      "evidence": "{'shipment': 'SHP-2026-04304', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU5825721', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318734, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-06', 'eta': '2026-12-08', 'status': 'in transit'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
-      },
-      "subject_raw": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
-      },
-      "attribute": "carrier",
+      "attribute": "carrier_id",
       "value": "LSP-01",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 11,
-        "column": "carrier"
+        "column": "carrier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04304', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU5825721', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318734, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-06', 'eta': '2026-12-08', 'status': 'in transit'}",
+      "evidence": "LSP-01",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
       "subject_raw": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
       "attribute": "mode",
       "value": "sea",
@@ -2276,18 +1870,16 @@
         "row": 11,
         "column": "mode"
       },
-      "evidence": "{'shipment': 'SHP-2026-04304', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU5825721', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318734, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-06', 'eta': '2026-12-08', 'status': 'in transit'}",
+      "evidence": "sea",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
       "subject_raw": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
       "attribute": "reference",
       "value": "NHSU5825721",
@@ -2296,108 +1888,98 @@
       "locator": {
         "sheet": "Tracker",
         "row": 11,
-        "column": "container_awb"
+        "column": "reference"
       },
-      "evidence": "{'shipment': 'SHP-2026-04304', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU5825721', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318734, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-06', 'eta': '2026-12-08', 'status': 'in transit'}",
+      "evidence": "NHSU5825721",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
       "subject_raw": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Dongguan Precision Housings",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 11,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04304', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU5825721', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318734, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-06', 'eta': '2026-12-08', 'status': 'in transit'}",
+      "evidence": "Dongguan Precision Housings",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
       "subject_raw": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
-      "attribute": "pos",
+      "attribute": "po_numbers",
       "value": "4500318734, 4500318737",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 11,
-        "column": "pos"
+        "column": "po_numbers"
       },
-      "evidence": "{'shipment': 'SHP-2026-04304', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU5825721', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318734, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-06', 'eta': '2026-12-08', 'status': 'in transit'}",
+      "evidence": "4500318734, 4500318737",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
       "subject_raw": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
-      "attribute": "from",
+      "attribute": "origin",
       "value": "CNYTN",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 11,
-        "column": "from"
+        "column": "origin"
       },
-      "evidence": "{'shipment': 'SHP-2026-04304', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU5825721', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318734, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-06', 'eta': '2026-12-08', 'status': 'in transit'}",
+      "evidence": "CNYTN",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
       "subject_raw": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
-      "attribute": "to",
+      "attribute": "destination",
       "value": "DEHAM",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 11,
-        "column": "to"
+        "column": "destination"
       },
-      "evidence": "{'shipment': 'SHP-2026-04304', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU5825721', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318734, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-06', 'eta': '2026-12-08', 'status': 'in transit'}",
+      "evidence": "DEHAM",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
       "subject_raw": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
       "attribute": "etd",
       "value": "2026-11-06",
@@ -2408,18 +1990,16 @@
         "row": 11,
         "column": "etd"
       },
-      "evidence": "{'shipment': 'SHP-2026-04304', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU5825721', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318734, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-06', 'eta': '2026-12-08', 'status': 'in transit'}",
+      "evidence": "2026-11-06",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
       "subject_raw": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
       "attribute": "eta",
       "value": "2026-12-08",
@@ -2430,18 +2010,16 @@
         "row": 11,
         "column": "eta"
       },
-      "evidence": "{'shipment': 'SHP-2026-04304', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU5825721', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318734, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-06', 'eta': '2026-12-08', 'status': 'in transit'}",
+      "evidence": "2026-12-08",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
       "subject_raw": {
-        "reference": "NHSU5825721",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04304"
       },
       "attribute": "status",
       "value": "in transit",
@@ -2452,62 +2030,36 @@
         "row": 11,
         "column": "status"
       },
-      "evidence": "{'shipment': 'SHP-2026-04304', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU5825721', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318734, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-06', 'eta': '2026-12-08', 'status': 'in transit'}",
+      "evidence": "in transit",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
       "subject_raw": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
-      "attribute": "shipment",
-      "value": "SHP-2026-04298",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Tracker",
-        "row": 12,
-        "column": "shipment"
-      },
-      "evidence": "{'shipment': 'SHP-2026-04298', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3791900', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318728, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-29', 'eta': '2026-12-09', 'status': 'delayed'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
-      },
-      "subject_raw": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
-      },
-      "attribute": "carrier",
+      "attribute": "carrier_id",
       "value": "LSP-01",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 12,
-        "column": "carrier"
+        "column": "carrier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04298', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3791900', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318728, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-29', 'eta': '2026-12-09', 'status': 'delayed'}",
+      "evidence": "LSP-01",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
       "subject_raw": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
       "attribute": "mode",
       "value": "sea",
@@ -2518,18 +2070,16 @@
         "row": 12,
         "column": "mode"
       },
-      "evidence": "{'shipment': 'SHP-2026-04298', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3791900', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318728, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-29', 'eta': '2026-12-09', 'status': 'delayed'}",
+      "evidence": "sea",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
       "subject_raw": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
       "attribute": "reference",
       "value": "NHSU3791900",
@@ -2538,108 +2088,98 @@
       "locator": {
         "sheet": "Tracker",
         "row": 12,
-        "column": "container_awb"
+        "column": "reference"
       },
-      "evidence": "{'shipment': 'SHP-2026-04298', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3791900', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318728, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-29', 'eta': '2026-12-09', 'status': 'delayed'}",
+      "evidence": "NHSU3791900",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
       "subject_raw": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Dongguan Precision Housings",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 12,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04298', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3791900', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318728, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-29', 'eta': '2026-12-09', 'status': 'delayed'}",
+      "evidence": "Dongguan Precision Housings",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
       "subject_raw": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
-      "attribute": "pos",
+      "attribute": "po_numbers",
       "value": "4500318728, 4500318737",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 12,
-        "column": "pos"
+        "column": "po_numbers"
       },
-      "evidence": "{'shipment': 'SHP-2026-04298', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3791900', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318728, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-29', 'eta': '2026-12-09', 'status': 'delayed'}",
+      "evidence": "4500318728, 4500318737",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
       "subject_raw": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
-      "attribute": "from",
+      "attribute": "origin",
       "value": "CNYTN",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 12,
-        "column": "from"
+        "column": "origin"
       },
-      "evidence": "{'shipment': 'SHP-2026-04298', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3791900', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318728, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-29', 'eta': '2026-12-09', 'status': 'delayed'}",
+      "evidence": "CNYTN",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
       "subject_raw": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
-      "attribute": "to",
+      "attribute": "destination",
       "value": "DEHAM",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 12,
-        "column": "to"
+        "column": "destination"
       },
-      "evidence": "{'shipment': 'SHP-2026-04298', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3791900', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318728, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-29', 'eta': '2026-12-09', 'status': 'delayed'}",
+      "evidence": "DEHAM",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
       "subject_raw": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
       "attribute": "etd",
       "value": "2026-10-29",
@@ -2650,18 +2190,16 @@
         "row": 12,
         "column": "etd"
       },
-      "evidence": "{'shipment': 'SHP-2026-04298', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3791900', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318728, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-29', 'eta': '2026-12-09', 'status': 'delayed'}",
+      "evidence": "2026-10-29",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
       "subject_raw": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
       "attribute": "eta",
       "value": "2026-12-09",
@@ -2672,18 +2210,16 @@
         "row": 12,
         "column": "eta"
       },
-      "evidence": "{'shipment': 'SHP-2026-04298', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3791900', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318728, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-29', 'eta': '2026-12-09', 'status': 'delayed'}",
+      "evidence": "2026-12-09",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
       "subject_raw": {
-        "reference": "NHSU3791900",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04298"
       },
       "attribute": "status",
       "value": "delayed",
@@ -2694,62 +2230,36 @@
         "row": 12,
         "column": "status"
       },
-      "evidence": "{'shipment': 'SHP-2026-04298', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3791900', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318728, 4500318737', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-10-29', 'eta': '2026-12-09', 'status': 'delayed'}",
+      "evidence": "delayed",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
       "subject_raw": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
-      "attribute": "shipment",
-      "value": "SHP-2026-04306",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Tracker",
-        "row": 13,
-        "column": "shipment"
-      },
-      "evidence": "{'shipment': 'SHP-2026-04306', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9049516', 'supplier': 'Guangzhou PackRight', 'pos': '4500318765', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-10', 'eta': '2026-12-12', 'status': 'in transit'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
-      },
-      "subject_raw": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
-      },
-      "attribute": "carrier",
+      "attribute": "carrier_id",
       "value": "LSP-01",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 13,
-        "column": "carrier"
+        "column": "carrier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04306', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9049516', 'supplier': 'Guangzhou PackRight', 'pos': '4500318765', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-10', 'eta': '2026-12-12', 'status': 'in transit'}",
+      "evidence": "LSP-01",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
       "subject_raw": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
       "attribute": "mode",
       "value": "sea",
@@ -2760,18 +2270,16 @@
         "row": 13,
         "column": "mode"
       },
-      "evidence": "{'shipment': 'SHP-2026-04306', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9049516', 'supplier': 'Guangzhou PackRight', 'pos': '4500318765', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-10', 'eta': '2026-12-12', 'status': 'in transit'}",
+      "evidence": "sea",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
       "subject_raw": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
       "attribute": "reference",
       "value": "NHMU9049516",
@@ -2780,108 +2288,98 @@
       "locator": {
         "sheet": "Tracker",
         "row": 13,
-        "column": "container_awb"
+        "column": "reference"
       },
-      "evidence": "{'shipment': 'SHP-2026-04306', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9049516', 'supplier': 'Guangzhou PackRight', 'pos': '4500318765', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-10', 'eta': '2026-12-12', 'status': 'in transit'}",
+      "evidence": "NHMU9049516",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
       "subject_raw": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Guangzhou PackRight",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 13,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04306', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9049516', 'supplier': 'Guangzhou PackRight', 'pos': '4500318765', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-10', 'eta': '2026-12-12', 'status': 'in transit'}",
+      "evidence": "Guangzhou PackRight",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
       "subject_raw": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
-      "attribute": "pos",
+      "attribute": "po_numbers",
       "value": "4500318765",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 13,
-        "column": "pos"
+        "column": "po_numbers"
       },
-      "evidence": "{'shipment': 'SHP-2026-04306', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9049516', 'supplier': 'Guangzhou PackRight', 'pos': '4500318765', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-10', 'eta': '2026-12-12', 'status': 'in transit'}",
+      "evidence": "4500318765",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
       "subject_raw": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
-      "attribute": "from",
+      "attribute": "origin",
       "value": "CNYTN",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 13,
-        "column": "from"
+        "column": "origin"
       },
-      "evidence": "{'shipment': 'SHP-2026-04306', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9049516', 'supplier': 'Guangzhou PackRight', 'pos': '4500318765', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-10', 'eta': '2026-12-12', 'status': 'in transit'}",
+      "evidence": "CNYTN",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
       "subject_raw": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
-      "attribute": "to",
+      "attribute": "destination",
       "value": "DEHAM",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 13,
-        "column": "to"
+        "column": "destination"
       },
-      "evidence": "{'shipment': 'SHP-2026-04306', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9049516', 'supplier': 'Guangzhou PackRight', 'pos': '4500318765', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-10', 'eta': '2026-12-12', 'status': 'in transit'}",
+      "evidence": "DEHAM",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
       "subject_raw": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
       "attribute": "etd",
       "value": "2026-11-10",
@@ -2892,18 +2390,16 @@
         "row": 13,
         "column": "etd"
       },
-      "evidence": "{'shipment': 'SHP-2026-04306', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9049516', 'supplier': 'Guangzhou PackRight', 'pos': '4500318765', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-10', 'eta': '2026-12-12', 'status': 'in transit'}",
+      "evidence": "2026-11-10",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
       "subject_raw": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
       "attribute": "eta",
       "value": "2026-12-12",
@@ -2914,18 +2410,16 @@
         "row": 13,
         "column": "eta"
       },
-      "evidence": "{'shipment': 'SHP-2026-04306', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9049516', 'supplier': 'Guangzhou PackRight', 'pos': '4500318765', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-10', 'eta': '2026-12-12', 'status': 'in transit'}",
+      "evidence": "2026-12-12",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
       "subject_raw": {
-        "reference": "NHMU9049516",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04306"
       },
       "attribute": "status",
       "value": "in transit",
@@ -2936,62 +2430,36 @@
         "row": 13,
         "column": "status"
       },
-      "evidence": "{'shipment': 'SHP-2026-04306', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHMU9049516', 'supplier': 'Guangzhou PackRight', 'pos': '4500318765', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-10', 'eta': '2026-12-12', 'status': 'in transit'}",
+      "evidence": "in transit",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
       "subject_raw": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
-      "attribute": "shipment",
-      "value": "SHP-2026-04305",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Tracker",
-        "row": 14,
-        "column": "shipment"
-      },
-      "evidence": "{'shipment': 'SHP-2026-04305', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8745743', 'supplier': 'Hwaseong Memory', 'pos': '4500318756, 4500318772', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-08', 'eta': '2026-12-17', 'status': 'delayed'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
-      },
-      "subject_raw": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
-      },
-      "attribute": "carrier",
+      "attribute": "carrier_id",
       "value": "LSP-01",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 14,
-        "column": "carrier"
+        "column": "carrier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04305', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8745743', 'supplier': 'Hwaseong Memory', 'pos': '4500318756, 4500318772', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-08', 'eta': '2026-12-17', 'status': 'delayed'}",
+      "evidence": "LSP-01",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
       "subject_raw": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
       "attribute": "mode",
       "value": "sea",
@@ -3002,18 +2470,16 @@
         "row": 14,
         "column": "mode"
       },
-      "evidence": "{'shipment': 'SHP-2026-04305', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8745743', 'supplier': 'Hwaseong Memory', 'pos': '4500318756, 4500318772', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-08', 'eta': '2026-12-17', 'status': 'delayed'}",
+      "evidence": "sea",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
       "subject_raw": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
       "attribute": "reference",
       "value": "NHSU8745743",
@@ -3022,108 +2488,98 @@
       "locator": {
         "sheet": "Tracker",
         "row": 14,
-        "column": "container_awb"
+        "column": "reference"
       },
-      "evidence": "{'shipment': 'SHP-2026-04305', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8745743', 'supplier': 'Hwaseong Memory', 'pos': '4500318756, 4500318772', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-08', 'eta': '2026-12-17', 'status': 'delayed'}",
+      "evidence": "NHSU8745743",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
       "subject_raw": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Hwaseong Memory",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 14,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04305', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8745743', 'supplier': 'Hwaseong Memory', 'pos': '4500318756, 4500318772', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-08', 'eta': '2026-12-17', 'status': 'delayed'}",
+      "evidence": "Hwaseong Memory",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
       "subject_raw": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
-      "attribute": "pos",
+      "attribute": "po_numbers",
       "value": "4500318756, 4500318772",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 14,
-        "column": "pos"
+        "column": "po_numbers"
       },
-      "evidence": "{'shipment': 'SHP-2026-04305', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8745743', 'supplier': 'Hwaseong Memory', 'pos': '4500318756, 4500318772', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-08', 'eta': '2026-12-17', 'status': 'delayed'}",
+      "evidence": "4500318756, 4500318772",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
       "subject_raw": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
-      "attribute": "from",
+      "attribute": "origin",
       "value": "KRPUS",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 14,
-        "column": "from"
+        "column": "origin"
       },
-      "evidence": "{'shipment': 'SHP-2026-04305', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8745743', 'supplier': 'Hwaseong Memory', 'pos': '4500318756, 4500318772', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-08', 'eta': '2026-12-17', 'status': 'delayed'}",
+      "evidence": "KRPUS",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
       "subject_raw": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
-      "attribute": "to",
+      "attribute": "destination",
       "value": "DEHAM",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 14,
-        "column": "to"
+        "column": "destination"
       },
-      "evidence": "{'shipment': 'SHP-2026-04305', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8745743', 'supplier': 'Hwaseong Memory', 'pos': '4500318756, 4500318772', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-08', 'eta': '2026-12-17', 'status': 'delayed'}",
+      "evidence": "DEHAM",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
       "subject_raw": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
       "attribute": "etd",
       "value": "2026-11-08",
@@ -3134,18 +2590,16 @@
         "row": 14,
         "column": "etd"
       },
-      "evidence": "{'shipment': 'SHP-2026-04305', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8745743', 'supplier': 'Hwaseong Memory', 'pos': '4500318756, 4500318772', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-08', 'eta': '2026-12-17', 'status': 'delayed'}",
+      "evidence": "2026-11-08",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
       "subject_raw": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
       "attribute": "eta",
       "value": "2026-12-17",
@@ -3156,18 +2610,16 @@
         "row": 14,
         "column": "eta"
       },
-      "evidence": "{'shipment': 'SHP-2026-04305', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8745743', 'supplier': 'Hwaseong Memory', 'pos': '4500318756, 4500318772', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-08', 'eta': '2026-12-17', 'status': 'delayed'}",
+      "evidence": "2026-12-17",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
       "subject_raw": {
-        "reference": "NHSU8745743",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04305"
       },
       "attribute": "status",
       "value": "delayed",
@@ -3178,62 +2630,36 @@
         "row": 14,
         "column": "status"
       },
-      "evidence": "{'shipment': 'SHP-2026-04305', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU8745743', 'supplier': 'Hwaseong Memory', 'pos': '4500318756, 4500318772', 'from': 'KRPUS', 'to': 'DEHAM', 'etd': '2026-11-08', 'eta': '2026-12-17', 'status': 'delayed'}",
+      "evidence": "delayed",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
       "subject_raw": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
-      "attribute": "shipment",
-      "value": "SHP-2026-04308",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Tracker",
-        "row": 15,
-        "column": "shipment"
-      },
-      "evidence": "{'shipment': 'SHP-2026-04308', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3750562', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318744, 4500318753', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-17', 'eta': '2026-12-19', 'status': 'in transit'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
-      },
-      "subject_raw": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
-      },
-      "attribute": "carrier",
+      "attribute": "carrier_id",
       "value": "LSP-01",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 15,
-        "column": "carrier"
+        "column": "carrier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04308', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3750562', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318744, 4500318753', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-17', 'eta': '2026-12-19', 'status': 'in transit'}",
+      "evidence": "LSP-01",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
       "subject_raw": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
       "attribute": "mode",
       "value": "sea",
@@ -3244,18 +2670,16 @@
         "row": 15,
         "column": "mode"
       },
-      "evidence": "{'shipment': 'SHP-2026-04308', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3750562', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318744, 4500318753', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-17', 'eta': '2026-12-19', 'status': 'in transit'}",
+      "evidence": "sea",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
       "subject_raw": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
       "attribute": "reference",
       "value": "NHSU3750562",
@@ -3264,108 +2688,98 @@
       "locator": {
         "sheet": "Tracker",
         "row": 15,
-        "column": "container_awb"
+        "column": "reference"
       },
-      "evidence": "{'shipment': 'SHP-2026-04308', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3750562', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318744, 4500318753', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-17', 'eta': '2026-12-19', 'status': 'in transit'}",
+      "evidence": "NHSU3750562",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
       "subject_raw": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Dongguan Precision Housings",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 15,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'shipment': 'SHP-2026-04308', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3750562', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318744, 4500318753', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-17', 'eta': '2026-12-19', 'status': 'in transit'}",
+      "evidence": "Dongguan Precision Housings",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
       "subject_raw": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
-      "attribute": "pos",
+      "attribute": "po_numbers",
       "value": "4500318744, 4500318753",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 15,
-        "column": "pos"
+        "column": "po_numbers"
       },
-      "evidence": "{'shipment': 'SHP-2026-04308', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3750562', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318744, 4500318753', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-17', 'eta': '2026-12-19', 'status': 'in transit'}",
+      "evidence": "4500318744, 4500318753",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
       "subject_raw": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
-      "attribute": "from",
+      "attribute": "origin",
       "value": "CNYTN",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 15,
-        "column": "from"
+        "column": "origin"
       },
-      "evidence": "{'shipment': 'SHP-2026-04308', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3750562', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318744, 4500318753', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-17', 'eta': '2026-12-19', 'status': 'in transit'}",
+      "evidence": "CNYTN",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
       "subject_raw": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
-      "attribute": "to",
+      "attribute": "destination",
       "value": "DEHAM",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Tracker",
         "row": 15,
-        "column": "to"
+        "column": "destination"
       },
-      "evidence": "{'shipment': 'SHP-2026-04308', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3750562', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318744, 4500318753', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-17', 'eta': '2026-12-19', 'status': 'in transit'}",
+      "evidence": "DEHAM",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
       "subject_raw": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
       "attribute": "etd",
       "value": "2026-11-17",
@@ -3376,18 +2790,16 @@
         "row": 15,
         "column": "etd"
       },
-      "evidence": "{'shipment': 'SHP-2026-04308', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3750562', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318744, 4500318753', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-17', 'eta': '2026-12-19', 'status': 'in transit'}",
+      "evidence": "2026-11-17",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
       "subject_raw": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
       "attribute": "eta",
       "value": "2026-12-19",
@@ -3398,18 +2810,16 @@
         "row": 15,
         "column": "eta"
       },
-      "evidence": "{'shipment': 'SHP-2026-04308', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3750562', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318744, 4500318753', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-17', 'eta': '2026-12-19', 'status': 'in transit'}",
+      "evidence": "2026-12-19",
       "confidence": "high"
     },
     {
-      "fact_type": "shipment_qty",
+      "fact_type": "shipment",
       "subject": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
       "subject_raw": {
-        "reference": "NHSU3750562",
-        "material_id": "unknown"
+        "shipment_id": "SHP-2026-04308"
       },
       "attribute": "status",
       "value": "in transit",
@@ -3420,7 +2830,7 @@
         "row": 15,
         "column": "status"
       },
-      "evidence": "{'shipment': 'SHP-2026-04308', 'carrier': 'LSP-01', 'mode': 'sea', 'container_awb': 'NHSU3750562', 'supplier': 'Dongguan Precision Housings', 'pos': '4500318744, 4500318753', 'from': 'CNYTN', 'to': 'DEHAM', 'etd': '2026-11-17', 'eta': '2026-12-19', 'status': 'in transit'}",
+      "evidence": "in transit",
       "confidence": "high"
     }
   ],

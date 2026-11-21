@@ -1,0 +1,49 @@
+{
+  "signature": "6f5b66c149f62d7f3f79cc6d63459979ce71783dd2aa75a6433614cec2184513",
+  "example_path": "soony/erp/stock_snapshot.csv",
+  "format": "csv",
+  "sheet": null,
+  "fact_type": "stock_batch",
+  "subject": [
+    "material_id",
+    "batch"
+  ],
+  "columns": {
+    "snapshot_date": {
+      "field": "snapshot_date",
+      "type": "text"
+    },
+    "site": {
+      "field": "site_id",
+      "type": "text"
+    },
+    "material_id": {
+      "field": "material_id",
+      "type": "text"
+    },
+    "batch": {
+      "field": "batch",
+      "type": "text"
+    },
+    "quantity": {
+      "field": "qty",
+      "type": "text"
+    },
+    "uom": {
+      "field": "uom",
+      "type": "text"
+    },
+    "safety_stock": {
+      "field": "safety_stock",
+      "type": "text"
+    },
+    "weeks_of_cover": {
+      "field": "weeks_of_cover",
+      "type": "text"
+    },
+    "last_count": {
+      "field": "last_count",
+      "type": "text"
+    }
+  }
+}

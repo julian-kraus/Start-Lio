@@ -1,0 +1,33 @@
+{
+  "signature": "1b9b7132c601cc9160087df67c1856db8f5d8b93bb3fe13c1d1dd34eed4da461",
+  "example_path": "soony/master/components_update_2026-11-21.csv",
+  "format": "csv",
+  "sheet": null,
+  "fact_type": "change_record",
+  "subject": [
+    "material_id",
+    "field"
+  ],
+  "columns": {
+    "component_id": {
+      "field": "material_id",
+      "type": "text"
+    },
+    "field": {
+      "field": "field",
+      "type": "text"
+    },
+    "old": {
+      "field": "old",
+      "type": "text"
+    },
+    "new": {
+      "field": "new",
+      "type": "text"
+    },
+    "changed_by": {
+      "field": "changed_by",
+      "type": "text"
+    }
+  }
+}

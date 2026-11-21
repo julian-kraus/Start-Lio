@@ -10,18 +10,119 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318658"
+      },
+      "subject_raw": {
+        "po_number": "4500318658"
+      },
+      "attribute": "oc_number",
+      "value": "OA26643033",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "OA26643033",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318658"
+      },
+      "subject_raw": {
+        "po_number": "4500318658"
+      },
+      "attribute": "oc_date",
+      "value": "2026-04-30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "2026-04-30",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318658"
+      },
+      "subject_raw": {
+        "po_number": "4500318658"
+      },
+      "attribute": "incoterm",
+      "value": "FOB",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "FOB",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318658"
+      },
+      "subject_raw": {
+        "po_number": "4500318658"
+      },
+      "attribute": "payment_terms",
+      "value": "NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "NET30",
+      "confidence": "high"
+    },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318658",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "ae6827230294"
       },
       "subject_raw": {
         "po_number": "4500318658",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "ae6827230294"
+      },
+      "attribute": "item_no_printed",
+      "value": "00010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY\n2026-07-16",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318658",
+        "po_line": 1,
+        "item_key": "ae6827230294"
+      },
+      "subject_raw": {
+        "po_number": "4500318658",
+        "po_line": 1,
+        "item_key": "ae6827230294"
       },
       "attribute": "supplier_part_no",
       "value": "CMP-GAM-003",
@@ -38,32 +139,13 @@
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318658",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "ae6827230294"
       },
       "subject_raw": {
         "po_number": "4500318658",
-        "po_line": 1
-      },
-      "attribute": "material_id",
-      "value": "CMP-GAM-003",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 12
-      },
-      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY\n2026-07-16",
-      "confidence": "medium"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318658",
-        "po_line": 1
-      },
-      "subject_raw": {
-        "po_number": "4500318658",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "ae6827230294"
       },
       "attribute": "qty",
       "value": 44000,
@@ -77,21 +159,95 @@
       "confidence": "high"
     },
     {
-      "fact_type": "supplier_statement",
+      "fact_type": "oc_line",
       "subject": {
-        "po_number": "4500318658"
+        "po_number": "4500318658",
+        "po_line": 1,
+        "item_key": "ae6827230294"
       },
       "subject_raw": {
-        "po_number": "4500318658"
+        "po_number": "4500318658",
+        "po_line": 1,
+        "item_key": "ae6827230294"
       },
-      "attribute": "value",
-      "value": "Customer: Soony Interactive GmbH · Your order 4500318658 of 2026-04-30 · Incoterms FOB Yantian · Payment NET30",
+      "attribute": "unit_price",
+      "value": 44000,
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 12
       },
-      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318658 of 2026-04-30 · Incoterms FOB Yantian · Payment NET30",
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY\n2026-07-16",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318658",
+        "po_line": 1,
+        "item_key": "ae6827230294"
+      },
+      "subject_raw": {
+        "po_number": "4500318658",
+        "po_line": 1,
+        "item_key": "ae6827230294"
+      },
+      "attribute": "currency",
+      "value": "CNY",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY\n2026-07-16",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318658",
+        "po_line": 1,
+        "item_key": "ae6827230294"
+      },
+      "subject_raw": {
+        "po_number": "4500318658",
+        "po_line": 1,
+        "item_key": "ae6827230294"
+      },
+      "attribute": "confirmed_date",
+      "value": "2026-07-16",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY\n2026-07-16",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318658",
+        "po_line": 1,
+        "item_key": "ae6827230294"
+      },
+      "subject_raw": {
+        "po_number": "4500318658",
+        "po_line": 1,
+        "item_key": "ae6827230294"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-003",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY\n2026-07-16",
       "confidence": "high"
     }
   ],

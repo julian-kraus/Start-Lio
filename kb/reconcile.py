@@ -27,21 +27,34 @@ def state_issues(conn) -> list[Issue]:
     """Issues that come from the state of ingestion rather than from rules."""
     issues = []
     for d in conn.execute("SELECT path, sha256, container, status, detail FROM documents "
-                          "WHERE active AND status IN ('needs_schema_map', 'partial', 'failed')"):
-        kind = "ingest_failed" if d["status"] == "failed" else "schema_map_needed"
+                          "WHERE active AND status IN ('needs_schema_map', 'partial', 'failed', 'needs_review')"):
+        kind = {"failed": "ingest_failed", "needs_review": "review_needed"}.get(d["status"], "schema_map_needed")
         detail = d["detail"] or {}
-        what = (f"cannot read {d['path']}: {detail.get('error')}" if kind == "ingest_failed" else
-                f"new table layout in {d['path']}: no schema map for "
-                f"{', '.join(u.get('sheet') or 'the table' for u in detail.get('unmatched', [])) or 'its header'}")
+        if kind == "ingest_failed":
+            what = f"cannot read {d['path']}: {detail.get('error')}"
+        elif kind == "review_needed":
+            what = f"extraction of {d['path']} failed the validation gate: " + \
+                "; ".join((detail.get("gate") or {}).get("fatal", [])[:2])
+        else:
+            what = (f"new table layout in {d['path']}: no schema map for "
+                    f"{', '.join(u.get('sheet') or 'the table' for u in detail.get('unmatched', [])) or 'its header'}")
         issues.append(Issue(issue_key(kind, d["path"], d["sha256"]), kind, "medium", what,
                             {"path": d["path"], "sha256": d["sha256"], "container": d["container"], **detail}, []))
-    for q in conn.execute("SELECT path, sha256, container, state, attempts, last_error FROM extraction_queue "
-                          "WHERE state IN ('pending', 'failed')"):
+    for q in conn.execute("SELECT path, sha256, container, state, attempts, last_error, doc_kind, routing "
+                          "FROM extraction_queue WHERE state IN ('pending', 'failed')"):
         kind = "pending_extraction" if q["state"] == "pending" else "extraction_failed"
-        issues.append(Issue(issue_key(kind, q["path"], q["sha256"]), kind, "medium",
-                            f"{q['path']} is not read yet" if kind == "pending_extraction"
-                            else f"{q['path']} could not be extracted: {q['last_error']}",
-                            dict(q), []))
+        routing = q["routing"] or {}
+        if kind == "pending_extraction":
+            title = (f"{q['path']} is not read yet (recognised as {q['doc_kind']})" if q["doc_kind"] else
+                     f"{q['path']} is not read yet and matches no known document kind ({routing.get('reason')})")
+        else:
+            title = f"{q['path']} could not be extracted: {q['last_error']}"
+        issues.append(Issue(issue_key(kind, q["path"], q["sha256"]), kind, "medium", title, dict(q), []))
+    for kind_name, table, key in (("doc_kind", "doc_kinds", "name"), ("schema_map", "schema_maps", "signature")):
+        for r in conn.execute(f"SELECT {key} AS name, created_by FROM {table} WHERE status = 'proposed'"):
+            issues.append(Issue(issue_key("promotion_needed", kind_name, r["name"]), "promotion_needed", "low",
+                                f"proposed {kind_name.replace('_', ' ')} {r['name'][:24]} by {r['created_by']} "
+                                f"waits for review", {"object_kind": kind_name, "name": r["name"]}, []))
     if db.tracker_table_exists(conn, "stale_flags"):
         for s in conn.execute("SELECT path, flagged_at FROM public.stale_flags"):
             issues.append(Issue(issue_key("stale_source", s["path"], ""), "stale_source", "high",
@@ -71,7 +84,7 @@ def run(conn, trigger: str, detail: dict | None = None, version: int | None = No
         raise SystemExit("no active rule set; run `python -m kb seed-rules` first")
     rule_list, settings = rules_mod.load_rule_set(conn, version)
     now = _now(settings)
-    records = build_records(load_valid_facts(conn))
+    records = build_records(load_valid_facts(conn, float(settings.get("proposed_confidence_cap", 0.5))))
     believed, rule_issues, diagnostics = evaluate(rule_list, records, settings, now)
     issues = {i.issue_key: i for i in rule_issues + state_issues(conn)}
 

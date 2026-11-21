@@ -10,7 +10,7 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
@@ -28,7 +28,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "region_hint": "paper field"
       },
       "evidence": "DAP Hamburg",
       "confidence": "medium",
@@ -49,7 +50,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "2027-12-31",
       "confidence": "medium",
@@ -70,7 +72,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "region_hint": "paper field"
       },
       "evidence": "Up to 50,000 printed parts within 36 hours; 35% surcharge; express truck",
       "confidence": "medium",
@@ -91,7 +94,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "0.5% of delayed order value per commenced week, capped at 5%",
       "confidence": "medium",
@@ -112,7 +116,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-004 0.06 EUR MOQ 50000 LT 21d",
       "confidence": "medium"
@@ -132,7 +137,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-004 0.06 EUR MOQ 50000 LT 21d",
       "confidence": "medium"
@@ -152,7 +158,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-004 0.06 EUR MOQ 50000 LT 21d",
       "confidence": "medium"
@@ -172,7 +179,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-004 0.06 EUR MOQ 50000 LT 21d",
       "confidence": "medium"
@@ -192,7 +200,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-005 0.06 EUR MOQ 50000 LT 21d",
       "confidence": "medium"
@@ -212,7 +221,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-005 0.06 EUR MOQ 50000 LT 21d",
       "confidence": "medium"
@@ -232,7 +242,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-005 0.06 EUR MOQ 50000 LT 21d",
       "confidence": "medium"
@@ -252,7 +263,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-005 0.06 EUR MOQ 50000 LT 21d",
       "confidence": "medium"
@@ -272,7 +284,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-008 2.1 EUR MOQ 5000 LT 35d",
       "confidence": "medium"
@@ -292,7 +305,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-008 2.1 EUR MOQ 5000 LT 35d",
       "confidence": "medium"
@@ -312,7 +326,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-008 2.1 EUR MOQ 5000 LT 35d",
       "confidence": "medium"
@@ -332,7 +347,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-008 2.1 EUR MOQ 5000 LT 35d",
       "confidence": "medium"
@@ -352,7 +368,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-009 0.22 EUR MOQ 20000 LT 21d",
       "confidence": "medium"
@@ -372,7 +389,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-009 0.22 EUR MOQ 20000 LT 21d",
       "confidence": "medium"
@@ -392,7 +410,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-009 0.22 EUR MOQ 20000 LT 21d",
       "confidence": "medium"
@@ -412,7 +431,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-009 0.22 EUR MOQ 20000 LT 21d",
       "confidence": "medium"
@@ -432,7 +452,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-011 0.03 EUR MOQ 100000 LT 21d",
       "confidence": "medium"
@@ -452,7 +473,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-011 0.03 EUR MOQ 100000 LT 21d",
       "confidence": "medium"
@@ -472,7 +494,8 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-011 0.03 EUR MOQ 100000 LT 21d",
       "confidence": "medium"
@@ -492,14 +515,15 @@
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 2
+        "page": 2,
+        "region_hint": "paper field"
       },
       "evidence": "Annex A CMP-GAM-011 0.03 EUR MOQ 100000 LT 21d",
       "confidence": "medium"
     }
   ],
   "unreadable": [
-    "PDF has no usable text layer; visually inspected as image."
+    "PDF has no usable text layer; reference envelope retained for visual review."
   ],
   "proposed_fact_types": []
 }

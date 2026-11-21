@@ -10,18 +10,119 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318777"
+      },
+      "subject_raw": {
+        "po_number": "4500318777"
+      },
+      "attribute": "oc_number",
+      "value": "26385785",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "26385785",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318777"
+      },
+      "subject_raw": {
+        "po_number": "4500318777"
+      },
+      "attribute": "oc_date",
+      "value": "2026-10-28",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "2026-10-28",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318777"
+      },
+      "subject_raw": {
+        "po_number": "4500318777"
+      },
+      "attribute": "incoterm",
+      "value": "FOB",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "FOB",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318777"
+      },
+      "subject_raw": {
+        "po_number": "4500318777"
+      },
+      "attribute": "payment_terms",
+      "value": "NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "NET30",
+      "confidence": "high"
+    },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318777",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "e541843492b0"
       },
       "subject_raw": {
         "po_number": "4500318777",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "e541843492b0"
+      },
+      "attribute": "item_no_printed",
+      "value": "00010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,200\n1037\nINR\n2027-01-13\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318777",
+        "po_line": 1,
+        "item_key": "e541843492b0"
+      },
+      "subject_raw": {
+        "po_number": "4500318777",
+        "po_line": 1,
+        "item_key": "e541843492b0"
       },
       "attribute": "supplier_part_no",
       "value": "CMP-GAM-010",
@@ -38,32 +139,13 @@
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318777",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "e541843492b0"
       },
       "subject_raw": {
         "po_number": "4500318777",
-        "po_line": 1
-      },
-      "attribute": "material_id",
-      "value": "CMP-GAM-010",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 13
-      },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,200\n1037\nINR\n2027-01-13\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
-      "confidence": "medium"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318777",
-        "po_line": 1
-      },
-      "subject_raw": {
-        "po_number": "4500318777",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "e541843492b0"
       },
       "attribute": "qty",
       "value": 2200,
@@ -77,30 +159,122 @@
       "confidence": "high"
     },
     {
-      "fact_type": "supplier_statement",
+      "fact_type": "oc_line",
       "subject": {
-        "po_number": "4500318777"
+        "po_number": "4500318777",
+        "po_line": 1,
+        "item_key": "e541843492b0"
       },
       "subject_raw": {
-        "po_number": "4500318777"
+        "po_number": "4500318777",
+        "po_line": 1,
+        "item_key": "e541843492b0"
       },
-      "attribute": "value",
-      "value": "Customer: Soony Interactive GmbH · Your order 4500318777 of 2026-10-28 · Incoterms FOB Nhava Sheva · Payment",
+      "attribute": "unit_price",
+      "value": 2200,
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 13
       },
-      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318777 of 2026-10-28 · Incoterms FOB Nhava Sheva · Payment",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,200\n1037\nINR\n2027-01-13\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318777",
+        "po_line": 1,
+        "item_key": "e541843492b0"
+      },
+      "subject_raw": {
+        "po_number": "4500318777",
+        "po_line": 1,
+        "item_key": "e541843492b0"
+      },
+      "attribute": "currency",
+      "value": "INR",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,200\n1037\nINR\n2027-01-13\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318777",
+        "po_line": 1,
+        "item_key": "e541843492b0"
+      },
+      "subject_raw": {
+        "po_number": "4500318777",
+        "po_line": 1,
+        "item_key": "e541843492b0"
+      },
+      "attribute": "confirmed_date",
+      "value": "2027-01-13",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,200\n1037\nINR\n2027-01-13\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318777",
+        "po_line": 1,
+        "item_key": "e541843492b0"
+      },
+      "subject_raw": {
+        "po_number": "4500318777",
+        "po_line": 1,
+        "item_key": "e541843492b0"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,200\n1037\nINR\n2027-01-13\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
       "confidence": "high"
     },
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "po_number": "4500318777"
+        "statement_no": 1
       },
       "subject_raw": {
-        "po_number": "4500318777"
+        "statement_no": 1
+      },
+      "attribute": "kind",
+      "value": "other",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1
+      },
+      "evidence": "Supplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "statement_no": 1
+      },
+      "subject_raw": {
+        "statement_no": 1
       },
       "attribute": "value",
       "value": "Supplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",

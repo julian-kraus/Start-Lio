@@ -1,3 +1,8 @@
+recognise:
+  path_globs: ["**/*delivery*note*scan*"]
+  any_phrases: ["delivery note", "goods receipt"]
+  container: pdf
+
 # delivery_note_scan
 
-Read every printed and handwritten delivery-note field. Preserve struck-through quantities and received stamps.
+Extract grounded fields, preserve source-language evidence, and retain unresolved joins explicitly.

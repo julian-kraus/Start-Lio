@@ -10,16 +10,16 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-2"
+        "locode": "KRPUS"
       },
       "subject_raw": {
-        "id": "row-2"
+        "locode": "KRPUS"
       },
       "attribute": "locode",
       "value": "KRPUS",
@@ -29,16 +29,16 @@
         "row": 2,
         "column": "locode"
       },
-      "evidence": "row 2: locode=KRPUS",
+      "evidence": "locode=KRPUS",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-2"
+        "locode": "KRPUS"
       },
       "subject_raw": {
-        "id": "row-2"
+        "locode": "KRPUS"
       },
       "attribute": "name",
       "value": "Busan",
@@ -48,16 +48,16 @@
         "row": 2,
         "column": "name"
       },
-      "evidence": "row 2: name=Busan",
+      "evidence": "name=Busan",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-2"
+        "locode": "KRPUS"
       },
       "subject_raw": {
-        "id": "row-2"
+        "locode": "KRPUS"
       },
       "attribute": "country",
       "value": "KR",
@@ -67,16 +67,16 @@
         "row": 2,
         "column": "country"
       },
-      "evidence": "row 2: country=KR",
+      "evidence": "country=KR",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-2"
+        "locode": "KRPUS"
       },
       "subject_raw": {
-        "id": "row-2"
+        "locode": "KRPUS"
       },
       "attribute": "lat",
       "value": 35.1028,
@@ -86,16 +86,16 @@
         "row": 2,
         "column": "lat"
       },
-      "evidence": "row 2: lat=35.1028",
+      "evidence": "lat=35.1028",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-2"
+        "locode": "KRPUS"
       },
       "subject_raw": {
-        "id": "row-2"
+        "locode": "KRPUS"
       },
       "attribute": "lon",
       "value": 129.0403,
@@ -105,16 +105,16 @@
         "row": 2,
         "column": "lon"
       },
-      "evidence": "row 2: lon=129.0403",
+      "evidence": "lon=129.0403",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-2"
+        "locode": "KRPUS"
       },
       "subject_raw": {
-        "id": "row-2"
+        "locode": "KRPUS"
       },
       "attribute": "mode",
       "value": "sea",
@@ -124,16 +124,16 @@
         "row": 2,
         "column": "mode"
       },
-      "evidence": "row 2: mode=sea",
+      "evidence": "mode=sea",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-3"
+        "locode": "CNYTN"
       },
       "subject_raw": {
-        "id": "row-3"
+        "locode": "CNYTN"
       },
       "attribute": "locode",
       "value": "CNYTN",
@@ -143,16 +143,16 @@
         "row": 3,
         "column": "locode"
       },
-      "evidence": "row 3: locode=CNYTN",
+      "evidence": "locode=CNYTN",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-3"
+        "locode": "CNYTN"
       },
       "subject_raw": {
-        "id": "row-3"
+        "locode": "CNYTN"
       },
       "attribute": "name",
       "value": "Yantian (Shenzhen)",
@@ -162,16 +162,16 @@
         "row": 3,
         "column": "name"
       },
-      "evidence": "row 3: name=Yantian (Shenzhen)",
+      "evidence": "name=Yantian (Shenzhen)",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-3"
+        "locode": "CNYTN"
       },
       "subject_raw": {
-        "id": "row-3"
+        "locode": "CNYTN"
       },
       "attribute": "country",
       "value": "CN",
@@ -181,16 +181,16 @@
         "row": 3,
         "column": "country"
       },
-      "evidence": "row 3: country=CN",
+      "evidence": "country=CN",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-3"
+        "locode": "CNYTN"
       },
       "subject_raw": {
-        "id": "row-3"
+        "locode": "CNYTN"
       },
       "attribute": "lat",
       "value": 22.5667,
@@ -200,16 +200,16 @@
         "row": 3,
         "column": "lat"
       },
-      "evidence": "row 3: lat=22.5667",
+      "evidence": "lat=22.5667",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-3"
+        "locode": "CNYTN"
       },
       "subject_raw": {
-        "id": "row-3"
+        "locode": "CNYTN"
       },
       "attribute": "lon",
       "value": 114.2667,
@@ -219,16 +219,16 @@
         "row": 3,
         "column": "lon"
       },
-      "evidence": "row 3: lon=114.2667",
+      "evidence": "lon=114.2667",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-3"
+        "locode": "CNYTN"
       },
       "subject_raw": {
-        "id": "row-3"
+        "locode": "CNYTN"
       },
       "attribute": "mode",
       "value": "sea",
@@ -238,16 +238,16 @@
         "row": 3,
         "column": "mode"
       },
-      "evidence": "row 3: mode=sea",
+      "evidence": "mode=sea",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-4"
+        "locode": "INNSA"
       },
       "subject_raw": {
-        "id": "row-4"
+        "locode": "INNSA"
       },
       "attribute": "locode",
       "value": "INNSA",
@@ -257,16 +257,16 @@
         "row": 4,
         "column": "locode"
       },
-      "evidence": "row 4: locode=INNSA",
+      "evidence": "locode=INNSA",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-4"
+        "locode": "INNSA"
       },
       "subject_raw": {
-        "id": "row-4"
+        "locode": "INNSA"
       },
       "attribute": "name",
       "value": "Nhava Sheva (Mumbai)",
@@ -276,16 +276,16 @@
         "row": 4,
         "column": "name"
       },
-      "evidence": "row 4: name=Nhava Sheva (Mumbai)",
+      "evidence": "name=Nhava Sheva (Mumbai)",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-4"
+        "locode": "INNSA"
       },
       "subject_raw": {
-        "id": "row-4"
+        "locode": "INNSA"
       },
       "attribute": "country",
       "value": "IN",
@@ -295,16 +295,16 @@
         "row": 4,
         "column": "country"
       },
-      "evidence": "row 4: country=IN",
+      "evidence": "country=IN",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-4"
+        "locode": "INNSA"
       },
       "subject_raw": {
-        "id": "row-4"
+        "locode": "INNSA"
       },
       "attribute": "lat",
       "value": 18.95,
@@ -314,16 +314,16 @@
         "row": 4,
         "column": "lat"
       },
-      "evidence": "row 4: lat=18.95",
+      "evidence": "lat=18.95",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-4"
+        "locode": "INNSA"
       },
       "subject_raw": {
-        "id": "row-4"
+        "locode": "INNSA"
       },
       "attribute": "lon",
       "value": 72.95,
@@ -333,16 +333,16 @@
         "row": 4,
         "column": "lon"
       },
-      "evidence": "row 4: lon=72.95",
+      "evidence": "lon=72.95",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-4"
+        "locode": "INNSA"
       },
       "subject_raw": {
-        "id": "row-4"
+        "locode": "INNSA"
       },
       "attribute": "mode",
       "value": "sea",
@@ -352,16 +352,16 @@
         "row": 4,
         "column": "mode"
       },
-      "evidence": "row 4: mode=sea",
+      "evidence": "mode=sea",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-5"
+        "locode": "DEHAM"
       },
       "subject_raw": {
-        "id": "row-5"
+        "locode": "DEHAM"
       },
       "attribute": "locode",
       "value": "DEHAM",
@@ -371,16 +371,16 @@
         "row": 5,
         "column": "locode"
       },
-      "evidence": "row 5: locode=DEHAM",
+      "evidence": "locode=DEHAM",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-5"
+        "locode": "DEHAM"
       },
       "subject_raw": {
-        "id": "row-5"
+        "locode": "DEHAM"
       },
       "attribute": "name",
       "value": "Hamburg",
@@ -390,16 +390,16 @@
         "row": 5,
         "column": "name"
       },
-      "evidence": "row 5: name=Hamburg",
+      "evidence": "name=Hamburg",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-5"
+        "locode": "DEHAM"
       },
       "subject_raw": {
-        "id": "row-5"
+        "locode": "DEHAM"
       },
       "attribute": "country",
       "value": "DE",
@@ -409,16 +409,16 @@
         "row": 5,
         "column": "country"
       },
-      "evidence": "row 5: country=DE",
+      "evidence": "country=DE",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-5"
+        "locode": "DEHAM"
       },
       "subject_raw": {
-        "id": "row-5"
+        "locode": "DEHAM"
       },
       "attribute": "lat",
       "value": 53.54,
@@ -428,16 +428,16 @@
         "row": 5,
         "column": "lat"
       },
-      "evidence": "row 5: lat=53.54",
+      "evidence": "lat=53.54",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-5"
+        "locode": "DEHAM"
       },
       "subject_raw": {
-        "id": "row-5"
+        "locode": "DEHAM"
       },
       "attribute": "lon",
       "value": 9.98,
@@ -447,16 +447,16 @@
         "row": 5,
         "column": "lon"
       },
-      "evidence": "row 5: lon=9.98",
+      "evidence": "lon=9.98",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-5"
+        "locode": "DEHAM"
       },
       "subject_raw": {
-        "id": "row-5"
+        "locode": "DEHAM"
       },
       "attribute": "mode",
       "value": "sea",
@@ -466,16 +466,16 @@
         "row": 5,
         "column": "mode"
       },
-      "evidence": "row 5: mode=sea",
+      "evidence": "mode=sea",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-6"
+        "locode": "NLRTM"
       },
       "subject_raw": {
-        "id": "row-6"
+        "locode": "NLRTM"
       },
       "attribute": "locode",
       "value": "NLRTM",
@@ -485,16 +485,16 @@
         "row": 6,
         "column": "locode"
       },
-      "evidence": "row 6: locode=NLRTM",
+      "evidence": "locode=NLRTM",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-6"
+        "locode": "NLRTM"
       },
       "subject_raw": {
-        "id": "row-6"
+        "locode": "NLRTM"
       },
       "attribute": "name",
       "value": "Rotterdam",
@@ -504,16 +504,16 @@
         "row": 6,
         "column": "name"
       },
-      "evidence": "row 6: name=Rotterdam",
+      "evidence": "name=Rotterdam",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-6"
+        "locode": "NLRTM"
       },
       "subject_raw": {
-        "id": "row-6"
+        "locode": "NLRTM"
       },
       "attribute": "country",
       "value": "NL",
@@ -523,16 +523,16 @@
         "row": 6,
         "column": "country"
       },
-      "evidence": "row 6: country=NL",
+      "evidence": "country=NL",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-6"
+        "locode": "NLRTM"
       },
       "subject_raw": {
-        "id": "row-6"
+        "locode": "NLRTM"
       },
       "attribute": "lat",
       "value": 51.95,
@@ -542,16 +542,16 @@
         "row": 6,
         "column": "lat"
       },
-      "evidence": "row 6: lat=51.95",
+      "evidence": "lat=51.95",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-6"
+        "locode": "NLRTM"
       },
       "subject_raw": {
-        "id": "row-6"
+        "locode": "NLRTM"
       },
       "attribute": "lon",
       "value": 4.14,
@@ -561,16 +561,16 @@
         "row": 6,
         "column": "lon"
       },
-      "evidence": "row 6: lon=4.14",
+      "evidence": "lon=4.14",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-6"
+        "locode": "NLRTM"
       },
       "subject_raw": {
-        "id": "row-6"
+        "locode": "NLRTM"
       },
       "attribute": "mode",
       "value": "sea",
@@ -580,16 +580,16 @@
         "row": 6,
         "column": "mode"
       },
-      "evidence": "row 6: mode=sea",
+      "evidence": "mode=sea",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-7"
+        "locode": "ICN"
       },
       "subject_raw": {
-        "id": "row-7"
+        "locode": "ICN"
       },
       "attribute": "locode",
       "value": "ICN",
@@ -599,16 +599,16 @@
         "row": 7,
         "column": "locode"
       },
-      "evidence": "row 7: locode=ICN",
+      "evidence": "locode=ICN",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-7"
+        "locode": "ICN"
       },
       "subject_raw": {
-        "id": "row-7"
+        "locode": "ICN"
       },
       "attribute": "name",
       "value": "Incheon",
@@ -618,16 +618,16 @@
         "row": 7,
         "column": "name"
       },
-      "evidence": "row 7: name=Incheon",
+      "evidence": "name=Incheon",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-7"
+        "locode": "ICN"
       },
       "subject_raw": {
-        "id": "row-7"
+        "locode": "ICN"
       },
       "attribute": "country",
       "value": "KR",
@@ -637,16 +637,16 @@
         "row": 7,
         "column": "country"
       },
-      "evidence": "row 7: country=KR",
+      "evidence": "country=KR",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-7"
+        "locode": "ICN"
       },
       "subject_raw": {
-        "id": "row-7"
+        "locode": "ICN"
       },
       "attribute": "lat",
       "value": 37.4602,
@@ -656,16 +656,16 @@
         "row": 7,
         "column": "lat"
       },
-      "evidence": "row 7: lat=37.4602",
+      "evidence": "lat=37.4602",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-7"
+        "locode": "ICN"
       },
       "subject_raw": {
-        "id": "row-7"
+        "locode": "ICN"
       },
       "attribute": "lon",
       "value": 126.4407,
@@ -675,16 +675,16 @@
         "row": 7,
         "column": "lon"
       },
-      "evidence": "row 7: lon=126.4407",
+      "evidence": "lon=126.4407",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-7"
+        "locode": "ICN"
       },
       "subject_raw": {
-        "id": "row-7"
+        "locode": "ICN"
       },
       "attribute": "mode",
       "value": "air",
@@ -694,16 +694,16 @@
         "row": 7,
         "column": "mode"
       },
-      "evidence": "row 7: mode=air",
+      "evidence": "mode=air",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-8"
+        "locode": "CAN"
       },
       "subject_raw": {
-        "id": "row-8"
+        "locode": "CAN"
       },
       "attribute": "locode",
       "value": "CAN",
@@ -713,16 +713,16 @@
         "row": 8,
         "column": "locode"
       },
-      "evidence": "row 8: locode=CAN",
+      "evidence": "locode=CAN",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-8"
+        "locode": "CAN"
       },
       "subject_raw": {
-        "id": "row-8"
+        "locode": "CAN"
       },
       "attribute": "name",
       "value": "Guangzhou Baiyun",
@@ -732,16 +732,16 @@
         "row": 8,
         "column": "name"
       },
-      "evidence": "row 8: name=Guangzhou Baiyun",
+      "evidence": "name=Guangzhou Baiyun",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-8"
+        "locode": "CAN"
       },
       "subject_raw": {
-        "id": "row-8"
+        "locode": "CAN"
       },
       "attribute": "country",
       "value": "CN",
@@ -751,16 +751,16 @@
         "row": 8,
         "column": "country"
       },
-      "evidence": "row 8: country=CN",
+      "evidence": "country=CN",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-8"
+        "locode": "CAN"
       },
       "subject_raw": {
-        "id": "row-8"
+        "locode": "CAN"
       },
       "attribute": "lat",
       "value": 23.3924,
@@ -770,16 +770,16 @@
         "row": 8,
         "column": "lat"
       },
-      "evidence": "row 8: lat=23.3924",
+      "evidence": "lat=23.3924",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-8"
+        "locode": "CAN"
       },
       "subject_raw": {
-        "id": "row-8"
+        "locode": "CAN"
       },
       "attribute": "lon",
       "value": 113.2988,
@@ -789,16 +789,16 @@
         "row": 8,
         "column": "lon"
       },
-      "evidence": "row 8: lon=113.2988",
+      "evidence": "lon=113.2988",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-8"
+        "locode": "CAN"
       },
       "subject_raw": {
-        "id": "row-8"
+        "locode": "CAN"
       },
       "attribute": "mode",
       "value": "air",
@@ -808,16 +808,16 @@
         "row": 8,
         "column": "mode"
       },
-      "evidence": "row 8: mode=air",
+      "evidence": "mode=air",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-9"
+        "locode": "ORD"
       },
       "subject_raw": {
-        "id": "row-9"
+        "locode": "ORD"
       },
       "attribute": "locode",
       "value": "ORD",
@@ -827,16 +827,16 @@
         "row": 9,
         "column": "locode"
       },
-      "evidence": "row 9: locode=ORD",
+      "evidence": "locode=ORD",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-9"
+        "locode": "ORD"
       },
       "subject_raw": {
-        "id": "row-9"
+        "locode": "ORD"
       },
       "attribute": "name",
       "value": "Chicago O'Hare",
@@ -846,16 +846,16 @@
         "row": 9,
         "column": "name"
       },
-      "evidence": "row 9: name=Chicago O'Hare",
+      "evidence": "name=Chicago O'Hare",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-9"
+        "locode": "ORD"
       },
       "subject_raw": {
-        "id": "row-9"
+        "locode": "ORD"
       },
       "attribute": "country",
       "value": "US",
@@ -865,16 +865,16 @@
         "row": 9,
         "column": "country"
       },
-      "evidence": "row 9: country=US",
+      "evidence": "country=US",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-9"
+        "locode": "ORD"
       },
       "subject_raw": {
-        "id": "row-9"
+        "locode": "ORD"
       },
       "attribute": "lat",
       "value": 41.9742,
@@ -884,16 +884,16 @@
         "row": 9,
         "column": "lat"
       },
-      "evidence": "row 9: lat=41.9742",
+      "evidence": "lat=41.9742",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-9"
+        "locode": "ORD"
       },
       "subject_raw": {
-        "id": "row-9"
+        "locode": "ORD"
       },
       "attribute": "lon",
       "value": -87.9073,
@@ -903,16 +903,16 @@
         "row": 9,
         "column": "lon"
       },
-      "evidence": "row 9: lon=-87.9073",
+      "evidence": "lon=-87.9073",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-9"
+        "locode": "ORD"
       },
       "subject_raw": {
-        "id": "row-9"
+        "locode": "ORD"
       },
       "attribute": "mode",
       "value": "air",
@@ -922,16 +922,16 @@
         "row": 9,
         "column": "mode"
       },
-      "evidence": "row 9: mode=air",
+      "evidence": "mode=air",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-10"
+        "locode": "BOM"
       },
       "subject_raw": {
-        "id": "row-10"
+        "locode": "BOM"
       },
       "attribute": "locode",
       "value": "BOM",
@@ -941,16 +941,16 @@
         "row": 10,
         "column": "locode"
       },
-      "evidence": "row 10: locode=BOM",
+      "evidence": "locode=BOM",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-10"
+        "locode": "BOM"
       },
       "subject_raw": {
-        "id": "row-10"
+        "locode": "BOM"
       },
       "attribute": "name",
       "value": "Mumbai Chhatrapati Shivaji",
@@ -960,16 +960,16 @@
         "row": 10,
         "column": "name"
       },
-      "evidence": "row 10: name=Mumbai Chhatrapati Shivaji",
+      "evidence": "name=Mumbai Chhatrapati Shivaji",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-10"
+        "locode": "BOM"
       },
       "subject_raw": {
-        "id": "row-10"
+        "locode": "BOM"
       },
       "attribute": "country",
       "value": "IN",
@@ -979,16 +979,16 @@
         "row": 10,
         "column": "country"
       },
-      "evidence": "row 10: country=IN",
+      "evidence": "country=IN",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-10"
+        "locode": "BOM"
       },
       "subject_raw": {
-        "id": "row-10"
+        "locode": "BOM"
       },
       "attribute": "lat",
       "value": 19.0896,
@@ -998,16 +998,16 @@
         "row": 10,
         "column": "lat"
       },
-      "evidence": "row 10: lat=19.0896",
+      "evidence": "lat=19.0896",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-10"
+        "locode": "BOM"
       },
       "subject_raw": {
-        "id": "row-10"
+        "locode": "BOM"
       },
       "attribute": "lon",
       "value": 72.8656,
@@ -1017,16 +1017,16 @@
         "row": 10,
         "column": "lon"
       },
-      "evidence": "row 10: lon=72.8656",
+      "evidence": "lon=72.8656",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-10"
+        "locode": "BOM"
       },
       "subject_raw": {
-        "id": "row-10"
+        "locode": "BOM"
       },
       "attribute": "mode",
       "value": "air",
@@ -1036,16 +1036,16 @@
         "row": 10,
         "column": "mode"
       },
-      "evidence": "row 10: mode=air",
+      "evidence": "mode=air",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-11"
+        "locode": "FRA"
       },
       "subject_raw": {
-        "id": "row-11"
+        "locode": "FRA"
       },
       "attribute": "locode",
       "value": "FRA",
@@ -1055,16 +1055,16 @@
         "row": 11,
         "column": "locode"
       },
-      "evidence": "row 11: locode=FRA",
+      "evidence": "locode=FRA",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-11"
+        "locode": "FRA"
       },
       "subject_raw": {
-        "id": "row-11"
+        "locode": "FRA"
       },
       "attribute": "name",
       "value": "Frankfurt",
@@ -1074,16 +1074,16 @@
         "row": 11,
         "column": "name"
       },
-      "evidence": "row 11: name=Frankfurt",
+      "evidence": "name=Frankfurt",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-11"
+        "locode": "FRA"
       },
       "subject_raw": {
-        "id": "row-11"
+        "locode": "FRA"
       },
       "attribute": "country",
       "value": "DE",
@@ -1093,16 +1093,16 @@
         "row": 11,
         "column": "country"
       },
-      "evidence": "row 11: country=DE",
+      "evidence": "country=DE",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-11"
+        "locode": "FRA"
       },
       "subject_raw": {
-        "id": "row-11"
+        "locode": "FRA"
       },
       "attribute": "lat",
       "value": 50.0379,
@@ -1112,16 +1112,16 @@
         "row": 11,
         "column": "lat"
       },
-      "evidence": "row 11: lat=50.0379",
+      "evidence": "lat=50.0379",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-11"
+        "locode": "FRA"
       },
       "subject_raw": {
-        "id": "row-11"
+        "locode": "FRA"
       },
       "attribute": "lon",
       "value": 8.5622,
@@ -1131,16 +1131,16 @@
         "row": 11,
         "column": "lon"
       },
-      "evidence": "row 11: lon=8.5622",
+      "evidence": "lon=8.5622",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-11"
+        "locode": "FRA"
       },
       "subject_raw": {
-        "id": "row-11"
+        "locode": "FRA"
       },
       "attribute": "mode",
       "value": "air",
@@ -1150,16 +1150,16 @@
         "row": 11,
         "column": "mode"
       },
-      "evidence": "row 11: mode=air",
+      "evidence": "mode=air",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-12"
+        "locode": "PLPOZ"
       },
       "subject_raw": {
-        "id": "row-12"
+        "locode": "PLPOZ"
       },
       "attribute": "locode",
       "value": "PLPOZ",
@@ -1169,16 +1169,16 @@
         "row": 12,
         "column": "locode"
       },
-      "evidence": "row 12: locode=PLPOZ",
+      "evidence": "locode=PLPOZ",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-12"
+        "locode": "PLPOZ"
       },
       "subject_raw": {
-        "id": "row-12"
+        "locode": "PLPOZ"
       },
       "attribute": "name",
       "value": "Poznań",
@@ -1188,16 +1188,16 @@
         "row": 12,
         "column": "name"
       },
-      "evidence": "row 12: name=Poznań",
+      "evidence": "name=Poznań",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-12"
+        "locode": "PLPOZ"
       },
       "subject_raw": {
-        "id": "row-12"
+        "locode": "PLPOZ"
       },
       "attribute": "country",
       "value": "PL",
@@ -1207,16 +1207,16 @@
         "row": 12,
         "column": "country"
       },
-      "evidence": "row 12: country=PL",
+      "evidence": "country=PL",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-12"
+        "locode": "PLPOZ"
       },
       "subject_raw": {
-        "id": "row-12"
+        "locode": "PLPOZ"
       },
       "attribute": "lat",
       "value": 52.4064,
@@ -1226,16 +1226,16 @@
         "row": 12,
         "column": "lat"
       },
-      "evidence": "row 12: lat=52.4064",
+      "evidence": "lat=52.4064",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-12"
+        "locode": "PLPOZ"
       },
       "subject_raw": {
-        "id": "row-12"
+        "locode": "PLPOZ"
       },
       "attribute": "lon",
       "value": 16.9252,
@@ -1245,16 +1245,16 @@
         "row": 12,
         "column": "lon"
       },
-      "evidence": "row 12: lon=16.9252",
+      "evidence": "lon=16.9252",
       "confidence": "high"
     },
     {
       "fact_type": "port",
       "subject": {
-        "id": "row-12"
+        "locode": "PLPOZ"
       },
       "subject_raw": {
-        "id": "row-12"
+        "locode": "PLPOZ"
       },
       "attribute": "mode",
       "value": "road",
@@ -1264,7 +1264,7 @@
         "row": 12,
         "column": "mode"
       },
-      "evidence": "row 12: mode=road",
+      "evidence": "mode=road",
       "confidence": "high"
     }
   ],

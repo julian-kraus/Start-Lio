@@ -1,0 +1,90 @@
+{
+  "signature": "690b5a7e6ebed445388fb7d90054d55901a47011ba395f58c41396a134feed69",
+  "example_path": "soony/erp/open_shipments.csv",
+  "format": "csv",
+  "sheet": null,
+  "fact_type": "shipment",
+  "subject": [
+    "shipment_id"
+  ],
+  "columns": {
+    "shipment_id": {
+      "field": "shipment_id",
+      "type": "text"
+    },
+    "carrier_id": {
+      "field": "carrier_id",
+      "type": "text"
+    },
+    "mode": {
+      "field": "mode",
+      "type": "text"
+    },
+    "reference": {
+      "field": "reference",
+      "type": "text"
+    },
+    "supplier_id": {
+      "field": "supplier_id",
+      "type": "text"
+    },
+    "po_numbers": {
+      "field": "po_numbers",
+      "type": "list",
+      "list_sep": "|"
+    },
+    "material_ids": {
+      "field": "material_ids",
+      "type": "list",
+      "list_sep": "|"
+    },
+    "route_id": {
+      "field": "route_id",
+      "type": "text"
+    },
+    "origin": {
+      "field": "origin",
+      "type": "text"
+    },
+    "destination": {
+      "field": "destination",
+      "type": "text"
+    },
+    "via": {
+      "field": "via",
+      "type": "text"
+    },
+    "dest_site": {
+      "field": "dest_site",
+      "type": "text"
+    },
+    "etd": {
+      "field": "etd",
+      "type": "text"
+    },
+    "eta": {
+      "field": "eta",
+      "type": "text"
+    },
+    "status": {
+      "field": "status",
+      "type": "text"
+    },
+    "last_lat": {
+      "field": "last_lat",
+      "type": "text"
+    },
+    "last_lon": {
+      "field": "last_lon",
+      "type": "text"
+    },
+    "updated_at": {
+      "field": "updated_at",
+      "type": "text"
+    },
+    "note": {
+      "field": "note",
+      "type": "text"
+    }
+  }
+}

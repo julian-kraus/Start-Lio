@@ -1,3 +1,8 @@
+recognise:
+  path_globs: ["**/*memo*"]
+  any_phrases: ["source document"]
+  container: pdf
+
 # memo
 
-Extract only the fields supported by the envelope contract; preserve source language in evidence and write translations in notes.
+Extract grounded fields, preserve source-language evidence, and retain unresolved joins explicitly.

@@ -1,9 +1,17 @@
 {
   "signature": "7bcb779d67f3cd1f32642304ad2ccfa18532d0c66fb244521e22425312a97dae",
+  "example_path": "soony/context/launch_status.xlsx",
   "format": "xlsx",
   "sheet": "Notes",
+  "fact_type": "x_workbook_row",
+  "subject": [
+    "record_id"
+  ],
   "columns": {
-    "note": "Note"
+    "Note": {
+      "field": "note",
+      "type": "text"
+    }
   },
   "header_detection": {
     "row": 1,

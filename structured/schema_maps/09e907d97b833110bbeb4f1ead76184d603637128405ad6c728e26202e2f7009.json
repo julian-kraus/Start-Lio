@@ -1,0 +1,33 @@
+{
+  "signature": "09e907d97b833110bbeb4f1ead76184d603637128405ad6c728e26202e2f7009",
+  "example_path": "soony/master/bom.csv",
+  "format": "csv",
+  "sheet": null,
+  "fact_type": "bom_line",
+  "subject": [
+    "parent_id",
+    "child_id"
+  ],
+  "columns": {
+    "parent_id": {
+      "field": "parent_id",
+      "type": "text"
+    },
+    "child_id": {
+      "field": "child_id",
+      "type": "text"
+    },
+    "qty_per": {
+      "field": "qty_per",
+      "type": "text"
+    },
+    "valid_from": {
+      "field": "valid_from",
+      "type": "text"
+    },
+    "valid_to": {
+      "field": "valid_to",
+      "type": "text"
+    }
+  }
+}

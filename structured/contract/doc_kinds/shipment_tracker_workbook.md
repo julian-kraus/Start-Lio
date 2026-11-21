@@ -1,3 +1,8 @@
+recognise:
+  path_globs: ["**/*shipment*tracker*workbook*"]
+  any_phrases: ["shipment", "carrier"]
+  container: xlsx
+
 # shipment_tracker_workbook
 
-Extract only the fields supported by the envelope contract; preserve source language in evidence and write translations in notes.
+Extract grounded fields, preserve source-language evidence, and retain unresolved joins explicitly.

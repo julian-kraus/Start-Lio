@@ -1,0 +1,60 @@
+{
+  "signature": "b21b5abad28a17ddf1a0ddf35f6bcdc3392f74dd9568b59cb55468a9549cef72",
+  "example_path": "soony/erp/goods_receipts.csv",
+  "format": "csv",
+  "sheet": null,
+  "fact_type": "goods_receipt",
+  "subject": [
+    "gr_number"
+  ],
+  "columns": {
+    "gr_number": {
+      "field": "gr_number",
+      "type": "text"
+    },
+    "gr_date": {
+      "field": "gr_date",
+      "type": "text"
+    },
+    "po_number": {
+      "field": "po_number",
+      "type": "text"
+    },
+    "po_line": {
+      "field": "po_line",
+      "type": "text"
+    },
+    "supplier_id": {
+      "field": "supplier_id",
+      "type": "text"
+    },
+    "material_id": {
+      "field": "material_id",
+      "type": "text"
+    },
+    "plant": {
+      "field": "plant",
+      "type": "text"
+    },
+    "qty_ordered": {
+      "field": "qty_ordered",
+      "type": "text"
+    },
+    "qty_received": {
+      "field": "qty_received",
+      "type": "text"
+    },
+    "delivery_note": {
+      "field": "delivery_note",
+      "type": "text"
+    },
+    "inspector": {
+      "field": "inspector",
+      "type": "text"
+    },
+    "remark": {
+      "field": "remark",
+      "type": "text"
+    }
+  }
+}

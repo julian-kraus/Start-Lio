@@ -1,0 +1,77 @@
+{
+  "signature": "0fff0fd579cb92aed32828ab203d891f356c9872d5889bd068f2b0447bd9e3e9",
+  "example_path": "soony/erp/purchase_orders_2025H2-2026.csv",
+  "format": "csv",
+  "sheet": null,
+  "fact_type": "po_line",
+  "subject": [
+    "po_number",
+    "po_line"
+  ],
+  "columns": {
+    "po_number": {
+      "field": "po_number",
+      "type": "text"
+    },
+    "po_line": {
+      "field": "po_line",
+      "type": "text"
+    },
+    "supplier_id": {
+      "field": "supplier_id",
+      "type": "text"
+    },
+    "material_id": {
+      "field": "material_id",
+      "type": "text"
+    },
+    "plant": {
+      "field": "plant",
+      "type": "text"
+    },
+    "quantity": {
+      "field": "qty",
+      "type": "text"
+    },
+    "unit_price": {
+      "field": "unit_price",
+      "type": "text"
+    },
+    "currency": {
+      "field": "currency",
+      "type": "text"
+    },
+    "order_date": {
+      "field": "order_date",
+      "type": "text"
+    },
+    "requested_date": {
+      "field": "requested_date",
+      "type": "text"
+    },
+    "promised_date": {
+      "field": "promised_date",
+      "type": "text"
+    },
+    "actual_delivery_date": {
+      "field": "actual_delivery_date",
+      "type": "text"
+    },
+    "status": {
+      "field": "status",
+      "type": "text"
+    },
+    "buyer": {
+      "field": "buyer",
+      "type": "text"
+    },
+    "incoterm": {
+      "field": "incoterm",
+      "type": "text"
+    },
+    "note": {
+      "field": "note",
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "signature": "de33311b464319a20b6e8ba1a7f0ad551eca9dba2c08289738df485f6ecbfcea",
+  "example_path": "soony/master/components.csv",
+  "format": "csv",
+  "sheet": null,
+  "fact_type": "component",
+  "subject": [
+    "material_id"
+  ],
+  "columns": {
+    "component_id": {
+      "field": "material_id",
+      "type": "text"
+    },
+    "description": {
+      "field": "description",
+      "type": "text"
+    },
+    "category": {
+      "field": "category",
+      "type": "text"
+    },
+    "uom": {
+      "field": "uom",
+      "type": "text"
+    },
+    "abc_class": {
+      "field": "abc_class",
+      "type": "text"
+    },
+    "critical": {
+      "field": "critical",
+      "type": "text"
+    },
+    "drawing_rev": {
+      "field": "drawing_rev",
+      "type": "text"
+    }
+  }
+}

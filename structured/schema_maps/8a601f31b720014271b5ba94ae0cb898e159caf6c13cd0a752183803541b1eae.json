@@ -1,0 +1,58 @@
+{
+  "signature": "8a601f31b720014271b5ba94ae0cb898e159caf6c13cd0a752183803541b1eae",
+  "example_path": "soony/master/bom_delta_2026-11-21.csv",
+  "format": "csv",
+  "sheet": null,
+  "fact_type": "change_record",
+  "subject": [
+    "parent_id",
+    "child_id",
+    "change_id"
+  ],
+  "columns": {
+    "change_id": {
+      "field": "change_id",
+      "type": "text"
+    },
+    "parent_id": {
+      "field": "parent_id",
+      "type": "text"
+    },
+    "child_id": {
+      "field": "child_id",
+      "type": "text"
+    },
+    "action": {
+      "field": "action",
+      "type": "text"
+    },
+    "qty_per_old": {
+      "field": "old",
+      "type": "text"
+    },
+    "qty_per_new": {
+      "field": "new",
+      "type": "text"
+    },
+    "rev_old": {
+      "field": "old",
+      "type": "text"
+    },
+    "rev_new": {
+      "field": "new",
+      "type": "text"
+    },
+    "use_up_old_rev": {
+      "field": "use_up_old_rev",
+      "type": "text"
+    },
+    "effective_from": {
+      "field": "effective_from",
+      "type": "text"
+    },
+    "reason": {
+      "field": "reason",
+      "type": "text"
+    }
+  }
+}

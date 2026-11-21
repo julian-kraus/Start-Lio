@@ -10,18 +10,20 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-2"
+        "material_id": "CMP-GAM-004",
+        "field": "drawing_rev"
       },
       "subject_raw": {
-        "entity": "row-2"
+        "material_id": "CMP-GAM-004",
+        "field": "drawing_rev"
       },
-      "attribute": "component_id",
+      "attribute": "material_id",
       "value": "CMP-GAM-004",
       "unit": null,
       "as_of": null,
@@ -29,16 +31,18 @@
         "row": 2,
         "column": "component_id"
       },
-      "evidence": "row 2: component_id=CMP-GAM-004",
+      "evidence": "component_id=CMP-GAM-004",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-2"
+        "material_id": "CMP-GAM-004",
+        "field": "drawing_rev"
       },
       "subject_raw": {
-        "entity": "row-2"
+        "material_id": "CMP-GAM-004",
+        "field": "drawing_rev"
       },
       "attribute": "field",
       "value": "drawing_rev",
@@ -48,16 +52,18 @@
         "row": 2,
         "column": "field"
       },
-      "evidence": "row 2: field=drawing_rev",
+      "evidence": "field=drawing_rev",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-2"
+        "material_id": "CMP-GAM-004",
+        "field": "drawing_rev"
       },
       "subject_raw": {
-        "entity": "row-2"
+        "material_id": "CMP-GAM-004",
+        "field": "drawing_rev"
       },
       "attribute": "old",
       "value": "B",
@@ -67,16 +73,18 @@
         "row": 2,
         "column": "old"
       },
-      "evidence": "row 2: old=B",
+      "evidence": "old=B",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-2"
+        "material_id": "CMP-GAM-004",
+        "field": "drawing_rev"
       },
       "subject_raw": {
-        "entity": "row-2"
+        "material_id": "CMP-GAM-004",
+        "field": "drawing_rev"
       },
       "attribute": "new",
       "value": "C",
@@ -86,16 +94,18 @@
         "row": 2,
         "column": "new"
       },
-      "evidence": "row 2: new=C",
+      "evidence": "new=C",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-2"
+        "material_id": "CMP-GAM-004",
+        "field": "drawing_rev"
       },
       "subject_raw": {
-        "entity": "row-2"
+        "material_id": "CMP-GAM-004",
+        "field": "drawing_rev"
       },
       "attribute": "changed_by",
       "value": "Sofia Marchetti",
@@ -105,18 +115,20 @@
         "row": 2,
         "column": "changed_by"
       },
-      "evidence": "row 2: changed_by=Sofia Marchetti",
+      "evidence": "changed_by=Sofia Marchetti",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-3"
+        "material_id": "CMP-GAM-009",
+        "field": "drawing_rev"
       },
       "subject_raw": {
-        "entity": "row-3"
+        "material_id": "CMP-GAM-009",
+        "field": "drawing_rev"
       },
-      "attribute": "component_id",
+      "attribute": "material_id",
       "value": "CMP-GAM-009",
       "unit": null,
       "as_of": null,
@@ -124,16 +136,18 @@
         "row": 3,
         "column": "component_id"
       },
-      "evidence": "row 3: component_id=CMP-GAM-009",
+      "evidence": "component_id=CMP-GAM-009",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-3"
+        "material_id": "CMP-GAM-009",
+        "field": "drawing_rev"
       },
       "subject_raw": {
-        "entity": "row-3"
+        "material_id": "CMP-GAM-009",
+        "field": "drawing_rev"
       },
       "attribute": "field",
       "value": "drawing_rev",
@@ -143,16 +157,18 @@
         "row": 3,
         "column": "field"
       },
-      "evidence": "row 3: field=drawing_rev",
+      "evidence": "field=drawing_rev",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-3"
+        "material_id": "CMP-GAM-009",
+        "field": "drawing_rev"
       },
       "subject_raw": {
-        "entity": "row-3"
+        "material_id": "CMP-GAM-009",
+        "field": "drawing_rev"
       },
       "attribute": "old",
       "value": "A",
@@ -162,16 +178,18 @@
         "row": 3,
         "column": "old"
       },
-      "evidence": "row 3: old=A",
+      "evidence": "old=A",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-3"
+        "material_id": "CMP-GAM-009",
+        "field": "drawing_rev"
       },
       "subject_raw": {
-        "entity": "row-3"
+        "material_id": "CMP-GAM-009",
+        "field": "drawing_rev"
       },
       "attribute": "new",
       "value": "B",
@@ -181,16 +199,18 @@
         "row": 3,
         "column": "new"
       },
-      "evidence": "row 3: new=B",
+      "evidence": "new=B",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-3"
+        "material_id": "CMP-GAM-009",
+        "field": "drawing_rev"
       },
       "subject_raw": {
-        "entity": "row-3"
+        "material_id": "CMP-GAM-009",
+        "field": "drawing_rev"
       },
       "attribute": "changed_by",
       "value": "Sofia Marchetti",
@@ -200,18 +220,20 @@
         "row": 3,
         "column": "changed_by"
       },
-      "evidence": "row 3: changed_by=Sofia Marchetti",
+      "evidence": "changed_by=Sofia Marchetti",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-4"
+        "material_id": "CMP-GAM-010",
+        "field": "critical"
       },
       "subject_raw": {
-        "entity": "row-4"
+        "material_id": "CMP-GAM-010",
+        "field": "critical"
       },
-      "attribute": "component_id",
+      "attribute": "material_id",
       "value": "CMP-GAM-010",
       "unit": null,
       "as_of": null,
@@ -219,16 +241,18 @@
         "row": 4,
         "column": "component_id"
       },
-      "evidence": "row 4: component_id=CMP-GAM-010",
+      "evidence": "component_id=CMP-GAM-010",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-4"
+        "material_id": "CMP-GAM-010",
+        "field": "critical"
       },
       "subject_raw": {
-        "entity": "row-4"
+        "material_id": "CMP-GAM-010",
+        "field": "critical"
       },
       "attribute": "field",
       "value": "critical",
@@ -238,16 +262,18 @@
         "row": 4,
         "column": "field"
       },
-      "evidence": "row 4: field=critical",
+      "evidence": "field=critical",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-4"
+        "material_id": "CMP-GAM-010",
+        "field": "critical"
       },
       "subject_raw": {
-        "entity": "row-4"
+        "material_id": "CMP-GAM-010",
+        "field": "critical"
       },
       "attribute": "old",
       "value": "N",
@@ -257,16 +283,18 @@
         "row": 4,
         "column": "old"
       },
-      "evidence": "row 4: old=N",
+      "evidence": "old=N",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-4"
+        "material_id": "CMP-GAM-010",
+        "field": "critical"
       },
       "subject_raw": {
-        "entity": "row-4"
+        "material_id": "CMP-GAM-010",
+        "field": "critical"
       },
       "attribute": "new",
       "value": "Y",
@@ -276,16 +304,18 @@
         "row": 4,
         "column": "new"
       },
-      "evidence": "row 4: new=Y",
+      "evidence": "new=Y",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-4"
+        "material_id": "CMP-GAM-010",
+        "field": "critical"
       },
       "subject_raw": {
-        "entity": "row-4"
+        "material_id": "CMP-GAM-010",
+        "field": "critical"
       },
       "attribute": "changed_by",
       "value": "Mei Lin",
@@ -295,18 +325,20 @@
         "row": 4,
         "column": "changed_by"
       },
-      "evidence": "row 4: changed_by=Mei Lin",
+      "evidence": "changed_by=Mei Lin",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-5"
+        "material_id": "CMP-GAM-001",
+        "field": "abc_class"
       },
       "subject_raw": {
-        "entity": "row-5"
+        "material_id": "CMP-GAM-001",
+        "field": "abc_class"
       },
-      "attribute": "component_id",
+      "attribute": "material_id",
       "value": "CMP-GAM-001",
       "unit": null,
       "as_of": null,
@@ -314,16 +346,18 @@
         "row": 5,
         "column": "component_id"
       },
-      "evidence": "row 5: component_id=CMP-GAM-001",
+      "evidence": "component_id=CMP-GAM-001",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-5"
+        "material_id": "CMP-GAM-001",
+        "field": "abc_class"
       },
       "subject_raw": {
-        "entity": "row-5"
+        "material_id": "CMP-GAM-001",
+        "field": "abc_class"
       },
       "attribute": "field",
       "value": "abc_class",
@@ -333,16 +367,18 @@
         "row": 5,
         "column": "field"
       },
-      "evidence": "row 5: field=abc_class",
+      "evidence": "field=abc_class",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-5"
+        "material_id": "CMP-GAM-001",
+        "field": "abc_class"
       },
       "subject_raw": {
-        "entity": "row-5"
+        "material_id": "CMP-GAM-001",
+        "field": "abc_class"
       },
       "attribute": "old",
       "value": "A",
@@ -352,16 +388,18 @@
         "row": 5,
         "column": "old"
       },
-      "evidence": "row 5: old=A",
+      "evidence": "old=A",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-5"
+        "material_id": "CMP-GAM-001",
+        "field": "abc_class"
       },
       "subject_raw": {
-        "entity": "row-5"
+        "material_id": "CMP-GAM-001",
+        "field": "abc_class"
       },
       "attribute": "new",
       "value": "A",
@@ -371,16 +409,18 @@
         "row": 5,
         "column": "new"
       },
-      "evidence": "row 5: new=A",
+      "evidence": "new=A",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "row-5"
+        "material_id": "CMP-GAM-001",
+        "field": "abc_class"
       },
       "subject_raw": {
-        "entity": "row-5"
+        "material_id": "CMP-GAM-001",
+        "field": "abc_class"
       },
       "attribute": "changed_by",
       "value": "Felix Brunner",
@@ -390,7 +430,7 @@
         "row": 5,
         "column": "changed_by"
       },
-      "evidence": "row 5: changed_by=Felix Brunner",
+      "evidence": "changed_by=Felix Brunner",
       "confidence": "high"
     }
   ],

@@ -10,7 +10,7 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
@@ -31,7 +31,7 @@
         "row": 2,
         "column": "snapshot_date"
       },
-      "evidence": "row 2: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -44,7 +44,7 @@
         "material_id": "CMP-GAM-001",
         "batch": "5000413056"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -52,7 +52,7 @@
         "row": 2,
         "column": "site"
       },
-      "evidence": "row 2: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -73,7 +73,7 @@
         "row": 2,
         "column": "material_id"
       },
-      "evidence": "row 2: material_id=CMP-GAM-001",
+      "evidence": "material_id=CMP-GAM-001",
       "confidence": "high"
     },
     {
@@ -94,7 +94,7 @@
         "row": 2,
         "column": "batch"
       },
-      "evidence": "row 2: batch=5000413056",
+      "evidence": "batch=5000413056",
       "confidence": "high"
     },
     {
@@ -113,9 +113,9 @@
       "as_of": null,
       "locator": {
         "row": 2,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 2: qty=9200",
+      "evidence": "quantity=9200",
       "confidence": "high"
     },
     {
@@ -136,7 +136,7 @@
         "row": 2,
         "column": "uom"
       },
-      "evidence": "row 2: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -157,7 +157,7 @@
         "row": 2,
         "column": "safety_stock"
       },
-      "evidence": "row 2: safety_stock=344000",
+      "evidence": "safety_stock=344000",
       "confidence": "high"
     },
     {
@@ -178,7 +178,7 @@
         "row": 2,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 2: weeks_of_cover=0.7",
+      "evidence": "weeks_of_cover=0.7",
       "confidence": "high"
     },
     {
@@ -199,7 +199,7 @@
         "row": 2,
         "column": "last_count"
       },
-      "evidence": "row 2: last_count=2026-11-10",
+      "evidence": "last_count=2026-11-10",
       "confidence": "high"
     },
     {
@@ -220,7 +220,7 @@
         "row": 3,
         "column": "snapshot_date"
       },
-      "evidence": "row 3: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -233,7 +233,7 @@
         "material_id": "CMP-GAM-001",
         "batch": "5000413057"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -241,7 +241,7 @@
         "row": 3,
         "column": "site"
       },
-      "evidence": "row 3: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -262,7 +262,7 @@
         "row": 3,
         "column": "material_id"
       },
-      "evidence": "row 3: material_id=CMP-GAM-001",
+      "evidence": "material_id=CMP-GAM-001",
       "confidence": "high"
     },
     {
@@ -283,7 +283,7 @@
         "row": 3,
         "column": "batch"
       },
-      "evidence": "row 3: batch=5000413057",
+      "evidence": "batch=5000413057",
       "confidence": "high"
     },
     {
@@ -302,9 +302,9 @@
       "as_of": null,
       "locator": {
         "row": 3,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 3: qty=41200",
+      "evidence": "quantity=41200",
       "confidence": "high"
     },
     {
@@ -325,7 +325,7 @@
         "row": 3,
         "column": "uom"
       },
-      "evidence": "row 3: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -346,7 +346,7 @@
         "row": 3,
         "column": "safety_stock"
       },
-      "evidence": "row 3: safety_stock=344000",
+      "evidence": "safety_stock=344000",
       "confidence": "high"
     },
     {
@@ -367,7 +367,7 @@
         "row": 3,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 3: weeks_of_cover=0.7",
+      "evidence": "weeks_of_cover=0.7",
       "confidence": "high"
     },
     {
@@ -388,7 +388,7 @@
         "row": 3,
         "column": "last_count"
       },
-      "evidence": "row 3: last_count=2026-11-10",
+      "evidence": "last_count=2026-11-10",
       "confidence": "high"
     },
     {
@@ -409,7 +409,7 @@
         "row": 4,
         "column": "snapshot_date"
       },
-      "evidence": "row 4: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -422,7 +422,7 @@
         "material_id": "CMP-GAM-001",
         "batch": "5000413062"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -430,7 +430,7 @@
         "row": 4,
         "column": "site"
       },
-      "evidence": "row 4: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -451,7 +451,7 @@
         "row": 4,
         "column": "material_id"
       },
-      "evidence": "row 4: material_id=CMP-GAM-001",
+      "evidence": "material_id=CMP-GAM-001",
       "confidence": "high"
     },
     {
@@ -472,7 +472,7 @@
         "row": 4,
         "column": "batch"
       },
-      "evidence": "row 4: batch=5000413062",
+      "evidence": "batch=5000413062",
       "confidence": "high"
     },
     {
@@ -491,9 +491,9 @@
       "as_of": null,
       "locator": {
         "row": 4,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 4: qty=68000",
+      "evidence": "quantity=68000",
       "confidence": "high"
     },
     {
@@ -514,7 +514,7 @@
         "row": 4,
         "column": "uom"
       },
-      "evidence": "row 4: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -535,7 +535,7 @@
         "row": 4,
         "column": "safety_stock"
       },
-      "evidence": "row 4: safety_stock=344000",
+      "evidence": "safety_stock=344000",
       "confidence": "high"
     },
     {
@@ -556,7 +556,7 @@
         "row": 4,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 4: weeks_of_cover=0.7",
+      "evidence": "weeks_of_cover=0.7",
       "confidence": "high"
     },
     {
@@ -577,7 +577,7 @@
         "row": 4,
         "column": "last_count"
       },
-      "evidence": "row 4: last_count=2026-11-10",
+      "evidence": "last_count=2026-11-10",
       "confidence": "high"
     },
     {
@@ -598,7 +598,7 @@
         "row": 5,
         "column": "snapshot_date"
       },
-      "evidence": "row 5: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -611,7 +611,7 @@
         "material_id": "CMP-GAM-002",
         "batch": "5000413023"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -619,7 +619,7 @@
         "row": 5,
         "column": "site"
       },
-      "evidence": "row 5: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -640,7 +640,7 @@
         "row": 5,
         "column": "material_id"
       },
-      "evidence": "row 5: material_id=CMP-GAM-002",
+      "evidence": "material_id=CMP-GAM-002",
       "confidence": "high"
     },
     {
@@ -661,7 +661,7 @@
         "row": 5,
         "column": "batch"
       },
-      "evidence": "row 5: batch=5000413023",
+      "evidence": "batch=5000413023",
       "confidence": "high"
     },
     {
@@ -680,9 +680,9 @@
       "as_of": null,
       "locator": {
         "row": 5,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 5: qty=860",
+      "evidence": "quantity=860",
       "confidence": "high"
     },
     {
@@ -703,7 +703,7 @@
         "row": 5,
         "column": "uom"
       },
-      "evidence": "row 5: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -724,7 +724,7 @@
         "row": 5,
         "column": "safety_stock"
       },
-      "evidence": "row 5: safety_stock=60000",
+      "evidence": "safety_stock=60000",
       "confidence": "high"
     },
     {
@@ -745,7 +745,7 @@
         "row": 5,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 5: weeks_of_cover=2.1",
+      "evidence": "weeks_of_cover=2.1",
       "confidence": "high"
     },
     {
@@ -766,7 +766,7 @@
         "row": 5,
         "column": "last_count"
       },
-      "evidence": "row 5: last_count=2026-11-07",
+      "evidence": "last_count=2026-11-07",
       "confidence": "high"
     },
     {
@@ -787,7 +787,7 @@
         "row": 6,
         "column": "snapshot_date"
       },
-      "evidence": "row 6: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -800,7 +800,7 @@
         "material_id": "CMP-GAM-002",
         "batch": "5000413026"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -808,7 +808,7 @@
         "row": 6,
         "column": "site"
       },
-      "evidence": "row 6: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -829,7 +829,7 @@
         "row": 6,
         "column": "material_id"
       },
-      "evidence": "row 6: material_id=CMP-GAM-002",
+      "evidence": "material_id=CMP-GAM-002",
       "confidence": "high"
     },
     {
@@ -850,7 +850,7 @@
         "row": 6,
         "column": "batch"
       },
-      "evidence": "row 6: batch=5000413026",
+      "evidence": "batch=5000413026",
       "confidence": "high"
     },
     {
@@ -869,9 +869,9 @@
       "as_of": null,
       "locator": {
         "row": 6,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 6: qty=5000",
+      "evidence": "quantity=5000",
       "confidence": "high"
     },
     {
@@ -892,7 +892,7 @@
         "row": 6,
         "column": "uom"
       },
-      "evidence": "row 6: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -913,7 +913,7 @@
         "row": 6,
         "column": "safety_stock"
       },
-      "evidence": "row 6: safety_stock=60000",
+      "evidence": "safety_stock=60000",
       "confidence": "high"
     },
     {
@@ -934,7 +934,7 @@
         "row": 6,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 6: weeks_of_cover=2.1",
+      "evidence": "weeks_of_cover=2.1",
       "confidence": "high"
     },
     {
@@ -955,7 +955,7 @@
         "row": 6,
         "column": "last_count"
       },
-      "evidence": "row 6: last_count=2026-11-07",
+      "evidence": "last_count=2026-11-07",
       "confidence": "high"
     },
     {
@@ -976,7 +976,7 @@
         "row": 7,
         "column": "snapshot_date"
       },
-      "evidence": "row 7: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -989,7 +989,7 @@
         "material_id": "CMP-GAM-002",
         "batch": "5000413027"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -997,7 +997,7 @@
         "row": 7,
         "column": "site"
       },
-      "evidence": "row 7: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -1018,7 +1018,7 @@
         "row": 7,
         "column": "material_id"
       },
-      "evidence": "row 7: material_id=CMP-GAM-002",
+      "evidence": "material_id=CMP-GAM-002",
       "confidence": "high"
     },
     {
@@ -1039,7 +1039,7 @@
         "row": 7,
         "column": "batch"
       },
-      "evidence": "row 7: batch=5000413027",
+      "evidence": "batch=5000413027",
       "confidence": "high"
     },
     {
@@ -1058,9 +1058,9 @@
       "as_of": null,
       "locator": {
         "row": 7,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 7: qty=6000",
+      "evidence": "quantity=6000",
       "confidence": "high"
     },
     {
@@ -1081,7 +1081,7 @@
         "row": 7,
         "column": "uom"
       },
-      "evidence": "row 7: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -1102,7 +1102,7 @@
         "row": 7,
         "column": "safety_stock"
       },
-      "evidence": "row 7: safety_stock=60000",
+      "evidence": "safety_stock=60000",
       "confidence": "high"
     },
     {
@@ -1123,7 +1123,7 @@
         "row": 7,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 7: weeks_of_cover=2.1",
+      "evidence": "weeks_of_cover=2.1",
       "confidence": "high"
     },
     {
@@ -1144,7 +1144,7 @@
         "row": 7,
         "column": "last_count"
       },
-      "evidence": "row 7: last_count=2026-11-07",
+      "evidence": "last_count=2026-11-07",
       "confidence": "high"
     },
     {
@@ -1165,7 +1165,7 @@
         "row": 8,
         "column": "snapshot_date"
       },
-      "evidence": "row 8: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -1178,7 +1178,7 @@
         "material_id": "CMP-GAM-002",
         "batch": "5000413034"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -1186,7 +1186,7 @@
         "row": 8,
         "column": "site"
       },
-      "evidence": "row 8: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -1207,7 +1207,7 @@
         "row": 8,
         "column": "material_id"
       },
-      "evidence": "row 8: material_id=CMP-GAM-002",
+      "evidence": "material_id=CMP-GAM-002",
       "confidence": "high"
     },
     {
@@ -1228,7 +1228,7 @@
         "row": 8,
         "column": "batch"
       },
-      "evidence": "row 8: batch=5000413034",
+      "evidence": "batch=5000413034",
       "confidence": "high"
     },
     {
@@ -1247,9 +1247,9 @@
       "as_of": null,
       "locator": {
         "row": 8,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 8: qty=12000",
+      "evidence": "quantity=12000",
       "confidence": "high"
     },
     {
@@ -1270,7 +1270,7 @@
         "row": 8,
         "column": "uom"
       },
-      "evidence": "row 8: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -1291,7 +1291,7 @@
         "row": 8,
         "column": "safety_stock"
       },
-      "evidence": "row 8: safety_stock=60000",
+      "evidence": "safety_stock=60000",
       "confidence": "high"
     },
     {
@@ -1312,7 +1312,7 @@
         "row": 8,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 8: weeks_of_cover=2.1",
+      "evidence": "weeks_of_cover=2.1",
       "confidence": "high"
     },
     {
@@ -1333,7 +1333,7 @@
         "row": 8,
         "column": "last_count"
       },
-      "evidence": "row 8: last_count=2026-11-07",
+      "evidence": "last_count=2026-11-07",
       "confidence": "high"
     },
     {
@@ -1354,7 +1354,7 @@
         "row": 9,
         "column": "snapshot_date"
       },
-      "evidence": "row 9: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -1367,7 +1367,7 @@
         "material_id": "CMP-GAM-002",
         "batch": "5000413037"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -1375,7 +1375,7 @@
         "row": 9,
         "column": "site"
       },
-      "evidence": "row 9: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -1396,7 +1396,7 @@
         "row": 9,
         "column": "material_id"
       },
-      "evidence": "row 9: material_id=CMP-GAM-002",
+      "evidence": "material_id=CMP-GAM-002",
       "confidence": "high"
     },
     {
@@ -1417,7 +1417,7 @@
         "row": 9,
         "column": "batch"
       },
-      "evidence": "row 9: batch=5000413037",
+      "evidence": "batch=5000413037",
       "confidence": "high"
     },
     {
@@ -1436,9 +1436,9 @@
       "as_of": null,
       "locator": {
         "row": 9,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 9: qty=5500",
+      "evidence": "quantity=5500",
       "confidence": "high"
     },
     {
@@ -1459,7 +1459,7 @@
         "row": 9,
         "column": "uom"
       },
-      "evidence": "row 9: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -1480,7 +1480,7 @@
         "row": 9,
         "column": "safety_stock"
       },
-      "evidence": "row 9: safety_stock=60000",
+      "evidence": "safety_stock=60000",
       "confidence": "high"
     },
     {
@@ -1501,7 +1501,7 @@
         "row": 9,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 9: weeks_of_cover=2.1",
+      "evidence": "weeks_of_cover=2.1",
       "confidence": "high"
     },
     {
@@ -1522,7 +1522,7 @@
         "row": 9,
         "column": "last_count"
       },
-      "evidence": "row 9: last_count=2026-11-07",
+      "evidence": "last_count=2026-11-07",
       "confidence": "high"
     },
     {
@@ -1543,7 +1543,7 @@
         "row": 10,
         "column": "snapshot_date"
       },
-      "evidence": "row 10: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -1556,7 +1556,7 @@
         "material_id": "CMP-GAM-002",
         "batch": "5000413039"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -1564,7 +1564,7 @@
         "row": 10,
         "column": "site"
       },
-      "evidence": "row 10: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -1585,7 +1585,7 @@
         "row": 10,
         "column": "material_id"
       },
-      "evidence": "row 10: material_id=CMP-GAM-002",
+      "evidence": "material_id=CMP-GAM-002",
       "confidence": "high"
     },
     {
@@ -1606,7 +1606,7 @@
         "row": 10,
         "column": "batch"
       },
-      "evidence": "row 10: batch=5000413039",
+      "evidence": "batch=5000413039",
       "confidence": "high"
     },
     {
@@ -1625,9 +1625,9 @@
       "as_of": null,
       "locator": {
         "row": 10,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 10: qty=10000",
+      "evidence": "quantity=10000",
       "confidence": "high"
     },
     {
@@ -1648,7 +1648,7 @@
         "row": 10,
         "column": "uom"
       },
-      "evidence": "row 10: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -1669,7 +1669,7 @@
         "row": 10,
         "column": "safety_stock"
       },
-      "evidence": "row 10: safety_stock=60000",
+      "evidence": "safety_stock=60000",
       "confidence": "high"
     },
     {
@@ -1690,7 +1690,7 @@
         "row": 10,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 10: weeks_of_cover=2.1",
+      "evidence": "weeks_of_cover=2.1",
       "confidence": "high"
     },
     {
@@ -1711,7 +1711,7 @@
         "row": 10,
         "column": "last_count"
       },
-      "evidence": "row 10: last_count=2026-11-07",
+      "evidence": "last_count=2026-11-07",
       "confidence": "high"
     },
     {
@@ -1732,7 +1732,7 @@
         "row": 11,
         "column": "snapshot_date"
       },
-      "evidence": "row 11: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -1745,7 +1745,7 @@
         "material_id": "CMP-GAM-002",
         "batch": "5000413053"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -1753,7 +1753,7 @@
         "row": 11,
         "column": "site"
       },
-      "evidence": "row 11: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -1774,7 +1774,7 @@
         "row": 11,
         "column": "material_id"
       },
-      "evidence": "row 11: material_id=CMP-GAM-002",
+      "evidence": "material_id=CMP-GAM-002",
       "confidence": "high"
     },
     {
@@ -1795,7 +1795,7 @@
         "row": 11,
         "column": "batch"
       },
-      "evidence": "row 11: batch=5000413053",
+      "evidence": "batch=5000413053",
       "confidence": "high"
     },
     {
@@ -1814,9 +1814,9 @@
       "as_of": null,
       "locator": {
         "row": 11,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 11: qty=5640",
+      "evidence": "quantity=5640",
       "confidence": "high"
     },
     {
@@ -1837,7 +1837,7 @@
         "row": 11,
         "column": "uom"
       },
-      "evidence": "row 11: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -1858,7 +1858,7 @@
         "row": 11,
         "column": "safety_stock"
       },
-      "evidence": "row 11: safety_stock=60000",
+      "evidence": "safety_stock=60000",
       "confidence": "high"
     },
     {
@@ -1879,7 +1879,7 @@
         "row": 11,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 11: weeks_of_cover=2.1",
+      "evidence": "weeks_of_cover=2.1",
       "confidence": "high"
     },
     {
@@ -1900,7 +1900,7 @@
         "row": 11,
         "column": "last_count"
       },
-      "evidence": "row 11: last_count=2026-11-07",
+      "evidence": "last_count=2026-11-07",
       "confidence": "high"
     },
     {
@@ -1921,7 +1921,7 @@
         "row": 12,
         "column": "snapshot_date"
       },
-      "evidence": "row 12: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -1934,7 +1934,7 @@
         "material_id": "CMP-GAM-002",
         "batch": "5000413055"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -1942,7 +1942,7 @@
         "row": 12,
         "column": "site"
       },
-      "evidence": "row 12: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -1963,7 +1963,7 @@
         "row": 12,
         "column": "material_id"
       },
-      "evidence": "row 12: material_id=CMP-GAM-002",
+      "evidence": "material_id=CMP-GAM-002",
       "confidence": "high"
     },
     {
@@ -1984,7 +1984,7 @@
         "row": 12,
         "column": "batch"
       },
-      "evidence": "row 12: batch=5000413055",
+      "evidence": "batch=5000413055",
       "confidence": "high"
     },
     {
@@ -2003,9 +2003,9 @@
       "as_of": null,
       "locator": {
         "row": 12,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 12: qty=13000",
+      "evidence": "quantity=13000",
       "confidence": "high"
     },
     {
@@ -2026,7 +2026,7 @@
         "row": 12,
         "column": "uom"
       },
-      "evidence": "row 12: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -2047,7 +2047,7 @@
         "row": 12,
         "column": "safety_stock"
       },
-      "evidence": "row 12: safety_stock=60000",
+      "evidence": "safety_stock=60000",
       "confidence": "high"
     },
     {
@@ -2068,7 +2068,7 @@
         "row": 12,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 12: weeks_of_cover=2.1",
+      "evidence": "weeks_of_cover=2.1",
       "confidence": "high"
     },
     {
@@ -2089,7 +2089,7 @@
         "row": 12,
         "column": "last_count"
       },
-      "evidence": "row 12: last_count=2026-11-07",
+      "evidence": "last_count=2026-11-07",
       "confidence": "high"
     },
     {
@@ -2110,7 +2110,7 @@
         "row": 13,
         "column": "snapshot_date"
       },
-      "evidence": "row 13: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -2123,7 +2123,7 @@
         "material_id": "CMP-GAM-002",
         "batch": "5000413059"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -2131,7 +2131,7 @@
         "row": 13,
         "column": "site"
       },
-      "evidence": "row 13: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -2152,7 +2152,7 @@
         "row": 13,
         "column": "material_id"
       },
-      "evidence": "row 13: material_id=CMP-GAM-002",
+      "evidence": "material_id=CMP-GAM-002",
       "confidence": "high"
     },
     {
@@ -2173,7 +2173,7 @@
         "row": 13,
         "column": "batch"
       },
-      "evidence": "row 13: batch=5000413059",
+      "evidence": "batch=5000413059",
       "confidence": "high"
     },
     {
@@ -2192,9 +2192,9 @@
       "as_of": null,
       "locator": {
         "row": 13,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 13: qty=5000",
+      "evidence": "quantity=5000",
       "confidence": "high"
     },
     {
@@ -2215,7 +2215,7 @@
         "row": 13,
         "column": "uom"
       },
-      "evidence": "row 13: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -2236,7 +2236,7 @@
         "row": 13,
         "column": "safety_stock"
       },
-      "evidence": "row 13: safety_stock=60000",
+      "evidence": "safety_stock=60000",
       "confidence": "high"
     },
     {
@@ -2257,7 +2257,7 @@
         "row": 13,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 13: weeks_of_cover=2.1",
+      "evidence": "weeks_of_cover=2.1",
       "confidence": "high"
     },
     {
@@ -2278,7 +2278,7 @@
         "row": 13,
         "column": "last_count"
       },
-      "evidence": "row 13: last_count=2026-11-07",
+      "evidence": "last_count=2026-11-07",
       "confidence": "high"
     },
     {
@@ -2299,7 +2299,7 @@
         "row": 14,
         "column": "snapshot_date"
       },
-      "evidence": "row 14: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -2312,7 +2312,7 @@
         "material_id": "CMP-GAM-003",
         "batch": "5000413045"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -2320,7 +2320,7 @@
         "row": 14,
         "column": "site"
       },
-      "evidence": "row 14: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -2341,7 +2341,7 @@
         "row": 14,
         "column": "material_id"
       },
-      "evidence": "row 14: material_id=CMP-GAM-003",
+      "evidence": "material_id=CMP-GAM-003",
       "confidence": "high"
     },
     {
@@ -2362,7 +2362,7 @@
         "row": 14,
         "column": "batch"
       },
-      "evidence": "row 14: batch=5000413045",
+      "evidence": "batch=5000413045",
       "confidence": "high"
     },
     {
@@ -2381,9 +2381,9 @@
       "as_of": null,
       "locator": {
         "row": 14,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 14: qty=96000",
+      "evidence": "quantity=96000",
       "confidence": "high"
     },
     {
@@ -2404,7 +2404,7 @@
         "row": 14,
         "column": "uom"
       },
-      "evidence": "row 14: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -2425,7 +2425,7 @@
         "row": 14,
         "column": "safety_stock"
       },
-      "evidence": "row 14: safety_stock=190000",
+      "evidence": "safety_stock=190000",
       "confidence": "high"
     },
     {
@@ -2446,7 +2446,7 @@
         "row": 14,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 14: weeks_of_cover=0.5",
+      "evidence": "weeks_of_cover=0.5",
       "confidence": "high"
     },
     {
@@ -2467,7 +2467,7 @@
         "row": 14,
         "column": "last_count"
       },
-      "evidence": "row 14: last_count=2026-11-01",
+      "evidence": "last_count=2026-11-01",
       "confidence": "high"
     },
     {
@@ -2488,7 +2488,7 @@
         "row": 15,
         "column": "snapshot_date"
       },
-      "evidence": "row 15: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -2501,7 +2501,7 @@
         "material_id": "CMP-GAM-004",
         "batch": "5000413040"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -2509,7 +2509,7 @@
         "row": 15,
         "column": "site"
       },
-      "evidence": "row 15: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -2530,7 +2530,7 @@
         "row": 15,
         "column": "material_id"
       },
-      "evidence": "row 15: material_id=CMP-GAM-004",
+      "evidence": "material_id=CMP-GAM-004",
       "confidence": "high"
     },
     {
@@ -2551,7 +2551,7 @@
         "row": 15,
         "column": "batch"
       },
-      "evidence": "row 15: batch=5000413040",
+      "evidence": "batch=5000413040",
       "confidence": "high"
     },
     {
@@ -2570,9 +2570,9 @@
       "as_of": null,
       "locator": {
         "row": 15,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 15: qty=48000",
+      "evidence": "quantity=48000",
       "confidence": "high"
     },
     {
@@ -2593,7 +2593,7 @@
         "row": 15,
         "column": "uom"
       },
-      "evidence": "row 15: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -2614,7 +2614,7 @@
         "row": 15,
         "column": "safety_stock"
       },
-      "evidence": "row 15: safety_stock=160000",
+      "evidence": "safety_stock=160000",
       "confidence": "high"
     },
     {
@@ -2635,7 +2635,7 @@
         "row": 15,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 15: weeks_of_cover=1.2",
+      "evidence": "weeks_of_cover=1.2",
       "confidence": "high"
     },
     {
@@ -2656,7 +2656,7 @@
         "row": 15,
         "column": "last_count"
       },
-      "evidence": "row 15: last_count=2026-11-04",
+      "evidence": "last_count=2026-11-04",
       "confidence": "high"
     },
     {
@@ -2677,7 +2677,7 @@
         "row": 16,
         "column": "snapshot_date"
       },
-      "evidence": "row 16: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -2690,7 +2690,7 @@
         "material_id": "CMP-GAM-004",
         "batch": "5000413060"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -2698,7 +2698,7 @@
         "row": 16,
         "column": "site"
       },
-      "evidence": "row 16: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -2719,7 +2719,7 @@
         "row": 16,
         "column": "material_id"
       },
-      "evidence": "row 16: material_id=CMP-GAM-004",
+      "evidence": "material_id=CMP-GAM-004",
       "confidence": "high"
     },
     {
@@ -2740,7 +2740,7 @@
         "row": 16,
         "column": "batch"
       },
-      "evidence": "row 16: batch=5000413060",
+      "evidence": "batch=5000413060",
       "confidence": "high"
     },
     {
@@ -2759,9 +2759,9 @@
       "as_of": null,
       "locator": {
         "row": 16,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 16: qty=74000",
+      "evidence": "quantity=74000",
       "confidence": "high"
     },
     {
@@ -2782,7 +2782,7 @@
         "row": 16,
         "column": "uom"
       },
-      "evidence": "row 16: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -2803,7 +2803,7 @@
         "row": 16,
         "column": "safety_stock"
       },
-      "evidence": "row 16: safety_stock=160000",
+      "evidence": "safety_stock=160000",
       "confidence": "high"
     },
     {
@@ -2824,7 +2824,7 @@
         "row": 16,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 16: weeks_of_cover=1.2",
+      "evidence": "weeks_of_cover=1.2",
       "confidence": "high"
     },
     {
@@ -2845,7 +2845,7 @@
         "row": 16,
         "column": "last_count"
       },
-      "evidence": "row 16: last_count=2026-11-04",
+      "evidence": "last_count=2026-11-04",
       "confidence": "high"
     },
     {
@@ -2866,7 +2866,7 @@
         "row": 17,
         "column": "snapshot_date"
       },
-      "evidence": "row 17: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -2879,7 +2879,7 @@
         "material_id": "CMP-GAM-004",
         "batch": "5000413064"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -2887,7 +2887,7 @@
         "row": 17,
         "column": "site"
       },
-      "evidence": "row 17: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -2908,7 +2908,7 @@
         "row": 17,
         "column": "material_id"
       },
-      "evidence": "row 17: material_id=CMP-GAM-004",
+      "evidence": "material_id=CMP-GAM-004",
       "confidence": "high"
     },
     {
@@ -2929,7 +2929,7 @@
         "row": 17,
         "column": "batch"
       },
-      "evidence": "row 17: batch=5000413064",
+      "evidence": "batch=5000413064",
       "confidence": "high"
     },
     {
@@ -2948,9 +2948,9 @@
       "as_of": null,
       "locator": {
         "row": 17,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 17: qty=64000",
+      "evidence": "quantity=64000",
       "confidence": "high"
     },
     {
@@ -2971,7 +2971,7 @@
         "row": 17,
         "column": "uom"
       },
-      "evidence": "row 17: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -2992,7 +2992,7 @@
         "row": 17,
         "column": "safety_stock"
       },
-      "evidence": "row 17: safety_stock=160000",
+      "evidence": "safety_stock=160000",
       "confidence": "high"
     },
     {
@@ -3013,7 +3013,7 @@
         "row": 17,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 17: weeks_of_cover=1.2",
+      "evidence": "weeks_of_cover=1.2",
       "confidence": "high"
     },
     {
@@ -3034,7 +3034,7 @@
         "row": 17,
         "column": "last_count"
       },
-      "evidence": "row 17: last_count=2026-11-04",
+      "evidence": "last_count=2026-11-04",
       "confidence": "high"
     },
     {
@@ -3055,7 +3055,7 @@
         "row": 18,
         "column": "snapshot_date"
       },
-      "evidence": "row 18: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -3068,7 +3068,7 @@
         "material_id": "CMP-GAM-005",
         "batch": "5000413033"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -3076,7 +3076,7 @@
         "row": 18,
         "column": "site"
       },
-      "evidence": "row 18: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -3097,7 +3097,7 @@
         "row": 18,
         "column": "material_id"
       },
-      "evidence": "row 18: material_id=CMP-GAM-005",
+      "evidence": "material_id=CMP-GAM-005",
       "confidence": "high"
     },
     {
@@ -3118,7 +3118,7 @@
         "row": 18,
         "column": "batch"
       },
-      "evidence": "row 18: batch=5000413033",
+      "evidence": "batch=5000413033",
       "confidence": "high"
     },
     {
@@ -3137,9 +3137,9 @@
       "as_of": null,
       "locator": {
         "row": 18,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 18: qty=55000",
+      "evidence": "quantity=55000",
       "confidence": "high"
     },
     {
@@ -3160,7 +3160,7 @@
         "row": 18,
         "column": "uom"
       },
-      "evidence": "row 18: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -3181,7 +3181,7 @@
         "row": 18,
         "column": "safety_stock"
       },
-      "evidence": "row 18: safety_stock=30000",
+      "evidence": "safety_stock=30000",
       "confidence": "high"
     },
     {
@@ -3202,7 +3202,7 @@
         "row": 18,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 18: weeks_of_cover=1.8",
+      "evidence": "weeks_of_cover=1.8",
       "confidence": "high"
     },
     {
@@ -3223,7 +3223,7 @@
         "row": 18,
         "column": "last_count"
       },
-      "evidence": "row 18: last_count=2026-11-08",
+      "evidence": "last_count=2026-11-08",
       "confidence": "high"
     },
     {
@@ -3244,7 +3244,7 @@
         "row": 19,
         "column": "snapshot_date"
       },
-      "evidence": "row 19: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -3257,7 +3257,7 @@
         "material_id": "CMP-GAM-006",
         "batch": "5000413024"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -3265,7 +3265,7 @@
         "row": 19,
         "column": "site"
       },
-      "evidence": "row 19: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -3286,7 +3286,7 @@
         "row": 19,
         "column": "material_id"
       },
-      "evidence": "row 19: material_id=CMP-GAM-006",
+      "evidence": "material_id=CMP-GAM-006",
       "confidence": "high"
     },
     {
@@ -3307,7 +3307,7 @@
         "row": 19,
         "column": "batch"
       },
-      "evidence": "row 19: batch=5000413024",
+      "evidence": "batch=5000413024",
       "confidence": "high"
     },
     {
@@ -3326,9 +3326,9 @@
       "as_of": null,
       "locator": {
         "row": 19,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 19: qty=11200",
+      "evidence": "quantity=11200",
       "confidence": "high"
     },
     {
@@ -3349,7 +3349,7 @@
         "row": 19,
         "column": "uom"
       },
-      "evidence": "row 19: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -3370,7 +3370,7 @@
         "row": 19,
         "column": "safety_stock"
       },
-      "evidence": "row 19: safety_stock=12000",
+      "evidence": "safety_stock=12000",
       "confidence": "high"
     },
     {
@@ -3391,7 +3391,7 @@
         "row": 19,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 19: weeks_of_cover=2.6",
+      "evidence": "weeks_of_cover=2.6",
       "confidence": "high"
     },
     {
@@ -3412,7 +3412,7 @@
         "row": 19,
         "column": "last_count"
       },
-      "evidence": "row 19: last_count=2026-11-16",
+      "evidence": "last_count=2026-11-16",
       "confidence": "high"
     },
     {
@@ -3433,7 +3433,7 @@
         "row": 20,
         "column": "snapshot_date"
       },
-      "evidence": "row 20: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -3446,7 +3446,7 @@
         "material_id": "CMP-GAM-006",
         "batch": "5000413048"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -3454,7 +3454,7 @@
         "row": 20,
         "column": "site"
       },
-      "evidence": "row 20: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -3475,7 +3475,7 @@
         "row": 20,
         "column": "material_id"
       },
-      "evidence": "row 20: material_id=CMP-GAM-006",
+      "evidence": "material_id=CMP-GAM-006",
       "confidence": "high"
     },
     {
@@ -3496,7 +3496,7 @@
         "row": 20,
         "column": "batch"
       },
-      "evidence": "row 20: batch=5000413048",
+      "evidence": "batch=5000413048",
       "confidence": "high"
     },
     {
@@ -3515,9 +3515,9 @@
       "as_of": null,
       "locator": {
         "row": 20,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 20: qty=20200",
+      "evidence": "quantity=20200",
       "confidence": "high"
     },
     {
@@ -3538,7 +3538,7 @@
         "row": 20,
         "column": "uom"
       },
-      "evidence": "row 20: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -3559,7 +3559,7 @@
         "row": 20,
         "column": "safety_stock"
       },
-      "evidence": "row 20: safety_stock=12000",
+      "evidence": "safety_stock=12000",
       "confidence": "high"
     },
     {
@@ -3580,7 +3580,7 @@
         "row": 20,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 20: weeks_of_cover=2.6",
+      "evidence": "weeks_of_cover=2.6",
       "confidence": "high"
     },
     {
@@ -3601,7 +3601,7 @@
         "row": 20,
         "column": "last_count"
       },
-      "evidence": "row 20: last_count=2026-11-16",
+      "evidence": "last_count=2026-11-16",
       "confidence": "high"
     },
     {
@@ -3622,7 +3622,7 @@
         "row": 21,
         "column": "snapshot_date"
       },
-      "evidence": "row 21: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -3635,7 +3635,7 @@
         "material_id": "CMP-GAM-007",
         "batch": "5000413028"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -3643,7 +3643,7 @@
         "row": 21,
         "column": "site"
       },
-      "evidence": "row 21: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -3664,7 +3664,7 @@
         "row": 21,
         "column": "material_id"
       },
-      "evidence": "row 21: material_id=CMP-GAM-007",
+      "evidence": "material_id=CMP-GAM-007",
       "confidence": "high"
     },
     {
@@ -3685,7 +3685,7 @@
         "row": 21,
         "column": "batch"
       },
-      "evidence": "row 21: batch=5000413028",
+      "evidence": "batch=5000413028",
       "confidence": "high"
     },
     {
@@ -3704,9 +3704,9 @@
       "as_of": null,
       "locator": {
         "row": 21,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 21: qty=5700",
+      "evidence": "quantity=5700",
       "confidence": "high"
     },
     {
@@ -3727,7 +3727,7 @@
         "row": 21,
         "column": "uom"
       },
-      "evidence": "row 21: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -3748,7 +3748,7 @@
         "row": 21,
         "column": "safety_stock"
       },
-      "evidence": "row 21: safety_stock=12000",
+      "evidence": "safety_stock=12000",
       "confidence": "high"
     },
     {
@@ -3769,7 +3769,7 @@
         "row": 21,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 21: weeks_of_cover=2.3",
+      "evidence": "weeks_of_cover=2.3",
       "confidence": "high"
     },
     {
@@ -3790,7 +3790,7 @@
         "row": 21,
         "column": "last_count"
       },
-      "evidence": "row 21: last_count=2026-11-04",
+      "evidence": "last_count=2026-11-04",
       "confidence": "high"
     },
     {
@@ -3811,7 +3811,7 @@
         "row": 22,
         "column": "snapshot_date"
       },
-      "evidence": "row 22: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -3824,7 +3824,7 @@
         "material_id": "CMP-GAM-007",
         "batch": "5000413051"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -3832,7 +3832,7 @@
         "row": 22,
         "column": "site"
       },
-      "evidence": "row 22: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -3853,7 +3853,7 @@
         "row": 22,
         "column": "material_id"
       },
-      "evidence": "row 22: material_id=CMP-GAM-007",
+      "evidence": "material_id=CMP-GAM-007",
       "confidence": "high"
     },
     {
@@ -3874,7 +3874,7 @@
         "row": 22,
         "column": "batch"
       },
-      "evidence": "row 22: batch=5000413051",
+      "evidence": "batch=5000413051",
       "confidence": "high"
     },
     {
@@ -3893,9 +3893,9 @@
       "as_of": null,
       "locator": {
         "row": 22,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 22: qty=21800",
+      "evidence": "quantity=21800",
       "confidence": "high"
     },
     {
@@ -3916,7 +3916,7 @@
         "row": 22,
         "column": "uom"
       },
-      "evidence": "row 22: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -3937,7 +3937,7 @@
         "row": 22,
         "column": "safety_stock"
       },
-      "evidence": "row 22: safety_stock=12000",
+      "evidence": "safety_stock=12000",
       "confidence": "high"
     },
     {
@@ -3958,7 +3958,7 @@
         "row": 22,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 22: weeks_of_cover=2.3",
+      "evidence": "weeks_of_cover=2.3",
       "confidence": "high"
     },
     {
@@ -3979,7 +3979,7 @@
         "row": 22,
         "column": "last_count"
       },
-      "evidence": "row 22: last_count=2026-11-04",
+      "evidence": "last_count=2026-11-04",
       "confidence": "high"
     },
     {
@@ -4000,7 +4000,7 @@
         "row": 23,
         "column": "snapshot_date"
       },
-      "evidence": "row 23: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -4013,7 +4013,7 @@
         "material_id": "CMP-GAM-008",
         "batch": "5000413029"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -4021,7 +4021,7 @@
         "row": 23,
         "column": "site"
       },
-      "evidence": "row 23: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -4042,7 +4042,7 @@
         "row": 23,
         "column": "material_id"
       },
-      "evidence": "row 23: material_id=CMP-GAM-008",
+      "evidence": "material_id=CMP-GAM-008",
       "confidence": "high"
     },
     {
@@ -4063,7 +4063,7 @@
         "row": 23,
         "column": "batch"
       },
-      "evidence": "row 23: batch=5000413029",
+      "evidence": "batch=5000413029",
       "confidence": "high"
     },
     {
@@ -4082,9 +4082,9 @@
       "as_of": null,
       "locator": {
         "row": 23,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 23: qty=1200",
+      "evidence": "quantity=1200",
       "confidence": "high"
     },
     {
@@ -4105,7 +4105,7 @@
         "row": 23,
         "column": "uom"
       },
-      "evidence": "row 23: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -4126,7 +4126,7 @@
         "row": 23,
         "column": "safety_stock"
       },
-      "evidence": "row 23: safety_stock=12000",
+      "evidence": "safety_stock=12000",
       "confidence": "high"
     },
     {
@@ -4147,7 +4147,7 @@
         "row": 23,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 23: weeks_of_cover=7.6",
+      "evidence": "weeks_of_cover=7.6",
       "confidence": "high"
     },
     {
@@ -4168,7 +4168,7 @@
         "row": 23,
         "column": "last_count"
       },
-      "evidence": "row 23: last_count=2026-11-11",
+      "evidence": "last_count=2026-11-11",
       "confidence": "high"
     },
     {
@@ -4189,7 +4189,7 @@
         "row": 24,
         "column": "snapshot_date"
       },
-      "evidence": "row 24: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -4202,7 +4202,7 @@
         "material_id": "CMP-GAM-008",
         "batch": "5000413049"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -4210,7 +4210,7 @@
         "row": 24,
         "column": "site"
       },
-      "evidence": "row 24: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -4231,7 +4231,7 @@
         "row": 24,
         "column": "material_id"
       },
-      "evidence": "row 24: material_id=CMP-GAM-008",
+      "evidence": "material_id=CMP-GAM-008",
       "confidence": "high"
     },
     {
@@ -4252,7 +4252,7 @@
         "row": 24,
         "column": "batch"
       },
-      "evidence": "row 24: batch=5000413049",
+      "evidence": "batch=5000413049",
       "confidence": "high"
     },
     {
@@ -4271,9 +4271,9 @@
       "as_of": null,
       "locator": {
         "row": 24,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 24: qty=10100",
+      "evidence": "quantity=10100",
       "confidence": "high"
     },
     {
@@ -4294,7 +4294,7 @@
         "row": 24,
         "column": "uom"
       },
-      "evidence": "row 24: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -4315,7 +4315,7 @@
         "row": 24,
         "column": "safety_stock"
       },
-      "evidence": "row 24: safety_stock=12000",
+      "evidence": "safety_stock=12000",
       "confidence": "high"
     },
     {
@@ -4336,7 +4336,7 @@
         "row": 24,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 24: weeks_of_cover=7.6",
+      "evidence": "weeks_of_cover=7.6",
       "confidence": "high"
     },
     {
@@ -4357,7 +4357,7 @@
         "row": 24,
         "column": "last_count"
       },
-      "evidence": "row 24: last_count=2026-11-11",
+      "evidence": "last_count=2026-11-11",
       "confidence": "high"
     },
     {
@@ -4378,7 +4378,7 @@
         "row": 25,
         "column": "snapshot_date"
       },
-      "evidence": "row 25: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -4391,7 +4391,7 @@
         "material_id": "CMP-GAM-008",
         "batch": "5000413065"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -4399,7 +4399,7 @@
         "row": 25,
         "column": "site"
       },
-      "evidence": "row 25: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -4420,7 +4420,7 @@
         "row": 25,
         "column": "material_id"
       },
-      "evidence": "row 25: material_id=CMP-GAM-008",
+      "evidence": "material_id=CMP-GAM-008",
       "confidence": "high"
     },
     {
@@ -4441,7 +4441,7 @@
         "row": 25,
         "column": "batch"
       },
-      "evidence": "row 25: batch=5000413065",
+      "evidence": "batch=5000413065",
       "confidence": "high"
     },
     {
@@ -4460,9 +4460,9 @@
       "as_of": null,
       "locator": {
         "row": 25,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 25: qty=80000",
+      "evidence": "quantity=80000",
       "confidence": "high"
     },
     {
@@ -4483,7 +4483,7 @@
         "row": 25,
         "column": "uom"
       },
-      "evidence": "row 25: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -4504,7 +4504,7 @@
         "row": 25,
         "column": "safety_stock"
       },
-      "evidence": "row 25: safety_stock=12000",
+      "evidence": "safety_stock=12000",
       "confidence": "high"
     },
     {
@@ -4525,7 +4525,7 @@
         "row": 25,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 25: weeks_of_cover=7.6",
+      "evidence": "weeks_of_cover=7.6",
       "confidence": "high"
     },
     {
@@ -4546,7 +4546,7 @@
         "row": 25,
         "column": "last_count"
       },
-      "evidence": "row 25: last_count=2026-11-11",
+      "evidence": "last_count=2026-11-11",
       "confidence": "high"
     },
     {
@@ -4567,7 +4567,7 @@
         "row": 26,
         "column": "snapshot_date"
       },
-      "evidence": "row 26: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -4580,7 +4580,7 @@
         "material_id": "CMP-GAM-009",
         "batch": "5000413017"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -4588,7 +4588,7 @@
         "row": 26,
         "column": "site"
       },
-      "evidence": "row 26: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -4609,7 +4609,7 @@
         "row": 26,
         "column": "material_id"
       },
-      "evidence": "row 26: material_id=CMP-GAM-009",
+      "evidence": "material_id=CMP-GAM-009",
       "confidence": "high"
     },
     {
@@ -4630,7 +4630,7 @@
         "row": 26,
         "column": "batch"
       },
-      "evidence": "row 26: batch=5000413017",
+      "evidence": "batch=5000413017",
       "confidence": "high"
     },
     {
@@ -4649,9 +4649,9 @@
       "as_of": null,
       "locator": {
         "row": 26,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 26: qty=15200",
+      "evidence": "quantity=15200",
       "confidence": "high"
     },
     {
@@ -4672,7 +4672,7 @@
         "row": 26,
         "column": "uom"
       },
-      "evidence": "row 26: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -4693,7 +4693,7 @@
         "row": 26,
         "column": "safety_stock"
       },
-      "evidence": "row 26: safety_stock=12000",
+      "evidence": "safety_stock=12000",
       "confidence": "high"
     },
     {
@@ -4714,7 +4714,7 @@
         "row": 26,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 26: weeks_of_cover=3.3",
+      "evidence": "weeks_of_cover=3.3",
       "confidence": "high"
     },
     {
@@ -4735,7 +4735,7 @@
         "row": 26,
         "column": "last_count"
       },
-      "evidence": "row 26: last_count=2026-11-11",
+      "evidence": "last_count=2026-11-11",
       "confidence": "high"
     },
     {
@@ -4756,7 +4756,7 @@
         "row": 27,
         "column": "snapshot_date"
       },
-      "evidence": "row 27: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -4769,7 +4769,7 @@
         "material_id": "CMP-GAM-009",
         "batch": "5000413046"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -4777,7 +4777,7 @@
         "row": 27,
         "column": "site"
       },
-      "evidence": "row 27: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -4798,7 +4798,7 @@
         "row": 27,
         "column": "material_id"
       },
-      "evidence": "row 27: material_id=CMP-GAM-009",
+      "evidence": "material_id=CMP-GAM-009",
       "confidence": "high"
     },
     {
@@ -4819,7 +4819,7 @@
         "row": 27,
         "column": "batch"
       },
-      "evidence": "row 27: batch=5000413046",
+      "evidence": "batch=5000413046",
       "confidence": "high"
     },
     {
@@ -4838,9 +4838,9 @@
       "as_of": null,
       "locator": {
         "row": 27,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 27: qty=24800",
+      "evidence": "quantity=24800",
       "confidence": "high"
     },
     {
@@ -4861,7 +4861,7 @@
         "row": 27,
         "column": "uom"
       },
-      "evidence": "row 27: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -4882,7 +4882,7 @@
         "row": 27,
         "column": "safety_stock"
       },
-      "evidence": "row 27: safety_stock=12000",
+      "evidence": "safety_stock=12000",
       "confidence": "high"
     },
     {
@@ -4903,7 +4903,7 @@
         "row": 27,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 27: weeks_of_cover=3.3",
+      "evidence": "weeks_of_cover=3.3",
       "confidence": "high"
     },
     {
@@ -4924,7 +4924,7 @@
         "row": 27,
         "column": "last_count"
       },
-      "evidence": "row 27: last_count=2026-11-11",
+      "evidence": "last_count=2026-11-11",
       "confidence": "high"
     },
     {
@@ -4945,7 +4945,7 @@
         "row": 28,
         "column": "snapshot_date"
       },
-      "evidence": "row 28: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -4958,7 +4958,7 @@
         "material_id": "CMP-GAM-010",
         "batch": "5000413032"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -4966,7 +4966,7 @@
         "row": 28,
         "column": "site"
       },
-      "evidence": "row 28: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -4987,7 +4987,7 @@
         "row": 28,
         "column": "material_id"
       },
-      "evidence": "row 28: material_id=CMP-GAM-010",
+      "evidence": "material_id=CMP-GAM-010",
       "confidence": "high"
     },
     {
@@ -5008,7 +5008,7 @@
         "row": 28,
         "column": "batch"
       },
-      "evidence": "row 28: batch=5000413032",
+      "evidence": "batch=5000413032",
       "confidence": "high"
     },
     {
@@ -5027,9 +5027,9 @@
       "as_of": null,
       "locator": {
         "row": 28,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 28: qty=7200",
+      "evidence": "quantity=7200",
       "confidence": "high"
     },
     {
@@ -5050,7 +5050,7 @@
         "row": 28,
         "column": "uom"
       },
-      "evidence": "row 28: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -5071,7 +5071,7 @@
         "row": 28,
         "column": "safety_stock"
       },
-      "evidence": "row 28: safety_stock=24000",
+      "evidence": "safety_stock=24000",
       "confidence": "high"
     },
     {
@@ -5092,7 +5092,7 @@
         "row": 28,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 28: weeks_of_cover=2.3",
+      "evidence": "weeks_of_cover=2.3",
       "confidence": "high"
     },
     {
@@ -5113,7 +5113,7 @@
         "row": 28,
         "column": "last_count"
       },
-      "evidence": "row 28: last_count=2026-11-16",
+      "evidence": "last_count=2026-11-16",
       "confidence": "high"
     },
     {
@@ -5134,7 +5134,7 @@
         "row": 29,
         "column": "snapshot_date"
       },
-      "evidence": "row 29: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -5147,7 +5147,7 @@
         "material_id": "CMP-GAM-010",
         "batch": "5000413054"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -5155,7 +5155,7 @@
         "row": 29,
         "column": "site"
       },
-      "evidence": "row 29: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -5176,7 +5176,7 @@
         "row": 29,
         "column": "material_id"
       },
-      "evidence": "row 29: material_id=CMP-GAM-010",
+      "evidence": "material_id=CMP-GAM-010",
       "confidence": "high"
     },
     {
@@ -5197,7 +5197,7 @@
         "row": 29,
         "column": "batch"
       },
-      "evidence": "row 29: batch=5000413054",
+      "evidence": "batch=5000413054",
       "confidence": "high"
     },
     {
@@ -5216,9 +5216,9 @@
       "as_of": null,
       "locator": {
         "row": 29,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 29: qty=14600",
+      "evidence": "quantity=14600",
       "confidence": "high"
     },
     {
@@ -5239,7 +5239,7 @@
         "row": 29,
         "column": "uom"
       },
-      "evidence": "row 29: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -5260,7 +5260,7 @@
         "row": 29,
         "column": "safety_stock"
       },
-      "evidence": "row 29: safety_stock=24000",
+      "evidence": "safety_stock=24000",
       "confidence": "high"
     },
     {
@@ -5281,7 +5281,7 @@
         "row": 29,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 29: weeks_of_cover=2.3",
+      "evidence": "weeks_of_cover=2.3",
       "confidence": "high"
     },
     {
@@ -5302,7 +5302,7 @@
         "row": 29,
         "column": "last_count"
       },
-      "evidence": "row 29: last_count=2026-11-16",
+      "evidence": "last_count=2026-11-16",
       "confidence": "high"
     },
     {
@@ -5323,7 +5323,7 @@
         "row": 30,
         "column": "snapshot_date"
       },
-      "evidence": "row 30: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -5336,7 +5336,7 @@
         "material_id": "CMP-GAM-010",
         "batch": "5000413063"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -5344,7 +5344,7 @@
         "row": 30,
         "column": "site"
       },
-      "evidence": "row 30: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -5365,7 +5365,7 @@
         "row": 30,
         "column": "material_id"
       },
-      "evidence": "row 30: material_id=CMP-GAM-010",
+      "evidence": "material_id=CMP-GAM-010",
       "confidence": "high"
     },
     {
@@ -5386,7 +5386,7 @@
         "row": 30,
         "column": "batch"
       },
-      "evidence": "row 30: batch=5000413063",
+      "evidence": "batch=5000413063",
       "confidence": "high"
     },
     {
@@ -5405,9 +5405,9 @@
       "as_of": null,
       "locator": {
         "row": 30,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 30: qty=5600",
+      "evidence": "quantity=5600",
       "confidence": "high"
     },
     {
@@ -5428,7 +5428,7 @@
         "row": 30,
         "column": "uom"
       },
-      "evidence": "row 30: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -5449,7 +5449,7 @@
         "row": 30,
         "column": "safety_stock"
       },
-      "evidence": "row 30: safety_stock=24000",
+      "evidence": "safety_stock=24000",
       "confidence": "high"
     },
     {
@@ -5470,7 +5470,7 @@
         "row": 30,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 30: weeks_of_cover=2.3",
+      "evidence": "weeks_of_cover=2.3",
       "confidence": "high"
     },
     {
@@ -5491,7 +5491,7 @@
         "row": 30,
         "column": "last_count"
       },
-      "evidence": "row 30: last_count=2026-11-16",
+      "evidence": "last_count=2026-11-16",
       "confidence": "high"
     },
     {
@@ -5512,7 +5512,7 @@
         "row": 31,
         "column": "snapshot_date"
       },
-      "evidence": "row 31: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -5525,7 +5525,7 @@
         "material_id": "CMP-GAM-011",
         "batch": "5000413015"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -5533,7 +5533,7 @@
         "row": 31,
         "column": "site"
       },
-      "evidence": "row 31: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -5554,7 +5554,7 @@
         "row": 31,
         "column": "material_id"
       },
-      "evidence": "row 31: material_id=CMP-GAM-011",
+      "evidence": "material_id=CMP-GAM-011",
       "confidence": "high"
     },
     {
@@ -5575,7 +5575,7 @@
         "row": 31,
         "column": "batch"
       },
-      "evidence": "row 31: batch=5000413015",
+      "evidence": "batch=5000413015",
       "confidence": "high"
     },
     {
@@ -5594,9 +5594,9 @@
       "as_of": null,
       "locator": {
         "row": 31,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 31: qty=150000",
+      "evidence": "quantity=150000",
       "confidence": "high"
     },
     {
@@ -5617,7 +5617,7 @@
         "row": 31,
         "column": "uom"
       },
-      "evidence": "row 31: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -5638,7 +5638,7 @@
         "row": 31,
         "column": "safety_stock"
       },
-      "evidence": "row 31: safety_stock=202000",
+      "evidence": "safety_stock=202000",
       "confidence": "high"
     },
     {
@@ -5659,7 +5659,7 @@
         "row": 31,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 31: weeks_of_cover=2.1",
+      "evidence": "weeks_of_cover=2.1",
       "confidence": "high"
     },
     {
@@ -5680,7 +5680,7 @@
         "row": 31,
         "column": "last_count"
       },
-      "evidence": "row 31: last_count=2026-11-15",
+      "evidence": "last_count=2026-11-15",
       "confidence": "high"
     },
     {
@@ -5701,7 +5701,7 @@
         "row": 32,
         "column": "snapshot_date"
       },
-      "evidence": "row 32: snapshot_date=2026-11-20",
+      "evidence": "snapshot_date=2026-11-20",
       "confidence": "high"
     },
     {
@@ -5714,7 +5714,7 @@
         "material_id": "CMP-GAM-011",
         "batch": "5000413047"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -5722,7 +5722,7 @@
         "row": 32,
         "column": "site"
       },
-      "evidence": "row 32: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -5743,7 +5743,7 @@
         "row": 32,
         "column": "material_id"
       },
-      "evidence": "row 32: material_id=CMP-GAM-011",
+      "evidence": "material_id=CMP-GAM-011",
       "confidence": "high"
     },
     {
@@ -5764,7 +5764,7 @@
         "row": 32,
         "column": "batch"
       },
-      "evidence": "row 32: batch=5000413047",
+      "evidence": "batch=5000413047",
       "confidence": "high"
     },
     {
@@ -5783,9 +5783,9 @@
       "as_of": null,
       "locator": {
         "row": 32,
-        "column": "qty"
+        "column": "quantity"
       },
-      "evidence": "row 32: qty=270000",
+      "evidence": "quantity=270000",
       "confidence": "high"
     },
     {
@@ -5806,7 +5806,7 @@
         "row": 32,
         "column": "uom"
       },
-      "evidence": "row 32: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
@@ -5827,7 +5827,7 @@
         "row": 32,
         "column": "safety_stock"
       },
-      "evidence": "row 32: safety_stock=202000",
+      "evidence": "safety_stock=202000",
       "confidence": "high"
     },
     {
@@ -5848,7 +5848,7 @@
         "row": 32,
         "column": "weeks_of_cover"
       },
-      "evidence": "row 32: weeks_of_cover=2.1",
+      "evidence": "weeks_of_cover=2.1",
       "confidence": "high"
     },
     {
@@ -5869,679 +5869,7 @@
         "row": 32,
         "column": "last_count"
       },
-      "evidence": "row 32: last_count=2026-11-15",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "CMP-MAG-005",
-        "batch": "CMP-MAG-005"
-      },
-      "subject_raw": {
-        "material_id": "CMP-MAG-005",
-        "batch": "CMP-MAG-005"
-      },
-      "attribute": "snapshot_date",
-      "value": "2026-11-20",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 33,
-        "column": "snapshot_date"
-      },
-      "evidence": "row 33: snapshot_date=2026-11-20",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "CMP-MAG-005",
-        "batch": "CMP-MAG-005"
-      },
-      "subject_raw": {
-        "material_id": "CMP-MAG-005",
-        "batch": "CMP-MAG-005"
-      },
-      "attribute": "site",
-      "value": "DC-HAM",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 33,
-        "column": "site"
-      },
-      "evidence": "row 33: site=DC-HAM",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "CMP-MAG-005",
-        "batch": "CMP-MAG-005"
-      },
-      "subject_raw": {
-        "material_id": "CMP-MAG-005",
-        "batch": "CMP-MAG-005"
-      },
-      "attribute": "material_id",
-      "value": "CMP-MAG-005",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 33,
-        "column": "material_id"
-      },
-      "evidence": "row 33: material_id=CMP-MAG-005",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "CMP-MAG-005",
-        "batch": "CMP-MAG-005"
-      },
-      "subject_raw": {
-        "material_id": "CMP-MAG-005",
-        "batch": "CMP-MAG-005"
-      },
-      "attribute": "qty",
-      "value": 0,
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 33,
-        "column": "qty"
-      },
-      "evidence": "row 33: qty=0",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "CMP-MAG-005",
-        "batch": "CMP-MAG-005"
-      },
-      "subject_raw": {
-        "material_id": "CMP-MAG-005",
-        "batch": "CMP-MAG-005"
-      },
-      "attribute": "uom",
-      "value": "PC",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 33,
-        "column": "uom"
-      },
-      "evidence": "row 33: uom=PC",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "CMP-MAG-005",
-        "batch": "CMP-MAG-005"
-      },
-      "subject_raw": {
-        "material_id": "CMP-MAG-005",
-        "batch": "CMP-MAG-005"
-      },
-      "attribute": "safety_stock",
-      "value": "0",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 33,
-        "column": "safety_stock"
-      },
-      "evidence": "row 33: safety_stock=0",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "CMP-MAG-005",
-        "batch": "CMP-MAG-005"
-      },
-      "subject_raw": {
-        "material_id": "CMP-MAG-005",
-        "batch": "CMP-MAG-005"
-      },
-      "attribute": "weeks_of_cover",
-      "value": "0.0",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 33,
-        "column": "weeks_of_cover"
-      },
-      "evidence": "row 33: weeks_of_cover=0.0",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "CMP-MAG-005",
-        "batch": "CMP-MAG-005"
-      },
-      "subject_raw": {
-        "material_id": "CMP-MAG-005",
-        "batch": "CMP-MAG-005"
-      },
-      "attribute": "last_count",
-      "value": "2026-11-01",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 33,
-        "column": "last_count"
-      },
-      "evidence": "row 33: last_count=2026-11-01",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH5-STD",
-        "batch": "FG-GH5-STD"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH5-STD",
-        "batch": "FG-GH5-STD"
-      },
-      "attribute": "snapshot_date",
-      "value": "2026-11-20",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 34,
-        "column": "snapshot_date"
-      },
-      "evidence": "row 34: snapshot_date=2026-11-20",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH5-STD",
-        "batch": "FG-GH5-STD"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH5-STD",
-        "batch": "FG-GH5-STD"
-      },
-      "attribute": "site",
-      "value": "DC-HAM",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 34,
-        "column": "site"
-      },
-      "evidence": "row 34: site=DC-HAM",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH5-STD",
-        "batch": "FG-GH5-STD"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH5-STD",
-        "batch": "FG-GH5-STD"
-      },
-      "attribute": "material_id",
-      "value": "FG-GH5-STD",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 34,
-        "column": "material_id"
-      },
-      "evidence": "row 34: material_id=FG-GH5-STD",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH5-STD",
-        "batch": "FG-GH5-STD"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH5-STD",
-        "batch": "FG-GH5-STD"
-      },
-      "attribute": "qty",
-      "value": 91000,
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 34,
-        "column": "qty"
-      },
-      "evidence": "row 34: qty=91000",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH5-STD",
-        "batch": "FG-GH5-STD"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH5-STD",
-        "batch": "FG-GH5-STD"
-      },
-      "attribute": "uom",
-      "value": "PC",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 34,
-        "column": "uom"
-      },
-      "evidence": "row 34: uom=PC",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH5-STD",
-        "batch": "FG-GH5-STD"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH5-STD",
-        "batch": "FG-GH5-STD"
-      },
-      "attribute": "safety_stock",
-      "value": "30000",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 34,
-        "column": "safety_stock"
-      },
-      "evidence": "row 34: safety_stock=30000",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH5-STD",
-        "batch": "FG-GH5-STD"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH5-STD",
-        "batch": "FG-GH5-STD"
-      },
-      "attribute": "weeks_of_cover",
-      "value": "3.0",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 34,
-        "column": "weeks_of_cover"
-      },
-      "evidence": "row 34: weeks_of_cover=3.0",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH5-STD",
-        "batch": "FG-GH5-STD"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH5-STD",
-        "batch": "FG-GH5-STD"
-      },
-      "attribute": "last_count",
-      "value": "2026-11-12",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 34,
-        "column": "last_count"
-      },
-      "evidence": "row 34: last_count=2026-11-12",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH6-CE",
-        "batch": "FG-GH6-CE"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH6-CE",
-        "batch": "FG-GH6-CE"
-      },
-      "attribute": "snapshot_date",
-      "value": "2026-11-20",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 35,
-        "column": "snapshot_date"
-      },
-      "evidence": "row 35: snapshot_date=2026-11-20",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH6-CE",
-        "batch": "FG-GH6-CE"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH6-CE",
-        "batch": "FG-GH6-CE"
-      },
-      "attribute": "site",
-      "value": "DC-HAM",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 35,
-        "column": "site"
-      },
-      "evidence": "row 35: site=DC-HAM",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH6-CE",
-        "batch": "FG-GH6-CE"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH6-CE",
-        "batch": "FG-GH6-CE"
-      },
-      "attribute": "material_id",
-      "value": "FG-GH6-CE",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 35,
-        "column": "material_id"
-      },
-      "evidence": "row 35: material_id=FG-GH6-CE",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH6-CE",
-        "batch": "FG-GH6-CE"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH6-CE",
-        "batch": "FG-GH6-CE"
-      },
-      "attribute": "qty",
-      "value": 46800,
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 35,
-        "column": "qty"
-      },
-      "evidence": "row 35: qty=46800",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH6-CE",
-        "batch": "FG-GH6-CE"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH6-CE",
-        "batch": "FG-GH6-CE"
-      },
-      "attribute": "uom",
-      "value": "PC",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 35,
-        "column": "uom"
-      },
-      "evidence": "row 35: uom=PC",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH6-CE",
-        "batch": "FG-GH6-CE"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH6-CE",
-        "batch": "FG-GH6-CE"
-      },
-      "attribute": "safety_stock",
-      "value": "12000",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 35,
-        "column": "safety_stock"
-      },
-      "evidence": "row 35: safety_stock=12000",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH6-CE",
-        "batch": "FG-GH6-CE"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH6-CE",
-        "batch": "FG-GH6-CE"
-      },
-      "attribute": "weeks_of_cover",
-      "value": "3.9",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 35,
-        "column": "weeks_of_cover"
-      },
-      "evidence": "row 35: weeks_of_cover=3.9",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH6-CE",
-        "batch": "FG-GH6-CE"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH6-CE",
-        "batch": "FG-GH6-CE"
-      },
-      "attribute": "last_count",
-      "value": "2026-11-20",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 35,
-        "column": "last_count"
-      },
-      "evidence": "row 35: last_count=2026-11-20",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH6-STD",
-        "batch": "FG-GH6-STD"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH6-STD",
-        "batch": "FG-GH6-STD"
-      },
-      "attribute": "snapshot_date",
-      "value": "2026-11-20",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 36,
-        "column": "snapshot_date"
-      },
-      "evidence": "row 36: snapshot_date=2026-11-20",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH6-STD",
-        "batch": "FG-GH6-STD"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH6-STD",
-        "batch": "FG-GH6-STD"
-      },
-      "attribute": "site",
-      "value": "DC-HAM",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 36,
-        "column": "site"
-      },
-      "evidence": "row 36: site=DC-HAM",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH6-STD",
-        "batch": "FG-GH6-STD"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH6-STD",
-        "batch": "FG-GH6-STD"
-      },
-      "attribute": "material_id",
-      "value": "FG-GH6-STD",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 36,
-        "column": "material_id"
-      },
-      "evidence": "row 36: material_id=FG-GH6-STD",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH6-STD",
-        "batch": "FG-GH6-STD"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH6-STD",
-        "batch": "FG-GH6-STD"
-      },
-      "attribute": "qty",
-      "value": 512000,
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 36,
-        "column": "qty"
-      },
-      "evidence": "row 36: qty=512000",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH6-STD",
-        "batch": "FG-GH6-STD"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH6-STD",
-        "batch": "FG-GH6-STD"
-      },
-      "attribute": "uom",
-      "value": "PC",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 36,
-        "column": "uom"
-      },
-      "evidence": "row 36: uom=PC",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH6-STD",
-        "batch": "FG-GH6-STD"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH6-STD",
-        "batch": "FG-GH6-STD"
-      },
-      "attribute": "safety_stock",
-      "value": "160000",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 36,
-        "column": "safety_stock"
-      },
-      "evidence": "row 36: safety_stock=160000",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH6-STD",
-        "batch": "FG-GH6-STD"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH6-STD",
-        "batch": "FG-GH6-STD"
-      },
-      "attribute": "weeks_of_cover",
-      "value": "3.2",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 36,
-        "column": "weeks_of_cover"
-      },
-      "evidence": "row 36: weeks_of_cover=3.2",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "stock_batch",
-      "subject": {
-        "material_id": "FG-GH6-STD",
-        "batch": "FG-GH6-STD"
-      },
-      "subject_raw": {
-        "material_id": "FG-GH6-STD",
-        "batch": "FG-GH6-STD"
-      },
-      "attribute": "last_count",
-      "value": "2026-11-20",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "row": 36,
-        "column": "last_count"
-      },
-      "evidence": "row 36: last_count=2026-11-20",
+      "evidence": "last_count=2026-11-15",
       "confidence": "high"
     }
   ],

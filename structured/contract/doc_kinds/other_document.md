@@ -1,3 +1,8 @@
+recognise:
+  path_globs: ["**/*other*document*"]
+  any_phrases: ["source document"]
+  container: pdf
+
 # other_document
 
-Retain grounded text or an explicit unreadable record; never invent values.
+Extract grounded fields, preserve source-language evidence, and retain unresolved joins explicitly.

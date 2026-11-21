@@ -1,17 +1,50 @@
 {
   "signature": "5edec4196dedb81c92fc3687e8b126a00f9fee16418471a4e5a72d4e6395df05",
+  "example_path": "soony/context/launch_plan_GH6.xlsx",
   "format": "xlsx",
   "sheet": "Inbound",
+  "fact_type": "shipment_qty",
+  "subject": [
+    "reference",
+    "material_id"
+  ],
   "columns": {
-    "supplier": "Supplier",
-    "part": "Part",
-    "quantity": "Quantity",
-    "mode": "Mode",
-    "reference": "Reference",
-    "etd": "ETD",
-    "eta": "ETA",
-    "status": "Status",
-    "comment": "Comment"
+    "Supplier": {
+      "field": "supplier_id",
+      "type": "text"
+    },
+    "Part": {
+      "field": "material_id",
+      "type": "text"
+    },
+    "Quantity": {
+      "field": "qty_planned",
+      "type": "text"
+    },
+    "Mode": {
+      "field": "mode",
+      "type": "text"
+    },
+    "Reference": {
+      "field": "reference",
+      "type": "text"
+    },
+    "ETD": {
+      "field": "etd",
+      "type": "text"
+    },
+    "ETA": {
+      "field": "eta",
+      "type": "text"
+    },
+    "Status": {
+      "field": "status",
+      "type": "text"
+    },
+    "Comment": {
+      "field": "note",
+      "type": "text"
+    }
   },
   "header_detection": {
     "row": 1,

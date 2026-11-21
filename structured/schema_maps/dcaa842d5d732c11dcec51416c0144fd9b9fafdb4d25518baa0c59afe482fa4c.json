@@ -1,0 +1,33 @@
+{
+  "signature": "dcaa842d5d732c11dcec51416c0144fd9b9fafdb4d25518baa0c59afe482fa4c",
+  "example_path": "soony/erp/packout_log.csv",
+  "format": "csv",
+  "sheet": null,
+  "fact_type": "packout",
+  "subject": [
+    "date",
+    "product_id"
+  ],
+  "columns": {
+    "date": {
+      "field": "date",
+      "type": "text"
+    },
+    "site": {
+      "field": "site_id",
+      "type": "text"
+    },
+    "product_id": {
+      "field": "product_id",
+      "type": "text"
+    },
+    "line": {
+      "field": "po_line",
+      "type": "text"
+    },
+    "units_packed": {
+      "field": "units_packed",
+      "type": "text"
+    }
+  }
+}

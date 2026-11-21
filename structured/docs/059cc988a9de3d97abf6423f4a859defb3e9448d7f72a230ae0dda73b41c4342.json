@@ -10,18 +10,18 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-2"
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-2"
+        "material_id": "CMP-GAM-001"
       },
-      "attribute": "component_id",
+      "attribute": "material_id",
       "value": "CMP-GAM-001",
       "unit": null,
       "as_of": null,
@@ -29,16 +29,16 @@
         "row": 2,
         "column": "component_id"
       },
-      "evidence": "row 2: component_id=CMP-GAM-001",
+      "evidence": "component_id=CMP-GAM-001",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-2"
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-2"
+        "material_id": "CMP-GAM-001"
       },
       "attribute": "description",
       "value": "Game Card 128 GB – Grand Heist 6",
@@ -48,16 +48,16 @@
         "row": 2,
         "column": "description"
       },
-      "evidence": "row 2: description=Game Card 128 GB – Grand Heist 6",
+      "evidence": "description=Game Card 128 GB – Grand Heist 6",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-2"
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-2"
+        "material_id": "CMP-GAM-001"
       },
       "attribute": "category",
       "value": "Game Media",
@@ -67,16 +67,16 @@
         "row": 2,
         "column": "category"
       },
-      "evidence": "row 2: category=Game Media",
+      "evidence": "category=Game Media",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-2"
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-2"
+        "material_id": "CMP-GAM-001"
       },
       "attribute": "uom",
       "value": "PC",
@@ -86,16 +86,16 @@
         "row": 2,
         "column": "uom"
       },
-      "evidence": "row 2: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-2"
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-2"
+        "material_id": "CMP-GAM-001"
       },
       "attribute": "abc_class",
       "value": "A",
@@ -105,16 +105,16 @@
         "row": 2,
         "column": "abc_class"
       },
-      "evidence": "row 2: abc_class=A",
+      "evidence": "abc_class=A",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-2"
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-2"
+        "material_id": "CMP-GAM-001"
       },
       "attribute": "critical",
       "value": "Y",
@@ -124,16 +124,16 @@
         "row": 2,
         "column": "critical"
       },
-      "evidence": "row 2: critical=Y",
+      "evidence": "critical=Y",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-2"
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-2"
+        "material_id": "CMP-GAM-001"
       },
       "attribute": "drawing_rev",
       "value": "A",
@@ -143,18 +143,18 @@
         "row": 2,
         "column": "drawing_rev"
       },
-      "evidence": "row 2: drawing_rev=A",
+      "evidence": "drawing_rev=A",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-002"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-002"
       },
-      "attribute": "component_id",
+      "attribute": "material_id",
       "value": "CMP-GAM-002",
       "unit": null,
       "as_of": null,
@@ -162,16 +162,16 @@
         "row": 3,
         "column": "component_id"
       },
-      "evidence": "row 3: component_id=CMP-GAM-002",
+      "evidence": "component_id=CMP-GAM-002",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-002"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-002"
       },
       "attribute": "description",
       "value": "Game Card 64 GB – Grand Heist 5",
@@ -181,16 +181,16 @@
         "row": 3,
         "column": "description"
       },
-      "evidence": "row 3: description=Game Card 64 GB – Grand Heist 5",
+      "evidence": "description=Game Card 64 GB – Grand Heist 5",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-002"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-002"
       },
       "attribute": "category",
       "value": "Game Media",
@@ -200,16 +200,16 @@
         "row": 3,
         "column": "category"
       },
-      "evidence": "row 3: category=Game Media",
+      "evidence": "category=Game Media",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-002"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-002"
       },
       "attribute": "uom",
       "value": "PC",
@@ -219,16 +219,16 @@
         "row": 3,
         "column": "uom"
       },
-      "evidence": "row 3: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-002"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-002"
       },
       "attribute": "abc_class",
       "value": "A",
@@ -238,16 +238,16 @@
         "row": 3,
         "column": "abc_class"
       },
-      "evidence": "row 3: abc_class=A",
+      "evidence": "abc_class=A",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-002"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-002"
       },
       "attribute": "critical",
       "value": "N",
@@ -257,16 +257,16 @@
         "row": 3,
         "column": "critical"
       },
-      "evidence": "row 3: critical=N",
+      "evidence": "critical=N",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-002"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-002"
       },
       "attribute": "drawing_rev",
       "value": "A",
@@ -276,18 +276,18 @@
         "row": 3,
         "column": "drawing_rev"
       },
-      "evidence": "row 3: drawing_rev=A",
+      "evidence": "drawing_rev=A",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "subject_raw": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
-      "attribute": "component_id",
+      "attribute": "material_id",
       "value": "CMP-GAM-003",
       "unit": null,
       "as_of": null,
@@ -295,16 +295,16 @@
         "row": 4,
         "column": "component_id"
       },
-      "evidence": "row 4: component_id=CMP-GAM-003",
+      "evidence": "component_id=CMP-GAM-003",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "subject_raw": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "attribute": "description",
       "value": "Game Card Case (clear)",
@@ -314,16 +314,16 @@
         "row": 4,
         "column": "description"
       },
-      "evidence": "row 4: description=Game Card Case (clear)",
+      "evidence": "description=Game Card Case (clear)",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "subject_raw": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "attribute": "category",
       "value": "Print & Packaging",
@@ -333,16 +333,16 @@
         "row": 4,
         "column": "category"
       },
-      "evidence": "row 4: category=Print & Packaging",
+      "evidence": "category=Print & Packaging",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "subject_raw": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "attribute": "uom",
       "value": "PC",
@@ -352,16 +352,16 @@
         "row": 4,
         "column": "uom"
       },
-      "evidence": "row 4: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "subject_raw": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "attribute": "abc_class",
       "value": "C",
@@ -371,16 +371,16 @@
         "row": 4,
         "column": "abc_class"
       },
-      "evidence": "row 4: abc_class=C",
+      "evidence": "abc_class=C",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "subject_raw": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "attribute": "critical",
       "value": "N",
@@ -390,16 +390,16 @@
         "row": 4,
         "column": "critical"
       },
-      "evidence": "row 4: critical=N",
+      "evidence": "critical=N",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "subject_raw": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "attribute": "drawing_rev",
       "value": "A",
@@ -409,18 +409,18 @@
         "row": 4,
         "column": "drawing_rev"
       },
-      "evidence": "row 4: drawing_rev=A",
+      "evidence": "drawing_rev=A",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "subject_raw": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
-      "attribute": "component_id",
+      "attribute": "material_id",
       "value": "CMP-GAM-004",
       "unit": null,
       "as_of": null,
@@ -428,16 +428,16 @@
         "row": 5,
         "column": "component_id"
       },
-      "evidence": "row 5: component_id=CMP-GAM-004",
+      "evidence": "component_id=CMP-GAM-004",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "subject_raw": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "attribute": "description",
       "value": "Cover Sleeve Grand Heist 6 (USK/PEGI)",
@@ -447,16 +447,16 @@
         "row": 5,
         "column": "description"
       },
-      "evidence": "row 5: description=Cover Sleeve Grand Heist 6 (USK/PEGI)",
+      "evidence": "description=Cover Sleeve Grand Heist 6 (USK/PEGI)",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "subject_raw": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "attribute": "category",
       "value": "Print & Packaging",
@@ -466,16 +466,16 @@
         "row": 5,
         "column": "category"
       },
-      "evidence": "row 5: category=Print & Packaging",
+      "evidence": "category=Print & Packaging",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "subject_raw": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "attribute": "uom",
       "value": "PC",
@@ -485,16 +485,16 @@
         "row": 5,
         "column": "uom"
       },
-      "evidence": "row 5: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "subject_raw": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "attribute": "abc_class",
       "value": "B",
@@ -504,16 +504,16 @@
         "row": 5,
         "column": "abc_class"
       },
-      "evidence": "row 5: abc_class=B",
+      "evidence": "abc_class=B",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "subject_raw": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "attribute": "critical",
       "value": "Y",
@@ -523,16 +523,16 @@
         "row": 5,
         "column": "critical"
       },
-      "evidence": "row 5: critical=Y",
+      "evidence": "critical=Y",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "subject_raw": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "attribute": "drawing_rev",
       "value": "B",
@@ -542,18 +542,18 @@
         "row": 5,
         "column": "drawing_rev"
       },
-      "evidence": "row 5: drawing_rev=B",
+      "evidence": "drawing_rev=B",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-005"
       },
       "subject_raw": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-005"
       },
-      "attribute": "component_id",
+      "attribute": "material_id",
       "value": "CMP-GAM-005",
       "unit": null,
       "as_of": null,
@@ -561,16 +561,16 @@
         "row": 6,
         "column": "component_id"
       },
-      "evidence": "row 6: component_id=CMP-GAM-005",
+      "evidence": "component_id=CMP-GAM-005",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-005"
       },
       "subject_raw": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-005"
       },
       "attribute": "description",
       "value": "Cover Sleeve Grand Heist 5 (USK/PEGI)",
@@ -580,16 +580,16 @@
         "row": 6,
         "column": "description"
       },
-      "evidence": "row 6: description=Cover Sleeve Grand Heist 5 (USK/PEGI)",
+      "evidence": "description=Cover Sleeve Grand Heist 5 (USK/PEGI)",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-005"
       },
       "subject_raw": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-005"
       },
       "attribute": "category",
       "value": "Print & Packaging",
@@ -599,16 +599,16 @@
         "row": 6,
         "column": "category"
       },
-      "evidence": "row 6: category=Print & Packaging",
+      "evidence": "category=Print & Packaging",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-005"
       },
       "subject_raw": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-005"
       },
       "attribute": "uom",
       "value": "PC",
@@ -618,16 +618,16 @@
         "row": 6,
         "column": "uom"
       },
-      "evidence": "row 6: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-005"
       },
       "subject_raw": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-005"
       },
       "attribute": "abc_class",
       "value": "C",
@@ -637,16 +637,16 @@
         "row": 6,
         "column": "abc_class"
       },
-      "evidence": "row 6: abc_class=C",
+      "evidence": "abc_class=C",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-005"
       },
       "subject_raw": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-005"
       },
       "attribute": "critical",
       "value": "N",
@@ -656,16 +656,16 @@
         "row": 6,
         "column": "critical"
       },
-      "evidence": "row 6: critical=N",
+      "evidence": "critical=N",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-005"
       },
       "subject_raw": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-005"
       },
       "attribute": "drawing_rev",
       "value": "A",
@@ -675,18 +675,18 @@
         "row": 6,
         "column": "drawing_rev"
       },
-      "evidence": "row 6: drawing_rev=A",
+      "evidence": "drawing_rev=A",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-006"
       },
       "subject_raw": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-006"
       },
-      "attribute": "component_id",
+      "attribute": "material_id",
       "value": "CMP-GAM-006",
       "unit": null,
       "as_of": null,
@@ -694,16 +694,16 @@
         "row": 7,
         "column": "component_id"
       },
-      "evidence": "row 7: component_id=CMP-GAM-006",
+      "evidence": "component_id=CMP-GAM-006",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-006"
       },
       "subject_raw": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-006"
       },
       "attribute": "description",
       "value": "Steel Case Grand Heist 6",
@@ -713,16 +713,16 @@
         "row": 7,
         "column": "description"
       },
-      "evidence": "row 7: description=Steel Case Grand Heist 6",
+      "evidence": "description=Steel Case Grand Heist 6",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-006"
       },
       "subject_raw": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-006"
       },
       "attribute": "category",
       "value": "Collector's Items",
@@ -732,16 +732,16 @@
         "row": 7,
         "column": "category"
       },
-      "evidence": "row 7: category=Collector's Items",
+      "evidence": "category=Collector's Items",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-006"
       },
       "subject_raw": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-006"
       },
       "attribute": "uom",
       "value": "PC",
@@ -751,16 +751,16 @@
         "row": 7,
         "column": "uom"
       },
-      "evidence": "row 7: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-006"
       },
       "subject_raw": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-006"
       },
       "attribute": "abc_class",
       "value": "B",
@@ -770,16 +770,16 @@
         "row": 7,
         "column": "abc_class"
       },
-      "evidence": "row 7: abc_class=B",
+      "evidence": "abc_class=B",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-006"
       },
       "subject_raw": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-006"
       },
       "attribute": "critical",
       "value": "N",
@@ -789,16 +789,16 @@
         "row": 7,
         "column": "critical"
       },
-      "evidence": "row 7: critical=N",
+      "evidence": "critical=N",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-006"
       },
       "subject_raw": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-006"
       },
       "attribute": "drawing_rev",
       "value": "A",
@@ -808,18 +808,18 @@
         "row": 7,
         "column": "drawing_rev"
       },
-      "evidence": "row 7: drawing_rev=A",
+      "evidence": "drawing_rev=A",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-007"
       },
       "subject_raw": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-007"
       },
-      "attribute": "component_id",
+      "attribute": "material_id",
       "value": "CMP-GAM-007",
       "unit": null,
       "as_of": null,
@@ -827,16 +827,16 @@
         "row": 8,
         "column": "component_id"
       },
-      "evidence": "row 8: component_id=CMP-GAM-007",
+      "evidence": "component_id=CMP-GAM-007",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-007"
       },
       "subject_raw": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-007"
       },
       "attribute": "description",
       "value": "Collector's Box Grand Heist 6 (rigid, magnetic lid)",
@@ -846,16 +846,16 @@
         "row": 8,
         "column": "description"
       },
-      "evidence": "row 8: description=Collector's Box Grand Heist 6 (rigid, magnetic lid)",
+      "evidence": "description=Collector's Box Grand Heist 6 (rigid, magnetic lid)",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-007"
       },
       "subject_raw": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-007"
       },
       "attribute": "category",
       "value": "Print & Packaging",
@@ -865,16 +865,16 @@
         "row": 8,
         "column": "category"
       },
-      "evidence": "row 8: category=Print & Packaging",
+      "evidence": "category=Print & Packaging",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-007"
       },
       "subject_raw": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-007"
       },
       "attribute": "uom",
       "value": "PC",
@@ -884,16 +884,16 @@
         "row": 8,
         "column": "uom"
       },
-      "evidence": "row 8: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-007"
       },
       "subject_raw": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-007"
       },
       "attribute": "abc_class",
       "value": "B",
@@ -903,16 +903,16 @@
         "row": 8,
         "column": "abc_class"
       },
-      "evidence": "row 8: abc_class=B",
+      "evidence": "abc_class=B",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-007"
       },
       "subject_raw": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-007"
       },
       "attribute": "critical",
       "value": "N",
@@ -922,16 +922,16 @@
         "row": 8,
         "column": "critical"
       },
-      "evidence": "row 8: critical=N",
+      "evidence": "critical=N",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-007"
       },
       "subject_raw": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-007"
       },
       "attribute": "drawing_rev",
       "value": "A",
@@ -941,18 +941,18 @@
         "row": 8,
         "column": "drawing_rev"
       },
-      "evidence": "row 8: drawing_rev=A",
+      "evidence": "drawing_rev=A",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-008"
       },
       "subject_raw": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-008"
       },
-      "attribute": "component_id",
+      "attribute": "material_id",
       "value": "CMP-GAM-008",
       "unit": null,
       "as_of": null,
@@ -960,16 +960,16 @@
         "row": 9,
         "column": "component_id"
       },
-      "evidence": "row 9: component_id=CMP-GAM-008",
+      "evidence": "component_id=CMP-GAM-008",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-008"
       },
       "subject_raw": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-008"
       },
       "attribute": "description",
       "value": "Art Book Grand Heist 6 (96 p, hardcover)",
@@ -979,16 +979,16 @@
         "row": 9,
         "column": "description"
       },
-      "evidence": "row 9: description=Art Book Grand Heist 6 (96 p, hardcover)",
+      "evidence": "description=Art Book Grand Heist 6 (96 p, hardcover)",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-008"
       },
       "subject_raw": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-008"
       },
       "attribute": "category",
       "value": "Print & Packaging",
@@ -998,16 +998,16 @@
         "row": 9,
         "column": "category"
       },
-      "evidence": "row 9: category=Print & Packaging",
+      "evidence": "category=Print & Packaging",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-008"
       },
       "subject_raw": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-008"
       },
       "attribute": "uom",
       "value": "PC",
@@ -1017,16 +1017,16 @@
         "row": 9,
         "column": "uom"
       },
-      "evidence": "row 9: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-008"
       },
       "subject_raw": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-008"
       },
       "attribute": "abc_class",
       "value": "B",
@@ -1036,16 +1036,16 @@
         "row": 9,
         "column": "abc_class"
       },
-      "evidence": "row 9: abc_class=B",
+      "evidence": "abc_class=B",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-008"
       },
       "subject_raw": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-008"
       },
       "attribute": "critical",
       "value": "N",
@@ -1055,16 +1055,16 @@
         "row": 9,
         "column": "critical"
       },
-      "evidence": "row 9: critical=N",
+      "evidence": "critical=N",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-008"
       },
       "subject_raw": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-008"
       },
       "attribute": "drawing_rev",
       "value": "A",
@@ -1074,18 +1074,18 @@
         "row": 9,
         "column": "drawing_rev"
       },
-      "evidence": "row 9: drawing_rev=A",
+      "evidence": "drawing_rev=A",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-009"
       },
       "subject_raw": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-009"
       },
-      "attribute": "component_id",
+      "attribute": "material_id",
       "value": "CMP-GAM-009",
       "unit": null,
       "as_of": null,
@@ -1093,16 +1093,16 @@
         "row": 10,
         "column": "component_id"
       },
-      "evidence": "row 10: component_id=CMP-GAM-009",
+      "evidence": "component_id=CMP-GAM-009",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-009"
       },
       "subject_raw": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-009"
       },
       "attribute": "description",
       "value": "City Map Poster Grand Heist 6 (folded)",
@@ -1112,16 +1112,16 @@
         "row": 10,
         "column": "description"
       },
-      "evidence": "row 10: description=City Map Poster Grand Heist 6 (folded)",
+      "evidence": "description=City Map Poster Grand Heist 6 (folded)",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-009"
       },
       "subject_raw": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-009"
       },
       "attribute": "category",
       "value": "Print & Packaging",
@@ -1131,16 +1131,16 @@
         "row": 10,
         "column": "category"
       },
-      "evidence": "row 10: category=Print & Packaging",
+      "evidence": "category=Print & Packaging",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-009"
       },
       "subject_raw": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-009"
       },
       "attribute": "uom",
       "value": "PC",
@@ -1150,16 +1150,16 @@
         "row": 10,
         "column": "uom"
       },
-      "evidence": "row 10: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-009"
       },
       "subject_raw": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-009"
       },
       "attribute": "abc_class",
       "value": "C",
@@ -1169,16 +1169,16 @@
         "row": 10,
         "column": "abc_class"
       },
-      "evidence": "row 10: abc_class=C",
+      "evidence": "abc_class=C",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-009"
       },
       "subject_raw": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-009"
       },
       "attribute": "critical",
       "value": "N",
@@ -1188,16 +1188,16 @@
         "row": 10,
         "column": "critical"
       },
-      "evidence": "row 10: critical=N",
+      "evidence": "critical=N",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-009"
       },
       "subject_raw": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-009"
       },
       "attribute": "drawing_rev",
       "value": "A",
@@ -1207,18 +1207,18 @@
         "row": 10,
         "column": "drawing_rev"
       },
-      "evidence": "row 10: drawing_rev=A",
+      "evidence": "drawing_rev=A",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-010"
       },
       "subject_raw": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-010"
       },
-      "attribute": "component_id",
+      "attribute": "material_id",
       "value": "CMP-GAM-010",
       "unit": null,
       "as_of": null,
@@ -1226,16 +1226,16 @@
         "row": 11,
         "column": "component_id"
       },
-      "evidence": "row 11: component_id=CMP-GAM-010",
+      "evidence": "component_id=CMP-GAM-010",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-010"
       },
       "subject_raw": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-010"
       },
       "attribute": "description",
       "value": "Statue \"The Getaway\" (die-cast, 18 cm)",
@@ -1245,16 +1245,16 @@
         "row": 11,
         "column": "description"
       },
-      "evidence": "row 11: description=Statue \"The Getaway\" (die-cast, 18 cm)",
+      "evidence": "description=Statue \"The Getaway\" (die-cast, 18 cm)",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-010"
       },
       "subject_raw": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-010"
       },
       "attribute": "category",
       "value": "Collector's Items",
@@ -1264,16 +1264,16 @@
         "row": 11,
         "column": "category"
       },
-      "evidence": "row 11: category=Collector's Items",
+      "evidence": "category=Collector's Items",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-010"
       },
       "subject_raw": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-010"
       },
       "attribute": "uom",
       "value": "PC",
@@ -1283,16 +1283,16 @@
         "row": 11,
         "column": "uom"
       },
-      "evidence": "row 11: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-010"
       },
       "subject_raw": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-010"
       },
       "attribute": "abc_class",
       "value": "A",
@@ -1302,16 +1302,16 @@
         "row": 11,
         "column": "abc_class"
       },
-      "evidence": "row 11: abc_class=A",
+      "evidence": "abc_class=A",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-010"
       },
       "subject_raw": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-010"
       },
       "attribute": "critical",
       "value": "N",
@@ -1321,16 +1321,16 @@
         "row": 11,
         "column": "critical"
       },
-      "evidence": "row 11: critical=N",
+      "evidence": "critical=N",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-010"
       },
       "subject_raw": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-010"
       },
       "attribute": "drawing_rev",
       "value": "A",
@@ -1340,18 +1340,18 @@
         "row": 11,
         "column": "drawing_rev"
       },
-      "evidence": "row 11: drawing_rev=A",
+      "evidence": "drawing_rev=A",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-12"
+        "material_id": "CMP-GAM-011"
       },
       "subject_raw": {
-        "material_id": "row-12"
+        "material_id": "CMP-GAM-011"
       },
-      "attribute": "component_id",
+      "attribute": "material_id",
       "value": "CMP-GAM-011",
       "unit": null,
       "as_of": null,
@@ -1359,16 +1359,16 @@
         "row": 12,
         "column": "component_id"
       },
-      "evidence": "row 12: component_id=CMP-GAM-011",
+      "evidence": "component_id=CMP-GAM-011",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-12"
+        "material_id": "CMP-GAM-011"
       },
       "subject_raw": {
-        "material_id": "row-12"
+        "material_id": "CMP-GAM-011"
       },
       "attribute": "description",
       "value": "Activation Code Leaflet",
@@ -1378,16 +1378,16 @@
         "row": 12,
         "column": "description"
       },
-      "evidence": "row 12: description=Activation Code Leaflet",
+      "evidence": "description=Activation Code Leaflet",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-12"
+        "material_id": "CMP-GAM-011"
       },
       "subject_raw": {
-        "material_id": "row-12"
+        "material_id": "CMP-GAM-011"
       },
       "attribute": "category",
       "value": "Print & Packaging",
@@ -1397,16 +1397,16 @@
         "row": 12,
         "column": "category"
       },
-      "evidence": "row 12: category=Print & Packaging",
+      "evidence": "category=Print & Packaging",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-12"
+        "material_id": "CMP-GAM-011"
       },
       "subject_raw": {
-        "material_id": "row-12"
+        "material_id": "CMP-GAM-011"
       },
       "attribute": "uom",
       "value": "PC",
@@ -1416,16 +1416,16 @@
         "row": 12,
         "column": "uom"
       },
-      "evidence": "row 12: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-12"
+        "material_id": "CMP-GAM-011"
       },
       "subject_raw": {
-        "material_id": "row-12"
+        "material_id": "CMP-GAM-011"
       },
       "attribute": "abc_class",
       "value": "C",
@@ -1435,16 +1435,16 @@
         "row": 12,
         "column": "abc_class"
       },
-      "evidence": "row 12: abc_class=C",
+      "evidence": "abc_class=C",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-12"
+        "material_id": "CMP-GAM-011"
       },
       "subject_raw": {
-        "material_id": "row-12"
+        "material_id": "CMP-GAM-011"
       },
       "attribute": "critical",
       "value": "N",
@@ -1454,16 +1454,16 @@
         "row": 12,
         "column": "critical"
       },
-      "evidence": "row 12: critical=N",
+      "evidence": "critical=N",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-12"
+        "material_id": "CMP-GAM-011"
       },
       "subject_raw": {
-        "material_id": "row-12"
+        "material_id": "CMP-GAM-011"
       },
       "attribute": "drawing_rev",
       "value": "A",
@@ -1473,18 +1473,18 @@
         "row": 12,
         "column": "drawing_rev"
       },
-      "evidence": "row 12: drawing_rev=A",
+      "evidence": "drawing_rev=A",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-13"
+        "material_id": "CMP-MAG-005"
       },
       "subject_raw": {
-        "material_id": "row-13"
+        "material_id": "CMP-MAG-005"
       },
-      "attribute": "component_id",
+      "attribute": "material_id",
       "value": "CMP-MAG-005",
       "unit": null,
       "as_of": null,
@@ -1492,16 +1492,16 @@
         "row": 13,
         "column": "component_id"
       },
-      "evidence": "row 13: component_id=CMP-MAG-005",
+      "evidence": "component_id=CMP-MAG-005",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-13"
+        "material_id": "CMP-MAG-005"
       },
       "subject_raw": {
-        "material_id": "row-13"
+        "material_id": "CMP-MAG-005"
       },
       "attribute": "description",
       "value": "NdFeB Disc Magnet 4x1 (lid closure)",
@@ -1511,16 +1511,16 @@
         "row": 13,
         "column": "description"
       },
-      "evidence": "row 13: description=NdFeB Disc Magnet 4x1 (lid closure)",
+      "evidence": "description=NdFeB Disc Magnet 4x1 (lid closure)",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-13"
+        "material_id": "CMP-MAG-005"
       },
       "subject_raw": {
-        "material_id": "row-13"
+        "material_id": "CMP-MAG-005"
       },
       "attribute": "category",
       "value": "Magnets",
@@ -1530,16 +1530,16 @@
         "row": 13,
         "column": "category"
       },
-      "evidence": "row 13: category=Magnets",
+      "evidence": "category=Magnets",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-13"
+        "material_id": "CMP-MAG-005"
       },
       "subject_raw": {
-        "material_id": "row-13"
+        "material_id": "CMP-MAG-005"
       },
       "attribute": "uom",
       "value": "PC",
@@ -1549,16 +1549,16 @@
         "row": 13,
         "column": "uom"
       },
-      "evidence": "row 13: uom=PC",
+      "evidence": "uom=PC",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-13"
+        "material_id": "CMP-MAG-005"
       },
       "subject_raw": {
-        "material_id": "row-13"
+        "material_id": "CMP-MAG-005"
       },
       "attribute": "abc_class",
       "value": "C",
@@ -1568,16 +1568,16 @@
         "row": 13,
         "column": "abc_class"
       },
-      "evidence": "row 13: abc_class=C",
+      "evidence": "abc_class=C",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-13"
+        "material_id": "CMP-MAG-005"
       },
       "subject_raw": {
-        "material_id": "row-13"
+        "material_id": "CMP-MAG-005"
       },
       "attribute": "critical",
       "value": "N",
@@ -1587,16 +1587,16 @@
         "row": 13,
         "column": "critical"
       },
-      "evidence": "row 13: critical=N",
+      "evidence": "critical=N",
       "confidence": "high"
     },
     {
       "fact_type": "component",
       "subject": {
-        "material_id": "row-13"
+        "material_id": "CMP-MAG-005"
       },
       "subject_raw": {
-        "material_id": "row-13"
+        "material_id": "CMP-MAG-005"
       },
       "attribute": "drawing_rev",
       "value": "A",
@@ -1606,7 +1606,7 @@
         "row": 13,
         "column": "drawing_rev"
       },
-      "evidence": "row 13: drawing_rev=A",
+      "evidence": "drawing_rev=A",
       "confidence": "high"
     }
   ],

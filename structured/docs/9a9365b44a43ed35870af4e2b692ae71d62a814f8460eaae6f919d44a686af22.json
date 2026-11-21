@@ -10,7 +10,7 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
@@ -29,7 +29,7 @@
         "row": 2,
         "column": "supplier_id"
       },
-      "evidence": "row 2: supplier_id=SUP-0028",
+      "evidence": "supplier_id=SUP-0028",
       "confidence": "high"
     },
     {
@@ -48,7 +48,7 @@
         "row": 2,
         "column": "name"
       },
-      "evidence": "row 2: name=Karton Nowak",
+      "evidence": "name=Karton Nowak",
       "confidence": "high"
     },
     {
@@ -67,7 +67,7 @@
         "row": 2,
         "column": "legal_name"
       },
-      "evidence": "row 2: legal_name=Karton Nowak Sp. z o.o.",
+      "evidence": "legal_name=Karton Nowak Sp. z o.o.",
       "confidence": "high"
     },
     {
@@ -86,7 +86,7 @@
         "row": 2,
         "column": "category"
       },
-      "evidence": "row 2: category=Print & Packaging",
+      "evidence": "category=Print & Packaging",
       "confidence": "high"
     },
     {
@@ -105,7 +105,7 @@
         "row": 2,
         "column": "country"
       },
-      "evidence": "row 2: country=PL",
+      "evidence": "country=PL",
       "confidence": "high"
     },
     {
@@ -124,7 +124,7 @@
         "row": 2,
         "column": "city"
       },
-      "evidence": "row 2: city=Poznań",
+      "evidence": "city=Poznań",
       "confidence": "high"
     },
     {
@@ -143,7 +143,7 @@
         "row": 2,
         "column": "lat"
       },
-      "evidence": "row 2: lat=52.4064",
+      "evidence": "lat=52.4064",
       "confidence": "high"
     },
     {
@@ -162,7 +162,7 @@
         "row": 2,
         "column": "lon"
       },
-      "evidence": "row 2: lon=16.9252",
+      "evidence": "lon=16.9252",
       "confidence": "high"
     },
     {
@@ -181,7 +181,7 @@
         "row": 2,
         "column": "currency"
       },
-      "evidence": "row 2: currency=EUR",
+      "evidence": "currency=EUR",
       "confidence": "high"
     },
     {
@@ -200,7 +200,7 @@
         "row": 2,
         "column": "payment_terms"
       },
-      "evidence": "row 2: payment_terms=NET30",
+      "evidence": "payment_terms=NET30",
       "confidence": "high"
     },
     {
@@ -219,7 +219,7 @@
         "row": 2,
         "column": "incoterm"
       },
-      "evidence": "row 2: incoterm=DAP Hamburg",
+      "evidence": "incoterm=DAP Hamburg",
       "confidence": "high"
     },
     {
@@ -238,7 +238,7 @@
         "row": 2,
         "column": "supplier_since"
       },
-      "evidence": "row 2: supplier_since=2021-01-01",
+      "evidence": "supplier_since=2021-01-01",
       "confidence": "high"
     },
     {
@@ -257,7 +257,7 @@
         "row": 2,
         "column": "status"
       },
-      "evidence": "row 2: status=active",
+      "evidence": "status=active",
       "confidence": "high"
     },
     {
@@ -276,7 +276,7 @@
         "row": 2,
         "column": "qualification_status"
       },
-      "evidence": "row 2: qualification_status=qualified",
+      "evidence": "qualification_status=qualified",
       "confidence": "high"
     },
     {
@@ -295,7 +295,7 @@
         "row": 2,
         "column": "contact_name"
       },
-      "evidence": "row 2: contact_name=Agnieszka Nowak",
+      "evidence": "contact_name=Agnieszka Nowak",
       "confidence": "high"
     },
     {
@@ -314,7 +314,7 @@
         "row": 2,
         "column": "contact_email"
       },
-      "evidence": "row 2: contact_email=a.nowak.karton-nowak@suppliers.juliansibbing.de",
+      "evidence": "contact_email=a.nowak.karton-nowak@suppliers.juliansibbing.de",
       "confidence": "high"
     },
     {
@@ -333,7 +333,7 @@
         "row": 2,
         "column": "phone"
       },
-      "evidence": "row 2: phone=+48 61 842 0101",
+      "evidence": "phone=+48 61 842 0101",
       "confidence": "high"
     },
     {
@@ -352,7 +352,7 @@
         "row": 2,
         "column": "preferred_language"
       },
-      "evidence": "row 2: preferred_language=pl",
+      "evidence": "preferred_language=pl",
       "confidence": "high"
     }
   ],

@@ -7,13 +7,10 @@
   "doc_kind": "delivery_note_scan",
   "doc_kind_confidence": "high",
   "languages": [
-    "en",
-    "pl",
-    "zh",
-    "ko"
+    "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
@@ -31,14 +28,12 @@
         ]
       },
       "attribute": "po_number",
-      "value": [
-        "4500318733"
-      ],
+      "value": null,
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "['4500318733']",
       "confidence": "medium"
@@ -63,7 +58,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "CMP-GAM-002",
       "confidence": "medium"
@@ -88,7 +83,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "CMP-GAM-002",
       "confidence": "medium"
@@ -113,9 +108,9 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
-      "evidence": "13000",
+      "evidence": "취급주의",
       "confidence": "medium",
       "note": "취급주의"
     },
@@ -139,9 +134,9 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
-      "evidence": "None",
+      "evidence": "취급주의",
       "confidence": "medium",
       "note": "취급주의"
     },
@@ -165,9 +160,9 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
-      "evidence": "False",
+      "evidence": "취급주의",
       "confidence": "medium",
       "note": "취급주의"
     },
@@ -191,9 +186,9 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
-      "evidence": "13000",
+      "evidence": "취급주의",
       "confidence": "medium",
       "note": "취급주의"
     },
@@ -217,7 +212,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "PCS",
       "confidence": "medium"
@@ -242,7 +237,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "26",
       "confidence": "medium"
@@ -267,7 +262,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "Nordhav Shipping A/S",
       "confidence": "medium"
@@ -292,7 +287,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "2026-10-04",
       "confidence": "medium"
@@ -317,7 +312,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "None",
       "confidence": "medium"
@@ -342,7 +337,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "True",
       "confidence": "medium"
@@ -367,7 +362,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1"
+        "region_hint": "line 1 field"
       },
       "evidence": "2134",
       "confidence": "medium"
@@ -375,12 +370,29 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "po_number": "4500318733",
-        "material_id": "CMP-GAM-002"
+        "statement_no": 1
       },
       "subject_raw": {
-        "po_number": "4500318733",
-        "material_id": "CMP-GAM-002"
+        "statement_no": 1
+      },
+      "attribute": "kind",
+      "value": "handling_note",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "handling note"
+      },
+      "evidence": "취급주의",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "statement_no": 1
+      },
+      "subject_raw": {
+        "statement_no": 1
       },
       "attribute": "value",
       "value": "취급주의",
@@ -388,11 +400,11 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 1 remarks"
+        "region_hint": "handling note"
       },
       "evidence": "취급주의",
       "confidence": "high",
-      "note": "Original-language note preserved; English translation is in the note."
+      "note": "Original-language handling note preserved from the reference envelope."
     },
     {
       "fact_type": "delivery_note_line",
@@ -409,14 +421,12 @@
         ]
       },
       "attribute": "po_number",
-      "value": [
-        "4500318733"
-      ],
+      "value": null,
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "['4500318733']",
       "confidence": "medium"
@@ -441,7 +451,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "CMP-GAM-001",
       "confidence": "medium"
@@ -466,7 +476,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "CMP-GAM-001",
       "confidence": "medium"
@@ -491,9 +501,9 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
-      "evidence": "84000",
+      "evidence": "취급주의",
       "confidence": "medium",
       "note": "취급주의"
     },
@@ -517,9 +527,9 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
-      "evidence": "None",
+      "evidence": "취급주의",
       "confidence": "medium",
       "note": "취급주의"
     },
@@ -543,9 +553,9 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
-      "evidence": "False",
+      "evidence": "취급주의",
       "confidence": "medium",
       "note": "취급주의"
     },
@@ -569,9 +579,9 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
-      "evidence": "84000",
+      "evidence": "취급주의",
       "confidence": "medium",
       "note": "취급주의"
     },
@@ -595,7 +605,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "PCS",
       "confidence": "medium"
@@ -620,7 +630,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "168",
       "confidence": "medium"
@@ -645,7 +655,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "Nordhav Shipping A/S",
       "confidence": "medium"
@@ -670,7 +680,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "2026-10-04",
       "confidence": "medium"
@@ -695,7 +705,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "None",
       "confidence": "medium"
@@ -720,7 +730,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "True",
       "confidence": "medium"
@@ -745,7 +755,7 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2"
+        "region_hint": "line 2 field"
       },
       "evidence": "2134",
       "confidence": "medium"
@@ -753,12 +763,29 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "po_number": "4500318733",
-        "material_id": "CMP-GAM-001"
+        "statement_no": 2
       },
       "subject_raw": {
-        "po_number": "4500318733",
-        "material_id": "CMP-GAM-001"
+        "statement_no": 2
+      },
+      "attribute": "kind",
+      "value": "handling_note",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "handling note"
+      },
+      "evidence": "취급주의",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "statement_no": 2
+      },
+      "subject_raw": {
+        "statement_no": 2
       },
       "attribute": "value",
       "value": "취급주의",
@@ -766,11 +793,11 @@
       "as_of": null,
       "locator": {
         "page": 1,
-        "region_hint": "line 2 remarks"
+        "region_hint": "handling note"
       },
       "evidence": "취급주의",
       "confidence": "high",
-      "note": "Original-language note preserved; English translation is in the note."
+      "note": "Original-language handling note preserved from the reference envelope."
     }
   ],
   "unreadable": [],

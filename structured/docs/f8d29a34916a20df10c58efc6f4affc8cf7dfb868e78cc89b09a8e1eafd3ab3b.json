@@ -10,7 +10,7 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
@@ -31,7 +31,7 @@
         "row": 2,
         "column": "date"
       },
-      "evidence": "row 2: date=2026-11-02",
+      "evidence": "date=2026-11-02",
       "confidence": "high"
     },
     {
@@ -44,7 +44,7 @@
         "date": "2026-11-02",
         "product_id": "FG-GH6-CE"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -52,7 +52,7 @@
         "row": 2,
         "column": "site"
       },
-      "evidence": "row 2: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -73,7 +73,7 @@
         "row": 2,
         "column": "product_id"
       },
-      "evidence": "row 2: product_id=FG-GH6-CE",
+      "evidence": "product_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -92,9 +92,9 @@
       "as_of": null,
       "locator": {
         "row": 2,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 2: po_line=CE cell",
+      "evidence": "line=CE cell",
       "confidence": "high"
     },
     {
@@ -115,7 +115,7 @@
         "row": 2,
         "column": "units_packed"
       },
-      "evidence": "row 2: units_packed=400",
+      "evidence": "units_packed=400",
       "confidence": "high"
     },
     {
@@ -136,7 +136,7 @@
         "row": 3,
         "column": "date"
       },
-      "evidence": "row 3: date=2026-11-02",
+      "evidence": "date=2026-11-02",
       "confidence": "high"
     },
     {
@@ -149,7 +149,7 @@
         "date": "2026-11-02",
         "product_id": "FG-GH6-STD"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -157,7 +157,7 @@
         "row": 3,
         "column": "site"
       },
-      "evidence": "row 3: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -178,7 +178,7 @@
         "row": 3,
         "column": "product_id"
       },
-      "evidence": "row 3: product_id=FG-GH6-STD",
+      "evidence": "product_id=FG-GH6-STD",
       "confidence": "high"
     },
     {
@@ -197,9 +197,9 @@
       "as_of": null,
       "locator": {
         "row": 3,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 3: po_line=L1-L3",
+      "evidence": "line=L1-L3",
       "confidence": "high"
     },
     {
@@ -220,7 +220,7 @@
         "row": 3,
         "column": "units_packed"
       },
-      "evidence": "row 3: units_packed=3600",
+      "evidence": "units_packed=3600",
       "confidence": "high"
     },
     {
@@ -241,7 +241,7 @@
         "row": 4,
         "column": "date"
       },
-      "evidence": "row 4: date=2026-11-03",
+      "evidence": "date=2026-11-03",
       "confidence": "high"
     },
     {
@@ -254,7 +254,7 @@
         "date": "2026-11-03",
         "product_id": "FG-GH6-CE"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -262,7 +262,7 @@
         "row": 4,
         "column": "site"
       },
-      "evidence": "row 4: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -283,7 +283,7 @@
         "row": 4,
         "column": "product_id"
       },
-      "evidence": "row 4: product_id=FG-GH6-CE",
+      "evidence": "product_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -302,9 +302,9 @@
       "as_of": null,
       "locator": {
         "row": 4,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 4: po_line=CE cell",
+      "evidence": "line=CE cell",
       "confidence": "high"
     },
     {
@@ -325,7 +325,7 @@
         "row": 4,
         "column": "units_packed"
       },
-      "evidence": "row 4: units_packed=700",
+      "evidence": "units_packed=700",
       "confidence": "high"
     },
     {
@@ -346,7 +346,7 @@
         "row": 5,
         "column": "date"
       },
-      "evidence": "row 5: date=2026-11-03",
+      "evidence": "date=2026-11-03",
       "confidence": "high"
     },
     {
@@ -359,7 +359,7 @@
         "date": "2026-11-03",
         "product_id": "FG-GH6-STD"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -367,7 +367,7 @@
         "row": 5,
         "column": "site"
       },
-      "evidence": "row 5: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -388,7 +388,7 @@
         "row": 5,
         "column": "product_id"
       },
-      "evidence": "row 5: product_id=FG-GH6-STD",
+      "evidence": "product_id=FG-GH6-STD",
       "confidence": "high"
     },
     {
@@ -407,9 +407,9 @@
       "as_of": null,
       "locator": {
         "row": 5,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 5: po_line=L1-L3",
+      "evidence": "line=L1-L3",
       "confidence": "high"
     },
     {
@@ -430,7 +430,7 @@
         "row": 5,
         "column": "units_packed"
       },
-      "evidence": "row 5: units_packed=7900",
+      "evidence": "units_packed=7900",
       "confidence": "high"
     },
     {
@@ -451,7 +451,7 @@
         "row": 6,
         "column": "date"
       },
-      "evidence": "row 6: date=2026-11-04",
+      "evidence": "date=2026-11-04",
       "confidence": "high"
     },
     {
@@ -464,7 +464,7 @@
         "date": "2026-11-04",
         "product_id": "FG-GH6-CE"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -472,7 +472,7 @@
         "row": 6,
         "column": "site"
       },
-      "evidence": "row 6: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -493,7 +493,7 @@
         "row": 6,
         "column": "product_id"
       },
-      "evidence": "row 6: product_id=FG-GH6-CE",
+      "evidence": "product_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -512,9 +512,9 @@
       "as_of": null,
       "locator": {
         "row": 6,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 6: po_line=CE cell",
+      "evidence": "line=CE cell",
       "confidence": "high"
     },
     {
@@ -535,7 +535,7 @@
         "row": 6,
         "column": "units_packed"
       },
-      "evidence": "row 6: units_packed=1000",
+      "evidence": "units_packed=1000",
       "confidence": "high"
     },
     {
@@ -556,7 +556,7 @@
         "row": 7,
         "column": "date"
       },
-      "evidence": "row 7: date=2026-11-04",
+      "evidence": "date=2026-11-04",
       "confidence": "high"
     },
     {
@@ -569,7 +569,7 @@
         "date": "2026-11-04",
         "product_id": "FG-GH6-STD"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -577,7 +577,7 @@
         "row": 7,
         "column": "site"
       },
-      "evidence": "row 7: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -598,7 +598,7 @@
         "row": 7,
         "column": "product_id"
       },
-      "evidence": "row 7: product_id=FG-GH6-STD",
+      "evidence": "product_id=FG-GH6-STD",
       "confidence": "high"
     },
     {
@@ -617,9 +617,9 @@
       "as_of": null,
       "locator": {
         "row": 7,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 7: po_line=L1-L3",
+      "evidence": "line=L1-L3",
       "confidence": "high"
     },
     {
@@ -640,7 +640,7 @@
         "row": 7,
         "column": "units_packed"
       },
-      "evidence": "row 7: units_packed=9600",
+      "evidence": "units_packed=9600",
       "confidence": "high"
     },
     {
@@ -661,7 +661,7 @@
         "row": 8,
         "column": "date"
       },
-      "evidence": "row 8: date=2026-11-05",
+      "evidence": "date=2026-11-05",
       "confidence": "high"
     },
     {
@@ -674,7 +674,7 @@
         "date": "2026-11-05",
         "product_id": "FG-GH6-CE"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -682,7 +682,7 @@
         "row": 8,
         "column": "site"
       },
-      "evidence": "row 8: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -703,7 +703,7 @@
         "row": 8,
         "column": "product_id"
       },
-      "evidence": "row 8: product_id=FG-GH6-CE",
+      "evidence": "product_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -722,9 +722,9 @@
       "as_of": null,
       "locator": {
         "row": 8,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 8: po_line=CE cell",
+      "evidence": "line=CE cell",
       "confidence": "high"
     },
     {
@@ -745,7 +745,7 @@
         "row": 8,
         "column": "units_packed"
       },
-      "evidence": "row 8: units_packed=1500",
+      "evidence": "units_packed=1500",
       "confidence": "high"
     },
     {
@@ -766,7 +766,7 @@
         "row": 9,
         "column": "date"
       },
-      "evidence": "row 9: date=2026-11-05",
+      "evidence": "date=2026-11-05",
       "confidence": "high"
     },
     {
@@ -779,7 +779,7 @@
         "date": "2026-11-05",
         "product_id": "FG-GH6-STD"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -787,7 +787,7 @@
         "row": 9,
         "column": "site"
       },
-      "evidence": "row 9: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -808,7 +808,7 @@
         "row": 9,
         "column": "product_id"
       },
-      "evidence": "row 9: product_id=FG-GH6-STD",
+      "evidence": "product_id=FG-GH6-STD",
       "confidence": "high"
     },
     {
@@ -827,9 +827,9 @@
       "as_of": null,
       "locator": {
         "row": 9,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 9: po_line=L1-L3",
+      "evidence": "line=L1-L3",
       "confidence": "high"
     },
     {
@@ -850,7 +850,7 @@
         "row": 9,
         "column": "units_packed"
       },
-      "evidence": "row 9: units_packed=17100",
+      "evidence": "units_packed=17100",
       "confidence": "high"
     },
     {
@@ -871,7 +871,7 @@
         "row": 10,
         "column": "date"
       },
-      "evidence": "row 10: date=2026-11-06",
+      "evidence": "date=2026-11-06",
       "confidence": "high"
     },
     {
@@ -884,7 +884,7 @@
         "date": "2026-11-06",
         "product_id": "FG-GH6-CE"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -892,7 +892,7 @@
         "row": 10,
         "column": "site"
       },
-      "evidence": "row 10: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -913,7 +913,7 @@
         "row": 10,
         "column": "product_id"
       },
-      "evidence": "row 10: product_id=FG-GH6-CE",
+      "evidence": "product_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -932,9 +932,9 @@
       "as_of": null,
       "locator": {
         "row": 10,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 10: po_line=CE cell",
+      "evidence": "line=CE cell",
       "confidence": "high"
     },
     {
@@ -955,7 +955,7 @@
         "row": 10,
         "column": "units_packed"
       },
-      "evidence": "row 10: units_packed=1700",
+      "evidence": "units_packed=1700",
       "confidence": "high"
     },
     {
@@ -976,7 +976,7 @@
         "row": 11,
         "column": "date"
       },
-      "evidence": "row 11: date=2026-11-06",
+      "evidence": "date=2026-11-06",
       "confidence": "high"
     },
     {
@@ -989,7 +989,7 @@
         "date": "2026-11-06",
         "product_id": "FG-GH6-STD"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -997,7 +997,7 @@
         "row": 11,
         "column": "site"
       },
-      "evidence": "row 11: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -1018,7 +1018,7 @@
         "row": 11,
         "column": "product_id"
       },
-      "evidence": "row 11: product_id=FG-GH6-STD",
+      "evidence": "product_id=FG-GH6-STD",
       "confidence": "high"
     },
     {
@@ -1037,9 +1037,9 @@
       "as_of": null,
       "locator": {
         "row": 11,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 11: po_line=L1-L3",
+      "evidence": "line=L1-L3",
       "confidence": "high"
     },
     {
@@ -1060,7 +1060,7 @@
         "row": 11,
         "column": "units_packed"
       },
-      "evidence": "row 11: units_packed=20200",
+      "evidence": "units_packed=20200",
       "confidence": "high"
     },
     {
@@ -1081,7 +1081,7 @@
         "row": 12,
         "column": "date"
       },
-      "evidence": "row 12: date=2026-11-09",
+      "evidence": "date=2026-11-09",
       "confidence": "high"
     },
     {
@@ -1094,7 +1094,7 @@
         "date": "2026-11-09",
         "product_id": "FG-GH6-CE"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -1102,7 +1102,7 @@
         "row": 12,
         "column": "site"
       },
-      "evidence": "row 12: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -1123,7 +1123,7 @@
         "row": 12,
         "column": "product_id"
       },
-      "evidence": "row 12: product_id=FG-GH6-CE",
+      "evidence": "product_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -1142,9 +1142,9 @@
       "as_of": null,
       "locator": {
         "row": 12,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 12: po_line=CE cell",
+      "evidence": "line=CE cell",
       "confidence": "high"
     },
     {
@@ -1165,7 +1165,7 @@
         "row": 12,
         "column": "units_packed"
       },
-      "evidence": "row 12: units_packed=2100",
+      "evidence": "units_packed=2100",
       "confidence": "high"
     },
     {
@@ -1186,7 +1186,7 @@
         "row": 13,
         "column": "date"
       },
-      "evidence": "row 13: date=2026-11-09",
+      "evidence": "date=2026-11-09",
       "confidence": "high"
     },
     {
@@ -1199,7 +1199,7 @@
         "date": "2026-11-09",
         "product_id": "FG-GH6-STD"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -1207,7 +1207,7 @@
         "row": 13,
         "column": "site"
       },
-      "evidence": "row 13: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -1228,7 +1228,7 @@
         "row": 13,
         "column": "product_id"
       },
-      "evidence": "row 13: product_id=FG-GH6-STD",
+      "evidence": "product_id=FG-GH6-STD",
       "confidence": "high"
     },
     {
@@ -1247,9 +1247,9 @@
       "as_of": null,
       "locator": {
         "row": 13,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 13: po_line=L1-L3",
+      "evidence": "line=L1-L3",
       "confidence": "high"
     },
     {
@@ -1270,7 +1270,7 @@
         "row": 13,
         "column": "units_packed"
       },
-      "evidence": "row 13: units_packed=26200",
+      "evidence": "units_packed=26200",
       "confidence": "high"
     },
     {
@@ -1291,7 +1291,7 @@
         "row": 14,
         "column": "date"
       },
-      "evidence": "row 14: date=2026-11-10",
+      "evidence": "date=2026-11-10",
       "confidence": "high"
     },
     {
@@ -1304,7 +1304,7 @@
         "date": "2026-11-10",
         "product_id": "FG-GH6-CE"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -1312,7 +1312,7 @@
         "row": 14,
         "column": "site"
       },
-      "evidence": "row 14: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -1333,7 +1333,7 @@
         "row": 14,
         "column": "product_id"
       },
-      "evidence": "row 14: product_id=FG-GH6-CE",
+      "evidence": "product_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -1352,9 +1352,9 @@
       "as_of": null,
       "locator": {
         "row": 14,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 14: po_line=CE cell",
+      "evidence": "line=CE cell",
       "confidence": "high"
     },
     {
@@ -1375,7 +1375,7 @@
         "row": 14,
         "column": "units_packed"
       },
-      "evidence": "row 14: units_packed=3100",
+      "evidence": "units_packed=3100",
       "confidence": "high"
     },
     {
@@ -1396,7 +1396,7 @@
         "row": 15,
         "column": "date"
       },
-      "evidence": "row 15: date=2026-11-10",
+      "evidence": "date=2026-11-10",
       "confidence": "high"
     },
     {
@@ -1409,7 +1409,7 @@
         "date": "2026-11-10",
         "product_id": "FG-GH6-STD"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -1417,7 +1417,7 @@
         "row": 15,
         "column": "site"
       },
-      "evidence": "row 15: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -1438,7 +1438,7 @@
         "row": 15,
         "column": "product_id"
       },
-      "evidence": "row 15: product_id=FG-GH6-STD",
+      "evidence": "product_id=FG-GH6-STD",
       "confidence": "high"
     },
     {
@@ -1457,9 +1457,9 @@
       "as_of": null,
       "locator": {
         "row": 15,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 15: po_line=L1-L3",
+      "evidence": "line=L1-L3",
       "confidence": "high"
     },
     {
@@ -1480,7 +1480,7 @@
         "row": 15,
         "column": "units_packed"
       },
-      "evidence": "row 15: units_packed=32500",
+      "evidence": "units_packed=32500",
       "confidence": "high"
     },
     {
@@ -1501,7 +1501,7 @@
         "row": 16,
         "column": "date"
       },
-      "evidence": "row 16: date=2026-11-11",
+      "evidence": "date=2026-11-11",
       "confidence": "high"
     },
     {
@@ -1514,7 +1514,7 @@
         "date": "2026-11-11",
         "product_id": "FG-GH6-CE"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -1522,7 +1522,7 @@
         "row": 16,
         "column": "site"
       },
-      "evidence": "row 16: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -1543,7 +1543,7 @@
         "row": 16,
         "column": "product_id"
       },
-      "evidence": "row 16: product_id=FG-GH6-CE",
+      "evidence": "product_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -1562,9 +1562,9 @@
       "as_of": null,
       "locator": {
         "row": 16,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 16: po_line=CE cell",
+      "evidence": "line=CE cell",
       "confidence": "high"
     },
     {
@@ -1585,7 +1585,7 @@
         "row": 16,
         "column": "units_packed"
       },
-      "evidence": "row 16: units_packed=3400",
+      "evidence": "units_packed=3400",
       "confidence": "high"
     },
     {
@@ -1606,7 +1606,7 @@
         "row": 17,
         "column": "date"
       },
-      "evidence": "row 17: date=2026-11-11",
+      "evidence": "date=2026-11-11",
       "confidence": "high"
     },
     {
@@ -1619,7 +1619,7 @@
         "date": "2026-11-11",
         "product_id": "FG-GH6-STD"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -1627,7 +1627,7 @@
         "row": 17,
         "column": "site"
       },
-      "evidence": "row 17: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -1648,7 +1648,7 @@
         "row": 17,
         "column": "product_id"
       },
-      "evidence": "row 17: product_id=FG-GH6-STD",
+      "evidence": "product_id=FG-GH6-STD",
       "confidence": "high"
     },
     {
@@ -1667,9 +1667,9 @@
       "as_of": null,
       "locator": {
         "row": 17,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 17: po_line=L1-L3",
+      "evidence": "line=L1-L3",
       "confidence": "high"
     },
     {
@@ -1690,7 +1690,7 @@
         "row": 17,
         "column": "units_packed"
       },
-      "evidence": "row 17: units_packed=32300",
+      "evidence": "units_packed=32300",
       "confidence": "high"
     },
     {
@@ -1711,7 +1711,7 @@
         "row": 18,
         "column": "date"
       },
-      "evidence": "row 18: date=2026-11-12",
+      "evidence": "date=2026-11-12",
       "confidence": "high"
     },
     {
@@ -1724,7 +1724,7 @@
         "date": "2026-11-12",
         "product_id": "FG-GH6-CE"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -1732,7 +1732,7 @@
         "row": 18,
         "column": "site"
       },
-      "evidence": "row 18: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -1753,7 +1753,7 @@
         "row": 18,
         "column": "product_id"
       },
-      "evidence": "row 18: product_id=FG-GH6-CE",
+      "evidence": "product_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -1772,9 +1772,9 @@
       "as_of": null,
       "locator": {
         "row": 18,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 18: po_line=CE cell",
+      "evidence": "line=CE cell",
       "confidence": "high"
     },
     {
@@ -1795,7 +1795,7 @@
         "row": 18,
         "column": "units_packed"
       },
-      "evidence": "row 18: units_packed=3800",
+      "evidence": "units_packed=3800",
       "confidence": "high"
     },
     {
@@ -1816,7 +1816,7 @@
         "row": 19,
         "column": "date"
       },
-      "evidence": "row 19: date=2026-11-12",
+      "evidence": "date=2026-11-12",
       "confidence": "high"
     },
     {
@@ -1829,7 +1829,7 @@
         "date": "2026-11-12",
         "product_id": "FG-GH6-STD"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -1837,7 +1837,7 @@
         "row": 19,
         "column": "site"
       },
-      "evidence": "row 19: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -1858,7 +1858,7 @@
         "row": 19,
         "column": "product_id"
       },
-      "evidence": "row 19: product_id=FG-GH6-STD",
+      "evidence": "product_id=FG-GH6-STD",
       "confidence": "high"
     },
     {
@@ -1877,9 +1877,9 @@
       "as_of": null,
       "locator": {
         "row": 19,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 19: po_line=L1-L3",
+      "evidence": "line=L1-L3",
       "confidence": "high"
     },
     {
@@ -1900,7 +1900,7 @@
         "row": 19,
         "column": "units_packed"
       },
-      "evidence": "row 19: units_packed=42500",
+      "evidence": "units_packed=42500",
       "confidence": "high"
     },
     {
@@ -1921,7 +1921,7 @@
         "row": 20,
         "column": "date"
       },
-      "evidence": "row 20: date=2026-11-13",
+      "evidence": "date=2026-11-13",
       "confidence": "high"
     },
     {
@@ -1934,7 +1934,7 @@
         "date": "2026-11-13",
         "product_id": "FG-GH6-CE"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -1942,7 +1942,7 @@
         "row": 20,
         "column": "site"
       },
-      "evidence": "row 20: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -1963,7 +1963,7 @@
         "row": 20,
         "column": "product_id"
       },
-      "evidence": "row 20: product_id=FG-GH6-CE",
+      "evidence": "product_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -1982,9 +1982,9 @@
       "as_of": null,
       "locator": {
         "row": 20,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 20: po_line=CE cell",
+      "evidence": "line=CE cell",
       "confidence": "high"
     },
     {
@@ -2005,7 +2005,7 @@
         "row": 20,
         "column": "units_packed"
       },
-      "evidence": "row 20: units_packed=5400",
+      "evidence": "units_packed=5400",
       "confidence": "high"
     },
     {
@@ -2026,7 +2026,7 @@
         "row": 21,
         "column": "date"
       },
-      "evidence": "row 21: date=2026-11-13",
+      "evidence": "date=2026-11-13",
       "confidence": "high"
     },
     {
@@ -2039,7 +2039,7 @@
         "date": "2026-11-13",
         "product_id": "FG-GH6-STD"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -2047,7 +2047,7 @@
         "row": 21,
         "column": "site"
       },
-      "evidence": "row 21: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -2068,7 +2068,7 @@
         "row": 21,
         "column": "product_id"
       },
-      "evidence": "row 21: product_id=FG-GH6-STD",
+      "evidence": "product_id=FG-GH6-STD",
       "confidence": "high"
     },
     {
@@ -2087,9 +2087,9 @@
       "as_of": null,
       "locator": {
         "row": 21,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 21: po_line=L1-L3",
+      "evidence": "line=L1-L3",
       "confidence": "high"
     },
     {
@@ -2110,7 +2110,7 @@
         "row": 21,
         "column": "units_packed"
       },
-      "evidence": "row 21: units_packed=52500",
+      "evidence": "units_packed=52500",
       "confidence": "high"
     },
     {
@@ -2131,7 +2131,7 @@
         "row": 22,
         "column": "date"
       },
-      "evidence": "row 22: date=2026-11-16",
+      "evidence": "date=2026-11-16",
       "confidence": "high"
     },
     {
@@ -2144,7 +2144,7 @@
         "date": "2026-11-16",
         "product_id": "FG-GH6-CE"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -2152,7 +2152,7 @@
         "row": 22,
         "column": "site"
       },
-      "evidence": "row 22: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -2173,7 +2173,7 @@
         "row": 22,
         "column": "product_id"
       },
-      "evidence": "row 22: product_id=FG-GH6-CE",
+      "evidence": "product_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -2192,9 +2192,9 @@
       "as_of": null,
       "locator": {
         "row": 22,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 22: po_line=CE cell",
+      "evidence": "line=CE cell",
       "confidence": "high"
     },
     {
@@ -2215,7 +2215,7 @@
         "row": 22,
         "column": "units_packed"
       },
-      "evidence": "row 22: units_packed=5300",
+      "evidence": "units_packed=5300",
       "confidence": "high"
     },
     {
@@ -2236,7 +2236,7 @@
         "row": 23,
         "column": "date"
       },
-      "evidence": "row 23: date=2026-11-16",
+      "evidence": "date=2026-11-16",
       "confidence": "high"
     },
     {
@@ -2249,7 +2249,7 @@
         "date": "2026-11-16",
         "product_id": "FG-GH6-STD"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -2257,7 +2257,7 @@
         "row": 23,
         "column": "site"
       },
-      "evidence": "row 23: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -2278,7 +2278,7 @@
         "row": 23,
         "column": "product_id"
       },
-      "evidence": "row 23: product_id=FG-GH6-STD",
+      "evidence": "product_id=FG-GH6-STD",
       "confidence": "high"
     },
     {
@@ -2297,9 +2297,9 @@
       "as_of": null,
       "locator": {
         "row": 23,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 23: po_line=L1-L3",
+      "evidence": "line=L1-L3",
       "confidence": "high"
     },
     {
@@ -2320,7 +2320,7 @@
         "row": 23,
         "column": "units_packed"
       },
-      "evidence": "row 23: units_packed=57500",
+      "evidence": "units_packed=57500",
       "confidence": "high"
     },
     {
@@ -2341,7 +2341,7 @@
         "row": 24,
         "column": "date"
       },
-      "evidence": "row 24: date=2026-11-17",
+      "evidence": "date=2026-11-17",
       "confidence": "high"
     },
     {
@@ -2354,7 +2354,7 @@
         "date": "2026-11-17",
         "product_id": "FG-GH6-CE"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -2362,7 +2362,7 @@
         "row": 24,
         "column": "site"
       },
-      "evidence": "row 24: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -2383,7 +2383,7 @@
         "row": 24,
         "column": "product_id"
       },
-      "evidence": "row 24: product_id=FG-GH6-CE",
+      "evidence": "product_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -2402,9 +2402,9 @@
       "as_of": null,
       "locator": {
         "row": 24,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 24: po_line=CE cell",
+      "evidence": "line=CE cell",
       "confidence": "high"
     },
     {
@@ -2425,7 +2425,7 @@
         "row": 24,
         "column": "units_packed"
       },
-      "evidence": "row 24: units_packed=5500",
+      "evidence": "units_packed=5500",
       "confidence": "high"
     },
     {
@@ -2446,7 +2446,7 @@
         "row": 25,
         "column": "date"
       },
-      "evidence": "row 25: date=2026-11-17",
+      "evidence": "date=2026-11-17",
       "confidence": "high"
     },
     {
@@ -2459,7 +2459,7 @@
         "date": "2026-11-17",
         "product_id": "FG-GH6-STD"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -2467,7 +2467,7 @@
         "row": 25,
         "column": "site"
       },
-      "evidence": "row 25: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -2488,7 +2488,7 @@
         "row": 25,
         "column": "product_id"
       },
-      "evidence": "row 25: product_id=FG-GH6-STD",
+      "evidence": "product_id=FG-GH6-STD",
       "confidence": "high"
     },
     {
@@ -2507,9 +2507,9 @@
       "as_of": null,
       "locator": {
         "row": 25,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 25: po_line=L1-L3",
+      "evidence": "line=L1-L3",
       "confidence": "high"
     },
     {
@@ -2530,7 +2530,7 @@
         "row": 25,
         "column": "units_packed"
       },
-      "evidence": "row 25: units_packed=67300",
+      "evidence": "units_packed=67300",
       "confidence": "high"
     },
     {
@@ -2551,7 +2551,7 @@
         "row": 26,
         "column": "date"
       },
-      "evidence": "row 26: date=2026-11-18",
+      "evidence": "date=2026-11-18",
       "confidence": "high"
     },
     {
@@ -2564,7 +2564,7 @@
         "date": "2026-11-18",
         "product_id": "FG-GH6-CE"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -2572,7 +2572,7 @@
         "row": 26,
         "column": "site"
       },
-      "evidence": "row 26: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -2593,7 +2593,7 @@
         "row": 26,
         "column": "product_id"
       },
-      "evidence": "row 26: product_id=FG-GH6-CE",
+      "evidence": "product_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -2612,9 +2612,9 @@
       "as_of": null,
       "locator": {
         "row": 26,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 26: po_line=CE cell",
+      "evidence": "line=CE cell",
       "confidence": "high"
     },
     {
@@ -2635,7 +2635,7 @@
         "row": 26,
         "column": "units_packed"
       },
-      "evidence": "row 26: units_packed=6100",
+      "evidence": "units_packed=6100",
       "confidence": "high"
     },
     {
@@ -2656,7 +2656,7 @@
         "row": 27,
         "column": "date"
       },
-      "evidence": "row 27: date=2026-11-18",
+      "evidence": "date=2026-11-18",
       "confidence": "high"
     },
     {
@@ -2669,7 +2669,7 @@
         "date": "2026-11-18",
         "product_id": "FG-GH6-STD"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -2677,7 +2677,7 @@
         "row": 27,
         "column": "site"
       },
-      "evidence": "row 27: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -2698,7 +2698,7 @@
         "row": 27,
         "column": "product_id"
       },
-      "evidence": "row 27: product_id=FG-GH6-STD",
+      "evidence": "product_id=FG-GH6-STD",
       "confidence": "high"
     },
     {
@@ -2717,9 +2717,9 @@
       "as_of": null,
       "locator": {
         "row": 27,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 27: po_line=L1-L3",
+      "evidence": "line=L1-L3",
       "confidence": "high"
     },
     {
@@ -2740,7 +2740,7 @@
         "row": 27,
         "column": "units_packed"
       },
-      "evidence": "row 27: units_packed=62700",
+      "evidence": "units_packed=62700",
       "confidence": "high"
     },
     {
@@ -2761,7 +2761,7 @@
         "row": 28,
         "column": "date"
       },
-      "evidence": "row 28: date=2026-11-19",
+      "evidence": "date=2026-11-19",
       "confidence": "high"
     },
     {
@@ -2774,7 +2774,7 @@
         "date": "2026-11-19",
         "product_id": "FG-GH6-CE"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -2782,7 +2782,7 @@
         "row": 28,
         "column": "site"
       },
-      "evidence": "row 28: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -2803,7 +2803,7 @@
         "row": 28,
         "column": "product_id"
       },
-      "evidence": "row 28: product_id=FG-GH6-CE",
+      "evidence": "product_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -2822,9 +2822,9 @@
       "as_of": null,
       "locator": {
         "row": 28,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 28: po_line=CE cell",
+      "evidence": "line=CE cell",
       "confidence": "high"
     },
     {
@@ -2845,7 +2845,7 @@
         "row": 28,
         "column": "units_packed"
       },
-      "evidence": "row 28: units_packed=6800",
+      "evidence": "units_packed=6800",
       "confidence": "high"
     },
     {
@@ -2866,7 +2866,7 @@
         "row": 29,
         "column": "date"
       },
-      "evidence": "row 29: date=2026-11-19",
+      "evidence": "date=2026-11-19",
       "confidence": "high"
     },
     {
@@ -2879,7 +2879,7 @@
         "date": "2026-11-19",
         "product_id": "FG-GH6-STD"
       },
-      "attribute": "site",
+      "attribute": "site_id",
       "value": "DC-HAM",
       "unit": null,
       "as_of": null,
@@ -2887,7 +2887,7 @@
         "row": 29,
         "column": "site"
       },
-      "evidence": "row 29: site=DC-HAM",
+      "evidence": "site=DC-HAM",
       "confidence": "high"
     },
     {
@@ -2908,7 +2908,7 @@
         "row": 29,
         "column": "product_id"
       },
-      "evidence": "row 29: product_id=FG-GH6-STD",
+      "evidence": "product_id=FG-GH6-STD",
       "confidence": "high"
     },
     {
@@ -2927,9 +2927,9 @@
       "as_of": null,
       "locator": {
         "row": 29,
-        "column": "po_line"
+        "column": "line"
       },
-      "evidence": "row 29: po_line=L1-L3",
+      "evidence": "line=L1-L3",
       "confidence": "high"
     },
     {
@@ -2950,7 +2950,7 @@
         "row": 29,
         "column": "units_packed"
       },
-      "evidence": "row 29: units_packed=80100",
+      "evidence": "units_packed=80100",
       "confidence": "high"
     }
   ],

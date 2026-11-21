@@ -1,0 +1,65 @@
+{
+  "signature": "dae747b26d0feb48cdc6782c1b84b57360795e4073e77e5f1adfdcc7ed7abb1f",
+  "example_path": "soony/logistics/open_shipments_tracker_v37_FINAL_final2.xlsx",
+  "format": "xlsx",
+  "sheet": "Tracker",
+  "fact_type": "shipment",
+  "subject": [
+    "shipment_id"
+  ],
+  "columns": {
+    "Shipment": {
+      "field": "shipment_id",
+      "type": "text"
+    },
+    "Carrier": {
+      "field": "carrier_id",
+      "type": "text"
+    },
+    "Mode": {
+      "field": "mode",
+      "type": "text"
+    },
+    "Container/AWB": {
+      "field": "reference",
+      "type": "text"
+    },
+    "Supplier": {
+      "field": "supplier_id",
+      "type": "text"
+    },
+    "POs": {
+      "field": "po_numbers",
+      "type": "list",
+      "list_sep": "|"
+    },
+    "From": {
+      "field": "origin",
+      "type": "text"
+    },
+    "To": {
+      "field": "destination",
+      "type": "text"
+    },
+    "ETD": {
+      "field": "etd",
+      "type": "text"
+    },
+    "ETA": {
+      "field": "eta",
+      "type": "text"
+    },
+    "Status": {
+      "field": "status",
+      "type": "text"
+    },
+    "Comment": {
+      "field": "note",
+      "type": "text"
+    }
+  },
+  "header_detection": {
+    "row": 1,
+    "title_rows": []
+  }
+}

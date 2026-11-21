@@ -10,221 +10,551 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
-      "fact_type": "x_org_chart_entry",
+      "fact_type": "policy_directive",
       "subject": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "f3ffade41920"
       },
       "subject_raw": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "f3ffade41920"
       },
-      "attribute": "entry",
+      "attribute": "directive",
+      "value": "Soony Interactive GmbH · Procurement organisation (v2, 2026-11-21)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 1
+      },
+      "evidence": "Soony Interactive GmbH · Procurement organisation (v2, 2026-11-21)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "org_chart_v2",
+        "directive_key": "f2d1f32f90f0"
+      },
+      "subject_raw": {
+        "scope": "org_chart_v2",
+        "directive_key": "f2d1f32f90f0"
+      },
+      "attribute": "directive",
+      "value": "Internal. Solid lines: reporting. Approval limits see Approval Policy PP-07.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 2
+      },
+      "evidence": "Internal. Solid lines: reporting. Approval limits see Approval Policy PP-07.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "org_chart_v2",
+        "directive_key": "7fc4d07dfc7e"
+      },
+      "subject_raw": {
+        "scope": "org_chart_v2",
+        "directive_key": "7fc4d07dfc7e"
+      },
+      "attribute": "directive",
+      "value": "Jonas Lindqvist",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 3
+      },
+      "evidence": "Jonas Lindqvist",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "org_chart_v2",
+        "directive_key": "c92c27a4ceae"
+      },
+      "subject_raw": {
+        "scope": "org_chart_v2",
+        "directive_key": "c92c27a4ceae"
+      },
+      "attribute": "directive",
+      "value": "Chief Procurement Officer",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 4
+      },
+      "evidence": "Chief Procurement Officer",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "org_chart_v2",
+        "directive_key": "acd98b4fd233"
+      },
+      "subject_raw": {
+        "scope": "org_chart_v2",
+        "directive_key": "acd98b4fd233"
+      },
+      "attribute": "directive",
+      "value": "Dr. Maren Vogt",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 5
+      },
+      "evidence": "Dr. Maren Vogt",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "org_chart_v2",
+        "directive_key": "21c2e7a1b25c"
+      },
+      "subject_raw": {
+        "scope": "org_chart_v2",
+        "directive_key": "21c2e7a1b25c"
+      },
+      "attribute": "directive",
       "value": "Head of Procurement",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 6
       },
       "evidence": "Head of Procurement",
       "confidence": "high"
     },
     {
-      "fact_type": "x_org_chart_entry",
+      "fact_type": "policy_directive",
       "subject": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "9cb3654cfb14"
       },
       "subject_raw": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "9cb3654cfb14"
       },
-      "attribute": "entry",
+      "attribute": "directive",
+      "value": "Tobias Brandt",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 7
+      },
+      "evidence": "Tobias Brandt",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "org_chart_v2",
+        "directive_key": "ecd4512f54a1"
+      },
+      "subject_raw": {
+        "scope": "org_chart_v2",
+        "directive_key": "ecd4512f54a1"
+      },
+      "attribute": "directive",
       "value": "Category Lead Game Media",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 8
       },
       "evidence": "Category Lead Game Media",
       "confidence": "high"
     },
     {
-      "fact_type": "x_org_chart_entry",
+      "fact_type": "policy_directive",
       "subject": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "4652e77f4bae"
       },
       "subject_raw": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "4652e77f4bae"
       },
-      "attribute": "entry",
+      "attribute": "directive",
+      "value": "Felix Brunner",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 9
+      },
+      "evidence": "Felix Brunner",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "org_chart_v2",
+        "directive_key": "7cab7da978ee"
+      },
+      "subject_raw": {
+        "scope": "org_chart_v2",
+        "directive_key": "7cab7da978ee"
+      },
+      "attribute": "directive",
       "value": "Senior Buyer (Game Cards)",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 10
       },
       "evidence": "Senior Buyer (Game Cards)",
       "confidence": "high"
     },
     {
-      "fact_type": "x_org_chart_entry",
+      "fact_type": "policy_directive",
       "subject": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "27378b5e62e7"
       },
       "subject_raw": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "27378b5e62e7"
       },
-      "attribute": "entry",
+      "attribute": "directive",
+      "value": "Sofia Marchetti",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 11
+      },
+      "evidence": "Sofia Marchetti",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "org_chart_v2",
+        "directive_key": "6073f42fabd5"
+      },
+      "subject_raw": {
+        "scope": "org_chart_v2",
+        "directive_key": "6073f42fabd5"
+      },
+      "attribute": "directive",
       "value": "Category Lead Print & Packaging",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 12
       },
       "evidence": "Category Lead Print & Packaging",
       "confidence": "high"
     },
     {
-      "fact_type": "x_org_chart_entry",
+      "fact_type": "policy_directive",
       "subject": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "1a77a462aac6"
       },
       "subject_raw": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "1a77a462aac6"
       },
-      "attribute": "entry",
+      "attribute": "directive",
+      "value": "Paul Winter",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "Paul Winter",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "org_chart_v2",
+        "directive_key": "c4bc3614ad83"
+      },
+      "subject_raw": {
+        "scope": "org_chart_v2",
+        "directive_key": "c4bc3614ad83"
+      },
+      "attribute": "directive",
       "value": "Buyer (Print & Packaging)",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 14
       },
       "evidence": "Buyer (Print & Packaging)",
       "confidence": "high"
     },
     {
-      "fact_type": "x_org_chart_entry",
+      "fact_type": "policy_directive",
       "subject": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "40a8f7a5c4da"
       },
       "subject_raw": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "40a8f7a5c4da"
       },
-      "attribute": "entry",
+      "attribute": "directive",
+      "value": "Arjun Krishnan (from 2026-11-23)",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 15
+      },
+      "evidence": "Arjun Krishnan (from 2026-11-23)",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "org_chart_v2",
+        "directive_key": "550565ca3a94"
+      },
+      "subject_raw": {
+        "scope": "org_chart_v2",
+        "directive_key": "550565ca3a94"
+      },
+      "attribute": "directive",
       "value": "Category Lead Collector's Items",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 16
       },
       "evidence": "Category Lead Collector's Items",
       "confidence": "high"
     },
     {
-      "fact_type": "x_org_chart_entry",
+      "fact_type": "policy_directive",
       "subject": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "69de9bc1fe3d"
       },
       "subject_raw": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "69de9bc1fe3d"
       },
-      "attribute": "entry",
+      "attribute": "directive",
+      "value": "Mei Lin",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 17
+      },
+      "evidence": "Mei Lin",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "org_chart_v2",
+        "directive_key": "58caaaabe37e"
+      },
+      "subject_raw": {
+        "scope": "org_chart_v2",
+        "directive_key": "58caaaabe37e"
+      },
+      "attribute": "directive",
       "value": "Buyer (Collector's Items)",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 18
       },
       "evidence": "Buyer (Collector's Items)",
       "confidence": "high"
     },
     {
-      "fact_type": "x_org_chart_entry",
+      "fact_type": "policy_directive",
       "subject": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "598c5201827a"
       },
       "subject_raw": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "598c5201827a"
       },
-      "attribute": "entry",
+      "attribute": "directive",
+      "value": "Daniel Okafor",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 19
+      },
+      "evidence": "Daniel Okafor",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "org_chart_v2",
+        "directive_key": "e817279e331b"
+      },
+      "subject_raw": {
+        "scope": "org_chart_v2",
+        "directive_key": "e817279e331b"
+      },
+      "attribute": "directive",
       "value": "Supplier Quality Lead",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 20
       },
       "evidence": "Supplier Quality Lead",
       "confidence": "high"
     },
     {
-      "fact_type": "x_org_chart_entry",
+      "fact_type": "policy_directive",
       "subject": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "085314920383"
       },
       "subject_raw": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "085314920383"
       },
-      "attribute": "entry",
+      "attribute": "directive",
+      "value": "Raj Patel",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 21
+      },
+      "evidence": "Raj Patel",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "org_chart_v2",
+        "directive_key": "1eeb563e1812"
+      },
+      "subject_raw": {
+        "scope": "org_chart_v2",
+        "directive_key": "1eeb563e1812"
+      },
+      "attribute": "directive",
       "value": "Logistics Planner",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 22
       },
       "evidence": "Logistics Planner",
       "confidence": "high"
     },
     {
-      "fact_type": "x_org_chart_entry",
+      "fact_type": "policy_directive",
       "subject": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "547395b05cba"
       },
       "subject_raw": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "547395b05cba"
       },
-      "attribute": "entry",
+      "attribute": "directive",
       "value": "Distribution Center Hamburg (dotted line to Head of Procurement)",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 23
       },
       "evidence": "Distribution Center Hamburg (dotted line to Head of Procurement)",
       "confidence": "high"
     },
     {
-      "fact_type": "x_org_chart_entry",
+      "fact_type": "policy_directive",
       "subject": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "afe593fd2e15"
       },
       "subject_raw": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "afe593fd2e15"
       },
-      "attribute": "entry",
+      "attribute": "directive",
+      "value": "Katrin Jansen",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 24
+      },
+      "evidence": "Katrin Jansen",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "org_chart_v2",
+        "directive_key": "4d81e5524a6f"
+      },
+      "subject_raw": {
+        "scope": "org_chart_v2",
+        "directive_key": "4d81e5524a6f"
+      },
+      "attribute": "directive",
       "value": "Site Lead DC Hamburg",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 25
       },
       "evidence": "Site Lead DC Hamburg",
       "confidence": "high"
     },
     {
-      "fact_type": "x_org_chart_entry",
+      "fact_type": "policy_directive",
       "subject": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "70d601fb025d"
       },
       "subject_raw": {
-        "source_path": "soony/context/org_chart_v2.pdf"
+        "scope": "org_chart_v2",
+        "directive_key": "70d601fb025d"
       },
-      "attribute": "entry",
+      "attribute": "directive",
       "value": "Also: Nils Berger (IT & Systems Lead (Procurement)), Clara Weiss (Quality & Compliance Manager), Henrik Dahl (Chief Financial Officer)",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 26
       },
       "evidence": "Also: Nils Berger (IT & Systems Lead (Procurement)), Clara Weiss (Quality & Compliance Manager), Henrik Dahl (Chief Financial Officer)",
       "confidence": "high"

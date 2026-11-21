@@ -10,23 +10,26 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
       "fact_type": "policy_directive",
       "subject": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "e41c1014aa0e"
       },
       "subject_raw": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "e41c1014aa0e"
       },
       "attribute": "directive",
       "value": "Soony · PP-07 Approval policy · v3.2",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 1
       },
       "evidence": "Soony · PP-07 Approval policy · v3.2",
       "confidence": "high"
@@ -34,17 +37,41 @@
     {
       "fact_type": "policy_directive",
       "subject": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "89545d2b6820"
       },
       "subject_raw": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "89545d2b6820"
+      },
+      "attribute": "directive",
+      "value": "Page 1",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 2
+      },
+      "evidence": "Page 1",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "f619199669ba"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "f619199669ba"
       },
       "attribute": "directive",
       "value": "Procurement Policy PP-07 · Approval of purchase orders and",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 3
       },
       "evidence": "Procurement Policy PP-07 · Approval of purchase orders and",
       "confidence": "high"
@@ -52,17 +79,83 @@
     {
       "fact_type": "policy_directive",
       "subject": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "af06eb1e5ff7"
       },
       "subject_raw": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "af06eb1e5ff7"
+      },
+      "attribute": "directive",
+      "value": "supplier releases",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 4
+      },
+      "evidence": "supplier releases",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "8edd23141438"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "8edd23141438"
+      },
+      "attribute": "directive",
+      "value": "Version 3.2 · Effective 2025-04-01 · Owner: Head of Procurement · Review: annually",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 5
+      },
+      "evidence": "Version 3.2 · Effective 2025-04-01 · Owner: Head of Procurement · Review: annually",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "cd7e0efbc7d9"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "cd7e0efbc7d9"
+      },
+      "attribute": "directive",
+      "value": "1. Purpose",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 6
+      },
+      "evidence": "1. Purpose",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "f377e70ca0e4"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "f377e70ca0e4"
       },
       "attribute": "directive",
       "value": "This policy defines who may approve purchase orders (POs), supplier releases and air-freight spend.",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 7
       },
       "evidence": "This policy defines who may approve purchase orders (POs), supplier releases and air-freight spend.",
       "confidence": "high"
@@ -70,17 +163,20 @@
     {
       "fact_type": "policy_directive",
       "subject": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "ed779b328c91"
       },
       "subject_raw": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "ed779b328c91"
       },
       "attribute": "directive",
       "value": "2. Approval limits by value (per PO, in EUR)",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 8
       },
       "evidence": "2. Approval limits by value (per PO, in EUR)",
       "confidence": "high"
@@ -88,17 +184,20 @@
     {
       "fact_type": "policy_directive",
       "subject": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "f6a497061ace"
       },
       "subject_raw": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "f6a497061ace"
       },
       "attribute": "directive",
       "value": "Role",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 9
       },
       "evidence": "Role",
       "confidence": "high"
@@ -106,17 +205,20 @@
     {
       "fact_type": "policy_directive",
       "subject": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "c3d05fb9e44f"
       },
       "subject_raw": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "c3d05fb9e44f"
       },
       "attribute": "directive",
       "value": "Limit per PO",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 10
       },
       "evidence": "Limit per PO",
       "confidence": "high"
@@ -124,17 +226,251 @@
     {
       "fact_type": "policy_directive",
       "subject": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "b356e7dd1b2f"
       },
       "subject_raw": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "b356e7dd1b2f"
+      },
+      "attribute": "directive",
+      "value": "Buyer",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 11
+      },
+      "evidence": "Buyer",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "21a105199e8e"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "21a105199e8e"
+      },
+      "attribute": "directive",
+      "value": "< 50,000",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "< 50,000",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "b8527df094c4"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "b8527df094c4"
+      },
+      "attribute": "directive",
+      "value": "Category Lead",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 13
+      },
+      "evidence": "Category Lead",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "c0899e40aa1b"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "c0899e40aa1b"
+      },
+      "attribute": "directive",
+      "value": "< 500,000",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 14
+      },
+      "evidence": "< 500,000",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "f327cae6d46d"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "f327cae6d46d"
+      },
+      "attribute": "directive",
+      "value": "Head of Procurement",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 15
+      },
+      "evidence": "Head of Procurement",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "b5422663ccc7"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "b5422663ccc7"
+      },
+      "attribute": "directive",
+      "value": "< 2,000,000",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 16
+      },
+      "evidence": "< 2,000,000",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "845473b83442"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "845473b83442"
+      },
+      "attribute": "directive",
+      "value": "Chief Procurement Officer",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 17
+      },
+      "evidence": "Chief Procurement Officer",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "0c7f1c7e3818"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "0c7f1c7e3818"
+      },
+      "attribute": "directive",
+      "value": "< 5,000,000",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 18
+      },
+      "evidence": "< 5,000,000",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "4d1ac1876f63"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "4d1ac1876f63"
+      },
+      "attribute": "directive",
+      "value": "CPO and CFO jointly",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 19
+      },
+      "evidence": "CPO and CFO jointly",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "6be9ca36f8f1"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "6be9ca36f8f1"
+      },
+      "attribute": "directive",
+      "value": "≥ 5,000,000",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 20
+      },
+      "evidence": "≥ 5,000,000",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "8aca643ba117"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "8aca643ba117"
+      },
+      "attribute": "directive",
+      "value": "3. Receiving site",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 21
+      },
+      "evidence": "3. Receiving site",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "b776eea15265"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "b776eea15265"
       },
       "attribute": "directive",
       "value": "POs delivered to a Soony site require, in addition to the value approval, a booked dock slot released by the site",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 22
       },
       "evidence": "POs delivered to a Soony site require, in addition to the value approval, a booked dock slot released by the site",
       "confidence": "high"
@@ -142,17 +478,167 @@
     {
       "fact_type": "policy_directive",
       "subject": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "5f64f306c755"
       },
       "subject_raw": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "5f64f306c755"
+      },
+      "attribute": "directive",
+      "value": "lead.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 23
+      },
+      "evidence": "lead.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "c3aa506ea729"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "c3aa506ea729"
+      },
+      "attribute": "directive",
+      "value": "Site",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 24
+      },
+      "evidence": "Site",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "083f852ead6c"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "083f852ead6c"
+      },
+      "attribute": "directive",
+      "value": "Site lead",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 25
+      },
+      "evidence": "Site lead",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "2ed57b54f4a9"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "2ed57b54f4a9"
+      },
+      "attribute": "directive",
+      "value": "Deputy",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 26
+      },
+      "evidence": "Deputy",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "2b032b7602c1"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "2b032b7602c1"
+      },
+      "attribute": "directive",
+      "value": "DC-HAM Hamburg",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 27
+      },
+      "evidence": "DC-HAM Hamburg",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "08ceda566654"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "08ceda566654"
+      },
+      "attribute": "directive",
+      "value": "Katrin Jansen",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 28
+      },
+      "evidence": "Katrin Jansen",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "afa19720aaa4"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "afa19720aaa4"
+      },
+      "attribute": "directive",
+      "value": "Raj Patel",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 29
+      },
+      "evidence": "Raj Patel",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "46c4fc5f0b13"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "46c4fc5f0b13"
       },
       "attribute": "directive",
       "value": "4. Air freight",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 30
       },
       "evidence": "4. Air freight",
       "confidence": "high"
@@ -160,17 +646,20 @@
     {
       "fact_type": "policy_directive",
       "subject": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "2ecd5b76876e"
       },
       "subject_raw": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "2ecd5b76876e"
       },
       "attribute": "directive",
       "value": "Unplanned air freight up to EUR 200,000 per calendar month and category is approved by the responsible",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 31
       },
       "evidence": "Unplanned air freight up to EUR 200,000 per calendar month and category is approved by the responsible",
       "confidence": "high"
@@ -178,17 +667,20 @@
     {
       "fact_type": "policy_directive",
       "subject": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "a23ee17f6459"
       },
       "subject_raw": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "a23ee17f6459"
       },
       "attribute": "directive",
       "value": "Category Lead. Above that, approval by the CPO is required before booking.",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 32
       },
       "evidence": "Category Lead. Above that, approval by the CPO is required before booking.",
       "confidence": "high"
@@ -196,17 +688,62 @@
     {
       "fact_type": "policy_directive",
       "subject": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "dc1d6573e478"
       },
       "subject_raw": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "dc1d6573e478"
+      },
+      "attribute": "directive",
+      "value": "5. New suppliers",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 33
+      },
+      "evidence": "5. New suppliers",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "195ca5c0dc95"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "195ca5c0dc95"
+      },
+      "attribute": "directive",
+      "value": "A supplier is released for serial deliveries only after a successful PPAP and written release by the Supplier",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 34
+      },
+      "evidence": "A supplier is released for serial deliveries only after a successful PPAP and written release by the Supplier",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "039ad2fb703d"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "039ad2fb703d"
       },
       "attribute": "directive",
       "value": "Quality Lead and the responsible Category Lead. Conditional releases are limited to 90 days from the date of",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 35
       },
       "evidence": "Quality Lead and the responsible Category Lead. Conditional releases are limited to 90 days from the date of",
       "confidence": "high"
@@ -214,17 +751,20 @@
     {
       "fact_type": "policy_directive",
       "subject": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "588bf3f84c09"
       },
       "subject_raw": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "588bf3f84c09"
       },
       "attribute": "directive",
       "value": "release. POs placed after a conditional release has expired are held in status 'awaiting approval'. A conditional",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 36
       },
       "evidence": "release. POs placed after a conditional release has expired are held in status 'awaiting approval'. A conditional",
       "confidence": "high"
@@ -232,17 +772,83 @@
     {
       "fact_type": "policy_directive",
       "subject": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "ea14e25e00b8"
       },
       "subject_raw": {
-        "scope": "approval_policy"
+        "scope": "approval_policy_PP-07",
+        "directive_key": "ea14e25e00b8"
+      },
+      "attribute": "directive",
+      "value": "release is extended in writing, once and by at most 90 days, by the responsible Category Lead together with the",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 37
+      },
+      "evidence": "release is extended in writing, once and by at most 90 days, by the responsible Category Lead together with the",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "c60e4ca7c96b"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "c60e4ca7c96b"
+      },
+      "attribute": "directive",
+      "value": "Supplier Quality Lead.",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 38
+      },
+      "evidence": "Supplier Quality Lead.",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "f87ebdea00fa"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "f87ebdea00fa"
+      },
+      "attribute": "directive",
+      "value": "6. Exceptions",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 39
+      },
+      "evidence": "6. Exceptions",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "policy_directive",
+      "subject": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "7a3d23467a61"
+      },
+      "subject_raw": {
+        "scope": "approval_policy_PP-07",
+        "directive_key": "7a3d23467a61"
       },
       "attribute": "directive",
       "value": "Exceptions must be documented and approved by the Head of Procurement.",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 40
       },
       "evidence": "Exceptions must be documented and approved by the Head of Procurement.",
       "confidence": "high"

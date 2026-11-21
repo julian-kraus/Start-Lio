@@ -1,0 +1,54 @@
+{
+  "signature": "cdaf4b50ee3bd6868f92d2a6c86a8db4494092a356093bb78c6c9b892b0219c4",
+  "example_path": "soony/context/launch_plan_GH6.xlsx",
+  "format": "xlsx",
+  "sheet": "Parts",
+  "fact_type": "plan_part",
+  "subject": [
+    "material_id"
+  ],
+  "columns": {
+    "Part": {
+      "field": "material_id",
+      "type": "text"
+    },
+    "Description": {
+      "field": "description",
+      "type": "text"
+    },
+    "Per Standard": {
+      "field": "per_standard",
+      "type": "text"
+    },
+    "Per Collector's": {
+      "field": "per_collector_s",
+      "type": "text"
+    },
+    "Needed for the remaining pack-out": {
+      "field": "need",
+      "type": "text"
+    },
+    "ERP stock": {
+      "field": "erp_stock",
+      "type": "text"
+    },
+    "Due before launch": {
+      "field": "due_before_launch",
+      "type": "text"
+    },
+    "Cover": {
+      "field": "cover",
+      "type": "text"
+    },
+    "Status": {
+      "field": "status",
+      "type": "text"
+    }
+  },
+  "header_detection": {
+    "row": 3,
+    "title_rows": [
+      1
+    ]
+  }
+}

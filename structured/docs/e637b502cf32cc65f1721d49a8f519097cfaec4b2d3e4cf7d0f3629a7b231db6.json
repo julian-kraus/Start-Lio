@@ -10,16 +10,16 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-2"
+        "carrier_id": "LSP-01"
       },
       "subject_raw": {
-        "id": "row-2"
+        "carrier_id": "LSP-01"
       },
       "attribute": "carrier_id",
       "value": "LSP-01",
@@ -29,16 +29,16 @@
         "row": 2,
         "column": "carrier_id"
       },
-      "evidence": "row 2: carrier_id=LSP-01",
+      "evidence": "carrier_id=LSP-01",
       "confidence": "high"
     },
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-2"
+        "carrier_id": "LSP-01"
       },
       "subject_raw": {
-        "id": "row-2"
+        "carrier_id": "LSP-01"
       },
       "attribute": "name",
       "value": "Nordhav Shipping A/S",
@@ -48,16 +48,16 @@
         "row": 2,
         "column": "name"
       },
-      "evidence": "row 2: name=Nordhav Shipping A/S",
+      "evidence": "name=Nordhav Shipping A/S",
       "confidence": "high"
     },
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-2"
+        "carrier_id": "LSP-01"
       },
       "subject_raw": {
-        "id": "row-2"
+        "carrier_id": "LSP-01"
       },
       "attribute": "city",
       "value": "Copenhagen",
@@ -67,16 +67,16 @@
         "row": 2,
         "column": "city"
       },
-      "evidence": "row 2: city=Copenhagen",
+      "evidence": "city=Copenhagen",
       "confidence": "high"
     },
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-2"
+        "carrier_id": "LSP-01"
       },
       "subject_raw": {
-        "id": "row-2"
+        "carrier_id": "LSP-01"
       },
       "attribute": "country",
       "value": "DK",
@@ -86,16 +86,16 @@
         "row": 2,
         "column": "country"
       },
-      "evidence": "row 2: country=DK",
+      "evidence": "country=DK",
       "confidence": "high"
     },
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-2"
+        "carrier_id": "LSP-01"
       },
       "subject_raw": {
-        "id": "row-2"
+        "carrier_id": "LSP-01"
       },
       "attribute": "modes",
       "value": "ocean",
@@ -105,16 +105,16 @@
         "row": 2,
         "column": "modes"
       },
-      "evidence": "row 2: modes=ocean",
+      "evidence": "modes=ocean",
       "confidence": "high"
     },
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-3"
+        "carrier_id": "LSP-02"
       },
       "subject_raw": {
-        "id": "row-3"
+        "carrier_id": "LSP-02"
       },
       "attribute": "carrier_id",
       "value": "LSP-02",
@@ -124,16 +124,16 @@
         "row": 3,
         "column": "carrier_id"
       },
-      "evidence": "row 3: carrier_id=LSP-02",
+      "evidence": "carrier_id=LSP-02",
       "confidence": "high"
     },
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-3"
+        "carrier_id": "LSP-02"
       },
       "subject_raw": {
-        "id": "row-3"
+        "carrier_id": "LSP-02"
       },
       "attribute": "name",
       "value": "Alpen Air Cargo GmbH",
@@ -143,16 +143,16 @@
         "row": 3,
         "column": "name"
       },
-      "evidence": "row 3: name=Alpen Air Cargo GmbH",
+      "evidence": "name=Alpen Air Cargo GmbH",
       "confidence": "high"
     },
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-3"
+        "carrier_id": "LSP-02"
       },
       "subject_raw": {
-        "id": "row-3"
+        "carrier_id": "LSP-02"
       },
       "attribute": "city",
       "value": "Munich",
@@ -162,16 +162,16 @@
         "row": 3,
         "column": "city"
       },
-      "evidence": "row 3: city=Munich",
+      "evidence": "city=Munich",
       "confidence": "high"
     },
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-3"
+        "carrier_id": "LSP-02"
       },
       "subject_raw": {
-        "id": "row-3"
+        "carrier_id": "LSP-02"
       },
       "attribute": "country",
       "value": "DE",
@@ -181,16 +181,16 @@
         "row": 3,
         "column": "country"
       },
-      "evidence": "row 3: country=DE",
+      "evidence": "country=DE",
       "confidence": "high"
     },
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-3"
+        "carrier_id": "LSP-02"
       },
       "subject_raw": {
-        "id": "row-3"
+        "carrier_id": "LSP-02"
       },
       "attribute": "modes",
       "value": "air",
@@ -200,16 +200,16 @@
         "row": 3,
         "column": "modes"
       },
-      "evidence": "row 3: modes=air",
+      "evidence": "modes=air",
       "confidence": "high"
     },
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-4"
+        "carrier_id": "LSP-03"
       },
       "subject_raw": {
-        "id": "row-4"
+        "carrier_id": "LSP-03"
       },
       "attribute": "carrier_id",
       "value": "LSP-03",
@@ -219,16 +219,16 @@
         "row": 4,
         "column": "carrier_id"
       },
-      "evidence": "row 4: carrier_id=LSP-03",
+      "evidence": "carrier_id=LSP-03",
       "confidence": "high"
     },
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-4"
+        "carrier_id": "LSP-03"
       },
       "subject_raw": {
-        "id": "row-4"
+        "carrier_id": "LSP-03"
       },
       "attribute": "name",
       "value": "Sahyadri Freight Forwarders Pvt. Ltd.",
@@ -238,16 +238,16 @@
         "row": 4,
         "column": "name"
       },
-      "evidence": "row 4: name=Sahyadri Freight Forwarders Pvt. Ltd.",
+      "evidence": "name=Sahyadri Freight Forwarders Pvt. Ltd.",
       "confidence": "high"
     },
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-4"
+        "carrier_id": "LSP-03"
       },
       "subject_raw": {
-        "id": "row-4"
+        "carrier_id": "LSP-03"
       },
       "attribute": "city",
       "value": "Mumbai",
@@ -257,16 +257,16 @@
         "row": 4,
         "column": "city"
       },
-      "evidence": "row 4: city=Mumbai",
+      "evidence": "city=Mumbai",
       "confidence": "high"
     },
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-4"
+        "carrier_id": "LSP-03"
       },
       "subject_raw": {
-        "id": "row-4"
+        "carrier_id": "LSP-03"
       },
       "attribute": "country",
       "value": "IN",
@@ -276,16 +276,16 @@
         "row": 4,
         "column": "country"
       },
-      "evidence": "row 4: country=IN",
+      "evidence": "country=IN",
       "confidence": "high"
     },
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-4"
+        "carrier_id": "LSP-03"
       },
       "subject_raw": {
-        "id": "row-4"
+        "carrier_id": "LSP-03"
       },
       "attribute": "modes",
       "value": "ocean",
@@ -295,16 +295,16 @@
         "row": 4,
         "column": "modes"
       },
-      "evidence": "row 4: modes=ocean",
+      "evidence": "modes=ocean",
       "confidence": "high"
     },
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-5"
+        "carrier_id": "LSP-04"
       },
       "subject_raw": {
-        "id": "row-5"
+        "carrier_id": "LSP-04"
       },
       "attribute": "carrier_id",
       "value": "LSP-04",
@@ -314,16 +314,16 @@
         "row": 5,
         "column": "carrier_id"
       },
-      "evidence": "row 5: carrier_id=LSP-04",
+      "evidence": "carrier_id=LSP-04",
       "confidence": "high"
     },
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-5"
+        "carrier_id": "LSP-04"
       },
       "subject_raw": {
-        "id": "row-5"
+        "carrier_id": "LSP-04"
       },
       "attribute": "name",
       "value": "Warta Trans Sp. z o.o.",
@@ -333,16 +333,16 @@
         "row": 5,
         "column": "name"
       },
-      "evidence": "row 5: name=Warta Trans Sp. z o.o.",
+      "evidence": "name=Warta Trans Sp. z o.o.",
       "confidence": "high"
     },
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-5"
+        "carrier_id": "LSP-04"
       },
       "subject_raw": {
-        "id": "row-5"
+        "carrier_id": "LSP-04"
       },
       "attribute": "city",
       "value": "Poznań",
@@ -352,16 +352,16 @@
         "row": 5,
         "column": "city"
       },
-      "evidence": "row 5: city=Poznań",
+      "evidence": "city=Poznań",
       "confidence": "high"
     },
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-5"
+        "carrier_id": "LSP-04"
       },
       "subject_raw": {
-        "id": "row-5"
+        "carrier_id": "LSP-04"
       },
       "attribute": "country",
       "value": "PL",
@@ -371,16 +371,16 @@
         "row": 5,
         "column": "country"
       },
-      "evidence": "row 5: country=PL",
+      "evidence": "country=PL",
       "confidence": "high"
     },
     {
       "fact_type": "carrier",
       "subject": {
-        "id": "row-5"
+        "carrier_id": "LSP-04"
       },
       "subject_raw": {
-        "id": "row-5"
+        "carrier_id": "LSP-04"
       },
       "attribute": "modes",
       "value": "road",
@@ -390,7 +390,7 @@
         "row": 5,
         "column": "modes"
       },
-      "evidence": "row 5: modes=road",
+      "evidence": "modes=road",
       "confidence": "high"
     }
   ],

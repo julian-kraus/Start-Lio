@@ -10,16 +10,20 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118"
       },
       "subject_raw": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118"
       },
       "attribute": "change_id",
       "value": "ECN-2026-118",
@@ -29,16 +33,20 @@
         "row": 2,
         "column": "change_id"
       },
-      "evidence": "row 2: change_id=ECN-2026-118",
+      "evidence": "change_id=ECN-2026-118",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118"
       },
       "subject_raw": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118"
       },
       "attribute": "parent_id",
       "value": "FG-GH6-STD",
@@ -48,16 +56,20 @@
         "row": 2,
         "column": "parent_id"
       },
-      "evidence": "row 2: parent_id=FG-GH6-STD",
+      "evidence": "parent_id=FG-GH6-STD",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118"
       },
       "subject_raw": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118"
       },
       "attribute": "child_id",
       "value": "CMP-GAM-004",
@@ -67,16 +79,20 @@
         "row": 2,
         "column": "child_id"
       },
-      "evidence": "row 2: child_id=CMP-GAM-004",
+      "evidence": "child_id=CMP-GAM-004",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118"
       },
       "subject_raw": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118"
       },
       "attribute": "action",
       "value": "revision",
@@ -86,18 +102,24 @@
         "row": 2,
         "column": "action"
       },
-      "evidence": "row 2: action=revision",
+      "evidence": "action=revision",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118",
+        "change_field": "qty_per"
       },
       "subject_raw": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118",
+        "change_field": "qty_per"
       },
-      "attribute": "qty_per_old",
+      "attribute": "old",
       "value": "1",
       "unit": null,
       "as_of": null,
@@ -105,18 +127,24 @@
         "row": 2,
         "column": "qty_per_old"
       },
-      "evidence": "row 2: qty_per_old=1",
+      "evidence": "qty_per_old=1",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118",
+        "change_field": "qty_per"
       },
       "subject_raw": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118",
+        "change_field": "qty_per"
       },
-      "attribute": "qty_per_new",
+      "attribute": "new",
       "value": "1",
       "unit": null,
       "as_of": null,
@@ -124,18 +152,24 @@
         "row": 2,
         "column": "qty_per_new"
       },
-      "evidence": "row 2: qty_per_new=1",
+      "evidence": "qty_per_new=1",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118",
+        "change_field": "drawing_rev"
       },
       "subject_raw": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118",
+        "change_field": "drawing_rev"
       },
-      "attribute": "rev_old",
+      "attribute": "old",
       "value": "B",
       "unit": null,
       "as_of": null,
@@ -143,18 +177,24 @@
         "row": 2,
         "column": "rev_old"
       },
-      "evidence": "row 2: rev_old=B",
+      "evidence": "rev_old=B",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118",
+        "change_field": "drawing_rev"
       },
       "subject_raw": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118",
+        "change_field": "drawing_rev"
       },
-      "attribute": "rev_new",
+      "attribute": "new",
       "value": "C",
       "unit": null,
       "as_of": null,
@@ -162,18 +202,24 @@
         "row": 2,
         "column": "rev_new"
       },
-      "evidence": "row 2: rev_new=C",
+      "evidence": "rev_new=C",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118",
+        "change_field": "drawing_rev"
       },
       "subject_raw": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118",
+        "change_field": "drawing_rev"
       },
-      "attribute": "use_up_old_rev",
+      "attribute": "use_up_old",
       "value": "N",
       "unit": null,
       "as_of": null,
@@ -181,16 +227,20 @@
         "row": 2,
         "column": "use_up_old_rev"
       },
-      "evidence": "row 2: use_up_old_rev=N",
+      "evidence": "use_up_old_rev=N",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118"
       },
       "subject_raw": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118"
       },
       "attribute": "effective_from",
       "value": "2026-11-21",
@@ -200,16 +250,20 @@
         "row": 2,
         "column": "effective_from"
       },
-      "evidence": "row 2: effective_from=2026-11-21",
+      "evidence": "effective_from=2026-11-21",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118"
       },
       "subject_raw": {
-        "entity": "FG-GH6-STD"
+        "parent_id": "FG-GH6-STD",
+        "child_id": "CMP-GAM-004",
+        "change_id": "ECN-2026-118"
       },
       "attribute": "reason",
       "value": "new age-rating mark (USK 2026); parts to rev B must not be packed",
@@ -219,16 +273,20 @@
         "row": 2,
         "column": "reason"
       },
-      "evidence": "row 2: reason=new age-rating mark (USK 2026); parts to rev B must not be packed",
+      "evidence": "reason=new age-rating mark (USK 2026); parts to rev B must not be packed",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119"
       },
       "subject_raw": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119"
       },
       "attribute": "change_id",
       "value": "ECN-2026-119",
@@ -238,16 +296,20 @@
         "row": 3,
         "column": "change_id"
       },
-      "evidence": "row 3: change_id=ECN-2026-119",
+      "evidence": "change_id=ECN-2026-119",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119"
       },
       "subject_raw": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119"
       },
       "attribute": "parent_id",
       "value": "FG-GH6-CE",
@@ -257,16 +319,20 @@
         "row": 3,
         "column": "parent_id"
       },
-      "evidence": "row 3: parent_id=FG-GH6-CE",
+      "evidence": "parent_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119"
       },
       "subject_raw": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119"
       },
       "attribute": "child_id",
       "value": "CMP-GAM-009",
@@ -276,16 +342,20 @@
         "row": 3,
         "column": "child_id"
       },
-      "evidence": "row 3: child_id=CMP-GAM-009",
+      "evidence": "child_id=CMP-GAM-009",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119"
       },
       "subject_raw": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119"
       },
       "attribute": "action",
       "value": "revision",
@@ -295,18 +365,24 @@
         "row": 3,
         "column": "action"
       },
-      "evidence": "row 3: action=revision",
+      "evidence": "action=revision",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119",
+        "change_field": "qty_per"
       },
       "subject_raw": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119",
+        "change_field": "qty_per"
       },
-      "attribute": "qty_per_old",
+      "attribute": "old",
       "value": "1",
       "unit": null,
       "as_of": null,
@@ -314,18 +390,24 @@
         "row": 3,
         "column": "qty_per_old"
       },
-      "evidence": "row 3: qty_per_old=1",
+      "evidence": "qty_per_old=1",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119",
+        "change_field": "qty_per"
       },
       "subject_raw": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119",
+        "change_field": "qty_per"
       },
-      "attribute": "qty_per_new",
+      "attribute": "new",
       "value": "1",
       "unit": null,
       "as_of": null,
@@ -333,18 +415,24 @@
         "row": 3,
         "column": "qty_per_new"
       },
-      "evidence": "row 3: qty_per_new=1",
+      "evidence": "qty_per_new=1",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119",
+        "change_field": "drawing_rev"
       },
       "subject_raw": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119",
+        "change_field": "drawing_rev"
       },
-      "attribute": "rev_old",
+      "attribute": "old",
       "value": "A",
       "unit": null,
       "as_of": null,
@@ -352,18 +440,24 @@
         "row": 3,
         "column": "rev_old"
       },
-      "evidence": "row 3: rev_old=A",
+      "evidence": "rev_old=A",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119",
+        "change_field": "drawing_rev"
       },
       "subject_raw": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119",
+        "change_field": "drawing_rev"
       },
-      "attribute": "rev_new",
+      "attribute": "new",
       "value": "B",
       "unit": null,
       "as_of": null,
@@ -371,18 +465,24 @@
         "row": 3,
         "column": "rev_new"
       },
-      "evidence": "row 3: rev_new=B",
+      "evidence": "rev_new=B",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119",
+        "change_field": "drawing_rev"
       },
       "subject_raw": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119",
+        "change_field": "drawing_rev"
       },
-      "attribute": "use_up_old_rev",
+      "attribute": "use_up_old",
       "value": "Y",
       "unit": null,
       "as_of": null,
@@ -390,16 +490,20 @@
         "row": 3,
         "column": "use_up_old_rev"
       },
-      "evidence": "row 3: use_up_old_rev=Y",
+      "evidence": "use_up_old_rev=Y",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119"
       },
       "subject_raw": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119"
       },
       "attribute": "effective_from",
       "value": "2026-11-21",
@@ -409,16 +513,20 @@
         "row": 3,
         "column": "effective_from"
       },
-      "evidence": "row 3: effective_from=2026-11-21",
+      "evidence": "effective_from=2026-11-21",
       "confidence": "high"
     },
     {
       "fact_type": "change_record",
       "subject": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119"
       },
       "subject_raw": {
-        "entity": "FG-GH6-CE"
+        "parent_id": "FG-GH6-CE",
+        "child_id": "CMP-GAM-009",
+        "change_id": "ECN-2026-119"
       },
       "attribute": "reason",
       "value": "fold pattern changed; use up rev A",
@@ -428,7 +536,7 @@
         "row": 3,
         "column": "reason"
       },
-      "evidence": "row 3: reason=fold pattern changed; use up rev A",
+      "evidence": "reason=fold pattern changed; use up rev A",
       "confidence": "high"
     }
   ],

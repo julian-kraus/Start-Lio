@@ -10,18 +10,119 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318713"
+      },
+      "subject_raw": {
+        "po_number": "4500318713"
+      },
+      "attribute": "oc_number",
+      "value": "OA26574370",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "OA26574370",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318713"
+      },
+      "subject_raw": {
+        "po_number": "4500318713"
+      },
+      "attribute": "oc_date",
+      "value": "2026-08-12",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "2026-08-12",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318713"
+      },
+      "subject_raw": {
+        "po_number": "4500318713"
+      },
+      "attribute": "incoterm",
+      "value": "FOB",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "FOB",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318713"
+      },
+      "subject_raw": {
+        "po_number": "4500318713"
+      },
+      "attribute": "payment_terms",
+      "value": "NET45",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "NET45",
+      "confidence": "high"
+    },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318713",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "7425d67a943c"
       },
       "subject_raw": {
         "po_number": "4500318713",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "7425d67a943c"
+      },
+      "attribute": "item_no_printed",
+      "value": "00010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n11,000\n5.4\nUSD\n2026-10-21",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318713",
+        "po_line": 1,
+        "item_key": "7425d67a943c"
+      },
+      "subject_raw": {
+        "po_number": "4500318713",
+        "po_line": 1,
+        "item_key": "7425d67a943c"
       },
       "attribute": "supplier_part_no",
       "value": "CMP-GAM-002",
@@ -38,32 +139,13 @@
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318713",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "7425d67a943c"
       },
       "subject_raw": {
         "po_number": "4500318713",
-        "po_line": 1
-      },
-      "attribute": "material_id",
-      "value": "CMP-GAM-002",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 12
-      },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n11,000\n5.4\nUSD\n2026-10-21",
-      "confidence": "medium"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318713",
-        "po_line": 1
-      },
-      "subject_raw": {
-        "po_number": "4500318713",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "7425d67a943c"
       },
       "attribute": "qty",
       "value": 11000,
@@ -77,21 +159,95 @@
       "confidence": "high"
     },
     {
-      "fact_type": "supplier_statement",
+      "fact_type": "oc_line",
       "subject": {
-        "po_number": "4500318713"
+        "po_number": "4500318713",
+        "po_line": 1,
+        "item_key": "7425d67a943c"
       },
       "subject_raw": {
-        "po_number": "4500318713"
+        "po_number": "4500318713",
+        "po_line": 1,
+        "item_key": "7425d67a943c"
       },
-      "attribute": "value",
-      "value": "Customer: Soony Interactive GmbH · Your order 4500318713 of 2026-08-12 · Incoterms FOB Busan · Payment NET45",
+      "attribute": "unit_price",
+      "value": 11000,
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 12
       },
-      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318713 of 2026-08-12 · Incoterms FOB Busan · Payment NET45",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n11,000\n5.4\nUSD\n2026-10-21",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318713",
+        "po_line": 1,
+        "item_key": "7425d67a943c"
+      },
+      "subject_raw": {
+        "po_number": "4500318713",
+        "po_line": 1,
+        "item_key": "7425d67a943c"
+      },
+      "attribute": "currency",
+      "value": "USD",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n11,000\n5.4\nUSD\n2026-10-21",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318713",
+        "po_line": 1,
+        "item_key": "7425d67a943c"
+      },
+      "subject_raw": {
+        "po_number": "4500318713",
+        "po_line": 1,
+        "item_key": "7425d67a943c"
+      },
+      "attribute": "confirmed_date",
+      "value": "2026-10-21",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n11,000\n5.4\nUSD\n2026-10-21",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318713",
+        "po_line": 1,
+        "item_key": "7425d67a943c"
+      },
+      "subject_raw": {
+        "po_number": "4500318713",
+        "po_line": 1,
+        "item_key": "7425d67a943c"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-002",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n11,000\n5.4\nUSD\n2026-10-21",
       "confidence": "high"
     }
   ],

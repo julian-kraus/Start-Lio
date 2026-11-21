@@ -1,0 +1,36 @@
+{
+  "signature": "7da29821571af6e77f333421e3f784efe7d8c6e31d2e0af31d96e15ad8f0f4af",
+  "example_path": "soony/master/ports.csv",
+  "format": "csv",
+  "sheet": null,
+  "fact_type": "port",
+  "subject": [
+    "locode"
+  ],
+  "columns": {
+    "locode": {
+      "field": "locode",
+      "type": "text"
+    },
+    "name": {
+      "field": "name",
+      "type": "text"
+    },
+    "country": {
+      "field": "country",
+      "type": "text"
+    },
+    "lat": {
+      "field": "lat",
+      "type": "text"
+    },
+    "lon": {
+      "field": "lon",
+      "type": "text"
+    },
+    "mode": {
+      "field": "mode",
+      "type": "text"
+    }
+  }
+}

@@ -1,12 +1,29 @@
 {
   "signature": "b172ae57d844ee3051391f0c0fe2f8e4365eb48ba6e317a1ae5e926f03c03755",
+  "example_path": "soony/context/launch_plan_GH6.xlsx",
   "format": "xlsx",
   "sheet": "Shifts",
+  "fact_type": "shift",
+  "subject": [
+    "day"
+  ],
   "columns": {
-    "day": "Day",
-    "shift": "Shift",
-    "hours": "Hours",
-    "lines": "Lines"
+    "Day": {
+      "field": "day",
+      "type": "text"
+    },
+    "Shift": {
+      "field": "shift",
+      "type": "text"
+    },
+    "Hours": {
+      "field": "hours",
+      "type": "text"
+    },
+    "Lines": {
+      "field": "lines",
+      "type": "text"
+    }
   },
   "header_detection": {
     "row": 1,

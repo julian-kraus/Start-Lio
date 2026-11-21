@@ -1,0 +1,52 @@
+{
+  "signature": "b9b9bad07a9f5dc7b85c137c80a6193e3f42d2a750a63c0025506df80022d10c",
+  "example_path": "soony/master/products.csv",
+  "format": "csv",
+  "sheet": null,
+  "fact_type": "product",
+  "subject": [
+    "product_id"
+  ],
+  "columns": {
+    "product_id": {
+      "field": "product_id",
+      "type": "text"
+    },
+    "name": {
+      "field": "name",
+      "type": "text"
+    },
+    "product_line": {
+      "field": "product_line",
+      "type": "text"
+    },
+    "lifecycle": {
+      "field": "lifecycle",
+      "type": "text"
+    },
+    "launch_date": {
+      "field": "launch_date",
+      "type": "text"
+    },
+    "weekly_plan_qty": {
+      "field": "weekly_plan_qty",
+      "type": "text"
+    },
+    "day_one_qty": {
+      "field": "day_one_qty",
+      "type": "text"
+    },
+    "plants": {
+      "field": "plants",
+      "type": "text"
+    },
+    "std_cost_eur": {
+      "field": "std_cost_eur",
+      "type": "text"
+    },
+    "valid_from": {
+      "field": "valid_from",
+      "type": "text"
+    }
+  }
+}

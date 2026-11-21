@@ -1,14 +1,15 @@
 {
   "spec_version": "codex-2026-11-21-v1",
-  "generated_at": "2026-11-21",
+  "generated_at": "2026-11-21T18:46:24",
   "documents": [
     {
       "path": "soony/context/approval_policy_PP-07.pdf",
       "sha256": "b4da302942d505b4e35265c5c6019d6a9038e56a69359406baba3b80e6df5ac7",
       "bytes": 63547,
       "doc_kind": "policy_document",
+      "role": "extraction",
       "status": "ok",
-      "facts": 13,
+      "facts": 40,
       "unreadable": []
     },
     {
@@ -16,8 +17,9 @@
       "sha256": "4859226a0db4e531160f5e7ce9525c39404fef21e2dd62653300f89936ba2491",
       "bytes": 9122,
       "doc_kind": "launch_plan_workbook",
+      "role": "extraction",
       "status": "ok",
-      "facts": 197,
+      "facts": 149,
       "unreadable": []
     },
     {
@@ -25,24 +27,29 @@
       "sha256": "fb07ebc36f4e770c38ca763af2d6a6d3573ba5f29e4ea8950db8b2ecf7dcdfd8",
       "bytes": 5911,
       "doc_kind": "launch_status_workbook",
+      "role": "extraction",
       "status": "ok",
-      "facts": 27,
+      "facts": 15,
       "unreadable": []
     },
     {
       "path": "soony/context/memo_launch_priorities.docx",
       "sha256": "10faff7f2e0f48b6ca54a7070f8e3c582a32b4e668269293ad480b05fe4738ae",
       "bytes": 37271,
-      "doc_kind": "memo",
-      "status": "ok",
-      "facts": 6,
-      "unreadable": []
+      "doc_kind": "other_document",
+      "role": "extraction",
+      "status": "partial",
+      "facts": 0,
+      "unreadable": [
+        "Extractor error: ModuleNotFoundError: No module named 'docx'"
+      ]
     },
     {
       "path": "soony/context/onboarding_notes.md",
       "sha256": "e7efcc11e89d9fedf8a642ee044f17670f78ec2b5324fe3ce1f39171ddc4086c",
       "bytes": 2460,
       "doc_kind": "context_note",
+      "role": "extraction",
       "status": "ok",
       "facts": 1,
       "unreadable": []
@@ -52,8 +59,9 @@
       "sha256": "8fe454f3fdd607de3830fede7552976e114898143d9679125f424b416a7373f7",
       "bytes": 64096,
       "doc_kind": "org_chart",
+      "role": "extraction",
       "status": "ok",
-      "facts": 12,
+      "facts": 26,
       "unreadable": []
     },
     {
@@ -61,8 +69,9 @@
       "sha256": "3c4b977283aa73e0e5a47d42acc90aeed3ee2ad1a91208dee205e6f8d26d6343",
       "bytes": 64121,
       "doc_kind": "org_chart",
+      "role": "extraction",
       "status": "ok",
-      "facts": 12,
+      "facts": 26,
       "unreadable": []
     },
     {
@@ -70,6 +79,7 @@
       "sha256": "8b2811bdc89040c6d21c49775aeb98cde0a606201f8caf14cfb32b6732bcba09",
       "bytes": 40445,
       "doc_kind": "erp_table",
+      "role": "extraction",
       "status": "ok",
       "facts": 4355,
       "unreadable": []
@@ -79,6 +89,7 @@
       "sha256": "bf2fddbc00b0aa5f63a97ced200770c31aa4c3573a6b3645f63e00be70ba4842",
       "bytes": 4857,
       "doc_kind": "erp_table",
+      "role": "extraction",
       "status": "ok",
       "facts": 443,
       "unreadable": []
@@ -88,6 +99,7 @@
       "sha256": "f8d29a34916a20df10c58efc6f4affc8cf7dfb868e78cc89b09a8e1eafd3ab3b",
       "bytes": 1211,
       "doc_kind": "erp_table",
+      "role": "extraction",
       "status": "ok",
       "facts": 140,
       "unreadable": []
@@ -97,6 +109,7 @@
       "sha256": "bf5d7a8dddf72a4c3529b59d3df0c2187df9652ba30c3e6d5fcfbba8dafbc50c",
       "bytes": 42211,
       "doc_kind": "erp_table",
+      "role": "extraction",
       "status": "ok",
       "facts": 4691,
       "unreadable": []
@@ -106,8 +119,9 @@
       "sha256": "16daab96a9b45dd1e22bd04344c4bac7158701495f1d1b30f19ccd47ecba70a6",
       "bytes": 13839,
       "doc_kind": "erp_table",
+      "role": "extraction",
       "status": "ok",
-      "facts": 1418,
+      "facts": 1676,
       "unreadable": []
     },
     {
@@ -115,8 +129,9 @@
       "sha256": "b23c2c34515acba00adfc7243e57a9076580933a1103913e40a0e2b2ac7f74ae",
       "bytes": 2559,
       "doc_kind": "erp_table",
+      "role": "extraction",
       "status": "ok",
-      "facts": 311,
+      "facts": 279,
       "unreadable": []
     },
     {
@@ -124,8 +139,9 @@
       "sha256": "1e2537bd07c61e2359b33caad46b2ccc859d56c603e6406fcf85bce014d3a347",
       "bytes": 6161,
       "doc_kind": "shipment_tracker_workbook",
+      "role": "extraction",
       "status": "ok",
-      "facts": 155,
+      "facts": 141,
       "unreadable": []
     },
     {
@@ -133,6 +149,7 @@
       "sha256": "894799f12f93bd558c1f14c539800a8cd4f250482c1cc417df2bd19fb5d46c4b",
       "bytes": 808,
       "doc_kind": "master_table",
+      "role": "extraction",
       "status": "ok",
       "facts": 80,
       "unreadable": []
@@ -142,6 +159,7 @@
       "sha256": "00c848c9fd86d8192299b8e054335d5f61ab81620f6f3fe2d05ccf8701e232fc",
       "bytes": 348,
       "doc_kind": "change_record_table",
+      "role": "extraction",
       "status": "ok",
       "facts": 22,
       "unreadable": []
@@ -151,6 +169,7 @@
       "sha256": "059cc988a9de3d97abf6423f4a859defb3e9448d7f72a230ae0dda73b41c4342",
       "bytes": 958,
       "doc_kind": "master_table",
+      "role": "extraction",
       "status": "ok",
       "facts": 84,
       "unreadable": []
@@ -160,6 +179,7 @@
       "sha256": "965d749bf0edcd27fa9cd91e904f5443da8ca7bac805357b9a3b5472d4a7cb65",
       "bytes": 204,
       "doc_kind": "change_record_table",
+      "role": "extraction",
       "status": "ok",
       "facts": 20,
       "unreadable": []
@@ -169,6 +189,7 @@
       "sha256": "e637b502cf32cc65f1721d49a8f519097cfaec4b2d3e4cf7d0f3629a7b231db6",
       "bytes": 237,
       "doc_kind": "master_table",
+      "role": "extraction",
       "status": "ok",
       "facts": 20,
       "unreadable": []
@@ -178,6 +199,7 @@
       "sha256": "fdfdda21df527a1eef9e439e18537d256f63f3759dad87258502ef22d4a4508e",
       "bytes": 494,
       "doc_kind": "master_table",
+      "role": "extraction",
       "status": "ok",
       "facts": 66,
       "unreadable": []
@@ -187,6 +209,7 @@
       "sha256": "b9d487bb6051dac24016377116a3c07497a2869e94ccfdf1a90a552fa978c714",
       "bytes": 470,
       "doc_kind": "master_table",
+      "role": "extraction",
       "status": "ok",
       "facts": 29,
       "unreadable": []
@@ -196,6 +219,7 @@
       "sha256": "e2c007b9e1eb0b260e3be029393ac6be868dfca459f2743fa73df668120ddfe8",
       "bytes": 443,
       "doc_kind": "master_table",
+      "role": "extraction",
       "status": "ok",
       "facts": 69,
       "unreadable": []
@@ -205,8 +229,19 @@
       "sha256": "d98a042d0e5de34658805d8fe7ec0eaacc5ebc150aa90b5922b71bb14bd15da0",
       "bytes": 126,
       "doc_kind": "master_table",
+      "role": "extraction",
       "status": "ok",
       "facts": 8,
+      "unreadable": []
+    },
+    {
+      "path": "soony/news/2026-11-21_export_controls.json",
+      "sha256": "5b86f4728d3b9a7f4efd382497485cc27fcf37ae1fe0f27cb060de8ee442706a",
+      "bytes": 1143,
+      "doc_kind": "news_feed",
+      "role": "extraction",
+      "status": "ok",
+      "facts": 14,
       "unreadable": []
     },
     {
@@ -214,6 +249,7 @@
       "sha256": "ffe8da498d7fa700fbf80a08485674f0f95990c07c878731702b68b6a95a57f2",
       "bytes": 1312559,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -223,6 +259,7 @@
       "sha256": "ec133a670e2252d287fdff1b48c8000df621724408e9dee9629943ec9a8c4ad6",
       "bytes": 131145,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -232,6 +269,7 @@
       "sha256": "94b65783fe6889173256140318fb528c1043cb6e9961f12a994616847b77938a",
       "bytes": 284743,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -241,6 +279,7 @@
       "sha256": "c6126a89fc91be294f66f417468247779d154e374aee69deb43f3f0a33aa727e",
       "bytes": 327062,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -250,6 +289,7 @@
       "sha256": "04dab8068ac2680ea88d163f4d119f3cb3fa0b314fa00840fd99ef4883e395d5",
       "bytes": 989081,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -259,6 +299,7 @@
       "sha256": "526a34f6ec0c08de75275b16e434fad2143d9632ad453d386b75bff7b402f6e6",
       "bytes": 145359,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 28,
       "unreadable": []
@@ -268,6 +309,7 @@
       "sha256": "7eb2464b3317628df41d654fa419546c08d4b755faf47eff23a5b4415f91a9c3",
       "bytes": 365018,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -277,6 +319,7 @@
       "sha256": "ea2c58ef40d442ae5501aff753855c4230f4626902203c00e68169a4c42e14d7",
       "bytes": 222696,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -286,6 +329,7 @@
       "sha256": "f4e8ad21e8cbb16c3112315e25034ba8c51debf81ec236134506a0bdb45d15fc",
       "bytes": 608160,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -295,6 +339,7 @@
       "sha256": "9ea80ee9061aa40b98c79256c2e5ed7ad9e82e24c205a37cfc23828cc245f733",
       "bytes": 442043,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -304,6 +349,7 @@
       "sha256": "065206bc793f6180f7e7d655e0ca5541fc31a7a7d686e87a3c27777f3414c800",
       "bytes": 2629614,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -313,6 +359,7 @@
       "sha256": "70677c082e28ad059ba7c255c1f2bd1131c796276d8aaa4ec8b7b1ac2e8ed85e",
       "bytes": 143527,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -322,8 +369,9 @@
       "sha256": "21d3479fd7a50a2631b52a7785ae518b222e9d400185eb51d4c2e1939910636d",
       "bytes": 235360,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
-      "facts": 15,
+      "facts": 16,
       "unreadable": []
     },
     {
@@ -331,6 +379,7 @@
       "sha256": "31871bfc201c3bfb0761540e0cd88e201c18f18566008f58315a0de3f2113bf9",
       "bytes": 203825,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 28,
       "unreadable": []
@@ -340,6 +389,7 @@
       "sha256": "c51cfdd56a8788c66db90f93ea67899d903dbfb7c07e651cf70d78ee8f9c3802",
       "bytes": 1423077,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -349,6 +399,7 @@
       "sha256": "239247b182d178c879f26940884b37b48de7943d9c3bbe0c6d32cddf61e42480",
       "bytes": 2219137,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -358,6 +409,7 @@
       "sha256": "dc4ebe0e0e90f753d55e9860dcf310d5b06d170b4c993302f5cb0da30c8d90c2",
       "bytes": 166196,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 28,
       "unreadable": []
@@ -367,8 +419,9 @@
       "sha256": "d0e70ed95e0f7403bff1670e434e36b9201537c868a0af856f7a22144a11fb98",
       "bytes": 278616,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
-      "facts": 15,
+      "facts": 16,
       "unreadable": []
     },
     {
@@ -376,8 +429,9 @@
       "sha256": "dcd6480db6b4b34884f619f9895a2d593d909e1dbd0b14da04154952bf12eb04",
       "bytes": 202193,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
-      "facts": 15,
+      "facts": 16,
       "unreadable": []
     },
     {
@@ -385,6 +439,7 @@
       "sha256": "7855d442f29c8a5ec1f50111728cdb7f0e8d47dfebfb6540c0b9b75d5aee8d18",
       "bytes": 1666351,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -394,6 +449,7 @@
       "sha256": "6cbab53004d936fc6fb47aa09491b02d8b75c5fd08125a95db157a3d8cbff147",
       "bytes": 1331512,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -403,8 +459,9 @@
       "sha256": "9da5940196cfd12318e07714150c703e0950037a702ae54e809330610c7144c8",
       "bytes": 149702,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
-      "facts": 15,
+      "facts": 16,
       "unreadable": []
     },
     {
@@ -412,8 +469,9 @@
       "sha256": "9e77e7b02aa6d3ea062971bbd61ab9ce5763d262cbb09301e6cd517dcab3fe6a",
       "bytes": 188997,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
-      "facts": 15,
+      "facts": 16,
       "unreadable": []
     },
     {
@@ -421,8 +479,9 @@
       "sha256": "fe0fb95b8c358e540e6aba460d07c5c74a030cc963ac139d76c5c0f801490e91",
       "bytes": 308940,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
-      "facts": 30,
+      "facts": 32,
       "unreadable": []
     },
     {
@@ -430,6 +489,7 @@
       "sha256": "b2d2282c5506f3bc39b6dbc21206a893b17271fb5c82a9ff246115f491ef734b",
       "bytes": 2199306,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 28,
       "unreadable": []
@@ -439,8 +499,9 @@
       "sha256": "e015762be7cd96dd75b3432497951f0859765989c70b184b04bc1f4825e23c04",
       "bytes": 1359648,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
-      "facts": 15,
+      "facts": 16,
       "unreadable": []
     },
     {
@@ -448,6 +509,7 @@
       "sha256": "7837eac367f8c037b3afb4961a1f4b5ee33ddda292723cd706b1a1e4bfb47f63",
       "bytes": 153835,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -457,6 +519,7 @@
       "sha256": "98e66174624b45e5c4c5e5f125cde3e988306bbd0f71b4594f79b7464e1db417",
       "bytes": 2018095,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -466,6 +529,7 @@
       "sha256": "4956ace638dcf0506a924315c00752d4ae9a3740d8db7b09d4169eb2f2686cc3",
       "bytes": 154550,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -475,6 +539,7 @@
       "sha256": "0ac9fe48340bc47625c4e43f1b8b0868f10bae2188f5322b87618bef8fd9c497",
       "bytes": 190037,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -484,6 +549,7 @@
       "sha256": "51f72a9f339bd62f270d6958c9d450290bfe76009bb3027e3049aebd94a9e51a",
       "bytes": 259536,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -493,6 +559,7 @@
       "sha256": "04c575ea50356ec2451ab234abba2524681e76d868d454c0b495ba34dfb8eb0e",
       "bytes": 932566,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 28,
       "unreadable": []
@@ -502,8 +569,9 @@
       "sha256": "0a1f0f7ec7075dfc223b2c821332fba2a3e640bee60c810a62afa9bbb1a3b113",
       "bytes": 168826,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
-      "facts": 15,
+      "facts": 16,
       "unreadable": []
     },
     {
@@ -511,8 +579,9 @@
       "sha256": "3d5be3f7d89de9f0e03d2b1dd043b7b711a4977f074f2c15ab814507dafc1c37",
       "bytes": 133148,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
-      "facts": 15,
+      "facts": 16,
       "unreadable": []
     },
     {
@@ -520,6 +589,7 @@
       "sha256": "3074ea55ebfe985fe8996f8332a2b4d02e9b4831f31905c39254f1679add2770",
       "bytes": 144477,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -529,8 +599,9 @@
       "sha256": "cfcb8395cb0c5c8dfaff7af605c9785bb7bf1d849ef8c4eb0f9949fffbc03102",
       "bytes": 200328,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
-      "facts": 15,
+      "facts": 16,
       "unreadable": []
     },
     {
@@ -538,8 +609,9 @@
       "sha256": "99ce33965400c3e4870499b3f061ce1d8acf89030e6f939622900c2518865102",
       "bytes": 173374,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
-      "facts": 15,
+      "facts": 16,
       "unreadable": []
     },
     {
@@ -547,6 +619,7 @@
       "sha256": "5559a4c56a712e86aff559ec8b80d16b756473916328314ea669cade85e493c8",
       "bytes": 365456,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -556,6 +629,7 @@
       "sha256": "b14fd60abc4218d72490047ccfd92d7d69321675d6503e12caebd6a55bc6ba14",
       "bytes": 772887,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -565,6 +639,7 @@
       "sha256": "83067421a76ad5333f25756c4a2fb748c24e66b45e5f682e3854b15614a98ceb",
       "bytes": 158518,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -574,6 +649,7 @@
       "sha256": "c102b5f601aa2f97adc067a8e1a372c371df520b273709c14de3af2ff45ff033",
       "bytes": 161607,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 28,
       "unreadable": []
@@ -583,6 +659,7 @@
       "sha256": "03973083b50ba11f1707de651cb6aabd80ffe6fe83ef92c387eda0895edbec19",
       "bytes": 157942,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -592,6 +669,7 @@
       "sha256": "c83eda184fc447cc0add8ab07e467f5d73b0679580195346fd4490bc3683fcde",
       "bytes": 139935,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -601,6 +679,7 @@
       "sha256": "7b96a696f45a890bd3f46419b3f00c1b8912c154c7820b7f61651121f465d117",
       "bytes": 506386,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -610,6 +689,7 @@
       "sha256": "291227763341854f00c38af0a346cc86355680898cf4358d7ba21c26191bd528",
       "bytes": 165337,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -619,8 +699,9 @@
       "sha256": "940f2bebfdaefe01ccc90bc0c8883fa5cb4e1ca503be5b705b799a439a60560c",
       "bytes": 156690,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
-      "facts": 15,
+      "facts": 16,
       "unreadable": []
     },
     {
@@ -628,8 +709,9 @@
       "sha256": "bb3831fa92b442c71d16b2bf9577e4f1da06f2908bd604669fd3eb5ca2b11c9a",
       "bytes": 2758822,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
-      "facts": 15,
+      "facts": 16,
       "unreadable": []
     },
     {
@@ -637,8 +719,9 @@
       "sha256": "1a4ac09db73460a5fbfb7facc856b34d380f027217d474f03a294ec7d2630022",
       "bytes": 159531,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
-      "facts": 15,
+      "facts": 16,
       "unreadable": []
     },
     {
@@ -646,6 +729,7 @@
       "sha256": "ac7b44fd48b097d27a2af5962c888f1f8a2d96ef020354f8f017fec6377dd7b7",
       "bytes": 222153,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -655,6 +739,7 @@
       "sha256": "55502d776828b832a30d7e9e749c1301c717f5592ebf1000c8cc8366de9055b7",
       "bytes": 1055777,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -664,6 +749,7 @@
       "sha256": "94a58889a86f7cb10db8f0e4590f9d30a230f4450e8ba56cee3c48fe3087463a",
       "bytes": 210440,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -673,6 +759,7 @@
       "sha256": "7f9ee23ac04bedb45da837b2f7869235e711c1f97901c2e4bf54027b9f7efdf7",
       "bytes": 165816,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -682,6 +769,7 @@
       "sha256": "485807518c79375912ae66f5b5546416658838a60fab350c60b8b5972f911813",
       "bytes": 1394624,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -691,8 +779,9 @@
       "sha256": "2380f9f93d8b081853e8b8411717cb16b525381fb15e5d2fbfab7c18aeb74a25",
       "bytes": 160243,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
-      "facts": 15,
+      "facts": 16,
       "unreadable": []
     },
     {
@@ -700,8 +789,9 @@
       "sha256": "2ef2ce892f190f3862598f721356d2de57d7fe28ccb358ea7e5cddfb33913962",
       "bytes": 170821,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
-      "facts": 30,
+      "facts": 32,
       "unreadable": []
     },
     {
@@ -709,6 +799,7 @@
       "sha256": "624fad512296b86cc0c1fc952f38e0ff91d3e39fb4f251d522af4cb26fa747c5",
       "bytes": 152595,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 28,
       "unreadable": []
@@ -718,6 +809,7 @@
       "sha256": "bcdd12f7f00b32e6897ddfb530d7b3696532d23c8a0d3c89544f32440bb94056",
       "bytes": 371545,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -727,8 +819,9 @@
       "sha256": "f559975a3d06e000bb3a575b223428a112bfdb54989207c9f11c6faa66987a3e",
       "bytes": 151823,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
-      "facts": 15,
+      "facts": 16,
       "unreadable": []
     },
     {
@@ -736,6 +829,7 @@
       "sha256": "9066aa05fcbb61b96ef4f53636ce5ba03b8e27e9237f5da49528b1c48912d1e8",
       "bytes": 239722,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
       "facts": 14,
       "unreadable": []
@@ -745,8 +839,9 @@
       "sha256": "5ce4bc4bb37463db77a3d3034fb89fbcbdb1bc81c9ba1149b4d9cc6f90c84fcd",
       "bytes": 439693,
       "doc_kind": "delivery_note_scan",
+      "role": "reference",
       "status": "ok",
-      "facts": 15,
+      "facts": 16,
       "unreadable": []
     },
     {
@@ -754,6 +849,7 @@
       "sha256": "9f593e5f2e4f794661f372109b479ec5ad51113573f9bbfa931ead26c6906146",
       "bytes": 62891,
       "doc_kind": "inspection_report",
+      "role": "extraction",
       "status": "ok",
       "facts": 4,
       "unreadable": []
@@ -762,7 +858,8 @@
       "path": "suppliers/SUP-0010_Hwaseong_Memory/components.csv",
       "sha256": "6ed301fa3e955e514994286b7a8d6c0b75cfa595b819fb27132565d5803678bd",
       "bytes": 258,
-      "doc_kind": "master_table",
+      "doc_kind": "supplier_components",
+      "role": "extraction",
       "status": "ok",
       "facts": 18,
       "unreadable": []
@@ -772,8 +869,9 @@
       "sha256": "c304343369c76b741f0f23a5a72375e817bea1a82141cf4cee2e712a3b23d899",
       "bytes": 66596,
       "doc_kind": "contract",
+      "role": "extraction",
       "status": "ok",
-      "facts": 1,
+      "facts": 2,
       "unreadable": []
     },
     {
@@ -781,8 +879,9 @@
       "sha256": "eb32c2198ca943791ca8ec6d0cef95cc9b8c03edb3d99f6bce918e50ccf3d000",
       "bytes": 63591,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -790,8 +889,9 @@
       "sha256": "44ac4b9a4c0568abbb9260040977bcb81354e52e99df8600083118ef79737386",
       "bytes": 63642,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -799,8 +899,9 @@
       "sha256": "0abfeac77bc720e819e8dfbef77302d3a1bb61693a70023501930f10d8de106a",
       "bytes": 63643,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -808,8 +909,9 @@
       "sha256": "bb0299f303aa30dd8025bbec0f2b09518139261dacb41b44c071504252c59047",
       "bytes": 63591,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -817,8 +919,9 @@
       "sha256": "23a3660ee1ef8f5b86e140581315388ab0d15a4fd63a45b46607b82a0b89a2af",
       "bytes": 63593,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -826,8 +929,9 @@
       "sha256": "eb4f265252dcc5e1efce99abdbd6c97daf88734eabbf107d29a0f9133e1bca42",
       "bytes": 63590,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -835,8 +939,9 @@
       "sha256": "8d03e85d97a3c4c61febbf95dd01b6238f70ac1c765df5738463150417eb5e16",
       "bytes": 63642,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -844,8 +949,9 @@
       "sha256": "a3ab1bdab80fec0caa2ecffe62614284337e62eafa056506d49684ec6b07d66d",
       "bytes": 63592,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -853,8 +959,9 @@
       "sha256": "8fab87c625b90c12fc7261bc682e9f057aaaee1307c7a4d71409a426563262d9",
       "bytes": 63592,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -862,8 +969,9 @@
       "sha256": "acfae4b9e68439f521f938b5754b39bbd2dae7e14c879ac46ff110ab00e7330b",
       "bytes": 63591,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -871,8 +979,9 @@
       "sha256": "a303e222dbd690cd43706b2096358e8e27e94480302bc4de164abbd73dc29baa",
       "bytes": 63643,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -880,8 +989,9 @@
       "sha256": "09acebf079cdbf228ffbee7569d757242fbb896ee8f95c8dc4f314139138005e",
       "bytes": 63595,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -889,8 +999,9 @@
       "sha256": "7d694bebbb0b1b409cc9c2136f08d41524d42e6706b8439dd9d94e56e784de44",
       "bytes": 63591,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -898,8 +1009,9 @@
       "sha256": "123068676b75064bbfbb4d224a440934c0f2521d9e47cd84d870c981d7c5703c",
       "bytes": 63590,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -907,8 +1019,9 @@
       "sha256": "4ea775530951427fc8bef7102c8638db8ef1a677c3cfa743ae7db61c2220c189",
       "bytes": 63591,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -916,8 +1029,9 @@
       "sha256": "e6f11c22843e3aa8035e97a8c3fa323e1c6e7f59ec4f1ae10bb308c911f42b40",
       "bytes": 63593,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -925,8 +1039,9 @@
       "sha256": "4825e8959c6da0484f3a8bd3d7664b2a78cb85c0657730074a56654b6af6d670",
       "bytes": 63592,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -934,8 +1049,9 @@
       "sha256": "5c148e0ac84e48340916c1b3cee305a385943c2107b8c58a7da8fcb5fe1f1b3a",
       "bytes": 63642,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -943,8 +1059,9 @@
       "sha256": "0a54f69d507a98b2fda6aa8a428ed41eacad42371e3f26594d49ee70541ea439",
       "bytes": 63646,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -952,8 +1069,9 @@
       "sha256": "3d673c189c33d100de3dd7f1370dc7b6c6f12edc3258b9d669c937709e5bbd93",
       "bytes": 63592,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -961,8 +1079,9 @@
       "sha256": "fa61d6bdcfcd04d5634964276097e9a8ea8f63e662271246a6443b2a61e1a30a",
       "bytes": 63591,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -970,8 +1089,9 @@
       "sha256": "acae5aef2f1c8546877a29c36283ebddc04f592fad43f18a0f39857fc799ca10",
       "bytes": 63640,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -979,8 +1099,9 @@
       "sha256": "41847f50123b472865d8356a6ddd1b348c3e387932c098a6f8d86413c8396380",
       "bytes": 63591,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -988,8 +1109,9 @@
       "sha256": "fe6e3b897b15f269da289f53629d59c21702d37e6ce8da3678c6b3c4a2560f6a",
       "bytes": 63645,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -997,8 +1119,9 @@
       "sha256": "1fc2cb199602c0add7064ee58f2cb35d6a63b65d0b5596fb0e271c17fc6c7149",
       "bytes": 63591,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1006,8 +1129,9 @@
       "sha256": "8a9177dc875b00b2ebafa61b287e4de9fa984d7d76489028b3ea1fc7272e585f",
       "bytes": 63591,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1015,8 +1139,9 @@
       "sha256": "090652c773898a080da3de20d43bab6318e7677151e48756b8bff1694056199b",
       "bytes": 63667,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1024,8 +1149,9 @@
       "sha256": "0fe1a20045293a765dce7017078f795948beff48d773d54f09e9848079067d46",
       "bytes": 63590,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1033,8 +1159,9 @@
       "sha256": "df7c419cf20d0d116ba7ce62c301af07f489ccabcfbca14143c0582b35155aee",
       "bytes": 63725,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 10,
+      "facts": 25,
       "unreadable": []
     },
     {
@@ -1042,8 +1169,9 @@
       "sha256": "70e12c4772377050039aa6d3a0f5a585bd10a311645cd68d9d6a34ed99c37868",
       "bytes": 63590,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1051,8 +1179,9 @@
       "sha256": "1293c7e1a32e1825331d185d200c95fa006ea4fd6971ed579903b46cbb72f9a0",
       "bytes": 63588,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1060,8 +1189,9 @@
       "sha256": "1d4ce09cb3e7aa3b6c9754d183d18aee0e748d4d45fc9bf841435d75305aa75a",
       "bytes": 63590,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1069,8 +1199,9 @@
       "sha256": "bc7e12dbcb50c125464d3c1c52d0502fdfc40e47ed11d294f1323aa0a3af9952",
       "bytes": 63836,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 16,
+      "facts": 39,
       "unreadable": []
     },
     {
@@ -1078,8 +1209,9 @@
       "sha256": "8bab8a3c3f3c023faa7546800205a7d2894fe982f92bb90bcdf64d881b9eb0dd",
       "bytes": 63592,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1087,8 +1219,9 @@
       "sha256": "22b81ed61cf575d749ee8fbc466ea3ebf32d67c293317901775088eaa8f9d634",
       "bytes": 63587,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1096,8 +1229,9 @@
       "sha256": "8f00712808d4f31a61b79dcbdf94877890bee844dde0e4cf50f2e03cdaa09288",
       "bytes": 63591,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1105,8 +1239,9 @@
       "sha256": "79a86226cf1746c3468fd396885024ee0678836b8222e26834688b397cb63384",
       "bytes": 63591,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1114,8 +1249,9 @@
       "sha256": "ae149450f6a61e4bd1b28800260d1fd9c0c131b703af0128e2f354ea97777d84",
       "bytes": 63590,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1123,8 +1259,9 @@
       "sha256": "023bca7006fb7f9b7535d0b4cb3302977cf1b229a10327e769f49f0b97b66f70",
       "bytes": 63637,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1132,8 +1269,9 @@
       "sha256": "a97d522d46c80d35a4a8ca092badb21d424f07185b832882d166eb26ed254ab4",
       "bytes": 63662,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1141,8 +1279,9 @@
       "sha256": "b0c377ee6dcc50a1c362b549109273316f045c052f7465eaf20cec81bd026140",
       "bytes": 63642,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1150,8 +1289,9 @@
       "sha256": "6fa447b55779adf199aead6f074d6acd3585bd99a3707da968d4d45de0713495",
       "bytes": 63592,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1159,8 +1299,9 @@
       "sha256": "f7f782992abbeca19963bbb83c06d19ba6ffad72aebaff5ef7f39e87a73e0c97",
       "bytes": 63591,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1168,8 +1309,9 @@
       "sha256": "bfbac11b5dd37145b69b8f7178e32f92a7ca7b0cf6eced0fd3598de8ae337a6b",
       "bytes": 63663,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1177,8 +1319,9 @@
       "sha256": "5d8c9967a3556572c6014149c90f0a8cb1d40397be2454c385a8b84342a27b74",
       "bytes": 63728,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 10,
+      "facts": 25,
       "unreadable": []
     },
     {
@@ -1186,8 +1329,9 @@
       "sha256": "a2b0f376c5e05f9daac30ccac1a072de6d3f9c9653cf749d92e6aefe48354d6b",
       "bytes": 63591,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1195,8 +1339,9 @@
       "sha256": "998db25f6cf80a1d9a552b3c81f6a54c2356bafda3c7a5e2c567cc7a63db4a25",
       "bytes": 63640,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1204,8 +1349,9 @@
       "sha256": "ae761e3f48a77c70eca5a671c034fc45ab6137fbd6121b577a6166d5e285b24d",
       "bytes": 63638,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1213,8 +1359,9 @@
       "sha256": "79de968a8207bec5fe7f249ac301583b5c259fe9b2fb6b2f8241ee5ae397f572",
       "bytes": 63648,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1222,8 +1369,9 @@
       "sha256": "dc1eae0207cb163f4c0698acc4e4aca821dca44069537ebb929ef5546198d0e8",
       "bytes": 63590,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1231,8 +1379,9 @@
       "sha256": "f6c409dddff67d4a58359552380ed82f8d9f67059b216b10bdd18ce1ba2ef42d",
       "bytes": 63643,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1240,8 +1389,9 @@
       "sha256": "58d6efa0eb175019a6995f40274eecb8b9a11e8f02cfc77f1608505392029ad4",
       "bytes": 63727,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 10,
+      "facts": 25,
       "unreadable": []
     },
     {
@@ -1249,8 +1399,9 @@
       "sha256": "fabf21924759a2dcd522060358ecffff8d6f3257c7685454670ebf579fda5817",
       "bytes": 63592,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1258,8 +1409,9 @@
       "sha256": "0f35838a5118363d74a0fd3c5838350357c0c6b418ebb1b69655a0e7087d48ba",
       "bytes": 63646,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1267,8 +1419,9 @@
       "sha256": "45e99967cd6cc2c0a0c43e845c88e591c1302ac36d862115bc5097b5d827738e",
       "bytes": 63590,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1276,8 +1429,9 @@
       "sha256": "95948c26a5480fd898784907dfa67efe720227969edbb3d72760386e4d9e4cf5",
       "bytes": 63592,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1285,8 +1439,9 @@
       "sha256": "ffc7d82e8f2156b4c82e0ea5dfa4f754c4570a13e8669484fad29345c7674755",
       "bytes": 68122,
       "doc_kind": "shipping_advice",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 13,
       "unreadable": []
     },
     {
@@ -1294,6 +1449,7 @@
       "sha256": "939b598690becbf4ef2181708a94d890e1546d8a5beb0b985eba3f802a7fe10a",
       "bytes": 417,
       "doc_kind": "supplier_profile",
+      "role": "extraction",
       "status": "ok",
       "facts": 18,
       "unreadable": []
@@ -1302,7 +1458,8 @@
       "path": "suppliers/SUP-0011_Boise_Semi/components.csv",
       "sha256": "5668314b81f3b768cd7b417ddd383ba850c684d113110a344c1358375aa0efb7",
       "bytes": 258,
-      "doc_kind": "master_table",
+      "doc_kind": "supplier_components",
+      "role": "extraction",
       "status": "ok",
       "facts": 18,
       "unreadable": []
@@ -1312,6 +1469,7 @@
       "sha256": "48b5ed33733232910c38a328dcf71a5608872653b8d0ea19a6bff271eaba0bb0",
       "bytes": 65393,
       "doc_kind": "contract",
+      "role": "extraction",
       "status": "ok",
       "facts": 2,
       "unreadable": []
@@ -1321,8 +1479,9 @@
       "sha256": "aca7aa50d8e8e946278b063be0e4cdfba354a16ad251721b6cb0edfc04bf1645",
       "bytes": 5171,
       "doc_kind": "price_list",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 10,
       "unreadable": []
     },
     {
@@ -1330,8 +1489,9 @@
       "sha256": "31162744ba089aee998c9e9426d313f8f411adb812397baab04cabf5ee1eeaa1",
       "bytes": 5175,
       "doc_kind": "price_list",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 10,
       "unreadable": []
     },
     {
@@ -1339,8 +1499,9 @@
       "sha256": "3341dd2c79523ca6c0e3c27325dcddd579b1aa3892285e489ba2a322fa45d833",
       "bytes": 62681,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1348,8 +1509,9 @@
       "sha256": "f52b2488a0772de2db9cb54a62547d70c7b7c9f254c5785fb7d5e144936beb79",
       "bytes": 62682,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1357,8 +1519,9 @@
       "sha256": "daac5e52bec6d8819558ec8b461dba1521655a87c8f50b0ad52db5b7b577fd81",
       "bytes": 62626,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1366,8 +1529,9 @@
       "sha256": "1e4a04cd16a78c1f2f01304780a5d5cd41109c623e229f2bc4f9910c5f5057f3",
       "bytes": 62627,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1375,8 +1539,9 @@
       "sha256": "df3de8439d33306e2758ebb0f66f6dc38b136b6295cd7c12bb08d8b7416e149b",
       "bytes": 62624,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1384,8 +1549,9 @@
       "sha256": "d8d5786059c2936c5238502808cd544d988524ce6771f37e296726910258a927",
       "bytes": 62626,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1393,8 +1559,9 @@
       "sha256": "399bec3106d26b00f471d676b71ab1b4f0a46fc454cac9d10ab54a1aab5f1f5c",
       "bytes": 62625,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1402,8 +1569,9 @@
       "sha256": "be71fe163e46fbe2836ce3581ddd51a11e8d8be540baa3cecfebac275676795e",
       "bytes": 62685,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1411,8 +1579,9 @@
       "sha256": "f1ccdbf49fd1182a2dd760edd82ecabe2162060d6b75f775314724d75a034bca",
       "bytes": 62626,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1420,8 +1589,9 @@
       "sha256": "59aa6adc4ca26403bd1fed1a9f89efb0065b8dbec15f4574ad1e2794d77e71f0",
       "bytes": 62625,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1429,8 +1599,9 @@
       "sha256": "ae5ead6aba1236e41a07cc23fec44ab442f561f6dde84a527a77c144016dce03",
       "bytes": 62684,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1438,8 +1609,9 @@
       "sha256": "75b8dc3a09dbb5ee9e5ddf11c3727c3a23663a18ef36ce95e88d7570479d8fc6",
       "bytes": 62626,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1447,8 +1619,9 @@
       "sha256": "91d6dfc2279a8411d6f91b50cfb6deff707463214da7373094d6e5f8c658cce9",
       "bytes": 62629,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1456,8 +1629,9 @@
       "sha256": "fd1dc43e7e39f11d40000fd7bc5f1c16ad013c6f60ca7cf068401a5dc1919241",
       "bytes": 62627,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1465,8 +1639,9 @@
       "sha256": "96b8ee7802274d8dbd5a79dca7336620dfec5498c6b42dd653b1b52143515118",
       "bytes": 62680,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1474,8 +1649,9 @@
       "sha256": "c6bea3cf501958461cc7e70d718c47e6465f27b58ef82882b9d74b4150689f44",
       "bytes": 62686,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1483,8 +1659,9 @@
       "sha256": "400b8476bce7f98453d430fc9fe824d85f266559b8fa22deb46a1eac3bbbab02",
       "bytes": 62629,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1492,8 +1669,9 @@
       "sha256": "7e36fec71e10a7ee3557c6b0292d07f8105d4a3c519e0d4316a8ae7470a0ea26",
       "bytes": 62626,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1501,8 +1679,9 @@
       "sha256": "ff04fc346fa8efd3f204e2a56f00a664497d452191bf0c29e46967ded08780d6",
       "bytes": 62707,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1510,8 +1689,9 @@
       "sha256": "86b85bf7d5413b2c17bc84309e6cb09902ac5e1228f6255aa499ec527fc21728",
       "bytes": 62680,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1519,8 +1699,9 @@
       "sha256": "6dde539f96e4caed8d5d4bd0b8db4c090b60105919e449489357df37173a7580",
       "bytes": 62863,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 5,
+      "facts": 13,
       "unreadable": []
     },
     {
@@ -1528,8 +1709,9 @@
       "sha256": "715a25fec95ebd796f786f28ed76abdcd61fddb80a9debc0d882872c4d25d7fa",
       "bytes": 62627,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1537,8 +1719,9 @@
       "sha256": "22a1016a93577296db28c13137e321fadb708230077ade57664bd359aaf2756e",
       "bytes": 62680,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1546,8 +1729,9 @@
       "sha256": "bc00ad9d2263bc541f5c60bc9a3a8585a130b30826c91fa848aa735c7721c539",
       "bytes": 62624,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1555,8 +1739,9 @@
       "sha256": "a2853a776db22e726966a980a5b2447c56eff307cb3f55b907c993996fe9d1a9",
       "bytes": 62627,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1564,8 +1749,9 @@
       "sha256": "8ed701c4619a91e20940687969d3f75eea9d74a0028307a4f9083593542bc3dd",
       "bytes": 62627,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1573,8 +1759,9 @@
       "sha256": "7e0280c0d281b9dcf8b5597dbee8cf51aa849b9672ff641fa0be471fdcb74a53",
       "bytes": 62625,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1582,8 +1769,9 @@
       "sha256": "c86254cc7567a806e171cec626e192da5c0ae3f4517d3adac32150e1e9ba5e76",
       "bytes": 62627,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1591,8 +1779,9 @@
       "sha256": "2743d8664930a3e217c72b1ad265dec8ddf81c9812f433f3ec7c6274482a49fa",
       "bytes": 62682,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1600,8 +1789,9 @@
       "sha256": "bf3cdd6708af631c37ca1ce06ad0c58cf849454e220a6f5fc4e05e200a2c3ea8",
       "bytes": 62626,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1609,8 +1799,9 @@
       "sha256": "1e4bfbb181eb1bfe53508e96d6cf3d64646f8d9555e5c40634ffa859663d847c",
       "bytes": 62711,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1618,8 +1809,9 @@
       "sha256": "084c67824e850a757bc9e4f103c0b906cf6216f0fd4e57793dd47fa7e122ae4f",
       "bytes": 62681,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1627,8 +1819,9 @@
       "sha256": "774096fcbd0c0991b678747bd4f22c33b35f3a93f20dcfb5c99f49032ccc9087",
       "bytes": 62624,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1636,8 +1829,9 @@
       "sha256": "5cb4015f059e16ac71d71c9a0013cf28a43beebeb5d068fdc708967b1abfb344",
       "bytes": 62681,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1645,8 +1839,9 @@
       "sha256": "705689d1c1a95b26485396746aaef11700cd061325d1e3aecbbc77381e3d031d",
       "bytes": 62626,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1654,8 +1849,9 @@
       "sha256": "02205ee3c1541d7c17c0cf7fe299f303ac11eae242c957a90497738c908cd762",
       "bytes": 62685,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1663,8 +1859,9 @@
       "sha256": "773ce2fc34928c9555148f19d8fd3864e2bace7c3e6c0f30552e3087262fe9dd",
       "bytes": 62624,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1672,8 +1869,9 @@
       "sha256": "5b7bf6a29512d01deb9f066386b69a63b9075ca4c0a1e4df4ccd1a17cfbb8e4f",
       "bytes": 62625,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1681,8 +1879,9 @@
       "sha256": "1647b02d0ff34aafd5c36e88e0a0d0e2a77f168914eaca82cb2584ad03e77fde",
       "bytes": 62626,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1690,8 +1889,9 @@
       "sha256": "20caab0348354d2de770f4ddcd17d10edd3193fc3b35a10c590dc2663a0586d2",
       "bytes": 62776,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 10,
+      "facts": 25,
       "unreadable": []
     },
     {
@@ -1699,8 +1899,9 @@
       "sha256": "18b200e33474cf6ee96eec6dfbd2369ddd8908395da1086696daf752c913a666",
       "bytes": 62626,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1708,8 +1909,9 @@
       "sha256": "11da2003cc8c0de1f3fcf4723691c5869f02f5a9cb9f36965c53f7800940e99d",
       "bytes": 62629,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1717,8 +1919,9 @@
       "sha256": "46c19417c5c6f143fef468ec7a287626827ae03ded4c596c6a1d2ae9a4ae38c5",
       "bytes": 62682,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1726,8 +1929,9 @@
       "sha256": "857b37b754349ed75063492971e4df9a7a9fd6224d545ce3cbb287d99b92b2ff",
       "bytes": 62627,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1735,8 +1939,9 @@
       "sha256": "6bcf82736b0a376c70025daa63dcbb69412f3edc66b870cba0708939ef8a46eb",
       "bytes": 62682,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1744,8 +1949,9 @@
       "sha256": "ba88754dd9e0b6d237eccee3ef28e6df60b619a31c2817c28967673b43c2e221",
       "bytes": 62682,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1753,8 +1959,9 @@
       "sha256": "3038704f5a002bc262b4502b81d50f77ce10575925962b9828e8e230d4a8904f",
       "bytes": 62626,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1762,8 +1969,9 @@
       "sha256": "eb910c11b0eba32e104430a8cfa4550f2e0c2540a31867b9f8dded1e3402bda7",
       "bytes": 62626,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1771,8 +1979,9 @@
       "sha256": "d1871c01953be82795acd2f420e685c49d7c0fc388b19738bca1e379e3a1497f",
       "bytes": 62684,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1780,8 +1989,9 @@
       "sha256": "521fca712a169de6068fe57f539f3a4551ce08059589437229849041ee47932d",
       "bytes": 62627,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1789,8 +1999,9 @@
       "sha256": "423afa53d2474ed17c3eca5172df6c58eac2d3874f4a8a2ce47c8b65a59b2c37",
       "bytes": 62627,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1798,6 +2009,7 @@
       "sha256": "d33e9635665500bc7c5038f4fea25480bc0a2b9fe16aa0e5a1f23db4c13a5ae6",
       "bytes": 401,
       "doc_kind": "supplier_profile",
+      "role": "extraction",
       "status": "ok",
       "facts": 18,
       "unreadable": []
@@ -1806,7 +2018,8 @@
       "path": "suppliers/SUP-0018_Pune_Diecast_Works/components.csv",
       "sha256": "55b9fa3e45d1127666aa305cf3dd0f5dc7fe3cbef49c33221ccdd851e2469369",
       "bytes": 193,
-      "doc_kind": "master_table",
+      "doc_kind": "supplier_components",
+      "role": "extraction",
       "status": "ok",
       "facts": 9,
       "unreadable": []
@@ -1816,8 +2029,9 @@
       "sha256": "eed35f2eedf6917b8846f0a31e799111e00012e1497a836404ff1b94d259c5b4",
       "bytes": 66387,
       "doc_kind": "contract",
+      "role": "extraction",
       "status": "ok",
-      "facts": 1,
+      "facts": 3,
       "unreadable": []
     },
     {
@@ -1825,8 +2039,9 @@
       "sha256": "b851878a3eb37205295d04f95c8ee95b265658e35d82788e2188b82234ed8068",
       "bytes": 2286,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 8,
+      "facts": 20,
       "unreadable": []
     },
     {
@@ -1834,8 +2049,9 @@
       "sha256": "a28e9c61835f69e0337cb2dc8d129fedcadf5fc7526e29225990f2ee9aba7a99",
       "bytes": 2288,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 8,
+      "facts": 20,
       "unreadable": []
     },
     {
@@ -1843,8 +2059,9 @@
       "sha256": "322e2231136c3afc45d0ddc477468bad8fa903210f7f35fcff6a4c0c35116448",
       "bytes": 2231,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 5,
+      "facts": 13,
       "unreadable": []
     },
     {
@@ -1852,8 +2069,9 @@
       "sha256": "ceb383c4c4ed63731ec6cea1dc36fce79829573298f16b2e79a13799b7697a78",
       "bytes": 2228,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 5,
+      "facts": 13,
       "unreadable": []
     },
     {
@@ -1861,8 +2079,9 @@
       "sha256": "cb86cf0d4aed07ada6d84995ec3ac8330d165d3207c8e51f55b9f4c9a66435c9",
       "bytes": 2226,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 5,
+      "facts": 13,
       "unreadable": []
     },
     {
@@ -1870,8 +2089,9 @@
       "sha256": "8c3cf7ca758ec6a23a1a7b50b218e86e1b0cd6c2be71f0ebcc1635265d82b492",
       "bytes": 2227,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 5,
+      "facts": 13,
       "unreadable": []
     },
     {
@@ -1879,15 +2099,27 @@
       "sha256": "2cb89b7f4eb9c0a71e190557f3e63a03aee9afbba357489edf92dae0eee25908",
       "bytes": 495,
       "doc_kind": "supplier_profile",
+      "role": "extraction",
       "status": "ok",
       "facts": 19,
+      "unreadable": []
+    },
+    {
+      "path": "suppliers/SUP-0018_Pune_Diecast_Works/profile.json",
+      "sha256": "01ba8418f1d29ce3e72c9f4ea82bd86c8cc5be906ee37c41f28cc77060c99fac",
+      "bytes": 1054,
+      "doc_kind": "other_document",
+      "role": "extraction",
+      "status": "failed",
+      "facts": 0,
       "unreadable": []
     },
     {
       "path": "suppliers/SUP-0019_Dongguan_Precision_Housings/components.csv",
       "sha256": "23b73e405b5903909a76c92fb636c1fb0d920760f06c873d48103fbfbdbe2dc7",
       "bytes": 353,
-      "doc_kind": "master_table",
+      "doc_kind": "supplier_components",
+      "role": "extraction",
       "status": "ok",
       "facts": 27,
       "unreadable": []
@@ -1897,10 +2129,11 @@
       "sha256": "8c9cc633b50d3fa1ba0079ddfbb430cb6c763b8eb2edd12647447f170ae57314",
       "bytes": 811286,
       "doc_kind": "contract",
+      "role": "reference",
       "status": "partial",
       "facts": 16,
       "unreadable": [
-        "PDF has no usable text layer; visually inspected as image."
+        "PDF has no usable text layer; reference envelope retained for visual review."
       ]
     },
     {
@@ -1908,8 +2141,9 @@
       "sha256": "c472ef4967a5fc38cec71c4bd5f369fd8f3ef82e3edff0907c596f8bd15d842e",
       "bytes": 5232,
       "doc_kind": "price_list",
+      "role": "extraction",
       "status": "ok",
-      "facts": 6,
+      "facts": 15,
       "unreadable": []
     },
     {
@@ -1917,8 +2151,9 @@
       "sha256": "ae4ebc16f18fa1ee374f40a8cd2614d56da2a0173b3e27d1918f1f619f7511a7",
       "bytes": 5235,
       "doc_kind": "price_list",
+      "role": "extraction",
       "status": "ok",
-      "facts": 6,
+      "facts": 15,
       "unreadable": []
     },
     {
@@ -1926,8 +2161,9 @@
       "sha256": "5f56b0d42a1f14af6a28260b3eaf127ee31352b3affcc9c49332c5fe2e19d218",
       "bytes": 63943,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1935,8 +2171,9 @@
       "sha256": "2a68fc06c487a930cec660fcc6444c79938c219e54b05d6aa52b1e9506b9c94a",
       "bytes": 63943,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1944,8 +2181,9 @@
       "sha256": "95dde6fca9cb54ace12a214fe83290a9960f1b5d4e6b427f888827537389e1be",
       "bytes": 63943,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1953,8 +2191,9 @@
       "sha256": "9b4a5714ca0040ba04a1a4746f441c726e510c100ca81bfc19caae2f1b2bb1c3",
       "bytes": 63941,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1962,8 +2201,9 @@
       "sha256": "7eb25b802b1301017174ed6d65789df3eb7806842178162f67feb5c84310bb32",
       "bytes": 64055,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1971,8 +2211,9 @@
       "sha256": "f98ab0ba38075425cfd3b94234a1683e31d6ef6bc92607b6f18bd9c9c6d5b453",
       "bytes": 63943,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -1980,8 +2221,9 @@
       "sha256": "5f711a5ed801ab708653d4eea462ae8715448105033b1920635f8f17a9df1b40",
       "bytes": 64056,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1989,8 +2231,9 @@
       "sha256": "05878021b545c7d975d8e2358a8728395448e7af7a2c474e1576c5062cebe297",
       "bytes": 64061,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -1998,8 +2241,9 @@
       "sha256": "e0dc5eac035bf96cab073921bd34dc91bba51dadd9c2e91617fe107ffd7e9a20",
       "bytes": 64060,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2007,8 +2251,9 @@
       "sha256": "b8ea48ddcc14d87f0307ca9d9d1ed9afb458bc81c506b4fd6125f442244ef00e",
       "bytes": 64057,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2016,8 +2261,9 @@
       "sha256": "a07953864582f6b8fddc8f841459549fa335b1a6418ca4432a1754ef4b268c5b",
       "bytes": 63966,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2025,8 +2271,9 @@
       "sha256": "2512c5e21ed59657238f22fa18ce6fa23f00a5383f5aaa4ade13ee1fc63b217b",
       "bytes": 63942,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2034,8 +2281,9 @@
       "sha256": "a9ce44b5344b1e8fdb805c60e5fa1e36cef7385a66d9dc16ab716f84e68ca9f4",
       "bytes": 64058,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2043,8 +2291,9 @@
       "sha256": "6224bf1679817779df2cb307b1db0aafa5b4ddf7f83594ad3eb041da6b54d4ee",
       "bytes": 64017,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2052,8 +2301,9 @@
       "sha256": "41bc3c75b559e9d638f31707c6f5ae9dea9837f881ff279b0955a170e774f0b5",
       "bytes": 63966,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2061,8 +2311,9 @@
       "sha256": "be53c33a15e4cfe9e1d22375ba175a180edb4913136eb02ad749e57c17a5e565",
       "bytes": 64058,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2070,8 +2321,9 @@
       "sha256": "bb0747a4eff1e3fe9a492d2630fc1b523a539470a5dc8d0e0915156c42b2f557",
       "bytes": 63940,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2079,8 +2331,9 @@
       "sha256": "ca9c2e7eec3e6ccb8073f5c3006160b6bcce6ce9d65a1b88f8cb8ef669ebafe3",
       "bytes": 63941,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2088,8 +2341,9 @@
       "sha256": "51e8a69b9a953a4649083116420335079fcb13f379c6358a1e0c7bb9cf3e414c",
       "bytes": 63940,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2097,8 +2351,9 @@
       "sha256": "387a681f1ff8a03bcf736b994476b2bcdddd4b316f3c5c64c0d24eac34eaa338",
       "bytes": 64060,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2106,8 +2361,9 @@
       "sha256": "545a1b3a124ee6330f6385e5507a3afb0a55cb22150339032d03650e0cf50f8c",
       "bytes": 63941,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2115,8 +2371,9 @@
       "sha256": "a20813280c7754e5b0a15eda83634a60c5bbd58e94344afb24f1b2df493227e3",
       "bytes": 63941,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2124,8 +2381,9 @@
       "sha256": "abf28eabad0ad3615b65e4c2533913fd1c540b6ee3b7f79294d719850907636e",
       "bytes": 64028,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2133,8 +2391,9 @@
       "sha256": "0b7b99bb9dd31581a6c822fd7b5ac34d85203cd49d53a52bae7a63bc1a3ca312",
       "bytes": 64031,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2142,8 +2401,9 @@
       "sha256": "86e1763d318f0c4c8cbdca1072d3be343f6c280803eeba68598248615fe621f7",
       "bytes": 63942,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2151,8 +2411,9 @@
       "sha256": "002793d2d210005c1890fbf15f6296e6faae4f7f901b8e787477f847ddfc3894",
       "bytes": 63965,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2160,8 +2421,9 @@
       "sha256": "825092deab3d8b53aee2c9f0c87fb79f56bf94c9c0b7a751eaac0834b210d285",
       "bytes": 64023,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2169,8 +2431,9 @@
       "sha256": "6df754e76f203f38315c72e9dcb2869ab57bc7c9bb77b66bc68342a517a7a75a",
       "bytes": 63940,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2178,8 +2441,9 @@
       "sha256": "4602538bd75033960491c0786e6543520ba6afac845ed45e0451b59bdc7ae596",
       "bytes": 63965,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2187,8 +2451,9 @@
       "sha256": "4b4da811197b2de9024f1e9d9a1fde62842a8cd4709b1e3dd22fa38a30232e8b",
       "bytes": 63966,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2196,8 +2461,9 @@
       "sha256": "0f8fdc195d227077cb25b4fa7828798487d5d2ad32ab4103df9533f3576ca5f7",
       "bytes": 63967,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2205,6 +2471,7 @@
       "sha256": "4993143d9c60134e28e9b8df76adf9d5cf5b1e29c3ef8b1786af05995caada39",
       "bytes": 447,
       "doc_kind": "supplier_profile",
+      "role": "extraction",
       "status": "ok",
       "facts": 18,
       "unreadable": []
@@ -2213,7 +2480,8 @@
       "path": "suppliers/SUP-0028_Karton_Nowak/components.csv",
       "sha256": "f8d9c38776d06ffcbeb13c4689d268b705d3ae4a60665e36fec3307506c0540c",
       "bytes": 554,
-      "doc_kind": "master_table",
+      "doc_kind": "supplier_components",
+      "role": "extraction",
       "status": "ok",
       "facts": 45,
       "unreadable": []
@@ -2223,10 +2491,11 @@
       "sha256": "a4e91da8a44d900a372bb325c5131a2d2a712887008a4a52332c2d77a75215ab",
       "bytes": 654307,
       "doc_kind": "contract",
+      "role": "reference",
       "status": "partial",
       "facts": 24,
       "unreadable": [
-        "PDF has no usable text layer; visually inspected as image."
+        "PDF has no usable text layer; reference envelope retained for visual review."
       ]
     },
     {
@@ -2234,6 +2503,7 @@
       "sha256": "256840ad6ee4b8a4baa3c33ac4bbe4ae2cb45b057cff25485dab257a9bd210bc",
       "bytes": 64442,
       "doc_kind": "offer",
+      "role": "extraction",
       "status": "ok",
       "facts": 41,
       "unreadable": []
@@ -2242,7 +2512,8 @@
       "path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
       "sha256": "2feae4d0837413b6ba0621fd0837b4384a446bf0c865719d5e35251de20156bb",
       "bytes": 64608,
-      "doc_kind": "capacity_notice",
+      "doc_kind": "other_document",
+      "role": "extraction",
       "status": "ok",
       "facts": 37,
       "unreadable": []
@@ -2252,8 +2523,9 @@
       "sha256": "124e3d767100b3aa69dc18dc8dbcd29b4be51bb69b0eca4c493f6d68f11d3fa8",
       "bytes": 2239,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2261,8 +2533,9 @@
       "sha256": "f6362abd2cc79106ab2ff59a924ad9dc00a5fdc61bbda29a2285e5933beea099",
       "bytes": 2154,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2270,8 +2543,9 @@
       "sha256": "17d5e134273e46940a7c2c3a25e7e6b5ddad690201167c3bc05dab1e1b33ca65",
       "bytes": 2243,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2279,8 +2553,9 @@
       "sha256": "919bfc5f526dc197fbd029cd8f3eef358285c13f48b8bcbf0621d5afd6659de8",
       "bytes": 2243,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2288,8 +2563,9 @@
       "sha256": "fc81ec723bfebe5655db1a04bc04cac08452ab4f1d7422c9c5846013b14ecd1d",
       "bytes": 2125,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2297,8 +2573,9 @@
       "sha256": "b531b555036948dcaa3ae1c22470fedd2aba58d9c4399af1055b7c92b5e3113c",
       "bytes": 2130,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2306,8 +2583,9 @@
       "sha256": "8fae5fdb7587e23b4acb96c898f59cf5bc395e02f7ecec7b1f58700586c0868d",
       "bytes": 2154,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2315,8 +2593,9 @@
       "sha256": "de77a8afe6e575b70f33db0c42f64d05a28206eda749e2a727007b10fac20f95",
       "bytes": 2237,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2324,8 +2603,9 @@
       "sha256": "3651b6b2265d3f91c6a6e639e291437ad6fe7a396518755000da233b165fafa7",
       "bytes": 2157,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2333,8 +2613,9 @@
       "sha256": "1b1c7b18781ea7e3f2520dde76965daf222f07776816cee6105c4313db1feb7c",
       "bytes": 2133,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2342,8 +2623,9 @@
       "sha256": "8e87518f454e01e034859dc5e6737448375843be702f642b4cccd6eeb1450077",
       "bytes": 2245,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2351,8 +2633,9 @@
       "sha256": "cd6fbbab7031958738f3588f26c85ef09f28c20101b50f5493ae221ae92174c0",
       "bytes": 2154,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2360,8 +2643,9 @@
       "sha256": "208276ee6f753134d05e6174eccaeae460cddf83fd44cd41dfa83783b8972f3b",
       "bytes": 2127,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2369,8 +2653,9 @@
       "sha256": "9d7365b1c4dc2c19877e2ef83fa0689a02a2a55ce93663bebd0ce995b1898706",
       "bytes": 2125,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2378,8 +2663,9 @@
       "sha256": "0c87573a0dce8f976ce187dc88a91b14fd1eb8e02f3760bff4f6f5b4a0abf691",
       "bytes": 2154,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2387,8 +2673,9 @@
       "sha256": "36a79c2876ca842515f8117278d28fae626cb4c96d6a202b060edc8847a3c991",
       "bytes": 62997,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 10,
+      "facts": 22,
       "unreadable": []
     },
     {
@@ -2396,8 +2683,9 @@
       "sha256": "c73a070937881a04edd99b552063ff3b6d00698b088aa11b83024eaec9b5fc5a",
       "bytes": 2324,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 9,
+      "facts": 19,
       "unreadable": []
     },
     {
@@ -2405,8 +2693,9 @@
       "sha256": "c205c98528e6d52773492ed0c7934690b2e1d3ad3dccf095cb9fef48551a3136",
       "bytes": 2243,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2414,8 +2703,9 @@
       "sha256": "81d5619c09950053d00e44dd5bb88f12a2e2c5cae8b5413cab0459267d01e05e",
       "bytes": 2485,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 15,
+      "facts": 33,
       "unreadable": []
     },
     {
@@ -2423,8 +2713,9 @@
       "sha256": "2919515fa683921581cea345fa63a3cfbcb1eebb9d420d721fd0b5830044a13f",
       "bytes": 2425,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 12,
+      "facts": 26,
       "unreadable": []
     },
     {
@@ -2432,8 +2723,9 @@
       "sha256": "e16929e5548dcdde0913a272a9041d14c2bfab99e02daa4c995f340330702e07",
       "bytes": 2154,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2441,8 +2733,9 @@
       "sha256": "1760da0a92f230ef96f2513f55605be15de5dc00276676342679209d2819cffa",
       "bytes": 2240,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2450,8 +2743,9 @@
       "sha256": "134c5d9e90f2aefc579456cf9c3227b74261300e1494c42e5563a13d3b4f6d5d",
       "bytes": 2243,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2459,8 +2753,9 @@
       "sha256": "ec2b61e19388a58c3375e11a6807cb5596cd72edeb49598cad03aba13ced6cee",
       "bytes": 2153,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2468,8 +2763,9 @@
       "sha256": "b6742b9b2015001b325ae1c6cc86d22dfe90fcd9603ab6afa6d6c17761a34840",
       "bytes": 2127,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2477,8 +2773,9 @@
       "sha256": "253d865cc2c812b5281cf96f94a2d8a7fee94891a2a67941cd0cee55a1c8806d",
       "bytes": 2128,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2486,8 +2783,9 @@
       "sha256": "a6011a731679031ffef53859828413361afc1e41f2cbbdaeef001e124dd00055",
       "bytes": 2324,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 9,
+      "facts": 19,
       "unreadable": []
     },
     {
@@ -2495,8 +2793,9 @@
       "sha256": "5ff4c9f7ab50e3284f9c191ed849a42ff70bd895d03aa87d25bdf7adf34ef7e0",
       "bytes": 2153,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2504,8 +2803,9 @@
       "sha256": "7d549d8f0d7c251c0f037e1d2ceb9b1c36c9a509c8867b5c1260bbe4974bb147",
       "bytes": 2150,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 11,
       "unreadable": []
     },
     {
@@ -2513,8 +2813,9 @@
       "sha256": "1c4a967ab07a95107a57acd82dfae57614927a3a75b6a8905a55267211db374e",
       "bytes": 2651,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 21,
+      "facts": 47,
       "unreadable": []
     },
     {
@@ -2522,8 +2823,9 @@
       "sha256": "58623a4bd6d50a9a6e8af24527fe6f0f3af5e76a713d3a6cf10c45454a8b2ce5",
       "bytes": 2324,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 9,
+      "facts": 19,
       "unreadable": []
     },
     {
@@ -2531,8 +2833,9 @@
       "sha256": "fa9fe5a54e9b581f1bf5d96398643b7a7106960f9eedae90e8ee9428e2e0e04c",
       "bytes": 2319,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 9,
+      "facts": 19,
       "unreadable": []
     },
     {
@@ -2540,8 +2843,9 @@
       "sha256": "f7453b3e943a2c8416fa6eb4aa9f3a6ed59fd6e1daf0d482525f1443b894fff9",
       "bytes": 2479,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 15,
+      "facts": 33,
       "unreadable": []
     },
     {
@@ -2549,8 +2853,9 @@
       "sha256": "3b49b9db7a2130d9dd4a076fbd28854c13725140a942e527ee9059da546e4694",
       "bytes": 2660,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 21,
+      "facts": 47,
       "unreadable": []
     },
     {
@@ -2558,6 +2863,7 @@
       "sha256": "9a9365b44a43ed35870af4e2b692ae71d62a814f8460eaae6f919d44a686af22",
       "bytes": 418,
       "doc_kind": "supplier_profile",
+      "role": "extraction",
       "status": "ok",
       "facts": 18,
       "unreadable": []
@@ -2566,9 +2872,20 @@
       "path": "suppliers/SUP-0029_Guangzhou_PackRight/components.csv",
       "sha256": "40ab55dcd7df2527c26e18286a1e59db5c0673fd342a02ef076519757e0cf73f",
       "bytes": 537,
-      "doc_kind": "master_table",
+      "doc_kind": "supplier_components",
+      "role": "extraction",
       "status": "ok",
       "facts": 37,
+      "unreadable": []
+    },
+    {
+      "path": "suppliers/SUP-0029_Guangzhou_PackRight/components_delta.csv",
+      "sha256": "83ebc27ebdab81c062d3c150e8a95427d762119858d3ac92906a01744fc91b4a",
+      "bytes": 276,
+      "doc_kind": "change_record_table",
+      "role": "extraction",
+      "status": "ok",
+      "facts": 15,
       "unreadable": []
     },
     {
@@ -2576,8 +2893,9 @@
       "sha256": "7c37ba504a7c59849bfd6bdd031dc3c0d037278f0ce7f6ca6209ab73abb22eec",
       "bytes": 67108,
       "doc_kind": "contract",
+      "role": "extraction",
       "status": "ok",
-      "facts": 4,
+      "facts": 6,
       "unreadable": []
     },
     {
@@ -2585,8 +2903,19 @@
       "sha256": "355bacd8e004e0c8a2d7d9601c65e52eb1ad0fb6bbec2a600ea0ae4320f3efcf",
       "bytes": 5256,
       "doc_kind": "price_list",
+      "role": "extraction",
       "status": "ok",
-      "facts": 6,
+      "facts": 15,
+      "unreadable": []
+    },
+    {
+      "path": "suppliers/SUP-0029_Guangzhou_PackRight/notices/Supply_notice_export_licence_2026-11-21.pdf",
+      "sha256": "0251401ec2bb23acc247213debd3011bfec3eab9393e587b858c112ff317524c",
+      "bytes": 73532,
+      "doc_kind": "other_document",
+      "role": "extraction",
+      "status": "ok",
+      "facts": 13,
       "unreadable": []
     },
     {
@@ -2594,8 +2923,9 @@
       "sha256": "706a23efb525cc987c4dc8d50542caaca4cf00cff48b221189264688bd25f1cd",
       "bytes": 63944,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 3,
+      "facts": 10,
       "unreadable": []
     },
     {
@@ -2603,8 +2933,9 @@
       "sha256": "cc50aa714b10f320a5c72dc999b4f9dbf4e13d32525d043bf16b7117131e7d4d",
       "bytes": 63944,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 3,
+      "facts": 10,
       "unreadable": []
     },
     {
@@ -2612,8 +2943,9 @@
       "sha256": "bdab2f8c6215302b1a43ff9182edaaa684ee77c9355af2a0061a2657344096a2",
       "bytes": 63946,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 3,
+      "facts": 10,
       "unreadable": []
     },
     {
@@ -2621,8 +2953,9 @@
       "sha256": "ed64d8cd84580938d442280a31fa2f58dd133b2258c4f4a97ef8df170ddb9ec1",
       "bytes": 63944,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 3,
+      "facts": 10,
       "unreadable": []
     },
     {
@@ -2630,8 +2963,9 @@
       "sha256": "dc9bb59cc17fc73f25c538cc96fbcb2cc5ecab1f9614015988501061e2cde889",
       "bytes": 63944,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 3,
+      "facts": 10,
       "unreadable": []
     },
     {
@@ -2639,8 +2973,9 @@
       "sha256": "e61f023200276d3a9ab57c09c2588d8d89a21ada0ed304b70e17b975616a400d",
       "bytes": 63944,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 3,
+      "facts": 10,
       "unreadable": []
     },
     {
@@ -2648,8 +2983,9 @@
       "sha256": "d18d38e012496cb8ed223b2e75263f1bbcd8e18361983c24dc10458e9769c13e",
       "bytes": 63943,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 3,
+      "facts": 10,
       "unreadable": []
     },
     {
@@ -2657,8 +2993,9 @@
       "sha256": "7d4a82af8d948981b422e630af8e1f29e6d38982f3433646c2d5df0b474fc09a",
       "bytes": 64091,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 3,
+      "facts": 12,
       "unreadable": []
     },
     {
@@ -2666,8 +3003,9 @@
       "sha256": "dcc61c8e7b154c9bce8d6155f6e604da11f1be87892d3877389ffb38634ee621",
       "bytes": 64153,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 5,
+      "facts": 21,
       "unreadable": []
     },
     {
@@ -2675,8 +3013,9 @@
       "sha256": "e71ed390dc3b28fc6ffddf479d07e9dfdf251511e18ea037808347408c9b1167",
       "bytes": 64092,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 3,
+      "facts": 12,
       "unreadable": []
     },
     {
@@ -2684,8 +3023,9 @@
       "sha256": "3d4b01f5736ed34439a9d86056d86a87007014c37b4c900d44cf8f905d71f935",
       "bytes": 63947,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 3,
+      "facts": 10,
       "unreadable": []
     },
     {
@@ -2693,8 +3033,9 @@
       "sha256": "970889d59425828b9deeebbfca3f04acb8f4a5b17c1cf6dd343363f33cb06b15",
       "bytes": 63943,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 3,
+      "facts": 10,
       "unreadable": []
     },
     {
@@ -2702,8 +3043,9 @@
       "sha256": "f8d6b2e8e5c96e40ed246de298aadf366ae0a660e4342d7c82b199da815d59c4",
       "bytes": 63943,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 3,
+      "facts": 10,
       "unreadable": []
     },
     {
@@ -2711,8 +3053,9 @@
       "sha256": "4b0bd18d6f9e75307f93c7e1e91632515466e91940d5d39beb3b7eef5b5c35c3",
       "bytes": 63944,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 3,
+      "facts": 10,
       "unreadable": []
     },
     {
@@ -2720,8 +3063,9 @@
       "sha256": "47d130f66e61c7e4ac596b8d9dbfb5b713a391fd248861a535cb0af3eaceff06",
       "bytes": 64385,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 7,
+      "facts": 29,
       "unreadable": []
     },
     {
@@ -2729,8 +3073,9 @@
       "sha256": "9060024b17cac66ed4e201f109446febeb07650567785e0122cc74bdd1bef33f",
       "bytes": 64109,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 5,
+      "facts": 21,
       "unreadable": []
     },
     {
@@ -2738,8 +3083,9 @@
       "sha256": "a43f34030b6b299e56c2befbf789d3b8994218a563292a316b151e484204f618",
       "bytes": 63942,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 3,
+      "facts": 10,
       "unreadable": []
     },
     {
@@ -2747,8 +3093,9 @@
       "sha256": "8b7a65503115e3547050e147d5ca34c155eb1b6dcb948213c54203626bff0c5d",
       "bytes": 63944,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 3,
+      "facts": 10,
       "unreadable": []
     },
     {
@@ -2756,8 +3103,9 @@
       "sha256": "08fc2146592518f702eb30eab4254023bf28961624fa71458df1b6d7f184fb63",
       "bytes": 64092,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 3,
+      "facts": 12,
       "unreadable": []
     },
     {
@@ -2765,8 +3113,9 @@
       "sha256": "d40e1ac466893e3676113841725d8cc708060102168cdd6dcd42a8911f4d5679",
       "bytes": 64092,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 3,
+      "facts": 12,
       "unreadable": []
     },
     {
@@ -2774,8 +3123,9 @@
       "sha256": "cb791b3b7bf0d4ba0d28bb564239fbf70520a0b3c4ff27a184adda9de9b7b13d",
       "bytes": 63944,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 3,
+      "facts": 10,
       "unreadable": []
     },
     {
@@ -2783,8 +3133,9 @@
       "sha256": "6193aa879508386a239d1516a2b4aebfd741eb95dd09c1e2f354e5075f299d07",
       "bytes": 64277,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 5,
+      "facts": 23,
       "unreadable": []
     },
     {
@@ -2792,8 +3143,9 @@
       "sha256": "e5904f9df11d0cc3d2bb780290640499e36d450947a40b146a1bedb1fc66f343",
       "bytes": 64189,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 5,
+      "facts": 18,
       "unreadable": []
     },
     {
@@ -2801,8 +3153,9 @@
       "sha256": "5b02c60152ee7f482a536ff9b3fdffa6ac3a1c853ce8ce7139e6b1e4d465c6e9",
       "bytes": 64056,
       "doc_kind": "order_confirmation",
+      "role": "extraction",
       "status": "ok",
-      "facts": 3,
+      "facts": 15,
       "unreadable": []
     },
     {
@@ -2810,10 +3163,11 @@
       "sha256": "fcf52aac405c6a6ffbd3b97a217852a424443dbd6cfad4a8dfd6a5b28a5af2e1",
       "bytes": 203853,
       "doc_kind": "packing_list",
+      "role": "reference",
       "status": "partial",
       "facts": 6,
       "unreadable": [
-        "PDF has no usable text layer; visually inspected as image."
+        "PDF has no usable text layer; reference envelope retained for visual review."
       ]
     },
     {
@@ -2821,67 +3175,81 @@
       "sha256": "e6d5fb238d91d843289397d0a2dad58c1a1f3964babcff47236d8422b85dcf89",
       "bytes": 436,
       "doc_kind": "supplier_profile",
+      "role": "extraction",
       "status": "ok",
       "facts": 18,
+      "unreadable": []
+    },
+    {
+      "path": "suppliers/SUP-0029_Guangzhou_PackRight/profile.json",
+      "sha256": "ce5c3eb5bb3291515dc8fd60f1f5956fe4fadfaf1e020e15e00acf9984cac773",
+      "bytes": 1006,
+      "doc_kind": "other_document",
+      "role": "extraction",
+      "status": "failed",
+      "facts": 0,
       "unreadable": []
     }
   ],
   "counts": {
-    "documents": 313,
-    "facts": 14697,
+    "documents": 318,
+    "facts": 16861,
     "doc_kinds": {
       "policy_document": 1,
       "launch_plan_workbook": 1,
       "launch_status_workbook": 1,
-      "memo": 1,
+      "other_document": 5,
       "context_note": 1,
       "org_chart": 2,
       "erp_table": 6,
       "shipment_tracker_workbook": 1,
-      "master_table": 13,
-      "change_record_table": 2,
+      "master_table": 7,
+      "change_record_table": 3,
+      "news_feed": 1,
       "delivery_note_scan": 60,
       "inspection_report": 1,
+      "supplier_components": 6,
       "contract": 6,
       "order_confirmation": 202,
       "shipping_advice": 1,
       "supplier_profile": 6,
       "price_list": 5,
       "offer": 1,
-      "capacity_notice": 1,
       "packing_list": 1
     },
     "fact_types": {
-      "policy_directive": 19,
-      "plan_edition": 27,
-      "plan_part": 99,
-      "shipment_qty": 216,
-      "shift": 10,
-      "x_workbook_row": 31,
+      "policy_directive": 133,
+      "plan_edition": 28,
+      "plan_part": 80,
+      "shipment_qty": 49,
+      "shift": 6,
+      "x_workbook_row": 7,
       "x_context_note": 1,
-      "x_org_chart_entry": 24,
       "goods_receipt": 4355,
-      "shipment": 443,
+      "shipment": 584,
       "packout": 140,
-      "po_line": 6109,
-      "stock_batch": 311,
+      "po_line": 6367,
+      "stock_batch": 279,
       "bom_line": 80,
-      "change_record": 42,
-      "component": 238,
+      "change_record": 57,
+      "component": 84,
       "carrier": 20,
       "port": 66,
       "product": 29,
       "route": 69,
       "site": 8,
+      "x_news_record": 14,
       "delivery_note_line": 966,
-      "supplier_statement": 253,
+      "supplier_statement": 105,
       "inspection_result": 4,
-      "contract_term": 13,
-      "oc_line": 876,
+      "supplier_part": 154,
+      "contract_term": 18,
+      "oc_header": 810,
+      "oc_line": 2089,
       "supplier": 109,
-      "price_change": 26,
+      "price_change": 65,
       "part_xref": 35,
-      "x_document_line": 78
+      "x_document_line": 50
     }
   }
 }

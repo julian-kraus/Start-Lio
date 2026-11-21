@@ -10,2528 +10,2024 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
       "fact_type": "plan_edition",
       "subject": {
-        "product_id": "row-2"
+        "product_id": "FG-GH6-STD"
       },
       "subject_raw": {
-        "product_id": "row-2"
+        "product_id": "FG-GH6-STD"
       },
-      "attribute": "grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential",
-      "value": "Edition",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Editions",
-        "row": 2,
-        "column": "grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential"
-      },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': 'Edition', 'column_2': 'Product', 'column_3': 'Day-one demand', 'column_4': 'of which pre-orders', 'column_5': 'Packed', 'column_6': 'Still to pack', 'column_7': 'Rate per hour', 'column_8': 'Hours needed', 'column_9': 'Hours available'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_edition",
-      "subject": {
-        "product_id": "row-2"
-      },
-      "subject_raw": {
-        "product_id": "row-2"
-      },
-      "attribute": "column_2",
-      "value": "Product",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Editions",
-        "row": 2,
-        "column": "column_2"
-      },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': 'Edition', 'column_2': 'Product', 'column_3': 'Day-one demand', 'column_4': 'of which pre-orders', 'column_5': 'Packed', 'column_6': 'Still to pack', 'column_7': 'Rate per hour', 'column_8': 'Hours needed', 'column_9': 'Hours available'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_edition",
-      "subject": {
-        "product_id": "row-2"
-      },
-      "subject_raw": {
-        "product_id": "row-2"
-      },
-      "attribute": "column_3",
-      "value": "Day-one demand",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Editions",
-        "row": 2,
-        "column": "column_3"
-      },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': 'Edition', 'column_2': 'Product', 'column_3': 'Day-one demand', 'column_4': 'of which pre-orders', 'column_5': 'Packed', 'column_6': 'Still to pack', 'column_7': 'Rate per hour', 'column_8': 'Hours needed', 'column_9': 'Hours available'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_edition",
-      "subject": {
-        "product_id": "row-2"
-      },
-      "subject_raw": {
-        "product_id": "row-2"
-      },
-      "attribute": "column_4",
-      "value": "of which pre-orders",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Editions",
-        "row": 2,
-        "column": "column_4"
-      },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': 'Edition', 'column_2': 'Product', 'column_3': 'Day-one demand', 'column_4': 'of which pre-orders', 'column_5': 'Packed', 'column_6': 'Still to pack', 'column_7': 'Rate per hour', 'column_8': 'Hours needed', 'column_9': 'Hours available'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_edition",
-      "subject": {
-        "product_id": "row-2"
-      },
-      "subject_raw": {
-        "product_id": "row-2"
-      },
-      "attribute": "column_5",
-      "value": "Packed",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Editions",
-        "row": 2,
-        "column": "column_5"
-      },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': 'Edition', 'column_2': 'Product', 'column_3': 'Day-one demand', 'column_4': 'of which pre-orders', 'column_5': 'Packed', 'column_6': 'Still to pack', 'column_7': 'Rate per hour', 'column_8': 'Hours needed', 'column_9': 'Hours available'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_edition",
-      "subject": {
-        "product_id": "row-2"
-      },
-      "subject_raw": {
-        "product_id": "row-2"
-      },
-      "attribute": "column_6",
-      "value": "Still to pack",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Editions",
-        "row": 2,
-        "column": "column_6"
-      },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': 'Edition', 'column_2': 'Product', 'column_3': 'Day-one demand', 'column_4': 'of which pre-orders', 'column_5': 'Packed', 'column_6': 'Still to pack', 'column_7': 'Rate per hour', 'column_8': 'Hours needed', 'column_9': 'Hours available'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_edition",
-      "subject": {
-        "product_id": "row-2"
-      },
-      "subject_raw": {
-        "product_id": "row-2"
-      },
-      "attribute": "column_7",
-      "value": "Rate per hour",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Editions",
-        "row": 2,
-        "column": "column_7"
-      },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': 'Edition', 'column_2': 'Product', 'column_3': 'Day-one demand', 'column_4': 'of which pre-orders', 'column_5': 'Packed', 'column_6': 'Still to pack', 'column_7': 'Rate per hour', 'column_8': 'Hours needed', 'column_9': 'Hours available'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_edition",
-      "subject": {
-        "product_id": "row-2"
-      },
-      "subject_raw": {
-        "product_id": "row-2"
-      },
-      "attribute": "column_8",
-      "value": "Hours needed",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Editions",
-        "row": 2,
-        "column": "column_8"
-      },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': 'Edition', 'column_2': 'Product', 'column_3': 'Day-one demand', 'column_4': 'of which pre-orders', 'column_5': 'Packed', 'column_6': 'Still to pack', 'column_7': 'Rate per hour', 'column_8': 'Hours needed', 'column_9': 'Hours available'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_edition",
-      "subject": {
-        "product_id": "row-2"
-      },
-      "subject_raw": {
-        "product_id": "row-2"
-      },
-      "attribute": "column_9",
-      "value": "Hours available",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Editions",
-        "row": 2,
-        "column": "column_9"
-      },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': 'Edition', 'column_2': 'Product', 'column_3': 'Day-one demand', 'column_4': 'of which pre-orders', 'column_5': 'Packed', 'column_6': 'Still to pack', 'column_7': 'Rate per hour', 'column_8': 'Hours needed', 'column_9': 'Hours available'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_edition",
-      "subject": {
-        "product_id": "row-3"
-      },
-      "subject_raw": {
-        "product_id": "row-3"
-      },
-      "attribute": "grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential",
+      "attribute": "edition_name",
       "value": "Standard",
       "unit": null,
-      "as_of": null,
+      "as_of": "2026-11-20T18:00",
       "locator": {
         "sheet": "Editions",
-        "row": 3,
-        "column": "grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential"
+        "row": 4,
+        "column": "edition_name"
       },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': 'Standard', 'column_2': 'FG-GH6-STD', 'column_3': 640000, 'column_4': 415000, 'column_5': 512000, 'column_6': 128000, 'column_7': 6000, 'column_8': 21.3, 'column_9': 30}",
-      "confidence": "high"
+      "evidence": "Standard",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch plan · status 2026-11-20 18:00 · CONFIDENTIAL"
     },
     {
       "fact_type": "plan_edition",
       "subject": {
-        "product_id": "row-3"
+        "product_id": "FG-GH6-STD"
       },
       "subject_raw": {
-        "product_id": "row-3"
+        "product_id": "FG-GH6-STD"
       },
-      "attribute": "column_2",
-      "value": "FG-GH6-STD",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Editions",
-        "row": 3,
-        "column": "column_2"
-      },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': 'Standard', 'column_2': 'FG-GH6-STD', 'column_3': 640000, 'column_4': 415000, 'column_5': 512000, 'column_6': 128000, 'column_7': 6000, 'column_8': 21.3, 'column_9': 30}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_edition",
-      "subject": {
-        "product_id": "row-3"
-      },
-      "subject_raw": {
-        "product_id": "row-3"
-      },
-      "attribute": "column_3",
+      "attribute": "demand",
       "value": 640000,
       "unit": null,
-      "as_of": null,
+      "as_of": "2026-11-20T18:00",
       "locator": {
         "sheet": "Editions",
-        "row": 3,
-        "column": "column_3"
+        "row": 4,
+        "column": "demand"
       },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': 'Standard', 'column_2': 'FG-GH6-STD', 'column_3': 640000, 'column_4': 415000, 'column_5': 512000, 'column_6': 128000, 'column_7': 6000, 'column_8': 21.3, 'column_9': 30}",
-      "confidence": "high"
+      "evidence": "640000",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch plan · status 2026-11-20 18:00 · CONFIDENTIAL"
     },
     {
       "fact_type": "plan_edition",
       "subject": {
-        "product_id": "row-3"
+        "product_id": "FG-GH6-STD"
       },
       "subject_raw": {
-        "product_id": "row-3"
+        "product_id": "FG-GH6-STD"
       },
-      "attribute": "column_4",
+      "attribute": "preorders",
       "value": 415000,
       "unit": null,
-      "as_of": null,
+      "as_of": "2026-11-20T18:00",
       "locator": {
         "sheet": "Editions",
-        "row": 3,
-        "column": "column_4"
+        "row": 4,
+        "column": "preorders"
       },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': 'Standard', 'column_2': 'FG-GH6-STD', 'column_3': 640000, 'column_4': 415000, 'column_5': 512000, 'column_6': 128000, 'column_7': 6000, 'column_8': 21.3, 'column_9': 30}",
-      "confidence": "high"
+      "evidence": "415000",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch plan · status 2026-11-20 18:00 · CONFIDENTIAL"
     },
     {
       "fact_type": "plan_edition",
       "subject": {
-        "product_id": "row-3"
+        "product_id": "FG-GH6-STD"
       },
       "subject_raw": {
-        "product_id": "row-3"
+        "product_id": "FG-GH6-STD"
       },
-      "attribute": "column_5",
+      "attribute": "packed",
       "value": 512000,
       "unit": null,
-      "as_of": null,
+      "as_of": "2026-11-20T18:00",
       "locator": {
         "sheet": "Editions",
-        "row": 3,
-        "column": "column_5"
+        "row": 4,
+        "column": "packed"
       },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': 'Standard', 'column_2': 'FG-GH6-STD', 'column_3': 640000, 'column_4': 415000, 'column_5': 512000, 'column_6': 128000, 'column_7': 6000, 'column_8': 21.3, 'column_9': 30}",
-      "confidence": "high"
+      "evidence": "512000",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch plan · status 2026-11-20 18:00 · CONFIDENTIAL"
     },
     {
       "fact_type": "plan_edition",
       "subject": {
-        "product_id": "row-3"
+        "product_id": "FG-GH6-STD"
       },
       "subject_raw": {
-        "product_id": "row-3"
+        "product_id": "FG-GH6-STD"
       },
-      "attribute": "column_6",
+      "attribute": "still_to_pack",
       "value": 128000,
       "unit": null,
-      "as_of": null,
+      "as_of": "2026-11-20T18:00",
       "locator": {
         "sheet": "Editions",
-        "row": 3,
-        "column": "column_6"
+        "row": 4,
+        "column": "still_to_pack"
       },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': 'Standard', 'column_2': 'FG-GH6-STD', 'column_3': 640000, 'column_4': 415000, 'column_5': 512000, 'column_6': 128000, 'column_7': 6000, 'column_8': 21.3, 'column_9': 30}",
-      "confidence": "high"
+      "evidence": "128000",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch plan · status 2026-11-20 18:00 · CONFIDENTIAL"
     },
     {
       "fact_type": "plan_edition",
       "subject": {
-        "product_id": "row-3"
+        "product_id": "FG-GH6-STD"
       },
       "subject_raw": {
-        "product_id": "row-3"
+        "product_id": "FG-GH6-STD"
       },
-      "attribute": "column_7",
+      "attribute": "rate_per_hour",
       "value": 6000,
       "unit": null,
-      "as_of": null,
+      "as_of": "2026-11-20T18:00",
       "locator": {
         "sheet": "Editions",
-        "row": 3,
-        "column": "column_7"
+        "row": 4,
+        "column": "rate_per_hour"
       },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': 'Standard', 'column_2': 'FG-GH6-STD', 'column_3': 640000, 'column_4': 415000, 'column_5': 512000, 'column_6': 128000, 'column_7': 6000, 'column_8': 21.3, 'column_9': 30}",
-      "confidence": "high"
+      "evidence": "6000",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch plan · status 2026-11-20 18:00 · CONFIDENTIAL"
     },
     {
       "fact_type": "plan_edition",
       "subject": {
-        "product_id": "row-3"
+        "product_id": "FG-GH6-STD"
       },
       "subject_raw": {
-        "product_id": "row-3"
+        "product_id": "FG-GH6-STD"
       },
-      "attribute": "column_8",
+      "attribute": "hours_needed",
       "value": 21.3,
       "unit": null,
-      "as_of": null,
+      "as_of": "2026-11-20T18:00",
       "locator": {
         "sheet": "Editions",
-        "row": 3,
-        "column": "column_8"
+        "row": 4,
+        "column": "hours_needed"
       },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': 'Standard', 'column_2': 'FG-GH6-STD', 'column_3': 640000, 'column_4': 415000, 'column_5': 512000, 'column_6': 128000, 'column_7': 6000, 'column_8': 21.3, 'column_9': 30}",
-      "confidence": "high"
+      "evidence": "21.3",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch plan · status 2026-11-20 18:00 · CONFIDENTIAL"
     },
     {
       "fact_type": "plan_edition",
       "subject": {
-        "product_id": "row-3"
+        "product_id": "FG-GH6-STD"
       },
       "subject_raw": {
-        "product_id": "row-3"
+        "product_id": "FG-GH6-STD"
       },
-      "attribute": "column_9",
+      "attribute": "hours_available",
       "value": 30,
       "unit": null,
-      "as_of": null,
+      "as_of": "2026-11-20T18:00",
       "locator": {
         "sheet": "Editions",
-        "row": 3,
-        "column": "column_9"
+        "row": 4,
+        "column": "hours_available"
       },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': 'Standard', 'column_2': 'FG-GH6-STD', 'column_3': 640000, 'column_4': 415000, 'column_5': 512000, 'column_6': 128000, 'column_7': 6000, 'column_8': 21.3, 'column_9': 30}",
-      "confidence": "high"
+      "evidence": "30",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch plan · status 2026-11-20 18:00 · CONFIDENTIAL"
     },
     {
       "fact_type": "plan_edition",
       "subject": {
-        "product_id": "row-4"
+        "product_id": "FG-GH6-CE"
       },
       "subject_raw": {
-        "product_id": "row-4"
+        "product_id": "FG-GH6-CE"
       },
-      "attribute": "grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential",
+      "attribute": "edition_name",
       "value": "Collector's",
       "unit": null,
-      "as_of": null,
+      "as_of": "2026-11-20T18:00",
       "locator": {
         "sheet": "Editions",
-        "row": 4,
-        "column": "grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential"
+        "row": 5,
+        "column": "edition_name"
       },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': \"Collector's\", 'column_2': 'FG-GH6-CE', 'column_3': 72000, 'column_4': 72000, 'column_5': 46800, 'column_6': 25200, 'column_7': 900, 'column_8': 28, 'column_9': 30}",
-      "confidence": "high"
+      "evidence": "Collector's",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch plan · status 2026-11-20 18:00 · CONFIDENTIAL"
     },
     {
       "fact_type": "plan_edition",
       "subject": {
-        "product_id": "row-4"
+        "product_id": "FG-GH6-CE"
       },
       "subject_raw": {
-        "product_id": "row-4"
+        "product_id": "FG-GH6-CE"
       },
-      "attribute": "column_2",
-      "value": "FG-GH6-CE",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Editions",
-        "row": 4,
-        "column": "column_2"
-      },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': \"Collector's\", 'column_2': 'FG-GH6-CE', 'column_3': 72000, 'column_4': 72000, 'column_5': 46800, 'column_6': 25200, 'column_7': 900, 'column_8': 28, 'column_9': 30}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_edition",
-      "subject": {
-        "product_id": "row-4"
-      },
-      "subject_raw": {
-        "product_id": "row-4"
-      },
-      "attribute": "column_3",
+      "attribute": "demand",
       "value": 72000,
       "unit": null,
-      "as_of": null,
+      "as_of": "2026-11-20T18:00",
       "locator": {
         "sheet": "Editions",
-        "row": 4,
-        "column": "column_3"
+        "row": 5,
+        "column": "demand"
       },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': \"Collector's\", 'column_2': 'FG-GH6-CE', 'column_3': 72000, 'column_4': 72000, 'column_5': 46800, 'column_6': 25200, 'column_7': 900, 'column_8': 28, 'column_9': 30}",
-      "confidence": "high"
+      "evidence": "72000",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch plan · status 2026-11-20 18:00 · CONFIDENTIAL"
     },
     {
       "fact_type": "plan_edition",
       "subject": {
-        "product_id": "row-4"
+        "product_id": "FG-GH6-CE"
       },
       "subject_raw": {
-        "product_id": "row-4"
+        "product_id": "FG-GH6-CE"
       },
-      "attribute": "column_4",
+      "attribute": "preorders",
       "value": 72000,
       "unit": null,
-      "as_of": null,
+      "as_of": "2026-11-20T18:00",
       "locator": {
         "sheet": "Editions",
-        "row": 4,
-        "column": "column_4"
+        "row": 5,
+        "column": "preorders"
       },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': \"Collector's\", 'column_2': 'FG-GH6-CE', 'column_3': 72000, 'column_4': 72000, 'column_5': 46800, 'column_6': 25200, 'column_7': 900, 'column_8': 28, 'column_9': 30}",
-      "confidence": "high"
+      "evidence": "72000",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch plan · status 2026-11-20 18:00 · CONFIDENTIAL"
     },
     {
       "fact_type": "plan_edition",
       "subject": {
-        "product_id": "row-4"
+        "product_id": "FG-GH6-CE"
       },
       "subject_raw": {
-        "product_id": "row-4"
+        "product_id": "FG-GH6-CE"
       },
-      "attribute": "column_5",
+      "attribute": "packed",
       "value": 46800,
       "unit": null,
-      "as_of": null,
+      "as_of": "2026-11-20T18:00",
       "locator": {
         "sheet": "Editions",
-        "row": 4,
-        "column": "column_5"
+        "row": 5,
+        "column": "packed"
       },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': \"Collector's\", 'column_2': 'FG-GH6-CE', 'column_3': 72000, 'column_4': 72000, 'column_5': 46800, 'column_6': 25200, 'column_7': 900, 'column_8': 28, 'column_9': 30}",
-      "confidence": "high"
+      "evidence": "46800",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch plan · status 2026-11-20 18:00 · CONFIDENTIAL"
     },
     {
       "fact_type": "plan_edition",
       "subject": {
-        "product_id": "row-4"
+        "product_id": "FG-GH6-CE"
       },
       "subject_raw": {
-        "product_id": "row-4"
+        "product_id": "FG-GH6-CE"
       },
-      "attribute": "column_6",
+      "attribute": "still_to_pack",
       "value": 25200,
       "unit": null,
-      "as_of": null,
+      "as_of": "2026-11-20T18:00",
       "locator": {
         "sheet": "Editions",
-        "row": 4,
-        "column": "column_6"
+        "row": 5,
+        "column": "still_to_pack"
       },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': \"Collector's\", 'column_2': 'FG-GH6-CE', 'column_3': 72000, 'column_4': 72000, 'column_5': 46800, 'column_6': 25200, 'column_7': 900, 'column_8': 28, 'column_9': 30}",
-      "confidence": "high"
+      "evidence": "25200",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch plan · status 2026-11-20 18:00 · CONFIDENTIAL"
     },
     {
       "fact_type": "plan_edition",
       "subject": {
-        "product_id": "row-4"
+        "product_id": "FG-GH6-CE"
       },
       "subject_raw": {
-        "product_id": "row-4"
+        "product_id": "FG-GH6-CE"
       },
-      "attribute": "column_7",
+      "attribute": "rate_per_hour",
       "value": 900,
       "unit": null,
-      "as_of": null,
+      "as_of": "2026-11-20T18:00",
       "locator": {
         "sheet": "Editions",
-        "row": 4,
-        "column": "column_7"
+        "row": 5,
+        "column": "rate_per_hour"
       },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': \"Collector's\", 'column_2': 'FG-GH6-CE', 'column_3': 72000, 'column_4': 72000, 'column_5': 46800, 'column_6': 25200, 'column_7': 900, 'column_8': 28, 'column_9': 30}",
-      "confidence": "high"
+      "evidence": "900",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch plan · status 2026-11-20 18:00 · CONFIDENTIAL"
     },
     {
       "fact_type": "plan_edition",
       "subject": {
-        "product_id": "row-4"
+        "product_id": "FG-GH6-CE"
       },
       "subject_raw": {
-        "product_id": "row-4"
+        "product_id": "FG-GH6-CE"
       },
-      "attribute": "column_8",
+      "attribute": "hours_needed",
       "value": 28,
       "unit": null,
-      "as_of": null,
+      "as_of": "2026-11-20T18:00",
       "locator": {
         "sheet": "Editions",
-        "row": 4,
-        "column": "column_8"
+        "row": 5,
+        "column": "hours_needed"
       },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': \"Collector's\", 'column_2': 'FG-GH6-CE', 'column_3': 72000, 'column_4': 72000, 'column_5': 46800, 'column_6': 25200, 'column_7': 900, 'column_8': 28, 'column_9': 30}",
-      "confidence": "high"
+      "evidence": "28",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch plan · status 2026-11-20 18:00 · CONFIDENTIAL"
     },
     {
       "fact_type": "plan_edition",
       "subject": {
-        "product_id": "row-4"
+        "product_id": "FG-GH6-CE"
       },
       "subject_raw": {
-        "product_id": "row-4"
+        "product_id": "FG-GH6-CE"
       },
-      "attribute": "column_9",
+      "attribute": "hours_available",
       "value": 30,
       "unit": null,
-      "as_of": null,
+      "as_of": "2026-11-20T18:00",
       "locator": {
         "sheet": "Editions",
-        "row": 4,
-        "column": "column_9"
+        "row": 5,
+        "column": "hours_available"
       },
-      "evidence": "{'grand_heist_6_launch_plan_status_2026_11_20_18_00_confidential': \"Collector's\", 'column_2': 'FG-GH6-CE', 'column_3': 72000, 'column_4': 72000, 'column_5': 46800, 'column_6': 25200, 'column_7': 900, 'column_8': 28, 'column_9': 30}",
-      "confidence": "high"
+      "evidence": "30",
+      "confidence": "high",
+      "note": "Grand Heist 6 launch plan · status 2026-11-20 18:00 · CONFIDENTIAL"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-2"
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-2"
+        "material_id": "CMP-GAM-001"
       },
-      "attribute": "parts_for_the_remaining_pack_out_erp_stock_not_counted",
-      "value": "Part",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Parts",
-        "row": 2,
-        "column": "parts_for_the_remaining_pack_out_erp_stock_not_counted"
-      },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'Part', 'column_2': 'Description', 'column_3': 'Per Standard', 'column_4': \"Per Collector's\", 'column_5': 'Needed for the remaining pack-out', 'column_6': 'ERP stock', 'column_7': 'Due before launch', 'column_8': 'Cover', 'column_9': 'Status'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_part",
-      "subject": {
-        "material_id": "row-2"
-      },
-      "subject_raw": {
-        "material_id": "row-2"
-      },
-      "attribute": "column_2",
-      "value": "Description",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Parts",
-        "row": 2,
-        "column": "column_2"
-      },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'Part', 'column_2': 'Description', 'column_3': 'Per Standard', 'column_4': \"Per Collector's\", 'column_5': 'Needed for the remaining pack-out', 'column_6': 'ERP stock', 'column_7': 'Due before launch', 'column_8': 'Cover', 'column_9': 'Status'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_part",
-      "subject": {
-        "material_id": "row-2"
-      },
-      "subject_raw": {
-        "material_id": "row-2"
-      },
-      "attribute": "column_3",
-      "value": "Per Standard",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Parts",
-        "row": 2,
-        "column": "column_3"
-      },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'Part', 'column_2': 'Description', 'column_3': 'Per Standard', 'column_4': \"Per Collector's\", 'column_5': 'Needed for the remaining pack-out', 'column_6': 'ERP stock', 'column_7': 'Due before launch', 'column_8': 'Cover', 'column_9': 'Status'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_part",
-      "subject": {
-        "material_id": "row-2"
-      },
-      "subject_raw": {
-        "material_id": "row-2"
-      },
-      "attribute": "column_4",
-      "value": "Per Collector's",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Parts",
-        "row": 2,
-        "column": "column_4"
-      },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'Part', 'column_2': 'Description', 'column_3': 'Per Standard', 'column_4': \"Per Collector's\", 'column_5': 'Needed for the remaining pack-out', 'column_6': 'ERP stock', 'column_7': 'Due before launch', 'column_8': 'Cover', 'column_9': 'Status'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_part",
-      "subject": {
-        "material_id": "row-2"
-      },
-      "subject_raw": {
-        "material_id": "row-2"
-      },
-      "attribute": "column_5",
-      "value": "Needed for the remaining pack-out",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Parts",
-        "row": 2,
-        "column": "column_5"
-      },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'Part', 'column_2': 'Description', 'column_3': 'Per Standard', 'column_4': \"Per Collector's\", 'column_5': 'Needed for the remaining pack-out', 'column_6': 'ERP stock', 'column_7': 'Due before launch', 'column_8': 'Cover', 'column_9': 'Status'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_part",
-      "subject": {
-        "material_id": "row-2"
-      },
-      "subject_raw": {
-        "material_id": "row-2"
-      },
-      "attribute": "column_6",
-      "value": "ERP stock",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Parts",
-        "row": 2,
-        "column": "column_6"
-      },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'Part', 'column_2': 'Description', 'column_3': 'Per Standard', 'column_4': \"Per Collector's\", 'column_5': 'Needed for the remaining pack-out', 'column_6': 'ERP stock', 'column_7': 'Due before launch', 'column_8': 'Cover', 'column_9': 'Status'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_part",
-      "subject": {
-        "material_id": "row-2"
-      },
-      "subject_raw": {
-        "material_id": "row-2"
-      },
-      "attribute": "column_7",
-      "value": "Due before launch",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Parts",
-        "row": 2,
-        "column": "column_7"
-      },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'Part', 'column_2': 'Description', 'column_3': 'Per Standard', 'column_4': \"Per Collector's\", 'column_5': 'Needed for the remaining pack-out', 'column_6': 'ERP stock', 'column_7': 'Due before launch', 'column_8': 'Cover', 'column_9': 'Status'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_part",
-      "subject": {
-        "material_id": "row-2"
-      },
-      "subject_raw": {
-        "material_id": "row-2"
-      },
-      "attribute": "column_8",
-      "value": "Cover",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Parts",
-        "row": 2,
-        "column": "column_8"
-      },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'Part', 'column_2': 'Description', 'column_3': 'Per Standard', 'column_4': \"Per Collector's\", 'column_5': 'Needed for the remaining pack-out', 'column_6': 'ERP stock', 'column_7': 'Due before launch', 'column_8': 'Cover', 'column_9': 'Status'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_part",
-      "subject": {
-        "material_id": "row-2"
-      },
-      "subject_raw": {
-        "material_id": "row-2"
-      },
-      "attribute": "column_9",
-      "value": "Status",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Parts",
-        "row": 2,
-        "column": "column_9"
-      },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'Part', 'column_2': 'Description', 'column_3': 'Per Standard', 'column_4': \"Per Collector's\", 'column_5': 'Needed for the remaining pack-out', 'column_6': 'ERP stock', 'column_7': 'Due before launch', 'column_8': 'Cover', 'column_9': 'Status'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_part",
-      "subject": {
-        "material_id": "row-3"
-      },
-      "subject_raw": {
-        "material_id": "row-3"
-      },
-      "attribute": "parts_for_the_remaining_pack_out_erp_stock_not_counted",
-      "value": "CMP-GAM-001",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Parts",
-        "row": 3,
-        "column": "parts_for_the_remaining_pack_out_erp_stock_not_counted"
-      },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-001', 'column_2': 'Game Card 128 GB – Grand Heist 6', 'column_3': 1, 'column_4': 1, 'column_5': 153200, 'column_6': 118400, 'column_7': 48000, 'column_8': 13200, 'column_9': 'ok'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_part",
-      "subject": {
-        "material_id": "row-3"
-      },
-      "subject_raw": {
-        "material_id": "row-3"
-      },
-      "attribute": "column_2",
+      "attribute": "description",
       "value": "Game Card 128 GB – Grand Heist 6",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 3,
-        "column": "column_2"
+        "row": 4,
+        "column": "description"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-001', 'column_2': 'Game Card 128 GB – Grand Heist 6', 'column_3': 1, 'column_4': 1, 'column_5': 153200, 'column_6': 118400, 'column_7': 48000, 'column_8': 13200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "Game Card 128 GB – Grand Heist 6",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-001"
       },
-      "attribute": "column_3",
+      "attribute": "per_standard",
       "value": 1,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 3,
-        "column": "column_3"
+        "row": 4,
+        "column": "per_standard"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-001', 'column_2': 'Game Card 128 GB – Grand Heist 6', 'column_3': 1, 'column_4': 1, 'column_5': 153200, 'column_6': 118400, 'column_7': 48000, 'column_8': 13200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "1",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-001"
       },
-      "attribute": "column_4",
+      "attribute": "per_collector_s",
       "value": 1,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 3,
-        "column": "column_4"
+        "row": 4,
+        "column": "per_collector_s"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-001', 'column_2': 'Game Card 128 GB – Grand Heist 6', 'column_3': 1, 'column_4': 1, 'column_5': 153200, 'column_6': 118400, 'column_7': 48000, 'column_8': 13200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "1",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-001"
       },
-      "attribute": "column_5",
+      "attribute": "need",
       "value": 153200,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 3,
-        "column": "column_5"
+        "row": 4,
+        "column": "need"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-001', 'column_2': 'Game Card 128 GB – Grand Heist 6', 'column_3': 1, 'column_4': 1, 'column_5': 153200, 'column_6': 118400, 'column_7': 48000, 'column_8': 13200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "153200",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-001"
       },
-      "attribute": "column_6",
+      "attribute": "erp_stock",
       "value": 118400,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 3,
-        "column": "column_6"
+        "row": 4,
+        "column": "erp_stock"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-001', 'column_2': 'Game Card 128 GB – Grand Heist 6', 'column_3': 1, 'column_4': 1, 'column_5': 153200, 'column_6': 118400, 'column_7': 48000, 'column_8': 13200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "118400",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-001"
       },
-      "attribute": "column_7",
+      "attribute": "due_before_launch",
       "value": 48000,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 3,
-        "column": "column_7"
+        "row": 4,
+        "column": "due_before_launch"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-001', 'column_2': 'Game Card 128 GB – Grand Heist 6', 'column_3': 1, 'column_4': 1, 'column_5': 153200, 'column_6': 118400, 'column_7': 48000, 'column_8': 13200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "48000",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-001"
       },
-      "attribute": "column_8",
+      "attribute": "cover",
       "value": 13200,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 3,
-        "column": "column_8"
+        "row": 4,
+        "column": "cover"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-001', 'column_2': 'Game Card 128 GB – Grand Heist 6', 'column_3': 1, 'column_4': 1, 'column_5': 153200, 'column_6': 118400, 'column_7': 48000, 'column_8': 13200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "13200",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "material_id": "CMP-GAM-001"
       },
-      "attribute": "column_9",
+      "attribute": "status",
       "value": "ok",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 3,
-        "column": "column_9"
-      },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-001', 'column_2': 'Game Card 128 GB – Grand Heist 6', 'column_3': 1, 'column_4': 1, 'column_5': 153200, 'column_6': 118400, 'column_7': 48000, 'column_8': 13200, 'column_9': 'ok'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_part",
-      "subject": {
-        "material_id": "row-4"
-      },
-      "subject_raw": {
-        "material_id": "row-4"
-      },
-      "attribute": "parts_for_the_remaining_pack_out_erp_stock_not_counted",
-      "value": "CMP-GAM-003",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Parts",
         "row": 4,
-        "column": "parts_for_the_remaining_pack_out_erp_stock_not_counted"
+        "column": "status"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-003', 'column_2': 'Game Card Case (clear)', 'column_3': 1, 'column_4': 0, 'column_5': 128000, 'column_6': 96000, 'column_7': 350000, 'column_8': 318000, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "ok",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "subject_raw": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
-      "attribute": "column_2",
+      "attribute": "description",
       "value": "Game Card Case (clear)",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 4,
-        "column": "column_2"
+        "row": 5,
+        "column": "description"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-003', 'column_2': 'Game Card Case (clear)', 'column_3': 1, 'column_4': 0, 'column_5': 128000, 'column_6': 96000, 'column_7': 350000, 'column_8': 318000, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "Game Card Case (clear)",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "subject_raw": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
-      "attribute": "column_3",
+      "attribute": "per_standard",
       "value": 1,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 4,
-        "column": "column_3"
+        "row": 5,
+        "column": "per_standard"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-003', 'column_2': 'Game Card Case (clear)', 'column_3': 1, 'column_4': 0, 'column_5': 128000, 'column_6': 96000, 'column_7': 350000, 'column_8': 318000, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "1",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "subject_raw": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
-      "attribute": "column_4",
+      "attribute": "per_collector_s",
       "value": 0,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 4,
-        "column": "column_4"
+        "row": 5,
+        "column": "per_collector_s"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-003', 'column_2': 'Game Card Case (clear)', 'column_3': 1, 'column_4': 0, 'column_5': 128000, 'column_6': 96000, 'column_7': 350000, 'column_8': 318000, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "0",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "subject_raw": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
-      "attribute": "column_5",
+      "attribute": "need",
       "value": 128000,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 4,
-        "column": "column_5"
+        "row": 5,
+        "column": "need"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-003', 'column_2': 'Game Card Case (clear)', 'column_3': 1, 'column_4': 0, 'column_5': 128000, 'column_6': 96000, 'column_7': 350000, 'column_8': 318000, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "128000",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "subject_raw": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
-      "attribute": "column_6",
+      "attribute": "erp_stock",
       "value": 96000,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 4,
-        "column": "column_6"
+        "row": 5,
+        "column": "erp_stock"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-003', 'column_2': 'Game Card Case (clear)', 'column_3': 1, 'column_4': 0, 'column_5': 128000, 'column_6': 96000, 'column_7': 350000, 'column_8': 318000, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "96000",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "subject_raw": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
-      "attribute": "column_7",
+      "attribute": "due_before_launch",
       "value": 350000,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 4,
-        "column": "column_7"
+        "row": 5,
+        "column": "due_before_launch"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-003', 'column_2': 'Game Card Case (clear)', 'column_3': 1, 'column_4': 0, 'column_5': 128000, 'column_6': 96000, 'column_7': 350000, 'column_8': 318000, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "350000",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "subject_raw": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
-      "attribute": "column_8",
+      "attribute": "cover",
       "value": 318000,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 4,
-        "column": "column_8"
+        "row": 5,
+        "column": "cover"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-003', 'column_2': 'Game Card Case (clear)', 'column_3': 1, 'column_4': 0, 'column_5': 128000, 'column_6': 96000, 'column_7': 350000, 'column_8': 318000, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "318000",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
       "subject_raw": {
-        "material_id": "row-4"
+        "material_id": "CMP-GAM-003"
       },
-      "attribute": "column_9",
+      "attribute": "status",
       "value": "ok",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 4,
-        "column": "column_9"
-      },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-003', 'column_2': 'Game Card Case (clear)', 'column_3': 1, 'column_4': 0, 'column_5': 128000, 'column_6': 96000, 'column_7': 350000, 'column_8': 318000, 'column_9': 'ok'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_part",
-      "subject": {
-        "material_id": "row-5"
-      },
-      "subject_raw": {
-        "material_id": "row-5"
-      },
-      "attribute": "parts_for_the_remaining_pack_out_erp_stock_not_counted",
-      "value": "CMP-GAM-004",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Parts",
         "row": 5,
-        "column": "parts_for_the_remaining_pack_out_erp_stock_not_counted"
+        "column": "status"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-004', 'column_2': 'Cover Sleeve Grand Heist 6 (USK/PEGI)', 'column_3': 1, 'column_4': 0, 'column_5': 128000, 'column_6': 186000, 'column_7': 20000, 'column_8': 78000, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "ok",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "subject_raw": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
-      "attribute": "column_2",
+      "attribute": "description",
       "value": "Cover Sleeve Grand Heist 6 (USK/PEGI)",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 5,
-        "column": "column_2"
+        "row": 6,
+        "column": "description"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-004', 'column_2': 'Cover Sleeve Grand Heist 6 (USK/PEGI)', 'column_3': 1, 'column_4': 0, 'column_5': 128000, 'column_6': 186000, 'column_7': 20000, 'column_8': 78000, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "Cover Sleeve Grand Heist 6 (USK/PEGI)",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "subject_raw": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
-      "attribute": "column_3",
+      "attribute": "per_standard",
       "value": 1,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 5,
-        "column": "column_3"
+        "row": 6,
+        "column": "per_standard"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-004', 'column_2': 'Cover Sleeve Grand Heist 6 (USK/PEGI)', 'column_3': 1, 'column_4': 0, 'column_5': 128000, 'column_6': 186000, 'column_7': 20000, 'column_8': 78000, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "1",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "subject_raw": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
-      "attribute": "column_4",
+      "attribute": "per_collector_s",
       "value": 0,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 5,
-        "column": "column_4"
+        "row": 6,
+        "column": "per_collector_s"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-004', 'column_2': 'Cover Sleeve Grand Heist 6 (USK/PEGI)', 'column_3': 1, 'column_4': 0, 'column_5': 128000, 'column_6': 186000, 'column_7': 20000, 'column_8': 78000, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "0",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "subject_raw": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
-      "attribute": "column_5",
+      "attribute": "need",
       "value": 128000,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 5,
-        "column": "column_5"
+        "row": 6,
+        "column": "need"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-004', 'column_2': 'Cover Sleeve Grand Heist 6 (USK/PEGI)', 'column_3': 1, 'column_4': 0, 'column_5': 128000, 'column_6': 186000, 'column_7': 20000, 'column_8': 78000, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "128000",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "subject_raw": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
-      "attribute": "column_6",
+      "attribute": "erp_stock",
       "value": 186000,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 5,
-        "column": "column_6"
+        "row": 6,
+        "column": "erp_stock"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-004', 'column_2': 'Cover Sleeve Grand Heist 6 (USK/PEGI)', 'column_3': 1, 'column_4': 0, 'column_5': 128000, 'column_6': 186000, 'column_7': 20000, 'column_8': 78000, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "186000",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "subject_raw": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
-      "attribute": "column_7",
+      "attribute": "due_before_launch",
       "value": 20000,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 5,
-        "column": "column_7"
+        "row": 6,
+        "column": "due_before_launch"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-004', 'column_2': 'Cover Sleeve Grand Heist 6 (USK/PEGI)', 'column_3': 1, 'column_4': 0, 'column_5': 128000, 'column_6': 186000, 'column_7': 20000, 'column_8': 78000, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "20000",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "subject_raw": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
-      "attribute": "column_8",
+      "attribute": "cover",
       "value": 78000,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 5,
-        "column": "column_8"
+        "row": 6,
+        "column": "cover"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-004', 'column_2': 'Cover Sleeve Grand Heist 6 (USK/PEGI)', 'column_3': 1, 'column_4': 0, 'column_5': 128000, 'column_6': 186000, 'column_7': 20000, 'column_8': 78000, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "78000",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
       "subject_raw": {
-        "material_id": "row-5"
+        "material_id": "CMP-GAM-004"
       },
-      "attribute": "column_9",
+      "attribute": "status",
       "value": "ok",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 5,
-        "column": "column_9"
-      },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-004', 'column_2': 'Cover Sleeve Grand Heist 6 (USK/PEGI)', 'column_3': 1, 'column_4': 0, 'column_5': 128000, 'column_6': 186000, 'column_7': 20000, 'column_8': 78000, 'column_9': 'ok'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_part",
-      "subject": {
-        "material_id": "row-6"
-      },
-      "subject_raw": {
-        "material_id": "row-6"
-      },
-      "attribute": "parts_for_the_remaining_pack_out_erp_stock_not_counted",
-      "value": "CMP-GAM-006",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Parts",
         "row": 6,
-        "column": "parts_for_the_remaining_pack_out_erp_stock_not_counted"
+        "column": "status"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-006', 'column_2': 'Steel Case Grand Heist 6', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 31400, 'column_7': 0, 'column_8': 6200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "ok",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-006"
       },
       "subject_raw": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-006"
       },
-      "attribute": "column_2",
+      "attribute": "description",
       "value": "Steel Case Grand Heist 6",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 6,
-        "column": "column_2"
+        "row": 7,
+        "column": "description"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-006', 'column_2': 'Steel Case Grand Heist 6', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 31400, 'column_7': 0, 'column_8': 6200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "Steel Case Grand Heist 6",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-006"
       },
       "subject_raw": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-006"
       },
-      "attribute": "column_3",
+      "attribute": "per_standard",
       "value": 0,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 6,
-        "column": "column_3"
+        "row": 7,
+        "column": "per_standard"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-006', 'column_2': 'Steel Case Grand Heist 6', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 31400, 'column_7': 0, 'column_8': 6200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "0",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-006"
       },
       "subject_raw": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-006"
       },
-      "attribute": "column_4",
+      "attribute": "per_collector_s",
       "value": 1,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 6,
-        "column": "column_4"
+        "row": 7,
+        "column": "per_collector_s"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-006', 'column_2': 'Steel Case Grand Heist 6', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 31400, 'column_7': 0, 'column_8': 6200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "1",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-006"
       },
       "subject_raw": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-006"
       },
-      "attribute": "column_5",
+      "attribute": "need",
       "value": 25200,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 6,
-        "column": "column_5"
+        "row": 7,
+        "column": "need"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-006', 'column_2': 'Steel Case Grand Heist 6', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 31400, 'column_7': 0, 'column_8': 6200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "25200",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-006"
       },
       "subject_raw": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-006"
       },
-      "attribute": "column_6",
+      "attribute": "erp_stock",
       "value": 31400,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 6,
-        "column": "column_6"
+        "row": 7,
+        "column": "erp_stock"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-006', 'column_2': 'Steel Case Grand Heist 6', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 31400, 'column_7': 0, 'column_8': 6200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "31400",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-006"
       },
       "subject_raw": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-006"
       },
-      "attribute": "column_7",
+      "attribute": "due_before_launch",
       "value": 0,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 6,
-        "column": "column_7"
+        "row": 7,
+        "column": "due_before_launch"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-006', 'column_2': 'Steel Case Grand Heist 6', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 31400, 'column_7': 0, 'column_8': 6200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "0",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-006"
       },
       "subject_raw": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-006"
       },
-      "attribute": "column_8",
+      "attribute": "cover",
       "value": 6200,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 6,
-        "column": "column_8"
+        "row": 7,
+        "column": "cover"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-006', 'column_2': 'Steel Case Grand Heist 6', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 31400, 'column_7': 0, 'column_8': 6200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "6200",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-006"
       },
       "subject_raw": {
-        "material_id": "row-6"
+        "material_id": "CMP-GAM-006"
       },
-      "attribute": "column_9",
+      "attribute": "status",
       "value": "ok",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 6,
-        "column": "column_9"
-      },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-006', 'column_2': 'Steel Case Grand Heist 6', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 31400, 'column_7': 0, 'column_8': 6200, 'column_9': 'ok'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_part",
-      "subject": {
-        "material_id": "row-7"
-      },
-      "subject_raw": {
-        "material_id": "row-7"
-      },
-      "attribute": "parts_for_the_remaining_pack_out_erp_stock_not_counted",
-      "value": "CMP-GAM-007",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Parts",
         "row": 7,
-        "column": "parts_for_the_remaining_pack_out_erp_stock_not_counted"
+        "column": "status"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-007', 'column_2': \"Collector's Box Grand Heist 6 (rigid, magnetic lid)\", 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 27500, 'column_7': 0, 'column_8': 2300, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "ok",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-007"
       },
       "subject_raw": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-007"
       },
-      "attribute": "column_2",
+      "attribute": "description",
       "value": "Collector's Box Grand Heist 6 (rigid, magnetic lid)",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 7,
-        "column": "column_2"
+        "row": 8,
+        "column": "description"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-007', 'column_2': \"Collector's Box Grand Heist 6 (rigid, magnetic lid)\", 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 27500, 'column_7': 0, 'column_8': 2300, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "Collector's Box Grand Heist 6 (rigid, magnetic lid)",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-007"
       },
       "subject_raw": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-007"
       },
-      "attribute": "column_3",
+      "attribute": "per_standard",
       "value": 0,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 7,
-        "column": "column_3"
+        "row": 8,
+        "column": "per_standard"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-007', 'column_2': \"Collector's Box Grand Heist 6 (rigid, magnetic lid)\", 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 27500, 'column_7': 0, 'column_8': 2300, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "0",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-007"
       },
       "subject_raw": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-007"
       },
-      "attribute": "column_4",
+      "attribute": "per_collector_s",
       "value": 1,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 7,
-        "column": "column_4"
+        "row": 8,
+        "column": "per_collector_s"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-007', 'column_2': \"Collector's Box Grand Heist 6 (rigid, magnetic lid)\", 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 27500, 'column_7': 0, 'column_8': 2300, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "1",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-007"
       },
       "subject_raw": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-007"
       },
-      "attribute": "column_5",
+      "attribute": "need",
       "value": 25200,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 7,
-        "column": "column_5"
+        "row": 8,
+        "column": "need"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-007', 'column_2': \"Collector's Box Grand Heist 6 (rigid, magnetic lid)\", 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 27500, 'column_7': 0, 'column_8': 2300, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "25200",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-007"
       },
       "subject_raw": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-007"
       },
-      "attribute": "column_6",
+      "attribute": "erp_stock",
       "value": 27500,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 7,
-        "column": "column_6"
+        "row": 8,
+        "column": "erp_stock"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-007', 'column_2': \"Collector's Box Grand Heist 6 (rigid, magnetic lid)\", 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 27500, 'column_7': 0, 'column_8': 2300, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "27500",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-007"
       },
       "subject_raw": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-007"
       },
-      "attribute": "column_7",
+      "attribute": "due_before_launch",
       "value": 0,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 7,
-        "column": "column_7"
+        "row": 8,
+        "column": "due_before_launch"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-007', 'column_2': \"Collector's Box Grand Heist 6 (rigid, magnetic lid)\", 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 27500, 'column_7': 0, 'column_8': 2300, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "0",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-007"
       },
       "subject_raw": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-007"
       },
-      "attribute": "column_8",
+      "attribute": "cover",
       "value": 2300,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 7,
-        "column": "column_8"
+        "row": 8,
+        "column": "cover"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-007', 'column_2': \"Collector's Box Grand Heist 6 (rigid, magnetic lid)\", 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 27500, 'column_7': 0, 'column_8': 2300, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "2300",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-007"
       },
       "subject_raw": {
-        "material_id": "row-7"
+        "material_id": "CMP-GAM-007"
       },
-      "attribute": "column_9",
+      "attribute": "status",
       "value": "ok",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 7,
-        "column": "column_9"
-      },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-007', 'column_2': \"Collector's Box Grand Heist 6 (rigid, magnetic lid)\", 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 27500, 'column_7': 0, 'column_8': 2300, 'column_9': 'ok'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_part",
-      "subject": {
-        "material_id": "row-8"
-      },
-      "subject_raw": {
-        "material_id": "row-8"
-      },
-      "attribute": "parts_for_the_remaining_pack_out_erp_stock_not_counted",
-      "value": "CMP-GAM-008",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Parts",
         "row": 8,
-        "column": "parts_for_the_remaining_pack_out_erp_stock_not_counted"
+        "column": "status"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-008', 'column_2': 'Art Book Grand Heist 6 (96 p, hardcover)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 91300, 'column_7': 0, 'column_8': 66100, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "ok",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-008"
       },
       "subject_raw": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-008"
       },
-      "attribute": "column_2",
+      "attribute": "description",
       "value": "Art Book Grand Heist 6 (96 p, hardcover)",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 8,
-        "column": "column_2"
+        "row": 9,
+        "column": "description"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-008', 'column_2': 'Art Book Grand Heist 6 (96 p, hardcover)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 91300, 'column_7': 0, 'column_8': 66100, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "Art Book Grand Heist 6 (96 p, hardcover)",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-008"
       },
       "subject_raw": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-008"
       },
-      "attribute": "column_3",
+      "attribute": "per_standard",
       "value": 0,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 8,
-        "column": "column_3"
+        "row": 9,
+        "column": "per_standard"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-008', 'column_2': 'Art Book Grand Heist 6 (96 p, hardcover)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 91300, 'column_7': 0, 'column_8': 66100, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "0",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-008"
       },
       "subject_raw": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-008"
       },
-      "attribute": "column_4",
+      "attribute": "per_collector_s",
       "value": 1,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 8,
-        "column": "column_4"
+        "row": 9,
+        "column": "per_collector_s"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-008', 'column_2': 'Art Book Grand Heist 6 (96 p, hardcover)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 91300, 'column_7': 0, 'column_8': 66100, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "1",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-008"
       },
       "subject_raw": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-008"
       },
-      "attribute": "column_5",
+      "attribute": "need",
       "value": 25200,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 8,
-        "column": "column_5"
+        "row": 9,
+        "column": "need"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-008', 'column_2': 'Art Book Grand Heist 6 (96 p, hardcover)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 91300, 'column_7': 0, 'column_8': 66100, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "25200",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-008"
       },
       "subject_raw": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-008"
       },
-      "attribute": "column_6",
+      "attribute": "erp_stock",
       "value": 91300,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 8,
-        "column": "column_6"
+        "row": 9,
+        "column": "erp_stock"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-008', 'column_2': 'Art Book Grand Heist 6 (96 p, hardcover)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 91300, 'column_7': 0, 'column_8': 66100, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "91300",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-008"
       },
       "subject_raw": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-008"
       },
-      "attribute": "column_7",
+      "attribute": "due_before_launch",
       "value": 0,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 8,
-        "column": "column_7"
+        "row": 9,
+        "column": "due_before_launch"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-008', 'column_2': 'Art Book Grand Heist 6 (96 p, hardcover)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 91300, 'column_7': 0, 'column_8': 66100, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "0",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-008"
       },
       "subject_raw": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-008"
       },
-      "attribute": "column_8",
+      "attribute": "cover",
       "value": 66100,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 8,
-        "column": "column_8"
+        "row": 9,
+        "column": "cover"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-008', 'column_2': 'Art Book Grand Heist 6 (96 p, hardcover)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 91300, 'column_7': 0, 'column_8': 66100, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "66100",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-008"
       },
       "subject_raw": {
-        "material_id": "row-8"
+        "material_id": "CMP-GAM-008"
       },
-      "attribute": "column_9",
+      "attribute": "status",
       "value": "ok",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 8,
-        "column": "column_9"
-      },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-008', 'column_2': 'Art Book Grand Heist 6 (96 p, hardcover)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 91300, 'column_7': 0, 'column_8': 66100, 'column_9': 'ok'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_part",
-      "subject": {
-        "material_id": "row-9"
-      },
-      "subject_raw": {
-        "material_id": "row-9"
-      },
-      "attribute": "parts_for_the_remaining_pack_out_erp_stock_not_counted",
-      "value": "CMP-GAM-009",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Parts",
         "row": 9,
-        "column": "parts_for_the_remaining_pack_out_erp_stock_not_counted"
+        "column": "status"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-009', 'column_2': 'City Map Poster Grand Heist 6 (folded)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 40000, 'column_7': 0, 'column_8': 14800, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "ok",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-009"
       },
       "subject_raw": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-009"
       },
-      "attribute": "column_2",
+      "attribute": "description",
       "value": "City Map Poster Grand Heist 6 (folded)",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 9,
-        "column": "column_2"
+        "row": 10,
+        "column": "description"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-009', 'column_2': 'City Map Poster Grand Heist 6 (folded)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 40000, 'column_7': 0, 'column_8': 14800, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "City Map Poster Grand Heist 6 (folded)",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-009"
       },
       "subject_raw": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-009"
       },
-      "attribute": "column_3",
+      "attribute": "per_standard",
       "value": 0,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 9,
-        "column": "column_3"
+        "row": 10,
+        "column": "per_standard"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-009', 'column_2': 'City Map Poster Grand Heist 6 (folded)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 40000, 'column_7': 0, 'column_8': 14800, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "0",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-009"
       },
       "subject_raw": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-009"
       },
-      "attribute": "column_4",
+      "attribute": "per_collector_s",
       "value": 1,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 9,
-        "column": "column_4"
+        "row": 10,
+        "column": "per_collector_s"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-009', 'column_2': 'City Map Poster Grand Heist 6 (folded)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 40000, 'column_7': 0, 'column_8': 14800, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "1",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-009"
       },
       "subject_raw": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-009"
       },
-      "attribute": "column_5",
+      "attribute": "need",
       "value": 25200,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 9,
-        "column": "column_5"
+        "row": 10,
+        "column": "need"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-009', 'column_2': 'City Map Poster Grand Heist 6 (folded)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 40000, 'column_7': 0, 'column_8': 14800, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "25200",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-009"
       },
       "subject_raw": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-009"
       },
-      "attribute": "column_6",
+      "attribute": "erp_stock",
       "value": 40000,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 9,
-        "column": "column_6"
+        "row": 10,
+        "column": "erp_stock"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-009', 'column_2': 'City Map Poster Grand Heist 6 (folded)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 40000, 'column_7': 0, 'column_8': 14800, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "40000",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-009"
       },
       "subject_raw": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-009"
       },
-      "attribute": "column_7",
+      "attribute": "due_before_launch",
       "value": 0,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 9,
-        "column": "column_7"
+        "row": 10,
+        "column": "due_before_launch"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-009', 'column_2': 'City Map Poster Grand Heist 6 (folded)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 40000, 'column_7': 0, 'column_8': 14800, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "0",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-009"
       },
       "subject_raw": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-009"
       },
-      "attribute": "column_8",
+      "attribute": "cover",
       "value": 14800,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 9,
-        "column": "column_8"
+        "row": 10,
+        "column": "cover"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-009', 'column_2': 'City Map Poster Grand Heist 6 (folded)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 40000, 'column_7': 0, 'column_8': 14800, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "14800",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-009"
       },
       "subject_raw": {
-        "material_id": "row-9"
+        "material_id": "CMP-GAM-009"
       },
-      "attribute": "column_9",
+      "attribute": "status",
       "value": "ok",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 9,
-        "column": "column_9"
-      },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-009', 'column_2': 'City Map Poster Grand Heist 6 (folded)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 40000, 'column_7': 0, 'column_8': 14800, 'column_9': 'ok'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_part",
-      "subject": {
-        "material_id": "row-10"
-      },
-      "subject_raw": {
-        "material_id": "row-10"
-      },
-      "attribute": "parts_for_the_remaining_pack_out_erp_stock_not_counted",
-      "value": "CMP-GAM-010",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Parts",
         "row": 10,
-        "column": "parts_for_the_remaining_pack_out_erp_stock_not_counted"
+        "column": "status"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-010', 'column_2': 'Statue \"The Getaway\" (die-cast, 18 cm)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 27400, 'column_7': 0, 'column_8': 2200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "ok",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-010"
       },
       "subject_raw": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-010"
       },
-      "attribute": "column_2",
+      "attribute": "description",
       "value": "Statue \"The Getaway\" (die-cast, 18 cm)",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 10,
-        "column": "column_2"
+        "row": 11,
+        "column": "description"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-010', 'column_2': 'Statue \"The Getaway\" (die-cast, 18 cm)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 27400, 'column_7': 0, 'column_8': 2200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "Statue \"The Getaway\" (die-cast, 18 cm)",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-010"
       },
       "subject_raw": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-010"
       },
-      "attribute": "column_3",
+      "attribute": "per_standard",
       "value": 0,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 10,
-        "column": "column_3"
+        "row": 11,
+        "column": "per_standard"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-010', 'column_2': 'Statue \"The Getaway\" (die-cast, 18 cm)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 27400, 'column_7': 0, 'column_8': 2200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "0",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-010"
       },
       "subject_raw": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-010"
       },
-      "attribute": "column_4",
+      "attribute": "per_collector_s",
       "value": 1,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 10,
-        "column": "column_4"
+        "row": 11,
+        "column": "per_collector_s"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-010', 'column_2': 'Statue \"The Getaway\" (die-cast, 18 cm)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 27400, 'column_7': 0, 'column_8': 2200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "1",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-010"
       },
       "subject_raw": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-010"
       },
-      "attribute": "column_5",
+      "attribute": "need",
       "value": 25200,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 10,
-        "column": "column_5"
+        "row": 11,
+        "column": "need"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-010', 'column_2': 'Statue \"The Getaway\" (die-cast, 18 cm)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 27400, 'column_7': 0, 'column_8': 2200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "25200",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-010"
       },
       "subject_raw": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-010"
       },
-      "attribute": "column_6",
+      "attribute": "erp_stock",
       "value": 27400,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 10,
-        "column": "column_6"
+        "row": 11,
+        "column": "erp_stock"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-010', 'column_2': 'Statue \"The Getaway\" (die-cast, 18 cm)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 27400, 'column_7': 0, 'column_8': 2200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "27400",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-010"
       },
       "subject_raw": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-010"
       },
-      "attribute": "column_7",
+      "attribute": "due_before_launch",
       "value": 0,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 10,
-        "column": "column_7"
+        "row": 11,
+        "column": "due_before_launch"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-010', 'column_2': 'Statue \"The Getaway\" (die-cast, 18 cm)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 27400, 'column_7': 0, 'column_8': 2200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "0",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-010"
       },
       "subject_raw": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-010"
       },
-      "attribute": "column_8",
+      "attribute": "cover",
       "value": 2200,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 10,
-        "column": "column_8"
+        "row": 11,
+        "column": "cover"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-010', 'column_2': 'Statue \"The Getaway\" (die-cast, 18 cm)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 27400, 'column_7': 0, 'column_8': 2200, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "2200",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-010"
       },
       "subject_raw": {
-        "material_id": "row-10"
+        "material_id": "CMP-GAM-010"
       },
-      "attribute": "column_9",
+      "attribute": "status",
       "value": "ok",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 10,
-        "column": "column_9"
-      },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-010', 'column_2': 'Statue \"The Getaway\" (die-cast, 18 cm)', 'column_3': 0, 'column_4': 1, 'column_5': 25200, 'column_6': 27400, 'column_7': 0, 'column_8': 2200, 'column_9': 'ok'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_part",
-      "subject": {
-        "material_id": "row-11"
-      },
-      "subject_raw": {
-        "material_id": "row-11"
-      },
-      "attribute": "parts_for_the_remaining_pack_out_erp_stock_not_counted",
-      "value": "CMP-GAM-011",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Parts",
         "row": 11,
-        "column": "parts_for_the_remaining_pack_out_erp_stock_not_counted"
+        "column": "status"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-011', 'column_2': 'Activation Code Leaflet', 'column_3': 1, 'column_4': 1, 'column_5': 153200, 'column_6': 420000, 'column_7': 0, 'column_8': 266800, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "ok",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-011"
       },
       "subject_raw": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-011"
       },
-      "attribute": "column_2",
+      "attribute": "description",
       "value": "Activation Code Leaflet",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 11,
-        "column": "column_2"
+        "row": 12,
+        "column": "description"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-011', 'column_2': 'Activation Code Leaflet', 'column_3': 1, 'column_4': 1, 'column_5': 153200, 'column_6': 420000, 'column_7': 0, 'column_8': 266800, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "Activation Code Leaflet",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-011"
       },
       "subject_raw": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-011"
       },
-      "attribute": "column_3",
+      "attribute": "per_standard",
       "value": 1,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 11,
-        "column": "column_3"
+        "row": 12,
+        "column": "per_standard"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-011', 'column_2': 'Activation Code Leaflet', 'column_3': 1, 'column_4': 1, 'column_5': 153200, 'column_6': 420000, 'column_7': 0, 'column_8': 266800, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "1",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-011"
       },
       "subject_raw": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-011"
       },
-      "attribute": "column_4",
+      "attribute": "per_collector_s",
       "value": 1,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 11,
-        "column": "column_4"
+        "row": 12,
+        "column": "per_collector_s"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-011', 'column_2': 'Activation Code Leaflet', 'column_3': 1, 'column_4': 1, 'column_5': 153200, 'column_6': 420000, 'column_7': 0, 'column_8': 266800, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "1",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-011"
       },
       "subject_raw": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-011"
       },
-      "attribute": "column_5",
+      "attribute": "need",
       "value": 153200,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 11,
-        "column": "column_5"
+        "row": 12,
+        "column": "need"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-011', 'column_2': 'Activation Code Leaflet', 'column_3': 1, 'column_4': 1, 'column_5': 153200, 'column_6': 420000, 'column_7': 0, 'column_8': 266800, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "153200",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-011"
       },
       "subject_raw": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-011"
       },
-      "attribute": "column_6",
+      "attribute": "erp_stock",
       "value": 420000,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 11,
-        "column": "column_6"
+        "row": 12,
+        "column": "erp_stock"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-011', 'column_2': 'Activation Code Leaflet', 'column_3': 1, 'column_4': 1, 'column_5': 153200, 'column_6': 420000, 'column_7': 0, 'column_8': 266800, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "420000",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-011"
       },
       "subject_raw": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-011"
       },
-      "attribute": "column_7",
+      "attribute": "due_before_launch",
       "value": 0,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 11,
-        "column": "column_7"
+        "row": 12,
+        "column": "due_before_launch"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-011', 'column_2': 'Activation Code Leaflet', 'column_3': 1, 'column_4': 1, 'column_5': 153200, 'column_6': 420000, 'column_7': 0, 'column_8': 266800, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "0",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-011"
       },
       "subject_raw": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-011"
       },
-      "attribute": "column_8",
+      "attribute": "cover",
       "value": 266800,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 11,
-        "column": "column_8"
+        "row": 12,
+        "column": "cover"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-011', 'column_2': 'Activation Code Leaflet', 'column_3': 1, 'column_4': 1, 'column_5': 153200, 'column_6': 420000, 'column_7': 0, 'column_8': 266800, 'column_9': 'ok'}",
-      "confidence": "high"
+      "evidence": "266800",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-011"
       },
       "subject_raw": {
-        "material_id": "row-11"
+        "material_id": "CMP-GAM-011"
       },
-      "attribute": "column_9",
+      "attribute": "status",
       "value": "ok",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 11,
-        "column": "column_9"
-      },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-GAM-011', 'column_2': 'Activation Code Leaflet', 'column_3': 1, 'column_4': 1, 'column_5': 153200, 'column_6': 420000, 'column_7': 0, 'column_8': 266800, 'column_9': 'ok'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "plan_part",
-      "subject": {
-        "material_id": "row-12"
-      },
-      "subject_raw": {
-        "material_id": "row-12"
-      },
-      "attribute": "parts_for_the_remaining_pack_out_erp_stock_not_counted",
-      "value": "CMP-MAG-005",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Parts",
         "row": 12,
-        "column": "parts_for_the_remaining_pack_out_erp_stock_not_counted"
+        "column": "status"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-MAG-005', 'column_2': 'NdFeB Disc Magnet 4x1 (lid closure)', 'column_3': 0, 'column_4': 4, 'column_5': 100800, 'column_6': 0, 'column_7': 0, 'column_8': -100800, 'column_9': 'CHECK'}",
-      "confidence": "high"
+      "evidence": "ok",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-12"
+        "material_id": "CMP-MAG-005"
       },
       "subject_raw": {
-        "material_id": "row-12"
+        "material_id": "CMP-MAG-005"
       },
-      "attribute": "column_2",
+      "attribute": "description",
       "value": "NdFeB Disc Magnet 4x1 (lid closure)",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 12,
-        "column": "column_2"
+        "row": 13,
+        "column": "description"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-MAG-005', 'column_2': 'NdFeB Disc Magnet 4x1 (lid closure)', 'column_3': 0, 'column_4': 4, 'column_5': 100800, 'column_6': 0, 'column_7': 0, 'column_8': -100800, 'column_9': 'CHECK'}",
-      "confidence": "high"
+      "evidence": "NdFeB Disc Magnet 4x1 (lid closure)",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-12"
+        "material_id": "CMP-MAG-005"
       },
       "subject_raw": {
-        "material_id": "row-12"
+        "material_id": "CMP-MAG-005"
       },
-      "attribute": "column_3",
+      "attribute": "per_standard",
       "value": 0,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 12,
-        "column": "column_3"
+        "row": 13,
+        "column": "per_standard"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-MAG-005', 'column_2': 'NdFeB Disc Magnet 4x1 (lid closure)', 'column_3': 0, 'column_4': 4, 'column_5': 100800, 'column_6': 0, 'column_7': 0, 'column_8': -100800, 'column_9': 'CHECK'}",
-      "confidence": "high"
+      "evidence": "0",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-12"
+        "material_id": "CMP-MAG-005"
       },
       "subject_raw": {
-        "material_id": "row-12"
+        "material_id": "CMP-MAG-005"
       },
-      "attribute": "column_4",
+      "attribute": "per_collector_s",
       "value": 4,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 12,
-        "column": "column_4"
+        "row": 13,
+        "column": "per_collector_s"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-MAG-005', 'column_2': 'NdFeB Disc Magnet 4x1 (lid closure)', 'column_3': 0, 'column_4': 4, 'column_5': 100800, 'column_6': 0, 'column_7': 0, 'column_8': -100800, 'column_9': 'CHECK'}",
-      "confidence": "high"
+      "evidence": "4",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-12"
+        "material_id": "CMP-MAG-005"
       },
       "subject_raw": {
-        "material_id": "row-12"
+        "material_id": "CMP-MAG-005"
       },
-      "attribute": "column_5",
+      "attribute": "need",
       "value": 100800,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 12,
-        "column": "column_5"
+        "row": 13,
+        "column": "need"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-MAG-005', 'column_2': 'NdFeB Disc Magnet 4x1 (lid closure)', 'column_3': 0, 'column_4': 4, 'column_5': 100800, 'column_6': 0, 'column_7': 0, 'column_8': -100800, 'column_9': 'CHECK'}",
-      "confidence": "high"
+      "evidence": "100800",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-12"
+        "material_id": "CMP-MAG-005"
       },
       "subject_raw": {
-        "material_id": "row-12"
+        "material_id": "CMP-MAG-005"
       },
-      "attribute": "column_6",
+      "attribute": "erp_stock",
       "value": 0,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 12,
-        "column": "column_6"
+        "row": 13,
+        "column": "erp_stock"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-MAG-005', 'column_2': 'NdFeB Disc Magnet 4x1 (lid closure)', 'column_3': 0, 'column_4': 4, 'column_5': 100800, 'column_6': 0, 'column_7': 0, 'column_8': -100800, 'column_9': 'CHECK'}",
-      "confidence": "high"
+      "evidence": "0",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-12"
+        "material_id": "CMP-MAG-005"
       },
       "subject_raw": {
-        "material_id": "row-12"
+        "material_id": "CMP-MAG-005"
       },
-      "attribute": "column_7",
+      "attribute": "due_before_launch",
       "value": 0,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 12,
-        "column": "column_7"
+        "row": 13,
+        "column": "due_before_launch"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-MAG-005', 'column_2': 'NdFeB Disc Magnet 4x1 (lid closure)', 'column_3': 0, 'column_4': 4, 'column_5': 100800, 'column_6': 0, 'column_7': 0, 'column_8': -100800, 'column_9': 'CHECK'}",
-      "confidence": "high"
+      "evidence": "0",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-12"
+        "material_id": "CMP-MAG-005"
       },
       "subject_raw": {
-        "material_id": "row-12"
+        "material_id": "CMP-MAG-005"
       },
-      "attribute": "column_8",
+      "attribute": "cover",
       "value": -100800,
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 12,
-        "column": "column_8"
+        "row": 13,
+        "column": "cover"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-MAG-005', 'column_2': 'NdFeB Disc Magnet 4x1 (lid closure)', 'column_3': 0, 'column_4': 4, 'column_5': 100800, 'column_6': 0, 'column_7': 0, 'column_8': -100800, 'column_9': 'CHECK'}",
-      "confidence": "high"
+      "evidence": "-100800",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "plan_part",
       "subject": {
-        "material_id": "row-12"
+        "material_id": "CMP-MAG-005"
       },
       "subject_raw": {
-        "material_id": "row-12"
+        "material_id": "CMP-MAG-005"
       },
-      "attribute": "column_9",
+      "attribute": "status",
       "value": "CHECK",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Parts",
-        "row": 12,
-        "column": "column_9"
+        "row": 13,
+        "column": "status"
       },
-      "evidence": "{'parts_for_the_remaining_pack_out_erp_stock_not_counted': 'CMP-MAG-005', 'column_2': 'NdFeB Disc Magnet 4x1 (lid closure)', 'column_3': 0, 'column_4': 4, 'column_5': 100800, 'column_6': 0, 'column_7': 0, 'column_8': -100800, 'column_9': 'CHECK'}",
-      "confidence": "high"
+      "evidence": "CHECK",
+      "confidence": "high",
+      "note": "Parts for the remaining pack-out (ERP stock, not counted)"
     },
     {
       "fact_type": "shipment_qty",
@@ -2543,38 +2039,16 @@
         "reference": "020-48113256",
         "material_id": "CMP-GAM-001"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Hwaseong Memory",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Inbound",
         "row": 2,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'supplier': 'Hwaseong Memory', 'part': 'CMP-GAM-001', 'quantity': 48000, 'mode': 'air', 'reference': '020-48113256', 'etd': '2026-11-20', 'eta': '2026-11-21', 'status': 'booked'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "020-48113256",
-        "material_id": "CMP-GAM-001"
-      },
-      "subject_raw": {
-        "reference": "020-48113256",
-        "material_id": "CMP-GAM-001"
-      },
-      "attribute": "material_id",
-      "value": "CMP-GAM-001",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Inbound",
-        "row": 2,
-        "column": "part"
-      },
-      "evidence": "{'supplier': 'Hwaseong Memory', 'part': 'CMP-GAM-001', 'quantity': 48000, 'mode': 'air', 'reference': '020-48113256', 'etd': '2026-11-20', 'eta': '2026-11-21', 'status': 'booked'}",
+      "evidence": "Hwaseong Memory",
       "confidence": "high"
     },
     {
@@ -2594,9 +2068,9 @@
       "locator": {
         "sheet": "Inbound",
         "row": 2,
-        "column": "quantity"
+        "column": "qty_planned"
       },
-      "evidence": "{'supplier': 'Hwaseong Memory', 'part': 'CMP-GAM-001', 'quantity': 48000, 'mode': 'air', 'reference': '020-48113256', 'etd': '2026-11-20', 'eta': '2026-11-21', 'status': 'booked'}",
+      "evidence": "48000",
       "confidence": "high"
     },
     {
@@ -2618,29 +2092,7 @@
         "row": 2,
         "column": "mode"
       },
-      "evidence": "{'supplier': 'Hwaseong Memory', 'part': 'CMP-GAM-001', 'quantity': 48000, 'mode': 'air', 'reference': '020-48113256', 'etd': '2026-11-20', 'eta': '2026-11-21', 'status': 'booked'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "020-48113256",
-        "material_id": "CMP-GAM-001"
-      },
-      "subject_raw": {
-        "reference": "020-48113256",
-        "material_id": "CMP-GAM-001"
-      },
-      "attribute": "reference",
-      "value": "020-48113256",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Inbound",
-        "row": 2,
-        "column": "reference"
-      },
-      "evidence": "{'supplier': 'Hwaseong Memory', 'part': 'CMP-GAM-001', 'quantity': 48000, 'mode': 'air', 'reference': '020-48113256', 'etd': '2026-11-20', 'eta': '2026-11-21', 'status': 'booked'}",
+      "evidence": "air",
       "confidence": "high"
     },
     {
@@ -2662,7 +2114,7 @@
         "row": 2,
         "column": "etd"
       },
-      "evidence": "{'supplier': 'Hwaseong Memory', 'part': 'CMP-GAM-001', 'quantity': 48000, 'mode': 'air', 'reference': '020-48113256', 'etd': '2026-11-20', 'eta': '2026-11-21', 'status': 'booked'}",
+      "evidence": "2026-11-20",
       "confidence": "high"
     },
     {
@@ -2684,7 +2136,7 @@
         "row": 2,
         "column": "eta"
       },
-      "evidence": "{'supplier': 'Hwaseong Memory', 'part': 'CMP-GAM-001', 'quantity': 48000, 'mode': 'air', 'reference': '020-48113256', 'etd': '2026-11-20', 'eta': '2026-11-21', 'status': 'booked'}",
+      "evidence": "2026-11-21",
       "confidence": "high"
     },
     {
@@ -2706,7 +2158,7 @@
         "row": 2,
         "column": "status"
       },
-      "evidence": "{'supplier': 'Hwaseong Memory', 'part': 'CMP-GAM-001', 'quantity': 48000, 'mode': 'air', 'reference': '020-48113256', 'etd': '2026-11-20', 'eta': '2026-11-21', 'status': 'booked'}",
+      "evidence": "booked",
       "confidence": "high"
     },
     {
@@ -2719,38 +2171,16 @@
         "reference": "PO 7K21M",
         "material_id": "CMP-GAM-004"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Karton Nowak",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Inbound",
         "row": 3,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'supplier': 'Karton Nowak', 'part': 'CMP-GAM-004', 'quantity': 20000, 'mode': 'road', 'reference': 'PO 7K21M', 'etd': '2026-11-20', 'eta': '2026-11-21', 'status': 'booked'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "PO 7K21M",
-        "material_id": "CMP-GAM-004"
-      },
-      "subject_raw": {
-        "reference": "PO 7K21M",
-        "material_id": "CMP-GAM-004"
-      },
-      "attribute": "material_id",
-      "value": "CMP-GAM-004",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Inbound",
-        "row": 3,
-        "column": "part"
-      },
-      "evidence": "{'supplier': 'Karton Nowak', 'part': 'CMP-GAM-004', 'quantity': 20000, 'mode': 'road', 'reference': 'PO 7K21M', 'etd': '2026-11-20', 'eta': '2026-11-21', 'status': 'booked'}",
+      "evidence": "Karton Nowak",
       "confidence": "high"
     },
     {
@@ -2770,9 +2200,9 @@
       "locator": {
         "sheet": "Inbound",
         "row": 3,
-        "column": "quantity"
+        "column": "qty_planned"
       },
-      "evidence": "{'supplier': 'Karton Nowak', 'part': 'CMP-GAM-004', 'quantity': 20000, 'mode': 'road', 'reference': 'PO 7K21M', 'etd': '2026-11-20', 'eta': '2026-11-21', 'status': 'booked'}",
+      "evidence": "20000",
       "confidence": "high"
     },
     {
@@ -2794,29 +2224,7 @@
         "row": 3,
         "column": "mode"
       },
-      "evidence": "{'supplier': 'Karton Nowak', 'part': 'CMP-GAM-004', 'quantity': 20000, 'mode': 'road', 'reference': 'PO 7K21M', 'etd': '2026-11-20', 'eta': '2026-11-21', 'status': 'booked'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "PO 7K21M",
-        "material_id": "CMP-GAM-004"
-      },
-      "subject_raw": {
-        "reference": "PO 7K21M",
-        "material_id": "CMP-GAM-004"
-      },
-      "attribute": "reference",
-      "value": "PO 7K21M",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Inbound",
-        "row": 3,
-        "column": "reference"
-      },
-      "evidence": "{'supplier': 'Karton Nowak', 'part': 'CMP-GAM-004', 'quantity': 20000, 'mode': 'road', 'reference': 'PO 7K21M', 'etd': '2026-11-20', 'eta': '2026-11-21', 'status': 'booked'}",
+      "evidence": "road",
       "confidence": "high"
     },
     {
@@ -2838,7 +2246,7 @@
         "row": 3,
         "column": "etd"
       },
-      "evidence": "{'supplier': 'Karton Nowak', 'part': 'CMP-GAM-004', 'quantity': 20000, 'mode': 'road', 'reference': 'PO 7K21M', 'etd': '2026-11-20', 'eta': '2026-11-21', 'status': 'booked'}",
+      "evidence": "2026-11-20",
       "confidence": "high"
     },
     {
@@ -2860,7 +2268,7 @@
         "row": 3,
         "column": "eta"
       },
-      "evidence": "{'supplier': 'Karton Nowak', 'part': 'CMP-GAM-004', 'quantity': 20000, 'mode': 'road', 'reference': 'PO 7K21M', 'etd': '2026-11-20', 'eta': '2026-11-21', 'status': 'booked'}",
+      "evidence": "2026-11-21",
       "confidence": "high"
     },
     {
@@ -2882,7 +2290,7 @@
         "row": 3,
         "column": "status"
       },
-      "evidence": "{'supplier': 'Karton Nowak', 'part': 'CMP-GAM-004', 'quantity': 20000, 'mode': 'road', 'reference': 'PO 7K21M', 'etd': '2026-11-20', 'eta': '2026-11-21', 'status': 'booked'}",
+      "evidence": "booked",
       "confidence": "high"
     },
     {
@@ -2895,38 +2303,16 @@
         "reference": "NHSU4471921",
         "material_id": "CMP-GAM-003"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Guangzhou PackRight",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Inbound",
         "row": 4,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'supplier': 'Guangzhou PackRight', 'part': 'CMP-GAM-003', 'quantity': 350000, 'mode': 'sea', 'reference': 'NHSU4471921', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'arrived port', 'comment': 'discharged at CTA Hamburg, available for pick-up'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHSU4471921",
-        "material_id": "CMP-GAM-003"
-      },
-      "subject_raw": {
-        "reference": "NHSU4471921",
-        "material_id": "CMP-GAM-003"
-      },
-      "attribute": "material_id",
-      "value": "CMP-GAM-003",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Inbound",
-        "row": 4,
-        "column": "part"
-      },
-      "evidence": "{'supplier': 'Guangzhou PackRight', 'part': 'CMP-GAM-003', 'quantity': 350000, 'mode': 'sea', 'reference': 'NHSU4471921', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'arrived port', 'comment': 'discharged at CTA Hamburg, available for pick-up'}",
+      "evidence": "Guangzhou PackRight",
       "confidence": "high"
     },
     {
@@ -2946,9 +2332,9 @@
       "locator": {
         "sheet": "Inbound",
         "row": 4,
-        "column": "quantity"
+        "column": "qty_planned"
       },
-      "evidence": "{'supplier': 'Guangzhou PackRight', 'part': 'CMP-GAM-003', 'quantity': 350000, 'mode': 'sea', 'reference': 'NHSU4471921', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'arrived port', 'comment': 'discharged at CTA Hamburg, available for pick-up'}",
+      "evidence": "350000",
       "confidence": "high"
     },
     {
@@ -2970,29 +2356,7 @@
         "row": 4,
         "column": "mode"
       },
-      "evidence": "{'supplier': 'Guangzhou PackRight', 'part': 'CMP-GAM-003', 'quantity': 350000, 'mode': 'sea', 'reference': 'NHSU4471921', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'arrived port', 'comment': 'discharged at CTA Hamburg, available for pick-up'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHSU4471921",
-        "material_id": "CMP-GAM-003"
-      },
-      "subject_raw": {
-        "reference": "NHSU4471921",
-        "material_id": "CMP-GAM-003"
-      },
-      "attribute": "reference",
-      "value": "NHSU4471921",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Inbound",
-        "row": 4,
-        "column": "reference"
-      },
-      "evidence": "{'supplier': 'Guangzhou PackRight', 'part': 'CMP-GAM-003', 'quantity': 350000, 'mode': 'sea', 'reference': 'NHSU4471921', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'arrived port', 'comment': 'discharged at CTA Hamburg, available for pick-up'}",
+      "evidence": "sea",
       "confidence": "high"
     },
     {
@@ -3014,7 +2378,7 @@
         "row": 4,
         "column": "etd"
       },
-      "evidence": "{'supplier': 'Guangzhou PackRight', 'part': 'CMP-GAM-003', 'quantity': 350000, 'mode': 'sea', 'reference': 'NHSU4471921', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'arrived port', 'comment': 'discharged at CTA Hamburg, available for pick-up'}",
+      "evidence": "2026-10-14",
       "confidence": "high"
     },
     {
@@ -3036,7 +2400,7 @@
         "row": 4,
         "column": "eta"
       },
-      "evidence": "{'supplier': 'Guangzhou PackRight', 'part': 'CMP-GAM-003', 'quantity': 350000, 'mode': 'sea', 'reference': 'NHSU4471921', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'arrived port', 'comment': 'discharged at CTA Hamburg, available for pick-up'}",
+      "evidence": "2026-11-19",
       "confidence": "high"
     },
     {
@@ -3058,7 +2422,7 @@
         "row": 4,
         "column": "status"
       },
-      "evidence": "{'supplier': 'Guangzhou PackRight', 'part': 'CMP-GAM-003', 'quantity': 350000, 'mode': 'sea', 'reference': 'NHSU4471921', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'arrived port', 'comment': 'discharged at CTA Hamburg, available for pick-up'}",
+      "evidence": "arrived port",
       "confidence": "high"
     },
     {
@@ -3071,16 +2435,16 @@
         "reference": "NHSU4471921",
         "material_id": "CMP-GAM-003"
       },
-      "attribute": "comment",
+      "attribute": "note",
       "value": "discharged at CTA Hamburg, available for pick-up",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Inbound",
         "row": 4,
-        "column": "comment"
+        "column": "note"
       },
-      "evidence": "{'supplier': 'Guangzhou PackRight', 'part': 'CMP-GAM-003', 'quantity': 350000, 'mode': 'sea', 'reference': 'NHSU4471921', 'etd': '2026-10-14', 'eta': '2026-11-19', 'status': 'arrived port', 'comment': 'discharged at CTA Hamburg, available for pick-up'}",
+      "evidence": "discharged at CTA Hamburg, available for pick-up",
       "confidence": "high"
     },
     {
@@ -3093,38 +2457,16 @@
         "reference": "020-48113304",
         "material_id": "CMP-GAM-001"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Boise Semi",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Inbound",
         "row": 5,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'supplier': 'Boise Semi', 'part': 'CMP-GAM-001', 'quantity': 36000, 'mode': 'air', 'reference': '020-48113304', 'etd': '2026-11-21', 'eta': '2026-11-23', 'status': 'booked'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "020-48113304",
-        "material_id": "CMP-GAM-001"
-      },
-      "subject_raw": {
-        "reference": "020-48113304",
-        "material_id": "CMP-GAM-001"
-      },
-      "attribute": "material_id",
-      "value": "CMP-GAM-001",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Inbound",
-        "row": 5,
-        "column": "part"
-      },
-      "evidence": "{'supplier': 'Boise Semi', 'part': 'CMP-GAM-001', 'quantity': 36000, 'mode': 'air', 'reference': '020-48113304', 'etd': '2026-11-21', 'eta': '2026-11-23', 'status': 'booked'}",
+      "evidence": "Boise Semi",
       "confidence": "high"
     },
     {
@@ -3144,9 +2486,9 @@
       "locator": {
         "sheet": "Inbound",
         "row": 5,
-        "column": "quantity"
+        "column": "qty_planned"
       },
-      "evidence": "{'supplier': 'Boise Semi', 'part': 'CMP-GAM-001', 'quantity': 36000, 'mode': 'air', 'reference': '020-48113304', 'etd': '2026-11-21', 'eta': '2026-11-23', 'status': 'booked'}",
+      "evidence": "36000",
       "confidence": "high"
     },
     {
@@ -3168,29 +2510,7 @@
         "row": 5,
         "column": "mode"
       },
-      "evidence": "{'supplier': 'Boise Semi', 'part': 'CMP-GAM-001', 'quantity': 36000, 'mode': 'air', 'reference': '020-48113304', 'etd': '2026-11-21', 'eta': '2026-11-23', 'status': 'booked'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "020-48113304",
-        "material_id": "CMP-GAM-001"
-      },
-      "subject_raw": {
-        "reference": "020-48113304",
-        "material_id": "CMP-GAM-001"
-      },
-      "attribute": "reference",
-      "value": "020-48113304",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Inbound",
-        "row": 5,
-        "column": "reference"
-      },
-      "evidence": "{'supplier': 'Boise Semi', 'part': 'CMP-GAM-001', 'quantity': 36000, 'mode': 'air', 'reference': '020-48113304', 'etd': '2026-11-21', 'eta': '2026-11-23', 'status': 'booked'}",
+      "evidence": "air",
       "confidence": "high"
     },
     {
@@ -3212,7 +2532,7 @@
         "row": 5,
         "column": "etd"
       },
-      "evidence": "{'supplier': 'Boise Semi', 'part': 'CMP-GAM-001', 'quantity': 36000, 'mode': 'air', 'reference': '020-48113304', 'etd': '2026-11-21', 'eta': '2026-11-23', 'status': 'booked'}",
+      "evidence": "2026-11-21",
       "confidence": "high"
     },
     {
@@ -3234,7 +2554,7 @@
         "row": 5,
         "column": "eta"
       },
-      "evidence": "{'supplier': 'Boise Semi', 'part': 'CMP-GAM-001', 'quantity': 36000, 'mode': 'air', 'reference': '020-48113304', 'etd': '2026-11-21', 'eta': '2026-11-23', 'status': 'booked'}",
+      "evidence": "2026-11-23",
       "confidence": "high"
     },
     {
@@ -3256,7 +2576,7 @@
         "row": 5,
         "column": "status"
       },
-      "evidence": "{'supplier': 'Boise Semi', 'part': 'CMP-GAM-001', 'quantity': 36000, 'mode': 'air', 'reference': '020-48113304', 'etd': '2026-11-21', 'eta': '2026-11-23', 'status': 'booked'}",
+      "evidence": "booked",
       "confidence": "high"
     },
     {
@@ -3269,38 +2589,16 @@
         "reference": "NHMU3390870",
         "material_id": "CMP-GAM-001"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Hwaseong Memory",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Inbound",
         "row": 6,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'supplier': 'Hwaseong Memory', 'part': 'CMP-GAM-001', 'quantity': 240000, 'mode': 'sea', 'reference': 'NHMU3390870', 'etd': '2026-10-17', 'eta': '2026-11-24', 'status': 'in transit'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHMU3390870",
-        "material_id": "CMP-GAM-001"
-      },
-      "subject_raw": {
-        "reference": "NHMU3390870",
-        "material_id": "CMP-GAM-001"
-      },
-      "attribute": "material_id",
-      "value": "CMP-GAM-001",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Inbound",
-        "row": 6,
-        "column": "part"
-      },
-      "evidence": "{'supplier': 'Hwaseong Memory', 'part': 'CMP-GAM-001', 'quantity': 240000, 'mode': 'sea', 'reference': 'NHMU3390870', 'etd': '2026-10-17', 'eta': '2026-11-24', 'status': 'in transit'}",
+      "evidence": "Hwaseong Memory",
       "confidence": "high"
     },
     {
@@ -3320,9 +2618,9 @@
       "locator": {
         "sheet": "Inbound",
         "row": 6,
-        "column": "quantity"
+        "column": "qty_planned"
       },
-      "evidence": "{'supplier': 'Hwaseong Memory', 'part': 'CMP-GAM-001', 'quantity': 240000, 'mode': 'sea', 'reference': 'NHMU3390870', 'etd': '2026-10-17', 'eta': '2026-11-24', 'status': 'in transit'}",
+      "evidence": "240000",
       "confidence": "high"
     },
     {
@@ -3344,29 +2642,7 @@
         "row": 6,
         "column": "mode"
       },
-      "evidence": "{'supplier': 'Hwaseong Memory', 'part': 'CMP-GAM-001', 'quantity': 240000, 'mode': 'sea', 'reference': 'NHMU3390870', 'etd': '2026-10-17', 'eta': '2026-11-24', 'status': 'in transit'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHMU3390870",
-        "material_id": "CMP-GAM-001"
-      },
-      "subject_raw": {
-        "reference": "NHMU3390870",
-        "material_id": "CMP-GAM-001"
-      },
-      "attribute": "reference",
-      "value": "NHMU3390870",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Inbound",
-        "row": 6,
-        "column": "reference"
-      },
-      "evidence": "{'supplier': 'Hwaseong Memory', 'part': 'CMP-GAM-001', 'quantity': 240000, 'mode': 'sea', 'reference': 'NHMU3390870', 'etd': '2026-10-17', 'eta': '2026-11-24', 'status': 'in transit'}",
+      "evidence": "sea",
       "confidence": "high"
     },
     {
@@ -3388,7 +2664,7 @@
         "row": 6,
         "column": "etd"
       },
-      "evidence": "{'supplier': 'Hwaseong Memory', 'part': 'CMP-GAM-001', 'quantity': 240000, 'mode': 'sea', 'reference': 'NHMU3390870', 'etd': '2026-10-17', 'eta': '2026-11-24', 'status': 'in transit'}",
+      "evidence": "2026-10-17",
       "confidence": "high"
     },
     {
@@ -3410,7 +2686,7 @@
         "row": 6,
         "column": "eta"
       },
-      "evidence": "{'supplier': 'Hwaseong Memory', 'part': 'CMP-GAM-001', 'quantity': 240000, 'mode': 'sea', 'reference': 'NHMU3390870', 'etd': '2026-10-17', 'eta': '2026-11-24', 'status': 'in transit'}",
+      "evidence": "2026-11-24",
       "confidence": "high"
     },
     {
@@ -3432,7 +2708,7 @@
         "row": 6,
         "column": "status"
       },
-      "evidence": "{'supplier': 'Hwaseong Memory', 'part': 'CMP-GAM-001', 'quantity': 240000, 'mode': 'sea', 'reference': 'NHMU3390870', 'etd': '2026-10-17', 'eta': '2026-11-24', 'status': 'in transit'}",
+      "evidence": "in transit",
       "confidence": "high"
     },
     {
@@ -3445,38 +2721,16 @@
         "reference": "NHSU6120458",
         "material_id": "CMP-GAM-010"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Dongguan Precision Housings",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Inbound",
         "row": 7,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'supplier': 'Dongguan Precision Housings', 'part': 'CMP-GAM-010', 'quantity': 10000, 'mode': 'sea', 'reference': 'NHSU6120458', 'etd': '2026-10-24', 'eta': '2026-11-27', 'status': 'in transit'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHSU6120458",
-        "material_id": "CMP-GAM-010"
-      },
-      "subject_raw": {
-        "reference": "NHSU6120458",
-        "material_id": "CMP-GAM-010"
-      },
-      "attribute": "material_id",
-      "value": "CMP-GAM-010",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Inbound",
-        "row": 7,
-        "column": "part"
-      },
-      "evidence": "{'supplier': 'Dongguan Precision Housings', 'part': 'CMP-GAM-010', 'quantity': 10000, 'mode': 'sea', 'reference': 'NHSU6120458', 'etd': '2026-10-24', 'eta': '2026-11-27', 'status': 'in transit'}",
+      "evidence": "Dongguan Precision Housings",
       "confidence": "high"
     },
     {
@@ -3496,9 +2750,9 @@
       "locator": {
         "sheet": "Inbound",
         "row": 7,
-        "column": "quantity"
+        "column": "qty_planned"
       },
-      "evidence": "{'supplier': 'Dongguan Precision Housings', 'part': 'CMP-GAM-010', 'quantity': 10000, 'mode': 'sea', 'reference': 'NHSU6120458', 'etd': '2026-10-24', 'eta': '2026-11-27', 'status': 'in transit'}",
+      "evidence": "10000",
       "confidence": "high"
     },
     {
@@ -3520,29 +2774,7 @@
         "row": 7,
         "column": "mode"
       },
-      "evidence": "{'supplier': 'Dongguan Precision Housings', 'part': 'CMP-GAM-010', 'quantity': 10000, 'mode': 'sea', 'reference': 'NHSU6120458', 'etd': '2026-10-24', 'eta': '2026-11-27', 'status': 'in transit'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHSU6120458",
-        "material_id": "CMP-GAM-010"
-      },
-      "subject_raw": {
-        "reference": "NHSU6120458",
-        "material_id": "CMP-GAM-010"
-      },
-      "attribute": "reference",
-      "value": "NHSU6120458",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Inbound",
-        "row": 7,
-        "column": "reference"
-      },
-      "evidence": "{'supplier': 'Dongguan Precision Housings', 'part': 'CMP-GAM-010', 'quantity': 10000, 'mode': 'sea', 'reference': 'NHSU6120458', 'etd': '2026-10-24', 'eta': '2026-11-27', 'status': 'in transit'}",
+      "evidence": "sea",
       "confidence": "high"
     },
     {
@@ -3564,7 +2796,7 @@
         "row": 7,
         "column": "etd"
       },
-      "evidence": "{'supplier': 'Dongguan Precision Housings', 'part': 'CMP-GAM-010', 'quantity': 10000, 'mode': 'sea', 'reference': 'NHSU6120458', 'etd': '2026-10-24', 'eta': '2026-11-27', 'status': 'in transit'}",
+      "evidence": "2026-10-24",
       "confidence": "high"
     },
     {
@@ -3586,7 +2818,7 @@
         "row": 7,
         "column": "eta"
       },
-      "evidence": "{'supplier': 'Dongguan Precision Housings', 'part': 'CMP-GAM-010', 'quantity': 10000, 'mode': 'sea', 'reference': 'NHSU6120458', 'etd': '2026-10-24', 'eta': '2026-11-27', 'status': 'in transit'}",
+      "evidence": "2026-11-27",
       "confidence": "high"
     },
     {
@@ -3608,7 +2840,7 @@
         "row": 7,
         "column": "status"
       },
-      "evidence": "{'supplier': 'Dongguan Precision Housings', 'part': 'CMP-GAM-010', 'quantity': 10000, 'mode': 'sea', 'reference': 'NHSU6120458', 'etd': '2026-10-24', 'eta': '2026-11-27', 'status': 'in transit'}",
+      "evidence": "in transit",
       "confidence": "high"
     },
     {
@@ -3621,38 +2853,16 @@
         "reference": "NHMU7718206",
         "material_id": "CMP-GAM-004"
       },
-      "attribute": "supplier",
+      "attribute": "supplier_id",
       "value": "Guangzhou PackRight",
       "unit": null,
       "as_of": null,
       "locator": {
         "sheet": "Inbound",
         "row": 8,
-        "column": "supplier"
+        "column": "supplier_id"
       },
-      "evidence": "{'supplier': 'Guangzhou PackRight', 'part': 'CMP-GAM-004', 'quantity': 150000, 'mode': 'sea', 'reference': 'NHMU7718206', 'etd': '2026-10-30', 'eta': '2026-12-03', 'status': 'in transit'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHMU7718206",
-        "material_id": "CMP-GAM-004"
-      },
-      "subject_raw": {
-        "reference": "NHMU7718206",
-        "material_id": "CMP-GAM-004"
-      },
-      "attribute": "material_id",
-      "value": "CMP-GAM-004",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Inbound",
-        "row": 8,
-        "column": "part"
-      },
-      "evidence": "{'supplier': 'Guangzhou PackRight', 'part': 'CMP-GAM-004', 'quantity': 150000, 'mode': 'sea', 'reference': 'NHMU7718206', 'etd': '2026-10-30', 'eta': '2026-12-03', 'status': 'in transit'}",
+      "evidence": "Guangzhou PackRight",
       "confidence": "high"
     },
     {
@@ -3672,9 +2882,9 @@
       "locator": {
         "sheet": "Inbound",
         "row": 8,
-        "column": "quantity"
+        "column": "qty_planned"
       },
-      "evidence": "{'supplier': 'Guangzhou PackRight', 'part': 'CMP-GAM-004', 'quantity': 150000, 'mode': 'sea', 'reference': 'NHMU7718206', 'etd': '2026-10-30', 'eta': '2026-12-03', 'status': 'in transit'}",
+      "evidence": "150000",
       "confidence": "high"
     },
     {
@@ -3696,29 +2906,7 @@
         "row": 8,
         "column": "mode"
       },
-      "evidence": "{'supplier': 'Guangzhou PackRight', 'part': 'CMP-GAM-004', 'quantity': 150000, 'mode': 'sea', 'reference': 'NHMU7718206', 'etd': '2026-10-30', 'eta': '2026-12-03', 'status': 'in transit'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shipment_qty",
-      "subject": {
-        "reference": "NHMU7718206",
-        "material_id": "CMP-GAM-004"
-      },
-      "subject_raw": {
-        "reference": "NHMU7718206",
-        "material_id": "CMP-GAM-004"
-      },
-      "attribute": "reference",
-      "value": "NHMU7718206",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Inbound",
-        "row": 8,
-        "column": "reference"
-      },
-      "evidence": "{'supplier': 'Guangzhou PackRight', 'part': 'CMP-GAM-004', 'quantity': 150000, 'mode': 'sea', 'reference': 'NHMU7718206', 'etd': '2026-10-30', 'eta': '2026-12-03', 'status': 'in transit'}",
+      "evidence": "sea",
       "confidence": "high"
     },
     {
@@ -3740,7 +2928,7 @@
         "row": 8,
         "column": "etd"
       },
-      "evidence": "{'supplier': 'Guangzhou PackRight', 'part': 'CMP-GAM-004', 'quantity': 150000, 'mode': 'sea', 'reference': 'NHMU7718206', 'etd': '2026-10-30', 'eta': '2026-12-03', 'status': 'in transit'}",
+      "evidence": "2026-10-30",
       "confidence": "high"
     },
     {
@@ -3762,7 +2950,7 @@
         "row": 8,
         "column": "eta"
       },
-      "evidence": "{'supplier': 'Guangzhou PackRight', 'part': 'CMP-GAM-004', 'quantity': 150000, 'mode': 'sea', 'reference': 'NHMU7718206', 'etd': '2026-10-30', 'eta': '2026-12-03', 'status': 'in transit'}",
+      "evidence": "2026-12-03",
       "confidence": "high"
     },
     {
@@ -3784,27 +2972,7 @@
         "row": 8,
         "column": "status"
       },
-      "evidence": "{'supplier': 'Guangzhou PackRight', 'part': 'CMP-GAM-004', 'quantity': 150000, 'mode': 'sea', 'reference': 'NHMU7718206', 'etd': '2026-10-30', 'eta': '2026-12-03', 'status': 'in transit'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shift",
-      "subject": {
-        "day": "Saturday"
-      },
-      "subject_raw": {
-        "day": "Saturday"
-      },
-      "attribute": "day",
-      "value": "Saturday",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Shifts",
-        "row": 2,
-        "column": "day"
-      },
-      "evidence": "{'day': 'Saturday', 'shift': '06:00–22:00', 'hours': 16, 'lines': 'L1–L3 Standard, CE cell'}",
+      "evidence": "in transit",
       "confidence": "high"
     },
     {
@@ -3824,7 +2992,7 @@
         "row": 2,
         "column": "shift"
       },
-      "evidence": "{'day': 'Saturday', 'shift': '06:00–22:00', 'hours': 16, 'lines': 'L1–L3 Standard, CE cell'}",
+      "evidence": "06:00–22:00",
       "confidence": "high"
     },
     {
@@ -3844,7 +3012,7 @@
         "row": 2,
         "column": "hours"
       },
-      "evidence": "{'day': 'Saturday', 'shift': '06:00–22:00', 'hours': 16, 'lines': 'L1–L3 Standard, CE cell'}",
+      "evidence": "16",
       "confidence": "high"
     },
     {
@@ -3864,27 +3032,7 @@
         "row": 2,
         "column": "lines"
       },
-      "evidence": "{'day': 'Saturday', 'shift': '06:00–22:00', 'hours': 16, 'lines': 'L1–L3 Standard, CE cell'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shift",
-      "subject": {
-        "day": "Sunday"
-      },
-      "subject_raw": {
-        "day": "Sunday"
-      },
-      "attribute": "day",
-      "value": "Sunday",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Shifts",
-        "row": 3,
-        "column": "day"
-      },
-      "evidence": "{'day': 'Sunday', 'shift': '06:00–20:00', 'hours': 14, 'lines': 'L1–L3 Standard, CE cell'}",
+      "evidence": "L1–L3 Standard, CE cell",
       "confidence": "high"
     },
     {
@@ -3904,7 +3052,7 @@
         "row": 3,
         "column": "shift"
       },
-      "evidence": "{'day': 'Sunday', 'shift': '06:00–20:00', 'hours': 14, 'lines': 'L1–L3 Standard, CE cell'}",
+      "evidence": "06:00–20:00",
       "confidence": "high"
     },
     {
@@ -3924,7 +3072,7 @@
         "row": 3,
         "column": "hours"
       },
-      "evidence": "{'day': 'Sunday', 'shift': '06:00–20:00', 'hours': 14, 'lines': 'L1–L3 Standard, CE cell'}",
+      "evidence": "14",
       "confidence": "high"
     },
     {
@@ -3944,58 +3092,16 @@
         "row": 3,
         "column": "lines"
       },
-      "evidence": "{'day': 'Sunday', 'shift': '06:00–20:00', 'hours': 14, 'lines': 'L1–L3 Standard, CE cell'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shift",
-      "subject": {
-        "day": "row-4"
-      },
-      "subject_raw": {
-        "day": "row-4"
-      },
-      "attribute": "hours",
-      "value": 30,
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Shifts",
-        "row": 4,
-        "column": "hours"
-      },
-      "evidence": "{'hours': 30, 'lines': 'No night shift. Trucks to retail leave from Sunday 20:00.'}",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "shift",
-      "subject": {
-        "day": "row-4"
-      },
-      "subject_raw": {
-        "day": "row-4"
-      },
-      "attribute": "lines",
-      "value": "No night shift. Trucks to retail leave from Sunday 20:00.",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "sheet": "Shifts",
-        "row": 4,
-        "column": "lines"
-      },
-      "evidence": "{'hours': 30, 'lines': 'No night shift. Trucks to retail leave from Sunday 20:00.'}",
+      "evidence": "L1–L3 Standard, CE cell",
       "confidence": "high"
     },
     {
       "fact_type": "x_workbook_row",
       "subject": {
-        "sheet": "Notes",
-        "row": 2
+        "record_id": "c3cc812083bb"
       },
       "subject_raw": {
-        "sheet": "Notes",
-        "row": 2
+        "record_id": "c3cc812083bb"
       },
       "attribute": "note",
       "value": "We have packed since the first programmed game cards arrived three weeks ago. Every shift has packed whatever arrived that day.",
@@ -4006,18 +3112,16 @@
         "row": 2,
         "column": "note"
       },
-      "evidence": "{'note': 'We have packed since the first programmed game cards arrived three weeks ago. Every shift has packed whatever arrived that day.'}",
+      "evidence": "We have packed since the first programmed game cards arrived three weeks ago. Every shift has packed whatever arrived that day.",
       "confidence": "high"
     },
     {
       "fact_type": "x_workbook_row",
       "subject": {
-        "sheet": "Notes",
-        "row": 3
+        "record_id": "138787150fca"
       },
       "subject_raw": {
-        "sheet": "Notes",
-        "row": 3
+        "record_id": "138787150fca"
       },
       "attribute": "note",
       "value": "Parts were chased by phone and freight rebooked almost daily. The team has worked through every weekend since.",
@@ -4028,18 +3132,16 @@
         "row": 3,
         "column": "note"
       },
-      "evidence": "{'note': 'Parts were chased by phone and freight rebooked almost daily. The team has worked through every weekend since.'}",
+      "evidence": "Parts were chased by phone and freight rebooked almost daily. The team has worked through every weekend since.",
       "confidence": "high"
     },
     {
       "fact_type": "x_workbook_row",
       "subject": {
-        "sheet": "Notes",
-        "row": 4
+        "record_id": "7ff189ca6e88"
       },
       "subject_raw": {
-        "sheet": "Notes",
-        "row": 4
+        "record_id": "7ff189ca6e88"
       },
       "attribute": "note",
       "value": "No buffer left: the Collector's cell needs 28.0 of 30 hours. Every hour it waits for a part costs 900 copies.",
@@ -4050,18 +3152,16 @@
         "row": 4,
         "column": "note"
       },
-      "evidence": "{'note': \"No buffer left: the Collector's cell needs 28.0 of 30 hours. Every hour it waits for a part costs 900 copies.\"}",
+      "evidence": "No buffer left: the Collector's cell needs 28.0 of 30 hours. Every hour it waits for a part costs 900 copies.",
       "confidence": "high"
     },
     {
       "fact_type": "x_workbook_row",
       "subject": {
-        "sheet": "Notes",
-        "row": 5
+        "record_id": "f94f2485010e"
       },
       "subject_raw": {
-        "sheet": "Notes",
-        "row": 5
+        "record_id": "f94f2485010e"
       },
       "attribute": "note",
       "value": "Escalate anything that can stop a line to the Head of Procurement the same hour.",
@@ -4072,7 +3172,7 @@
         "row": 5,
         "column": "note"
       },
-      "evidence": "{'note': 'Escalate anything that can stop a line to the Head of Procurement the same hour.'}",
+      "evidence": "Escalate anything that can stop a line to the Head of Procurement the same hour.",
       "confidence": "high"
     }
   ],

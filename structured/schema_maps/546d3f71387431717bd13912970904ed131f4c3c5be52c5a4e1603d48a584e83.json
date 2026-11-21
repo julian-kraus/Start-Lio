@@ -1,0 +1,33 @@
+{
+  "signature": "546d3f71387431717bd13912970904ed131f4c3c5be52c5a4e1603d48a584e83",
+  "example_path": "soony/master/logistics_providers.csv",
+  "format": "csv",
+  "sheet": null,
+  "fact_type": "carrier",
+  "subject": [
+    "carrier_id"
+  ],
+  "columns": {
+    "carrier_id": {
+      "field": "carrier_id",
+      "type": "text"
+    },
+    "name": {
+      "field": "name",
+      "type": "text"
+    },
+    "city": {
+      "field": "city",
+      "type": "text"
+    },
+    "country": {
+      "field": "country",
+      "type": "text"
+    },
+    "modes": {
+      "field": "modes",
+      "type": "list",
+      "list_sep": "|"
+    }
+  }
+}

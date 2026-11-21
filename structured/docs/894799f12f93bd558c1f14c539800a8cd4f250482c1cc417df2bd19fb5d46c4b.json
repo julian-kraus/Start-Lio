@@ -10,7 +10,7 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
@@ -31,7 +31,7 @@
         "row": 2,
         "column": "parent_id"
       },
-      "evidence": "row 2: parent_id=FG-GH5-STD",
+      "evidence": "parent_id=FG-GH5-STD",
       "confidence": "high"
     },
     {
@@ -52,7 +52,7 @@
         "row": 2,
         "column": "child_id"
       },
-      "evidence": "row 2: child_id=CMP-GAM-002",
+      "evidence": "child_id=CMP-GAM-002",
       "confidence": "high"
     },
     {
@@ -73,7 +73,7 @@
         "row": 2,
         "column": "qty_per"
       },
-      "evidence": "row 2: qty_per=1",
+      "evidence": "qty_per=1",
       "confidence": "high"
     },
     {
@@ -94,7 +94,7 @@
         "row": 2,
         "column": "valid_from"
       },
-      "evidence": "row 2: valid_from=2024-01-01",
+      "evidence": "valid_from=2024-01-01",
       "confidence": "high"
     },
     {
@@ -115,7 +115,7 @@
         "row": 2,
         "column": "valid_to"
       },
-      "evidence": "row 2: valid_to=9999-12-31",
+      "evidence": "valid_to=9999-12-31",
       "confidence": "high"
     },
     {
@@ -136,7 +136,7 @@
         "row": 3,
         "column": "parent_id"
       },
-      "evidence": "row 3: parent_id=FG-GH5-STD",
+      "evidence": "parent_id=FG-GH5-STD",
       "confidence": "high"
     },
     {
@@ -157,7 +157,7 @@
         "row": 3,
         "column": "child_id"
       },
-      "evidence": "row 3: child_id=CMP-GAM-003",
+      "evidence": "child_id=CMP-GAM-003",
       "confidence": "high"
     },
     {
@@ -178,7 +178,7 @@
         "row": 3,
         "column": "qty_per"
       },
-      "evidence": "row 3: qty_per=1",
+      "evidence": "qty_per=1",
       "confidence": "high"
     },
     {
@@ -199,7 +199,7 @@
         "row": 3,
         "column": "valid_from"
       },
-      "evidence": "row 3: valid_from=2024-01-01",
+      "evidence": "valid_from=2024-01-01",
       "confidence": "high"
     },
     {
@@ -220,7 +220,7 @@
         "row": 3,
         "column": "valid_to"
       },
-      "evidence": "row 3: valid_to=9999-12-31",
+      "evidence": "valid_to=9999-12-31",
       "confidence": "high"
     },
     {
@@ -241,7 +241,7 @@
         "row": 4,
         "column": "parent_id"
       },
-      "evidence": "row 4: parent_id=FG-GH5-STD",
+      "evidence": "parent_id=FG-GH5-STD",
       "confidence": "high"
     },
     {
@@ -262,7 +262,7 @@
         "row": 4,
         "column": "child_id"
       },
-      "evidence": "row 4: child_id=CMP-GAM-005",
+      "evidence": "child_id=CMP-GAM-005",
       "confidence": "high"
     },
     {
@@ -283,7 +283,7 @@
         "row": 4,
         "column": "qty_per"
       },
-      "evidence": "row 4: qty_per=1",
+      "evidence": "qty_per=1",
       "confidence": "high"
     },
     {
@@ -304,7 +304,7 @@
         "row": 4,
         "column": "valid_from"
       },
-      "evidence": "row 4: valid_from=2024-01-01",
+      "evidence": "valid_from=2024-01-01",
       "confidence": "high"
     },
     {
@@ -325,7 +325,7 @@
         "row": 4,
         "column": "valid_to"
       },
-      "evidence": "row 4: valid_to=9999-12-31",
+      "evidence": "valid_to=9999-12-31",
       "confidence": "high"
     },
     {
@@ -346,7 +346,7 @@
         "row": 5,
         "column": "parent_id"
       },
-      "evidence": "row 5: parent_id=FG-GH5-STD",
+      "evidence": "parent_id=FG-GH5-STD",
       "confidence": "high"
     },
     {
@@ -367,7 +367,7 @@
         "row": 5,
         "column": "child_id"
       },
-      "evidence": "row 5: child_id=CMP-GAM-011",
+      "evidence": "child_id=CMP-GAM-011",
       "confidence": "high"
     },
     {
@@ -388,7 +388,7 @@
         "row": 5,
         "column": "qty_per"
       },
-      "evidence": "row 5: qty_per=1",
+      "evidence": "qty_per=1",
       "confidence": "high"
     },
     {
@@ -409,7 +409,7 @@
         "row": 5,
         "column": "valid_from"
       },
-      "evidence": "row 5: valid_from=2024-01-01",
+      "evidence": "valid_from=2024-01-01",
       "confidence": "high"
     },
     {
@@ -430,7 +430,7 @@
         "row": 5,
         "column": "valid_to"
       },
-      "evidence": "row 5: valid_to=9999-12-31",
+      "evidence": "valid_to=9999-12-31",
       "confidence": "high"
     },
     {
@@ -451,7 +451,7 @@
         "row": 6,
         "column": "parent_id"
       },
-      "evidence": "row 6: parent_id=FG-GH6-STD",
+      "evidence": "parent_id=FG-GH6-STD",
       "confidence": "high"
     },
     {
@@ -472,7 +472,7 @@
         "row": 6,
         "column": "child_id"
       },
-      "evidence": "row 6: child_id=CMP-GAM-001",
+      "evidence": "child_id=CMP-GAM-001",
       "confidence": "high"
     },
     {
@@ -493,7 +493,7 @@
         "row": 6,
         "column": "qty_per"
       },
-      "evidence": "row 6: qty_per=1",
+      "evidence": "qty_per=1",
       "confidence": "high"
     },
     {
@@ -514,7 +514,7 @@
         "row": 6,
         "column": "valid_from"
       },
-      "evidence": "row 6: valid_from=2024-01-01",
+      "evidence": "valid_from=2024-01-01",
       "confidence": "high"
     },
     {
@@ -535,7 +535,7 @@
         "row": 6,
         "column": "valid_to"
       },
-      "evidence": "row 6: valid_to=9999-12-31",
+      "evidence": "valid_to=9999-12-31",
       "confidence": "high"
     },
     {
@@ -556,7 +556,7 @@
         "row": 7,
         "column": "parent_id"
       },
-      "evidence": "row 7: parent_id=FG-GH6-STD",
+      "evidence": "parent_id=FG-GH6-STD",
       "confidence": "high"
     },
     {
@@ -577,7 +577,7 @@
         "row": 7,
         "column": "child_id"
       },
-      "evidence": "row 7: child_id=CMP-GAM-003",
+      "evidence": "child_id=CMP-GAM-003",
       "confidence": "high"
     },
     {
@@ -598,7 +598,7 @@
         "row": 7,
         "column": "qty_per"
       },
-      "evidence": "row 7: qty_per=1",
+      "evidence": "qty_per=1",
       "confidence": "high"
     },
     {
@@ -619,7 +619,7 @@
         "row": 7,
         "column": "valid_from"
       },
-      "evidence": "row 7: valid_from=2024-01-01",
+      "evidence": "valid_from=2024-01-01",
       "confidence": "high"
     },
     {
@@ -640,7 +640,7 @@
         "row": 7,
         "column": "valid_to"
       },
-      "evidence": "row 7: valid_to=9999-12-31",
+      "evidence": "valid_to=9999-12-31",
       "confidence": "high"
     },
     {
@@ -661,7 +661,7 @@
         "row": 8,
         "column": "parent_id"
       },
-      "evidence": "row 8: parent_id=FG-GH6-STD",
+      "evidence": "parent_id=FG-GH6-STD",
       "confidence": "high"
     },
     {
@@ -682,7 +682,7 @@
         "row": 8,
         "column": "child_id"
       },
-      "evidence": "row 8: child_id=CMP-GAM-004",
+      "evidence": "child_id=CMP-GAM-004",
       "confidence": "high"
     },
     {
@@ -703,7 +703,7 @@
         "row": 8,
         "column": "qty_per"
       },
-      "evidence": "row 8: qty_per=1",
+      "evidence": "qty_per=1",
       "confidence": "high"
     },
     {
@@ -724,7 +724,7 @@
         "row": 8,
         "column": "valid_from"
       },
-      "evidence": "row 8: valid_from=2024-01-01",
+      "evidence": "valid_from=2024-01-01",
       "confidence": "high"
     },
     {
@@ -745,7 +745,7 @@
         "row": 8,
         "column": "valid_to"
       },
-      "evidence": "row 8: valid_to=9999-12-31",
+      "evidence": "valid_to=9999-12-31",
       "confidence": "high"
     },
     {
@@ -766,7 +766,7 @@
         "row": 9,
         "column": "parent_id"
       },
-      "evidence": "row 9: parent_id=FG-GH6-STD",
+      "evidence": "parent_id=FG-GH6-STD",
       "confidence": "high"
     },
     {
@@ -787,7 +787,7 @@
         "row": 9,
         "column": "child_id"
       },
-      "evidence": "row 9: child_id=CMP-GAM-011",
+      "evidence": "child_id=CMP-GAM-011",
       "confidence": "high"
     },
     {
@@ -808,7 +808,7 @@
         "row": 9,
         "column": "qty_per"
       },
-      "evidence": "row 9: qty_per=1",
+      "evidence": "qty_per=1",
       "confidence": "high"
     },
     {
@@ -829,7 +829,7 @@
         "row": 9,
         "column": "valid_from"
       },
-      "evidence": "row 9: valid_from=2024-01-01",
+      "evidence": "valid_from=2024-01-01",
       "confidence": "high"
     },
     {
@@ -850,7 +850,7 @@
         "row": 9,
         "column": "valid_to"
       },
-      "evidence": "row 9: valid_to=9999-12-31",
+      "evidence": "valid_to=9999-12-31",
       "confidence": "high"
     },
     {
@@ -871,7 +871,7 @@
         "row": 10,
         "column": "parent_id"
       },
-      "evidence": "row 10: parent_id=FG-GH6-CE",
+      "evidence": "parent_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -892,7 +892,7 @@
         "row": 10,
         "column": "child_id"
       },
-      "evidence": "row 10: child_id=CMP-GAM-001",
+      "evidence": "child_id=CMP-GAM-001",
       "confidence": "high"
     },
     {
@@ -913,7 +913,7 @@
         "row": 10,
         "column": "qty_per"
       },
-      "evidence": "row 10: qty_per=1",
+      "evidence": "qty_per=1",
       "confidence": "high"
     },
     {
@@ -934,7 +934,7 @@
         "row": 10,
         "column": "valid_from"
       },
-      "evidence": "row 10: valid_from=2024-01-01",
+      "evidence": "valid_from=2024-01-01",
       "confidence": "high"
     },
     {
@@ -955,7 +955,7 @@
         "row": 10,
         "column": "valid_to"
       },
-      "evidence": "row 10: valid_to=9999-12-31",
+      "evidence": "valid_to=9999-12-31",
       "confidence": "high"
     },
     {
@@ -976,7 +976,7 @@
         "row": 11,
         "column": "parent_id"
       },
-      "evidence": "row 11: parent_id=FG-GH6-CE",
+      "evidence": "parent_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -997,7 +997,7 @@
         "row": 11,
         "column": "child_id"
       },
-      "evidence": "row 11: child_id=CMP-GAM-006",
+      "evidence": "child_id=CMP-GAM-006",
       "confidence": "high"
     },
     {
@@ -1018,7 +1018,7 @@
         "row": 11,
         "column": "qty_per"
       },
-      "evidence": "row 11: qty_per=1",
+      "evidence": "qty_per=1",
       "confidence": "high"
     },
     {
@@ -1039,7 +1039,7 @@
         "row": 11,
         "column": "valid_from"
       },
-      "evidence": "row 11: valid_from=2024-01-01",
+      "evidence": "valid_from=2024-01-01",
       "confidence": "high"
     },
     {
@@ -1060,7 +1060,7 @@
         "row": 11,
         "column": "valid_to"
       },
-      "evidence": "row 11: valid_to=9999-12-31",
+      "evidence": "valid_to=9999-12-31",
       "confidence": "high"
     },
     {
@@ -1081,7 +1081,7 @@
         "row": 12,
         "column": "parent_id"
       },
-      "evidence": "row 12: parent_id=FG-GH6-CE",
+      "evidence": "parent_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -1102,7 +1102,7 @@
         "row": 12,
         "column": "child_id"
       },
-      "evidence": "row 12: child_id=CMP-GAM-007",
+      "evidence": "child_id=CMP-GAM-007",
       "confidence": "high"
     },
     {
@@ -1123,7 +1123,7 @@
         "row": 12,
         "column": "qty_per"
       },
-      "evidence": "row 12: qty_per=1",
+      "evidence": "qty_per=1",
       "confidence": "high"
     },
     {
@@ -1144,7 +1144,7 @@
         "row": 12,
         "column": "valid_from"
       },
-      "evidence": "row 12: valid_from=2024-01-01",
+      "evidence": "valid_from=2024-01-01",
       "confidence": "high"
     },
     {
@@ -1165,7 +1165,7 @@
         "row": 12,
         "column": "valid_to"
       },
-      "evidence": "row 12: valid_to=9999-12-31",
+      "evidence": "valid_to=9999-12-31",
       "confidence": "high"
     },
     {
@@ -1186,7 +1186,7 @@
         "row": 13,
         "column": "parent_id"
       },
-      "evidence": "row 13: parent_id=FG-GH6-CE",
+      "evidence": "parent_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -1207,7 +1207,7 @@
         "row": 13,
         "column": "child_id"
       },
-      "evidence": "row 13: child_id=CMP-GAM-008",
+      "evidence": "child_id=CMP-GAM-008",
       "confidence": "high"
     },
     {
@@ -1228,7 +1228,7 @@
         "row": 13,
         "column": "qty_per"
       },
-      "evidence": "row 13: qty_per=1",
+      "evidence": "qty_per=1",
       "confidence": "high"
     },
     {
@@ -1249,7 +1249,7 @@
         "row": 13,
         "column": "valid_from"
       },
-      "evidence": "row 13: valid_from=2024-01-01",
+      "evidence": "valid_from=2024-01-01",
       "confidence": "high"
     },
     {
@@ -1270,7 +1270,7 @@
         "row": 13,
         "column": "valid_to"
       },
-      "evidence": "row 13: valid_to=9999-12-31",
+      "evidence": "valid_to=9999-12-31",
       "confidence": "high"
     },
     {
@@ -1291,7 +1291,7 @@
         "row": 14,
         "column": "parent_id"
       },
-      "evidence": "row 14: parent_id=FG-GH6-CE",
+      "evidence": "parent_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -1312,7 +1312,7 @@
         "row": 14,
         "column": "child_id"
       },
-      "evidence": "row 14: child_id=CMP-GAM-009",
+      "evidence": "child_id=CMP-GAM-009",
       "confidence": "high"
     },
     {
@@ -1333,7 +1333,7 @@
         "row": 14,
         "column": "qty_per"
       },
-      "evidence": "row 14: qty_per=1",
+      "evidence": "qty_per=1",
       "confidence": "high"
     },
     {
@@ -1354,7 +1354,7 @@
         "row": 14,
         "column": "valid_from"
       },
-      "evidence": "row 14: valid_from=2024-01-01",
+      "evidence": "valid_from=2024-01-01",
       "confidence": "high"
     },
     {
@@ -1375,7 +1375,7 @@
         "row": 14,
         "column": "valid_to"
       },
-      "evidence": "row 14: valid_to=9999-12-31",
+      "evidence": "valid_to=9999-12-31",
       "confidence": "high"
     },
     {
@@ -1396,7 +1396,7 @@
         "row": 15,
         "column": "parent_id"
       },
-      "evidence": "row 15: parent_id=FG-GH6-CE",
+      "evidence": "parent_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -1417,7 +1417,7 @@
         "row": 15,
         "column": "child_id"
       },
-      "evidence": "row 15: child_id=CMP-GAM-010",
+      "evidence": "child_id=CMP-GAM-010",
       "confidence": "high"
     },
     {
@@ -1438,7 +1438,7 @@
         "row": 15,
         "column": "qty_per"
       },
-      "evidence": "row 15: qty_per=1",
+      "evidence": "qty_per=1",
       "confidence": "high"
     },
     {
@@ -1459,7 +1459,7 @@
         "row": 15,
         "column": "valid_from"
       },
-      "evidence": "row 15: valid_from=2024-01-01",
+      "evidence": "valid_from=2024-01-01",
       "confidence": "high"
     },
     {
@@ -1480,7 +1480,7 @@
         "row": 15,
         "column": "valid_to"
       },
-      "evidence": "row 15: valid_to=9999-12-31",
+      "evidence": "valid_to=9999-12-31",
       "confidence": "high"
     },
     {
@@ -1501,7 +1501,7 @@
         "row": 16,
         "column": "parent_id"
       },
-      "evidence": "row 16: parent_id=FG-GH6-CE",
+      "evidence": "parent_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -1522,7 +1522,7 @@
         "row": 16,
         "column": "child_id"
       },
-      "evidence": "row 16: child_id=CMP-GAM-011",
+      "evidence": "child_id=CMP-GAM-011",
       "confidence": "high"
     },
     {
@@ -1543,7 +1543,7 @@
         "row": 16,
         "column": "qty_per"
       },
-      "evidence": "row 16: qty_per=1",
+      "evidence": "qty_per=1",
       "confidence": "high"
     },
     {
@@ -1564,7 +1564,7 @@
         "row": 16,
         "column": "valid_from"
       },
-      "evidence": "row 16: valid_from=2024-01-01",
+      "evidence": "valid_from=2024-01-01",
       "confidence": "high"
     },
     {
@@ -1585,7 +1585,7 @@
         "row": 16,
         "column": "valid_to"
       },
-      "evidence": "row 16: valid_to=9999-12-31",
+      "evidence": "valid_to=9999-12-31",
       "confidence": "high"
     },
     {
@@ -1606,7 +1606,7 @@
         "row": 17,
         "column": "parent_id"
       },
-      "evidence": "row 17: parent_id=FG-GH6-CE",
+      "evidence": "parent_id=FG-GH6-CE",
       "confidence": "high"
     },
     {
@@ -1627,7 +1627,7 @@
         "row": 17,
         "column": "child_id"
       },
-      "evidence": "row 17: child_id=CMP-MAG-005",
+      "evidence": "child_id=CMP-MAG-005",
       "confidence": "high"
     },
     {
@@ -1648,7 +1648,7 @@
         "row": 17,
         "column": "qty_per"
       },
-      "evidence": "row 17: qty_per=4",
+      "evidence": "qty_per=4",
       "confidence": "high"
     },
     {
@@ -1669,7 +1669,7 @@
         "row": 17,
         "column": "valid_from"
       },
-      "evidence": "row 17: valid_from=2024-01-01",
+      "evidence": "valid_from=2024-01-01",
       "confidence": "high"
     },
     {
@@ -1690,7 +1690,7 @@
         "row": 17,
         "column": "valid_to"
       },
-      "evidence": "row 17: valid_to=9999-12-31",
+      "evidence": "valid_to=9999-12-31",
       "confidence": "high"
     }
   ],

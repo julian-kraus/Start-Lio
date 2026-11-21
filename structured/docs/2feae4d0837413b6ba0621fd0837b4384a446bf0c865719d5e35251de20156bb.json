@@ -4,22 +4,24 @@
     "sha256": "2feae4d0837413b6ba0621fd0837b4384a446bf0c865719d5e35251de20156bb",
     "bytes": 64608
   },
-  "doc_kind": "capacity_notice",
+  "doc_kind": "other_document",
   "doc_kind_confidence": "high",
   "languages": [
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "8fa2c0288fcd"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "8fa2c0288fcd"
       },
       "attribute": "text",
       "value": "Karton Nowak Sp. z o.o.",
@@ -35,10 +37,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "9863f3262506"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "9863f3262506"
       },
       "attribute": "text",
       "value": "Zawiadomienie o planowanym przestoju technicznym",
@@ -54,10 +58,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "f94f8e829e38"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "f94f8e829e38"
       },
       "attribute": "text",
       "value": "Do: Soony Interactive GmbH, Dział Zakupów · Poznań, 09.11.2026",
@@ -73,10 +79,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "dbc98315750e"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "dbc98315750e"
       },
       "attribute": "text",
       "value": "Maszyna",
@@ -92,10 +100,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "f4f3394efc32"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "f4f3394efc32"
       },
       "attribute": "text",
       "value": "Przestój od",
@@ -111,10 +121,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "6578d56b3715"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "6578d56b3715"
       },
       "attribute": "text",
       "value": "Przestój do",
@@ -130,10 +142,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "fca9725021b3"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "fca9725021b3"
       },
       "attribute": "text",
       "value": "Zakres prac",
@@ -149,10 +163,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "ec1cede3b641"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "ec1cede3b641"
       },
       "attribute": "text",
       "value": "Moce w czasie",
@@ -168,10 +184,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "fc387456da72"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "fc387456da72"
       },
       "attribute": "text",
       "value": "przestoju",
@@ -187,10 +205,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "36d4451f3150"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "36d4451f3150"
       },
       "attribute": "text",
       "value": "Offset arkuszowy B1",
@@ -206,10 +226,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "008f480e2f83"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "008f480e2f83"
       },
       "attribute": "text",
       "value": "(linia 1)",
@@ -225,10 +247,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "c53d2536329d"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "c53d2536329d"
       },
       "attribute": "text",
       "value": "21.11.2026 14:00",
@@ -244,10 +268,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "4c8701ecf497"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "4c8701ecf497"
       },
       "attribute": "text",
       "value": "23.11.2026 06:00",
@@ -263,10 +289,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "1963b12968af"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "1963b12968af"
       },
       "attribute": "text",
       "value": "przegląd roczny,",
@@ -282,10 +310,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "bab0f1a2b1be"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "bab0f1a2b1be"
       },
       "attribute": "text",
       "value": "wymiana obciągów i",
@@ -301,10 +331,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "61779760eacc"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "61779760eacc"
       },
       "attribute": "text",
       "value": "wałków",
@@ -320,10 +352,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "1a8999c3ae2c"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "1a8999c3ae2c"
       },
       "attribute": "text",
       "value": "brak",
@@ -339,10 +373,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "4768c607afef"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "4768c607afef"
       },
       "attribute": "text",
       "value": "Druk cyfrowy B2 (linia",
@@ -358,10 +394,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "56483568deb2"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "56483568deb2"
       },
       "attribute": "text",
       "value": "3)",
@@ -377,10 +415,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "cf7831ef91c8"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "cf7831ef91c8"
       },
       "attribute": "text",
       "value": "—",
@@ -396,10 +436,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "4a40ebf764be"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "4a40ebf764be"
       },
       "attribute": "text",
       "value": "—",
@@ -415,10 +457,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "8a52f6506486"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "8a52f6506486"
       },
       "attribute": "text",
       "value": "praca bez zmian",
@@ -434,10 +478,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "5797442a6f49"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "5797442a6f49"
       },
       "attribute": "text",
       "value": "do 15 000 szt.",
@@ -453,10 +499,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "2671550283de"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "2671550283de"
       },
       "attribute": "text",
       "value": "okładek lub ulotek na",
@@ -472,10 +520,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "8c16f284a170"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "8c16f284a170"
       },
       "attribute": "text",
       "value": "36 h",
@@ -491,10 +541,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "8cf226a6bfaa"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "8cf226a6bfaa"
       },
       "attribute": "text",
       "value": "Introligatornia",
@@ -510,10 +562,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "ffb6f3994e27"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "ffb6f3994e27"
       },
       "attribute": "text",
       "value": "(oprawa twarda)",
@@ -529,10 +583,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "a06f58b0a8e8"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "a06f58b0a8e8"
       },
       "attribute": "text",
       "value": "21.11.2026 14:00",
@@ -548,10 +604,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "4155cc5e45f8"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "4155cc5e45f8"
       },
       "attribute": "text",
       "value": "23.11.2026 06:00",
@@ -567,10 +625,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "90be8efeca11"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "90be8efeca11"
       },
       "attribute": "text",
       "value": "serwis linii",
@@ -586,10 +646,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "020b146ae871"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "020b146ae871"
       },
       "attribute": "text",
       "value": "brak; wysyłka",
@@ -605,10 +667,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "818e76375b6a"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "818e76375b6a"
       },
       "attribute": "text",
       "value": "wyrobów gotowych z",
@@ -624,10 +688,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "85074243f5dd"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "85074243f5dd"
       },
       "attribute": "text",
       "value": "magazynu możliwa",
@@ -643,10 +709,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "aee74189b995"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "aee74189b995"
       },
       "attribute": "text",
       "value": "Szanowni Państwo, informujemy o planowanym przestoju technicznym w naszej drukarni w Poznaniu. W czasie",
@@ -662,10 +730,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "800c0ea652dc"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "800c0ea652dc"
       },
       "attribute": "text",
       "value": "przestoju zlecenia w trybie ekspresowym (§ 3.2 umowy) realizujemy wyłącznie na linii cyfrowej, w ilości podanej w tabeli.",
@@ -681,10 +751,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "25b92d04e93e"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "25b92d04e93e"
       },
       "attribute": "text",
       "value": "Zlecenia ekspresowe na linię offsetową przyjmujemy do 21.11.2026, godz. 09:00, z gotowym plikiem do druku.",
@@ -700,10 +772,12 @@
     {
       "fact_type": "x_document_line",
       "subject": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "2708a7254324"
       },
       "subject_raw": {
-        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf"
+        "source_path": "suppliers/SUP-0028_Karton_Nowak/notices/Zawiadomienie_przestoj_techniczny_2026-11.pdf",
+        "line_key": "2708a7254324"
       },
       "attribute": "text",
       "value": "Z poważaniem, Agnieszka Nowak, Karton Nowak Sp. z o.o., tel. +48 61 842 0101",

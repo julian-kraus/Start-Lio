@@ -1,0 +1,334 @@
+{
+  "source": {
+    "path": "suppliers/SUP-0029_Guangzhou_PackRight/components_delta.csv",
+    "sha256": "83ebc27ebdab81c062d3c150e8a95427d762119858d3ac92906a01744fc91b4a",
+    "bytes": 276
+  },
+  "doc_kind": "change_record_table",
+  "doc_kind_confidence": "high",
+  "languages": [
+    "en"
+  ],
+  "spec_version": "codex-2026-11-21-v1",
+  "extracted_by": "codex:deterministic+source-envelope",
+  "doc_date": null,
+  "facts": [
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "material_id": "CMP-GAM-007",
+        "field": "flag"
+      },
+      "subject_raw": {
+        "material_id": "CMP-GAM-007",
+        "field": "flag"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-007",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "component_id"
+      },
+      "evidence": "component_id=CMP-GAM-007",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "material_id": "CMP-GAM-007",
+        "field": "flag"
+      },
+      "subject_raw": {
+        "material_id": "CMP-GAM-007",
+        "field": "flag"
+      },
+      "attribute": "supplier_id",
+      "value": "SUP-0029",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "supplier_id"
+      },
+      "evidence": "supplier_id=SUP-0029",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "material_id": "CMP-GAM-007",
+        "field": "flag"
+      },
+      "subject_raw": {
+        "material_id": "CMP-GAM-007",
+        "field": "flag"
+      },
+      "attribute": "action",
+      "value": "flag",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "action"
+      },
+      "evidence": "action=flag",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "material_id": "CMP-GAM-007",
+        "field": "flag"
+      },
+      "subject_raw": {
+        "material_id": "CMP-GAM-007",
+        "field": "flag"
+      },
+      "attribute": "old",
+      "value": "63",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "lead_time_days_old"
+      },
+      "evidence": "lead_time_days_old=63",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "material_id": "CMP-GAM-007",
+        "field": "flag"
+      },
+      "subject_raw": {
+        "material_id": "CMP-GAM-007",
+        "field": "flag"
+      },
+      "attribute": "new",
+      "value": "105",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "lead_time_days_new"
+      },
+      "evidence": "lead_time_days_new=105",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "material_id": "CMP-GAM-007",
+        "field": "flag"
+      },
+      "subject_raw": {
+        "material_id": "CMP-GAM-007",
+        "field": "flag"
+      },
+      "attribute": "share",
+      "value": 1,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "share"
+      },
+      "evidence": "share=1.0",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "material_id": "CMP-GAM-007",
+        "field": "flag"
+      },
+      "subject_raw": {
+        "material_id": "CMP-GAM-007",
+        "field": "flag"
+      },
+      "attribute": "primary",
+      "value": "Y",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "primary"
+      },
+      "evidence": "primary=Y",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "material_id": "CMP-GAM-007",
+        "field": "flag"
+      },
+      "subject_raw": {
+        "material_id": "CMP-GAM-007",
+        "field": "flag"
+      },
+      "attribute": "note",
+      "value": "+42 d for deliveries from December, see supply notice",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 2,
+        "column": "note"
+      },
+      "evidence": "note=+42 d for deliveries from December, see supply notice",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "material_id": "CMP-MAG-005",
+        "field": "flag"
+      },
+      "subject_raw": {
+        "material_id": "CMP-MAG-005",
+        "field": "flag"
+      },
+      "attribute": "material_id",
+      "value": "CMP-MAG-005",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "component_id"
+      },
+      "evidence": "component_id=CMP-MAG-005",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "material_id": "CMP-MAG-005",
+        "field": "flag"
+      },
+      "subject_raw": {
+        "material_id": "CMP-MAG-005",
+        "field": "flag"
+      },
+      "attribute": "supplier_id",
+      "value": "SUP-0029",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "supplier_id"
+      },
+      "evidence": "supplier_id=SUP-0029",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "material_id": "CMP-MAG-005",
+        "field": "flag"
+      },
+      "subject_raw": {
+        "material_id": "CMP-MAG-005",
+        "field": "flag"
+      },
+      "attribute": "action",
+      "value": "flag",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "action"
+      },
+      "evidence": "action=flag",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "material_id": "CMP-MAG-005",
+        "field": "flag"
+      },
+      "subject_raw": {
+        "material_id": "CMP-MAG-005",
+        "field": "flag"
+      },
+      "attribute": "old",
+      "value": "63",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "lead_time_days_old"
+      },
+      "evidence": "lead_time_days_old=63",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "material_id": "CMP-MAG-005",
+        "field": "flag"
+      },
+      "subject_raw": {
+        "material_id": "CMP-MAG-005",
+        "field": "flag"
+      },
+      "attribute": "share",
+      "value": 1,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "share"
+      },
+      "evidence": "share=1.0",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "material_id": "CMP-MAG-005",
+        "field": "flag"
+      },
+      "subject_raw": {
+        "material_id": "CMP-MAG-005",
+        "field": "flag"
+      },
+      "attribute": "primary",
+      "value": "Y",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "primary"
+      },
+      "evidence": "primary=Y",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "change_record",
+      "subject": {
+        "material_id": "CMP-MAG-005",
+        "field": "flag"
+      },
+      "subject_raw": {
+        "material_id": "CMP-MAG-005",
+        "field": "flag"
+      },
+      "attribute": "note",
+      "value": "sub-supplier cannot export; no second source on file",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "row": 3,
+        "column": "note"
+      },
+      "evidence": "note=sub-supplier cannot export; no second source on file",
+      "confidence": "high"
+    }
+  ],
+  "unreadable": [],
+  "proposed_fact_types": []
+}

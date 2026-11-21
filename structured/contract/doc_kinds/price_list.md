@@ -1,3 +1,8 @@
+recognise:
+  path_globs: ["**/*price*list*"]
+  any_phrases: ["source document"]
+  container: pdf
+
 # price_list
 
-Extract price changes and preserve footer reasons as evidence.
+Extract grounded fields, preserve source-language evidence, and retain unresolved joins explicitly.

@@ -1,3 +1,8 @@
+recognise:
+  path_globs: ["**/*supplier*profile*"]
+  any_phrases: ["source document"]
+  container: tabular
+
 # supplier_profile
 
-Extract only the fields supported by the envelope contract; preserve source language in evidence and write translations in notes.
+Extract grounded fields, preserve source-language evidence, and retain unresolved joins explicitly.

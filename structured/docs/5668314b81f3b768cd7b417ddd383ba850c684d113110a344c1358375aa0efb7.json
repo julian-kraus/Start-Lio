@@ -4,24 +4,26 @@
     "sha256": "5668314b81f3b768cd7b417ddd383ba850c684d113110a344c1358375aa0efb7",
     "bytes": 258
   },
-  "doc_kind": "master_table",
+  "doc_kind": "supplier_components",
   "doc_kind_confidence": "high",
   "languages": [
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
-      "fact_type": "component",
+      "fact_type": "supplier_part",
       "subject": {
-        "material_id": "row-2"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-2"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
       },
-      "attribute": "component_id",
+      "attribute": "material_id",
       "value": "CMP-GAM-001",
       "unit": null,
       "as_of": null,
@@ -29,16 +31,18 @@
         "row": 2,
         "column": "component_id"
       },
-      "evidence": "row 2: component_id=CMP-GAM-001",
+      "evidence": "component_id=CMP-GAM-001",
       "confidence": "high"
     },
     {
-      "fact_type": "component",
+      "fact_type": "supplier_part",
       "subject": {
-        "material_id": "row-2"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-2"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
       },
       "attribute": "description",
       "value": "Game Card 128 GB – Grand Heist 6",
@@ -48,16 +52,18 @@
         "row": 2,
         "column": "description"
       },
-      "evidence": "row 2: description=Game Card 128 GB – Grand Heist 6",
+      "evidence": "description=Game Card 128 GB – Grand Heist 6",
       "confidence": "high"
     },
     {
-      "fact_type": "component",
+      "fact_type": "supplier_part",
       "subject": {
-        "material_id": "row-2"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-2"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
       },
       "attribute": "category",
       "value": "Game Media",
@@ -67,16 +73,18 @@
         "row": 2,
         "column": "category"
       },
-      "evidence": "row 2: category=Game Media",
+      "evidence": "category=Game Media",
       "confidence": "high"
     },
     {
-      "fact_type": "component",
+      "fact_type": "supplier_part",
       "subject": {
-        "material_id": "row-2"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-2"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
       },
       "attribute": "share",
       "value": 0.3,
@@ -86,16 +94,18 @@
         "row": 2,
         "column": "share"
       },
-      "evidence": "row 2: share=0.3",
+      "evidence": "share=0.3",
       "confidence": "high"
     },
     {
-      "fact_type": "component",
+      "fact_type": "supplier_part",
       "subject": {
-        "material_id": "row-2"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-2"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
       },
       "attribute": "unit_price",
       "value": 10.2,
@@ -105,16 +115,18 @@
         "row": 2,
         "column": "unit_price"
       },
-      "evidence": "row 2: unit_price=10.2",
+      "evidence": "unit_price=10.2",
       "confidence": "high"
     },
     {
-      "fact_type": "component",
+      "fact_type": "supplier_part",
       "subject": {
-        "material_id": "row-2"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-2"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
       },
       "attribute": "currency",
       "value": "USD",
@@ -124,16 +136,18 @@
         "row": 2,
         "column": "currency"
       },
-      "evidence": "row 2: currency=USD",
+      "evidence": "currency=USD",
       "confidence": "high"
     },
     {
-      "fact_type": "component",
+      "fact_type": "supplier_part",
       "subject": {
-        "material_id": "row-2"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-2"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
       },
       "attribute": "lead_time_days",
       "value": 28,
@@ -143,16 +157,18 @@
         "row": 2,
         "column": "lead_time_days"
       },
-      "evidence": "row 2: lead_time_days=28",
+      "evidence": "lead_time_days=28",
       "confidence": "high"
     },
     {
-      "fact_type": "component",
+      "fact_type": "supplier_part",
       "subject": {
-        "material_id": "row-2"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-2"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
       },
       "attribute": "moq",
       "value": 20000,
@@ -162,16 +178,18 @@
         "row": 2,
         "column": "moq"
       },
-      "evidence": "row 2: moq=20000",
+      "evidence": "moq=20000",
       "confidence": "high"
     },
     {
-      "fact_type": "component",
+      "fact_type": "supplier_part",
       "subject": {
-        "material_id": "row-2"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
       },
       "subject_raw": {
-        "material_id": "row-2"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-001"
       },
       "attribute": "primary",
       "value": "N",
@@ -181,18 +199,20 @@
         "row": 2,
         "column": "primary"
       },
-      "evidence": "row 2: primary=N",
+      "evidence": "primary=N",
       "confidence": "high"
     },
     {
-      "fact_type": "component",
+      "fact_type": "supplier_part",
       "subject": {
-        "material_id": "row-3"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
       },
-      "attribute": "component_id",
+      "attribute": "material_id",
       "value": "CMP-GAM-002",
       "unit": null,
       "as_of": null,
@@ -200,16 +220,18 @@
         "row": 3,
         "column": "component_id"
       },
-      "evidence": "row 3: component_id=CMP-GAM-002",
+      "evidence": "component_id=CMP-GAM-002",
       "confidence": "high"
     },
     {
-      "fact_type": "component",
+      "fact_type": "supplier_part",
       "subject": {
-        "material_id": "row-3"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
       },
       "attribute": "description",
       "value": "Game Card 64 GB – Grand Heist 5",
@@ -219,16 +241,18 @@
         "row": 3,
         "column": "description"
       },
-      "evidence": "row 3: description=Game Card 64 GB – Grand Heist 5",
+      "evidence": "description=Game Card 64 GB – Grand Heist 5",
       "confidence": "high"
     },
     {
-      "fact_type": "component",
+      "fact_type": "supplier_part",
       "subject": {
-        "material_id": "row-3"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
       },
       "attribute": "category",
       "value": "Game Media",
@@ -238,16 +262,18 @@
         "row": 3,
         "column": "category"
       },
-      "evidence": "row 3: category=Game Media",
+      "evidence": "category=Game Media",
       "confidence": "high"
     },
     {
-      "fact_type": "component",
+      "fact_type": "supplier_part",
       "subject": {
-        "material_id": "row-3"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
       },
       "attribute": "share",
       "value": 0.3,
@@ -257,16 +283,18 @@
         "row": 3,
         "column": "share"
       },
-      "evidence": "row 3: share=0.3",
+      "evidence": "share=0.3",
       "confidence": "high"
     },
     {
-      "fact_type": "component",
+      "fact_type": "supplier_part",
       "subject": {
-        "material_id": "row-3"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
       },
       "attribute": "unit_price",
       "value": 5.7,
@@ -276,16 +304,18 @@
         "row": 3,
         "column": "unit_price"
       },
-      "evidence": "row 3: unit_price=5.7",
+      "evidence": "unit_price=5.7",
       "confidence": "high"
     },
     {
-      "fact_type": "component",
+      "fact_type": "supplier_part",
       "subject": {
-        "material_id": "row-3"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
       },
       "attribute": "currency",
       "value": "USD",
@@ -295,16 +325,18 @@
         "row": 3,
         "column": "currency"
       },
-      "evidence": "row 3: currency=USD",
+      "evidence": "currency=USD",
       "confidence": "high"
     },
     {
-      "fact_type": "component",
+      "fact_type": "supplier_part",
       "subject": {
-        "material_id": "row-3"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
       },
       "attribute": "lead_time_days",
       "value": 28,
@@ -314,16 +346,18 @@
         "row": 3,
         "column": "lead_time_days"
       },
-      "evidence": "row 3: lead_time_days=28",
+      "evidence": "lead_time_days=28",
       "confidence": "high"
     },
     {
-      "fact_type": "component",
+      "fact_type": "supplier_part",
       "subject": {
-        "material_id": "row-3"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
       },
       "attribute": "moq",
       "value": 5000,
@@ -333,16 +367,18 @@
         "row": 3,
         "column": "moq"
       },
-      "evidence": "row 3: moq=5000",
+      "evidence": "moq=5000",
       "confidence": "high"
     },
     {
-      "fact_type": "component",
+      "fact_type": "supplier_part",
       "subject": {
-        "material_id": "row-3"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
       },
       "subject_raw": {
-        "material_id": "row-3"
+        "supplier_id": "SUP-0011",
+        "material_id": "CMP-GAM-002"
       },
       "attribute": "primary",
       "value": "N",
@@ -352,7 +388,7 @@
         "row": 3,
         "column": "primary"
       },
-      "evidence": "row 3: primary=N",
+      "evidence": "primary=N",
       "confidence": "high"
     }
   ],

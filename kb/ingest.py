@@ -9,9 +9,13 @@ from pathlib import Path
 from tracker.diff import detect_kind
 from tracker.store import BlobStore
 
-from . import events
+from psycopg.types.json import Jsonb
+
+from . import designer, events, registry, survey
 from . import facts as facts_mod
+from .llm.base import text_of
 from .loader import DEFAULT_CONFIDENCE, envelope_for, load_envelope
+from .registry import ACTIVE_MAP_STATUS
 from .tabular import TABULAR_CONTAINERS, find_header, guess_header, read_tables, table_to_facts
 
 log = logging.getLogger(__name__)
@@ -32,20 +36,26 @@ class FileReader:
 
 
 def schema_maps(conn) -> dict[str, dict]:
-    return {r["signature"]: r["mapping"] for r in conn.execute("SELECT signature, mapping FROM schema_maps")}
+    return {r["signature"]: r["mapping"] for r in conn.execute(
+        "SELECT signature, mapping FROM schema_maps WHERE status = ANY(%s)", (list(ACTIVE_MAP_STATUS),))}
 
 
 def process_file(conn, path: str, sha: str, data: bytes, structured: Path,
-                 confidence_map: dict | None = None) -> str:
+                 confidence_map: dict | None = None, llm=None) -> str:
     """Returns the document status. Emits a fact event when the path's valid facts changed."""
     before = events.snapshot(conn, path)
-    status = _process_file(conn, path, sha, data, structured, confidence_map)
+    status = _process_file(conn, path, sha, data, structured, confidence_map, llm)
     events.emit(conn, path, before, sha=sha, status=status)
     return status
 
 
+def _has_own_facts(conn, path: str, sha: str) -> bool:
+    return conn.execute("SELECT EXISTS (SELECT 1 FROM facts WHERE source_path = %s AND source_sha256 = %s AND valid) "
+                        "AS e", (path, sha)).fetchone()["e"]
+
+
 def _process_file(conn, path: str, sha: str, data: bytes, structured: Path,
-                  confidence_map: dict | None = None) -> str:
+                  confidence_map: dict | None = None, llm=None) -> str:
     confidence_map = confidence_map or DEFAULT_CONFIDENCE
     container = detect_kind(path, data)
     facts_mod.deactivate_other_versions(conn, path, sha)
@@ -57,11 +67,17 @@ def _process_file(conn, path: str, sha: str, data: bytes, structured: Path,
             tables = read_tables(container, data)
         except Exception as exc:
             tables, detail = [], {"error": f"{type(exc).__name__}: {exc}"}
-        parsed, unmatched, stats = [], [], {}
+        parsed, unmatched, stats, designed = [], [], {}, []
         for table in tables:
             if not table.rows:
                 continue
             hit = find_header(table, maps, container)
+            if hit is None and llm is not None and llm.supports("design"):
+                outcome = designer.propose_table_map(conn, llm, path, sha, container, table)
+                designed.append(outcome)
+                if outcome["status"] == "auto":
+                    maps = schema_maps(conn)
+                    hit = find_header(table, maps, container)
             if hit is None:
                 unmatched.append({"sheet": table.sheet, "header_guess": guess_header(table)[:40]})
                 continue
@@ -88,26 +104,35 @@ def _process_file(conn, path: str, sha: str, data: bytes, structured: Path,
             status = "partial" if parsed else "needs_schema_map"
         else:
             status = "parsed" if parsed else "loaded"
-        detail = {**detail, "parsed": stats, "unmatched": unmatched}
+        detail = {**detail, "parsed": stats, "unmatched": unmatched, "designed": designed}
         facts_mod.upsert_document(conn, path, sha, container=container, status=status,
                                   extractor="kb:tabular" if parsed else None, detail=detail)
         return status
 
-    if facts_mod.has_valid_facts(conn, sha):
+    doc_kind = None
+    if _has_own_facts(conn, path, sha):
         status = "loaded"
+    elif survey.reuse_facts(conn, path, sha):
+        status, detail = "reused", {"routing": {"decision": "reuse", "by": "hash", "reason": "same content seen"}}
     else:
         env = envelope_for(structured, sha)
         if env is not None:
             load_envelope(conn, env, current_sha=sha, confidence_map=confidence_map, emit=False)
-            status = "loaded"
+            status, doc_kind = "loaded", env.get("doc_kind")
         else:
+            text, _ = text_of(container, data)
+            routing = survey.route_document(path, container, text, registry.structures(conn))
+            doc_kind = routing.kind
+            detail = {"routing": vars(routing)}
             conn.execute(
-                "INSERT INTO extraction_queue (path, sha256, container) VALUES (%s, %s, %s) "
-                "ON CONFLICT (path, sha256) DO UPDATE SET state = CASE WHEN extraction_queue.state = 'superseded' "
-                "THEN 'pending' ELSE extraction_queue.state END, updated_at = now()", (path, sha, container))
+                """INSERT INTO extraction_queue (path, sha256, container, doc_kind, routing) VALUES (%s, %s, %s, %s, %s)
+                   ON CONFLICT (path, sha256) DO UPDATE SET doc_kind = EXCLUDED.doc_kind, routing = EXCLUDED.routing,
+                     state = CASE WHEN extraction_queue.state = 'superseded' THEN 'pending'
+                                  ELSE extraction_queue.state END, updated_at = now()""",
+                (path, sha, container, doc_kind, Jsonb(vars(routing))))
             status = "queued"
     existing = conn.execute("SELECT status FROM documents WHERE path = %s AND sha256 = %s", (path, sha)).fetchone()
-    facts_mod.upsert_document(conn, path, sha, container=container,
+    facts_mod.upsert_document(conn, path, sha, container=container, doc_kind=doc_kind,
                               status=existing["status"] if existing and status == "loaded" else status, detail=detail)
     return status
 
@@ -121,7 +146,7 @@ def remove_path(conn, path: str) -> None:
 
 
 def sync_current(conn, current: dict[str, str], reader: FileReader, structured: Path, confidence_map: dict,
-                 force: bool = False) -> dict:
+                 force: bool = False, llm=None) -> dict:
     """Bring kb in line with the tracker's current file set (used at start-up: the tracker's baseline poll emits no
     events). Only versions kb has not processed yet are read, unless force is set."""
     known = {(r["path"], r["sha256"]) for r in conn.execute("SELECT path, sha256 FROM documents WHERE active")}
@@ -130,7 +155,7 @@ def sync_current(conn, current: dict[str, str], reader: FileReader, structured: 
         if (path, sha) in known and not force:
             continue
         try:
-            status = process_file(conn, path, sha, reader(sha, path), structured, confidence_map)
+            status = process_file(conn, path, sha, reader(sha, path), structured, confidence_map, llm)
         except Exception as exc:
             conn.rollback()
             facts_mod.upsert_document(conn, path, sha, container=None, status="failed",

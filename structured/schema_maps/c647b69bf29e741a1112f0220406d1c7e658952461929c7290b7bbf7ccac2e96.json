@@ -1,0 +1,42 @@
+{
+  "signature": "c647b69bf29e741a1112f0220406d1c7e658952461929c7290b7bbf7ccac2e96",
+  "example_path": "soony/news/2026-11-21_export_controls.json",
+  "format": "json",
+  "sheet": null,
+  "fact_type": "x_news_record",
+  "subject": [
+    "id"
+  ],
+  "columns": {
+    "id": {
+      "field": "id",
+      "type": "text"
+    },
+    "published_at": {
+      "field": "published_at",
+      "type": "text"
+    },
+    "source": {
+      "field": "source",
+      "type": "text"
+    },
+    "headline": {
+      "field": "headline",
+      "type": "text"
+    },
+    "summary": {
+      "field": "summary",
+      "type": "text"
+    },
+    "regions": {
+      "field": "regions",
+      "type": "list",
+      "list_sep": "|"
+    },
+    "tags": {
+      "field": "tags",
+      "type": "list",
+      "list_sep": "|"
+    }
+  }
+}

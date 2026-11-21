@@ -10,7 +10,7 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
@@ -43,14 +43,14 @@
         "supplier_id": "SUP-0011",
         "contract_id": "SUP-0011_Sales_Agreement_2023"
       },
-      "attribute": "incoterm",
-      "value": "EXW",
+      "attribute": "expiry",
+      "value": "2028-04-30",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1
       },
-      "evidence": "EXW",
+      "evidence": "Expires 2028-04-30",
       "confidence": "high"
     }
   ],

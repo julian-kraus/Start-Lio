@@ -10,7 +10,7 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
     {
@@ -100,48 +100,45 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "po_number": "4500318752",
-        "material_id": "PR-SL-0604"
+        "statement_no": 1
       },
       "subject_raw": {
-        "po_number": "4500318752",
-        "material_id": "PR-SL-0604"
+        "statement_no": 1
+      },
+      "attribute": "kind",
+      "value": "handling_note",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "region_hint": "handling note"
+      },
+      "evidence": "Artwork rev. B (GH6_sleeve_revB.pdf); 300 cartons; 15 pallets; gross 3,600 kg",
+      "confidence": "medium"
+    },
+    {
+      "fact_type": "supplier_statement",
+      "subject": {
+        "statement_no": 1
+      },
+      "subject_raw": {
+        "statement_no": 1
       },
       "attribute": "value",
       "value": "Artwork rev. B (GH6_sleeve_revB.pdf); 300 cartons; 15 pallets; gross 3,600 kg",
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "region_hint": "handling note"
       },
       "evidence": "Artwork rev. B (GH6_sleeve_revB.pdf); 300 cartons; 15 pallets; gross 3,600 kg",
       "confidence": "medium",
-      "note": "Read from rendered image-only PDF."
-    },
-    {
-      "fact_type": "supplier_statement",
-      "subject": {
-        "po_number": "4500318752",
-        "material_id": "PR-SL-0604"
-      },
-      "subject_raw": {
-        "po_number": "4500318752",
-        "material_id": "PR-SL-0604"
-      },
-      "attribute": "kind",
-      "value": "packing_list",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1
-      },
-      "evidence": "packing_list",
-      "confidence": "medium",
-      "note": "Read from rendered image-only PDF."
+      "note": "Original-language handling note preserved from the reference envelope."
     }
   ],
   "unreadable": [
-    "PDF has no usable text layer; visually inspected as image."
+    "PDF has no usable text layer; reference envelope retained for visual review."
   ],
   "proposed_fact_types": []
 }

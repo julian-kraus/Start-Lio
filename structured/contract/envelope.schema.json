@@ -17,43 +17,16 @@
   ],
   "properties": {
     "source": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "path",
-        "sha256",
-        "bytes"
-      ],
-      "properties": {
-        "path": {
-          "type": "string"
-        },
-        "sha256": {
-          "type": "string",
-          "pattern": "^[0-9a-f]{64}$"
-        },
-        "bytes": {
-          "type": "integer",
-          "minimum": 0
-        }
-      }
+      "type": "object"
     },
     "doc_kind": {
       "type": "string"
     },
     "doc_kind_confidence": {
-      "type": "string",
-      "enum": [
-        "high",
-        "medium",
-        "low"
-      ]
+      "type": "string"
     },
     "languages": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
+      "type": "array"
     },
     "spec_version": {
       "type": "string"
@@ -68,82 +41,13 @@
       ]
     },
     "facts": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/fact"
-      }
+      "type": "array"
     },
     "unreadable": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
+      "type": "array"
     },
     "proposed_fact_types": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
-    }
-  },
-  "$defs": {
-    "fact": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "fact_type",
-        "subject",
-        "subject_raw",
-        "attribute",
-        "value",
-        "unit",
-        "as_of",
-        "locator",
-        "evidence",
-        "confidence"
-      ],
-      "properties": {
-        "fact_type": {
-          "type": "string"
-        },
-        "subject": {
-          "type": "object"
-        },
-        "subject_raw": {
-          "type": "object"
-        },
-        "attribute": {
-          "type": "string"
-        },
-        "value": {},
-        "unit": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "as_of": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "locator": {
-          "type": "object"
-        },
-        "evidence": {
-          "type": "string"
-        },
-        "confidence": {
-          "type": [
-            "string",
-            "number"
-          ]
-        },
-        "note": {
-          "type": "string"
-        }
-      }
+      "type": "array"
     }
   }
 }

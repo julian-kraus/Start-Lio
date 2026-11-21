@@ -14,7 +14,9 @@ import yaml
 from . import consumer, db, reconcile, rules
 from .config import load_settings
 from .ingest import FileReader, sync_current
-from .llm.base import drain_queue, load_adapter
+from . import eval_extraction, registry
+from .intake import drain
+from .llm.base import load_adapter
 from .loader import current_sha_by_path, load_contract, load_envelopes
 
 
@@ -55,11 +57,42 @@ def cmd_reconcile(args, s, conn):
            {"changes": {k: len(v) for k, v in result["changes"].items()}})
 
 
-def cmd_extract(args, s, conn):
-    client = load_adapter(s.llm_adapter)
+def _adapter(spec):
+    client = load_adapter(spec)
     if client is None:
-        raise SystemExit("no LLM adapter configured (KB_LLM_ADAPTER=package.module:ClassName)")
-    _print(drain_queue(conn, client, FileReader(s.data_dir), s.structured_dir, _conf_map(conn), args.limit))
+        raise SystemExit("no LLM adapter configured (KB_LLM_ADAPTER=package.module:ClassName or --adapter)")
+    return client
+
+
+def cmd_extract(args, s, conn):
+    client = _adapter(args.adapter or s.llm_adapter)
+    _print(drain(conn, client, FileReader(s.data_dir), s.structured_dir, _conf_map(conn), limit=args.limit))
+    result = reconcile.run(conn, "llm_extraction", {"adapter": client.label})
+    _print({"changes": {k: len(v) for k, v in result["changes"].items()}})
+
+
+def cmd_eval_extraction(args, s, conn):
+    client = _adapter(args.adapter or s.llm_adapter)
+    result = eval_extraction.run(conn, client, s.structured_dir, FileReader(s.data_dir),
+                                 current_sha_by_path(conn, s.data_dir), kinds=args.kind or None, limit=args.limit)
+    for kind, b in sorted(result.items()):
+        print(f"{kind:28} files={b['files']:<4} reference facts={b['ref_facts']:<6} matched={b['matched']:<6} "
+              f"agree={b['agree']:<6} agreement={b['agreement']}  extra={b['extra_facts']}  errors={len(b['errors'])}")
+    if args.full:
+        _print(result)
+
+
+def cmd_review(args, s, conn):
+    _print(registry.pending_review(conn))
+
+
+def cmd_promote(args, s, conn):
+    registry.promote(conn, args.object_kind.replace("-", "_"), args.name, args.by, alias_of=args.alias,
+                     reject=args.cmd == "reject")
+    conn.commit()
+    result = reconcile.run(conn, "promotion", {"by": args.by, "object": args.object_kind, "name": args.name})
+    _print({"done": f"{args.cmd} {args.object_kind} {args.name}", "run_id": result["run_id"],
+            "changes": {k: len(v) for k, v in result["changes"].items()}})
 
 
 def cmd_run(args, s, conn):
@@ -187,9 +220,25 @@ def main(argv=None) -> int:
     p = sub.add_parser("reconcile", help="evaluate rules and update issues")
     p.add_argument("--by", default="cli")
     p.set_defaults(func=cmd_reconcile)
-    p = sub.add_parser("extract", help="run the configured LLM adapter over the extraction queue")
+    p = sub.add_parser("extract", help="run an LLM adapter over the extraction queue")
+    p.add_argument("--adapter", help="package.module:ClassName (default KB_LLM_ADAPTER)")
     p.add_argument("--limit", type=int, default=20)
     p.set_defaults(func=cmd_extract)
+    p = sub.add_parser("eval-extraction", help="score an LLM adapter against the reference envelopes")
+    p.add_argument("--adapter", help="package.module:ClassName (default KB_LLM_ADAPTER)")
+    p.add_argument("--kind", action="append", help="doc kind(s) to score; default all")
+    p.add_argument("--limit", type=int, default=20, help="files per doc kind")
+    p.add_argument("--full", action="store_true")
+    p.set_defaults(func=cmd_eval_extraction)
+    sub.add_parser("review", help="what agents proposed and what failed the validation gate").set_defaults(
+        func=cmd_review)
+    for name in ("promote", "reject"):
+        p = sub.add_parser(name, help=f"{name} a proposed doc kind, schema map or fact type")
+        p.add_argument("object_kind", choices=["doc-kind", "schema-map", "fact-type"])
+        p.add_argument("name")
+        p.add_argument("--alias", help="promote a proposed fact type as an alias of this core type")
+        p.add_argument("--by", required=True, help="who approves")
+        p.set_defaults(func=cmd_promote)
     sub.add_parser("run", help="follow the tracker's change feed").set_defaults(func=cmd_run)
     p = sub.add_parser("check-structured", help="acceptance check for structured/ (no database needed)")
     p.add_argument("--full", action="store_true", help="print every detail, not just the summary")

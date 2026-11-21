@@ -10,18 +10,119 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318753"
+      },
+      "subject_raw": {
+        "po_number": "4500318753"
+      },
+      "attribute": "oc_number",
+      "value": "OA26179375",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "OA26179375",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318753"
+      },
+      "subject_raw": {
+        "po_number": "4500318753"
+      },
+      "attribute": "oc_date",
+      "value": "2026-09-30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "2026-09-30",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318753"
+      },
+      "subject_raw": {
+        "po_number": "4500318753"
+      },
+      "attribute": "incoterm",
+      "value": "FOB",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "FOB",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318753"
+      },
+      "subject_raw": {
+        "po_number": "4500318753"
+      },
+      "attribute": "payment_terms",
+      "value": "NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "NET30",
+      "confidence": "high"
+    },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318753",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "b75d3c9a4920"
       },
       "subject_raw": {
         "po_number": "4500318753",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "b75d3c9a4920"
+      },
+      "attribute": "item_no_printed",
+      "value": "00010",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n25,000\n22.29\nCNY\n2026-12-22",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318753",
+        "po_line": 1,
+        "item_key": "b75d3c9a4920"
+      },
+      "subject_raw": {
+        "po_number": "4500318753",
+        "po_line": 1,
+        "item_key": "b75d3c9a4920"
       },
       "attribute": "supplier_part_no",
       "value": "CMP-GAM-006",
@@ -38,32 +139,13 @@
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318753",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "b75d3c9a4920"
       },
       "subject_raw": {
         "po_number": "4500318753",
-        "po_line": 1
-      },
-      "attribute": "material_id",
-      "value": "CMP-GAM-006",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 12
-      },
-      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n25,000\n22.29\nCNY\n2026-12-22",
-      "confidence": "medium"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318753",
-        "po_line": 1
-      },
-      "subject_raw": {
-        "po_number": "4500318753",
-        "po_line": 1
+        "po_line": 1,
+        "item_key": "b75d3c9a4920"
       },
       "attribute": "qty",
       "value": 25000,
@@ -77,21 +159,95 @@
       "confidence": "high"
     },
     {
-      "fact_type": "supplier_statement",
+      "fact_type": "oc_line",
       "subject": {
-        "po_number": "4500318753"
+        "po_number": "4500318753",
+        "po_line": 1,
+        "item_key": "b75d3c9a4920"
       },
       "subject_raw": {
-        "po_number": "4500318753"
+        "po_number": "4500318753",
+        "po_line": 1,
+        "item_key": "b75d3c9a4920"
       },
-      "attribute": "value",
-      "value": "Customer: Soony Interactive GmbH · Your order 4500318753 of 2026-09-30 · Incoterms FOB Yantian · Payment NET30",
+      "attribute": "unit_price",
+      "value": 25000,
       "unit": null,
       "as_of": null,
       "locator": {
-        "page": 1
+        "page": 1,
+        "line": 12
       },
-      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318753 of 2026-09-30 · Incoterms FOB Yantian · Payment NET30",
+      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n25,000\n22.29\nCNY\n2026-12-22",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318753",
+        "po_line": 1,
+        "item_key": "b75d3c9a4920"
+      },
+      "subject_raw": {
+        "po_number": "4500318753",
+        "po_line": 1,
+        "item_key": "b75d3c9a4920"
+      },
+      "attribute": "currency",
+      "value": "CNY",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n25,000\n22.29\nCNY\n2026-12-22",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318753",
+        "po_line": 1,
+        "item_key": "b75d3c9a4920"
+      },
+      "subject_raw": {
+        "po_number": "4500318753",
+        "po_line": 1,
+        "item_key": "b75d3c9a4920"
+      },
+      "attribute": "confirmed_date",
+      "value": "2026-12-22",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n25,000\n22.29\nCNY\n2026-12-22",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318753",
+        "po_line": 1,
+        "item_key": "b75d3c9a4920"
+      },
+      "subject_raw": {
+        "po_number": "4500318753",
+        "po_line": 1,
+        "item_key": "b75d3c9a4920"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-006",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n25,000\n22.29\nCNY\n2026-12-22",
       "confidence": "high"
     }
   ],

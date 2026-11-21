@@ -77,12 +77,18 @@ def has_valid_facts(conn, sha: str) -> bool:
                         (sha,)).fetchone()["e"]
 
 
-def load_valid_facts(conn) -> list[Fact]:
+def load_valid_facts(conn, proposed_cap: float = 0.5) -> list[Fact]:
+    """Valid facts as the rules see them: fact types renamed through promoted aliases, and confidence capped for facts
+    whose doc kind or fact type is still only proposed (so they show up but cannot win against settled sources)."""
     rows = conn.execute(
-        """SELECT f.fact_id, f.fact_type, f.subject, f.attribute, f.value, f.as_of, f.confidence, f.extractor,
-                  f.source_path, f.source_sha256, f.evidence, f.unit, d.doc_kind
+        """SELECT f.fact_id, coalesce(ft.alias_of, f.fact_type) AS fact_type, f.subject, f.attribute, f.value,
+                  f.as_of, f.extractor, f.source_path, f.source_sha256, f.evidence, f.unit, d.doc_kind,
+                  CASE WHEN dk.status = 'proposed' OR (ft.status = 'proposed' AND ft.alias_of IS NULL)
+                       THEN least(f.confidence, %s) ELSE f.confidence END AS confidence
            FROM facts f
            LEFT JOIN documents d ON d.path = f.source_path AND d.sha256 = f.source_sha256
-           WHERE f.valid"""
+           LEFT JOIN doc_kinds dk ON dk.name = d.doc_kind
+           LEFT JOIN fact_types ft ON ft.name = f.fact_type
+           WHERE f.valid AND coalesce(ft.status, 'core') <> 'rejected'""", (proposed_cap,)
     ).fetchall()
     return [Fact(**r) for r in rows]

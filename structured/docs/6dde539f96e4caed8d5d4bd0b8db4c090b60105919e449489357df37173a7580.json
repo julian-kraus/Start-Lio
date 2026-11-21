@@ -10,18 +10,119 @@
     "en"
   ],
   "spec_version": "codex-2026-11-21-v1",
-  "extracted_by": "codex:deterministic+visual-review",
+  "extracted_by": "codex:deterministic+source-envelope",
   "doc_date": null,
   "facts": [
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318769"
+      },
+      "subject_raw": {
+        "po_number": "4500318769"
+      },
+      "attribute": "oc_number",
+      "value": "26144214",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "26144214",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318769"
+      },
+      "subject_raw": {
+        "po_number": "4500318769"
+      },
+      "attribute": "oc_date",
+      "value": "2026-10-20",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "2026-10-20",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318769"
+      },
+      "subject_raw": {
+        "po_number": "4500318769"
+      },
+      "attribute": "incoterm",
+      "value": "EXW",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "EXW",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_header",
+      "subject": {
+        "po_number": "4500318769"
+      },
+      "subject_raw": {
+        "po_number": "4500318769"
+      },
+      "attribute": "payment_terms",
+      "value": "NET30",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "section": "header"
+      },
+      "evidence": "NET30",
+      "confidence": "high"
+    },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318769",
-        "po_line": 2
+        "po_line": 2,
+        "item_key": "9a1559c051e6"
       },
       "subject_raw": {
         "po_number": "4500318769",
-        "po_line": 2
+        "po_line": 2,
+        "item_key": "9a1559c051e6"
+      },
+      "attribute": "item_no_printed",
+      "value": "00020",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n36,000\n10.93\nUSD\n2026-11-23\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.\nYour order states 'DDP Hamburg'. We do not accept this term. The shipment is pack",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318769",
+        "po_line": 2,
+        "item_key": "9a1559c051e6"
+      },
+      "subject_raw": {
+        "po_number": "4500318769",
+        "po_line": 2,
+        "item_key": "9a1559c051e6"
       },
       "attribute": "supplier_part_no",
       "value": "CMP-GAM-001",
@@ -31,39 +132,20 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n36,000\n10.93\nUSD\n2026-11-23\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and add",
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n36,000\n10.93\nUSD\n2026-11-23\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.\nYour order states 'DDP Hamburg'. We do not accept this term. The shipment is pack",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318769",
-        "po_line": 2
+        "po_line": 2,
+        "item_key": "9a1559c051e6"
       },
       "subject_raw": {
         "po_number": "4500318769",
-        "po_line": 2
-      },
-      "attribute": "material_id",
-      "value": "CMP-GAM-001",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 12
-      },
-      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n36,000\n10.93\nUSD\n2026-11-23\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and add",
-      "confidence": "medium"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318769",
-        "po_line": 2
-      },
-      "subject_raw": {
-        "po_number": "4500318769",
-        "po_line": 2
+        "po_line": 2,
+        "item_key": "9a1559c051e6"
       },
       "attribute": "qty",
       "value": 36000,
@@ -73,34 +155,126 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n36,000\n10.93\nUSD\n2026-11-23\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and add",
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n36,000\n10.93\nUSD\n2026-11-23\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.\nYour order states 'DDP Hamburg'. We do not accept this term. The shipment is pack",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318769",
+        "po_line": 2,
+        "item_key": "9a1559c051e6"
+      },
+      "subject_raw": {
+        "po_number": "4500318769",
+        "po_line": 2,
+        "item_key": "9a1559c051e6"
+      },
+      "attribute": "unit_price",
+      "value": 36000,
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n36,000\n10.93\nUSD\n2026-11-23\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.\nYour order states 'DDP Hamburg'. We do not accept this term. The shipment is pack",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318769",
+        "po_line": 2,
+        "item_key": "9a1559c051e6"
+      },
+      "subject_raw": {
+        "po_number": "4500318769",
+        "po_line": 2,
+        "item_key": "9a1559c051e6"
+      },
+      "attribute": "currency",
+      "value": "USD",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n36,000\n10.93\nUSD\n2026-11-23\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.\nYour order states 'DDP Hamburg'. We do not accept this term. The shipment is pack",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318769",
+        "po_line": 2,
+        "item_key": "9a1559c051e6"
+      },
+      "subject_raw": {
+        "po_number": "4500318769",
+        "po_line": 2,
+        "item_key": "9a1559c051e6"
+      },
+      "attribute": "confirmed_date",
+      "value": "2026-11-23",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n36,000\n10.93\nUSD\n2026-11-23\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.\nYour order states 'DDP Hamburg'. We do not accept this term. The shipment is pack",
+      "confidence": "high"
+    },
+    {
+      "fact_type": "oc_line",
+      "subject": {
+        "po_number": "4500318769",
+        "po_line": 2,
+        "item_key": "9a1559c051e6"
+      },
+      "subject_raw": {
+        "po_number": "4500318769",
+        "po_line": 2,
+        "item_key": "9a1559c051e6"
+      },
+      "attribute": "material_id",
+      "value": "CMP-GAM-001",
+      "unit": null,
+      "as_of": null,
+      "locator": {
+        "page": 1,
+        "line": 12
+      },
+      "evidence": "CMP-GAM-001\nGame Card\n128 GB –\nGrand Heist 6\n36,000\n10.93\nUSD\n2026-11-23\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.\nYour order states 'DDP Hamburg'. We do not accept this term. The shipment is pack",
       "confidence": "high"
     },
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "po_number": "4500318769"
+        "statement_no": 1
       },
       "subject_raw": {
-        "po_number": "4500318769"
+        "statement_no": 1
       },
-      "attribute": "value",
-      "value": "Customer: Soony Interactive GmbH · Your order 4500318769 of 2026-10-20 · Incoterms EXW Boise · Payment NET30",
+      "attribute": "kind",
+      "value": "hold",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1
       },
-      "evidence": "Customer: Soony Interactive GmbH · Your order 4500318769 of 2026-10-20 · Incoterms EXW Boise · Payment NET30",
+      "evidence": "Your order states 'DDP Hamburg'. We do not accept this term. The shipment is packed and on hold at our dock. We",
       "confidence": "high"
     },
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "po_number": "4500318769"
+        "statement_no": 1
       },
       "subject_raw": {
-        "po_number": "4500318769"
+        "statement_no": 1
       },
       "attribute": "value",
       "value": "Your order states 'DDP Hamburg'. We do not accept this term. The shipment is packed and on hold at our dock. We",

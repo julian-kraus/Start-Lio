@@ -1,0 +1,44 @@
+{
+  "signature": "f225787b4e7550328b283c388db893334ebdffef0ded2c46af79fd6eededd859",
+  "example_path": "soony/master/sites.csv",
+  "format": "csv",
+  "sheet": null,
+  "fact_type": "site",
+  "subject": [
+    "site_id"
+  ],
+  "columns": {
+    "site_id": {
+      "field": "site_id",
+      "type": "text"
+    },
+    "name": {
+      "field": "name",
+      "type": "text"
+    },
+    "operator": {
+      "field": "operator",
+      "type": "text"
+    },
+    "type": {
+      "field": "type",
+      "type": "text"
+    },
+    "country": {
+      "field": "country",
+      "type": "text"
+    },
+    "city": {
+      "field": "city",
+      "type": "text"
+    },
+    "lat": {
+      "field": "lat",
+      "type": "text"
+    },
+    "lon": {
+      "field": "lon",
+      "type": "text"
+    }
+  }
+}
