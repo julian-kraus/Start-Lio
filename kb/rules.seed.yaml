@@ -1,0 +1,150 @@
+# Seed for the first rule set version. At runtime rules live in Postgres (kb.rule_sets / source_rules / settings)
+# and are edited through `python -m kb rules ...` (later the UI). Editing this file only affects a fresh seed.
+#
+# A rule answers one question about one kind of entity. Facts are grouped into records (all facts of one source
+# row or document item). Records matching any candidate are grouped by `key`; inside a group each candidate that is
+# present is one "side". Sides that disagree are a contradiction; the believed value is picked by `decide`.
+#
+# Candidate fields:
+#   label         shown to users
+#   fact_type     required
+#   attribute     the value compared
+#   key_map       {rule key field: field name in this fact type}, when names differ
+#   where         {attribute: value} filter (exact match after text normalisation)
+#   extractor     glob on the extractor (e.g. "derived:*"), extractor_not: glob to exclude
+#   source_path   glob on the source path, doc_kind: exact doc kind
+#   value_map     {raw value: value}; a raw value mapped to null drops the record from the rule
+#   aggregate     latest (default) | sum
+# Rule fields:
+#   compare       number | text | date
+#   tolerance     absolute tolerance for numbers; tolerance_pct relative tolerance in percent
+#   decide        preference (first candidate wins) | newest (newest as_of wins) | none (a person decides)
+#   min_confidence, fallback (lowest | highest | none) when the preferred side is below min_confidence
+#   severity      high | medium | low | cost | info
+#   explanation   template: {winner} {winner_value} {others}
+
+rules:
+  - rule_id: received_qty
+    question: How many units physically arrived with this delivery?
+    key: [delivery_note, material_id]
+    candidates:
+      - {label: signed delivery note, fact_type: delivery_note_line, attribute: final_qty}
+      - {label: ERP goods receipt, fact_type: goods_receipt, attribute: qty_received}
+    compare: number
+    decide: preference
+    min_confidence: 0.6
+    fallback: lowest
+    severity: high
+    explanation: "We believe the {winner} ({winner_value}). The signed delivery note is the physical record; the ERP booking was typed from it ({others})."
+
+  - rule_id: batch_usable
+    question: Can this stock batch be packed?
+    key: [batch]
+    candidates:
+      - {label: incoming inspection, fact_type: inspection_result, attribute: decision, key_map: {batch: gr_number},
+         value_map: {fail: 0, failed: 0, rejected: 0, reject: 0, pass: null, passed: null, accepted: null}}
+      - {label: ERP stock batch, fact_type: stock_batch, attribute: qty}
+    compare: number
+    decide: preference
+    min_confidence: 0.6
+    fallback: lowest
+    severity: high
+    explanation: "An inspection failed this lot, so {winner_value} units are usable until a concession is signed ({others})."
+
+  - rule_id: shipment_qty
+    question: How many units are really on this shipment?
+    key: [reference]
+    candidates:
+      - {label: supplier dispatch document, fact_type: shipment_qty, attribute: qty_shipped}
+      - {label: launch plan, fact_type: shipment_qty, attribute: qty_planned}
+    compare: number
+    decide: preference
+    min_confidence: 0.6
+    fallback: lowest
+    severity: high
+    explanation: "We believe the {winner} ({winner_value}): the supplier's dispatch document says what actually left; plans say what was booked ({others})."
+
+  - rule_id: shipment_status
+    question: Where is this shipment?
+    key: [shipment_id]
+    candidates:
+      - {label: ERP shipments, fact_type: shipment, attribute: status, source_path: "soony/erp/*"}
+      - {label: manual tracker, fact_type: shipment, attribute: status, source_path: "soony/logistics/*"}
+    compare: text
+    decide: newest
+    severity: medium
+    explanation: "The newest source wins: {winner} says {winner_value} ({others})."
+
+  - rule_id: confirmed_date
+    question: When will the supplier deliver this PO line?
+    key: [po_number, po_line]
+    candidates:
+      - {label: supplier order confirmation, fact_type: oc_line, attribute: confirmed_date}
+      - {label: ERP purchase order, fact_type: po_line, attribute: promised_date}
+    compare: date
+    decide: preference
+    severity: medium
+    explanation: "The supplier's confirmation ({winner_value}) is the commitment; the PO date is our request ({others})."
+
+  - rule_id: unit_price
+    question: What price applies to this PO line?
+    key: [po_number, po_line]
+    candidates:
+      - {label: ERP purchase order, fact_type: po_line, attribute: unit_price}
+      - {label: supplier order confirmation, fact_type: oc_line, attribute: unit_price}
+    compare: number
+    tolerance_pct: 0.5
+    decide: none
+    severity: cost
+    explanation: "PO and supplier confirmation disagree on price; check the contract before paying the invoice."
+
+  - rule_id: incoterm
+    question: Which delivery terms apply to this order?
+    key: [po_number]
+    candidates:
+      - {label: ERP purchase order, fact_type: po_line, attribute: incoterm}
+      - {label: supplier order confirmation, fact_type: oc_line, attribute: incoterm}
+    compare: text
+    decide: none
+    severity: cost
+    explanation: "PO and supplier confirmation name different delivery terms; this decides who pays freight and can hold a shipment."
+
+  - rule_id: drawing_rev
+    question: Which artwork or drawing revision is released for this part?
+    key: [material_id]
+    candidates:
+      - {label: engineering change, fact_type: component, attribute: drawing_rev, extractor: "derived:*"}
+      - {label: component master, fact_type: component, attribute: drawing_rev, extractor_not: "derived:*"}
+      - {label: supplier statement, fact_type: supplier_statement, attribute: value, where: {kind: artwork_rev}}
+    compare: text
+    decide: preference
+    severity: high
+    explanation: "The {winner} sets the released revision {winner_value}; parts to other revisions must not be packed ({others})."
+
+  - rule_id: plan_stock
+    question: Does the launch plan use the same stock as the ERP?
+    key: [material_id]
+    candidates:
+      - {label: ERP stock snapshot, fact_type: stock_batch, attribute: qty, aggregate: sum}
+      - {label: launch plan, fact_type: plan_part, attribute: erp_stock}
+    compare: number
+    decide: preference
+    severity: medium
+    explanation: "The ERP snapshot ({winner_value}) is the source the plan should copy ({others})."
+
+  - rule_id: packed_units
+    question: How many units are already packed?
+    key: [product_id]
+    candidates:
+      - {label: pack-out log, fact_type: packout, attribute: units_packed, aggregate: sum}
+      - {label: launch plan, fact_type: plan_edition, attribute: packed}
+    compare: number
+    decide: preference
+    severity: medium
+    explanation: "The pack-out log ({winner_value}) is the system of record for packed units ({others})."
+
+settings:
+  confidence_map: {high: 0.9, medium: 0.75, low: 0.4}
+  change_record_fact_type: change_record
+  evaluation_time: null        # null = now; set an ISO time to evaluate "as of" a moment
+  max_issue_sides: 6
