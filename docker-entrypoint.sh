@@ -11,6 +11,10 @@ if [ "$(id -u)" = "0" ]; then
         uid=$(id -u tracker)
         gid=$(id -g tracker)
     fi
+    # HOME must belong to the new user: libpq looks for ~/.postgresql/ (client certs) and fails
+    # with "permission denied" on TLS connections if HOME still points at /root.
+    if [ "$uid" = "$(id -u tracker)" ]; then HOME=/home/tracker; else HOME=/tmp; fi
+    export HOME
     exec setpriv --reuid="$uid" --regid="$gid" --clear-groups "$@"
 fi
 exec "$@"
