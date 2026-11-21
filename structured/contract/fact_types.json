@@ -626,6 +626,18 @@
         "condition_to_release": {
           "description": "condition_to_release",
           "type": "string"
+        },
+        "promise_kind": {
+          "description": "promise classification of the statement: confirm, delay, cancel or short-ship",
+          "type": "string"
+        },
+        "quantity": {
+          "description": "promised quantity, kept verbatim as written (parse in code; may be space-grouped)",
+          "type": "string"
+        },
+        "due_time": {
+          "description": "promised due date or time the statement commits to",
+          "type": "string"
         }
       }
     },
@@ -813,6 +825,22 @@
         },
         "transport_time": {
           "description": "transport_time",
+          "type": "string"
+        },
+        "unit_price": {
+          "description": "offered unit price, kept verbatim as written (parse in code)",
+          "type": "string"
+        },
+        "lot_size": {
+          "description": "offered lot or batch size, kept verbatim as written (parse in code)",
+          "type": "string"
+        },
+        "ready_time": {
+          "description": "when the offered goods are ready or can ship",
+          "type": "string"
+        },
+        "deposit": {
+          "description": "deposit or prepayment the offer asks for, kept verbatim as written",
           "type": "string"
         }
       }
