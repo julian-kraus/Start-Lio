@@ -9,3 +9,5 @@ secrets/
 exports/
 mail_data/
 .DS_Store
+logs/
+ops/STOP
