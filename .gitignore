@@ -12,3 +12,4 @@ mail_data/
 logs/
 ops/STOP
 .worktrees/
+.agent-machine-id
