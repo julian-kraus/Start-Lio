@@ -21,25 +21,6 @@
       "subject_raw": {
         "po_number": "4500318771"
       },
-      "attribute": "oc_number",
-      "value": "26101187",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "section": "header"
-      },
-      "evidence": "26101187",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_header",
-      "subject": {
-        "po_number": "4500318771"
-      },
-      "subject_raw": {
-        "po_number": "4500318771"
-      },
       "attribute": "oc_date",
       "value": "2026-10-20",
       "unit": null,
@@ -60,33 +41,14 @@
         "po_number": "4500318771"
       },
       "attribute": "incoterm",
-      "value": "FOB",
+      "value": "FOB Nhava Sheva",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "section": "header"
       },
-      "evidence": "FOB",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_header",
-      "subject": {
-        "po_number": "4500318771"
-      },
-      "subject_raw": {
-        "po_number": "4500318771"
-      },
-      "attribute": "payment_terms",
-      "value": "NET30",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "section": "header"
-      },
-      "evidence": "NET30",
+      "evidence": "FOB Nhava Sheva",
       "confidence": "high"
     },
     {
@@ -109,7 +71,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR\n2027-01-04\n00020",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR",
       "confidence": "high"
     },
     {
@@ -132,7 +94,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR\n2027-01-04\n00020",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR",
       "confidence": "high"
     },
     {
@@ -155,7 +117,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR\n2027-01-04\n00020",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR",
       "confidence": "high"
     },
     {
@@ -178,7 +140,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR\n2027-01-04\n00020",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR",
       "confidence": "high"
     },
     {
@@ -201,7 +163,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR\n2027-01-04\n00020",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR",
       "confidence": "high"
     },
     {
@@ -224,43 +186,43 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR\n2027-01-04\n00020",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318771",
-        "po_line": 1,
-        "item_key": "0dbd42099a22"
+        "po_line": 2,
+        "item_key": "49b458cd6bc4"
       },
       "subject_raw": {
         "po_number": "4500318771",
-        "po_line": 1,
-        "item_key": "0dbd42099a22"
+        "po_line": 2,
+        "item_key": "49b458cd6bc4"
       },
       "attribute": "item_no_printed",
-      "value": "00010",
+      "value": "00020",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 23
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR\n2027-01-04\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318771",
-        "po_line": 1,
-        "item_key": "0dbd42099a22"
+        "po_line": 2,
+        "item_key": "49b458cd6bc4"
       },
       "subject_raw": {
         "po_number": "4500318771",
-        "po_line": 1,
-        "item_key": "0dbd42099a22"
+        "po_line": 2,
+        "item_key": "49b458cd6bc4"
       },
       "attribute": "supplier_part_no",
       "value": "CMP-GAM-010",
@@ -270,20 +232,20 @@
         "page": 1,
         "line": 23
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR\n2027-01-04\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318771",
-        "po_line": 1,
-        "item_key": "0dbd42099a22"
+        "po_line": 2,
+        "item_key": "49b458cd6bc4"
       },
       "subject_raw": {
         "po_number": "4500318771",
-        "po_line": 1,
-        "item_key": "0dbd42099a22"
+        "po_line": 2,
+        "item_key": "49b458cd6bc4"
       },
       "attribute": "qty",
       "value": 2600,
@@ -293,20 +255,20 @@
         "page": 1,
         "line": 23
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR\n2027-01-04\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318771",
-        "po_line": 1,
-        "item_key": "0dbd42099a22"
+        "po_line": 2,
+        "item_key": "49b458cd6bc4"
       },
       "subject_raw": {
         "po_number": "4500318771",
-        "po_line": 1,
-        "item_key": "0dbd42099a22"
+        "po_line": 2,
+        "item_key": "49b458cd6bc4"
       },
       "attribute": "currency",
       "value": "INR",
@@ -316,20 +278,20 @@
         "page": 1,
         "line": 23
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR\n2027-01-04\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318771",
-        "po_line": 1,
-        "item_key": "0dbd42099a22"
+        "po_line": 2,
+        "item_key": "49b458cd6bc4"
       },
       "subject_raw": {
         "po_number": "4500318771",
-        "po_line": 1,
-        "item_key": "0dbd42099a22"
+        "po_line": 2,
+        "item_key": "49b458cd6bc4"
       },
       "attribute": "confirmed_date",
       "value": "2027-01-04",
@@ -339,20 +301,20 @@
         "page": 1,
         "line": 23
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR\n2027-01-04\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318771",
-        "po_line": 1,
-        "item_key": "0dbd42099a22"
+        "po_line": 2,
+        "item_key": "49b458cd6bc4"
       },
       "subject_raw": {
         "po_number": "4500318771",
-        "po_line": 1,
-        "item_key": "0dbd42099a22"
+        "po_line": 2,
+        "item_key": "49b458cd6bc4"
       },
       "attribute": "material_id",
       "value": "CMP-GAM-010",
@@ -362,19 +324,21 @@
         "page": 1,
         "line": 23
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR\n2027-01-04\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR",
       "confidence": "high"
     },
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318771"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318771"
       },
       "attribute": "kind",
-      "value": "other",
+      "value": "approval_claim",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -386,10 +350,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318771"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318771"
       },
       "attribute": "value",
       "value": "Supplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",

@@ -103,7 +103,7 @@ rules:
     key: [po_number]
     candidates:
       - {label: ERP purchase order, fact_type: po_line, attribute: incoterm}
-      - {label: supplier order confirmation, fact_type: oc_line, attribute: incoterm}
+      - {label: supplier order confirmation, fact_type: oc_header, attribute: incoterm}
     compare: text
     decide: none
     severity: cost
@@ -115,7 +115,7 @@ rules:
     candidates:
       - {label: engineering change, fact_type: component, attribute: drawing_rev, extractor: "derived:*"}
       - {label: component master, fact_type: component, attribute: drawing_rev, extractor_not: "derived:*"}
-      - {label: supplier statement, fact_type: supplier_statement, attribute: value, where: {kind: artwork_rev}}
+      - {label: supplier statement, fact_type: supplier_statement, attribute: revision, where: {kind: artwork_rev}}
     compare: text
     decide: preference
     severity: high
@@ -146,6 +146,15 @@ rules:
 settings:
   confidence_map: {high: 0.9, medium: 0.75, low: 0.4}
   change_record_fact_type: change_record
+  change_record_subject_exclude: [field, change_field, change_id, entity]   # subject keys that describe the change, not the entity
   evaluation_time: null        # null = now; set an ISO time to evaluate "as of" a moment
   max_issue_sides: 6
+  line_match:                  # resolver: re-key items that name a line which does not fit (kb/resolve.py)
+    - {source: oc_line, target: po_line, document_key: po_number, line_key: po_line, match: [material_id, qty]}
+  text_parts:                  # resolver: a part named in a remark's text sets the remark's material
+    - fact_types: [supplier_statement]
+      text_attributes: [value]
+      material_key: material_id
+      id_fact_type: component
+      xref: {fact_type: part_xref, part_attribute: supplier_part_no, material_attribute: material_id}
   proposed_confidence_cap: 0.5   # facts from proposed doc kinds or fact types count at most this confident

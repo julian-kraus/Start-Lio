@@ -370,10 +370,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "DN-261008-142"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "DN-261008-142"
       },
       "attribute": "kind",
       "value": "handling_note",
@@ -389,10 +391,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "DN-261008-142"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "DN-261008-142"
       },
       "attribute": "value",
       "value": "Pallets returnable",

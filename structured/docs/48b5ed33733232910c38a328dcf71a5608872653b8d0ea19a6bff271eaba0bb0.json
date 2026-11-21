@@ -17,11 +17,11 @@
       "fact_type": "contract_term",
       "subject": {
         "supplier_id": "SUP-0011",
-        "contract_id": "SUP-0011_Sales_Agreement_2023"
+        "contract_id": "PC-0011-2023"
       },
       "subject_raw": {
         "supplier_id": "SUP-0011",
-        "contract_id": "SUP-0011_Sales_Agreement_2023"
+        "contract_id": "PC-0011-2023"
       },
       "attribute": "incoterm",
       "value": "EXW",
@@ -37,11 +37,11 @@
       "fact_type": "contract_term",
       "subject": {
         "supplier_id": "SUP-0011",
-        "contract_id": "SUP-0011_Sales_Agreement_2023"
+        "contract_id": "PC-0011-2023"
       },
       "subject_raw": {
         "supplier_id": "SUP-0011",
-        "contract_id": "SUP-0011_Sales_Agreement_2023"
+        "contract_id": "PC-0011-2023"
       },
       "attribute": "expiry",
       "value": "2028-04-30",

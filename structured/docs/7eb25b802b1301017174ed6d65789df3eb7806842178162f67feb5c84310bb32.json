@@ -60,14 +60,14 @@
         "po_number": "4500318776"
       },
       "attribute": "incoterm",
-      "value": "FOB",
+      "value": "FOB Yantian",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "section": "header"
       },
-      "evidence": "FOB",
+      "evidence": "FOB Yantian",
       "confidence": "high"
     },
     {
@@ -109,7 +109,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n9,000\n88.38\nCNY\n2027-01-18\n00010",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n9,000\n88.38\nCNY",
       "confidence": "high"
     },
     {
@@ -132,7 +132,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n9,000\n88.38\nCNY\n2027-01-18\n00010",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n9,000\n88.38\nCNY",
       "confidence": "high"
     },
     {
@@ -155,7 +155,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n9,000\n88.38\nCNY\n2027-01-18\n00010",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n9,000\n88.38\nCNY",
       "confidence": "high"
     },
     {
@@ -178,7 +178,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n9,000\n88.38\nCNY\n2027-01-18\n00010",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n9,000\n88.38\nCNY",
       "confidence": "high"
     },
     {
@@ -201,7 +201,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n9,000\n88.38\nCNY\n2027-01-18\n00010",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n9,000\n88.38\nCNY",
       "confidence": "high"
     },
     {
@@ -224,7 +224,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n9,000\n88.38\nCNY\n2027-01-18\n00010",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n9,000\n88.38\nCNY",
       "confidence": "high"
     },
     {
@@ -247,43 +247,43 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n9,000\n88.38\nCNY\n2027-01-18\n00010",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n9,000\n88.38\nCNY",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318776",
-        "po_line": 2,
-        "item_key": "269a7c9b84d0"
+        "po_line": 1,
+        "item_key": "acaadce92781"
       },
       "subject_raw": {
         "po_number": "4500318776",
-        "po_line": 2,
-        "item_key": "269a7c9b84d0"
+        "po_line": 1,
+        "item_key": "acaadce92781"
       },
       "attribute": "item_no_printed",
-      "value": "00020",
+      "value": "00010",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 22
       },
-      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n24,000\n22.29\nCNY\n2027-01-11",
+      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n24,000\n22.29\nCNY",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318776",
-        "po_line": 2,
-        "item_key": "269a7c9b84d0"
+        "po_line": 1,
+        "item_key": "acaadce92781"
       },
       "subject_raw": {
         "po_number": "4500318776",
-        "po_line": 2,
-        "item_key": "269a7c9b84d0"
+        "po_line": 1,
+        "item_key": "acaadce92781"
       },
       "attribute": "supplier_part_no",
       "value": "CMP-GAM-006",
@@ -293,20 +293,20 @@
         "page": 1,
         "line": 22
       },
-      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n24,000\n22.29\nCNY\n2027-01-11",
+      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n24,000\n22.29\nCNY",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318776",
-        "po_line": 2,
-        "item_key": "269a7c9b84d0"
+        "po_line": 1,
+        "item_key": "acaadce92781"
       },
       "subject_raw": {
         "po_number": "4500318776",
-        "po_line": 2,
-        "item_key": "269a7c9b84d0"
+        "po_line": 1,
+        "item_key": "acaadce92781"
       },
       "attribute": "qty",
       "value": 24000,
@@ -316,20 +316,20 @@
         "page": 1,
         "line": 22
       },
-      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n24,000\n22.29\nCNY\n2027-01-11",
+      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n24,000\n22.29\nCNY",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318776",
-        "po_line": 2,
-        "item_key": "269a7c9b84d0"
+        "po_line": 1,
+        "item_key": "acaadce92781"
       },
       "subject_raw": {
         "po_number": "4500318776",
-        "po_line": 2,
-        "item_key": "269a7c9b84d0"
+        "po_line": 1,
+        "item_key": "acaadce92781"
       },
       "attribute": "unit_price",
       "value": 22.29,
@@ -339,20 +339,20 @@
         "page": 1,
         "line": 22
       },
-      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n24,000\n22.29\nCNY\n2027-01-11",
+      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n24,000\n22.29\nCNY",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318776",
-        "po_line": 2,
-        "item_key": "269a7c9b84d0"
+        "po_line": 1,
+        "item_key": "acaadce92781"
       },
       "subject_raw": {
         "po_number": "4500318776",
-        "po_line": 2,
-        "item_key": "269a7c9b84d0"
+        "po_line": 1,
+        "item_key": "acaadce92781"
       },
       "attribute": "currency",
       "value": "CNY",
@@ -362,20 +362,20 @@
         "page": 1,
         "line": 22
       },
-      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n24,000\n22.29\nCNY\n2027-01-11",
+      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n24,000\n22.29\nCNY",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318776",
-        "po_line": 2,
-        "item_key": "269a7c9b84d0"
+        "po_line": 1,
+        "item_key": "acaadce92781"
       },
       "subject_raw": {
         "po_number": "4500318776",
-        "po_line": 2,
-        "item_key": "269a7c9b84d0"
+        "po_line": 1,
+        "item_key": "acaadce92781"
       },
       "attribute": "confirmed_date",
       "value": "2027-01-11",
@@ -385,20 +385,20 @@
         "page": 1,
         "line": 22
       },
-      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n24,000\n22.29\nCNY\n2027-01-11",
+      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n24,000\n22.29\nCNY",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318776",
-        "po_line": 2,
-        "item_key": "269a7c9b84d0"
+        "po_line": 1,
+        "item_key": "acaadce92781"
       },
       "subject_raw": {
         "po_number": "4500318776",
-        "po_line": 2,
-        "item_key": "269a7c9b84d0"
+        "po_line": 1,
+        "item_key": "acaadce92781"
       },
       "attribute": "material_id",
       "value": "CMP-GAM-006",
@@ -408,7 +408,7 @@
         "page": 1,
         "line": 22
       },
-      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n24,000\n22.29\nCNY\n2027-01-11",
+      "evidence": "CMP-GAM-006\nSteel Case\nGrand Heist 6\n24,000\n22.29\nCNY",
       "confidence": "high"
     }
   ],

@@ -21,25 +21,6 @@
       "subject_raw": {
         "po_number": "4500318591"
       },
-      "attribute": "oc_number",
-      "value": "25760555",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "section": "header"
-      },
-      "evidence": "25760555",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_header",
-      "subject": {
-        "po_number": "4500318591"
-      },
-      "subject_raw": {
-        "po_number": "4500318591"
-      },
       "attribute": "oc_date",
       "value": "2025-12-04",
       "unit": null,
@@ -60,14 +41,14 @@
         "po_number": "4500318591"
       },
       "attribute": "incoterm",
-      "value": "EXW",
+      "value": "EXW Boise",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "section": "header"
       },
-      "evidence": "EXW",
+      "evidence": "EXW Boise",
       "confidence": "high"
     },
     {
@@ -109,7 +90,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n8,500\n6.11\nUSD\n2026-01-14\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n8,500\n6.11\nUSD",
       "confidence": "high"
     },
     {
@@ -132,7 +113,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n8,500\n6.11\nUSD\n2026-01-14\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n8,500\n6.11\nUSD",
       "confidence": "high"
     },
     {
@@ -155,7 +136,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n8,500\n6.11\nUSD\n2026-01-14\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n8,500\n6.11\nUSD",
       "confidence": "high"
     },
     {
@@ -171,14 +152,14 @@
         "item_key": "9c3727486256"
       },
       "attribute": "unit_price",
-      "value": 4.1,
+      "value": 6.11,
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n8,500\n6.11\nUSD\n2026-01-14\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n8,500\n6.11\nUSD",
       "confidence": "high"
     },
     {
@@ -201,7 +182,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n8,500\n6.11\nUSD\n2026-01-14\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n8,500\n6.11\nUSD",
       "confidence": "high"
     },
     {
@@ -224,7 +205,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n8,500\n6.11\nUSD\n2026-01-14\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n8,500\n6.11\nUSD",
       "confidence": "high"
     },
     {
@@ -247,7 +228,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n8,500\n6.11\nUSD\n2026-01-14\nTerms of delivery: EXW Boise, ID per Sales Agreement PC-0011-2023, section 4.1. DDP is not agreed. Freight,\ninsurance and duties are prepaid by Seller and added to the invoice.",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n8,500\n6.11\nUSD",
       "confidence": "high"
     }
   ],

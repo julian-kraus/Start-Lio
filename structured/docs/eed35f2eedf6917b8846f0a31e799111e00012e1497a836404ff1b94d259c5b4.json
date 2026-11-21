@@ -17,11 +17,11 @@
       "fact_type": "contract_term",
       "subject": {
         "supplier_id": "SUP-0018",
-        "contract_id": "SUP-0018_Framework_Supply_Agreement_2026"
+        "contract_id": "PC-0018-2026"
       },
       "subject_raw": {
         "supplier_id": "SUP-0018",
-        "contract_id": "SUP-0018_Framework_Supply_Agreement_2026"
+        "contract_id": "PC-0018-2026"
       },
       "attribute": "incoterm",
       "value": "FOB",
@@ -37,11 +37,11 @@
       "fact_type": "contract_term",
       "subject": {
         "supplier_id": "SUP-0018",
-        "contract_id": "SUP-0018_Framework_Supply_Agreement_2026"
+        "contract_id": "PC-0018-2026"
       },
       "subject_raw": {
         "supplier_id": "SUP-0018",
-        "contract_id": "SUP-0018_Framework_Supply_Agreement_2026"
+        "contract_id": "PC-0018-2026"
       },
       "attribute": "expiry",
       "value": "2029-07-31",
@@ -57,11 +57,11 @@
       "fact_type": "contract_term",
       "subject": {
         "supplier_id": "SUP-0018",
-        "contract_id": "SUP-0018_Framework_Supply_Agreement_2026"
+        "contract_id": "PC-0018-2026"
       },
       "subject_raw": {
         "supplier_id": "SUP-0018",
-        "contract_id": "SUP-0018_Framework_Supply_Agreement_2026"
+        "contract_id": "PC-0018-2026"
       },
       "attribute": "penalty",
       "value": "0",

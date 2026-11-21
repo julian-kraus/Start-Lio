@@ -17,11 +17,11 @@
       "fact_type": "contract_term",
       "subject": {
         "supplier_id": "SUP-0010",
-        "contract_id": "SUP-0010_LTA_2022"
+        "contract_id": "PC-0010-2022"
       },
       "subject_raw": {
         "supplier_id": "SUP-0010",
-        "contract_id": "SUP-0010_LTA_2022"
+        "contract_id": "PC-0010-2022"
       },
       "attribute": "incoterm",
       "value": "FOB",
@@ -37,11 +37,11 @@
       "fact_type": "contract_term",
       "subject": {
         "supplier_id": "SUP-0010",
-        "contract_id": "SUP-0010_LTA_2022"
+        "contract_id": "PC-0010-2022"
       },
       "subject_raw": {
         "supplier_id": "SUP-0010",
-        "contract_id": "SUP-0010_LTA_2022"
+        "contract_id": "PC-0010-2022"
       },
       "attribute": "expiry",
       "value": "2026-12-31",

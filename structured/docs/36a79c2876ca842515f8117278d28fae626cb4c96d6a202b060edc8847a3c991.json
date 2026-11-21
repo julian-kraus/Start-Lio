@@ -60,33 +60,14 @@
         "po_number": "4500318775"
       },
       "attribute": "incoterm",
-      "value": "DAP",
+      "value": "DAP Hamburg",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "section": "header"
       },
-      "evidence": "DAP",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_header",
-      "subject": {
-        "po_number": "4500318775"
-      },
-      "subject_raw": {
-        "po_number": "4500318775"
-      },
-      "attribute": "payment_terms",
-      "value": "NET30",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "section": "header"
-      },
-      "evidence": "NET30",
+      "evidence": "DAP Hamburg",
       "confidence": "high"
     },
     {
@@ -109,7 +90,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n20,000\n0.06\nEUR\n2026-11-21",
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n20,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
@@ -132,7 +113,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n20,000\n0.06\nEUR\n2026-11-21",
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n20,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
@@ -155,7 +136,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n20,000\n0.06\nEUR\n2026-11-21",
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n20,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
@@ -178,7 +159,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n20,000\n0.06\nEUR\n2026-11-21",
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n20,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
@@ -194,14 +175,14 @@
         "item_key": "9b8a71cf96b5"
       },
       "attribute": "currency",
-      "value": "USK",
+      "value": "EUR",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n20,000\n0.06\nEUR\n2026-11-21",
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n20,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
@@ -224,7 +205,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n20,000\n0.06\nEUR\n2026-11-21",
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n20,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
@@ -247,7 +228,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n20,000\n0.06\nEUR\n2026-11-21",
+      "evidence": "CMP-GAM-004\nCover Sleeve\nGrand Heist 6\n(USK/PEGI)\n20,000\n0.06\nEUR",
       "confidence": "high"
     },
     {
@@ -270,7 +251,7 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing 2026-08-07. /\nPrinted to artwork rev. C as received from Soony Marketing on 2026-08-07.\nWysyłka: 21.11.2026, Warta Trans, dostawa DC Hamburg tego samego dnia wieczorem. / Dispatch 2026-11-21, delivery\nto DC Hamburg the same evening.",
+      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing",
       "confidence": "high"
     },
     {
@@ -293,53 +274,7 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing 2026-08-07. /\nPrinted to artwork rev. C as received from Soony Marketing on 2026-08-07.\nWysyłka: 21.11.2026, Warta Trans, dostawa DC Hamburg tego samego dnia wieczorem. / Dispatch 2026-11-21, delivery\nto DC Hamburg the same evening.",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318775",
-        "po_line": 2,
-        "item_key": "39a36aebaac3"
-      },
-      "subject_raw": {
-        "po_number": "4500318775",
-        "po_line": 2,
-        "item_key": "39a36aebaac3"
-      },
-      "attribute": "qty",
-      "value": 2026,
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 21
-      },
-      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing 2026-08-07. /\nPrinted to artwork rev. C as received from Soony Marketing on 2026-08-07.\nWysyłka: 21.11.2026, Warta Trans, dostawa DC Hamburg tego samego dnia wieczorem. / Dispatch 2026-11-21, delivery\nto DC Hamburg the same evening.",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_line",
-      "subject": {
-        "po_number": "4500318775",
-        "po_line": 2,
-        "item_key": "39a36aebaac3"
-      },
-      "subject_raw": {
-        "po_number": "4500318775",
-        "po_line": 2,
-        "item_key": "39a36aebaac3"
-      },
-      "attribute": "unit_price",
-      "value": 21.11,
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "line": 21
-      },
-      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing 2026-08-07. /\nPrinted to artwork rev. C as received from Soony Marketing on 2026-08-07.\nWysyłka: 21.11.2026, Warta Trans, dostawa DC Hamburg tego samego dnia wieczorem. / Dispatch 2026-11-21, delivery\nto DC Hamburg the same evening.",
+      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing",
       "confidence": "high"
     },
     {
@@ -362,7 +297,7 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing 2026-08-07. /\nPrinted to artwork rev. C as received from Soony Marketing on 2026-08-07.\nWysyłka: 21.11.2026, Warta Trans, dostawa DC Hamburg tego samego dnia wieczorem. / Dispatch 2026-11-21, delivery\nto DC Hamburg the same evening.",
+      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing",
       "confidence": "high"
     },
     {
@@ -385,16 +320,18 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing 2026-08-07. /\nPrinted to artwork rev. C as received from Soony Marketing on 2026-08-07.\nWysyłka: 21.11.2026, Warta Trans, dostawa DC Hamburg tego samego dnia wieczorem. / Dispatch 2026-11-21, delivery\nto DC Hamburg the same evening.",
+      "evidence": "CMP-GAM-004: druk wg pliku rev. C (GH6_sleeve_revC_USK2026.pdf), otrzymanego od Soony Marketing",
       "confidence": "high"
     },
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318775"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318775"
       },
       "attribute": "kind",
       "value": "artwork_rev",
@@ -409,10 +346,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318775"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318775"
       },
       "attribute": "value",
       "value": "Printed to artwork rev. C as received from Soony Marketing on 2026-08-07.",
@@ -427,10 +366,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318775"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318775"
       },
       "attribute": "revision",
       "value": "C",
@@ -445,13 +386,15 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 2
+        "statement_no": 2,
+        "po_number": "4500318775"
       },
       "subject_raw": {
-        "statement_no": 2
+        "statement_no": 2,
+        "po_number": "4500318775"
       },
       "attribute": "kind",
-      "value": "delivery",
+      "value": "dispatch_info",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -463,10 +406,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 2
+        "statement_no": 2,
+        "po_number": "4500318775"
       },
       "subject_raw": {
-        "statement_no": 2
+        "statement_no": 2,
+        "po_number": "4500318775"
       },
       "attribute": "value",
       "value": "Wysyłka: 21.11.2026, Warta Trans, dostawa DC Hamburg tego samego dnia wieczorem. / Dispatch 2026-11-21, delivery",

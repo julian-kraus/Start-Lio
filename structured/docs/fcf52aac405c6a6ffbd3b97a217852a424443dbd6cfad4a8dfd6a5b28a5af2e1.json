@@ -100,13 +100,15 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "reference": "NHMU7718206"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "reference": "NHMU7718206"
       },
       "attribute": "kind",
-      "value": "handling_note",
+      "value": "artwork_rev",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -119,10 +121,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "reference": "NHMU7718206"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "reference": "NHMU7718206"
       },
       "attribute": "value",
       "value": "Artwork rev. B (GH6_sleeve_revB.pdf); 300 cartons; 15 pallets; gross 3,600 kg",

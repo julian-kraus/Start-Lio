@@ -21,25 +21,6 @@
       "subject_raw": {
         "po_number": "4500318745"
       },
-      "attribute": "oc_number",
-      "value": "26428863",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "section": "header"
-      },
-      "evidence": "26428863",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_header",
-      "subject": {
-        "po_number": "4500318745"
-      },
-      "subject_raw": {
-        "po_number": "4500318745"
-      },
       "attribute": "oc_date",
       "value": "2026-09-22",
       "unit": null,
@@ -60,33 +41,14 @@
         "po_number": "4500318745"
       },
       "attribute": "incoterm",
-      "value": "FOB",
+      "value": "FOB Nhava Sheva",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "section": "header"
       },
-      "evidence": "FOB",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_header",
-      "subject": {
-        "po_number": "4500318745"
-      },
-      "subject_raw": {
-        "po_number": "4500318745"
-      },
-      "attribute": "payment_terms",
-      "value": "NET30",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "section": "header"
-      },
-      "evidence": "NET30",
+      "evidence": "FOB Nhava Sheva",
       "confidence": "high"
     },
     {
@@ -109,7 +71,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR\n2026-12-07\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR",
       "confidence": "high"
     },
     {
@@ -132,7 +94,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR\n2026-12-07\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR",
       "confidence": "high"
     },
     {
@@ -155,7 +117,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR\n2026-12-07\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR",
       "confidence": "high"
     },
     {
@@ -178,7 +140,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR\n2026-12-07\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR",
       "confidence": "high"
     },
     {
@@ -201,7 +163,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR\n2026-12-07\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR",
       "confidence": "high"
     },
     {
@@ -224,19 +186,21 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR\n2026-12-07\nSupplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",
+      "evidence": "CMP-GAM-010\nStatue \"The\nGetaway\"\n(die-cast, 18\ncm)\n2,600\n1037\nINR",
       "confidence": "high"
     },
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318745"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318745"
       },
       "attribute": "kind",
-      "value": "other",
+      "value": "approval_claim",
       "unit": null,
       "as_of": null,
       "locator": {
@@ -248,10 +212,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318745"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "po_number": "4500318745"
       },
       "attribute": "value",
       "value": "Supplier status: approved for serial supply to Soony (PPAP documents submitted 2026-09-14).",

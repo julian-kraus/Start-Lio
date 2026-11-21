@@ -17,11 +17,11 @@
       "fact_type": "contract_term",
       "subject": {
         "supplier_id": "SUP-0019",
-        "contract_id": "SUP-0019_Supply_Agreement_2018"
+        "contract_id": "doc8c9cc633b50d"
       },
       "subject_raw": {
         "supplier_id": "SUP-0019",
-        "contract_id": "SUP-0019_Supply_Agreement_2018"
+        "contract_id": "doc8c9cc633b50d"
       },
       "attribute": "incoterm",
       "value": "FOB Yantian",
@@ -33,17 +33,17 @@
       },
       "evidence": "FOB Yantian",
       "confidence": "medium",
-      "note": "Read from rendered image-only PDF."
+      "note": "Reference envelope had no extractable contract number; doc plus sha256 prefix used."
     },
     {
       "fact_type": "contract_term",
       "subject": {
         "supplier_id": "SUP-0019",
-        "contract_id": "SUP-0019_Supply_Agreement_2018"
+        "contract_id": "doc8c9cc633b50d"
       },
       "subject_raw": {
         "supplier_id": "SUP-0019",
-        "contract_id": "SUP-0019_Supply_Agreement_2018"
+        "contract_id": "doc8c9cc633b50d"
       },
       "attribute": "expiry",
       "value": "2027-02-28",
@@ -55,17 +55,17 @@
       },
       "evidence": "2027-02-28",
       "confidence": "medium",
-      "note": "Read from rendered image-only PDF."
+      "note": "Reference envelope had no extractable contract number; doc plus sha256 prefix used."
     },
     {
       "fact_type": "contract_term",
       "subject": {
         "supplier_id": "SUP-0019",
-        "contract_id": "SUP-0019_Supply_Agreement_2018"
+        "contract_id": "doc8c9cc633b50d"
       },
       "subject_raw": {
         "supplier_id": "SUP-0019",
-        "contract_id": "SUP-0019_Supply_Agreement_2018"
+        "contract_id": "doc8c9cc633b50d"
       },
       "attribute": "price_revision_rule",
       "value": "Annex A prices in CNY; NET30 from receipt of a correct invoice",
@@ -77,17 +77,17 @@
       },
       "evidence": "Annex A prices in CNY; NET30 from receipt of a correct invoice",
       "confidence": "medium",
-      "note": "Read from rendered image-only PDF."
+      "note": "Reference envelope had no extractable contract number; doc plus sha256 prefix used."
     },
     {
       "fact_type": "contract_term",
       "subject": {
         "supplier_id": "SUP-0019",
-        "contract_id": "SUP-0019_Supply_Agreement_2018"
+        "contract_id": "doc8c9cc633b50d"
       },
       "subject_raw": {
         "supplier_id": "SUP-0019",
-        "contract_id": "SUP-0019_Supply_Agreement_2018"
+        "contract_id": "doc8c9cc633b50d"
       },
       "attribute": "penalty",
       "value": "0.5% of delayed order value per commenced week, capped at 5%",
@@ -99,7 +99,7 @@
       },
       "evidence": "0.5% of delayed order value per commenced week, capped at 5%",
       "confidence": "medium",
-      "note": "Read from rendered image-only PDF."
+      "note": "Reference envelope had no extractable contract number; doc plus sha256 prefix used."
     },
     {
       "fact_type": "part_xref",

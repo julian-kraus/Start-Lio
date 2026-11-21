@@ -60,33 +60,14 @@
         "po_number": "4500318698"
       },
       "attribute": "incoterm",
-      "value": "DAP",
+      "value": "DAP Hamburg",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "section": "header"
       },
-      "evidence": "DAP",
-      "confidence": "high"
-    },
-    {
-      "fact_type": "oc_header",
-      "subject": {
-        "po_number": "4500318698"
-      },
-      "subject_raw": {
-        "po_number": "4500318698"
-      },
-      "attribute": "payment_terms",
-      "value": "NET30",
-      "unit": null,
-      "as_of": null,
-      "locator": {
-        "page": 1,
-        "section": "header"
-      },
-      "evidence": "NET30",
+      "evidence": "DAP Hamburg",
       "confidence": "high"
     },
     {
@@ -109,7 +90,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n130,000\n0.03\nEUR\n2026-08-14\n00020",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n130,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
@@ -132,7 +113,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n130,000\n0.03\nEUR\n2026-08-14\n00020",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n130,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
@@ -155,7 +136,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n130,000\n0.03\nEUR\n2026-08-14\n00020",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n130,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
@@ -178,7 +159,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n130,000\n0.03\nEUR\n2026-08-14\n00020",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n130,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
@@ -201,7 +182,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n130,000\n0.03\nEUR\n2026-08-14\n00020",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n130,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
@@ -224,7 +205,7 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n130,000\n0.03\nEUR\n2026-08-14\n00020",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n130,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
@@ -247,43 +228,43 @@
         "page": 1,
         "line": 13
       },
-      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n130,000\n0.03\nEUR\n2026-08-14\n00020",
+      "evidence": "CMP-GAM-011\nActivation\nCode Leaflet\n130,000\n0.03\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318698",
-        "po_line": 1,
-        "item_key": "1feda5f1e0ea"
+        "po_line": 2,
+        "item_key": "a6304df519c1"
       },
       "subject_raw": {
         "po_number": "4500318698",
-        "po_line": 1,
-        "item_key": "1feda5f1e0ea"
+        "po_line": 2,
+        "item_key": "a6304df519c1"
       },
       "attribute": "item_no_printed",
-      "value": "00010",
+      "value": "00020",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n10,500\n2.1\nEUR\n2026-09-03",
+      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n10,500\n2.1\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318698",
-        "po_line": 1,
-        "item_key": "1feda5f1e0ea"
+        "po_line": 2,
+        "item_key": "a6304df519c1"
       },
       "subject_raw": {
         "po_number": "4500318698",
-        "po_line": 1,
-        "item_key": "1feda5f1e0ea"
+        "po_line": 2,
+        "item_key": "a6304df519c1"
       },
       "attribute": "supplier_part_no",
       "value": "CMP-GAM-008",
@@ -293,20 +274,20 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n10,500\n2.1\nEUR\n2026-09-03",
+      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n10,500\n2.1\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318698",
-        "po_line": 1,
-        "item_key": "1feda5f1e0ea"
+        "po_line": 2,
+        "item_key": "a6304df519c1"
       },
       "subject_raw": {
         "po_number": "4500318698",
-        "po_line": 1,
-        "item_key": "1feda5f1e0ea"
+        "po_line": 2,
+        "item_key": "a6304df519c1"
       },
       "attribute": "qty",
       "value": 10500,
@@ -316,20 +297,20 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n10,500\n2.1\nEUR\n2026-09-03",
+      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n10,500\n2.1\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318698",
-        "po_line": 1,
-        "item_key": "1feda5f1e0ea"
+        "po_line": 2,
+        "item_key": "a6304df519c1"
       },
       "subject_raw": {
         "po_number": "4500318698",
-        "po_line": 1,
-        "item_key": "1feda5f1e0ea"
+        "po_line": 2,
+        "item_key": "a6304df519c1"
       },
       "attribute": "unit_price",
       "value": 2.1,
@@ -339,20 +320,20 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n10,500\n2.1\nEUR\n2026-09-03",
+      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n10,500\n2.1\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318698",
-        "po_line": 1,
-        "item_key": "1feda5f1e0ea"
+        "po_line": 2,
+        "item_key": "a6304df519c1"
       },
       "subject_raw": {
         "po_number": "4500318698",
-        "po_line": 1,
-        "item_key": "1feda5f1e0ea"
+        "po_line": 2,
+        "item_key": "a6304df519c1"
       },
       "attribute": "currency",
       "value": "EUR",
@@ -362,20 +343,20 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n10,500\n2.1\nEUR\n2026-09-03",
+      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n10,500\n2.1\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318698",
-        "po_line": 1,
-        "item_key": "1feda5f1e0ea"
+        "po_line": 2,
+        "item_key": "a6304df519c1"
       },
       "subject_raw": {
         "po_number": "4500318698",
-        "po_line": 1,
-        "item_key": "1feda5f1e0ea"
+        "po_line": 2,
+        "item_key": "a6304df519c1"
       },
       "attribute": "confirmed_date",
       "value": "2026-09-03",
@@ -385,20 +366,20 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n10,500\n2.1\nEUR\n2026-09-03",
+      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n10,500\n2.1\nEUR",
       "confidence": "high"
     },
     {
       "fact_type": "oc_line",
       "subject": {
         "po_number": "4500318698",
-        "po_line": 1,
-        "item_key": "1feda5f1e0ea"
+        "po_line": 2,
+        "item_key": "a6304df519c1"
       },
       "subject_raw": {
         "po_number": "4500318698",
-        "po_line": 1,
-        "item_key": "1feda5f1e0ea"
+        "po_line": 2,
+        "item_key": "a6304df519c1"
       },
       "attribute": "material_id",
       "value": "CMP-GAM-008",
@@ -408,7 +389,7 @@
         "page": 1,
         "line": 21
       },
-      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n10,500\n2.1\nEUR\n2026-09-03",
+      "evidence": "CMP-GAM-008\nArt Book\nGrand Heist 6\n(96 p,\nhardcover)\n10,500\n2.1\nEUR",
       "confidence": "high"
     }
   ],

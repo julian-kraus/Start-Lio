@@ -60,14 +60,14 @@
         "po_number": "4500318541"
       },
       "attribute": "incoterm",
-      "value": "FOB",
+      "value": "FOB Yantian",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "section": "header"
       },
-      "evidence": "FOB",
+      "evidence": "FOB Yantian",
       "confidence": "high"
     },
     {
@@ -109,7 +109,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY\n2025-11-03",
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY",
       "confidence": "high"
     },
     {
@@ -132,7 +132,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY\n2025-11-03",
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY",
       "confidence": "high"
     },
     {
@@ -155,7 +155,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY\n2025-11-03",
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY",
       "confidence": "high"
     },
     {
@@ -178,7 +178,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY\n2025-11-03",
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY",
       "confidence": "high"
     },
     {
@@ -201,7 +201,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY\n2025-11-03",
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY",
       "confidence": "high"
     },
     {
@@ -224,7 +224,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY\n2025-11-03",
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY",
       "confidence": "high"
     },
     {
@@ -247,7 +247,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY\n2025-11-03",
+      "evidence": "CMP-GAM-003\nGame Card\nCase (clear)\n44,000\n1.52\nCNY",
       "confidence": "high"
     }
   ],

@@ -352,8 +352,12 @@ def csv_subject(ft, row, path):
         return {"shipment_id": row_get(row, "shipment_id")}
     if ft == "change_record":
         if "bom_delta" in path.stem.lower():
-            return {"parent_id": row_get(row, "parent_id"), "child_id": row_get(row, "child_id"), "change_id": row_get(row, "change_id")}
-        return {"material_id": row_get(row, "component_id", "material_id"), "field": row_get(row, "field") or row_get(row, "action")}
+            parent = row_get(row, "parent_id")
+            child = row_get(row, "child_id")
+            return {"entity": f"{parent}:{child}", "parent_id": parent, "child_id": child, "change_id": row_get(row, "change_id")}
+        material = row_get(row, "component_id", "material_id")
+        field = row_get(row, "field") or row_get(row, "action")
+        return {"entity": material, "material_id": material, "field": field}
     return {"record_id": row_get(row, "id", "record_id", "date", "material_id", "component_id") or path.stem}
 
 
@@ -458,95 +462,154 @@ def parse_inspection(path, text):
 def parse_contract(path, text):
     found = re.findall(r"SUP-\d{4}", rel(path), re.I)
     supplier = supplier_id(found[0] if found else path.parent.parent.name.split("_")[0])
-    subject = {"supplier_id": supplier, "contract_id": path.stem}
+    contract_match = re.search(r"(?:contract|agreement)\s*(?:no\.?|number)?\s*[:#]?\s*([A-Z]{2,5}[- ]?\d{3,}[- ]?\d{2,})", text, re.I)
+    contract_id = contract_match.group(1).replace(" ", "-") if contract_match else "doc" + hashlib.sha256(path.read_bytes()).hexdigest()[:12]
+    fallback_note = None if contract_match else "No contract identifier was extractable; doc plus sha256 prefix used."
+    subject = {"supplier_id": supplier, "contract_id": contract_id}
     facts = []
     for incoterm in sorted(set(re.findall(r"\b(EXW|FCA|FOB|CIF|DAP|DDP)\b", text, re.I))):
-        facts.append(fact("contract_term", subject, "incoterm", incoterm.upper(), path, incoterm, locator={"page": 1}))
-    for match in re.finditer(r"\b(PR[-A-Z0-9]+)\s+((?:CMP|PR|PRM)-[A-Z0-9-]+)\b", text):
-        facts.append(fact("part_xref", {"supplier_id": supplier, "supplier_part_no": match.group(1)}, "material_id", match.group(2), path, match.group(0), locator={"page": 1}))
+        facts.append(fact("contract_term", subject, "incoterm", incoterm.upper(), path, incoterm, locator={"page": 1}, note=fallback_note))
+    # pypdf retains the Annex C table in reading order: Soony part followed by
+    # that row's supplier part.  Match that pair directly rather than adjacent
+    # supplier/Soony tokens, which would shift every cross-reference one row.
+    annex_match = re.search(r"Annex C\s*[–-]\s*Part number cross-reference(?P<table>.*)", text, re.I | re.S)
+    annex = annex_match.group("table") if annex_match else ""
+    for match in re.finditer(r"\b((?:CMP|PRM)-[A-Z0-9-]+)\b\s+\b((?:PR|RM)-[A-Z0-9-]+)\b", annex):
+        material_id, supplier_part = match.groups()
+        facts.append(fact("part_xref", {"supplier_id": supplier, "supplier_part_no": supplier_part}, "material_id", material_id, path, match.group(0), locator={"page": 1, "section": "Annex C"}))
     for label, pattern in (("expiry", r"(?:expires|expiry)\s*[: ]\s*([0-9./-]+)"), ("penalty", r"(?:late delivery|penalty)[: ]+([^.\n]+)")):
         value = re.search(pattern, text, re.I)
         if value:
-            facts.append(fact("contract_term", subject, label, value.group(1).strip(), path, value.group(0), locator={"page": 1}))
+            facts.append(fact("contract_term", subject, label, value.group(1).strip(), path, value.group(0), locator={"page": 1}, note=fallback_note))
     return facts
 
 
 def classify_statement(text):
     folded = text.casefold()
-    if "hold" in folded or "suspend" in folded:
-        return "hold"
+    if ("packed" in folded and ("wait" in folded or "buyer" in folded)) or "on hold" in folded or "suspend" in folded:
+        return "on_hold"
+    if "term" in folded and ("reject" in folded or "declin" in folded):
+        return "term_rejected"
+    if "short" in folded or "fewer" in folded or "less than ordered" in folded:
+        return "short_shipment"
     if "artwork" in folded or "rev." in folded or "revision" in folded:
         return "artwork_rev"
-    if "short" in folded or "quantity" in folded:
-        return "quantity"
-    if "dispatch" in folded or "ship" in folded or "delivery" in folded:
-        return "delivery"
+    if "approval" in folded or "approved" in folded or "certif" in folded or "qualification" in folded:
+        return "approval_claim"
+    if "dispatch" in folded or "ship" in folded or "delivery" in folded or "carrier" in folded or "flight" in folded:
+        return "dispatch_info"
     if "payment" in folded or "price" in folded:
-        return "commercial"
+        return "price_deviation"
     return "other"
 
 
+def known_currency_codes():
+    values = set()
+    for source in sorted((DATA / "soony" / "erp").glob("*.csv")):
+        for row in csv_rows(source):
+            value = row_get(row, "currency")
+            if value:
+                values.add(str(value).upper())
+    return values
+
+
+def parse_shipping_advice(path, text):
+    po_match = re.search(r"Your order\s+(\d{8,})", text, re.I)
+    po_number = po_match.group(1) if po_match else None
+    reference_match = re.search(r"\bAWB\s*[:#]?\s*(\d{3}-\d{8})\b", text, re.I)
+    reference = reference_match.group(1) if reference_match else next(iter(re.findall(r"\b\d{3}-\d{8}\b", text)), None)
+    material_match = re.search(r"\b((?:CMP|PR|PRM)-[A-Z0-9-]+)\b", text)
+    material_id = material_match.group(1) if material_match else None
+    labels = re.search(r"(?:Ordered|발주수량).*?(?:Shipped|출하수량).*?(?:Balance|잔량)", text, re.I | re.S)
+    table_tail = text[labels.end():] if labels else text
+    table_tail = table_tail.split("AWB", 1)[0]
+    quantities = re.findall(r"(?<![A-Za-z])(?:\d{1,3}(?:[,. ]\d{3})+|\d{4,})(?![A-Za-z])", table_tail)
+    quantities = [num(value) for value in quantities[:3]]
+    while len(quantities) < 3:
+        quantities.append(None)
+    eta_match = re.search(r"delivery\s+to\s+[^\n]*?\b(\d{4}-\d{2}-\d{2})\b", text, re.I)
+    if not eta_match:
+        eta_match = re.search(r"next available flight[^\n]*?\b(\d{4}-\d{2}-\d{2})\b", text, re.I)
+    subject = {"reference": reference, "material_id": material_id}
+    facts = []
+    for attribute, value in (("qty_planned", quantities[0]), ("qty_shipped", quantities[1]), ("qty_balance", quantities[2]), ("balance_eta", eta_match.group(1) if eta_match else None), ("po_number", po_number), ("reference", reference)):
+        if value is not None:
+            facts.append(fact("shipment_qty", subject, attribute, value, path, f"{attribute}: {value}", locator={"page": 1, "section": "shipping advice table"}))
+    statement_text = " ".join(line.strip() for line in text.splitlines() if line.strip() and ("ULD" in line or "offloaded" in line.lower() or "balance" in line.lower()))
+    if statement_text:
+        statement_subject = {"statement_no": 1, "po_number": po_number, "reference": reference, "material_id": material_id}
+        facts.append(fact("supplier_statement", statement_subject, "kind", "short_shipment", path, statement_text, locator={"page": 1, "section": "remarks"}))
+        facts.append(fact("supplier_statement", statement_subject, "value", statement_text, path, statement_text, locator={"page": 1, "section": "remarks"}))
+    return facts
+
+
 def parse_order_like(path, text, kind):
-    order_match = re.search(r"(?:Order Confirmation|OA)\s*[:#]?\s*([A-Z0-9-]+)", text, re.I)
-    oc_number = order_match.group(1) if order_match else path.stem
-    po_match = re.search(r"(?:Your order|PO|Purchase order)\s*[:#]?\s*(\d{8,})", text, re.I)
+    order_match = re.search(r"(?:Order Confirmation|OA)\s*[:#]?\s*(OA\d+)", text, re.I)
+    oc_number = order_match.group(1) if order_match else next(iter(re.findall(r"\bOA\d+\b", path.name)), None)
+    po_match = re.search(r"Your order\s+(\d{8,})", text, re.I)
     po_number = po_match.group(1) if po_match else next(iter(re.findall(r"\b45\d{8}\b", text)), None)
-    order_date = next(iter(re.findall(r"\b\d{4}-\d{2}-\d{2}\b", text)), None)
-    incoterm = next(iter(re.findall(r"\b(EXW|FCA|FOB|CIF|DAP|DDP)(?:\s+[A-Za-z]+)?", text, re.I)), None)
-    payment = re.search(r"payment\s+([A-Z0-9 /-]+)", text, re.I)
+    order_header = re.search(r"Your order\s+\d{8,}\s+of\s+(\d{4}-\d{2}-\d{2})", text, re.I)
+    order_date = order_header.group(1) if order_header else None
+    incoterm_match = re.search(r"(?:Incoterms?|Delivery terms)\s*[: ]\s*([^\n|]+)", text, re.I)
+    incoterm = re.split(r"\s*(?:\||·|\bPayment\b)\s*", incoterm_match.group(1).strip(), maxsplit=1, flags=re.I)[0] if incoterm_match else None
+    payment = re.search(r"Payment\s*[: ]\s*([^\n|]+)", text, re.I)
+    payment_terms = payment.group(1).strip() if payment else None
     facts = []
     header_subject = {"po_number": po_number or oc_number}
-    for attr, value in (("oc_number", oc_number), ("oc_date", order_date), ("incoterm", incoterm), ("payment_terms", payment.group(1).strip() if payment else None)):
+    for attr, value in (("oc_number", oc_number), ("oc_date", order_date), ("incoterm", incoterm), ("payment_terms", payment_terms)):
         if value:
             facts.append(fact("oc_header", header_subject, attr, value, path, value, locator={"page": 1, "section": "header"}))
     material_re = re.compile(r"\b((?:CMP|PR|PRM)-[A-Z0-9-]+)\b")
-    matches = list(material_re.finditer(text))
-    used = Counter()
-    for index, match in enumerate(matches):
+    # Item facts may only come from the item table.  Remarks can repeat a
+    # supplier part number (for example an artwork revision) after the table.
+    # Treating that repeat as a row duplicates the preceding item number.
+    remark_start = re.search(r"(?im)^\s*(?:artwork|remarks?|notes?)\b", text)
+    item_region_end = remark_start.start() if remark_start else len(text)
+    matches = []
+    for match in material_re.finditer(text):
+        if match.start() >= item_region_end:
+            continue
+        prefix = text[max(0, match.start() - 200):match.start()]
+        item_numbers = re.findall(r"(?:^|\n)\s*(\d{5})\s*(?:\n|$)", prefix)
+        if item_numbers:
+            matches.append((match, item_numbers[-1]))
+    currency_codes = known_currency_codes()
+    for index, (match, item_printed) in enumerate(matches):
         supplier_part = match.group(1)
-        end = matches[index + 1].start() if index + 1 < len(matches) else min(len(text), match.end() + 700)
+        end = matches[index + 1][0].start() if index + 1 < len(matches) else min(len(text), match.end() + 700)
         block = text[match.end():end]
-        numbers = re.findall(r"(?<![A-Za-z])(?:\d{1,3}(?:[,. ]\d{3})+|\d{4,})(?![A-Za-z])", block)
+        date_match = re.search(r"\b(\d{4}-\d{2}-\d{2})\b", block)
+        row_block = block[:date_match.start()] if date_match else block
+        numbers = re.findall(r"(?<![A-Za-z])(?:\d{1,3}(?:[,. ]\d{3})+|\d{4,})(?![A-Za-z])", row_block)
         quantity = num(numbers[0]) if numbers else None
-        price_candidates = re.findall(r"(?<![A-Za-z])\d+(?:[.,]\d+)(?![A-Za-z])", block)
-        price_candidates = [candidate for candidate in price_candidates if not re.fullmatch(r"\d{1,3}[,.]\d{3}(?:[,.]\d{3})*", candidate)]
-        price_match = price_candidates[-1] if price_candidates else None
-        currency_match = re.search(r"\b[A-Z]{3}\b", block)
-        confirmed = next(iter(re.findall(r"\b\d{4}-\d{2}-\d{2}\b", block)), None)
-        item_match = re.search(r"(?:^|\n)\s*(\d{5})\s*(?:\n|$)", text[max(0, match.start() - 160):match.start()])
-        item_printed = item_match.group(1) if item_match else str(index + 1)
-        po_line = int(item_printed) // 10 if item_printed.isdigit() else index + 1
-        used[po_line] += 1
-        evidence = (supplier_part + block[:320]).strip()
+        price_candidates = [candidate for candidate in re.findall(r"(?<![A-Za-z])\d+(?:[.,]\d+)(?![A-Za-z])", row_block) if not re.fullmatch(r"\d{1,3}[,.]\d{3}(?:[,.]\d{3})*", candidate)]
+        price = num(price_candidates[-1]) if price_candidates else None
+        currency = next((code for code in re.findall(r"\b[A-Z]{3}\b", row_block) if code.upper() in currency_codes), None)
+        po_line = int(item_printed) // 10
         subject = {"po_number": po_number or oc_number, "po_line": po_line, "item_key": hashlib.sha1(f"{item_printed}|{supplier_part}|{match.start()}".encode()).hexdigest()[:12]}
-        attrs = {"item_no_printed": item_printed, "supplier_part_no": supplier_part, "qty": quantity, "unit_price": num(price_match) if price_match else None, "currency": currency_match.group(0) if currency_match else None, "confirmed_date": confirmed}
+        attrs = {"item_no_printed": item_printed, "supplier_part_no": supplier_part, "qty": quantity, "unit_price": price, "currency": currency, "confirmed_date": date_match.group(1) if date_match else None}
         if supplier_part.startswith("CMP-"):
             attrs["material_id"] = supplier_part
         for attr, value in attrs.items():
             if value is not None:
-                facts.append(fact("oc_line", subject, attr, value, path, evidence, locator={"page": 1, "line": text[:match.start()].count("\n") + 1}))
+                facts.append(fact("oc_line", subject, attr, value, path, (supplier_part + row_block[:320]).strip(), locator={"page": 1, "line": text[:match.start()].count("\n") + 1}))
+    statement_no = 0
     for line in text.splitlines():
         stripped = line.strip()
         if not stripped or re.search(r"^(item|material|description|qty|unit price|confirmed)\b", stripped, re.I):
             continue
-        if re.search(r"remark|note|on hold|short shipment|artwork|approved|dispatch", stripped, re.I):
-            statement_no = len([x for x in facts if x["fact_type"] == "supplier_statement" and x["attribute"] == "kind"]) + 1
-            subject = {"statement_no": statement_no}
+        if re.search(r"remark|note|on hold|short shipment|artwork|approved|dispatch|certif|qualification", stripped, re.I):
+            statement_no += 1
+            named_part = re.search(r"\b((?:CMP|PR|PRM)-[A-Z0-9-]+)\b", stripped)
+            subject = {"statement_no": statement_no, "po_number": po_number or oc_number}
+            if named_part:
+                subject["material_id"] = named_part.group(1)
             kind_value = classify_statement(stripped)
             facts.append(fact("supplier_statement", subject, "kind", kind_value, path, stripped, locator={"page": 1}))
             facts.append(fact("supplier_statement", subject, "value", stripped, path, stripped, locator={"page": 1}))
             revision = re.search(r"(?:rev\.?|revision)\s*([A-Z0-9]+)", stripped, re.I)
             if revision:
                 facts.append(fact("supplier_statement", subject, "revision", revision.group(1), path, stripped, locator={"page": 1}))
-    if kind == "shipping_advice" and po_number:
-        reference = next(iter(re.findall(r"\b[A-Z]{4}\d{7}\b", text)), path.stem)
-        for match in material_re.finditer(text):
-            block = text[match.end(): match.end() + 400]
-            numbers = re.findall(r"(?<![A-Za-z])(?:\d{1,3}(?:[,. ]\d{3})+|\d{4,})(?![A-Za-z])", block)
-            if numbers:
-                sub = {"reference": reference, "material_id": match.group(1)}
-                facts.append(fact("shipment_qty", sub, "qty_shipped", num(numbers[0]), path, block[:300], locator={"page": 1}))
-                facts.append(fact("shipment_qty", sub, "po_number", po_number, path, po_number, locator={"page": 1}))
     return facts
 
 
@@ -555,16 +618,23 @@ def parse_pdf(path, text, kind):
         return parse_inspection(path, text)
     if kind == "contract":
         return parse_contract(path, text)
-    if kind in {"order_confirmation", "shipping_advice", "packing_list"}:
+    if kind == "shipping_advice":
+        return parse_shipping_advice(path, text)
+    if kind == "packing_list":
+        return [fact("x_document_line", {"source_path": rel(path), "line_key": hashlib.sha1(f"{line}|{line_number}".encode()).hexdigest()[:12]}, "text", line, path, line, locator={"page": 1, "line": line_number}) for line_number, line in enumerate(text.splitlines(), 1) if line.strip()]
+    if kind == "order_confirmation":
         return parse_order_like(path, text, kind)
     facts = []
-    fact_type = "x_document_line" if kind == "other_document" else "policy_directive"
+    fact_type = "policy_directive" if kind == "policy_document" else "x_document_line"
+    policy_match = re.search(r"\b(PP[- ]\d+)\b", text, re.I) if fact_type == "policy_directive" else None
+    scope = policy_match.group(1).replace(" ", "-").upper() if policy_match else "doc" + hashlib.sha256(path.read_bytes()).hexdigest()[:12]
+    fallback_note = None if policy_match else "No document identifier was extractable; doc plus sha256 prefix used."
     for line_number, line in enumerate(text.splitlines(), 1):
         line = line.strip()
         if line:
             attribute = "text" if fact_type == "x_document_line" else "directive"
-            subject = {"source_path": rel(path), "line_key": hashlib.sha1(f"{line}|{line_number}".encode()).hexdigest()[:12]} if fact_type == "x_document_line" else {"scope": path.stem, "directive_key": hashlib.sha1(f"{line}|{line_number}".encode()).hexdigest()[:12]}
-            facts.append(fact(fact_type, subject, attribute, line, path, line, locator={"page": 1, "line": line_number}))
+            subject = {"source_path": rel(path), "line_key": hashlib.sha1(f"{line}|{line_number}".encode()).hexdigest()[:12]} if fact_type == "x_document_line" else {"scope": scope, "directive_key": hashlib.sha1(f"{line}|{line_number}".encode()).hexdigest()[:12]}
+            facts.append(fact(fact_type, subject, attribute, line, path, line, locator={"page": 1, "line": line_number}, note=fallback_note))
     return facts
 
 
@@ -576,6 +646,10 @@ def copy_reference(path):
 def normalize_reference(path, facts):
     result = []
     statement_no = 0
+    delivery_note = next((item.get("subject", {}).get("delivery_note") for item in facts if item.get("fact_type") == "delivery_note_line"), None)
+    reference = next((item.get("subject", {}).get("reference") for item in facts if item.get("fact_type") == "shipment_qty" and item.get("subject", {}).get("reference") != path.stem), None)
+    po_number = next((item.get("subject", {}).get("po_number") for item in facts if item.get("subject", {}).get("po_number")), None)
+    fallback_id = "doc" + hashlib.sha256(path.read_bytes()).hexdigest()[:12]
     for original in facts:
         item = dict(original)
         item["locator"] = dict(item.get("locator") or {})
@@ -592,11 +666,30 @@ def normalize_reference(path, facts):
             if item.get("attribute") != "value":
                 continue
             statement_no += 1
-            item["subject"] = {"statement_no": statement_no}
+            original_subject = original.get("subject", {})
+            item_subject = {"statement_no": statement_no}
+            if delivery_note:
+                item_subject["delivery_note"] = delivery_note
+            elif reference:
+                item_subject["reference"] = reference
+            elif original_subject.get("po_number") or po_number:
+                item_subject["po_number"] = original_subject.get("po_number") or po_number
+            material = original_subject.get("material_id")
+            if material:
+                item_subject["material_id"] = material
+            item["subject"] = item_subject
             item["subject_raw"] = dict(item["subject"])
             item["locator"]["region_hint"] = "handling note"
             item["note"] = "Original-language handling note preserved from the reference envelope."
-            result.append(fact("supplier_statement", item["subject"], "kind", "handling_note", path, item.get("evidence"), locator=item["locator"], confidence=item.get("confidence", "medium")))
+            kind = "handling_note" if delivery_note else classify_statement(str(item.get("value") or item.get("evidence") or ""))
+            result.append(fact("supplier_statement", item["subject"], "kind", kind, path, item.get("evidence"), locator=item["locator"], confidence=item.get("confidence", "medium")))
+        if item.get("fact_type") == "contract_term":
+            item["subject"] = {**item.get("subject", {}), "contract_id": fallback_id}
+            item["subject_raw"] = dict(item["subject"])
+            item["note"] = "Reference envelope had no extractable contract number; doc plus sha256 prefix used."
+        if item.get("fact_type") == "shipment_qty" and item.get("subject", {}).get("reference") == path.stem and reference:
+            item["subject"] = {**item["subject"], "reference": reference}
+            item["subject_raw"] = dict(item["subject"])
         result.append(item)
     return result
 
@@ -629,8 +722,24 @@ def resolve_order_parts(environments, xrefs):
             if part and not values.get("material_id") and part in xrefs:
                 subject = json.loads(subject_text)
                 env["facts"].append(fact("oc_line", subject, "material_id", xrefs[part], Path(DATA / env["source"]["path"]), part, locator={"page": 1, "section": "part cross-reference"}, confidence="medium", note="Resolved through the supplier contract part cross-reference."))
-        if item.get("attribute") == "po_number" and item.get("value") in {"—", "-", ""}:
-            item["value"] = None
+
+
+def resolve_statement_parts(environments, xrefs):
+    for env in environments:
+        for item in env.get("facts", []):
+            if item.get("fact_type") != "supplier_statement":
+                continue
+            subject = item.get("subject", {})
+            material = subject.get("material_id")
+            if not material:
+                statement_text = str(item.get("value") or item.get("evidence") or "")
+                named = re.search(r"\b((?:CMP|PR|PRM|RM)-[A-Z0-9-]+)\b", statement_text)
+                material = named.group(1) if named else None
+            if material in xrefs:
+                material = xrefs[material]
+            if material and material.startswith(("CMP-", "PRM-")):
+                subject["material_id"] = material
+                item["subject_raw"] = dict(subject)
 
 
 def xlsx_rows(path):
@@ -764,7 +873,10 @@ def json_facts(path):
 def docx_facts(path):
     from docx import Document
     text = "\n".join(paragraph.text.strip() for paragraph in Document(path).paragraphs if paragraph.text.strip())
-    return [fact("policy_directive", {"scope": path.stem}, "directive", line, path, line, locator={"section": "memo"}) for line in text.splitlines()]
+    policy_match = re.search(r"\b(PP[- ]\d+)\b", text, re.I)
+    scope = policy_match.group(1).replace(" ", "-").upper() if policy_match else "doc" + hashlib.sha256(path.read_bytes()).hexdigest()[:12]
+    note = None if policy_match else "No document identifier was extractable; doc plus sha256 prefix used."
+    return [fact("policy_directive", {"scope": scope, "directive_key": hashlib.sha1(f"{line}|{number}".encode()).hexdigest()[:12]}, "directive", line, path, line, locator={"section": "memo"}, note=note) for number, line in enumerate(text.splitlines(), 1)]
 
 
 def markdown_facts(path):
@@ -921,6 +1033,7 @@ def main():
             if key:
                 xrefs[key] = item["value"]
     resolve_order_parts(environments, xrefs)
+    resolve_statement_parts(environments, xrefs)
     for env in environments:
         if env["doc_kind"] == "delivery_note_scan":
             resolve_scan_parts(env["facts"], xrefs)

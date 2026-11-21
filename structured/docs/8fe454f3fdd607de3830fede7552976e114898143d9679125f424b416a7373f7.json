@@ -14,16 +14,16 @@
   "doc_date": null,
   "facts": [
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "4a3ed7ee986b"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "4a3ed7ee986b"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "4a3ed7ee986b"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "4a3ed7ee986b"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Soony Interactive GmbH · Procurement organisation (v1, 2026-09-01)",
       "unit": null,
       "as_of": null,
@@ -32,19 +32,20 @@
         "line": 1
       },
       "evidence": "Soony Interactive GmbH · Procurement organisation (v1, 2026-09-01)",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "f2d1f32f90f0"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "f2d1f32f90f0"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "f2d1f32f90f0"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "f2d1f32f90f0"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Internal. Solid lines: reporting. Approval limits see Approval Policy PP-07.",
       "unit": null,
       "as_of": null,
@@ -53,19 +54,20 @@
         "line": 2
       },
       "evidence": "Internal. Solid lines: reporting. Approval limits see Approval Policy PP-07.",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "7fc4d07dfc7e"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "7fc4d07dfc7e"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "7fc4d07dfc7e"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "7fc4d07dfc7e"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Jonas Lindqvist",
       "unit": null,
       "as_of": null,
@@ -74,19 +76,20 @@
         "line": 3
       },
       "evidence": "Jonas Lindqvist",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "c92c27a4ceae"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "c92c27a4ceae"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "c92c27a4ceae"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "c92c27a4ceae"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Chief Procurement Officer",
       "unit": null,
       "as_of": null,
@@ -95,19 +98,20 @@
         "line": 4
       },
       "evidence": "Chief Procurement Officer",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "acd98b4fd233"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "acd98b4fd233"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "acd98b4fd233"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "acd98b4fd233"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Dr. Maren Vogt",
       "unit": null,
       "as_of": null,
@@ -116,19 +120,20 @@
         "line": 5
       },
       "evidence": "Dr. Maren Vogt",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "21c2e7a1b25c"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "21c2e7a1b25c"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "21c2e7a1b25c"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "21c2e7a1b25c"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Head of Procurement",
       "unit": null,
       "as_of": null,
@@ -137,19 +142,20 @@
         "line": 6
       },
       "evidence": "Head of Procurement",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "9cb3654cfb14"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "9cb3654cfb14"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "9cb3654cfb14"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "9cb3654cfb14"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Tobias Brandt",
       "unit": null,
       "as_of": null,
@@ -158,19 +164,20 @@
         "line": 7
       },
       "evidence": "Tobias Brandt",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "ecd4512f54a1"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "ecd4512f54a1"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "ecd4512f54a1"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "ecd4512f54a1"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Category Lead Game Media",
       "unit": null,
       "as_of": null,
@@ -179,19 +186,20 @@
         "line": 8
       },
       "evidence": "Category Lead Game Media",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "4652e77f4bae"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "4652e77f4bae"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "4652e77f4bae"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "4652e77f4bae"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Felix Brunner",
       "unit": null,
       "as_of": null,
@@ -200,19 +208,20 @@
         "line": 9
       },
       "evidence": "Felix Brunner",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "7cab7da978ee"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "7cab7da978ee"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "7cab7da978ee"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "7cab7da978ee"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Senior Buyer (Game Cards)",
       "unit": null,
       "as_of": null,
@@ -221,19 +230,20 @@
         "line": 10
       },
       "evidence": "Senior Buyer (Game Cards)",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "27378b5e62e7"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "27378b5e62e7"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "27378b5e62e7"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "27378b5e62e7"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Sofia Marchetti",
       "unit": null,
       "as_of": null,
@@ -242,19 +252,20 @@
         "line": 11
       },
       "evidence": "Sofia Marchetti",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "6073f42fabd5"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "6073f42fabd5"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "6073f42fabd5"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "6073f42fabd5"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Category Lead Print & Packaging",
       "unit": null,
       "as_of": null,
@@ -263,19 +274,20 @@
         "line": 12
       },
       "evidence": "Category Lead Print & Packaging",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "1a77a462aac6"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "1a77a462aac6"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "1a77a462aac6"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "1a77a462aac6"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Paul Winter",
       "unit": null,
       "as_of": null,
@@ -284,19 +296,20 @@
         "line": 13
       },
       "evidence": "Paul Winter",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "c4bc3614ad83"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "c4bc3614ad83"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "c4bc3614ad83"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "c4bc3614ad83"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Buyer (Print & Packaging)",
       "unit": null,
       "as_of": null,
@@ -305,19 +318,20 @@
         "line": 14
       },
       "evidence": "Buyer (Print & Packaging)",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "b1a30a5b8fe3"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "b1a30a5b8fe3"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "b1a30a5b8fe3"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "b1a30a5b8fe3"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "TBD",
       "unit": null,
       "as_of": null,
@@ -326,19 +340,20 @@
         "line": 15
       },
       "evidence": "TBD",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "550565ca3a94"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "550565ca3a94"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "550565ca3a94"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "550565ca3a94"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Category Lead Collector's Items",
       "unit": null,
       "as_of": null,
@@ -347,19 +362,20 @@
         "line": 16
       },
       "evidence": "Category Lead Collector's Items",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "69de9bc1fe3d"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "69de9bc1fe3d"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "69de9bc1fe3d"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "69de9bc1fe3d"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Mei Lin",
       "unit": null,
       "as_of": null,
@@ -368,19 +384,20 @@
         "line": 17
       },
       "evidence": "Mei Lin",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "58caaaabe37e"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "58caaaabe37e"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "58caaaabe37e"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "58caaaabe37e"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Buyer (Collector's Items)",
       "unit": null,
       "as_of": null,
@@ -389,19 +406,20 @@
         "line": 18
       },
       "evidence": "Buyer (Collector's Items)",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "598c5201827a"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "598c5201827a"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "598c5201827a"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "598c5201827a"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Daniel Okafor",
       "unit": null,
       "as_of": null,
@@ -410,19 +428,20 @@
         "line": 19
       },
       "evidence": "Daniel Okafor",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "e817279e331b"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "e817279e331b"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "e817279e331b"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "e817279e331b"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Supplier Quality Lead",
       "unit": null,
       "as_of": null,
@@ -431,19 +450,20 @@
         "line": 20
       },
       "evidence": "Supplier Quality Lead",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "085314920383"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "085314920383"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "085314920383"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "085314920383"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Raj Patel",
       "unit": null,
       "as_of": null,
@@ -452,19 +472,20 @@
         "line": 21
       },
       "evidence": "Raj Patel",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "1eeb563e1812"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "1eeb563e1812"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "1eeb563e1812"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "1eeb563e1812"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Logistics Planner",
       "unit": null,
       "as_of": null,
@@ -473,19 +494,20 @@
         "line": 22
       },
       "evidence": "Logistics Planner",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "547395b05cba"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "547395b05cba"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "547395b05cba"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "547395b05cba"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Distribution Center Hamburg (dotted line to Head of Procurement)",
       "unit": null,
       "as_of": null,
@@ -494,19 +516,20 @@
         "line": 23
       },
       "evidence": "Distribution Center Hamburg (dotted line to Head of Procurement)",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "afe593fd2e15"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "afe593fd2e15"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "afe593fd2e15"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "afe593fd2e15"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Katrin Jansen",
       "unit": null,
       "as_of": null,
@@ -515,19 +538,20 @@
         "line": 24
       },
       "evidence": "Katrin Jansen",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "4d81e5524a6f"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "4d81e5524a6f"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "4d81e5524a6f"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "4d81e5524a6f"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Site Lead DC Hamburg",
       "unit": null,
       "as_of": null,
@@ -536,19 +560,20 @@
         "line": 25
       },
       "evidence": "Site Lead DC Hamburg",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     },
     {
-      "fact_type": "policy_directive",
+      "fact_type": "x_document_line",
       "subject": {
-        "scope": "org_chart_procurement",
-        "directive_key": "70d601fb025d"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "70d601fb025d"
       },
       "subject_raw": {
-        "scope": "org_chart_procurement",
-        "directive_key": "70d601fb025d"
+        "source_path": "soony/context/org_chart_procurement.pdf",
+        "line_key": "70d601fb025d"
       },
-      "attribute": "directive",
+      "attribute": "text",
       "value": "Also: Nils Berger (IT & Systems Lead (Procurement)), Clara Weiss (Quality & Compliance Manager), Henrik Dahl (Chief Financial Officer)",
       "unit": null,
       "as_of": null,
@@ -557,7 +582,8 @@
         "line": 26
       },
       "evidence": "Also: Nils Berger (IT & Systems Lead (Procurement)), Clara Weiss (Quality & Compliance Manager), Henrik Dahl (Chief Financial Officer)",
-      "confidence": "high"
+      "confidence": "high",
+      "note": "No document identifier was extractable; doc plus sha256 prefix used."
     }
   ],
   "unreadable": [],

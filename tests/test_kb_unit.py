@@ -127,3 +127,33 @@ def test_rule_validation():
     with pytest.raises(RuleError):
         validate_rule({"rule_id": "x", "key": ["k"], "candidates": [{"fact_type": "a"}]})
     validate_rule(RULE)
+
+
+def test_change_record_with_field_in_subject():
+    rule = {"rule_id": "rev", "key": ["item"], "compare": "text", "decide": "preference",
+            "candidates": [{"label": "change", "fact_type": "item", "attribute": "rev", "extractor": "derived:*"},
+                           {"label": "master", "fact_type": "item", "attribute": "rev", "extractor_not": "derived:*"}]}
+    base = [_fact("m", "item", {"item": "I1"}, "rev", "B", sha="m")]
+    change = [_fact(f"c{i}", "change_record", {"item": "I1", "field": "rev"}, a, v, sha="c")
+              for i, (a, v) in enumerate([("old", "B"), ("new", "C")])]
+    believed, issues, _ = evaluate([rule], build_records(base + change), {}, NOW)
+    assert believed[0].value == "C" and believed[0].key == {"item": "I1"}
+
+
+def test_resolver_line_match_and_text_parts():
+    from kb.resolve import resolve
+    po = [_fact(f"p{i}{a}", "po_line", {"po": "P", "line": i}, a, v, sha="po")
+          for i, m, q in [(1, "M2", 13), (3, "M1", 84), (5, "M1", 240)] for a, v in [("material", m), ("qty", q)]]
+    oc = [_fact(f"o{a}", "oc_line", {"po": "P", "line": 1}, a, v, sha="oc1")
+          for a, v in [("material", "M1"), ("qty", 84)]]
+    xref = [_fact("x", "xref", {"part": "SP-9"}, "material", "M7", sha="c")]
+    stmt = [_fact("s1", "stmt", {"po": "P", "no": 1, "material": "M3"}, "value", "Artwork SP-9: rev. B", sha="oc2")]
+    records = build_records(po + oc + xref + stmt)
+    changes = resolve(records, {
+        "line_match": [{"source": "oc_line", "target": "po_line", "document_key": "po", "line_key": "line",
+                        "match": ["material", "qty"]}],
+        "text_parts": [{"fact_types": ["stmt"], "text_attributes": ["value"], "material_key": "material",
+                        "xref": {"fact_type": "xref", "part_attribute": "part", "material_attribute": "material"}}]})
+    moved = {c["fact_type"]: c["to"] for c in changes}
+    assert moved == {"oc_line": 3, "stmt": "M7"}
+    assert next(r for r in records if r.fact_type == "oc_line").subject["line"] == 3

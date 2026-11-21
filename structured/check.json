@@ -7,16 +7,16 @@
       "join": "goods_receipt.delivery_note + material_id"
     },
     "oc_line_join": {
-      "oc_quantity_lines": 217,
-      "joined": 216,
+      "oc_quantity_lines": 291,
+      "joined": 291,
       "item_rule": "exact",
-      "exact_hits": 216,
+      "exact_hits": 291,
       "div10_hits": 0,
-      "agreement_rate": 0.9954
+      "agreement_rate": 1.0
     },
     "shipment_arithmetic": {
-      "tested": 1,
-      "passed": 1,
+      "tested": 2,
+      "passed": 2,
       "agreement_rate": 1.0
     }
   },

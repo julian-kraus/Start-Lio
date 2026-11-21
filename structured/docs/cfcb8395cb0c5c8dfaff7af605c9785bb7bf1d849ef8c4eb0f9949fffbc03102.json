@@ -370,10 +370,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "DN-261023-398"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "DN-261023-398"
       },
       "attribute": "kind",
       "value": "handling_note",
@@ -389,10 +391,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "DN-261023-398"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "DN-261023-398"
       },
       "attribute": "value",
       "value": "취급주의",

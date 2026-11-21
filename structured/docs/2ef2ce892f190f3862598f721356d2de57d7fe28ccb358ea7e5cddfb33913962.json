@@ -370,10 +370,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "DN-261004-669"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "DN-261004-669"
       },
       "attribute": "kind",
       "value": "handling_note",
@@ -389,10 +391,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "DN-261004-669"
       },
       "subject_raw": {
-        "statement_no": 1
+        "statement_no": 1,
+        "delivery_note": "DN-261004-669"
       },
       "attribute": "value",
       "value": "취급주의",
@@ -763,10 +767,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 2
+        "statement_no": 2,
+        "delivery_note": "DN-261004-669"
       },
       "subject_raw": {
-        "statement_no": 2
+        "statement_no": 2,
+        "delivery_note": "DN-261004-669"
       },
       "attribute": "kind",
       "value": "handling_note",
@@ -782,10 +788,12 @@
     {
       "fact_type": "supplier_statement",
       "subject": {
-        "statement_no": 2
+        "statement_no": 2,
+        "delivery_note": "DN-261004-669"
       },
       "subject_raw": {
-        "statement_no": 2
+        "statement_no": 2,
+        "delivery_note": "DN-261004-669"
       },
       "attribute": "value",
       "value": "취급주의",

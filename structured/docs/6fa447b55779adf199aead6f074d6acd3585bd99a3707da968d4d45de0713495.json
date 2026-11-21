@@ -60,14 +60,14 @@
         "po_number": "4500318678"
       },
       "attribute": "incoterm",
-      "value": "FOB",
+      "value": "FOB Busan",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "section": "header"
       },
-      "evidence": "FOB",
+      "evidence": "FOB Busan",
       "confidence": "high"
     },
     {
@@ -109,7 +109,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n19,000\n5.4\nUSD\n2026-08-31",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n19,000\n5.4\nUSD",
       "confidence": "high"
     },
     {
@@ -132,7 +132,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n19,000\n5.4\nUSD\n2026-08-31",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n19,000\n5.4\nUSD",
       "confidence": "high"
     },
     {
@@ -155,7 +155,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n19,000\n5.4\nUSD\n2026-08-31",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n19,000\n5.4\nUSD",
       "confidence": "high"
     },
     {
@@ -178,7 +178,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n19,000\n5.4\nUSD\n2026-08-31",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n19,000\n5.4\nUSD",
       "confidence": "high"
     },
     {
@@ -201,7 +201,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n19,000\n5.4\nUSD\n2026-08-31",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n19,000\n5.4\nUSD",
       "confidence": "high"
     },
     {
@@ -224,7 +224,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n19,000\n5.4\nUSD\n2026-08-31",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n19,000\n5.4\nUSD",
       "confidence": "high"
     },
     {
@@ -247,7 +247,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n19,000\n5.4\nUSD\n2026-08-31",
+      "evidence": "CMP-GAM-002\nGame Card 64\nGB – Grand\nHeist 5\n19,000\n5.4\nUSD",
       "confidence": "high"
     }
   ],

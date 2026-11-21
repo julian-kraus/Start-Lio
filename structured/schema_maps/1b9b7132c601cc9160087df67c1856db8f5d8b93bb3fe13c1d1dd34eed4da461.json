@@ -5,6 +5,7 @@
   "sheet": null,
   "fact_type": "change_record",
   "subject": [
+    "entity",
     "material_id",
     "field"
   ],

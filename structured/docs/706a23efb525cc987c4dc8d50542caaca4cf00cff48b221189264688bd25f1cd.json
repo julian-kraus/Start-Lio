@@ -60,14 +60,14 @@
         "po_number": "4500318598"
       },
       "attribute": "incoterm",
-      "value": "FOB",
+      "value": "FOB Yantian",
       "unit": null,
       "as_of": null,
       "locator": {
         "page": 1,
         "section": "header"
       },
-      "evidence": "FOB",
+      "evidence": "FOB Yantian",
       "confidence": "high"
     },
     {
@@ -109,7 +109,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n80,000\n1.44\nCNY\n2026-02-25",
+      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n80,000\n1.44\nCNY",
       "confidence": "high"
     },
     {
@@ -132,7 +132,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n80,000\n1.44\nCNY\n2026-02-25",
+      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n80,000\n1.44\nCNY",
       "confidence": "high"
     },
     {
@@ -155,7 +155,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n80,000\n1.44\nCNY\n2026-02-25",
+      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n80,000\n1.44\nCNY",
       "confidence": "high"
     },
     {
@@ -178,7 +178,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n80,000\n1.44\nCNY\n2026-02-25",
+      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n80,000\n1.44\nCNY",
       "confidence": "high"
     },
     {
@@ -201,7 +201,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n80,000\n1.44\nCNY\n2026-02-25",
+      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n80,000\n1.44\nCNY",
       "confidence": "high"
     },
     {
@@ -224,7 +224,7 @@
         "page": 1,
         "line": 12
       },
-      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n80,000\n1.44\nCNY\n2026-02-25",
+      "evidence": "PR-CC-0312\nGame Card\nCase (clear)\n80,000\n1.44\nCNY",
       "confidence": "high"
     },
     {
@@ -240,7 +240,7 @@
         "po_number": "4500318598"
       },
       "attribute": "material_id",
-      "value": "CMP-GAM-004",
+      "value": "CMP-GAM-003",
       "unit": null,
       "as_of": null,
       "locator": {

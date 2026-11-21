@@ -109,7 +109,9 @@ def build_records(facts: list[Fact]) -> list[Record]:
     return list(records.values())
 
 
-def derive_change_records(records: list[Record], change_type: str, now: datetime) -> tuple[list[Record], list[dict]]:
+def derive_change_records(records: list[Record], change_type: str, now: datetime,
+                           subject_exclude: tuple[str, ...] = ("field", "change_field", "change_id")
+                           ) -> tuple[list[Record], list[dict]]:
     """Turn effective change records (field, new, effective_from) into derived facts on the changed entity.
 
     The fact type of the derived fact is taken from `target_fact_type` if the change record names one, otherwise
@@ -126,7 +128,9 @@ def derive_change_records(records: list[Record], change_type: str, now: datetime
     for r in records:
         if r.fact_type != change_type:
             continue
-        field_name, new = r.get("field"), r.get("new")
+        field_name = r.get("field") or r.get("change_field")
+        new = r.get("new")
+        target_subject = {k: v for k, v in r.subject.items() if k not in subject_exclude}
         if field_name in (None, "") or new is None:
             continue
         effective = r.get("effective_from")
@@ -139,7 +143,7 @@ def derive_change_records(records: list[Record], change_type: str, now: datetime
             continue
         target = r.get("target_fact_type")
         if not target:
-            matches = sorted(t.split("\x00")[0] for t in by_subject.get(_subject_key(r.subject), ())
+            matches = sorted(t.split("\x00")[0] for t in by_subject.get(_subject_key(target_subject), ())
                              if t.split("\x00")[1] == field_name)
             if len(matches) != 1:
                 skipped.append({"subject": r.subject, "field": field_name,
@@ -148,11 +152,12 @@ def derive_change_records(records: list[Record], change_type: str, now: datetime
                 continue
             target = matches[0]
         fact = Fact(
-            fact_id=f"derived:{base.fact_id}", fact_type=target, subject=r.subject, attribute=str(field_name),
+            fact_id=f"derived:{base.fact_id}", fact_type=target, subject=target_subject, attribute=str(field_name),
             value=new, as_of=as_of, confidence=base.confidence, extractor=f"derived:{r.extractor}",
             source_path=r.source_path, source_sha256=r.source_sha256, evidence=base.evidence, doc_kind=r.doc_kind,
         )
-        rec = Record(target, r.subject, r.source_path, r.source_sha256, fact.extractor, r.doc_kind, {fact.attribute: fact})
+        rec = Record(target, target_subject, r.source_path, r.source_sha256, fact.extractor, r.doc_kind,
+                     {fact.attribute: fact})
         derived.append(rec)
     return derived, skipped
 
@@ -346,7 +351,11 @@ def contradiction_issues(rule: dict, believed: list[Believed], max_sides: int = 
 
 def evaluate(rules: list[dict], records: list[Record], settings: dict, now: datetime):
     """Returns (believed values, issues, diagnostics)."""
-    derived, skipped = derive_change_records(records, settings.get("change_record_fact_type", "change_record"), now)
+    derived, skipped = derive_change_records(
+        records, settings.get("change_record_fact_type", "change_record"), now,
+        tuple(settings.get("change_record_subject_exclude", ("field", "change_field", "change_id"))))
+    from .resolve import resolve
+    resolved = resolve(records, settings)
     all_records = records + derived
     believed: list[Believed] = []
     issues: list[Issue] = []
@@ -354,5 +363,6 @@ def evaluate(rules: list[dict], records: list[Record], settings: dict, now: date
         res = evaluate_rule(rule, all_records)
         believed.extend(res)
         issues.extend(contradiction_issues(rule, res, int(settings.get("max_issue_sides", 6))))
-    diagnostics = {"records": len(records), "derived": len(derived), "derived_skipped": skipped[:50]}
+    diagnostics = {"records": len(records), "derived": len(derived), "derived_skipped": skipped[:50],
+                   "resolved": len(resolved), "resolved_samples": resolved[:50]}
     return believed, issues, diagnostics
