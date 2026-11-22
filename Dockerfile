@@ -12,6 +12,7 @@ COPY tracker ./tracker
 COPY kb ./kb
 COPY mail ./mail
 COPY plan ./plan
+COPY sourcing ./sourcing
 COPY structured ./structured
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod 755 /usr/local/bin/docker-entrypoint.sh \

@@ -2,6 +2,10 @@
 
 import dataclasses
 import os
+import re
+import shutil
+import subprocess
+import sys
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
@@ -345,3 +349,12 @@ def test_goal_turns_green_after_accept_only_when_coverage_meets_it(tmp_path, sto
     la.append([plan(4200)], "monitor")
     out = decisions.card(la, "D", stores)["end_state"]
     assert out["met"] and out["text"] == "Deluxe 4,200 of 4,200 covered"
+
+
+def test_the_image_holds_what_the_decisions_import(tmp_path):
+    root = Path(__file__).resolve().parent.parent
+    for name in re.findall(r"^COPY (\w+) \./\1$", (root / "Dockerfile").read_text(), re.M):
+        shutil.copytree(root / name, tmp_path / name)
+    done = subprocess.run([sys.executable, "-c", "import tracker.web, tracker.lookahead_decisions"], cwd=tmp_path,
+                          capture_output=True, text=True, env={"PATH": ""})
+    assert done.returncode == 0, done.stderr
