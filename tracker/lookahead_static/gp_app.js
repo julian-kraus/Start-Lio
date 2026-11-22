@@ -179,30 +179,11 @@ function dqCard(d) {
   <div class="dc-plan"><div class="dc-plan-h"><span>On accept · ${esc(supName(d.supplier_id))}</span><span class="dc-more">${ic("arrow-right")}</span></div><ul>${plan}</ul></div>
   <div class="dc-foot">${signerLine(d)}${acts(d)}</div></article>`;
 }
-function why(d) {
-  const ev = (S.events || []).filter(e => e.lane === d.lane && e.detail && (e.detail.reasoning || []).length);
-  const rows = ev.flatMap(e => e.detail.reasoning).slice(-6);
-  return rows.map(whyRow).join("");
-}
-function decCard(d) {
-  const proms = (S.promises || []).filter(p => p.lane === d.lane);
-  const steps = proms.map(p => {
-    const k = p.state === "proven" ? "done" : p.state === "broken" ? "bad" : "";
-    return `<li class="k-${k}"><span class="pd-t">${esc(dhm(p.due || p.next_check))}</span><i>${k === "done" ? ic("check") : k === "bad" ? ic("x") : ""}</i><span class="pd-x">${esc(supName(p.supplier_id))}: ${esc(p.what)}</span></li>`;
-  }).join("") + `<li class="k-dead"><span class="pd-t">${esc(dhm(S.launch.deadline))}</span><i></i><span class="pd-x">Deadline</span></li>`;
-  return `<article class="dc2"><div class="dc2-meta">${B("r", "Open")}<span class="dc2-due">${ic("clock")}<b>Raised ${esc(dhm(d.at))}</b></span></div>
-  <h3 class="dc2-t">${esc(d.title)}</h3><p class="dc2-sum">${esc(d.recommendation || "")}</p>
-  <div class="dc2-kpi"><div><span>To pay, on delivery</span><b>${eur(d.cost && d.cost.eur)}</b><small>${esc(d.cost && d.cost.text)}</small>${srcLine(d.cost && d.cost.sources)}</div>
-   <div><span>Refunds if ignored</span><b class="bad">${eur(d.impact && d.impact.eur)}</b><small>${esc(d.impact && d.impact.text)}</small>${srcLine(d.impact && d.impact.sources)}</div>
-   <div><span>Copies protected</span><b>${num(d.impact && d.impact.units)}</b><small>${esc((S.launch || {}).name || "")}</small>${srcLine(d.impact && d.impact.sources)}</div></div>
-  <div class="dc2-cols"><section><p class="pd-h">${esc(supName(d.supplier_id))}</p><ol class="pd-steps">${steps}</ol></section>
-   <section><p class="pd-h">${ic("sparkles")}Why the agent suggests this</p><dl class="pd-why">${why(d)}</dl></section></div>
-  <div class="dc2-foot"><div class="pd-sign"><span class="act-av${signerOf(d).name ? "" : " empty"}">${esc(signerOf(d).name ? initials(signerOf(d).name) : "?")}</span><span><b>${esc(signerText(signerOf(d)))}</b><small>${esc([signerOf(d).rule, signerOf(d).reason].filter(Boolean).join(". "))}</small></span></div>${acts(d)}</div></article>`;
-}
+// decCard (the full decision card) lives in gp_decision.js
 function decisions() {
   const open = openDecisions();
   $("#decCount").textContent = open.length; $("#dqCount").textContent = open.length;
-  $("#dq").innerHTML = open.length ? dqCard(open[0]) : `<article class="dq-card ac"><p class="sm muted">Nothing waiting for you.</p></article>`;
+  $("#dq").innerHTML = open.length ? dqCard(open[0]) : fxAllClear();
   $("#decOpen").innerHTML = open.length ? open.map(decCard).join("") : `<p class="sm muted">Nothing waiting for you.</p>`;
   const done = (S.decisions || []).filter(d => d.status !== "open");
   $("#decDone").textContent = done.length;
@@ -229,11 +210,13 @@ async function accept(id) {
     note("The signer changed. Nothing was sent; check the name and click again.");
     return;
   }
-  const approver = shown.name;
+  const approver = shown.name, dec = (S.decisions || []).find(x => x.decision_id === id) || {};
+  fxSend(true, `Sending to ${supName(dec.supplier_id)}…`);
   const r = await fetch(`/api/lookahead/decisions/${encodeURIComponent(id)}/accept`, {method: "POST",
     headers: {"Content-Type": "application/json"}, body: JSON.stringify({approver})});
   shown.busy = false;
   note(r.ok ? "" : (await r.json().catch(() => ({}))).error || "Accept failed");
+  if (r.ok) { fxSend(true, `Sent to ${supName(dec.supplier_id)}`, true); setTimeout(() => fxSend(false), 1400); } else fxSend(false);
   load();
 }
 let REJ = null;
