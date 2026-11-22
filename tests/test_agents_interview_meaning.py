@@ -172,3 +172,43 @@ def test_a_fortnight_is_no_next_sunday():
 def test_a_full_stop_in_the_quote_does_not_borrow_the_next_refusal(quote):
     answer = "All on time. Supplier goodwill can suffer. Don't bankrupt me."
     assert confirmed(read(answer, item("trade_off", quote), item("ceiling", "Don't bankrupt me")))["sacrifices"]
+
+
+# ---- A: "all" needs words that say every edition ----------------------------------------
+
+DEMO = "All Deluxe copies on time. Supplier goodwill can suffer. Don't bankrupt me."
+FIRST = item("priority", "All Deluxe copies on time", edition=DELUXE)
+
+
+@pytest.mark.parametrize("items", [
+    [item("priority", "Don't bankrupt me", edition="all")],
+    [item("priority", "bankrupt", edition="all"), item("trade_off", "Supplier goodwill can suffer")],
+    [FIRST, item("priority", "Don't bankrupt me", edition="all")],
+    [FIRST, item("priority", "Supplier goodwill", edition="all")],
+])
+def test_a_stray_all_does_not_price_every_edition(items):
+    blocked(read(DEMO, *items))
+
+
+def test_a_value_marked_all_stays_with_the_edition_the_goal_protects():
+    answer = {"goal": DEMO, "limits": "A missing copy costs 75 EUR"}
+    blocked(read(answer, FIRST, item("value", answer["limits"], "75 EUR", "all")))
+
+
+@pytest.mark.parametrize("answer", ["Every copy of the first-priority edition is on time.",
+                                    "The top edition is on time"])
+def test_one_unnamed_edition_does_not_price_every_edition(answer):
+    blocked(read(answer, item("priority", answer)))
+    blocked(read(answer, item("priority", answer, edition="all")))
+
+
+def test_one_unnamed_edition_takes_a_value_given_per_edition():
+    answer = "Every copy of the first-priority edition is on time."
+    goal = confirmed(read(answer, item("priority", answer), inputs={**INPUTS, "unit_loss": {DELUXE: "60"}}))
+    assert (goal["edition"], goal["unit_loss_eur"]) == (DELUXE, 60)
+
+
+@pytest.mark.parametrize("answer, edition", [("Everything on time", "all"), ("Every edition on time", "all"),
+                                             ("Each edition is on time", ""), ("On time", "")])
+def test_a_goal_for_every_edition_still_confirms(answer, edition):
+    assert confirmed(read(answer, item("priority", answer, edition=edition)))["edition"] == "all"

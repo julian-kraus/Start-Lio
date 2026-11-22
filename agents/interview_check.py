@@ -30,6 +30,8 @@ GIVEN_UP = re.compile(r"\b(?:(?:can|may|could|might) (?:wait|suffer|slip|be late
                       re.IGNORECASE)
 TURN = re.compile(r"\b(?:but|however|though|although)\b", re.IGNORECASE)
 EVERY = re.compile(r"\b(?:(?:every|all|each|both) editions?|both)\b", re.IGNORECASE)
+EVERYTHING = re.compile(r"\b(?:all|both|every|everything|each|whole|entire)\b", re.IGNORECASE)
+ONE_EDITION = re.compile(r"(?<!\bevery )(?<!\beach )(?<!\bper )(?<!\bany )\bedition\b", re.IGNORECASE)
 SPEND = re.compile(r"\b(?:spend\w*|budget|ceiling|cap|at most|no more than)\b", re.IGNORECASE)
 PER_COPY = re.compile(r"\b(?:worth|missing|(?:a|per|each) copy|apiece)\b", re.IGNORECASE)
 MONEY_TALK = re.compile(r"€|\b(?:eur|euros?|spend\w*|spent|pay|budget|ceiling|cap|costs?|worth|value|price|at most"
@@ -111,6 +113,8 @@ def priority_edition(place: Place, given: str | None, editions: list[str]) -> No
     if given == "all":
         if hit and not EVERY.search(clause):
             raise text.UnreadableError(f"{clause.strip()!r} names {hit}, which is not every edition")
+        if not hit and named(place.answer, editions) and not EVERYTHING.search(clause):
+            raise text.UnreadableError(f"{clause.strip()!r} does not say every edition")
     elif given:
         if given not in hit:
             raise text.UnreadableError(f"the answer does not name {given!r}")
@@ -138,6 +142,8 @@ def value_edition(place: Place, given: str | None, editions: list[str], protecte
     if given == "all":
         if hit and set(hit) != set(editions) and not EVERY.search(clause):
             raise text.UnreadableError(f"{clause.strip()!r} names {hit}, which is not every edition")
+        if not hit and protected and set(protected) != set(editions) and not EVERY.search(clause):
+            raise text.UnreadableError(f"{clause.strip()!r} does not say every edition: give no edition")
     elif given:
         if several:
             raise text.UnreadableError(f"cannot tell which of {hit} the amount is for")
@@ -310,6 +316,16 @@ def unprotected(answers: Mapping[str, str], editions: list[str], lines: list[dic
             for start, end in reversed(text.spans(x["quote"], rest)):
                 rest = rest[:start] + " . " + rest[end:]
     return [f"the goal names {e!r} and no priority item does" for e in named(rest, editions) if e not in protected]
+
+
+def unnamed_edition(answers: Mapping[str, str], editions: list[str], lines: list[dict]) -> list[str]:
+    """A goal for one edition it does not name cannot hand a value without an edition to all of them."""
+    goal = answers.get("goal", "")
+    if len(editions) < 2 or named(goal, editions) or not ONE_EDITION.search(goal):
+        return []
+    if not any(x["field"] == "value" and x["edition"] in (None, "all") for x in lines):
+        return []
+    return ["the goal means one edition without naming it: name the edition, or give the value per edition"]
 
 
 def contradicted(answers: Mapping[str, str], lines: list[dict], filled: list[dict]) -> list[str]:

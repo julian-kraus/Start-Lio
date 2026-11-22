@@ -359,6 +359,7 @@ def interview(client: LLMClient, answers: str | Mapping[str, str], *, editions: 
     unread = result.verdict["rejected"] if result.guard_failed else reading.problems
     lines, gaps = _combine(reading.lines, filled, names)
     gaps += check.contradicted({k: text.normal(v) for k, v in said.items()}, reading.lines, filled)
+    gaps += check.unnamed_edition({k: text.normal(v) for k, v in said.items()}, names, lines)
     return Draft(answers=said, editions=names, lines=lines, problems=[*unread, *gaps], product=product,
                  deadline=deadline, run_id=str(result.run_id) if result.run_id else None,
                  guard_failed=result.guard_failed)
