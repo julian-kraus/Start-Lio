@@ -130,3 +130,29 @@ def test_po_line_that_already_differs_from_the_printed_item_is_kept():
               "value": "00030"}]
     env = _envelope({"facts": facts}, "order_confirmation", {})
     assert env["facts"][0]["subject"]["po_line"] == 3
+
+
+# ---------- dates and flags in the form the records use ----------
+
+@pytest.mark.parametrize("raw,iso", [("2031/02/03", "2031-02-03"), ("03.02.2031", "2031-02-03"),
+                                     ("23/02/2031", "2031-02-23"), ("2031-2-3", "2031-02-03")])
+def test_unambiguous_dates_become_iso(raw, iso):
+    env = _envelope({"facts": [fact(raw, attribute="note_date")]}, "delivery_note_scan", NUMERIC)
+    assert env["facts"][0]["value"] == iso and env["facts"][0]["evidence"] == raw
+
+
+@pytest.mark.parametrize("raw", ["03/02/2031", "early February", "31.13.2031"])
+def test_ambiguous_or_invalid_dates_stay_as_printed(raw):
+    env = _envelope({"facts": [fact(raw, attribute="received_stamp_date")]}, "delivery_note_scan", NUMERIC)
+    assert env["facts"][0]["value"] == raw
+
+
+@pytest.mark.parametrize("raw,flag", [("yes", True), ("No", False), ("x", True)])
+def test_flags_become_booleans(raw, flag):
+    env = _envelope({"facts": [fact(raw, attribute="receiver_signature_present")]}, "delivery_note_scan", NUMERIC)
+    assert env["facts"][0]["value"] is flag
+
+
+def test_a_flag_word_outside_a_flag_attribute_is_text():
+    env = _envelope({"facts": [fact("yes", attribute="remark")]}, "delivery_note_scan", NUMERIC)
+    assert env["facts"][0]["value"] == "yes"

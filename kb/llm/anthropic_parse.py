@@ -42,6 +42,13 @@ _INT_SUBJECT = re.compile(r"(?:^|_)line$|^statement_no$")
 # index, the printed item number divided by ten. A model copies the printed number, so po_line is corrected in code
 # when it equals the record's own item_no_printed.
 _PRINTED_ITEM_ATTR, _PRINTED_ITEM_STEP = "item_no_printed", 10
+# The contract types dates and flags as string, so they are recognised by attribute name. Records hold ISO dates
+# and true/false flags; a model copies "20.11.2026" or "yes" as printed.
+_DATE_ATTR = re.compile(r"(?:^|_)date$")
+_FLAG_ATTR = re.compile(r"(?:_present$|^struck_through$|^is_|^has_)")
+_ISO = re.compile(r"(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})")
+_DMY = re.compile(r"(\d{1,2})([./])(\d{1,2})\2(\d{4})")
+_YES, _NO = {"yes", "y", "true", "ja", "x", "1", "present", "signed"}, {"no", "n", "false", "nein", "0", "absent", "none"}
 _ENVELOPE_KEYS = ("source", "doc_kind", "doc_kind_confidence", "languages", "spec_version", "extracted_by",
                   "doc_date", "facts", "unreadable", "proposed_fact_types")
 # Subject keys per fact type come from this read-only contract file (contract_summary omits them).
@@ -143,6 +150,40 @@ def _coerce_subject(subject: dict) -> dict:
     return out
 
 
+def _iso_date(value: str) -> str | None:
+    """ISO date for an unambiguous printed date: year first, a dotted day-month-year, or a slash date whose first
+    part cannot be a month. Anything else (a slash date that could be either order) stays as printed."""
+    s = value.strip()
+    if (m := _ISO.fullmatch(s)):
+        y, mo, d = m.groups()
+    elif (m := _DMY.fullmatch(s)):
+        d, sep, mo, y = m.groups()
+        if sep == "/" and int(d) <= 12:
+            return None
+    else:
+        return None
+    if not (1 <= int(mo) <= 12 and 1 <= int(d) <= 31):
+        return None
+    return f"{int(y):04d}-{int(mo):02d}-{int(d):02d}"
+
+
+def _typed_by_name(f: dict) -> None:
+    """Dates to ISO and flags to booleans by attribute name, keeping the printed text as evidence."""
+    value, attr = f.get("value"), str(f.get("attribute") or "")
+    if not isinstance(value, str):
+        return
+    new = None
+    if _DATE_ATTR.search(attr):
+        new = _iso_date(value)
+    elif _FLAG_ATTR.search(attr):
+        low = value.strip().lower()
+        new = True if low in _YES else False if low in _NO else None
+    if new is not None and new != value:
+        if f.get("evidence") is None:
+            f["evidence"] = value
+        f["value"] = new
+
+
 def _po_line_from_printed_item(facts: list[dict]) -> None:
     """po_line = printed item number // 10 for every fact of a record whose po_line is the printed item number."""
     printed = {}
@@ -170,6 +211,7 @@ def _envelope(data: dict, default_kind: str, numeric_attrs: dict | None = None) 
         f = dict(f)
         if isinstance(f.get("subject"), dict):
             f["subject"] = _coerce_subject(f["subject"])
+        _typed_by_name(f)
         value, attr = f.get("value"), f.get("attribute")
         if isinstance(value, str) and attr in numeric_attrs.get(f.get("fact_type"), ()):
             count = bool(_QUANTITY_ATTR.search(str(attr)))
