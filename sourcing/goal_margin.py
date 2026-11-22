@@ -1,7 +1,8 @@
 """Does the goal protect margin? A closed grammar over the person's words. Pure functions, no LLM.
 
 `read` gives (line, None) when it does, (None, None) when it does not and (None, words) when the words on margin
-are not among the recognised forms. Those are never guessed: the goal's `protect` list settles them.
+are not among the recognised forms. Those are never guessed: the goal's `protect` list settles them. The same
+holds in every field: a sacrifice, a protect entry and the answer to a question on margin.
 """
 
 from __future__ import annotations
@@ -37,7 +38,10 @@ GIVES_UP = re.compile("|".join((
 )))
 NEGATION = re.compile(r"\b(?:not|never|cannot|no|stop|forget)\b")
 CONDITION = re.compile(r"\b(?:unless|except|only if|only when|as long as)\b")
-ALL_BUT = re.compile(r"\b(?:except|other than|apart from|but|not)\b")
+GIVEN = re.compile(rf"(?:(?:some|lower|a bit of|a little) )?{M}|{GIVES_UP.pattern}")
+KEPT = re.compile(rf"{M}|{PROTECTS.pattern}")
+ASKS = re.compile(rf"(?:(?:should|do|must) (?:we|i|you) (?:(?:want to|need to|have to) )?)?{V} {M}")
+NO = re.compile(r"no|nope|false")
 CLAUSE = re.compile(r"[,:]|\s[-\u2013]+\s|\u2014|(?<!anything )(?<!everything )(?<!nothing )\bbut\b", re.IGNORECASE)
 
 
@@ -62,17 +66,52 @@ def _plain(text: str) -> str:
     return OTHER_MARGIN.sub("", text).strip(" \"'")
 
 
+def _asked(answers) -> Iterable[tuple[str, object]]:
+    """Each question, or the key standing for one, with its answer."""
+    if isinstance(answers, (list, tuple)):
+        for item in answers:
+            yield from _asked(item)
+    elif isinstance(answers, Mapping):
+        if question := answers.get("q") or answers.get("question"):
+            yield str(question), answers.get("a", answers.get("answer"))
+        else:
+            for key, item in answers.items():
+                if isinstance(item, (Mapping, list, tuple)):
+                    yield from _asked(item)
+                else:
+                    yield str(key).replace("_", " "), item
+
+
 def read(goal: Mapping | None) -> tuple[str | None, str | None]:
     if not goal:
         return None, None
+    given, unclear = False, None
     for text in _strings(goal.get("sacrifices")):
-        if MARGIN.search(said := _plain(text)):
-            return (None, text) if ALL_BUT.search(said) else (None, None)
+        if MARGIN.search(said := _plain(text).rstrip(" .!;")):
+            if GIVEN.fullmatch(said):
+                given = True
+            else:
+                unclear = unclear or text
+    if given and not unclear:
+        return None, None
     if goal.get("protect") is not None:
-        kept = [text for text in _strings(goal["protect"]) if "margin" in text.lower()]
-        return (f"protect: {kept[0]}" if kept else None), None
+        kept = None
+        for text in _strings(goal["protect"]):
+            if MARGIN.search(said := _plain(text).rstrip(" .!;")):
+                if not KEPT.fullmatch(said):
+                    return None, text
+                kept = kept or f"protect: {text}"
+        return kept, None
+    if unclear:
+        return None, unclear
 
     protects, gives_up = [], []
+    for question, answer in _asked(goal.get("answers")):
+        asked, said = _plain(question).rstrip(" ?"), _plain("" if answer is None else str(answer)).rstrip(" .!")
+        if said and MARGIN.search(asked) and not MARGIN.search(said):       # "yes" alone does not mention margin
+            if not (ASKS.fullmatch(asked) and NO.fullmatch(said)):
+                return None, f"{question} {answer}"
+            gives_up.append(f"{question} {answer}")
     for text in _strings([goal.get("statement"), goal.get("answers")]):
         for sentence in re.findall(r"[^.;!?\n]+[.;!?]?", text):
             whole = _plain(sentence)
