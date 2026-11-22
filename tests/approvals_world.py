@@ -4,6 +4,7 @@ POLICY = """Example Co · AP-1 Approval rules · v2.0
 Version 2.0 · Effective 2030-01-01 · Owner: Purchasing Director
 1. Purpose
 This policy says who may approve orders.
+Budgets are set by the Chief Treasury Officer.
 2. Approval limits by value (per order, in EUR)
 Role
 Limit per order

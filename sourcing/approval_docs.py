@@ -106,6 +106,14 @@ class Policy:
     exceptions: Rule | None = None
     scope: str | None = None
     title: str = ""
+    text: str = ""
+
+    def spellings(self, role: str) -> list[str]:
+        """The role and, for an abbreviated chief, its title if this policy writes out exactly one that fits."""
+        if not re.fullmatch(r"C[A-Z]O", role.strip()):
+            return [role]
+        middles = {m for m in re.findall(rf"\bChief\s+({WORD})\s+Officer\b", self.text) if m[0] == role.strip()[1]}
+        return [role, f"Chief {middles.pop()} Officer"] if len(middles) == 1 else [role]
 
     def same_policy(self, other: "Policy") -> bool:
         """Versions or readings of one policy, as opposed to another policy that also states limits."""
@@ -247,20 +255,30 @@ def _release(section: Section) -> Rule:
     return rule
 
 
+def unread_policy(doc: Document, known: Policy) -> bool:
+    """A document that `read_policy` did not read, but that could be the approval policy or a newer version of it."""
+    if known.same_policy(Policy(doc.path, "", None, None, [], [], scope=doc.scope, title=doc.lines[0].text)):
+        return True
+    if not any(re.search(r"\bapprov", line.text, re.I) for line in doc.lines):
+        return False
+    return any(LIMIT_CELL.fullmatch(line.text) for line in doc.lines)
+
+
 def read_policy(doc: Document) -> Policy | None:
-    """None when the document has no table of approval limits, so it is some other policy."""
+    """None when the document has no table of approval limits. `unread_policy` says whether that is safe to ignore."""
     parts = sections(doc.lines)
     value = next((s for s in parts if re.search(r"\blimits?\b", s.title, re.I)), None)
     if value is None:
         return None
     text = " ".join(x.text for x in doc.lines)
     version = re.search(r"\b(?:Version\s+|v)(\d+(?:\.\d+)*)\b", text)
-    effective = re.search(r"\bEffective\s+(\d{4}-\d\d-\d\d)\b", text, re.I)
+    stated = list(re.finditer(r"\bEffective\s+(\d{4}-\d\d-\d\d)\b", text, re.I))
+    effective = stated[0] if len({m[1] for m in stated}) == 1 else None     # two dates are not a choice to make
     policy = Policy(doc.path, doc.scope or doc.lines[0].text, version[1] if version else None,
                     iso_date(effective[1]) if effective else None, list(doc.problems),
                     [x.fact_id for x in doc.lines if (version and version[0] in x.text)
                      or (effective and effective[0] in x.text)], value,
-                    scope=doc.scope, title=doc.lines[0].text)
+                    scope=doc.scope, title=doc.lines[0].text, text=text)
     _tiers(value, policy)
     for section in parts:
         if section is value:

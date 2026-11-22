@@ -18,8 +18,9 @@ from __future__ import annotations
 from datetime import date, datetime, timedelta
 from decimal import Decimal, InvalidOperation
 
-from sourcing.approval_chart import HELD, Chart, cited_lines, read_charts, seat_scope, title_scope
-from sourcing.approval_docs import CHART_KIND, POLICY_KIND, Policy, Rule, Section, documents, read_policy, words
+from sourcing.approval_chart import HELD, Chart, cited_lines, read_charts, readings_differ, seat_scope, title_scope
+from sourcing.approval_docs import (CHART_KIND, POLICY_KIND, Policy, Rule, Section, documents, read_policy,
+                                    unread_policy, words)
 from sourcing.approval_sites import Site, read_sites, seat_scopes
 
 ACTIONS = ("purchase_order", "air_freight", "conditional_release", "release_extension")
@@ -50,11 +51,14 @@ def _version(value: str | None) -> tuple:
 
 
 def _policy(rows: list[dict], today: date) -> tuple[Policy | None, list[str]]:
-    found = [p for p in map(read_policy, documents(rows, POLICY_KIND)) if p]
+    docs = documents(rows, POLICY_KIND)
+    read = [(doc, read_policy(doc)) for doc in docs]
+    found = [p for _, p in read if p]
+    unsure = [problem for doc in docs for problem in doc.problems]     # what cannot be read could be the newest
     usable = [p for p in found if p.effective is None or p.effective <= today]
     undated = [f"{p.path}: no readable effective date" for p in found if p.effective is None]
     if not usable:
-        return None, ["no approval policy in force was found in the facts"]
+        return None, unsure + ["no approval policy in force was found in the facts"]
     rank = lambda p: (p.effective or date.min, _version(p.version))
     best = max(usable, key=rank)
 
@@ -63,7 +67,10 @@ def _policy(rows: list[dict], today: date) -> tuple[Policy | None, list[str]]:
         return (p.currency, [(t.roles, t.op, t.amount) for t in p.tiers],
                 [(r.roles, r.above, r.limit, r.currency, r.days, r.once) if r else None for r in rules])
 
-    problems = undated + best.problems     # a policy without a date could be the newer one
+    unsure += [f"{doc.path}: could be the approval policy, but no limits could be read from it"
+               for doc, policy in read if not policy and doc.lines and unread_policy(doc, best)]
+    # a policy without a date could be the newer one
+    problems = list(dict.fromkeys(undated + unsure + best.problems))
     others = sorted({p.path for p in usable if not p.same_policy(best)})
     if others:
         problems.append(f"different policies state approval limits: {best.path} and {', '.join(others)}")
@@ -74,31 +81,40 @@ def _policy(rows: list[dict], today: date) -> tuple[Policy | None, list[str]]:
 
 def _chart(rows: list[dict], today: date) -> tuple[Chart | None, list[Chart], list[str]]:
     found, undated = read_charts(rows, documents(rows, CHART_KIND))
-    undated += [p for c in found if c.dated is None for p in c.problems]
+    undated += [p for c in found for p in c.problems]     # what cannot be read could be the newest
     usable = [c for c in found if c.dated and c.dated <= today]
     if not usable:
         return None, found, undated + ["no org chart in force was found in the facts"]
     rank = lambda c: (c.dated, _version(c.version))
     best = max(usable, key=rank)
     seats = lambda c: sorted((s.title, s.scope, s.name or "", s.state, str(s.start), str(s.end)) for s in c.seats)
-    problems = undated + best.problems     # a chart without a date could be the newer one
+    problems = list(dict.fromkeys(undated))
     if any(rank(c) == rank(best) and seats(c) != seats(best) for c in usable):
         problems.append("two org charts with the same version and date disagree")
     return best, found, problems
 
 
-def _holder(chart: Chart, role: str, area: str | None, today: date, sites: list[Site] | None = None) -> dict:
+def _holder(chart: Chart, role: str, spellings: list[str], area: str | None, today: date,
+            sites: list[Site] | None = None) -> dict:
     """The seat of a role on that day: state is held, vacant, absent, unclear, not_started, ended or not_in_chart.
 
     With `sites` the area is a delivery site, otherwise a category, which matches exactly. Every seat that matches
-    has to be held on that day by the same person, otherwise nobody signs."""
-    matches = [(s, scope) for s in chart.seats if (scope := seat_scope(s, role)) is not None]
+    has to be held on that day by the same person, otherwise nobody signs. A seat without a scope counts next to the
+    one of the area, as it may be a reading that missed it. It stands in alone only where the role has no scopes."""
+    matches = [(s, scope) for s in chart.seats if (scope := seat_scope(s, spellings)) is not None]
+    if readings_differ(chart, matches):
+        return {"state": "unclear", "why": f"two readings of the org chart disagree on the seats for {role}",
+                "fact_ids": [i for s, _ in matches for i in s.ids]}
     site_ids: list[str] = []
     if area and sites is not None:
         fitting, site_ids = seat_scopes({scope for _, scope in matches}, area, sites)
-        matches = [m for m in matches if m[1] in fitting]
+        matches = [m for m in matches if m[1] in fitting or (fitting and not m[1])]
     elif area:
-        matches = [m for m in matches if set(words(m[1])) == set(words(area))] or [m for m in matches if not m[1]]
+        exact = [m for m in matches if set(words(m[1])) == set(words(area))]
+        if exact or all(not scope for _, scope in matches):
+            matches = exact + [m for m in matches if not m[1]]
+        else:
+            matches = []    # the role is held per category and none of its seats is this one
     elif any(scope for _, scope in matches):
         return {"state": "unclear", "why": f"{role} is held per category or site and none was given"}
     if not matches:
@@ -173,9 +189,11 @@ class _Routing:
         return self.label(section, detail)
 
     def rank(self, role: str) -> int | None:
+        mine = self.policy.spellings(role)
         for i, tier in enumerate(self.policy.tiers):
             for other in tier.roles:
-                if words(other) == words(role) or title_scope(other, role) == "" or title_scope(role, other) == "":
+                theirs = self.policy.spellings(other)
+                if any(title_scope(a, b) == "" or title_scope(b, a) == "" for a in mine for b in theirs):
                     return i
         return None
 
@@ -183,7 +201,7 @@ class _Routing:
         signer = {"role": role, "required_role": role, "rule": rule}
         if not self.chart:
             return {**signer, "state": "unclear"}
-        found = _holder(self.chart, role, area, self.today, sites)
+        found = _holder(self.chart, role, self.policy.spellings(role), area, self.today, sites)
         self.cite(found.get("fact_ids", []))
         signer.update(role=found.get("title", role), state=found["state"])
         if "seat_fact_ids" in found:
@@ -346,6 +364,8 @@ def route(rows: list[dict], *, action: str, on: date | datetime, amount_eur=None
         raise ValueError(f"action must be one of {', '.join(ACTIONS)}, got {action!r}")
     if isinstance(on, datetime) and on.tzinfo is None:
         raise ValueError("on needs a UTC offset")
+    if extensions_used is not None and extensions_used < 0:
+        raise ValueError(f"extensions_used must be >= 0, got {extensions_used!r}")
     amount, used = _money(amount_eur, "amount_eur"), _money(budget_used_eur, "budget_used_eur")
     routing = _Routing(list(rows), action, on.date() if isinstance(on, datetime) else on)
     if routing.policy:
@@ -353,10 +373,10 @@ def route(rows: list[dict], *, action: str, on: date | datetime, amount_eur=None
             routing.value(amount, amount_source, category)
             if delivery_site:
                 routing.site(delivery_site)
-            if release_valid_until:
-                routing.expired(release_valid_until, release_source)
         elif action == "air_freight":
             routing.air(amount, amount_source, category, used, budget_used_source)
         else:
             routing.release(category, released_on, release_source, extensions_used)
+        if release_valid_until and action in ("purchase_order", "release_extension"):
+            routing.expired(release_valid_until, release_source)
     return routing.result()

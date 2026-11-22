@@ -18,7 +18,8 @@ SEAT_TYPE = "org_seat"
 HELD = "held"
 STATUSES = (HELD, "vacant", "absent", "unclear")
 ATTRIBUTES = ("holder", "status", "valid_from", "valid_until", "line_key")
-SENIORITY = {"senior", "junior", "principal", "acting"}
+SENIORITY = {"senior"}             # every other grade (junior, acting, principal, deputy) is another seat
+OTHER_DATE = re.compile(r"\b(?:19|20)\d\d\b|\b\d{1,2}([./-])\d{1,2}\1\d{2,4}\b")
 
 
 @dataclass
@@ -31,6 +32,7 @@ class Seat:
     end: date | None
     line_key: str | None
     ids: list[str]
+    reading: str = ""               # the extractor that read it
 
     @property
     def label(self) -> str:
@@ -64,20 +66,14 @@ def title_scope(title: str, term: str) -> str | None:
     while base and base[0] in SENIORITY:
         base = base[1:]
     wanted = words(term)
-    if re.fullmatch(r"C[A-Z]O", term.strip()):
-        if len(base) < 3 or base[0] != "chief" or base[2] != "officer" or base[1][0] != term.strip()[1].lower():
-            return None
-        size = 3
-    elif wanted and base[:len(wanted)] == wanted:
-        size = len(wanted)
-    else:
+    if not wanted or base[:len(wanted)] != wanted:
         return None
-    return " ".join(base[size:] + (words(paren[2]) if paren else []))
+    return " ".join(base[len(wanted):] + (words(paren[2]) if paren else []))
 
 
-def seat_scope(seat: Seat, role: str) -> str | None:
+def seat_scope(seat: Seat, spellings: list[str]) -> str | None:
     """What the seat is limited to, by its title and its scope key together. Neither can widen the other."""
-    in_title = title_scope(seat.title, role)
+    in_title = next((s for role in spellings if (s := title_scope(seat.title, role)) is not None), None)
     if in_title is None:
         return None
     printed = words(seat.scope)
@@ -85,6 +81,14 @@ def seat_scope(seat: Seat, role: str) -> str | None:
     if set(titled) <= set(printed):
         return " ".join(printed)
     return in_title if set(printed) <= set(titled) else " ".join(titled + printed)
+
+
+def readings_differ(chart: Chart, matches: list[tuple[Seat, str]]) -> bool:
+    """Whether the extractors that read seats from this chart differ on a role: its scopes, states, holders or dates."""
+    read: dict[str, set] = {seat.reading: set() for seat in chart.seats}
+    for seat, scope in matches:
+        read[seat.reading].add((frozenset(scope.split()), seat.state, seat.name or "", str(seat.start), str(seat.end)))
+    return len({frozenset(found) for found in read.values()}) > 1
 
 
 def read_seats(rows: list[dict]) -> dict[tuple[str, str], list[Seat]]:
@@ -98,8 +102,10 @@ def read_seats(rows: list[dict]) -> dict[tuple[str, str], list[Seat]]:
                str(subject.get("title") or ""), str(subject.get("scope") or ""))
         groups.setdefault(key, []).append(row)
     seats: dict[tuple[str, str], list[Seat]] = {}
-    for (path, sha, _, title, scope), facts in sorted(groups.items()):
-        seats.setdefault((path, sha), []).append(_seat(title, scope, facts))
+    for (path, sha, reading, title, scope), facts in sorted(groups.items()):
+        seat = _seat(title, scope, facts)
+        seat.reading = reading
+        seats.setdefault((path, sha), []).append(seat)
     return seats
 
 
@@ -128,9 +134,14 @@ def _seat(title: str, scope: str, facts: list[dict]) -> Seat:
 
 def read_chart(doc: Document) -> Chart:
     """The version and date of a chart, with the line that states them."""
-    for line in doc.lines[:4]:
+    top = doc.lines[:4]
+    for line in top:
         header = re.search(r"\bv(?:ersion\s*)?(\d+(?:\.\d+)*)\b.*?(\d{4}-\d\d-\d\d)", line.text, re.I)
         if header and (dated := iso_date(header[2])):
+            rest = " | ".join(x.text for x in top).replace(header[2], " ")
+            if OTHER_DATE.search(re.sub(r"\bv(?:ersion\s*)?\d+(?:\.\d+)*\b", " ", rest, flags=re.I)):
+                why = f"{doc.path}: more than one date at the top, so the date of the chart is unclear"
+                return Chart(doc.path, doc.sha256, header[1], None, [*doc.problems, why], [line.fact_id])
             return Chart(doc.path, doc.sha256, header[1], dated, list(doc.problems), [line.fact_id])
     return Chart(doc.path, doc.sha256, None, None, doc.problems + [f"{doc.path}: no version and date"], [])
 
