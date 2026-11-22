@@ -13,6 +13,7 @@
   <div class="row" style="gap:12px"><span class="logo" data-i="trending-up"></span><div><p style="font-weight:700;font-size:16px;letter-spacing:-.01em">Grand Plan Lio</p></div></div>
   <nav class="row" style="gap:2px" aria-label="Views">
     <button class="tab on" data-view="timeline"><span data-i="clock"></span>Timeline</button>
+    <button class="tab" data-view="plan"><span data-i="document"></span>Plan</button>
     <button class="tab" data-view="weak"><span data-i="alert-triangle"></span>Risks &amp; monitoring</button>
     <button class="tab" data-view="decisions"><span data-i="gavel"></span>Decisions <span class="count" id="decCount">0</span></button>
   </nav>
@@ -39,6 +40,8 @@
     </div></section>
     <section class="card"><div class="row" style="color:var(--v7)"><span data-i="sparkles"></span><h2 class="h-sm" style="color:var(--text)">What the agent did</h2></div><ul class="feed" id="feed" style="margin-top:18px"></ul></section>
   </div>
+
+  <div class="view" id="v-plan"></div>
 
   <div class="view" id="v-weak">
     <section class="card">
@@ -75,5 +78,6 @@
 
 <script src="/lookahead/static/gp_icons.js"></script>
 <script src="/lookahead/static/gp_app.js"></script>
+<script src="/lookahead/static/gp_plan.js"></script>
 </body>
 </html>

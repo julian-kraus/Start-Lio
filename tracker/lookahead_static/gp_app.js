@@ -193,11 +193,14 @@ function show(v) {
   document.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", t.dataset.view === v));
   document.querySelectorAll(".view").forEach(x => x.classList.toggle("on", x.id === "v-" + v));
   history.replaceState(null, "", "#v=" + v);
+  if (v === "plan" && typeof pfWires === "function") requestAnimationFrame(pfWires);   // connectors need the view visible
 }
 function render() {
   if (!S || !S.launch) return;
   TZ = S.launch.timezone || TZ;
-  header(); goal(); timeline(); feed(); decisions(); risks(); hydrate();
+  header(); goal(); timeline(); feed(); decisions(); risks();
+  if (typeof planView === "function") planView(S);
+  hydrate();
 }
 async function load() {
   S = await (await fetch("/api/lookahead/state")).json();
