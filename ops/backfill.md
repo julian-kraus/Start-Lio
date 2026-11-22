@@ -8,16 +8,17 @@ credential files.
 
 ## 0. Preconditions
 
-- The checkout has #7 (the extraction adapter), #65 (kb reads mail) and #78 (kb run follows portal events). Before
-  #65, `kb sync` deletes mail documents and `kb extract` loses their sender label. Before #78, a running worker does
-  not see new portal files. All three checks must print ok:
+- The checkout has #7 (the extraction adapter), #65 (kb reads mail), #78 (kb run follows portal events), #89 (kb run
+  reconciles a failure) and #66 (a document of no kind is tried once). Before #65, `kb sync` deletes mail documents
+  and `kb extract` loses their sender label. Before #78, a running worker does not see new portal files. Before #66,
+  the steps below pay again for every document of no kind. All three checks must print ok:
 
 ```sh
 git pull --ff-only
 python -m pip install -r requirements.txt
 python -c "import kb.mail_source; print('ok')"
 python -c "import kb.llm.anthropic; print('ok')"
-git merge-base --is-ancestor 752dbc0 HEAD && echo ok     # #78
+git merge-base --is-ancestor 504b7b7 HEAD && echo ok     # #78, #89, #66
 ```
 
 - The API key is in its file as described in AGENTS.md. The adapter reads it itself: do not export it or print it.
@@ -70,17 +71,16 @@ Read the first block of the output. The first line that matches says what to do:
 | `failed` above 0 | read the warning, fix the cause (key, network, missing package), run again with the same limit |
 | `done` or `needs_review` above 0 | go on to step 5 |
 | `mail_parked` above 0 | mail that fits no kind left the queue: run again with the same limit |
-| `unrouted` above 0 | no kind fits the oldest documents, they stay first in line (#66): run again with `--limit` one higher |
-| every count 0 | nothing is queued: go to step 6 |
+| `unrouted` above 0 | no kind fits that document, it is now set aside: run again with the same limit |
+| every count 0 | nothing is left to try: go to step 6 |
 
 Every failed run uses up one of the document's three attempts, and no command puts a failed document back into the
-queue. If `--limit` has passed `queue.pending` and `done` and `needs_review` are still 0, no queued document can be
-routed: skip step 5 and report on #36.
+queue. If every count is 0 while `queue.pending` is above 0, no queued document can be routed: report that on #36.
 
 ## 5. Drain
 
-`--limit` must be above `queue.pending`. Documents no kind fits stay at the head of the queue (#66), so with a small
-limit the same ones are read again and the rest are never reached.
+Keep `--limit` above `queue.pending`, so that each run reaches every document that is still to try. A document no
+kind fits is read once and then skipped until the doc kinds or the adapter change.
 
 ```sh
 for i in 1 2 3; do kbl extract --adapter "$ADAPTER" --limit 1000; done
@@ -111,8 +111,8 @@ kbl issues --kind promotion_needed --limit 1000     # structures the designer pr
 kbl explain <issue_key>                             # the detail behind one line
 ```
 
-If `pending` is left after step 5, do not loop on it: every run pays for another classification. Post the count on
-the backfill issue (#36).
+If `pending` is left after step 5 and one more run prints every count 0, do not loop on it: those documents fit no
+kind and wait for one. Post the count on the backfill issue (#36).
 
 Known gaps. These end with no facts and no issue, also after a reconcile. No list above shows them and no kb
 command finds them, so an empty queue does not prove them handled:
@@ -135,15 +135,11 @@ kbl run >> exports/logs/kb-run.log 2>&1 &                                  # no 
 KB_LLM_ADAPTER="$ADAPTER" kbl run >> exports/logs/kb-run.log 2>&1 &        # or: extracts as they arrive
 ```
 
-Run one of the two lines, not both. Use the second only when step 6 left nothing pending (#66: it classifies an
-unroutable document again on every poll, every 5 seconds).
+Run one of the two lines, not both. The second does not pay again on every poll for what step 6 left pending: it
+tries such a document again only after the doc kinds or the adapter change.
 
 Either worker sees new portal files by itself, so a drop needs no `kbl sync`. The first only queues what needs the
 model: drain it with steps 2, 5 and 7. The second extracts it, so do not run `kbl extract` next to it (step 2).
-
-Known gap of the second: a document that fails or lands in review in a later round can keep its `pending_extraction`
-issue until something reconciles (#89). When `kbl status` shows `failed` or `review` in `queue`, run
-`kbl reconcile --by "<your name>"` before you read the issues.
 
 ## 8. Report
 

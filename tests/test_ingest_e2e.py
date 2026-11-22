@@ -203,8 +203,8 @@ class Pipeline:
         settings = KbSettings(**{**vars(self.settings), "llm_adapter": adapter})
         self.thread = threading.Thread(target=consumer.run, args=(settings, self.stopping, 0.2), daemon=True)
         self.thread.start()
-        # the feed is followed from here on: what the portal drops next arrives as events, not by start-up sync
-        self.wait(lambda: self.rows("SELECT 1 FROM public.consumer_cursors WHERE consumer = %s", consumer.CONSUMER))
+        # not the cursor, which is committed before the sync: after this run a drop can only arrive as an event
+        self.wait(lambda: self.rows("SELECT 1 FROM runs WHERE trigger = 'startup_sync'"))
 
     def wait(self, condition, timeout: float = 20):
         deadline = time.monotonic() + timeout
@@ -367,9 +367,9 @@ def test_backfill_first_document_gets_past_one_of_no_kind(pipeline):
         pipeline.drop({path: blob})
         pipeline.wait(lambda: path in pipeline.statuses())
     pipeline.stop()
-    for limit, done in ((1, 0), (1, 0), (2, 1)):  # ops/backfill.md step 4: the same limit never gets past it
-        printed, _ = json.JSONDecoder().raw_decode(pipeline.kb("extract", "--adapter", REPLAY, "--limit", str(limit)))
-        assert (printed["unrouted"], printed["done"]) == (1, done)
+    for expected in ((1, 0), (0, 1), (0, 0)):  # ops/backfill.md step 4: the same limit moves on, then finds nothing
+        printed, _ = json.JSONDecoder().raw_decode(pipeline.kb("extract", "--adapter", REPLAY, "--limit", "1"))
+        assert (printed["unrouted"], printed["done"]) == expected
 
 
 @pytest.mark.parametrize("adapter", [REPLAY, None], ids=["worker", "backfill"])
