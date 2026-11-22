@@ -33,6 +33,21 @@ def ids(x) -> list[dict]:
     return [{"fact_id": f} for f in fids[:20]] or [{"scenario_input": "computed"}]
 
 
+MODELS = {"deposit_only": "deposit only, the backup can be cancelled", "full_order": "full order"}
+
+
+def shown(row: dict) -> str:
+    """A hedge drill-down value as the screen shows it, with its unit."""
+    v, unit = row.get("value"), str(row.get("unit") or "")
+    if isinstance(v, str):
+        return MODELS.get(v, v)
+    if "eur" in unit.casefold() or "price" in str(row.get("name", "")) or "deposit" in str(row.get("name", "")):
+        return eur(v)
+    if isinstance(v, float) and v < 1 and "p_fail" in str(row.get("name", "")):
+        return f"{v:.0%}"
+    return num(v) if isinstance(v, (int, float)) else str(v)
+
+
 def supplier_record(w: World, card: dict, master: dict, sid: str, parts: list[str], **extra) -> dict:
     return {"kind": "supplier", "supplier_id": sid, "name": master.get("name") or card.get("name") or sid,
             "country": master.get("country"), "city": master.get("city"), "lang": master.get("preferred_language"),
@@ -161,7 +176,7 @@ def build(w: World, scn: dict) -> list[dict]:
     add({"kind": "clock", "now": at(back["ordered_at"])})
     add(supplier_record(w, a_card, a_master, off["supplier_id"], [part]))
     add({"kind": "event", "type": "offer_in", "at": at(off["received_at"]),
-         "title": f"{off['label']} offers {num(off['units'])} units of {part}", "lane": part,
+         "title": f"{off['label']} offers {num(off['units'])} x {w.part_name(part)}", "lane": part,
          "supplier_id": off["supplier_id"], "severity": "info",
          "detail": {"happened": f"Offer: {num(off['units'])} at {eur(off['unit_price_eur'])}, loading "
                                 f"{instant(off['loads_at']):%a %H:%M} ({SCN}).",
@@ -171,7 +186,7 @@ def build(w: World, scn: dict) -> list[dict]:
          "impact": {"eur": deposit},
          "detail": {"happened": result["rationale"] if isinstance(result["rationale"], str)
                     else " ".join(map(str, result["rationale"])),
-                    "reasoning": [{"text": r.get("text"), "value": str(r.get("value"))}
+                    "reasoning": [{"text": r.get("text"), "value": shown(r)}
                                   for r in result["drilldown"]["inputs"]][:8],
                     "autonomy": {"mode": "autonomous",
                                  "text": f"Deposit {eur(deposit)} is under the goal's {eur(goal['budget_eur'])}."}}})

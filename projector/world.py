@@ -82,7 +82,7 @@ class World:
             if str(r.get("supplier_id")) == supplier_id:
                 share = r.get("share")
                 pct = f" ({float(share):.0%})" if share not in (None, "") else ""
-                found.append(f"{r.get('material_id')} {str(r.get('description') or '').split('(')[0].strip()}{pct}")
+                found.append(f"{str(r.get('description') or r.get('material_id')).split('(')[0].strip()}{pct}")
         return found
 
     def part_name(self, part_id: str) -> str:

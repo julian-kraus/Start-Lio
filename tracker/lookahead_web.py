@@ -29,6 +29,7 @@ from .lookahead import Lookahead, LookaheadError
 from .lookahead_clock import parse_time
 
 PAGE = Path(__file__).with_name("lookahead_page.html")
+PAGE_V2 = Path(__file__).with_name("lookahead_v2.html")   # the Grand Plan Lio layout, same records
 STATIC = Path(__file__).with_name("lookahead_static")
 STATIC_FILE = re.compile(r"/lookahead/static/([a-z0-9_]+\.(js|css))")
 STATIC_TYPES = {"js": "text/javascript; charset=utf-8", "css": "text/css; charset=utf-8"}
@@ -139,6 +140,8 @@ class LookaheadRoutes:
     def _lookahead_file(self, path: str):
         if path == "/lookahead":
             return self._send(200, PAGE.read_bytes(), "text/html; charset=utf-8")
+        if path == "/lookahead/v2":
+            return self._send(200, PAGE_V2.read_bytes(), "text/html; charset=utf-8")
         m = STATIC_FILE.fullmatch(path)
         if not m or not (STATIC / m.group(1)).is_file():
             raise LookaheadError(404, "not found")
@@ -151,7 +154,7 @@ class LookaheadRoutes:
 
     def lookahead_get(self, path: str, params: dict):
         try:
-            if path == "/lookahead" or path.startswith("/lookahead/static/"):
+            if path in ("/lookahead", "/lookahead/v2") or path.startswith("/lookahead/static/"):
                 return self._lookahead_file(path)
             la = self._need_lookahead()
             if path == "/api/lookahead/state":
