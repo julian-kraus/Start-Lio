@@ -94,8 +94,9 @@ def ensure_db() -> tuple[bool, str]:
         msg = f"started new container {CONTAINER} on port {DB_PORT}"
     deadline = time.monotonic() + READY_TIMEOUT
     while time.monotonic() < deadline:
-        ready = subprocess.run(["docker", "exec", CONTAINER, "pg_isready", "-U", DB_USER, "-d", DB_NAME],
-                              capture_output=True)
+        # over TCP: while a new container initialises, a temporary server answers on the socket only
+        ready = subprocess.run(["docker", "exec", CONTAINER, "pg_isready", "-h", "127.0.0.1",
+                                "-U", DB_USER, "-d", DB_NAME], capture_output=True)
         if ready.returncode == 0:
             return True, msg
         time.sleep(1)
