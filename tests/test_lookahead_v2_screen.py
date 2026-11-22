@@ -1,6 +1,7 @@
 """The /lookahead/v2 scripts run in node on synthetic state, with the page stubbed."""
 
 import json
+import re
 import shutil
 import subprocess
 from pathlib import Path
@@ -24,8 +25,8 @@ ctx.window = ctx;
 const vm = require("vm"), fs = require("fs");
 vm.createContext(ctx);
 for (const f of ["gp_app.js", "gp_plan.js"]) vm.runInContext(fs.readFileSync(process.argv[1] + "/" + f, "utf8"), ctx);
-vm.runInContext("S = " + process.argv[2] + "; decisions(); feed(); planView(S);", ctx);
-console.log(JSON.stringify({feed: els["#feed"].innerHTML, decided: els["#decClosed"].innerHTML, plan: els["#v-plan"].innerHTML}));
+vm.runInContext("S = " + process.argv[2] + "; decisions(); feed(); timeline(); planView(S);", ctx);
+console.log(JSON.stringify({lanes: els["#lanes"].innerHTML, feed: els["#feed"].innerHTML, decided: els["#decClosed"].innerHTML, plan: els["#v-plan"].innerHTML}));
 """
 
 
@@ -80,3 +81,10 @@ def test_the_outside_supplier_is_known_by_its_record_and_names_its_scenario_inpu
 def test_every_checkpoint_is_counted():
     promises = [{"promise_id": str(i), "state": "proven", "what": "Proof"} for i in range(4)]
     assert "Checkpoints 4 / 4" in render(promises=promises)["plan"]
+
+
+def test_chips_at_the_same_time_each_get_a_row():
+    events = [{"id": i, "type": "document", "supplier_id": "s", "title": f"Synthetic finding number {i}",
+               "at": "2030-01-01T09:00:00+00:00"} for i in range(4)]
+    tops = re.findall(r'class="ev [^"]*" style="[^"]*top:([^;]+);', render(events=events)["lanes"])
+    assert len(tops) == 4 and len(set(tops)) == 4

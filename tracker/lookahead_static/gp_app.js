@@ -41,6 +41,15 @@ function range() {
   const start = Math.min(end - 26 * 3600e3, Math.min(...ats) - 1800e3);
   return [start, end];
 }
+function placeRows(items) {   // each chip takes the first row where it covers no other, left to right
+  const ends = [];
+  [...items].sort((a, b) => a.from - b.from).forEach(it => {
+    let row = ends.findIndex(to => to + 4 <= it.from);
+    if (row < 0) row = ends.length;
+    ends[row] = it.to; it.row = row;
+  });
+  return Math.max(1, ends.length);
+}
 function timeline() {
   const [a, b] = range(), X = t => ((ms(t) - a) / (b - a) * 100).toFixed(2);
   const ids = [];
@@ -50,20 +59,26 @@ function timeline() {
   const step = 4 * 3600e3, first = Math.ceil(a / step) * step;
   for (let t = first; t < b; t += step) html += `<div class="grid" style="left:${X(t)}%"></div>`;
   html += `<div class="pastbg" style="width:${X(S.clock.now)}%"></div>`;
+  const W = $("#lanes").clientWidth || 1000;
   ids.forEach(id => {
-    let chips = "", last = {};
-    (S.events || []).filter(e => e.supplier_id === id && EV[e.type]).forEach((e, i) => {
+    const items = (S.events || []).filter(e => e.supplier_id === id && EV[e.type]).map(e => {
       let [cls, icon] = EV[e.type], x = +X(e.at);
       if (x > 96) { x = 96; cls = "muted end"; }               // after the shown range: pinned at the lane's end
       if (!cls && e.severity === "risk") cls = "bad";
-      const top = last.x != null && Math.abs(x - last.x) < 9 && last.top !== "74%" ? "74%" : "28%";
-      last = {x, top};
-      chips += `<button class="ev ${cls}" style="left:${x}%;top:${top}" data-ev="${e.id}"><span class="pin">${ic(icon)}</span><span class="lbl">${esc(e.title)}</span></button>`;
+      const w = Math.min(260, 44 + String(e.title).length * 7.5), from = x * W / 100 + (cls === "muted end" ? 11 - w : -11);
+      return {e, cls, icon, x, w, from, to: from + w};
     });
     openDecisions().filter(d => d.supplier_id === id).forEach(d => {
-      chips += `<div class="win" style="left:${X(d.at)}%;width:${Math.max(2, X(S.launch.deadline) - X(d.at))}%"><span class="flag">${ic("gavel")}Decide</span></div>`;
+      const x = +X(d.at), pct = Math.max(2, X(S.launch.deadline) - x), from = x * W / 100;
+      items.push({win: true, x, pct, from, to: from + Math.max(pct * W / 100, 24)});
     });
-    html += `<div class="lane tall"><button class="lname"><b>${esc(supName(id))}</b></button>${chips}</div>`;
+    const rows = placeRows(items), tall = Math.max(96, rows * 40);
+    const chips = items.map(it => {
+      const top = rows < 3 ? (it.row ? "74%" : "28%") : `${((it.row + .5) / rows * 100).toFixed(1)}%`;
+      if (it.win) return `<div class="win" style="left:${it.x}%;width:${it.pct}%;top:${top}"><span class="flag">${ic("gavel")}Decide</span></div>`;
+      return `<button class="ev ${it.cls}" style="left:${it.x}%;top:${top};max-width:${it.w}px" title="${esc(it.e.title)}" data-ev="${it.e.id}"><span class="pin">${ic(it.icon)}</span><span class="lbl" style="overflow:hidden;text-overflow:ellipsis">${esc(it.e.title)}</span></button>`;
+    }).join("");
+    html += `<div class="lane tall"${tall > 96 ? ` style="height:${tall}px"` : ""}><button class="lname"><b>${esc(supName(id))}</b></button>${chips}</div>`;
   });
   if (!ids.length) html += `<div class="lane"><span class="lname subtle">No supplier events yet</span></div>`;
   html += `<div class="after" style="left:${X(S.launch.deadline)}%"></div><div class="vline dead" style="left:${X(S.launch.deadline)}%"><span class="vlab" style="color:var(--redtext)">Deadline ${hm(S.launch.deadline)}</span></div><div class="now" style="left:${X(S.clock.now)}%"><span>Now</span></div>`;
