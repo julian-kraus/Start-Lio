@@ -189,3 +189,21 @@ def test_free_words_in_an_aside_are_refused(said):
 def test_an_edition_the_goal_names_is_still_an_aside(named):
     for said in ("All Alpha on time. Protect margin.", "Protect margin. Alpha copies can wait."):
         assert hedge.margin_line({**named, "statement": said})
+
+
+@pytest.mark.parametrize("question", [
+    "What can we sacrifice?", "What may suffer?", "What can wait?", "Which goal should we drop?",
+])
+def test_an_answer_to_what_may_suffer_is_not_read_as_protecting_margin(question):
+    with pytest.raises(ModelError, match="margin"):
+        hedge.margin_line({"answers": [{"q": question, "a": "Protecting margin"}]})
+
+
+def test_protecting_margin_where_possible_is_a_condition():
+    with pytest.raises(ModelError, match="margin"):
+        hedge.margin_line({"statement": "Protect margin where possible"})
+
+
+def test_the_interview_question_that_also_asks_what_may_suffer_is_still_read():
+    question = "How far will you go? The worth of one missing copy, what may suffer, the most to spend."
+    assert hedge.margin_line({"answers": [{"id": "limits", "q": question, "a": "Protect margin"}]})
