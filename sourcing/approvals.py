@@ -47,6 +47,7 @@ def _version(value: str | None) -> tuple:
 def _policy(rows: list[dict], today: date) -> tuple[Policy | None, list[str]]:
     found = [p for p in map(read_policy, documents(rows, POLICY_KIND)) if p]
     usable = [p for p in found if p.effective is None or p.effective <= today]
+    undated = [f"{p.path}: no readable effective date" for p in found if p.effective is None]
     if not usable:
         return None, ["no approval policy in force was found in the facts"]
     rank = lambda p: (p.effective or date.min, _version(p.version))
@@ -57,7 +58,10 @@ def _policy(rows: list[dict], today: date) -> tuple[Policy | None, list[str]]:
         return (p.currency, [(t.roles, t.op, t.amount) for t in p.tiers],
                 [(r.roles, r.above, r.limit, r.currency, r.days, r.once) if r else None for r in rules])
 
-    problems = list(best.problems)
+    problems = undated + best.problems     # a policy without a date could be the newer one
+    others = sorted({p.path for p in usable if not p.same_policy(best)})
+    if others:
+        problems.append(f"different policies state approval limits: {best.path} and {', '.join(others)}")
     if any(rank(p) == rank(best) and terms(p) != terms(best) for p in usable):
         problems.append(f"two readings of {best.name} with the same version disagree")
     return best, problems
