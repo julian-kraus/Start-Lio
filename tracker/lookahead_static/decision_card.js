@@ -1,17 +1,28 @@
 "use strict";
 // ---------- decision overlay ----------
-function acceptButton(d, err, after) {
-  const signer = d.signer || {};
+// The signer comes from the server's routing on kb facts (card route); the one stored on the decision is only the
+// producer's proposal, and Accept is refused for anyone but the routed signer.
+async function routedSigner(d) {
+  const card = await api(`/api/lookahead/decisions/${encodeURIComponent(d.decision_id)}`);
+  return card.signer || {};
+}
+function acceptButton(d, err, after, onSigner) {
   const b = el("button", { class: "btn primary big", onclick: async () => {
     b.disabled = true; err.textContent = "";
     try {
-      const r = await api(`/api/lookahead/decisions/${encodeURIComponent(d.decision_id)}/accept`, { approver: signer.name || "" });
+      const signer = await routedSigner(d);
+      if (!signer.name) throw new Error(signer.reason || "No signer can accept this decision");
+      const r = await api(`/api/lookahead/decisions/${encodeURIComponent(d.decision_id)}/accept`, { approver: signer.name });
       S.decisionOpen = null;
       if (after) after();
       toast(r.sent && r.sent.length ? `Accepted. ${r.sent.length} email(s) sent.` : "Accepted. Actions are going out.");
       render();
     } catch (e) { err.textContent = e.message; b.disabled = false; }
-  } }, signer.name ? `Accept as ${signer.name}` : "Accept");
+  } }, "Accept");
+  routedSigner(d).then((s) => {
+    b.textContent = s.name ? `Accept as ${s.name}` : "Accept";
+    if (onSigner) onSigner(s);
+  }).catch(() => {});
   return b;
 }
 function renderOverlay() {
@@ -24,7 +35,9 @@ function renderOverlay() {
   o.dataset.id = d.decision_id;
   const err = el("div", { class: "err" });
   const signer = d.signer || {};
-  const accept = acceptButton(d, err, () => { o.dataset.id = ""; });
+  const who = el("b", {}, signer.name ? `${signer.name}, ${signer.role}` : "You");
+  const accept = acceptButton(d, err, () => { o.dataset.id = ""; },
+    (s) => { who.textContent = s.name ? `${s.name}, ${s.role}` : (s.reason || "No signer"); });
   const opts = el("div", { class: "opts" , hidden: true }, (d.options || []).map((x) => el("div", { class: "alt" }, el("b", {}, x.label), el("span", {}, x.text))));
   o.replaceChildren(el("div", { class: "dcard", role: "dialog", "aria-modal": "true", "aria-label": d.title },
     el("div", { class: "kicker" }, "Decision needed"),
@@ -34,7 +47,7 @@ function renderOverlay() {
       el("div", { class: "prot" }, el("b", {}, d.impact && d.impact.eur ? eur(d.impact.eur) : "–"), el("span", {}, d.impact ? d.impact.text || "protected" : "")),
       el("div", {}, el("b", {}, d.cost && d.cost.eur != null ? eur(d.cost.eur) : "–"), el("span", {}, d.cost ? d.cost.text || "cost" : ""))),
     el("div", { class: "signer" }, el("div", { class: "avatar" }, initials(signer.name)),
-      el("div", {}, el("b", {}, signer.name ? `${signer.name}, ${signer.role}` : "You"), el("div", { class: "src" }, signer.rule || ""))),
+      el("div", {}, who, el("div", { class: "src" }, signer.rule || ""))),
     (d.on_accept || []).length ? el("ul", {}, d.on_accept.map((a) => el("li", {}, a))) : null,
     opts,
     el("div", { class: "acts" }, accept,
