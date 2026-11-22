@@ -1,6 +1,6 @@
 "use strict";
 // ---------- operator: rehearsal beats, or the scenario clock in live mode ----------
-const CLOCK_POLL_MS = 2000, CLOCK_REDRAW_MS = 120000;
+const CLOCK_POLL_MS = 2000, CLOCK_REDRAW_MS = 2 * 60 * 1000;
 function renderOperator() {
   const op = $("operator"), r = S.state.rehearsal, c = S.state.clock;
   if (params.has("clean") || (!r && !c.simulated)) { op.hidden = true; return; }
