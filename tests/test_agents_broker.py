@@ -76,9 +76,12 @@ def test_broker_registers_a_promise_and_drafts_the_hedge_without_sending(plan_co
     mail = MailTools(s, mail_conn, actor="agent:broker")
 
     client = llm.ReplayClient(FIXTURES / "broker_hedge.json")
+    # The statement the broker is briefing on: the register tool grounds the made time, quantity and supplier in it
+    # (and refuses a cited fact it does not know), so the promise it registers must cite fact-1.
+    said = Statement(kind="confirm", at=NOW.isoformat(), supplier_id="SUP-0028", part_id="PART-A", fact_id="fact-1")
     result, registered = broker.run_broker(client, plan_conn, mail,
                                             prompt="A supplier promised to load the backup order within 4 h.",
-                                            now=NOW)
+                                            now=NOW, statements=[said])
     plan_conn.commit()
 
     assert result.ok
@@ -225,6 +228,65 @@ def test_two_emails_that_reuse_a_statement_number_do_not_merge():
     assert {s.fact_id for s in sts} == {"a-kind", "b-kind"}
 
 
+def test_the_kb_load_time_is_not_used_as_the_statement_time():
+    # as_of null (true of the reference facts): the statement time must not fall back to observed_at (today's kb
+    # load), which would break a promise made before the load. With no document or mail time either, it is unknown
+    # (finding: the kb load time was used as the statement time).
+    rows = [_row("f-kind", "kind", "on_hold", as_of=None), _row("f-mat", "material_id", "PART-A", as_of=None)]
+    [st] = broker.statements_from_rows(rows)
+    assert st.at is None
+    p = promises.promise_from_statement(promise_id="PR-1", supplier_id="SUP-A", part_id="PART-A", what="x",
+                                        made_at=NOW, within="within 4 h", fallback="call",
+                                        sources=[{"fact_id": "made"}])
+    assert promises.reconcile([p], [st]) == []                 # an unknown time settles nothing
+    assert promises.review([p], [st])[0]["reason"] == "unreadable_time"
+
+
+def test_a_mail_date_stands_in_when_as_of_is_missing():
+    # When the supplier-stated time is missing but the mail carries a date, that date is the statement time.
+    rows = [{"fact_type": "supplier_statement", "fact_id": "f-kind", "attribute": "kind", "value": "dispatch_info",
+             "subject": {"statement_no": "ST-1"}, "path": "mail/a.eml", "sha256": "sha-a", "as_of": None,
+             "locator": {"mail": {"supplier_id": "SUP-A", "date_header": "2030-01-11T17:00:00+00:00"}}}]
+    [st] = broker.statements_from_rows(rows)
+    assert st.at == "2030-01-11T17:00:00+00:00"
+
+
+def test_a_statement_keeps_every_grouped_fact_id():
+    # The grouped statement carries all its fact ids, so the ledger recognises it as a promise's maker whichever
+    # fact was cited (finding: citing another fact of the same email re-opened the self-proof).
+    rows = [_row("f-kind", "kind", "dispatch_info"), _row("f-val", "value", "Loaded."),
+            _row("f-mat", "material_id", "PART-A")]
+    [st] = broker.statements_from_rows(rows)
+    assert st.fact_id == "f-kind"
+    assert st.all_fact_ids() == {"f-kind", "f-val", "f-mat"}
+
+
+def test_register_takes_the_supplier_from_the_statement_over_the_model(plan_conn, mail_env):
+    # The model must not reassign a statement to another supplier: the cited statement's supplier wins (finding:
+    # a model supplier_id overrode the cited statement's).
+    st = Statement(kind="confirm", at=NOW.isoformat(), supplier_id="SUP-0028", part_id="PART-A", fact_id="S-1")
+    registry, reg = _registry(plan_conn, mail_env, statements=[st])
+    out = registry.call("register_promise", {
+        "promise_id": "PR-2", "supplier_id": "SUP-WRONG", "what": "loads the backup order", "within": "within 4 h",
+        "fallback": "call the supplier contact", "part_id": "PART-A", "sources": [{"fact_id": "S-1"}]})
+    assert out.get("promise_id") == "PR-2"
+    plan_conn.commit()
+    row = plan_conn.execute("SELECT supplier_id FROM promises WHERE promise_id = 'PR-2'").fetchone()
+    assert row["supplier_id"] == "SUP-0028"
+
+
+def test_register_refuses_an_invented_fact_id(plan_conn, mail_env):
+    # A cited fact the kb does not hold is refused, so the model cannot register a watched promise (with a
+    # model-written due) on nothing (finding: the register tool was not grounded).
+    st = Statement(kind="confirm", at=NOW.isoformat(), supplier_id="SUP-A", part_id="PART-A", fact_id="real")
+    registry, reg = _registry(plan_conn, mail_env, statements=[st])
+    out = registry.call("register_promise", {
+        "promise_id": "PR-x", "what": "x", "due": "2030-02-01T00:00:00+00:00",
+        "fallback": "call", "part_id": "PART-A", "sources": [{"fact_id": "no-such-fact"}]})
+    assert "error" in out and reg == []
+    assert plan_conn.execute("SELECT count(*) AS n FROM promises").fetchone()["n"] == 0
+
+
 class _StubConn:
     def __init__(self, rows):
         self._rows = rows
@@ -345,7 +407,8 @@ def test_register_does_not_reopen_a_settled_promise(plan_conn, mail_env):
 
 
 def test_one_bad_register_call_does_not_lose_the_good_ones(plan_conn, mail_env):
-    registry, reg = _registry(plan_conn, mail_env)
+    st = Statement(kind="confirm", at=NOW.isoformat(), supplier_id="SUP-A", part_id="PART-A", fact_id="f")
+    registry, reg = _registry(plan_conn, mail_env, statements=[st])
     bad = registry.call("register_promise", {"promise_id": "PR-bad", "supplier_id": "SUP-A", "what": "x",
                                              "within": "within 4 h", "fallback": "call", "decision_id": "NOPE",
                                              "sources": [{"fact_id": "f"}]})

@@ -102,17 +102,48 @@ def test_the_statement_that_made_the_promise_does_not_settle_it():
 
 
 def test_the_citing_fact_is_recognised_across_source_shapes():
-    said = Statement(kind="confirm", at=MADE, supplier_id="SUP-A", part_id="PART-A", fact_id="fact-1")
+    # A decisive statement (dispatch_info) that made the promise still must not settle it, however its citation
+    # was stored by the register tool.
+    said = Statement(kind="dispatch_info", at=MADE, supplier_id="SUP-A", part_id="PART-A", fact_id="fact-1")
     for shape in ("fact-1", {"fact_id": "fact-1"}, {"fact_id": "fact-1", "label": "supplier_statement"}):
         p = a_promise(sources=[shape])
         assert promises.reconcile([p], [said]) == []               # the maker never settles, however it is stored
 
 
-def test_a_statement_matches_on_part_when_the_supplier_is_unknown():
+def test_citing_another_fact_of_the_same_email_does_not_self_prove():
+    # An email yields several facts (the kind row and, say, a value row). A promise registered against one fact of
+    # the email must not be proven by the dispatch statement of that same email cited through another of its facts
+    # (finding: the self-proof returned when another fact of the statement was cited).
+    said = Statement(kind="dispatch_info", at=MADE, supplier_id="SUP-A", part_id="PART-A",
+                     fact_id="kind-fact", fact_ids=("kind-fact", "value-fact"))
+    p = a_promise(sources=[{"fact_id": "value-fact"}])             # rests on another fact of the same email
+    assert promises.reconcile([p], [said]) == []
+    assert promises.review([p], [said]) == []
+
+
+def test_a_confirm_is_not_proof_of_loading():
+    # A confirm restates the commitment; it is not evidence the goods loaded, so it leaves the promise waiting and
+    # a later cancellation still breaks it (finding: a check-in confirm closed the promise before a cancellation).
+    confirm1 = Statement(kind="confirm", at=MADE, supplier_id="SUP-A", part_id="PART-A", fact_id="f1")
+    confirm2 = Statement(kind="confirm", at="2030-01-11T18:00:00+00:00", supplier_id="SUP-A",
+                         part_id="PART-A", fact_id="f2")
+    cancel = Statement(kind="cancel", at="2030-01-12T05:00:00+00:00", supplier_id="SUP-A",
+                       part_id="PART-A", fact_id="f3")
+    p = a_promise(sources=[{"fact_id": "f1"}])
+    [upd] = promises.reconcile([p], [confirm1, confirm2, cancel])
+    assert upd["state"] == "broken" and upd["source"] == {"fact_id": "f3"}
+    assert promises.reconcile([p], [confirm2]) == []              # a confirm alone proves nothing
+
+
+def test_a_supplier_less_statement_does_not_settle_and_is_flagged():
+    # A statement with no supplier could be any supplier's, so it must not settle a promise on a shared part; it is
+    # surfaced for a human instead (finding: a supplier-less statement broke an unrelated supplier's promise).
     p = a_promise()
     st = Statement(kind="dispatch_info", at="2030-01-11T17:00:00+00:00", part_id="PART-A", fact_id="f")
-    [upd] = promises.reconcile([p], [st])
-    assert upd["state"] == "proven"
+    assert promises.reconcile([p], [st]) == []
+    [flag] = promises.review([p], [st])
+    assert flag["reason"] == "supplier_unknown" and flag["candidates"] == ["PR-1"]
+    assert flag["source"] == {"fact_id": "f"}
 
 
 def test_a_statement_that_shares_no_key_never_matches():
@@ -137,7 +168,8 @@ def test_a_part_only_statement_over_two_suppliers_settles_none():
     st = Statement(kind="on_hold", at="2030-01-11T16:00:00+00:00", part_id="PART-X", fact_id="f")
     assert promises.reconcile(ps, [st]) == []
     [flag] = promises.review(ps, [st])
-    assert flag["reason"] == "ambiguous" and set(flag["candidates"]) == {"PR-A", "PR-B"}
+    # The statement names no supplier, so it is not applied; a human decides which supplier's promise it bears on.
+    assert flag["reason"] == "supplier_unknown" and set(flag["candidates"]) == {"PR-A", "PR-B"}
 
 
 def test_a_proof_after_the_due_time_is_marked_late():
