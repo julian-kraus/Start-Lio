@@ -37,9 +37,14 @@ const EV = {  // record type -> chip class and icon, as in the prototype
   offer_in: ["", "inbox"], agent: ["agent", "sparkles"], email_out: ["agent", "send"], email_in: ["good", "mail"],
   check_in: ["good", "check"], cancellation: ["bad", "x"], decision: ["agent", "gavel"], document: ["", "document"],
   delay: ["", "truck"], delivery: ["muted", "truck"],
+  offer_received: ["", "inbox"], promise_watched: ["good", "check"], promise_kept: ["good", "check"],
+  promise_broken: ["bad", "x"],
 };
 const FEED_IC = {cancellation: "alert-triangle", email_in: "mail", email_out: "send", check_in: "check", goal: "check",
-  agent: "sparkles", decision: "gavel", offer_in: "inbox"};
+  agent: "sparkles", decision: "gavel", offer_in: "inbox",
+  offer_received: "inbox", promise_watched: "check", promise_kept: "check", promise_broken: "alert-triangle"};
+const SIMULATED = new Set(["check_in", "cancellation", "promise_watched", "promise_broken"]);
+const simTag = e => S.launch.scenario && SIMULATED.has(e.type) ? ` <small class="subtle">simulated</small>` : "";
 
 function supName(id) { const s = (S.suppliers || []).find(x => x.supplier_id === id); return s ? s.name : id; }
 function openDecisions() { return (S.decisions || []).filter(d => d.status === "open"); }
@@ -126,7 +131,7 @@ function feed() {
   const items = (S.events || []).filter(e => ms(e.at) <= now).sort((x, y) => ms(y.at) - ms(x.at));
   $("#feed").innerHTML = items.length ? items.map(e => {
     const i = FEED_IC[e.type] || "info", k = e.severity === "risk" ? "k-bad" : e.severity === "ok" ? "k-good" : "";
-    return `<li class="${k}" data-ev="${e.id}"><span class="ft">${when(e)}</span><span class="fn">${ic(i)}</span><span class="fx">${esc(e.title)}</span></li>`;
+    return `<li class="${k}" data-ev="${e.id}"><span class="ft">${when(e)}</span><span class="fn">${ic(i)}</span><span class="fx">${esc(e.title)}${simTag(e)}</span></li>`;
   }).join("") : `<li><span class="fx subtle">Nothing yet. Set the goal to start.</span></li>`;
   document.querySelectorAll("#feed [data-ev]").forEach(el => el.onclick = () => openEvent(+el.dataset.ev));
 }
@@ -330,6 +335,21 @@ document.querySelectorAll("[data-goview]").forEach(b => b.onclick = () => show(b
 $("#goalSet").onclick = setGoal; $("#dClose").onclick = closeAll; $("#scrim").onclick = closeAll; $("#rejNo").onclick = closeAll; $("#rejYes").onclick = rejectDecision;
 show((location.hash.match(/v=(\w+)/) || [])[1] || "timeline");
 hydrate(); load();
+let jumping = false;
+addEventListener("keydown", async e => {   // the presenter's keys, as on /lookahead
+  if (e.metaKey || e.ctrlKey || e.altKey || e.repeat || !S || e.target.closest("input, textarea, select")) return;
+  const k = e.key.toLowerCase();
+  if (k === "g") { show("timeline"); scrollTo({top: 0, behavior: "smooth"}); }
+  if (k === "j" && !jumping && S.rehearsal) {   // a rehearsal's J is its next beat
+    jumping = true;
+    try { await fetch("/api/lookahead/advance", {method: "POST", headers: {"Content-Type": "application/json"}, body: "{}"}); await load(); }
+    finally { jumping = false; }
+  } else if (k === "j" && !jumping && S.clock.simulated && S.clock.next) {
+    jumping = true;
+    try { await fetch("/api/lookahead/clock/next", {method: "POST", headers: {"Content-Type": "application/json"}, body: "{}"}); await load(); }
+    finally { jumping = false; }
+  }
+});
 let pending = null;
 const es = new EventSource("/api/lookahead/stream");
 const refresh = () => { clearTimeout(pending); pending = setTimeout(load, 150); };

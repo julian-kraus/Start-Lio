@@ -15,11 +15,14 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from zoneinfo import ZoneInfo
+
 from psycopg.types.json import Json
 
 from plan import clock
 from tracker.lookahead import append_records
 
+BERLIN = ZoneInfo("Europe/Berlin")
 FED = "screen_fed"
 # the event types the Overview story and the timeline already show
 OFFER_RECEIVED = "offer_in"
@@ -28,6 +31,10 @@ PROMISE_WATCHED = PROMISE_KEPT = "check_in"
 
 def _iso(value):
     return value.isoformat() if hasattr(value, "isoformat") else value
+
+
+def _local(value):
+    return value.astimezone(BERLIN).strftime("%a %H:%M") if hasattr(value, "astimezone") else value
 
 
 def _amount(value) -> str | None:
@@ -61,7 +68,7 @@ def promise_records(promise: dict, state: str, name: str, now) -> list[dict]:
     if state == "proven" and promise.get("proven_at"):
         record["proven_at"] = _iso(promise["proven_at"])
     if state == "waiting":
-        title = f"Watching {name}: {promise['what']}, due {_iso(promise['due'])}"
+        title = f"Watching {name}: {promise['what']}, due {_local(promise['due'])}"
         kind = PROMISE_WATCHED
     else:
         title = f"{name} kept its promise: {promise['what']}"

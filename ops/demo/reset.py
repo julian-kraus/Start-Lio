@@ -182,7 +182,8 @@ def current_inputs(pack: dict, log: Path, warn=warn_operator) -> dict:
                 answers.append(record["answers"])
     if not launch or not launch.get("scenario"):
         raise DemoError("the log holds no scenario launch: run reset first")
-    values = {q["id"]: q.get("suggested") for q in launch.get("goal_questions", [])}
+    values = {**launch.get("scenario_inputs", {}),
+              **{q["id"]: q.get("suggested") for q in launch.get("goal_questions", [])}}
     result = {}
     for spec in pack["inputs"]:
         key = spec["id"]
@@ -207,20 +208,21 @@ def opening_records(pack: dict, deadline, inputs: dict) -> list[dict]:
 
     start = before(script["start_h_before_deadline"])
     questions = [{"id": s["id"], "q": s["q"], "suggested": inputs[s["id"]],
-                  "why": "Scenario input. You can change it here.",
-                  **({"unit": s["unit"]} if "unit" in s else {})} for s in pack["inputs"]]
+                  "why": s.get("why", "Scenario input. You can change it here."),
+                  **({"unit": s["unit"]} if "unit" in s else {})} for s in pack["inputs"] if s.get("on_screen") or not any(q.get("on_screen") for q in pack["inputs"])]
     launch = {"kind": "launch", "name": pack["name"], "mode": "live", "deadline": deadline.isoformat(),
               "scenario": True, "rehearsal_id": uuid.uuid4().hex,  # unique per reset: mail outlives the plan schema
               "team_offline_at": before(script["offline_h_before_deadline"]),
-              "demo_times": [before(h) for h in script["stops_h_before_deadline"]], "goal_questions": questions}
+              "demo_times": [before(h) for h in script["stops_h_before_deadline"]], "goal_questions": questions,
+              "scenario_inputs": inputs, **({"edition": pack["edition"]} if pack.get("edition") else {})}
     labelled = {"kind": "event", "type": "scenario", "severity": "info", "at": start,
-                "title": f"Scenario: {' and '.join(p['display_name'] for p in cast)} "
+                "title": pack.get("label") or f"Scenario: {' and '.join(p['display_name'] for p in cast)} "
                          f"{'is' if len(cast) == 1 else 'are'} played by the team",
                 "source": {"scenario_input": pack["name"]},
                 "detail": {"happened": " ".join(p["note"] for p in cast),
-                           "reasoning": [{"text": f"Scenario input: {s['q']}",
-                                          "value": " ".join(filter(None, (inputs[s["id"]], s.get("unit"))))}
-                                         for s in pack["inputs"]]}}
+                           "reasoning": [{"text": f"Scenario input: {q['q']}",
+                                          "value": " ".join(filter(None, (str(q["suggested"]), q.get("unit"))))}
+                                         for q in questions]}}
     records = [{"producer": PRODUCER, **r} for r in (launch, labelled)]   # the live screen hides unnamed producers
     for record in records:
         contracts.validate_record(record)
@@ -244,7 +246,7 @@ def history_card(conn, pack: dict, supplier_id: str, at: str, persona: dict | No
         raise DemoError(f"kb holds no delivery history of supplier {supplier_id!r}")
     persona, whose = persona or pack["persona"], card.get("name") or supplier_id
     record = {**card, "producer": PRODUCER, "supplier_id": persona["persona_id"], "name": persona["display_name"],
-              "at": at, "history_supplier_id": supplier_id, "flags": ["Scenario offer", f"Real history: {whose}"],
+              "at": at, "history_supplier_id": supplier_id, "flags": ["Replayed offer", f"Real history: {whose}"],
               "persona": f"{persona['note']} The score is computed from the history of {whose} in kb facts."}
     contracts.validate_record(record)
     return record
@@ -270,6 +272,11 @@ def reset(url: str, pack: dict, deadline: str, overrides: dict, log: Path,
             refuse_used(conn, pack)
             if history_supplier:
                 records.append(history_card(conn, pack, history_supplier, records[1]["at"]))
+            for persona in personas(pack)[1:]:
+                if persona["persona_id"] not in bound:     # named on screen, with no history claimed
+                    records.append({"kind": "supplier", "producer": PRODUCER, "supplier_id": persona["persona_id"],
+                                    "name": persona["display_name"], "flags": ["Simulated"],
+                                    "persona": persona["note"]})
             for persona, supplier in bound.values():
                 records.append(history_card(conn, pack, supplier, records[1]["at"], persona))
             drop_plan(conn, schema)

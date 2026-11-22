@@ -23,6 +23,10 @@ NUMBER = re.compile(r"^\s*(?:EUR|€)?\s*(\d+(?:[.,]\d{1,2})?)\s*(?:EUR|€)?\s*
 PER_UNIT = re.compile(r"^(?:per |/ ?)?(?:1 )?(?:unit|piece|pc|pcs|each|ea)s?$", re.I)
 
 
+PRICE_EACH = re.compile(r"\s*(?:per\s+|/\s*)(?:1\s+)?(?:unit|piece|pc|pcs|each|ea)s?\s*$", re.I)
+AFTER_ORDER = re.compile(r"\s+(?:after|of|from)\s+(?:your\s+)?(?:acceptance|order)\s*$", re.I)
+
+
 def _number(value):
     if isinstance(value, bool):
         return None
@@ -36,7 +40,7 @@ def _hours(value):
     if value in (None, ""):
         return None
     try:
-        return timing.parse_hours(str(value))
+        return timing.parse_hours(AFTER_ORDER.sub("", str(value)))
     except timing.TimingError:
         return None
 
@@ -62,7 +66,7 @@ def offers_from_rows(rows) -> list[dict]:
         offers.append({
             "offer_id": f"kb:{ref}", "supplier_id": str(supplier), "part_id": str(part),
             "quantity": _number(a.get("qty")),
-            "unit_price_eur": (_number(a.get("unit_price"))
+            "unit_price_eur": (_number(PRICE_EACH.sub("", str(a.get("unit_price") or "")))
                                if PER_UNIT.match(str(a.get("price_basis") or "each")) else None),
             "lead_time_h": _hours(a.get("lead_time")) if a.get("lead_time") else _hours(a.get("ready_time")),
             "valid_until": a.get("valid_until") if ISO_DATE.match(str(a.get("valid_until") or "")) else None,

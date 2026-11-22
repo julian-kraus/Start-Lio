@@ -17,6 +17,7 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import re
 import threading
 from pathlib import Path
 from typing import Callable
@@ -33,15 +34,17 @@ from tracker.lookahead import append_records, fold
 from tracker.lookahead_records import LookaheadError, validate
 from tracker.lookahead_view import shown_live
 
-from . import broker, hedger, kb_offers, llm, monitor_feed
+from . import broker, hedger, kb_offers, llm, monitor_feed, monitor_plan
 
 log = logging.getLogger("agents.monitor")
 
 LOCK = 7_222_001
 PRODUCER = "monitor"
 HANDLED = "promise_broken"
+BREAK_EVENT = "cancellation"    # the screens' word for a break
 BROKERED = "statement_brokered"
 BROKER_ATTEMPTS = 3         # for each statement and start of the monitor
+SHOWN_TEXT = ("title", "recommendation", "what", "text", "value", "happened", "reason", "rationale", "decide_by_why")
 COMMITMENTS = ("confirm",)      # statements that make a promise worth watching (sourcing.promises.OUTCOMES settles)
 BACKOFF = (1, 2, 5, 10, 30)
 NO_SITE = "delivery site not on file"    # routed as a site, so a required release cannot be skipped
@@ -49,6 +52,19 @@ NO_SITE = "delivery site not on file"    # routed as a site, so a required relea
 
 def _plain(value):
     return json.loads(json.dumps(value, default=hedger._json_value))
+
+
+def _named(value, suppliers: dict, key: str = ""):
+    """Text a person reads says the supplier's name. Ids, references and sources keep the id."""
+    if isinstance(value, dict):
+        return {k: v if k in ("sources", "source") else _named(v, suppliers, k) for k, v in value.items()}
+    if isinstance(value, list):
+        return [_named(v, suppliers, key) for v in value]
+    if isinstance(value, str) and key in SHOWN_TEXT:
+        for sid, card in suppliers.items():
+            if card.get("name"):
+                value = re.sub(rf"(?<![\w:/-]){re.escape(str(sid))}(?![\w:/@-])", lambda _: card["name"], value)
+    return value
 
 
 def screen_state(path: Path) -> dict:
@@ -177,7 +193,9 @@ class Monitor:
             log.info("promise %s is %s", update["promise_id"], update["state"])
         self.plan.commit()
         try:      # show offers and watched promises before any break, so the screen follows each mail
-            names = {sid: s.get("name") for sid, s in screen_state(self.log)["suppliers"].items()}
+            shown = screen_state(self.log)
+            monitor_plan.publish(self, shown, PRODUCER)
+            names = {sid: s.get("name") for sid, s in shown["suppliers"].items()}
             monitor_feed.feed(self.plan, self.log, names, PRODUCER, HANDLED)
         except Exception as exc:     # the screen lagging must not stop the re-plan
             self.plan.rollback()
@@ -303,13 +321,14 @@ class Monitor:
                         for d in state["decisions"].values()
                         if d.get("status") == "open" and d.get("lane") in (lane, part)
                         and d["decision_id"] != decision_id]
-        title = f"{supplier} broke its promise: {promise['what']}"
+        name = lambda sid: (state["suppliers"].get(sid) or {}).get("name") or sid
+        title = f"{name(supplier)} broke its promise: {promise['what']}"
         decision = {**shared, "kind": "decision", "decision_id": decision_id, "status": "open",
                     "at": now.isoformat(), "sources": promise["sources"], "actions": []}
         if rec:
             verb = "Switch to" if rec["kind"] == "hedge" else "Do not switch to"
             decision.update(
-                title=f"{title}. {verb} {rec['backup_supplier_id']}?", recommendation=rec["rationale"],
+                title=f"{title}. {verb} {name(rec['backup_supplier_id'])}?", recommendation=rec["rationale"],
                 recommendation_id=rec["recommendation_id"], backup_supplier_id=rec["backup_supplier_id"],
                 offer_id=rec["offer_id"], decide_by=rec["decide_by"], decide_by_why=rec["decide_by_why"],
                 actions=rec["actions"], category=category, delivery_site=site, signer=card_signer(rec["approval"]),
@@ -318,12 +337,12 @@ class Monitor:
             decision.update(title=f"{title}. A person has to re-plan.",
                             recommendation=f"No backup can be proposed: {why}. "
                                            f"Fallback on file: {promise.get('fallback') or 'none'}.")
-        records.append({**shared, "kind": "event", "type": HANDLED, "severity": "critical", "title": title,
+        records.append({**shared, "kind": "event", "type": BREAK_EVENT, "severity": "critical", "title": title,
                         "at": promise["broken_at"].isoformat(), "decision_id": decision_id,
                         "source": promise["sources"][-1] if promise["sources"] else None,
                         "detail": {"happened": title,
                                    "reasoning": [{"text": "Re-plan", "value": decision["recommendation"]}]}})
-        return _plain([*records, decision])
+        return _named(_plain([*records, decision]), state["suppliers"])
 
 
 def run(url: str, client: llm.LLMClient, log_path: Path, stop: threading.Event, *, kb_schema: str = "kb",

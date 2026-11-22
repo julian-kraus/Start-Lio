@@ -33,6 +33,7 @@ log = logging.getLogger("kb")
 CONSUMER = "kb-mail"
 CHANNEL = "mail_events"
 TRUSTED = ("supplier_contact", "test")
+OWN_KEY = {"offer": "offer_ref", "supplier_statement": "statement_no"}
 META_KEYS = ("trust", "thread_id", "message_id", "supplier_id", "persona_id")
 MASTER_TYPE = "supplier"
 CLAIMED_TYPE = f"x_mail_{MASTER_TYPE}"
@@ -256,4 +257,11 @@ class LabellingClient(LLMClient):
             fact["locator"] = {**locator, "mail": meta}
             if fact.get("fact_type") == MASTER_TYPE:
                 fact["fact_type"] = CLAIMED_TYPE
+            own_key = OWN_KEY.get(fact.get("fact_type"))
+            if own_key and isinstance(fact.get("subject"), dict):     # who wrote is the envelope's, not the model's
+                sender = meta.get("supplier_id") or meta.get("persona_id")
+                if sender:
+                    fact["subject"]["supplier_id"] = sender
+                if meta.get("message_id") and not fact["subject"].get(own_key):
+                    fact["subject"][own_key] = meta["message_id"]
         return env
