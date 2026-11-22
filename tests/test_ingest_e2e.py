@@ -359,6 +359,19 @@ def test_document_of_no_known_kind_stays_visible(pipeline):
     assert pipeline.outcomes()[path] == {"pending_extraction"}
 
 
+def test_backfill_first_document_gets_past_one_of_no_kind(pipeline):
+    data = documents()[PDF]
+    pipeline.record(data, GOOD[PDF])
+    pipeline.start(adapter=None)
+    for path, blob in (("elsewhere/memo.txt", b"A memo that fits no known kind."), (PDF, data)):
+        pipeline.drop({path: blob})
+        pipeline.wait(lambda: path in pipeline.statuses())
+    pipeline.stop()
+    for limit, done in ((1, 0), (1, 0), (2, 1)):  # ops/backfill.md step 4: the same limit never gets past it
+        printed, _ = json.JSONDecoder().raw_decode(pipeline.kb("extract", "--adapter", REPLAY, "--limit", str(limit)))
+        assert (printed["unrouted"], printed["done"]) == (1, done)
+
+
 @pytest.mark.parametrize("adapter", [REPLAY, None], ids=["worker", "backfill"])
 def test_supplier_email_after_the_drop_ends_as_facts(pipeline, adapter):
     docs = documents()

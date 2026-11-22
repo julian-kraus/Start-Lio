@@ -63,9 +63,19 @@ kbl extract --adapter "$ADAPTER" --limit 1
 kbl status
 ```
 
-Continue only if the output shows `"done": 1` or `"needs_review": 1`. With `"failed": 1`, read the warning and fix
-the cause (key, network, missing package) first: every failed run uses up one of the document's three attempts,
-and no command puts a failed document back into the queue.
+Read the first block of the output. The first line that matches says what to do:
+
+| output | next |
+|---|---|
+| `failed` above 0 | read the warning, fix the cause (key, network, missing package), run again with the same limit |
+| `done` or `needs_review` above 0 | go on to step 5 |
+| `mail_parked` above 0 | mail that fits no kind left the queue: run again with the same limit |
+| `unrouted` above 0 | no kind fits the oldest documents, they stay first in line (#66): run again with `--limit` one higher |
+| every count 0 | nothing is queued: go to step 6 |
+
+Every failed run uses up one of the document's three attempts, and no command puts a failed document back into the
+queue. If `--limit` has passed `queue.pending` and `done` and `needs_review` are still 0, no queued document can be
+routed: skip step 5 and report on #36.
 
 ## 5. Drain
 
@@ -82,28 +92,40 @@ answered is not paid for again.
 
 ## 6. Read the result
 
-Done means that `queue` in `kbl status` has no `pending`. Every document is then facts or a named issue:
+The drain is over when `queue` in `kbl status` has no `pending`. **That does not prove that every document became
+facts or an issue** (see the known gaps below).
 
 | `queue` state | meaning | where to look |
 |---|---|---|
-| `done` | facts passed the gate | `kbl status`, `fact_types` |
-| `review` | the answer failed the gate, its facts do not count | `kbl issues --kind review_needed`, `kbl review` |
-| `failed` | three errors, or mail that fits no kind | `kbl issues --kind extraction_failed` |
-| `pending` | no known kind fits | `kbl issues --kind pending_extraction` |
+| `done` | the answer passed the gate, it can hold 0 facts | `kbl status`, `fact_types` |
+| `review` | the answer failed the gate, its facts do not count | `kbl issues --kind review_needed --limit 1000`, `kbl review` |
+| `failed` | three errors, or mail that fits no kind | `kbl issues --kind extraction_failed --limit 1000` |
+| `pending` | no known kind fits | `kbl issues --kind pending_extraction --limit 1000` |
 
 Tables never enter the queue. A new or renamed layout is a `needs_schema_map` document:
 
 ```sh
-kbl issues --kind schema_map_needed
-kbl issues --kind promotion_needed     # structures the designer proposed
-kbl explain <issue_key>                # the detail behind one line
+kbl issues --kind schema_map_needed --limit 1000
+kbl issues --kind ingest_failed --limit 1000        # files kb could not read
+kbl issues --kind promotion_needed --limit 1000     # structures the designer proposed
+kbl explain <issue_key>                             # the detail behind one line
 ```
 
 If `pending` is left after step 5, do not loop on it: every run pays for another classification. Post the count on
 the backfill issue (#36).
 
-Known gap: a JSON file without a list of records ends `loaded` with no facts and no issue (#79). It shows up in
-neither list.
+Known gaps. These end with no facts and no issue, also after a reconcile. No list above shows them and no kb
+command finds them, so an empty queue does not prove them handled:
+
+| input | document status | queue |
+|---|---|---|
+| JSON without a list of records: one object, `[]`, `{"items": []}`, a list of strings (#79) | `loaded` | none |
+| empty CSV (#126) | `loaded` | none |
+| CSV of a known layout with only a header (#126) | `parsed` | none |
+| CSV of a known layout where no row has the subject column's value (#126) | `parsed` | none |
+| document whose answer or reference envelope holds 0 facts (#126) | `loaded` | `done`, or none with an envelope |
+
+When you report (step 8), say that these were not checked.
 
 ## 7. Restart the worker, one instance
 
