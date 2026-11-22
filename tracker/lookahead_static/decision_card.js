@@ -49,7 +49,7 @@ function openRejectDialog(decision, translate) {
   const close = () => $("modal-root").replaceChildren();
   const reason = el("textarea", {rows:"3", "aria-label":tr("reason")});
   const error = el("p", {class:"decision-error",role:"alert"});
-  const submit = el("button", {class:"btn btn-primary",type:"button",disabled:true}, tr("reject"));
+  const submit = el("button", {class:"btn btn-primary",type:"button",disabled:true}, tr("regenerate"));
   reason.addEventListener("input", () => { submit.disabled = !reason.value.trim(); });
   submit.addEventListener("click", async () => {
     const text=reason.value.trim();

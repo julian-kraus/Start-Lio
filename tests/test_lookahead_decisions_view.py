@@ -16,7 +16,8 @@ let call;global.api=async(path,body)=>{if(body){call={path,body};return {}}retur
 vm.runInThisContext(fs.readFileSync('tracker/lookahead_static/decision_card.js','utf8'));
 const t=x=>x;openRejectDialog({decision_id:'d-1',title:'Example',signer:{name:'A signer'}},t);
 function all(n){return typeof n==='string'?[n]:[n,...n.children.flatMap(all)]} const nodes=all(root);
-const reason=nodes.find(n=>n.tag==='textarea'), submit=nodes.find(n=>n.tag==='button'&&n.children.includes('decisions.reject'));
+const reason=nodes.find(n=>n.tag==='textarea'), submit=nodes.find(n=>n.tag==='button'&&n.children.includes('decisions.regenerate'));
+if(!submit)throw Error('reject action must offer regeneration');
 if(!submit.disabled)throw Error('empty reason must not submit');reason.value='Not suitable';reason.listeners.input();
 (async()=>{await submit.listeners.click();if(call.path!=='/api/lookahead/decisions/d-1/reject'||call.body.approver!=='A signer'||call.body.reason!=='Not suitable')throw Error('incorrect route or body');console.log('ok')})().catch(e=>{console.error(e);process.exitCode=1});
 '''
