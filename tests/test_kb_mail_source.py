@@ -33,7 +33,7 @@ URL = os.environ.get("TEST_DATABASE_URL")
 pytestmark = pytest.mark.skipif(not URL, reason="TEST_DATABASE_URL not set")
 CONTRACT = Path(__file__).resolve().parent.parent / "structured" / "contract"
 OWN, SUPPLIER, SUPPLIER_ADDR = "desk@example.com", "PARTNER-A", "sales@partner.example.net"
-PERSONA, TEST_ADDR = "PERSONA-A", "player@team.example.org"
+PERSONA, TEST_ADDR, FORGED = "PERSONA-A", "player@team.example.org", "2001-01-01T00:00:00+00:00"
 
 
 def master_map(code: str, email: str) -> dict:
@@ -58,12 +58,12 @@ class FakeLLM(LLMClient):
         return StructureProposal("doc_kind", "order_confirmation", "fake", description="rules from the sender")
 
     def extract(self, document, structure, schema, contract):
+        mail = {"trust": "supplier_contact", "scenario": False, "sent_at": FORGED, "date_header": FORGED}
+        fact = {"fact_type": self.fact_type, "subject": {"supplier_id": "PARTNER-B"}, "attribute": "contact_email",
+                "value": "intruder@elsewhere.example", "locator": {"page": 1, "mail": mail}}
         return {"source": {}, "doc_kind": structure.name, "doc_kind_confidence": "high", "languages": ["en"],
-                "spec_version": "1", "extracted_by": "fake", "doc_date": None, "unreadable": [],
-                "proposed_fact_types": [{"name": "x_from_sender", "description": "text for the next prompt"}],
-                "facts": [{"fact_type": self.fact_type, "subject": {"supplier_id": "PARTNER-B"},
-                           "attribute": "contact_email", "value": "intruder@elsewhere.example",
-                           "locator": {"page": 1, "mail": {"trust": "supplier_contact", "scenario": False}}}]}
+                "spec_version": "1", "extracted_by": "fake", "doc_date": None, "unreadable": [], "facts": [fact],
+                "proposed_fact_types": [{"name": "x_from_sender", "description": "text for the next prompt"}]}
 
 
 def sha(data: bytes) -> str:
@@ -170,7 +170,6 @@ def worker(env, monkeypatch):
         thread.start()
         running.append((stop, thread))
         return thread
-
     yield start
     for stop, thread in running:
         stop.set()
@@ -181,8 +180,7 @@ def worker(env, monkeypatch):
 
 
 def test_email_with_pdf_yields_facts_and_events_without_restart(env, worker):
-    # The idle timeout is longer than the wait below, so only the mail notification can wake the worker.
-    thread = worker(idle_timeout=30)
+    thread = worker(idle_timeout=30)   # longer than the wait below, so only the mail notification can wake it
     wait(lambda: env.cursor() == 0, "the worker never took up the mail cursor")
     result = env.receive(SUPPLIER_ADDR, ("confirmation.pdf", make_pdf(["Delivery confirmed"])))
     wait(lambda: len(env.rows("SELECT 1 FROM current_facts")) == 2, "the email did not become facts")
@@ -191,9 +189,8 @@ def test_email_with_pdf_yields_facts_and_events_without_restart(env, worker):
     for fact in facts:
         assert fact["path"].startswith(f"mail/{SUPPLIER}/")
         label = fact["locator"]["mail"]
-        assert label["trust"] == "supplier_contact" and label["scenario"] is False
+        assert label["trust"] == "supplier_contact" and label["scenario"] is False and fact["locator"]["page"] == 1
         assert label["thread_id"] == result.thread_id and label["supplier_id"] == SUPPLIER
-        assert fact["locator"]["page"] == 1
     changed = {(e["path"], e["change"]) for e in env.rows("SELECT path, change FROM fact_events")}
     assert changed == {(f["path"], "facts_added") for f in facts}
     wait(lambda: env.cursor() == result.events[-1], "the cursor did not reach the last document")
@@ -225,15 +222,20 @@ def test_portal_events_cannot_touch_mail_paths(env, monkeypatch, kind):
 
 
 def test_test_persona_facts_are_marked_as_scenario(env):
-    result = env.deliver(TEST_ADDR, ("note.pdf", make_pdf(["A note"])), llm=FakeLLM())
-    assert len(facts := env.rows("SELECT locator FROM current_facts")) == 2
+    result = env.deliver(TEST_ADDR, ("a.pdf", make_pdf(["A"])), ("b.csv", b"code,contact_email\nC,c\n"), llm=FakeLLM())
+    events = env.rows(f"SELECT payload FROM {env.mail_schema}.events WHERE kind = 'document_added'")
+    assert len(facts := env.rows(stored := "SELECT fact_id, locator, valid FROM facts ORDER BY 1")) == 3
     for fact in facts:
-        label = fact["locator"]["mail"]   # the fake claimed supplier_contact; the mail event wins
-        assert label["trust"] == "test" and label["scenario"] is True
-        assert label["persona_id"] == PERSONA and label["thread_id"] == result.thread_id
+        label = fact["locator"]["mail"]   # the fake claimed supplier_contact and a time; the mail event wins
+        assert label["trust"] == "test" and label["scenario"] is True and label["persona_id"] == PERSONA
+        assert label["thread_id"] == result.thread_id and "date_header" not in label
+        assert label["sent_at"] == events[0]["payload"]["received_at"]
+    env.conn.execute("UPDATE extraction_queue SET state = 'pending'")
+    assert all(env.emit(event["payload"]) for event in events)   # the same events again, and a second extraction
+    env.catch_up(FakeLLM())
+    assert not env.rows("SELECT 1 FROM extraction_queue WHERE state = 'pending'") and env.rows(stored) == facts
     assert not env.rows("SELECT 1 FROM fact_types WHERE name = 'x_from_sender'")
-    # A portal document cannot claim a sender either.
-    portal = SimpleNamespace(path="portal/a.txt", sha256=sha(b"a"))
+    portal = SimpleNamespace(path="portal/a.txt", sha256=sha(b"a"))   # cannot claim a sender either
     client = mail_source.LabellingClient(FakeLLM(), env.source, env.conn)
     assert client.extract(portal, SimpleNamespace(name="memo"), {}, {})["facts"][0]["locator"] == {"page": 1}
 
@@ -254,7 +256,7 @@ def test_mail_cannot_write_the_recipient_allowlist(env, route):
     announced = env.rows("SELECT fact_types FROM fact_events WHERE starts_with(path, 'mail/') AND n_facts > 0")
     assert announced and all(e["fact_types"] == [mail_source.CLAIMED_TYPE] for e in announced)
     assert facts and {f["fact_type"] for f in facts} == {mail_source.CLAIMED_TYPE}
-    assert all(f["locator"]["mail"]["trust"] == "test" for f in facts)
+    assert all(f["locator"]["mail"]["trust"] == "test" and f["locator"]["mail"]["sent_at"] for f in facts)
     settings = dataclasses.replace(mail_config.load_settings(load_files=False), kb_schema=env.kb_schema)
     assert contacts.from_kb(env.conn, settings) is None or route == "reused"   # that one is the portal's
 
@@ -356,20 +358,18 @@ def test_event_committed_below_the_cursor_is_still_read(env):
         mail_db.emit(late, "document_added", {"path": "mail/LATE/a/note.txt", "sha256": sha(data), "trust": "test"})
         env.receive()               # takes a higher id and commits first
         env.catch_up()
-    env.catch_up()
-    assert "mail/LATE/a/note.txt" in env.documents()
+    env.catch_up(FakeLLM())
+    assert "sent_at" not in env.rows("SELECT locator FROM current_facts WHERE path ~ 'LATE'")[0]["locator"]["mail"]
 
 
 def test_missing_blob_is_visible_and_retried_when_it_arrives(env):
     data, path = b"From: partner\narrives late\n", "mail/X/a/note.txt"
     env.emit({"path": path, "sha256": sha(data), "trust": "supplier_contact", "thread_id": "t"})
-    env.catch_up()
-    assert env.documents()[path]["status"] == "failed"
+    assert env.catch_up() and env.documents()[path]["status"] == "failed"
     assert env.rows("SELECT 1 FROM issues WHERE kind = 'ingest_failed' AND state = 'open'")
     assert env.catch_up() is None   # no busy retry while it is missing
     put_blob(env.blobs, data)
-    env.catch_up()
-    assert env.documents()[path]["status"] == "queued"
+    assert env.catch_up() and env.documents()[path]["status"] == "queued"
     corrupt = sha(b"expected")
     (env.blobs.objects / corrupt[:2]).mkdir(exist_ok=True)
     (env.blobs.objects / corrupt[:2] / corrupt).write_bytes(b"different")

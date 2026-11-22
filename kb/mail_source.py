@@ -2,7 +2,7 @@
 
 Bodies and attachments go through ingest.process_file. For every kb command, what a sender wrote stays
 marked as theirs:
-- every fact carries locator.mail (trust, scenario, thread_id, ...), taken from the mail event, never from the text;
+- every fact carries locator.mail (trust, scenario, sent_at, ...), taken from the mail event, never from the text;
 - mail never yields a `supplier` master data fact, because mail.contacts builds the recipient allowlist from those;
 - fact ids of mail are separate from those of a portal file with the same bytes;
 - mail never adds to the shared registry: no doc kinds, schema maps or fact types.
@@ -49,7 +49,9 @@ def second_path(path: str, sha: str) -> str:
 
 
 def label(payload: dict) -> dict:
-    return {**{k: payload.get(k) for k in META_KEYS}, "scenario": payload["trust"] == "test"}
+    meta = {**{k: payload.get(k) for k in META_KEYS}, "scenario": payload["trust"] == "test"}
+    # When the mail was received. Without that there is no time: the load time would not be the sender's.
+    return {**meta, "sent_at": payload["received_at"]} if payload.get("received_at") else meta
 
 
 def last_fact_event(conn) -> int:
