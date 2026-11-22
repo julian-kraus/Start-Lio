@@ -12,6 +12,7 @@ Record kinds:
   launch    name, deadline, product, mode ("live" | "rehearse"), demo_times[] (stops of the jump key)
   clock     now                                  rehearse mode only; live mode follows plan.clock
   goal      statement, answers[], unit_loss_eur, budget_cap_eur, sacrifices[], edition
+            budget_eur is accepted and written as budget_cap_eur
   plan      lanes[], coverage {covered, needed, unit}, summary      latest solve replaces the previous one
   supplier  supplier_id, ...persona and score fields                upsert by supplier_id
   event     type, title, at, supplier_id?, lane?, severity?, impact?, source?, detail?   shown on the world lane
@@ -37,31 +38,10 @@ from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
 
+from .lookahead_records import KINDS, UPSERT_KEYS, LookaheadError, one_budget_name, validate  # noqa: F401
 from .lookahead_view import plan_view, shown_live
 
 log = logging.getLogger("tracker.lookahead")
-KINDS = {"launch", "clock", "goal", "plan", "supplier", "event", "decision", "promise", "cue"}
-UPSERT_KEYS = {"supplier": "supplier_id", "decision": "decision_id", "promise": "promise_id"}
-
-
-class LookaheadError(Exception):
-    def __init__(self, status: int, message: str):
-        super().__init__(message)
-        self.status = status
-
-
-def validate(record: dict) -> dict:
-    if not isinstance(record, dict):
-        raise LookaheadError(400, "record must be a JSON object")
-    kind = record.get("kind")
-    if kind not in KINDS:
-        raise LookaheadError(400, f"unknown kind {kind!r}")
-    key = UPSERT_KEYS.get(kind)
-    if key and not record.get(key):
-        raise LookaheadError(400, f"{kind} record needs {key}")
-    if kind == "event" and not (record.get("type") and record.get("title")):
-        raise LookaheadError(400, "event record needs type and title")
-    return record
 
 
 def append_records(path: Path, records: list[dict], producer: str | None = None) -> None:
@@ -69,6 +49,7 @@ def append_records(path: Path, records: list[dict], producer: str | None = None)
     `producer` is stamped on records that do not name one."""
     for r in records:
         validate(r)
+    records = [one_budget_name(r) for r in records]
     if producer:
         records = [{"producer": producer, **r} for r in records]
     path.parent.mkdir(parents=True, exist_ok=True)
