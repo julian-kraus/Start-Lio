@@ -103,8 +103,8 @@ function timeline() {
     });
     mine.forEach(d => {   // the decision window: open until the deadline, a decided one until it was decided
       const x = +X(d.at), until = d.status === "open" ? X(S.launch.deadline) : d.decided_at ? X(d.decided_at) : x;
-      const pct = Math.max(2, until - x), from = x * W / 100;
-      items.push({win: true, done: d.status !== "open", x, pct, from, to: from + Math.max(pct * W / 100, 24)});
+      const pct = Math.max(2, until - x, 84 / W * 100), from = x * W / 100;   // wide enough for its flag
+      items.push({win: true, done: d.status !== "open", x, pct, from, to: from + pct * W / 100});
     });
     const rows = placeRows(items);
     const chips = items.map(it => {
