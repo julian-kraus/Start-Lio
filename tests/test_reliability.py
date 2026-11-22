@@ -127,6 +127,20 @@ def test_ambiguous_receipt_is_reported_and_never_makes_a_line_short():
     assert record["score"]["not_judged"]["receipts without a certain PO line"] == 1
 
 
+@pytest.mark.parametrize("line_part, receipt_part", [("P1", None), (None, "P1"), (None, None)])
+def test_unplaced_receipt_without_a_material_never_makes_a_line_short(line_part, receipt_part):
+    facts = (line("A", 10, part=line_part) + receipt("G1", "A", 10, received=60)
+             + receipt("G2", "A", 3, received=40, part=receipt_part))
+    record = card(facts)
+    assert measure(record, "in_full")["n"] == 0
+    assert record["score"]["history"] == {"kept": 1, "n": 1}
+
+
+def test_unplaced_receipt_of_another_material_does_not_hide_a_short_line():
+    facts = line("A", 10) + receipt("G1", "A", 10, received=60) + receipt("G2", "A", 3, received=40, part="P2")
+    assert card(facts)["score"]["inputs"][0]["in_full"] is False
+
+
 def test_failed_inspection_breaks_an_on_time_promise():
     record = card(line("A") + receipt("G1", "A") + inspection("G1", "Rejected"))
     assert record["score"]["history"] == {"kept": 0, "n": 1}
@@ -148,6 +162,24 @@ def test_failed_inspection_without_a_po_line_still_counts():
 def test_only_a_failed_inspection_lowers_quality(decision, verdict):
     row = measure(card(line("A") + receipt("G1", "A") + inspection("G1", decision)), "quality")
     assert (row["kept"], row["inspections"]) == (1, {verdict: 1})
+
+
+@pytest.mark.parametrize("first, second, verdict", [
+    ("passed", "passed", "passed"), ("failed", "failed", "failed"),
+    ("passed", "failed", "failed"), ("failed", "passed", "failed"),
+    ("under discussion", "passed", "passed"), ("passed", "under discussion", "passed"),
+])
+def test_one_report_in_two_documents_counts_once(first, second, verdict):
+    again = [dict(f, fact_id="b" + f["fact_id"], sha256="b", path="b") for f in inspection("G1", second)]
+    row = measure(card(line("A") + receipt("G1", "A") + inspection("G1", first) + again), "quality")
+    assert row["inspections"] == {verdict: 1}
+    assert row["value"].endswith("(1 inspection reports)")
+
+
+def test_reports_on_two_receipts_count_twice():
+    facts = (line("A") + receipt("G1", "A", received=50) + receipt("G2", "A", received=50)
+             + inspection("G1", "passed") + inspection("G2", "passed"))
+    assert measure(card(facts), "quality")["inspections"] == {"passed": 2}
 
 
 def test_each_measure_is_shrunk_toward_its_own_average():
