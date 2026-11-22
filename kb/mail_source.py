@@ -1,6 +1,7 @@
 """Supplier email as a kb input: follows mail.events (document_added) with a cursor in mail.consumer_cursors.
 
-Bodies and attachments go through ingest.process_file. In `kb run`, what a sender wrote stays marked as theirs:
+Bodies and attachments go through ingest.process_file. For every kb command, what a sender wrote stays
+marked as theirs:
 - every fact carries locator.mail (trust, scenario, thread_id, ...), taken from the mail event, never from the text;
 - mail never yields a `supplier` master data fact, because mail.contacts builds the recipient allowlist from those;
 - fact ids of mail are separate from those of a portal file with the same bytes;
@@ -24,14 +25,13 @@ from tracker.store import SHA_RE, check_path
 
 from . import facts as facts_mod
 from .config import SCHEMA_NAME
-from .ingest import process_file
+from .ingest import MAIL_PREFIX as PREFIX, is_mail, process_file
 from .llm.base import LLMClient, StructureProposal
 from .tabular import TABULAR_CONTAINERS
 
 log = logging.getLogger("kb")
 CONSUMER = "kb-mail"
 CHANNEL = "mail_events"
-PREFIX = "mail/"
 TRUSTED = ("supplier_contact", "test")
 META_KEYS = ("trust", "thread_id", "message_id", "supplier_id", "persona_id")
 MASTER_TYPE = "supplier"
@@ -39,10 +39,6 @@ CLAIMED_TYPE = f"x_mail_{MASTER_TYPE}"
 NO_KIND = "no known doc kind fits, and mail cannot add one"
 # Event ids are taken before commit, so a lower id can become visible after the cursor has passed it.
 LOOKBACK = 200
-
-
-def is_mail(path: str | None) -> bool:
-    return bool(path) and path.startswith(PREFIX)
 
 
 def second_path(path: str, sha: str) -> str:
@@ -54,17 +50,6 @@ def second_path(path: str, sha: str) -> str:
 
 def label(payload: dict) -> dict:
     return {**{k: payload.get(k) for k in META_KEYS}, "scenario": payload["trust"] == "test"}
-
-
-def active_documents(conn) -> dict[str, str]:
-    """Mail is not in the tracker's file set, so the current-file sync gets it from here."""
-    return {r["path"]: r["sha256"] for r in conn.execute(
-        "SELECT path, sha256 FROM documents WHERE active AND starts_with(path, %s)", (PREFIX,))}
-
-
-def hashes_with_facts(conn) -> set[str]:
-    return {r["source_sha256"] for r in conn.execute(
-        "SELECT DISTINCT source_sha256 FROM facts WHERE valid AND starts_with(source_path, %s)", (PREFIX,))}
 
 
 def last_fact_event(conn) -> int:

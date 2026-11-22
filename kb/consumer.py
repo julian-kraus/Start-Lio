@@ -4,12 +4,13 @@ from __future__ import annotations
 
 import logging
 import threading
+from pathlib import Path
 
 import psycopg
 
 from tracker import db as tracker_db
 
-from . import db, facts as facts_mod, mail_source, reconcile
+from . import db, mail_source, reconcile
 from .config import KbSettings
 from .ingest import FileReader, process_file, remove_path, sync_current
 from .intake import drain
@@ -37,37 +38,36 @@ def _current_sha(conn, path: str) -> str | None:
     return row["sha256"] if row else None
 
 
-def _ingest(conn, path: str, sha: str, data: bytes, settings: KbSettings, confidence_map: dict, llm) -> str:
+def _ingest(conn, path: str, sha: str, data: bytes, structured: Path, confidence_map: dict, llm=None) -> str:
     """A portal file. Facts it reuses from an email lose the mail label before their event can be read."""
     since = mail_source.last_fact_event(conn)
-    status = process_file(conn, path, sha, data, settings.structured_dir, confidence_map, llm)
+    status = process_file(conn, path, sha, data, structured, confidence_map, llm)
     mail_source.release_copies(conn, path)
     mail_source.announce_stored_types(conn, path, since)
     return status
 
 
-def _ingest_mailed_copies(conn, current: dict[str, str], reader: FileReader, settings: KbSettings,
-                          confidence_map: dict, llm) -> dict[str, int]:
-    """sync_current commits a file's event straight away, so new files with the bytes of an email go first."""
-    mailed = mail_source.hashes_with_facts(conn)
-    known = {(r["path"], r["sha256"]) for r in conn.execute("SELECT path, sha256 FROM documents WHERE active")}
-    counts: dict[str, int] = {}
-    for path, sha in sorted(current.items()):
-        if sha not in mailed or (path, sha) in known:
-            continue
-        try:
-            status = _ingest(conn, path, sha, reader(sha, path), settings, confidence_map, llm)
-        except (psycopg.OperationalError, psycopg.InterfaceError):
-            raise
-        except Exception as exc:
-            conn.rollback()
-            facts_mod.upsert_document(conn, path, sha, container=None, status="failed",
-                                      detail={"error": f"{type(exc).__name__}: {exc}"})
-            status = "failed"
-            log.warning("failed to process %s: %s", path, exc)
-        conn.commit()
-        counts[status] = counts.get(status, 0) + 1
+def sync(conn, settings: KbSettings, reader: FileReader, confidence_map: dict, *, llm=None,
+         force: bool = False) -> dict:
+    """The current-file sync of `kb run` and `kb sync`."""
+    counts = sync_current(conn, current_sha_by_path(conn, settings.data_dir), reader, settings.structured_dir,
+                          confidence_map, force=force, llm=llm, process=_ingest)
+    mail_source.release_copies(conn)
+    conn.commit()
     return counts
+
+
+def extract(conn, settings: KbSettings, reader: FileReader, llm, mail: mail_source.MailSource, confidence_map: dict,
+            *, limit: int = 20) -> tuple[dict, list[dict]]:
+    """The queue drain of `kb run` and `kb extract`: what it did, and the mail it parked because no kind fits."""
+    def read(sha: str, path: str) -> bytes:
+        return mail.read(sha) if mail_source.is_mail(path) else reader(sha, path)
+
+    drained = drain(conn, mail_source.LabellingClient(llm, mail, conn), read, settings.structured_dir, confidence_map,
+                    limit=limit)
+    parked = mail_source.park_unrouted(conn)
+    conn.commit()
+    return drained, parked
 
 
 def handle_event(conn, ev: dict, reader: FileReader, settings: KbSettings, confidence_map: dict,
@@ -83,7 +83,7 @@ def handle_event(conn, ev: dict, reader: FileReader, settings: KbSettings, confi
         sha = ev["new_sha"]
         if sha != current:
             return None
-        return _ingest(conn, path, sha, reader(sha, path), settings, confidence_map, llm)
+        return _ingest(conn, path, sha, reader(sha, path), settings.structured_dir, confidence_map, llm)
     if kind == "removed":
         if current is not None:
             return None
@@ -116,14 +116,10 @@ def catch_up(conn, settings: KbSettings, reader: FileReader, llm,
     stale_events = processed and not paths
     paths.extend(mail.catch_up(conn, settings.structured_dir, confidence_map))
     if llm is not None:
-        def read(sha: str, path: str) -> bytes:
-            return mail.read(sha) if mail_source.is_mail(path) else reader(sha, path)
-
-        drained = drain(conn, mail_source.LabellingClient(llm, mail, conn), read, settings.structured_dir,
-                        confidence_map)
+        drained, parked = extract(conn, settings, reader, llm, mail, confidence_map)
         if drained["done"]:
             paths.append({"llm_extracted": drained["done"]})
-        paths.extend({"path": r["path"], "status": "failed"} for r in mail_source.park_unrouted(conn))
+        paths.extend({"path": r["path"], "status": "failed"} for r in parked)
     if paths or stale_events:
         return reconcile.run(conn, "file_events", {"events": processed, "paths": paths[:200]})
     conn.commit()
@@ -149,16 +145,7 @@ def _follow(conn, listen, settings: KbSettings, reader: FileReader, llm, mail: m
     tracker_db.init_schema(conn)
     conn.commit()
     load_contract(conn, settings.structured_dir)
-    current = {path: sha for path, sha in current_sha_by_path(conn, settings.data_dir).items()
-               if not mail_source.is_mail(path)}
-    current.update(mail_source.active_documents(conn))   # emails are current until kb says otherwise
-    confidence_map = _confidence_map(conn)
-    copies = _ingest_mailed_copies(conn, current, reader, settings, confidence_map, llm)
-    counts = sync_current(conn, current, reader, settings.structured_dir, confidence_map, llm=llm)
-    for status, n in copies.items():
-        counts[status] = counts.get(status, 0) + n
-    mail_source.release_copies(conn)
-    conn.commit()
+    counts = sync(conn, settings, reader, _confidence_map(conn), llm=llm)
     log.info("start-up sync: %s", counts)
     result = reconcile.run(conn, "startup_sync", {"sync": counts})
     log.info("reconcile run %s: %s issues", result["run_id"], result["issues"])

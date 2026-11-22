@@ -6,6 +6,8 @@ from __future__ import annotations
 import logging
 from pathlib import Path
 
+import psycopg
+
 from tracker.diff import detect_kind
 from tracker.store import BlobStore
 
@@ -19,6 +21,11 @@ from .registry import ACTIVE_MAP_STATUS
 from .tabular import TABULAR_CONTAINERS, find_header, guess_header, read_tables, table_to_facts
 
 log = logging.getLogger(__name__)
+MAIL_PREFIX = "mail/"   # supplier email (kb.mail_source): never in the tracker's file set
+
+
+def is_mail(path: str | None) -> bool:
+    return bool(path) and path.startswith(MAIL_PREFIX)
 
 
 class FileReader:
@@ -88,12 +95,14 @@ def _process_file(conn, path: str, sha: str, data: bytes, structured: Path,
             stats[table.sheet or "table"] = {"fact_type": mapping["fact_type"], **s}
         if parsed:
             # kb's own parse wins over an envelope for the same sheets; other sheets keep envelope facts.
+            # An email with the same bytes is its sender's statement and keeps its facts.
             if container == "xlsx":
                 conn.execute("UPDATE facts SET valid = false WHERE source_sha256 = %s AND extractor <> 'kb:tabular' "
-                             "AND locator->>'sheet' = ANY(%s)", (sha, parsed))
+                             "AND NOT starts_with(source_path, %s) AND locator->>'sheet' = ANY(%s)",
+                             (sha, MAIL_PREFIX, parsed))
             else:
-                conn.execute("UPDATE facts SET valid = false WHERE source_sha256 = %s AND extractor <> 'kb:tabular'",
-                             (sha,))
+                conn.execute("UPDATE facts SET valid = false WHERE source_sha256 = %s AND extractor <> 'kb:tabular' "
+                             "AND NOT starts_with(source_path, %s)", (sha, MAIL_PREFIX))
         env = envelope_for(structured, sha)
         if env is not None:
             load_envelope(conn, env, current_sha=sha, confidence_map=confidence_map, emit=False)
@@ -146,16 +155,19 @@ def remove_path(conn, path: str) -> None:
 
 
 def sync_current(conn, current: dict[str, str], reader: FileReader, structured: Path, confidence_map: dict,
-                 force: bool = False, llm=None) -> dict:
+                 force: bool = False, llm=None, process=process_file) -> dict:
     """Bring kb in line with the tracker's current file set (used at start-up: the tracker's baseline poll emits no
-    events). Only versions kb has not processed yet are read, unless force is set."""
+    events). Only versions kb has not processed yet are read, unless force is set. Mail paths are left alone, whoever
+    calls this. Each file commits with what `process` did to it, so its event is final when it becomes visible."""
     known = {(r["path"], r["sha256"]) for r in conn.execute("SELECT path, sha256 FROM documents WHERE active")}
     counts: dict[str, int] = {}
     for path, sha in sorted(current.items()):
-        if (path, sha) in known and not force:
+        if is_mail(path) or ((path, sha) in known and not force):
             continue
         try:
-            status = process_file(conn, path, sha, reader(sha, path), structured, confidence_map, llm)
+            status = process(conn, path, sha, reader(sha, path), structured, confidence_map, llm)
+        except (psycopg.OperationalError, psycopg.InterfaceError):
+            raise   # not the file's fault
         except Exception as exc:
             conn.rollback()
             facts_mod.upsert_document(conn, path, sha, container=None, status="failed",
@@ -165,7 +177,7 @@ def sync_current(conn, current: dict[str, str], reader: FileReader, structured: 
         conn.commit()
         counts[status] = counts.get(status, 0) + 1
     for row in conn.execute("SELECT DISTINCT path FROM documents WHERE active").fetchall():
-        if row["path"] not in current:
+        if row["path"] not in current and not is_mail(row["path"]):
             remove_path(conn, row["path"])
             counts["removed"] = counts.get("removed", 0) + 1
     conn.commit()
