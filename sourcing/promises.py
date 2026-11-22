@@ -44,6 +44,22 @@ OUTCOMES: dict[str, str] = {
 
 _MATCH_KEYS = ("supplier_id", "part_id", "lane")
 
+# The model writes a statement's kind in its own words ("cancellation: our press is not available"). The ledger only
+# acts on the closed vocabulary above, so the kind is normalised in code by its leading word; anything else is kept
+# as written and stays informational (it is never read as a confirm). Finding: rehearsal run 4.
+_KIND_PREFIXES = (("cancel", "cancel"), ("confirm", "confirm"), ("delay", "delay"), ("dispatch", "dispatch_info"),
+                  ("shipped", "dispatch_info"), ("on hold", "on_hold"), ("on_hold", "on_hold"), ("hold", "on_hold"),
+                  ("short", "short-ship"), ("term_rejected", "term_rejected"), ("reject", "term_rejected"))
+
+
+def normalise_kind(kind) -> str:
+    text = " ".join(str(kind or "").strip().lower().replace("-", " ").split())
+    head = text.split(":", 1)[0].strip()
+    for prefix, canonical in _KIND_PREFIXES:
+        if head.startswith(prefix):
+            return canonical
+    return str(kind or "").strip()
+
 
 class PromiseError(ValueError):
     pass
@@ -68,6 +84,9 @@ class Statement:
     due_time: str | None = None
     quantity: str | None = None
     fact_ids: tuple = ()
+
+    def __post_init__(self):
+        object.__setattr__(self, "kind", normalise_kind(self.kind))
 
     def all_fact_ids(self) -> set[str]:
         """Every kb fact id this statement rests on, as strings: the classifying `fact_id` and the grouped

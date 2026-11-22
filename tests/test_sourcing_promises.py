@@ -200,3 +200,24 @@ def test_watch_gaps_flags_unwatched_open_promises_only():
     no_fallback = {"promise_id": "PR-3", "state": "waiting", "next_check": MADE, "fallback": " "}
     settled = {"promise_id": "PR-4", "state": "proven"}                    # not open: not a gap
     assert promises.watch_gaps([good, no_check, no_fallback, settled]) == ["PR-2", "PR-3"]
+
+
+@pytest.mark.parametrize("kind", ["cancellation: our press is not available", "Cancelled", "CANCEL - press down",
+                                  "cancellation"])
+def test_a_cancellation_in_the_models_own_words_breaks_the_promise(kind):
+    # Rehearsal run 4: the model wrote the kind as a sentence, the ledger read it as informational and the promise
+    # was never broken. The kind is normalised in code by its leading word.
+    said = Statement(kind="confirm", at=MADE, supplier_id="SUP-A", part_id="PART-A", fact_id="fact-1")
+    cancel = Statement(kind=kind, at="2030-01-11T19:00:00+00:00", supplier_id="SUP-A", part_id="PART-A",
+                       fact_id="fact-2")
+    [upd] = promises.reconcile([a_promise(sources=[{"fact_id": "fact-1"}])], [said, cancel])
+    assert upd["state"] == "broken"
+
+
+@pytest.mark.parametrize("kind,canonical", [("Confirmation: we load within 4 h", "confirm"),
+                                            ("delay - two days", "delay"), ("on hold", "on_hold"),
+                                            ("price question", "price question")])
+def test_kinds_are_normalised_to_the_closed_set_and_unknown_kinds_stay_informational(kind, canonical):
+    assert Statement(kind=kind, at=MADE).kind == canonical
+    assert promises.reconcile([a_promise()], [Statement(kind="price question", at="2030-01-11T19:00:00+00:00",
+                                                        supplier_id="SUP-A", fact_id="f-9")]) == []

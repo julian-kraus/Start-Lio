@@ -325,3 +325,18 @@ def test_a_call_citing_two_statements_saves_nothing(plan_conn, mail_env, order):
                                              "fallback": "call", "sources": [{"fact_id": f} for f in order]})
     assert "error" in out and "exactly one" in out["error"] and reg == []
     assert plan_conn.execute("SELECT count(*) AS n FROM promises").fetchone()["n"] == 0
+
+
+def test_register_takes_the_lane_from_the_statement_not_the_model(plan_conn, mail_env):
+    # Rehearsal run 4: the model set lane="confirm"; a cancellation without that lane could then never match the
+    # promise. The lane is the statement's (here none), never the model's.
+    st = Statement(kind="confirm", at=NOW.isoformat(), supplier_id="SUP-0028", fact_id="S-1",
+                   text="loads within 4 h")
+    registry, reg = _registry(plan_conn, mail_env, statements=[st])
+    out = registry.call("register_promise", {
+        "promise_id": "PR-l", "what": "loads", "within": "within 4 h", "fallback": "call",
+        "lane": "confirm", "sources": [{"fact_id": "S-1"}]})
+    assert out.get("promise_id") == "PR-l"
+    plan_conn.commit()
+    row = plan_conn.execute("SELECT lane FROM promises WHERE promise_id = 'PR-l'").fetchone()
+    assert row["lane"] is None

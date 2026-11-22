@@ -340,6 +340,7 @@ def _register_tool(plan_conn, registered: list[dict], by_fact: dict):
             kwargs["due"], kwargs["within"] = due, None
         else:
             return {"error": "the due time is not in the cited statement; quote its duration (`within`) or `due_time`"}
+        kwargs["lane"] = str(st.lane) if st.lane else None   # the lane comes from the statement, never the model
         if st.part_id:
             kwargs["part_id"] = str(st.part_id)      # the statement's part wins over any the model passed
         qty = parse_quantity(st.quantity)
