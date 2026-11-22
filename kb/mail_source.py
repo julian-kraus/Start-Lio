@@ -3,7 +3,8 @@
 Bodies and attachments go through ingest.process_file. In `kb run`, what a sender wrote stays marked as theirs:
 - every fact carries locator.mail (trust, scenario, thread_id, ...), taken from the mail event, never from the text;
 - mail never yields a `supplier` master data fact, because mail.contacts builds the recipient allowlist from those;
-- fact ids of mail are separate from those of a portal file with the same bytes.
+- fact ids of mail are separate from those of a portal file with the same bytes;
+- mail never adds to the shared registry: no doc kinds, schema maps or fact types.
 """
 
 from __future__ import annotations
@@ -24,7 +25,7 @@ from tracker.store import SHA_RE, check_path
 from . import facts as facts_mod
 from .config import SCHEMA_NAME
 from .ingest import process_file
-from .llm.base import LLMClient
+from .llm.base import LLMClient, StructureProposal
 from .tabular import TABULAR_CONTAINERS
 
 log = logging.getLogger("kb")
@@ -35,6 +36,7 @@ TRUSTED = ("supplier_contact", "test")
 META_KEYS = ("trust", "thread_id", "message_id", "supplier_id", "persona_id")
 MASTER_TYPE = "supplier"
 CLAIMED_TYPE = f"x_mail_{MASTER_TYPE}"
+NO_KIND = "no known doc kind fits, and mail cannot add one"
 # Event ids are taken before commit, so a lower id can become visible after the cursor has passed it.
 LOOKBACK = 200
 
@@ -58,6 +60,25 @@ def active_documents(conn) -> dict[str, str]:
     """Mail is not in the tracker's file set, so the current-file sync gets it from here."""
     return {r["path"]: r["sha256"] for r in conn.execute(
         "SELECT path, sha256 FROM documents WHERE active AND starts_with(path, %s)", (PREFIX,))}
+
+
+def last_fact_event(conn) -> int:
+    return conn.execute("SELECT coalesce(max(id), 0) AS id FROM fact_events").fetchone()["id"]
+
+
+def announce_stored_types(conn, path: str, since: int) -> None:
+    """process_file writes its event before the facts are relabelled. Call in that same transaction, so that a
+    reader of the feed only ever sees the types that were stored."""
+    conn.execute("UPDATE fact_events e SET fact_types = ARRAY(SELECT DISTINCT fact_type FROM facts "
+                 "WHERE source_path = e.path AND valid ORDER BY 1) WHERE e.path = %s AND e.id > %s", (path, since))
+
+
+def park_unrouted(conn) -> list[dict]:
+    """Classified mail that fits no kind would stay pending: classified on every poll and ahead of portal files."""
+    return conn.execute(
+        "UPDATE extraction_queue SET state = 'failed', last_error = %s, updated_at = now() "
+        "WHERE state = 'pending' AND starts_with(path, %s) AND routing ? 'rules' RETURNING path",
+        (NO_KIND, PREFIX)).fetchall()
 
 
 def release_copies(conn, path: str | None = None) -> None:
@@ -100,7 +121,7 @@ class MailSource:
         return conn.execute("SELECT to_regclass(%s) IS NOT NULL AND to_regclass(%s) IS NOT NULL AS ok",
                             (f"{self.schema}.events", f"{self.schema}.consumer_cursors")).fetchone()["ok"]
 
-    def catch_up(self, conn, structured: Path, confidence_map: dict, llm: LLMClient | None = None) -> list[dict]:
+    def catch_up(self, conn, structured: Path, confidence_map: dict) -> list[dict]:
         """Process new mail documents. Each commits together with the cursor, so a crash repeats at most one."""
         if not self.available(conn):
             conn.commit()
@@ -124,7 +145,7 @@ class MailSource:
         conn.commit()
         done = []
         for event in pending:
-            result = self._handle(conn, event, structured, confidence_map, llm, first_time=event["id"] > cursor)
+            result = self._handle(conn, event, structured, confidence_map, first_time=event["id"] > cursor)
             if result:
                 done.append(result)
             conn.execute(self._sql("UPDATE {mail}.consumer_cursors SET last_event_id = GREATEST(last_event_id, %s), "
@@ -132,7 +153,7 @@ class MailSource:
             conn.commit()
         return done
 
-    def _handle(self, conn, event: dict, structured: Path, confidence_map: dict, llm, *,
+    def _handle(self, conn, event: dict, structured: Path, confidence_map: dict, *,
                 first_time: bool) -> dict | None:
         payload = event["payload"]
         path, sha = str(payload.get("path") or ""), str(payload.get("sha256") or "")
@@ -145,12 +166,16 @@ class MailSource:
             if first_time:
                 log.warning("mail event %s ignored: bad path, hash or sender trust", event["id"])
             return None
+        # pending was read once, so the same part can be in it twice. A part whose blob was missing is not done.
+        if conn.execute("SELECT 1 FROM documents WHERE sha256 = %s AND path = ANY(%s) AND NOT detail ? 'retry_event'",
+                        (sha, [path, second_path(path, sha)])).fetchone():
+            return None
         taken = conn.execute("SELECT 1 FROM documents WHERE path = %s AND sha256 <> %s AND active",
                              (path, sha)).fetchone()
         if taken:
             path = second_path(path, sha)
         try:
-            status = self._process(conn, path, sha, self.read(sha), label(payload), structured, confidence_map, llm)
+            status = self._process(conn, path, sha, self.read(sha), label(payload), structured, confidence_map)
         except (psycopg.OperationalError, psycopg.InterfaceError):
             raise   # not the document's fault: the worker reconnects and the cursor has not moved
         except Exception as exc:
@@ -163,7 +188,7 @@ class MailSource:
         return {"path": path, "event": "document_added", "status": status}
 
     def _process(self, conn, path: str, sha: str, data: bytes, meta: dict, structured: Path,
-                 confidence_map: dict, llm) -> str:
+                 confidence_map: dict) -> str:
         container = detect_kind(path, data)
         tabular = container in TABULAR_CONTAINERS
         # A table's fact ids ignore the path, so parsing would rewrite the facts another path has for the same
@@ -171,8 +196,10 @@ class MailSource:
         others = conn.execute(
             "UPDATE facts SET fact_id = 'held:' || fact_id WHERE source_sha256 = %s AND source_path <> %s "
             "RETURNING fact_id, valid", (sha, path)).fetchall() if tabular else []
+        since = last_fact_event(conn)
         # No envelope lookup for mail: an envelope names a portal path and would make that path current again.
-        status = process_file(conn, path, sha, data, structured / "no-mail-envelopes", confidence_map, llm)
+        # No LLM here: process_file would only use it to let the document design a schema map.
+        status = process_file(conn, path, sha, data, structured / "no-mail-envelopes", confidence_map)
         conn.execute(
             """UPDATE facts SET
                  locator = CASE jsonb_typeof(locator) WHEN 'object' THEN locator ELSE '{}'::jsonb END
@@ -182,6 +209,7 @@ class MailSource:
                                                          'hex'), 32) ELSE fact_id END
                WHERE source_path = %s AND source_sha256 = %s""",
             (Jsonb(meta), MASTER_TYPE, CLAIMED_TYPE, tabular, path, sha))
+        announce_stored_types(conn, path, since)
         if others:
             conn.execute("UPDATE facts SET fact_id = substr(fact_id, 6), valid = fact_id = ANY(%s) "
                          "WHERE fact_id = ANY(%s)",
@@ -216,11 +244,15 @@ class LabellingClient(LLMClient):
         return self.inner.classify(document, kinds)
 
     def design(self, document, similar, contract, sample_rows=None):
+        if is_mail(document.path):
+            return StructureProposal("none", "", NO_KIND)
         return self.inner.design(document, similar, contract, sample_rows)
 
     def extract(self, document, structure, schema, contract):
         env = self.inner.extract(document, structure, schema, contract)
         meta = self.source.label_of(self.conn, document.path, document.sha256) if is_mail(document.path) else None
+        if meta is not None:
+            env["proposed_fact_types"] = []
         for fact in env.get("facts") or []:
             locator = fact.get("locator")
             if meta is None:

@@ -50,8 +50,10 @@ def handle_event(conn, ev: dict, reader: FileReader, settings: KbSettings, confi
         sha = ev["new_sha"]
         if sha != current:
             return None
+        since = mail_source.last_fact_event(conn)
         status = process_file(conn, path, sha, reader(sha, path), settings.structured_dir, confidence_map, llm)
         mail_source.release_copies(conn, path)
+        mail_source.announce_stored_types(conn, path, since)
         return status
     if kind == "removed":
         if current is not None:
@@ -83,7 +85,7 @@ def catch_up(conn, settings: KbSettings, reader: FileReader, llm,
             conn.commit()
             processed += 1
     stale_events = processed and not paths
-    paths.extend(mail.catch_up(conn, settings.structured_dir, confidence_map, llm))
+    paths.extend(mail.catch_up(conn, settings.structured_dir, confidence_map))
     if llm is not None:
         def read(sha: str, path: str) -> bytes:
             return mail.read(sha) if mail_source.is_mail(path) else reader(sha, path)
@@ -92,6 +94,7 @@ def catch_up(conn, settings: KbSettings, reader: FileReader, llm,
                         confidence_map)
         if drained["done"]:
             paths.append({"llm_extracted": drained["done"]})
+        paths.extend({"path": r["path"], "status": "failed"} for r in mail_source.park_unrouted(conn))
     if paths or stale_events:
         return reconcile.run(conn, "file_events", {"events": processed, "paths": paths[:200]})
     conn.commit()
