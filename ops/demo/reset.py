@@ -18,6 +18,7 @@ import json
 import math
 import os
 import sys
+import uuid
 from datetime import timedelta
 from email import message_from_string, policy
 from email.utils import format_datetime, formataddr
@@ -150,7 +151,8 @@ def opening_records(pack: dict, deadline, inputs: dict) -> list[dict]:
                   "why": "Scenario input. You can change it here.",
                   **({"unit": s["unit"]} if "unit" in s else {})} for s in pack["inputs"]]
     launch = {"kind": "launch", "name": pack["name"], "mode": "live", "deadline": deadline.isoformat(),
-              "scenario": True, "team_offline_at": before(script["offline_h_before_deadline"]),
+              "scenario": True, "rehearsal_id": uuid.uuid4().hex,  # unique per reset: mail outlives the plan schema
+              "team_offline_at": before(script["offline_h_before_deadline"]),
               "demo_times": [before(h) for h in script["stops_h_before_deadline"]], "goal_questions": questions}
     labelled = {"kind": "event", "type": "scenario", "severity": "info", "at": start,
                 "title": f"Scenario: {persona['display_name']} is played by the team",

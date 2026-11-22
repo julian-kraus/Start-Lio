@@ -232,3 +232,18 @@ def test_replay_reaches_kb_as_scenario_mail_and_sends_nothing(pack, demo_db, tmp
         conn.commit()
         seen = MailSource("mail", blobs).catch_up(conn, tmp_path / "structured", {})
     assert len(seen) == 3 and all(d["status"] != "failed" for d in seen), json.dumps(seen)
+
+
+def test_a_second_rehearsal_on_the_same_log_path_delivers_its_mail_again(pack, demo_db, tmp_path):
+    log, blobs = tmp_path / "log", tmp_path / "mail"
+    for _ in range(2):
+        log.unlink(missing_ok=True)
+        demo.reset(demo_db, pack, DEADLINE, VALUES, log)
+        for beat in pack["beats"]:
+            assert demo.replay(demo_db, pack, beat, log, blobs).new
+            assert not demo.replay(demo_db, pack, beat, log, blobs).new
+    with kb_db.connect(demo_db, "kb") as conn:
+        kb_db.migrate(conn, "kb")
+        conn.commit()
+        seen = MailSource("mail", blobs).catch_up(conn, tmp_path / "structured", {})
+    assert len(seen) == 6 and all(d["status"] != "failed" for d in seen), json.dumps(seen)
