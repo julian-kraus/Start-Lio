@@ -1,0 +1,50 @@
+family: demand
+# Demand: pre-orders for an edition rise or fall, or a forecast is revised. Demand moves the quantity at risk.
+types:
+  - id: demand.preorders_up
+    description: Pre-orders for an edition rise, increasing the quantity of a part needed.
+    channel: table
+    parameters:
+      edition: {type: ref, ref: edition}
+      part: {type: ref, ref: part}
+      delta: {type: number}
+    produces:
+      table:
+        path: "demand/preorders.csv"
+        row:
+          edition: "{edition.edition}"
+          material_id: "{part.material_id}"
+          delta: "+{delta}"
+    expects:
+      - {fact_type: preorder_demand, attribute: quantity, change: update}
+
+  - id: demand.preorders_down
+    description: Pre-orders for an edition fall, reducing the quantity of a part needed.
+    channel: table
+    parameters:
+      edition: {type: ref, ref: edition}
+      part: {type: ref, ref: part}
+      delta: {type: number}
+    produces:
+      table:
+        path: "demand/preorders.csv"
+        row:
+          edition: "{edition.edition}"
+          material_id: "{part.material_id}"
+          delta: "-{delta}"
+    expects:
+      - {fact_type: preorder_demand, attribute: quantity, change: update}
+
+  - id: demand.forecast_revision
+    description: A revised demand forecast document changes the planned quantity for an edition.
+    channel: document
+    parameters:
+      edition: {type: ref, ref: edition}
+      part: {type: ref, ref: part}
+    produces:
+      document:
+        filename: "forecast_{edition.edition}.xlsx"
+        kind: xlsx
+        body: "Revised forecast for edition {edition.edition}: planned quantity per part including {part.material_id}."
+    expects:
+      - {fact_type: preorder_demand, attribute: quantity, change: update}

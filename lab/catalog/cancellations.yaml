@@ -1,0 +1,50 @@
+family: cancellations
+# Cancellations: a line is cancelled, a whole order is cancelled, a force-majeure stop.
+types:
+  - id: cancellations.line_cancelled
+    description: Supplier cancels a single order line.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      line: {type: ref, ref: order_line}
+      reason: {type: text, required: false}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject: "Cancellation of line on order {line.po_number}"
+        body:
+          en: "Dear team,\n\nWe must cancel line {line.po_line} on order {line.po_number}. Reason: {reason}.\n\nKind regards"
+    expects:
+      - {fact_type: confirmed_date, attribute: eta, change: deactivate}
+
+  - id: cancellations.order_cancelled
+    description: Supplier cancels every line on an order.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      line: {type: ref, ref: order_line}
+      reason: {type: text, required: false}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject: "Order {line.po_number} cancelled"
+        body:
+          en: "Dear team,\n\nWe can no longer supply order {line.po_number} and are cancelling it in full. Reason: {reason}.\n\nKind regards"
+    expects:
+      - {fact_type: confirmed_date, attribute: eta, change: deactivate}
+
+  - id: cancellations.force_majeure
+    description: Supplier invokes force majeure and halts supply for a line.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      line: {type: ref, ref: order_line}
+      reason: {type: text}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject: "Force majeure affecting order {line.po_number}"
+        body:
+          en: "Dear team,\n\nDue to {reason} we invoke force majeure and must suspend line {line.po_line} on order {line.po_number} until further notice.\n\nKind regards"
+    expects:
+      - {fact_type: confirmed_date, attribute: eta, change: deactivate}

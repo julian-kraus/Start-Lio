@@ -1,0 +1,52 @@
+family: deliveries
+# Partial deliveries: a short shipment, a split shipment, a delivery note document.
+types:
+  - id: deliveries.partial_shipped
+    description: Supplier ships fewer units than the line ordered and sends a delivery note.
+    channel: document
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      line: {type: ref, ref: order_line}
+      shipped_qty: {type: number}
+    produces:
+      document:
+        filename: "delivery_note_{line.po_number}.pdf"
+        kind: pdf
+        body: "Delivery note from {supplier.supplier_id}. Order {line.po_number} line {line.po_line}: {shipped_qty} units shipped."
+    expects:
+      - {fact_type: delivery_note_line, attribute: final_qty, change: new}
+
+  - id: deliveries.short_delivery
+    description: Supplier warns that a shipment will be short against the order line.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      line: {type: ref, ref: order_line}
+      missing_qty: {type: number}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject:
+          en: "Short delivery for order {line.po_number}"
+          de: "Teillieferung fuer Bestellung {line.po_number}"
+        body:
+          en: "Dear team,\n\nLine {line.po_line} on order {line.po_number} will be short by {missing_qty} units in the next shipment.\n\nKind regards"
+          de: "Sehr geehrtes Team,\n\nPosition {line.po_line} der Bestellung {line.po_number} wird in der naechsten Sendung um {missing_qty} Einheiten unterliefert.\n\nMit freundlichen Gruessen"
+    expects:
+      - {fact_type: delivery_note_line, attribute: final_qty, change: update}
+
+  - id: deliveries.split_shipment
+    description: Supplier splits a line into several shipments on different dates.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      line: {type: ref, ref: order_line}
+      next_eta: {type: date}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject: "Split shipment for order {line.po_number}"
+        body:
+          en: "Dear team,\n\nLine {line.po_line} on order {line.po_number} will ship in parts; the next part is due {next_eta}.\n\nKind regards"
+    expects:
+      - {fact_type: delivery_note_line, attribute: final_qty, change: new}

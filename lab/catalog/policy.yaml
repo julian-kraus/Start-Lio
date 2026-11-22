@@ -1,0 +1,46 @@
+family: policy
+# Policy and people: the signer for a decision becomes vacant, an approval limit changes, a signer is
+# appointed. These enter through the approval-routing table, not supplier mail.
+types:
+  - id: policy.signer_vacant
+    description: The role that must sign a class of decisions becomes vacant.
+    channel: table
+    parameters:
+      role: {type: text}
+    produces:
+      table:
+        path: "policy/signers.csv"
+        row:
+          role: "{role}"
+          status: vacant
+    expects:
+      - {fact_type: signer, attribute: status, change: update}
+
+  - id: policy.approval_limit_change
+    description: The approval limit for a signer role changes.
+    channel: table
+    parameters:
+      role: {type: text}
+      limit: {type: money}
+    produces:
+      table:
+        path: "policy/approval_limits.csv"
+        row:
+          role: "{role}"
+          limit: "{limit}"
+    expects:
+      - {fact_type: approval_limit, attribute: amount, change: update}
+
+  - id: policy.signer_appointed
+    description: A role that was vacant has a signer appointed again.
+    channel: table
+    parameters:
+      role: {type: text}
+    produces:
+      table:
+        path: "policy/signers.csv"
+        row:
+          role: "{role}"
+          status: active
+    expects:
+      - {fact_type: signer, attribute: status, change: update}

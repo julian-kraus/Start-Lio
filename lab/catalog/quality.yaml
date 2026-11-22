@@ -1,0 +1,50 @@
+family: quality
+# Quality: an inspection passes, an inspection fails, or the supplier asks for a concession on a defect.
+types:
+  - id: quality.inspection_pass
+    description: An incoming inspection passes for a part.
+    channel: document
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      part: {type: ref, ref: part}
+    produces:
+      document:
+        filename: "inspection_{part.material_id}.pdf"
+        kind: pdf
+        body: "Inspection report for part {part.material_id} from {supplier.supplier_id}: pass."
+    expects:
+      - {fact_type: inspection_result, attribute: outcome, change: new}
+
+  - id: quality.inspection_fail
+    description: An incoming inspection fails for a part with a recorded defect.
+    channel: document
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      part: {type: ref, ref: part}
+      defect: {type: text}
+    produces:
+      document:
+        filename: "inspection_{part.material_id}.pdf"
+        kind: pdf
+        body: "Inspection report for part {part.material_id} from {supplier.supplier_id}: fail. Defect: {defect}."
+    expects:
+      - {fact_type: inspection_result, attribute: outcome, change: new}
+
+  - id: quality.concession_request
+    description: Supplier asks to ship a part out of specification under a concession.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      part: {type: ref, ref: part}
+      defect: {type: text}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject:
+          en: "Concession request for part {part.material_id}"
+          zh: "零件 {part.material_id} 的让步申请"
+        body:
+          en: "Dear team,\n\nWe request a concession to ship part {part.material_id} with {defect}. Please advise.\n\nKind regards"
+          zh: "您好,\n\n我们申请让步交付零件 {part.material_id},存在 {defect}。请指示。\n\n此致"
+    expects:
+      - {fact_type: concession, attribute: status, change: new}

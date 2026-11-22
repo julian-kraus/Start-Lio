@@ -1,0 +1,52 @@
+family: capacity
+# Capacity and stock changes: an allocation cut, a stock-level row change, a minimum-order-quantity change.
+types:
+  - id: capacity.allocation_cut
+    description: Supplier reduces the quantity it can allocate to us for a part.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      part: {type: ref, ref: part}
+      available_qty: {type: number}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject:
+          en: "Allocation change for part {part.material_id}"
+          de: "Kontingentaenderung fuer Teil {part.material_id}"
+        body:
+          en: "Dear team,\n\nOur allocation for part {part.material_id} is reduced to {available_qty} units for the current period.\n\nKind regards"
+          de: "Sehr geehrtes Team,\n\nUnser Kontingent fuer Teil {part.material_id} wird fuer die laufende Periode auf {available_qty} Einheiten reduziert.\n\nMit freundlichen Gruessen"
+    expects:
+      - {fact_type: capacity, attribute: available_qty, change: update}
+
+  - id: capacity.stock_update
+    description: A stock-level table shows a new on-hand quantity for a part.
+    channel: table
+    parameters:
+      part: {type: ref, ref: part}
+      on_hand: {type: number}
+    produces:
+      table:
+        path: "stock/on_hand.csv"
+        row:
+          material_id: "{part.material_id}"
+          on_hand: "{on_hand}"
+    expects:
+      - {fact_type: stock_level, attribute: on_hand, change: update}
+
+  - id: capacity.moq_change
+    description: Supplier raises the minimum order quantity for a part.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      part: {type: ref, ref: part}
+      moq: {type: number}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject: "Minimum order quantity update for part {part.material_id}"
+        body:
+          en: "Dear team,\n\nThe minimum order quantity for part {part.material_id} is now {moq} units.\n\nKind regards"
+    expects:
+      - {fact_type: capacity, attribute: moq, change: update}

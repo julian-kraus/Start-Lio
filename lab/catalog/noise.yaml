@@ -1,0 +1,45 @@
+family: noise
+# Duplicates and noise: a resent message, an out-of-scope message, a garbled attachment. The system must
+# absorb these without changing any believed value; each type expects no fact change.
+types:
+  - id: noise.duplicate_message
+    description: Supplier resends a message already on record; ingestion is idempotent and adds nothing.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      original: {type: ref, ref: kb_id}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject: "Re: order update"
+        body:
+          en: "Dear team,\n\nResending our earlier message for reference {original.fact_id}.\n\nKind regards"
+    expects:
+      - {fact_type: confirmed_date, attribute: eta, change: none}
+
+  - id: noise.out_of_scope
+    description: Supplier sends an unrelated message (marketing or general enquiry) that yields no fact.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject: "Season greetings from {supplier.supplier_id}"
+        body:
+          en: "Dear team,\n\nThank you for your business this year. We look forward to continuing our partnership.\n\nKind regards"
+    expects:
+      - {fact_type: offer, attribute: unit_price, change: none}
+
+  - id: noise.garbled_attachment
+    description: Supplier sends an unreadable attachment that cannot be parsed into facts.
+    channel: document
+    parameters:
+      supplier: {type: ref, ref: supplier}
+    produces:
+      document:
+        filename: "scan_from_{supplier.supplier_id}.pdf"
+        kind: binary
+        body: "Unreadable scan from {supplier.supplier_id}; no extractable content."
+    expects:
+      - {fact_type: offer, attribute: unit_price, change: none}

@@ -1,0 +1,39 @@
+family: silence
+# Silence: a promised reply, a quote validity, or a promised date passes with no supplier message. These are
+# clock moves: time advances past a deadline and no mail arrives, which the monitor must notice on its own.
+types:
+  - id: silence.no_reply
+    description: A promised reply deadline for an order line passes with no supplier message.
+    channel: clock
+    parameters:
+      line: {type: ref, ref: order_line}
+      until: {type: date}
+    produces:
+      clock:
+        move: "{until}"
+    expects:
+      - {fact_type: confirmed_date, attribute: eta, change: none}
+
+  - id: silence.quote_lapsed
+    description: A quote validity date for a part passes with no renewal.
+    channel: clock
+    parameters:
+      part: {type: ref, ref: part}
+      until: {type: date}
+    produces:
+      clock:
+        move: "{until}"
+    expects:
+      - {fact_type: offer, attribute: unit_price, change: none}
+
+  - id: silence.promise_due
+    description: A promised delivery date passes with no proof of shipment.
+    channel: clock
+    parameters:
+      line: {type: ref, ref: order_line}
+      until: {type: date}
+    produces:
+      clock:
+        move: "{until}"
+    expects:
+      - {fact_type: delivery_note_line, attribute: final_qty, change: none}

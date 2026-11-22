@@ -1,0 +1,51 @@
+family: confirmations
+# Confirmations: an order line is confirmed by mail, by a confirmation document, or confirmed in part.
+types:
+  - id: confirmations.order_confirmed
+    description: Supplier confirms the delivery date for an order line.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      line: {type: ref, ref: order_line}
+      confirmed_date: {type: date}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject:
+          en: "Order {line.po_number} confirmed"
+          zh: "订单 {line.po_number} 已确认"
+        body:
+          en: "Dear team,\n\nWe confirm line {line.po_line} on order {line.po_number} for delivery on {confirmed_date}.\n\nKind regards"
+          zh: "您好,\n\n我们确认订单 {line.po_number} 第 {line.po_line} 行的交货日期为 {confirmed_date}。\n\n此致"
+    expects:
+      - {fact_type: confirmed_date, attribute: eta, change: new}
+
+  - id: confirmations.order_confirmed_doc
+    description: Supplier sends an order confirmation document for a line.
+    channel: document
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      line: {type: ref, ref: order_line}
+    produces:
+      document:
+        filename: "order_confirmation_{line.po_number}.pdf"
+        kind: pdf
+        body: "Order confirmation from {supplier.supplier_id}. Order {line.po_number} line {line.po_line} with a confirmed date."
+    expects:
+      - {fact_type: confirmed_date, attribute: eta, change: new}
+
+  - id: confirmations.partial_confirm
+    description: Supplier confirms only part of the ordered quantity for a line.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      line: {type: ref, ref: order_line}
+      confirmed_qty: {type: number}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject: "Partial confirmation for order {line.po_number}"
+        body:
+          en: "Dear team,\n\nWe can confirm {confirmed_qty} units of line {line.po_line} on order {line.po_number}; the remainder is under review.\n\nKind regards"
+    expects:
+      - {fact_type: confirmed_date, attribute: confirmed_qty, change: new}
