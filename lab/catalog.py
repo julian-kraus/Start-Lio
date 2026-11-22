@@ -36,7 +36,6 @@ REF_FIELDS = {
     "kb_id": ("fact_id",),
 }
 PLACEHOLDER = re.compile(r"\{([a-z_][a-z0-9_]*)(?:\.([a-z_][a-z0-9_]*))?\}")
-BRACE = re.compile(r"\{[^{}]*\}")
 ID_RE = re.compile(r"^[a-z][a-z0-9_]*\.[a-z][a-z0-9_]*$")
 NAME_RE = re.compile(r"^[a-z][a-z0-9_]*$")
 
@@ -235,11 +234,9 @@ def _supplier_param(event: EventType) -> Param | None:
 
 def _check_placeholders(event: EventType) -> None:
     for text in _template_strings(event.produces):
-        for brace in BRACE.findall(text):
-            if not PLACEHOLDER.fullmatch(brace):
-                raise CatalogError(f"{event.id}: malformed placeholder {brace!r} in a template")
-        if text.count("{") != text.count("}"):
-            raise CatalogError(f"{event.id}: unbalanced '{{' or '}}' in a template")
+        left = PLACEHOLDER.sub("", text)
+        if "{" in left or "}" in left:
+            raise CatalogError(f"{event.id}: malformed placeholder or stray brace in template {text!r}")
         for name, field in PLACEHOLDER.findall(text):
             param = event.params.get(name)
             if param is None:

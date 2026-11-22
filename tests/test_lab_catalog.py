@@ -146,6 +146,17 @@ def test_contract_and_placeholder_validation_names_the_type(tmp_path, mutate, ne
     assert needle in message and "delays.new_eta" in message, message
 
 
+@pytest.mark.parametrize("subject", ["{{line.po_number}}", "} late {", "{x{reason}}", "{ {reason} }"])
+def test_braces_left_after_substitution_are_rejected_naming_the_type(tmp_path, subject):
+    import yaml
+
+    doc = yaml.safe_load((catalog.CATALOG_DIR / "delays.yaml").read_text())
+    doc["types"][0]["produces"]["mail"]["subject"] = subject
+    (tmp_path / "delays.yaml").write_text(yaml.safe_dump(doc))
+    with pytest.raises(catalog.CatalogError, match="delays.new_eta"):
+        catalog.load_catalog(tmp_path)
+
+
 # --------------------------------------------------------------------------- reference resolution (database)
 
 @needs_db
