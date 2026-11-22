@@ -3,7 +3,7 @@ code. More than one coordinator may run (one per machine); every step below is s
 that another coordinator already made simply fails and is skipped.
 
 Do one round:
-1. Merge: for each open PR labelled review:pass, not labelled human-only, and not labelled contract-change unless
+1. Merge: for each open PR labelled review:pass whose base is main, not labelled human-only, and not labelled contract-change unless
    its issue is labelled preapproved: rebase it onto
    origin/main in a fresh worktree under .worktrees/, run `python ops/check.py` (or `pytest -q` against the local throwaway Postgres
    in TEST_DATABASE_URL until it exists). If it passes, push the rebased branch with --force-with-lease and run
@@ -11,7 +11,9 @@ Do one round:
    because the branch or main moved, leave it for the next round. After every merge you made, run the check on main
    in a fresh worktree under .worktrees/; if main fails, stop merging and open a P0 issue naming the PR.
 2. Ready: for each issue labelled status:waiting whose blocking issues are all closed,
-   `python ops/gh_status.py ready <n>`.
+   `python ops/gh_status.py ready <n>`. Also ready the stackable ones (all blockers closed but one, which has an
+   open PR; see "Stacked PRs" in AGENTS.md) and comment `ready, stacked on #<m> (i<m>)`. Move acceptance items
+   no agent can run to a human-only follow-up as "Acceptance items a headless agent cannot run" says.
 3. Stale claims: status:claimed, no push to i<n> and no comment for 120 minutes:
    `python ops/gh_status.py release <n> "<reason>"`.
 4. Verify every merged PR closed its issue; reopen an issue closed without a merged, reviewed PR.

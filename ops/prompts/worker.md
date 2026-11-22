@@ -4,8 +4,11 @@ Do one round:
 1. If an issue is already claimed by {AGENT_ID} (claim comment or claim commit on its branch i<n>) and not
    merged, continue it in its worktree .worktrees/i<n>. Also fix any of your PRs labelled review:changes first.
    Whatever you work on, first comment `working: {AGENT_ID}` on that issue (this is your heartbeat).
-2. Otherwise pick and claim one issue as described in AGENTS.md (highest priority status:ready, blockers closed,
-   no file overlap with claimed issues, git claim lock on branch i<n>, then `python ops/gh_status.py claim`).
+   If its branch is stacked (a `Stacked-on:` line in the claim commit or PR body), run
+   `python ops/restack.py <n>` before anything else.
+2. Otherwise pick and claim one issue as described in AGENTS.md (highest priority status:ready, blockers closed
+   or stacked as the coordinator's ready comment says, no file overlap with claimed issues, git claim lock on
+   branch i<n>, then `python ops/gh_status.py claim`). For a stacked issue follow "Stacked PRs" in AGENTS.md.
 3. Implement it in a fresh worktree under .worktrees/, test it, push, open the PR with `Closes #<n>`, the acceptance checklist with
    evidence, and a line `Agent: {AGENT_ID}`. Then `python ops/gh_status.py review <n>`.
 4. Comment progress on the issue at least every 30 minutes of work.
