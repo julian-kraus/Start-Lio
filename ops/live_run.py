@@ -32,6 +32,7 @@ KEY_FILE = ROOT / "secrets" / "anthropic.env"
 # USD per million tokens (input, output); override when the model or price changes
 RATES = (float(os.environ.get("LIVE_RATE_IN", "1")), float(os.environ.get("LIVE_RATE_OUT", "5")))
 BUDGET = float(os.environ.get("LIVE_BUDGET_USD", "100"))
+PARALLEL = int(os.environ.get("LIVE_PARALLEL", "8"))   # eval-extraction kinds scored at once
 COMMANDS = {"eval-extraction": ["-m", "kb", "eval-extraction"], "extract": ["-m", "kb", "extract"]}
 
 
@@ -99,6 +100,39 @@ def step(worktree: Path, env: dict, args: list[str], label: str, key: str = "") 
     return r
 
 
+def kinds_in(worktree: Path) -> list[str]:
+    kinds = set()
+    for f in (worktree / "structured" / "docs").glob("*.json"):
+        try:
+            kinds.add(json.loads(f.read_text()).get("doc_kind") or "unknown")
+        except ValueError:
+            continue
+    return sorted(kinds)
+
+
+def run_parallel(worktree: Path, env: dict, extra: list[str]) -> subprocess.CompletedProcess:
+    """eval-extraction once per doc kind, PARALLEL at a time, on the same database; output merged in kind order.
+    Scoring is per file and the cache is per answer, so the result equals one sequential run, only faster."""
+    pending = [[*COMMANDS["eval-extraction"], "--kind", k, *extra] for k in kinds_in(worktree)]
+    running: list[subprocess.Popen] = []
+    done: list[tuple[str, int, str]] = []
+    while pending or running:
+        while pending and len(running) < PARALLEL:
+            args = pending.pop(0)
+            proc = subprocess.Popen([sys.executable, *args], cwd=worktree, env=env, stdout=subprocess.PIPE,
+                                    stderr=subprocess.STDOUT, text=True)
+            proc.kind = args[args.index("--kind") + 1]
+            running.append(proc)
+        for proc in list(running):
+            if proc.poll() is not None:
+                done.append((proc.kind, proc.returncode, proc.stdout.read()))
+                running.remove(proc)
+        time.sleep(0.5)
+    done.sort()
+    out = "\n".join(text for _, _, text in done)
+    return subprocess.CompletedProcess([], max((c for _, c, _ in done), default=0), out, "")
+
+
 def main() -> None:
     if sys.argv[1:2] == ["--spend"]:
         print(f"estimated live spend so far: ${spend():.2f} of ${BUDGET:.0f} budget")
@@ -147,7 +181,10 @@ def main() -> None:
     else:
         args = [*COMMANDS[cmd], *extra]
     try:
-        r = subprocess.run([sys.executable, *args], cwd=worktree, env=env, capture_output=True, text=True)
+        if cmd == "eval-extraction" and "--kind" not in extra:
+            r = run_parallel(worktree, env, extra)
+        else:
+            r = subprocess.run([sys.executable, *args], cwd=worktree, env=env, capture_output=True, text=True)
     finally:
         if shim:
             (shim / "secrets" / "anthropic.env").unlink(missing_ok=True)
