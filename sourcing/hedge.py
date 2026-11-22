@@ -139,7 +139,7 @@ def p_fail(card: Mapping) -> Input:
 
 
 def goal_loss(goal: Mapping, edition: str | None = None) -> Input:
-    """Loss per missing copy, only ever from the goal."""
+    """Loss per missing copy, only ever from the goal, with the origin its goal line records."""
     prices, value = goal.get("unit_loss_by_edition"), goal.get("unit_loss_eur")
     wanted = str(edition or "").casefold()
     if prices:
@@ -153,8 +153,23 @@ def goal_loss(goal: Mapping, edition: str | None = None) -> Input:
             raise ModelError(f"the goal gives no loss for edition {edition!r}")
     if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value < 0:
         raise ModelError("the goal gives no loss per missing copy")
+    if lines := [x for x in goal.get("goal_lines") or [] if x.get("field") == "value"]:
+        return Input(value, _stated(goal, lines, value, wanted))
     line = f"{goal.get('statement') or ''} (value of a missing copy: {value:,} EUR)".strip()
     return Input(value, {"goal_line": line, "value": value})
+
+
+def _stated(goal: Mapping, lines: list[Mapping], value: float, wanted: str) -> dict:
+    """The confirmed line behind a value. A pre-filled one stays a scenario input: the person did not say it."""
+    found = [x for x in lines if x.get("value") == value
+             and (not wanted or str(x.get("edition") or "all").casefold() in (wanted, "all", "both"))]
+    if len(found) != 1 or not found[0].get("goal_line"):
+        raise ModelError(f"the goal has no single line that states a loss of {value:,} EUR")
+    source = {"goal_line": found[0]["goal_line"], "value": value}
+    source.update({key: goal[key] for key in ("goal_id", "author", "at") if goal.get(key)})
+    if label := found[0].get("scenario_input"):
+        source["scenario_input"] = label
+    return source
 
 
 def _strings(value) -> Iterable[str]:
@@ -187,10 +202,10 @@ def margin_line(goal: Mapping | None) -> str | None:
 def describe(ref: Mapping) -> str:
     if ref.get("fact_id") not in (None, ""):
         return f"fact {ref['fact_id']}"
+    if ref.get("scenario_input"):       # before the goal line, which can carry a pre-filled number
+        return f"scenario input: {ref['scenario_input']}"
     if ref.get("goal_line"):
         return f"goal: {ref['goal_line']}"
-    if ref.get("scenario_input"):
-        return f"scenario input: {ref['scenario_input']}"
     return str(ref.get("label") or "")
 
 
