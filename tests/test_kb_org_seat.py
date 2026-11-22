@@ -73,10 +73,25 @@ def test_the_whole_rules_and_the_type_reach_the_model(replayed):
     assert '"org_seat"' in sent
 
 
-def test_only_the_named_holder_is_held(replayed):
+def test_only_a_named_holder_is_held(replayed):
     seats = seats_of(replayed[0])
     held = {key: a["holder"] for key, a in seats.items() if a["status"] == "held"}
-    assert held == {("Plant Director", "North Site"): "Alex Example"}
+    assert held == {("Plant Director", "North Site"): "Alex Example", ("Sample Planner", ""): "Casey Sample"}
+
+
+def test_rules_make_a_printed_start_date_held_from_that_day():
+    rules = " ".join(RULES.split())
+    assert "with a printed start date is `held`, also when that date is still to come" in rules
+    assert "`valid_from` must then be that date" in rules
+    assert "a start that is not printed as a full date" in rules    # held without a date would sign too early
+    assert "a person who has not started yet, and" not in rules
+
+
+def test_a_seat_with_a_printed_start_date_keeps_the_date(replayed):
+    env, text, _ = replayed
+    assert "Casey Sample from 2031-03-10" in text
+    seat = seats_of(env)[("Sample Planner", "")]
+    assert (seat["status"], seat["holder"], seat["valid_from"]) == ("held", "Casey Sample", "2031-03-10")
 
 
 @pytest.mark.parametrize("seat, printed, status", [
@@ -101,9 +116,9 @@ def test_every_seat_is_complete_grounded_and_stored_as_text(replayed):
                           known_types={t["name"] for t in CONTRACT["fact_types"]}, text=text)
     assert gate.ok and not gate.warnings
     seats = seats_of(env)
-    assert len(seats) == 7 and all(set(a) == ATTRIBUTES for a in seats.values())
+    assert len(seats) == 8 and all(set(a) == ATTRIBUTES for a in seats.values())
     rows = envelope_facts(env, DEFAULT_CONFIDENCE)
-    assert len(rows) == 7 * len(ATTRIBUTES)          # nothing collapsed or dropped
+    assert len(rows) == 8 * len(ATTRIBUTES)          # nothing collapsed or dropped
     for row in rows:
         assert set(row["subject"]) == {"source_path", "title", "scope"}
         assert isinstance(row["value"], str) and row["evidence"] in text
