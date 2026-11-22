@@ -1,8 +1,9 @@
 """Goal interview: two free-text answers become a goal that a named person confirms.
 
+    from agents.interview_store import cite, confirm, records
+
     draft = interview(client, answers, editions=names, inputs=scenario, now=..., zone=..., conn=conn)
     draft.show()                                # read it back to the person
-    # from agents.interview_store import confirm, records, cite
     goal = confirm(conn, draft, author="...")   # plan.goals, with author and time; returns the goal record
     append_records(log, records(goal))          # the goal bar and its timeline event
     cite(goal, "value", edition)                # the source a recommendation gives for a number from the goal
@@ -58,7 +59,8 @@ Fields:
 Each item has:
 - quote: the shortest complete phrase, copied exactly from one answer. A time keeps its day.
 - amount: for value and ceiling, the figure exactly as written, with currency and scale if written. Otherwise "".
-- edition: for priority and value, one name from the given editions, or "all", or "" when none is meant. Otherwise "".
+- edition: for priority and value, one name from the given editions, "all" only when every edition is meant, or ""
+  when no edition is named. "All" in front of an edition's name means that edition. Otherwise "".
 
 One item per statement, edition and time. Leave out what the person did not say. Answer with JSON only."""
 
