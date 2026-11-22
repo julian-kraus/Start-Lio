@@ -11,6 +11,7 @@ from __future__ import annotations
 from sourcing import hedge, weakspots
 from sourcing.facts import number
 
+from . import background
 from .world import World, goal_of, instant
 
 SCN = "scenario input"
@@ -155,8 +156,15 @@ def build(w: World, scn: dict) -> list[dict]:
               "suggested": str(goal["budget_eur"]), "unit": "EUR",
               "why": f"Goal answer for this run ({SCN}). The approval policy still decides who signs."}]})
     add({"kind": "clock", "now": start.isoformat()})
-    for sid in sorted({c for c in w.history.suppliers}):
+    sids = sorted({c for c in w.history.suppliers})
+    for sid in sids:
         add(supplier_record(w, w.card(sid), masters.get(sid, {}), sid, w.parts_of(sid)))
+    # what is known at the start: open kb findings and next promised deliveries, plus coverage (needs no goal)
+    first_part = {r.get("supplier_id"): str(r.get("material_id")) for r in w.facts.rows("supplier_part")
+                  if str(r.get("primary")) == "Y"}
+    for rec in background.events(w, start, sids, first_part):
+        add(rec)
+    add(plan(start.isoformat(), [], covered, open_))
     add({"kind": "cue", "label": "Goal interview", "wait_for": "goal"})
     at = lambda t: instant(t).isoformat()
     t_plan = start.replace(minute=start.minute + 1).isoformat()

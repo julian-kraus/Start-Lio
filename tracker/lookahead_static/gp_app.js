@@ -24,7 +24,7 @@ let S = null, VIEW = "timeline";
 const EV = {  // record type -> chip class and icon, as in the prototype
   offer_in: ["", "inbox"], agent: ["agent", "sparkles"], email_out: ["agent", "send"], email_in: ["good", "mail"],
   check_in: ["good", "check"], cancellation: ["bad", "x"], decision: ["agent", "gavel"], document: ["", "document"],
-  delay: ["", "truck"],
+  delay: ["", "truck"], delivery: ["muted", "truck"],
 };
 const FEED_IC = {cancellation: "alert-triangle", email_in: "mail", email_out: "send", check_in: "check", goal: "check",
   agent: "sparkles", decision: "gavel", offer_in: "inbox"};
@@ -35,7 +35,7 @@ function openDecisions() { return (S.decisions || []).filter(d => d.status === "
 // ---------- timeline ----------
 function range() {
   const end = ms(S.launch.deadline) + 3600e3;
-  const ats = (S.events || []).map(e => ms(e.at)).concat([ms(S.clock.now)]);
+  const ats = (S.events || []).map(e => ms(e.at)).filter(t => t < end).concat([ms(S.clock.now)]);
   const start = Math.min(end - 26 * 3600e3, Math.min(...ats) - 1800e3);
   return [start, end];
 }
@@ -51,7 +51,9 @@ function timeline() {
   ids.forEach(id => {
     let chips = "", last = {};
     (S.events || []).filter(e => e.supplier_id === id && EV[e.type]).forEach((e, i) => {
-      const [cls, icon] = EV[e.type], x = +X(e.at);
+      let [cls, icon] = EV[e.type], x = +X(e.at);
+      if (x > 96) { x = 96; cls = "muted end"; }               // after the shown range: pinned at the lane's end
+      if (!cls && e.severity === "risk") cls = "bad";
       const top = last.x != null && Math.abs(x - last.x) < 9 && last.top !== "74%" ? "74%" : "28%";
       last = {x, top};
       chips += `<button class="ev ${cls}" style="left:${x}%;top:${top}" data-ev="${e.id}"><span class="pin">${ic(icon)}</span><span class="lbl">${esc(e.title)}</span></button>`;
