@@ -72,34 +72,51 @@ def is_local_name(host: str) -> bool:
     return True
 
 
-def lookahead_goal(la: Lookahead, body: dict) -> dict:
+def lookahead_goal(la: Lookahead, body: dict, *, client=None, stores=None) -> dict:
+    """Run the goal interview on the typed answers, then read it back or confirm it.
+
+    Without an author the answers are read into a draft and shown back with its open points, and nothing is
+    stored. With an author the confirmed goal is stored in plan.goals (who set it and when) and the records that
+    put it on the timeline are appended. Both steps run the same reading, so the person confirms what was shown.
+    """
     answers = body.get("answers")
     if not isinstance(answers, dict) or not answers:
         raise LookaheadError(400, "answers must be a non-empty object")
-    st = la.state()
-    questions = (st["launch"] or {}).get("goal_questions", [])
-    known = {q["id"] for q in questions}
+    author = body.get("author")
+    launch = la.state()["launch"] or {}
+    known = {q["id"] for q in launch.get("goal_questions", [])}
     unknown = set(answers) - known
     if unknown:
         raise LookaheadError(400, f"unknown answers: {sorted(unknown)}")
-    now = la.now()
-    rec = {"kind": "goal", "at": now, "answers": answers,
-           "questions": [{"id": q["id"], "q": q["q"], "a": answers.get(q["id"]), "unit": q.get("unit")} for q in questions]}
-    for key in ("unit_loss", "budget"):
-        if key in answers:
-            try:
-                rec[key + "_eur"] = float(answers[key])
-            except (TypeError, ValueError):
-                raise LookaheadError(400, f"{key} must be a number") from None
-    rec["statement"] = answers.get("goal", "")
-    la.append([rec, {"kind": "event", "type": "goal", "at": now, "severity": "info",
-                     "title": "Goal set: " + (rec["statement"] or "updated"),
-                     "detail": {"happened": "Goal interview answered.",
-                                "reasoning": [{"text": q["q"], "value": str(q["a"]) + (" " + q["unit"] if q.get("unit") else "")}
-                                              for q in rec["questions"] if q["a"] not in (None, "")],
-                                "autonomy": {"mode": "none", "text": "Set by you. Every later change shows up here."}}}])
+
+    from agents import interview as iv, interview_store as store
+
+    stores = stores or decisions.Stores()
+    client = client or _goal_client()
+    try:
+        with stores.plan() as conn:
+            draft = iv.interview(client, answers, conn=conn, editions=launch.get("editions") or (),
+                                 inputs=launch.get("goal_inputs"), zone=launch.get("timezone"),
+                                 product=launch.get("product"), deadline=launch.get("deadline"))
+            shown = draft.show()
+            if author is None:  # no author yet: a read-back. An empty author is a confirm that store.confirm refuses.
+                return {"ok": True, "confirmed": False, "ready": draft.ready, "show": shown}
+            goal = store.confirm(conn, draft, author)
+    except iv.InterviewError as exc:
+        raise LookaheadError(400, str(exc)) from None
+    la.append(store.records(goal))
     la.after_human_step()
-    return {"ok": True}
+    return {"ok": True, "confirmed": True, "show": shown}
+
+
+def _goal_client():
+    """The live agent adapter, built only when a goal is actually interviewed (it needs the configured key)."""
+    from agents.llm import AnthropicClient
+
+    try:
+        return AnthropicClient()
+    except RuntimeError as exc:
+        raise LookaheadError(503, str(exc)) from None
 
 
 def lookahead_accept(la: Lookahead, decision_id: str, body: dict, stores=None) -> dict:
@@ -116,6 +133,7 @@ class LookaheadRoutes:
 
     lookahead: Lookahead | None = None
     decision_stores = None  # kb, plan and mail for the decision card; None reads the configured databases
+    goal_client = None  # LLM adapter for the goal interview; None builds the live Anthropic client
 
     def _lookahead_file(self, path: str):
         if path == "/lookahead":
@@ -165,7 +183,8 @@ class LookaheadRoutes:
             if not isinstance(body, dict):
                 raise LookaheadError(400, "body must be a JSON object")
             if path == "/api/lookahead/goal":
-                return self._send(200, dumps(lookahead_goal(la, body)))
+                return self._send(200, dumps(lookahead_goal(la, body, client=self.goal_client,
+                                                             stores=self.decision_stores)))
             if m := re.fullmatch(DECISION + "/accept", path):
                 return self._send(200, dumps(lookahead_accept(la, unquote(m.group(1)), body, self.decision_stores)))
             if m := re.fullmatch(DECISION + "/reject", path):
