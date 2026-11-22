@@ -64,7 +64,7 @@ Each item has:
 
 One item per statement, edition and time. Leave out what the person did not say. Answer with JSON only."""
 
-NOT_A_PERSON = re.compile(r"^(?:agent|system|worker|llm|assistant)(?![a-z])|^mail:|-(?:worker|reviewer|coordinator)-\d",
+NOT_A_PERSON = re.compile(r"^(?:agent|system|worker|llm)(?![a-z])|^mail:|-(?:worker|reviewer|coordinator)-\d",
                           re.IGNORECASE)
 REFUSAL = re.compile(r"\b(?:don't|do not|never|must not|cannot|can't|won't)\b(?! (?:care|mind|matter|need))",
                      re.IGNORECASE)

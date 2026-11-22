@@ -28,7 +28,7 @@ SUNDAY = "2030-01-13T10:00:00+01:00"
 INPUTS = {"label": "demo pre-fill", "unit_loss": "60", "budget": "700", "team_window": {"to": SUNDAY}}
 TYPED = {"goal": "All Deluxe copies on time.",
          "limits": "A missing Deluxe copy costs €75, a Basic one 20 EUR. Basic stock can wait. "
-                   "Spend at most 8 500 EUR. Team offline Sun 10:00."}
+                   "Spend at most 7 300 EUR. Team offline Sun 10:00."}
 
 
 def item(field, quote, amount="", edition=""):
@@ -39,7 +39,7 @@ TYPED_ITEMS = [item("priority", "All Deluxe copies on time", edition="Deluxe Edi
                item("value", "A missing Deluxe copy costs €75", "€75", "Deluxe Edition"),
                item("value", "a Basic one 20 EUR", "20 EUR", "Basic Edition"),
                item("trade_off", "Basic stock can wait"),
-               item("ceiling", "Spend at most 8 500 EUR", "8 500 EUR"),
+               item("ceiling", "Spend at most 7 300 EUR", "7 300 EUR"),
                item("team_until", "Team offline Sun 10:00")]
 
 
@@ -89,7 +89,7 @@ def test_free_text_becomes_a_structured_goal():
     goal = goal_of(draft)
     assert goal["statement"] == TYPED["goal"]
     assert goal["unit_loss_by_edition"] == {"Deluxe Edition": 75, "Basic Edition": 20}
-    assert goal["budget_cap_eur"] == 8500
+    assert goal["budget_cap_eur"] == 7300
     assert goal["sacrifices"] == ["Basic stock can wait"]
     assert goal["team_window"] == {"to": SUNDAY}
     contracts.validate_record(goal)
@@ -97,7 +97,7 @@ def test_free_text_becomes_a_structured_goal():
 
 def test_the_goal_is_shown_back_for_confirmation():
     shown = "\n".join(read(TYPED, TYPED_ITEMS).show())
-    for part in ("All Deluxe copies on time", "Deluxe Edition: 75 EUR", "Basic Edition: 20 EUR", "8,500 EUR",
+    for part in ("All Deluxe copies on time", "Deluxe Edition: 75 EUR", "Basic Edition: 20 EUR", "7,300 EUR",
                  "Basic stock can wait", SUNDAY):
         assert part in shown
 
@@ -136,7 +136,7 @@ def test_example_sentence_with_prefill_becomes_a_goal():
 def test_typed_figures_win_over_prefilled_ones():
     goal = goal_of(read(TYPED, TYPED_ITEMS, inputs={**INPUTS, "team_window": "2030-01-14T09:00:00+01:00"}))
     assert goal["unit_loss_by_edition"] == {"Deluxe Edition": 75, "Basic Edition": 20}
-    assert goal["budget_cap_eur"] == 8500 and goal["team_window"] == {"to": SUNDAY}
+    assert goal["budget_cap_eur"] == 7300 and goal["team_window"] == {"to": SUNDAY}
     assert not any(x.get("scenario_input") for x in goal["goal_lines"])
 
 
@@ -177,8 +177,8 @@ def test_bad_answers_are_refused(answers):
 
 @pytest.mark.parametrize("bad, why", [
     (item("value", "a missing copy costs 999 EUR", "999 EUR"), "not in the answers"),
-    (item("ceiling", "at most 8 500 EUR", "500 EUR"), "not the figure"),
-    (item("ceiling", "at most 8 500 EUR"), "give the figure"),
+    (item("ceiling", "at most 7 300 EUR", "300 EUR"), "not the figure"),
+    (item("ceiling", "at most 7 300 EUR"), "give the figure"),
     (item("priority", "on time", edition="Gold"), "not one of the editions"),
     (item("priority", "on time", edition="Deluxe Edition"), "does not name"),
     (item("trade_off", "Never cut quality"), "refuses a trade-off"),
@@ -186,19 +186,19 @@ def test_bad_answers_are_refused(answers):
     ("not an object", "unknown field"),
 ])
 def test_the_guard_rejects_what_the_answers_do_not_say(bad, why):
-    guard = iv.QuoteGuard(answers={"goal": "Everything on time. Spend at most 8 500 EUR. Never cut quality."},
+    guard = iv.QuoteGuard(answers={"goal": "Everything on time. Spend at most 7 300 EUR. Never cut quality."},
                           editions=EDITIONS, now=NOW, zone=ZONE)
     assert why in " ".join(guard.read({"items": [bad]}).problems)
 
 
 def test_a_wrong_answer_is_retried_then_accepted():
-    draft = read(TYPED, [*TYPED_ITEMS[:4], item("ceiling", "Spend at most 8 500 EUR", "500"), TYPED_ITEMS[5]],
+    draft = read(TYPED, [*TYPED_ITEMS[:4], item("ceiling", "Spend at most 7 300 EUR", "300"), TYPED_ITEMS[5]],
                  TYPED_ITEMS)
-    assert draft.ready and not draft.guard_failed and goal_of(draft)["budget_cap_eur"] == 8500
+    assert draft.ready and not draft.guard_failed and goal_of(draft)["budget_cap_eur"] == 7300
 
 
 def test_after_two_retries_code_wins_and_confirmation_is_blocked():
-    wrong = [*TYPED_ITEMS[:4], item("ceiling", "Spend at most 8 500 EUR", "500"), TYPED_ITEMS[5]]
+    wrong = [*TYPED_ITEMS[:4], item("ceiling", "Spend at most 7 300 EUR", "300"), TYPED_ITEMS[5]]
     draft = read(TYPED, wrong, wrong, wrong)
     assert draft.guard_failed and not draft.ready
     assert goal_of(draft)["budget_cap_eur"] is None
@@ -207,7 +207,7 @@ def test_after_two_retries_code_wins_and_confirmation_is_blocked():
 def test_a_dropped_figure_cannot_be_replaced_by_the_prefill():
     missed = [x for x in TYPED_ITEMS if x["field"] != "ceiling"]
     draft = read(TYPED, missed, missed, missed, inputs=INPUTS)
-    assert not draft.ready and any("8,500" in p for p in draft.problems)
+    assert not draft.ready and any("7,300" in p for p in draft.problems)
 
 
 def test_an_unmarked_number_nobody_read_blocks():
@@ -244,7 +244,7 @@ def test_an_unreadable_model_answer_is_an_error():
 
 
 @pytest.mark.parametrize("said, value", [
-    ("120", 120), ("8 500", 8500), ("8 500 EUR", 8500), ("8,500", 8500), ("8.500", 8500), ("€5k", 5000),
+    ("120", 120), ("7 300", 7300), ("7\u00a0300 EUR", 7300), ("7,300", 7300), ("7.300", 7300), ("€5k", 5000),
     ("5k€", 5000), ("12,50 €", 12.5), ("1.250,75 EUR", 1250.75), ("2 million", 2_000_000), ("0", 0)])
 def test_amounts_are_parsed_by_code(said, value):
     assert words.amount(said) == value
@@ -257,7 +257,7 @@ def test_unreadable_amounts_are_refused(said):
         words.amount(said)
 
 
-@pytest.mark.parametrize("sentence", ["8 500 USD", "$8,500", "8 500%", "8.500,5000", "5 billion"])
+@pytest.mark.parametrize("sentence", ["7 300 USD", "$7,300", "7 300%", "7.300,5000", "5 billion"])
 def test_no_amount_is_cut_out_of_a_longer_one(sentence):
     assert words.amounts(sentence) == []
 
