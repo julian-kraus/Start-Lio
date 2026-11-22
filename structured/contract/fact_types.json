@@ -1204,6 +1204,37 @@
           "type": "string"
         }
       }
+    },
+    {
+      "name": "org_seat",
+      "description": "Org chart seat",
+      "subject_keys": [
+        "source_path",
+        "title",
+        "scope"
+      ],
+      "attributes": {
+        "holder": {
+          "description": "holder",
+          "type": "string"
+        },
+        "status": {
+          "description": "status",
+          "type": "string"
+        },
+        "valid_from": {
+          "description": "valid_from",
+          "type": "string"
+        },
+        "valid_until": {
+          "description": "valid_until",
+          "type": "string"
+        },
+        "line_key": {
+          "description": "line_key",
+          "type": "string"
+        }
+      }
     }
   ]
 }
