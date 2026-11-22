@@ -282,6 +282,28 @@ def test_goal_shapes(world, goal, expected):
     assert (values["P-A"], values["P-B"]) == expected and "value of a missing copy" in line
 
 
+@pytest.mark.parametrize("statement, expected", [
+    ("Basic can wait, every other copy on time.", (7, 7)),
+    ("Every copy except Basic on time.", (7, 7)),
+    ("Every copy on time, not only Basic.", (7, 7)),
+    ("Every Basic copy can wait.", (7, 7)),
+    ("Every copy meets our basic quality bar.", (7, 7)),
+    ("Every Deluxe copy on time, Basic can slip.", (7, 0)),
+    ("Every Deluxe copy on time but Basic can wait.", (7, 0)),
+    ("All Deluxe on time. Margin can suffer.", (7, 0)),
+    ("All 1,000 Deluxe copies on time.", (7, 0)),
+    ("All Deluxe and Basic copies on time.", (7, 7)),
+    ("All Deluxe on time. Basic must not be late.", (7, 7)),
+    ("All Deluxe on time; Basic cannot slip.", (7, 7)),
+    ("All Deluxe on time, no Basic copy can wait.", (7, 7)),
+    ("All Deluxe on time. Don’t drop Basic.", (7, 7)),
+    ("All Basic copies late is fine.", (7, 7)),
+])
+def test_a_statement_never_values_only_the_edition_it_gives_up(world, statement, expected):
+    values, _ = weakspots.goal_values({"statement": statement, "unit_loss_eur": 7}, world.run()["editions"])
+    assert (values["P-A"], values["P-B"]) == expected
+
+
 @pytest.mark.parametrize("goal", [
     {}, {"unit_loss_eur": None}, {"unit_loss_eur": -1}, {"unit_loss_eur": "a lot"},
     {"unit_loss_eur": float("nan")}, {"unit_loss_eur": float("inf")}, {"unit_loss_eur": 5, "edition": "Gold"},
