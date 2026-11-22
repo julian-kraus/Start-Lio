@@ -230,3 +230,30 @@ def test_bad_inputs_are_refused(world):
         world.run(now=datetime(2030, 1, 7))
     with pytest.raises(ValueError, match="no launch plan demand"):
         world.run(products=["P-Z"])
+
+
+def test_asking_for_one_edition_does_not_free_what_the_policy_reserves():
+    world = World()
+    every = world.run()
+    for product in ("P-A", "P-B"):
+        one = world.run(products=[product])
+        assert one["editions"] == [edition(every, product)]
+        assert part(one, "CARD") == part(every, "CARD")
+        assert one["covered"] == edition(every, product)["covered"]["value"]
+        assert one["needed"] == edition(every, product)["open"]["value"]
+
+
+def test_one_edition_reports_only_its_own_parts_and_escalations():
+    world = World()
+    world.drop("bom_line", parent_id="P-A", child_id="BOOK")
+    world.bom("P-A", "SLEEVE", 1)
+    world.ship(eta=None, part="SLEEVE")
+    result = world.run(products=["P-B"])
+    assert {p["material_id"] for p in result["parts"]} == {"CARD", "CASE"}
+    assert {a.get("product_id", "P-B") for a in result["escalations"]} == {"P-B"}
+    assert "SLEEVE" not in {a.get("material_id") for a in result["escalations"]}
+
+
+def test_an_empty_selection_is_refused():
+    with pytest.raises(ValueError):
+        World().run(products=[])
