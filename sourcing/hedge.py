@@ -29,6 +29,12 @@ ORIGINS = ("fact_id", "goal_line", "scenario_input")
 COST_MODELS = ("deposit_only", "full_order")
 NUMBER = r"\d+(?:[.,\s]\d+)*"
 EURO = r"(?:€|eur|euros?)"
+DEPOSIT = r"(?:deposit|prepayment|down payment|advance payment|anzahlung)"
+NOW = r"(?:upfront|up front|in advance|now|(?:on|with|upon) (?:order|acceptance|your acceptance))"
+# the whole text must state the deposit: a share that is a balance, a limit or negated is not one
+SHARE = re.compile(rf"(?:(?:an? |the )?{DEPOSIT}(?: is| of|:)? )?({NUMBER}) ?(?:%|percent|per cent|prozent)"
+                   rf"(?: {DEPOSIT})?(?: of (?:the )?(?:order(?: value)?|total))?"
+                   rf"(?:,? (?:due |payable )?{NOW})?\.?")
 FACTS_SHOWN = 3     # the rest are in `refs`
 
 
@@ -102,10 +108,9 @@ def deposit_amount(given: Input, order_value: Input) -> Input:
     """The deposit in EUR from a number, a share of the order ("25%") or a quoted EUR amount."""
     order = amount(order_value, "order value")
     if isinstance(given.value, str):
-        text = given.value.strip().lower()
-        shares = re.findall(rf"({NUMBER})\s*(?:%|percent\b|per cent\b|prozent\b)", text)
-        if len(shares) == 1 and len(re.findall(NUMBER, text)) == 1:
-            share = parse_number(shares[0])
+        text = " ".join(given.value.lower().split())
+        if stated := SHARE.fullmatch(text):
+            share = parse_number(stated.group(1))
             if share > 100:
                 raise ModelError(f"deposit is more than the order: {given.value!r}")
             value = order * share / 100

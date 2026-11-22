@@ -188,6 +188,23 @@ def test_ambiguous_numbers_are_refused(text):
         hedge.parse_number(text)
 
 
+@pytest.mark.parametrize("text", [
+    "No deposit, 100% on delivery", "100% on delivery", "no 25% deposit", "not 25%", "balance 75%", "75% remainder",
+    "-25%", "\u221225%", ".5%", "up to 25%", "at least 25%", "25%+", "25% discount", "25% VAT", "100% refundable",
+    "25% per month", "25% deposit waived", "deposit 25%, due on delivery"])
+def test_a_percentage_that_is_not_the_deposit_is_refused(text):
+    with pytest.raises(ModelError):
+        decide(deposit=text)
+
+
+@pytest.mark.parametrize("text", [
+    "25%", "25 per cent", "25 Prozent", "deposit 25%", "Deposit: 25%", "a deposit of 25%", "25% upfront",
+    "25% in advance", "25% on order", "25% of the order value", "25% prepayment", "25 percent, due with your acceptance",
+    "The deposit is 25 percent, due with your acceptance."])
+def test_a_deposit_share_is_read_in_its_plain_forms(text):
+    assert decide(deposit=text)["commitment_eur"] == 300
+
+
 @pytest.mark.parametrize("kw", [dict(model="deposit_only"), dict(model="full_order", salvage=100),
                                 dict(goal=MARGIN), dict(model="full_order", deposit=None, goal=MARGIN)])
 def test_drilldown_lists_every_input_with_its_source(kw):
