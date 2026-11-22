@@ -48,8 +48,11 @@ function windowRange() {
     if (ts.length) { t0 = Math.min(t0, Math.min(...ts) - 3600000); t1 = Math.max(t1, Math.max(...ts) + 3600000); }
   }
   t0 = Math.min(t0, nowMs() - 3600000);
-  // the ghost is never cut off: its late landing is the point
-  for (const l of lanes()) for (const b of l.bars) if (b.kind === "ghost" && b.usable_at) t1 = Math.max(t1, ms(b.usable_at) + 3600000);
+  // the comparison is never cut off: the early start of the backup and the late landing of the ghost
+  for (const l of lanes()) if (l.bars.some((b) => b.kind === "ghost")) for (const b of l.bars) {
+    if (b.start) t0 = Math.min(t0, ms(b.start) - 3600000);
+    if (b.usable_at) t1 = Math.max(t1, ms(b.usable_at) + 3600000);
+  }
   return [t0, t1];
 }
 
