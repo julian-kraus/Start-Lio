@@ -245,7 +245,8 @@ class Monitor:
             if "starting_point" not in ((card or {}).get("score") or {}):
                 believed = self.kb.execute("SELECT * FROM believed").fetchall()
                 card = reliability.card(reliability.history(rows, believed), supplier)
-            card = reliability.update(card, "broken", key, promise["sources"], now.isoformat())
+            cited = [s if isinstance(s, dict) else {"fact_id": s} for s in promise["sources"] or []]   # broker stores bare ids too
+            card = reliability.update(card, "broken", key, cited, now.isoformat())
             rec, why, category, site = self._replan(promise, part, state, card, rows, now)
         except (psycopg.OperationalError, psycopg.InterfaceError):
             raise

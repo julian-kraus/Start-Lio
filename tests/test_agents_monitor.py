@@ -361,3 +361,21 @@ def test_a_broker_failure_is_retried_and_does_not_stop_the_ledger(demo_run, monk
     assert watch.tick() == [] and watch.tick() == []
     assert len(calls) == 2, "a statement the broker could not handle is tried again, not marked done"
     assert not r.plan.execute("SELECT 1 FROM timeline_events WHERE type = %s", (monitor.BROKERED,)).fetchall()
+
+
+def test_a_promise_whose_sources_are_bare_fact_ids_still_re_plans(demo_run):
+    # Rehearsal: the broker stores sources as bare fact ids as well as {"fact_id": ...}; the mix made the re-plan
+    # fail with "an input needs a source" and no card appeared.
+    r, facts = demo_run, launch_facts()
+    offer(r.plan, "BACKUP", "S9", 4)
+    [fact] = r.plan.execute("SELECT sources FROM promises WHERE promise_id = 'p'").fetchone()["sources"]
+    r.plan.execute("UPDATE promises SET sources = %s WHERE promise_id = 'p'", (Json([fact["fact_id"]]),))
+    r.plan.commit()
+    rows = [*approval_world(), *facts.current]
+    watch = monitor.Monitor(r.plan, KbWithRows(r.kb, rows), llm.ReplayClient(
+        ROOT / "tests" / "fixtures" / "replay" / "hedger_debate.json"), r.log,
+        load_facts=lambda *_: Facts(facts.current, facts.believed, facts.issues))
+    r.deliver("cancellation")
+    [decision_id] = watch.tick()
+    card = {d["decision_id"]: d for d in screen(r.log).state()["decisions"]}[decision_id]
+    assert card["offer_id"] == "BACKUP" and card["actions"]
