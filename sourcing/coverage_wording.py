@@ -1,7 +1,8 @@
 """Rules that kb has only as wording: phantom lines and the priority between editions.
 
-Wording is the weakest evidence, so it fails towards a visible problem: a negated or doubtful phantom note
-leaves the shortage standing, and an unclear priority is no priority. Both escalate.
+Wording is the weakest evidence, so it fails towards a visible problem: a phantom note with any word that is
+not understood leaves the shortage standing, and so does a doubt. A priority counts only when nothing
+unexplained follows it or is said about another edition. Both escalate.
 """
 
 from __future__ import annotations
@@ -18,25 +19,33 @@ DOUBT = re.compile(r"\b(?:no|not|never|non|nor|cannot|without|false|former|forme
                    r"|\b(?:withdr[ae]w|remov|cancel|ceas|revok|rescind|revers|retract|lifted|dropped|obsolete|ended|expired"
                    r"|error|mistak|wrong|incorrect|disput|previous|earlier)\w*"
                    r"|\b(?:buy|reorder|order (?:it|them|separately)|(?:must|to) be (?:ordered|bought))\b", re.I)
+WORD = re.compile(r"[^\W\d_]+")
+# all a phantom note may say, besides the names of the parts
+PHANTOM_WORDS = frozenset("""a an the and or is are as it its this that part parts line lines bom item component
+    phantom pre prefitted fitted premounted mounted preassembled assembled preinstalled installed by with in into
+    on onto to of our supplier vendor""".split())
+# all that may follow a priority, or be said about an edition that is not first
+PRIORITY_WORDS = frozenset("""a an the and for of on in to is are be s goes go gets get edition editions shared
+    part parts first then second last waits wait followed by""".split())
+STALE = re.compile(r"\b(?:old|stale|void|outdated|at first)\b|\b(?:supersed|suspend|replac)")
 SENTENCE = re.compile(r"(?<=[.;!?\n])")
 CLAUSE = re.compile(r"(?<=[,;.:!?\n])|\bthen\b|\bfollowed by\b")
 NEXT = re.compile(r"\bthen\b|\bfollowed by\b")
-SWITCH = re.compile(r"\b(?:now|instead)\b")
 BEHIND = re.compile(r"\b(?:waits?|last|second|after|until)\b")
 TOKEN = re.compile(r"@(\d+)@")
 
 
-def phantom(note: str) -> bool | None:
-    """True: the note says phantom. False: it mentions one with a negation or doubt. None: no mention."""
-    said = None
+def phantom(note: str, part_names: frozenset[str] = frozenset()) -> bool | None:
+    """True: all the note says is phantom. False: it mentions one and says more, or doubts it. None: no mention."""
+    rests, said = [], False
     for sentence in SENTENCE.split(note):
         rest = NOT_STOCKED.sub(" ", sentence)
-        if not PHANTOM.search(rest) and rest == sentence:
-            continue
-        if DOUBT.search(rest):
-            return False
-        said = True
-    return said
+        said = said or rest != sentence or bool(PHANTOM.search(rest))
+        rests.append(rest)
+    if not said:
+        return None
+    known = PHANTOM_WORDS | part_names
+    return not any(DOUBT.search(r) or set(WORD.findall(r.lower())) - known for r in rests)
 
 
 def priority(text: str, labels: dict[str, list[str]]) -> tuple[bool, list[str] | None]:
@@ -52,14 +61,19 @@ def priority(text: str, labels: dict[str, list[str]]) -> tuple[bool, list[str] |
 
     if not named(masked):
         return False, None
+    if STALE.search(masked):
+        return True, None
     leaders = set()
     for clause in CLAUSE.split(masked):
+        understood = set(WORD.findall(clause)) <= PRIORITY_WORDS
         if not re.search(r"\bfirst\b", clause):
-            if named(clause) and SWITCH.search(clause):
-                return True, None                       # an edition takes over without being said to be first
+            if not understood and (named(clause) or leaders):
+                return True, None                       # it may take the priority back, or hand it on
             continue
         who = named(clause)
-        if len(who) != 1 or DOUBT.search(clause) or BEHIND.search(clause):
+        before, after = re.split(r"\bfirst\b", clause, maxsplit=1)
+        if len(who) != 1 or DOUBT.search(clause) or BEHIND.search(clause) or not named(before) \
+                or set(WORD.findall(after)) - PRIORITY_WORDS:
             return True, None
         leaders |= who
     if len(leaders) != 1:
