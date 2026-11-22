@@ -1,0 +1,346 @@
+"""Who signs: approval routing from the policy and org chart facts.
+
+    result = route(rows, action="purchase_order", on=clock.now(conn), amount_eur=total, amount_source=source,
+                   category=category)
+
+`rows` are rows of `kb.current_facts`. No database, no LLM, and it approves nothing: it names who has to.
+`result["signer"]` fits the `decision` contract. It carries a name only when `status` is `resolved` or
+`escalated`; with `held` or `needs_human` the reasons say what a person has to settle first.
+`on` decides which chart and which holder are valid, so pass the time in the team's own time zone.
+"""
+
+from __future__ import annotations
+
+from datetime import date, datetime, timedelta
+from decimal import Decimal, InvalidOperation
+
+from sourcing.approval_docs import (CHART_KIND, POLICY_KIND, Chart, Policy, Rule, Section, Seat, documents,
+                                    read_chart, read_policy, title_scope, words)
+
+ACTIONS = ("purchase_order", "air_freight", "conditional_release", "release_extension")
+UNRESOLVED = "Unresolved"
+CURRENCY = "EUR"                   # the unit of every amount in plan contracts (`*_eur`)
+
+
+def _money(value, name: str) -> Decimal | None:
+    if value is None:
+        return None
+    try:
+        amount = Decimal(str(value)) if not isinstance(value, bool) else None
+    except InvalidOperation:
+        amount = None
+    if amount is None or not amount.is_finite() or amount < 0:
+        raise ValueError(f"{name} must be a finite amount >= 0, got {value!r}")
+    return amount
+
+
+def _plain(value: Decimal | None):
+    if value is None:
+        return None
+    return int(value) if value == value.to_integral_value() else float(value)
+
+
+def _version(value: str | None) -> tuple:
+    return tuple(int(x) for x in value.split(".")) if value else ()
+
+
+def _policy(rows: list[dict], today: date) -> tuple[Policy | None, list[str]]:
+    found = [p for p in map(read_policy, documents(rows, POLICY_KIND)) if p]
+    usable = [p for p in found if p.effective is None or p.effective <= today]
+    if not usable:
+        return None, ["no approval policy in force was found in the facts"]
+    rank = lambda p: (p.effective or date.min, _version(p.version))
+    best = max(usable, key=rank)
+
+    def terms(p: Policy):
+        rules = (p.air, p.release, p.release and p.release.extension, p.site, p.exceptions)
+        return (p.currency, [(t.roles, t.op, t.amount) for t in p.tiers],
+                [(r.roles, r.above, r.limit, r.currency, r.days, r.once) if r else None for r in rules])
+
+    problems = list(best.problems)
+    if any(rank(p) == rank(best) and terms(p) != terms(best) for p in usable):
+        problems.append(f"two readings of {best.name} with the same version disagree")
+    return best, problems
+
+
+def _chart(rows: list[dict], policy: Policy, today: date) -> tuple[Chart | None, list[Chart], list[str]]:
+    found = [read_chart(d, policy.role_terms()) for d in documents(rows, CHART_KIND)]
+    undated = [p for c in found if c.dated is None for p in c.problems]
+    usable = [c for c in found if c.dated and c.dated <= today]
+    if not usable:
+        return None, found, undated + ["no org chart in force was found in the facts"]
+    rank = lambda c: (c.dated, _version(c.version))
+    best = max(usable, key=rank)
+    seats = lambda c: sorted((s.title, s.name or "", s.state, str(s.start), str(s.end)) for s in c.seats)
+    problems = undated + best.problems     # a chart without a date could be the newer one
+    if any(rank(c) == rank(best) and seats(c) != seats(best) for c in usable):
+        problems.append("two org charts with the same version and date disagree")
+    return best, found, problems
+
+
+def _same_area(scope: str, wanted: str, loose: bool) -> bool:
+    have, want = set(words(scope)), set(words(wanted))
+    return bool(have and want) and (have == want or (loose and (have <= want or want <= have)))
+
+
+def _holder(chart: Chart, role: str, area: str | None, today: date, loose: bool) -> dict:
+    """The holder of a role on that day: state is held, vacant, not_in_chart or unclear."""
+    matches = [(s, scope) for s in chart.seats if (scope := title_scope(s.title, role)) is not None]
+    if area:
+        scoped = [m for m in matches if _same_area(m[1], area, loose)]
+        matches = scoped or [m for m in matches if not m[1]]
+    elif any(scope for _, scope in matches):
+        return {"state": "unclear", "why": f"{role} is held per category or site and none was given"}
+    if not matches:
+        where = f" for {area}" if area else ""
+        return {"state": "not_in_chart", "why": f"the org chart lists no {role}{where}"}
+
+    def active(seat: Seat) -> bool:
+        return seat.state == "held" and (not seat.start or seat.start <= today) and (not seat.end or today <= seat.end)
+
+    seats = [s for s, _ in matches]
+    out = {"title": seats[0].title, "fact_ids": [i for s in seats for i in s.ids]}
+    if any(s.state == "unclear" for s in seats):
+        return {**out, "state": "unclear", "why": f"the holder of {seats[0].title} cannot be read"}
+    now = [s for s in seats if active(s)]
+    if len({s.name for s in now}) > 1:
+        return {**out, "state": "unclear", "why": f"several people hold {role}: " + ", ".join(s.name for s in now)}
+    if now:
+        return {**out, "title": now[0].title, "state": "held", "name": now[0].name}
+    coming = [s for s in seats if s.state == "held" and s.start and s.start > today]
+    why = f"{seats[0].title} is vacant on {today.isoformat()}"
+    if coming:
+        why += f" ({coming[0].name} starts {coming[0].start.isoformat()})"
+    return {**out, "state": "vacant", "why": why}
+
+
+class _Routing:
+    def __init__(self, rows: list[dict], action: str, today: date):
+        self.action, self.today = action, today
+        self.reasons: list[str] = []
+        self.sources: list = []
+        self.signers: list[dict] = []
+        self.also: list[dict] = []
+        self.extra: dict = {}
+        self.rule: str | None = None
+        self.held = self.blocked = False
+        self.chart, self.charts = None, []
+        self.policy, problems = _policy(rows, today)
+        if self.policy:
+            self.cite(self.policy.ids)
+            self.chart, self.charts, more = _chart(rows, self.policy, today)
+            problems += more
+            if self.chart:
+                self.cite(self.chart.ids)
+        for problem in problems:
+            self.stop(problem)
+
+    def stop(self, why: str) -> None:
+        self.blocked = True
+        self.reasons.append(why)
+
+    def cite(self, fact_ids) -> None:
+        for fact_id in fact_ids:
+            if {"fact_id": fact_id} not in self.sources:
+                self.sources.append({"fact_id": fact_id})
+
+    def given(self, value: Decimal, source, name: str) -> dict:
+        if not source or not isinstance(source, (str, dict)):
+            raise ValueError(f"{name} needs its source (fact id, goal line or labelled scenario input)")
+        self.sources.append(source)
+        return {"value": _plain(value), "currency": CURRENCY, "source": source}
+
+    def label(self, section: Section, detail: str = "") -> str:
+        version = f" v{self.policy.version}" if self.policy.version else ""
+        return f"{self.policy.name}{version} section {section.number} ({section.title}){detail}"
+
+    def use(self, section: Section, detail: str = "", ids=None) -> str:
+        self.cite(section.ids if ids is None else [section.ids[0], *ids])
+        return self.label(section, detail)
+
+    def rank(self, role: str) -> int | None:
+        for i, tier in enumerate(self.policy.tiers):
+            for other in tier.roles:
+                if words(other) == words(role) or title_scope(other, role) == "" or title_scope(role, other) == "":
+                    return i
+        return None
+
+    def sign(self, role: str, rule: str, area: str | None, loose: bool = False) -> dict:
+        signer = {"role": role, "required_role": role, "rule": rule}
+        if not self.chart:
+            return {**signer, "state": "unclear"}
+        found = _holder(self.chart, role, area, self.today, loose)
+        self.cite(found.get("fact_ids", []))
+        signer.update(role=found.get("title", role), state=found["state"])
+        if found["state"] == "held":
+            return {**signer, "name": found["name"]}
+        self.reasons.append(found["why"])
+        if found["state"] == "unclear":
+            self.blocked = True
+            return signer
+        return self.escalate(signer, role, area)
+
+    def escalate(self, signer: dict, role: str, area: str | None) -> dict:
+        rule = self.policy.exceptions
+        if not rule or len(rule.roles) != 1:
+            self.stop("the policy names no single approver for exceptions")
+            return signer
+        approver = rule.roles[0]
+        why = self.use(rule.section)
+        needed, limit = self.rank(role), self.rank(approver)
+        if needed is not None and (limit is None or needed > limit):
+            self.stop(f"{approver} approves exceptions but has a lower limit than {role}: a person has to decide")
+            return signer
+        found = _holder(self.chart, approver, area, self.today, False)
+        self.cite(found.get("fact_ids", []))
+        if found["state"] != "held":
+            self.stop(f"cannot escalate: {found['why']}")
+            return signer
+        self.reasons.append(f"escalated to {found['title']} as an exception to document, {why}")
+        return {**signer, "state": "escalated", "vacant_role": signer["role"], "vacancy": signer["state"],
+                "role": found["title"], "name": found["name"], "rule": f"{signer['rule']}; escalated per {why}"}
+
+    def value(self, amount: Decimal | None, source, category: str | None) -> None:
+        policy = self.policy
+        if amount is None:
+            return self.stop("the order value is unknown, so no limit can be applied")
+        self.extra["amount"] = self.given(amount, source, "amount_eur")
+        if policy.currency != CURRENCY:
+            return self.stop(f"the policy states its limits in {policy.currency}, the amount is in {CURRENCY}")
+        tier = next((t for t in policy.tiers if t.covers(amount)), None)
+        if not tier:
+            return self.stop(f"no limit in {policy.name} covers this amount")
+        self.rule = self.use(policy.value, f": {' and '.join(tier.roles)} {tier.op} {tier.amount:,} {CURRENCY}",
+                             tier.ids)
+        self.extra["limit"] = {"op": tier.op, "value": _plain(tier.amount), "currency": CURRENCY,
+                               "fact_ids": tier.ids}
+        self.signers = [self.sign(role, self.rule, category) for role in tier.roles]
+
+    def site(self, delivery_site: str) -> None:
+        rule = self.policy.site
+        if rule:
+            why = self.use(rule.section)
+            if not rule.roles:
+                return self.stop(f"cannot read who releases the delivery in {why}")
+            self.also = [self.sign(role, why, delivery_site, loose=True) for role in rule.roles]
+
+    def air(self, amount: Decimal | None, source, category: str | None, used: Decimal | None, used_source) -> None:
+        rule = self.policy.air
+        self.extra["budget"] = budget = {"used": "unknown", "limit": "unknown", "category": category or "unknown"}
+        if used is not None:
+            budget["used"] = self.given(used, used_source, "budget_used_eur")
+        if amount is not None:
+            self.extra["amount"] = self.given(amount, source, "amount_eur")
+        if not rule or rule.limit is None or not rule.roles or not rule.above:
+            return self.stop("no readable air freight rule in the policy")
+        self.rule = self.use(rule.section)
+        if rule.currency != CURRENCY:
+            return self.stop(f"the air freight limit is in {rule.currency}, the amount is in {CURRENCY}")
+        budget["limit"] = {"value": _plain(rule.limit), "currency": CURRENCY, "fact_ids": rule.section.ids}
+        if amount is None:
+            return self.stop("the air freight cost is unknown, so no limit can be applied")
+        if amount > rule.limit or (used is not None and used + amount > rule.limit):
+            roles = rule.above
+            self.reasons.append("this booking takes the month and category above the limit")
+        elif used is not None:
+            roles = rule.roles
+            if not category:
+                return self.stop("the category is unknown, and the limit is per category")
+        else:
+            roles = rule.above
+            budget["lower_signer_if_used_at_most"] = {"role": " and ".join(rule.roles),
+                                                      "value": _plain(rule.limit - amount), "currency": CURRENCY,
+                                                      "fact_ids": rule.section.ids}
+            self.reasons.append("the category budget used this month is unknown, so the approval above the limit "
+                                "applies")
+        self.signers = [self.sign(role, self.rule, category) for role in roles]
+
+    def release(self, category: str | None, released_on: date | None, source, extended: int | None) -> None:
+        base: Rule | None = self.policy.release
+        extending = self.action == "release_extension"
+        rule = base.extension if base and extending else base
+        if not rule or not rule.roles:
+            return self.stop(f"no readable rule for {self.action} in the policy")
+        self.rule = self.use(rule.section)
+        validity = {"max_days": rule.days if rule.days is not None else "unknown", "fact_ids": rule.section.ids}
+        if released_on:
+            if not source:
+                raise ValueError("released_on needs its source")
+            self.sources.append(source)
+        if not extending and rule.days is not None:
+            validity["valid_until"] = ((released_on or self.today) + timedelta(days=rule.days)).isoformat()
+        self.extra["validity"] = validity
+        self.signers = [self.sign(role, self.rule, category) for role in rule.roles]
+        if extending and rule.once:
+            if extended is None:
+                self.stop("it is unknown whether the release was extended before, and it may be extended once")
+            elif extended >= 1:
+                self.stop("the release was already extended, and it may be extended once")
+
+    def expired(self, valid_until: date, source) -> None:
+        if not source:
+            raise ValueError("release_valid_until needs its source")
+        self.sources.append(source)
+        if valid_until < self.today:
+            self.held = True
+            self.reasons.append(f"the supplier's conditional release expired on {valid_until.isoformat()}: the "
+                                "order waits for approval")
+            if self.policy.release:
+                self.reasons.append(f"held per {self.use(self.policy.release.section)}")
+
+    def result(self) -> dict:
+        everyone = self.signers + self.also
+        if self.blocked or not self.signers or any(s["state"] not in ("held", "escalated") for s in everyone):
+            status = "needs_human"
+        elif self.held:
+            status = "held"
+        else:
+            status = "escalated" if any(s["state"] == "escalated" for s in everyone) else "resolved"
+        named = status in ("resolved", "escalated")
+        signer = {"role": " and ".join(dict.fromkeys(s["role"] for s in self.signers)) or UNRESOLVED}
+        if named:
+            signer["name"] = " and ".join(dict.fromkeys(s["name"] for s in self.signers))
+        rules = list(dict.fromkeys(s["rule"] for s in self.signers)) or ([self.rule] if self.rule else [])
+        if rules:
+            signer["rule"] = "; ".join(rules)
+        return {"action": self.action, "on": self.today.isoformat(), "status": status, "signer": signer,
+                "signers": self.signers, "also_required": self.also,
+                "policy": self.policy and {"name": self.policy.name, "version": self.policy.version,
+                                           "path": self.policy.path, "fact_ids": self.policy.ids},
+                "org_chart": self.chart_used(), "reasons": self.reasons, "sources": self.sources, **self.extra}
+
+    def chart_used(self) -> dict | None:
+        chart = self.chart
+        if not chart:
+            return None
+        used = f"org chart v{chart.version} of {chart.dated.isoformat()}"
+        older = sorted({(c.dated, c.version, c.path) for c in self.charts
+                        if c.dated and (c.dated, _version(c.version)) < (chart.dated, _version(chart.version))})
+        return {"label": used, "version": chart.version, "dated": chart.dated.isoformat(), "path": chart.path,
+                "fact_ids": chart.ids,
+                "replaces": [{"version": v, "dated": d.isoformat(), "path": p} for d, v, p in older]}
+
+
+def route(rows: list[dict], *, action: str, on: date | datetime, amount_eur=None, amount_source=None,
+          category: str | None = None, delivery_site: str | None = None, budget_used_eur=None,
+          budget_used_source=None, released_on: date | None = None, extensions_used: int | None = None,
+          release_valid_until: date | None = None, release_source=None) -> dict:
+    """Who signs this action on that day, with the rule, the chart used and the sources."""
+    if action not in ACTIONS:
+        raise ValueError(f"action must be one of {', '.join(ACTIONS)}, got {action!r}")
+    if isinstance(on, datetime) and on.tzinfo is None:
+        raise ValueError("on needs a UTC offset")
+    amount, used = _money(amount_eur, "amount_eur"), _money(budget_used_eur, "budget_used_eur")
+    routing = _Routing(list(rows), action, on.date() if isinstance(on, datetime) else on)
+    if routing.policy:
+        if action == "purchase_order":
+            routing.value(amount, amount_source, category)
+            if delivery_site:
+                routing.site(delivery_site)
+            if release_valid_until:
+                routing.expired(release_valid_until, release_source)
+        elif action == "air_freight":
+            routing.air(amount, amount_source, category, used, budget_used_source)
+        else:
+            routing.release(category, released_on, release_source, extensions_used)
+    return routing.result()
