@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lookahead.local/plan/contract/promise.schema.json",
+  "title": "promise",
+  "description": "A supplier commitment that is watched until it is proven or broken.",
+  "type": "object",
+  "required": [
+    "promise_id",
+    "supplier_id",
+    "what",
+    "due",
+    "state"
+  ],
+  "properties": {
+    "promise_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "supplier_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "part_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lane": {
+      "type": "string",
+      "minLength": 1
+    },
+    "decision_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "what": {
+      "type": "string",
+      "minLength": 1
+    },
+    "quantity": {
+      "type": "number",
+      "minimum": 0
+    },
+    "due": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "proof": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state": {
+      "enum": [
+        "waiting",
+        "proven",
+        "broken",
+        "cancelled"
+      ]
+    },
+    "next_check": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "fallback": {
+      "type": "string",
+      "minLength": 1
+    },
+    "proven_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "broken_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "source": {
+      "description": "Where a number comes from: a kb fact id, a goal line, a labelled scenario input or a file.",
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "fact_id": {
+              "type": [
+                "string",
+                "integer"
+              ]
+            },
+            "goal_line": {
+              "type": "string",
+              "minLength": 1
+            },
+            "scenario_input": {
+              "type": "string",
+              "minLength": 1
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1
+            },
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "value": {}
+          }
+        }
+      ]
+    }
+  }
+}

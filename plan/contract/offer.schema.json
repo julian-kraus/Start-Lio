@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lookahead.local/plan/contract/offer.schema.json",
+  "title": "offer",
+  "description": "A quantity a supplier can deliver at a price and time.",
+  "type": "object",
+  "required": [
+    "offer_id",
+    "supplier_id",
+    "part_id",
+    "sources"
+  ],
+  "properties": {
+    "offer_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "supplier_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "part_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "quantity": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "min_quantity": {
+      "type": "number",
+      "minimum": 0
+    },
+    "unit_price_eur": {
+      "type": "number",
+      "minimum": 0
+    },
+    "fixed_cost_eur": {
+      "type": "number",
+      "minimum": 0
+    },
+    "lead_time_h": {
+      "type": "number",
+      "minimum": 0
+    },
+    "available_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "valid_until": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "enum": [
+        "open",
+        "requested",
+        "accepted",
+        "declined",
+        "expired"
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "source": {
+      "description": "Where a number comes from: a kb fact id, a goal line, a labelled scenario input or a file.",
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "fact_id": {
+              "type": [
+                "string",
+                "integer"
+              ]
+            },
+            "goal_line": {
+              "type": "string",
+              "minLength": 1
+            },
+            "scenario_input": {
+              "type": "string",
+              "minLength": 1
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1
+            },
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "value": {}
+          }
+        }
+      ]
+    }
+  }
+}

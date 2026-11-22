@@ -1,0 +1,17 @@
+{
+  "run_id": "00000000-0000-4000-8000-000000000001",
+  "part_id": "PART-A",
+  "lane": "PART-A",
+  "rank": 1,
+  "p_fail": 0.3,
+  "exposure_eur": 12000,
+  "reason": "Single source with a 0.7 on-time rate.",
+  "sources": [
+    {
+      "fact_id": "fact-0001"
+    },
+    {
+      "fact_id": "fact-0002"
+    }
+  ]
+}

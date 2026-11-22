@@ -1,0 +1,17 @@
+{
+  "promise_id": "PR-1",
+  "supplier_id": "SUP-A",
+  "part_id": "PART-A",
+  "what": "200 units loaded",
+  "quantity": 200,
+  "due": "2030-01-11T18:00:00+00:00",
+  "proof": "carrier scan",
+  "state": "waiting",
+  "next_check": "2030-01-11T18:00:00+00:00",
+  "fallback": "Call the supplier contact",
+  "sources": [
+    {
+      "fact_id": "fact-0004"
+    }
+  ]
+}

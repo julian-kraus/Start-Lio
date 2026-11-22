@@ -1,0 +1,36 @@
+{
+  "decision_id": "D-1",
+  "recommendation_id": "00000000-0000-4000-8000-000000000002",
+  "status": "open",
+  "title": "Order 200 units from the backup supplier",
+  "lane": "PART-A",
+  "supplier_id": "SUP-B",
+  "impact": {
+    "units": 200,
+    "eur": 12000,
+    "text": "protects 200 copies"
+  },
+  "cost": {
+    "eur": 600,
+    "text": "200 x 2.50 EUR plus 100 EUR setup"
+  },
+  "signer": {
+    "role": "Buyer",
+    "rule": "buyer signs under the policy limit"
+  },
+  "options": [
+    {
+      "label": "Order 100",
+      "text": "Half the hedge."
+    }
+  ],
+  "on_accept": [
+    "Order draft to the backup supplier"
+  ],
+  "at": "2030-01-10T08:00:00+00:00",
+  "sources": [
+    {
+      "fact_id": "fact-0005"
+    }
+  ]
+}

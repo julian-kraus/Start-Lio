@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lookahead.local/plan/contract/record_supplier.schema.json",
+  "title": "record_supplier",
+  "description": "Lookahead record kind 'supplier': a supplier card; upsert by supplier_id.",
+  "type": "object",
+  "required": [
+    "kind",
+    "supplier_id"
+  ],
+  "properties": {
+    "kind": {
+      "const": "supplier"
+    },
+    "supplier_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "parts": {
+      "type": "array"
+    },
+    "flags": {
+      "type": "array"
+    },
+    "score": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "n": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "prior": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "k": {
+          "type": "number",
+          "minimum": 0
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "breakdown": {
+          "type": "array"
+        }
+      }
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "source": {
+      "description": "Where a number comes from: a kb fact id, a goal line, a labelled scenario input or a file.",
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "fact_id": {
+              "type": [
+                "string",
+                "integer"
+              ]
+            },
+            "goal_line": {
+              "type": "string",
+              "minLength": 1
+            },
+            "scenario_input": {
+              "type": "string",
+              "minLength": 1
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1
+            },
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "value": {}
+          }
+        }
+      ]
+    }
+  }
+}

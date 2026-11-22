@@ -1,0 +1,10 @@
+{"kind": "launch", "name": "Example launch", "product": "PROD-X", "mode": "rehearse", "deadline": "2030-01-12T18:00:00+00:00", "goal_questions": [{"id": "goal", "q": "What has to be true at the deadline?"}]}
+{"kind": "clock", "now": "2030-01-10T08:00:00+00:00"}
+{"kind": "cue", "label": "Goal interview", "wait_for": "goal"}
+{"kind": "goal", "statement": "1000 copies packed by the deadline", "answers": [], "unit_loss_eur": 60, "budget_cap_eur": 5000, "sacrifices": ["supplier goodwill"], "edition": null}
+{"kind": "plan", "at": "2030-01-10T08:01:00+00:00", "lanes": [{"lane_id": "PART-A", "name": "Part A", "status": "critical", "need": 1000, "usable": 900, "gap": 100, "bars": []}], "coverage": {"covered": 900, "needed": 1000, "unit": "copies"}, "summary": "One lane short by 100"}
+{"kind": "supplier", "supplier_id": "SUP-A", "name": "Supplier A", "parts": ["PART-A"], "flags": [], "score": {"value": 0.7, "n": 20, "prior": 0.8, "k": 5, "method": "shrunk on-time rate", "breakdown": []}}
+{"kind": "event", "type": "document", "title": "Shipping advice shows a short shipment", "at": "2030-01-10T07:00:00+00:00", "lane": "PART-A", "supplier_id": "SUP-A", "severity": "risk"}
+{"kind": "decision", "decision_id": "D-1", "status": "open", "title": "Order 200 units from the backup supplier", "signer": {"role": "Buyer"}}
+{"kind": "promise", "promise_id": "PR-1", "state": "waiting", "supplier_id": "SUP-A", "due": "2030-01-11T18:00:00+00:00", "what": "200 units loaded"}
+{"kind": "cue", "label": "Decision", "wait_for": "accept:D-1"}
