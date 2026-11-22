@@ -1,0 +1,42 @@
+# The art-book demo scenario. Only what the scenario adds to the real world lives here; every other number on the
+# screen is computed from kb facts by sourcing/ (see projector/artbook.py). Each value below is shown on screen as a
+# labelled scenario input.
+name: Art book backup bet
+start: "2026-11-21T18:00:00+01:00"        # scenario clock at the first beat
+edition: Collector's                      # the goal's edition; its weak spot is the part the story is about
+team_offline: "2026-11-22T10:00:00+01:00"
+
+goal:                                     # the answers the presenter gives in the goal interview (goal lines)
+  statement: All Collector's copies packed on time.
+  unit_loss_eur: 120                      # refund per missing copy; no kb fact holds it, so it is the goal's answer
+  sacrifice: Supplier goodwill, Standard retail stock.
+  budget_eur: 5000                        # what the agent may commit alone per hedge
+
+offer:                                    # an outside supplier offers the missing part
+  supplier_id: SCN-A
+  label: Supplier A
+  history_from: least_reliable           # decision on #43: A's score is computed from the real history of the
+                                         # least reliable supplier with at least 10 promises (computed)
+  city: Hannover
+  country: DE
+  lang: de
+  units: 6000
+  unit_price_eur: 1.95
+  received_at: "2026-11-21T18:24:00+01:00"
+  loads_at: "2026-11-22T01:00:00+01:00"
+
+backup:                                   # the qualified source's spare lot (the order terms come from kb)
+  supplier_id: qualified_source          # the weak spot's qualified source, computed from kb
+  units: 8000
+  deposit: "20%"
+  ordered_at: "2026-11-21T18:27:00+01:00"
+  load_due: "2026-11-21T22:30:00+01:00"
+  reply_at: "2026-11-21T18:41:00+01:00"
+  loaded_at: "2026-11-21T22:24:00+01:00"
+  arrives_at: "2026-11-22T07:30:00+01:00"
+
+cancellation:
+  at: "2026-11-22T05:52:00+01:00"
+  reason: bindery failure
+
+decision_at: "2026-11-22T06:01:00+01:00"
