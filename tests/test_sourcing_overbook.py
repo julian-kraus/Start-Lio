@@ -33,7 +33,7 @@ def fact(kind, subject, attribute, value, fid=None, **more):
 
 def listed(value="2.40", currency="EUR"):
     key = {"supplier_id": "B", "material_id": "PART"}
-    return [fact("supplier_part", key, "unit_price", value), fact("supplier_part", key, "moq", "10 000"),
+    return [fact("supplier_part", key, "unit_price", value), fact("supplier_part", key, "moq", "17 003"),
             fact("supplier", {"supplier_id": "B"}, "currency", currency)]
 
 
@@ -164,7 +164,7 @@ def test_offer_price_lot_and_quantity_come_from_the_offer():
     assert overbook.price(facts, "B", "PART", offer_ref="O-1").value == 2.1
     assert overbook.order_limit(facts, "B", "PART", "lot_size", "O-1").value == 1000
     assert overbook.order_limit(facts, "B", "PART", "qty", "O-1").value == 8000
-    assert overbook.order_limit(facts, "B", "PART", "moq").value == 10000
+    assert overbook.order_limit(facts, "B", "PART", "moq").value == 17003
     assert overbook.order_limit(facts, "B", "PART", "lot_size") is None
 
 

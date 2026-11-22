@@ -37,8 +37,8 @@ def test_deposit_only_commits_the_deposit():
 
 
 def test_full_order_commits_the_order_minus_salvage():
-    r = decide(p=0.2, model="full_order", deposit=None, salvage=100)
-    assert (r["order_value_eur"], r["commitment_eur"], r["expected_loss_eur"]) == (1200, 1100, 1000)
+    r = decide(p=0.2, model="full_order", deposit=None, salvage=87)
+    assert (r["order_value_eur"], r["commitment_eur"], r["expected_loss_eur"]) == (1200, 1113, 1000)
     assert r["verdict"] == "hold"
     assert r["cost_model"]["basis"] == "full_order"
     assert decide(p=0.2, model="full_order", deposit=None, salvage=300)["verdict"] == "hedge"
@@ -175,7 +175,7 @@ def test_order_without_a_deposit_and_deposit_of_everything():
 
 
 @pytest.mark.parametrize("text,value", [("25%", 300), ("25 % deposit", 300), ("12,5 percent", 150),
-                                        ("€1,100", 1100), ("1 100 EUR", 1100), ("eur 240.50", 240.5)])
+                                        ("€1,113", 1113), ("1 113 EUR", 1113), ("eur 240.50", 240.5)])
 def test_deposit_is_parsed_from_quoted_text(text, value):
     assert decide(deposit=text)["commitment_eur"] == value
 
@@ -187,9 +187,9 @@ def test_deposit_that_cannot_be_read_is_refused(text):
 
 
 @pytest.mark.parametrize("text,grouped,value", [
-    ("10 000", False, 10000), ("10 000", False, 10000), ("10 000,50", False, 10000.5), ("2,10", False, 2.1),
+    ("17 003", False, 17003), ("17 003", False, 17003), ("17 003,50", False, 17003.5), ("2,10", False, 2.1),
     ("0.125", False, 0.125), ("1.234,56", False, 1234.56), ("1,234,567", False, 1234567),
-    ("10,000", True, 10000), ("10.000", True, 10000), ("2.1", True, 2.1),
+    ("17,003", True, 17003), ("17.003", True, 17003), ("2.1", True, 2.1),
 ])
 def test_numbers_are_parsed_in_code(text, grouped, value):
     assert hedge.parse_number(text, grouped) == value
