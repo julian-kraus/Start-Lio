@@ -257,9 +257,9 @@ def test_a_reason_says_when_the_goal_puts_no_value_on_the_copies(world):
 
 
 def test_a_phantom_line_is_no_weak_spot(world):
-    world.bom("P-A", "MAGNET", 1)
-    world.issues.append({"kind": "phantom_part", "payload": {"material_id": "MAGNET"}, "fact_ids": ["f0"]})
-    assert "MAGNET" not in {s["part_id"] for s in ranked(world)}
+    world.bom("P-A", "PART-P", 1)
+    world.issues.append({"kind": "phantom_part", "payload": {"material_id": "PART-P"}, "fact_ids": ["f0"]})
+    assert "PART-P" not in {s["part_id"] for s in ranked(world)}
 
 
 def test_changing_the_goal_changes_the_ranking(world):
