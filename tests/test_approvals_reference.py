@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from sourcing import approval_docs, approvals
+from sourcing import approval_chart, approval_docs, approvals
 
 DOCS = Path(__file__).resolve().parent.parent / "structured" / "docs"
 KINDS = (approval_docs.POLICY_KIND, approval_docs.CHART_KIND)
@@ -25,7 +25,7 @@ def reference():
     if not rows:
         pytest.skip("no reference policy or org chart")
     policy = approval_docs.read_policy(approval_docs.documents(rows, KINDS[0])[0])
-    charts = sorted((approval_docs.read_chart(d, policy.role_terms())
+    charts = sorted((approval_chart.read_chart(d, policy.role_terms())
                      for d in approval_docs.documents(rows, KINDS[1])), key=lambda c: c.dated)
     return rows, policy, charts
 
@@ -43,7 +43,7 @@ def test_reference_every_tier_and_category_has_a_signer(reference):
     rows, policy, charts = reference
     newest = charts[-1]
     areas = {scope for s in newest.seats for role in policy.tiers[1].roles
-             if (scope := approval_docs.title_scope(s.title, role))}
+             if (scope := approval_chart.title_scope(s.title, role))}
     assert areas
     for area in areas:
         for i, tier in enumerate(policy.tiers[1:], 1):
@@ -61,7 +61,7 @@ def test_reference_future_holder_escalates_until_the_start(reference):
         if not seat.start:
             continue
         i, tier, area = next((i, t, scope) for i, t in enumerate(policy.tiers) for role in t.roles
-                             if (scope := approval_docs.title_scope(seat.title, role)))
+                             if (scope := approval_chart.title_scope(seat.title, role)))
 
         def signed(on):
             return approvals.route(rows, action="purchase_order", on=on, amount_source="reference test",

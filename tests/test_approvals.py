@@ -286,7 +286,10 @@ def test_delivery_to_a_site_also_needs_the_site_release():
 @pytest.mark.parametrize("site", ["Example Northern Distribution Center Norwick", "DC-NOR"])
 def test_site_is_found_by_its_kb_name_or_id(site):
     chart = CHART_V2.replace("Warehouse Chief North Depot", "Warehouse Chief DC Norwick")
-    out = route(world(POLICY, chart), delivery_site=site)
+    known = {"fact_id": "own/sites.csv|1", "path": "own/sites.csv", "doc_kind": "master_table", "fact_type": "site",
+             "subject": {"site_id": "DC-NOR"}, "attribute": "name", "confidence": 0.9,
+             "value": "Example Northern Distribution Center Norwick"}
+    out = route(world(POLICY, chart) + [known], delivery_site=site)
     assert [(s["state"], s["name"]) for s in out["also_required"]] == [("held", "Finn Ford")]
 
 
