@@ -221,11 +221,16 @@ class AnthropicClient(LLMClient):
             "You read one supplier document into facts that follow a fixed contract. Answer with one JSON object "
             "and nothing else, with exactly these keys: doc_kind, doc_kind_confidence (high|medium|low), languages "
             "(array of ISO codes), doc_date (YYYY-MM-DD or null), facts (array), unreadable (array of strings), "
-            "proposed_fact_types (array). Each fact is {fact_type, subject (object of entity ids, never a row or "
-            "line number), attribute, value, unit, locator ({page, section}), evidence (the exact text you read "
-            "the value from), confidence (high|medium|low)}. For each contract fact type use exactly the subject "
-            "keys it lists as the subject object's keys (the entity ids that identify the record, never invented "
-            "names) and use only the attribute names it lists for that type. Copy every quantity verbatim as it "
+            "proposed_fact_types (array). Each fact is {fact_type, subject (object of the values that identify the "
+            "record), attribute, value, unit, locator ({page, section}), evidence (the exact text you read the "
+            "value from), confidence (high|medium|low)}. For each contract fact type use exactly the subject keys "
+            "it lists as the subject object's keys (never invented names) and use only the attribute names it "
+            "lists for that type. A subject key named line, ending in _line, or statement_no is the 1-based "
+            "position of the record in the document, counted from the top: 1 for the first line, never a part, "
+            "material or item number. For every record you report, give one fact for each attribute its fact type "
+            "lists; when the document shows that attribute empty or unmarked, give it with value null (false for "
+            "a yes/no attribute such as struck_through), so absence is stated, not skipped. A handwritten or "
+            "corrected quantity goes in its own attribute, and the quantity that finally counts in final_qty. Copy every quantity verbatim as it "
             "appears in the document, keeping any digit grouping (for example \"10 000\"); do not round or reformat "
             "it. Use only fact types from the contract; for genuinely new information name the type x_<something> "
             "and list it in proposed_fact_types.")
@@ -234,7 +239,8 @@ class AnthropicClient(LLMClient):
         content, notes = self._content(document, instruction)
         aux = _aux_key("extract", structure.name, vocabulary)
         data = self._answer("extract", document.sha256, system, content, aux=aux)
-        env = _envelope(data, structure.name, _numeric_attrs(contract))
+        attrs = {v["name"]: set(v.get("attributes") or {}) for v in vocabulary if v.get("name")}
+        env = _envelope(data, structure.name, _numeric_attrs(contract), attrs)
         if notes:                       # pages or text the cap cut never reach the model: record, do not hide
             env["unreadable"] = list(env["unreadable"]) + notes
         return env

@@ -255,3 +255,77 @@ def test_an_unreadable_count_never_becomes_a_fact_through_drain(tmp_path):
         conn.execute(sql.SQL("DROP SCHEMA {} CASCADE").format(sql.Identifier(schema)))
         conn.commit()
         conn.close()
+
+
+def _lines(env):
+    return [f["subject"]["line"] for f in env["facts"]]
+
+
+def test_code_in_a_line_key_is_renumbered_by_position():
+    facts = [fact("5", subject={"delivery_note": "DN-X1", "line": "PRT-AA-01"}),
+             fact("6", subject={"delivery_note": "DN-X1", "line": "PRT-BB-02"}),
+             fact("7", attribute="unit_price", subject={"delivery_note": "DN-X1", "line": "PRT-AA-01"})]
+    env = _envelope({"facts": facts}, "delivery_note_scan", NUMERIC)
+    assert _lines(env) == [1, 2, 1]
+
+
+def test_numeric_or_mixed_line_keys_are_left_alone():
+    numbered = [fact("5", subject={"delivery_note": "DN-X1", "line": "3"})]
+    assert _lines(_envelope({"facts": numbered}, "delivery_note_scan", NUMERIC)) == [3]
+    mixed = [fact("5", subject={"delivery_note": "DN-X1", "line": 2}),
+             fact("6", subject={"delivery_note": "DN-X1", "line": "PRT-AA-01"})]
+    assert _lines(_envelope({"facts": mixed}, "delivery_note_scan", NUMERIC)) == [2, "PRT-AA-01"]
+
+
+def test_line_codes_are_numbered_per_delivery_note():
+    facts = [fact("5", subject={"delivery_note": "DN-X1", "line": "PRT-AA-01"}),
+             fact("6", subject={"delivery_note": "DN-X2", "line": "PRT-CC-09"})]
+    assert _lines(_envelope({"facts": facts}, "delivery_note_scan", NUMERIC)) == [1, 1]
+
+
+def test_extract_prompt_defines_positions_and_asks_for_every_attribute(tmp_path):
+    seen = {}
+
+    class Capture:
+        def create(self, request):
+            seen.update(request)
+            return Reply("end_turn", json.dumps({"facts": []}), {"input_tokens": 1, "output_tokens": 1})
+
+    client = AnthropicClient(api_key="test", store_dir=tmp_path, transport=Capture(), record=False)
+    doc = Document(path="x/note.txt", sha256="a" * 64, container="txt", text="synthetic")
+    client.extract(doc, Structure("delivery_note_scan", "", None, "core"), {}, CONTRACT)
+    system = seen["system"] if isinstance(seen["system"], str) else json.dumps(seen["system"])
+    assert "1-based" in system and "never a part" in system
+    assert "value null" in system
+
+
+def test_identifier_attributes_are_stated_from_the_subject():
+    facts = [{"fact_type": "route", "subject": {"route_id": "R-X1"}, "attribute": "mode", "value": "road",
+              "confidence": "high"}]
+    env = _envelope({"facts": facts}, "master_table", {}, {"route": {"route_id", "mode"}})
+    got = {(f["attribute"], f["value"]) for f in env["facts"]}
+    assert got == {("mode", "road"), ("route_id", "R-X1")}
+    again = _envelope({"facts": facts + [{**facts[0], "attribute": "route_id", "value": "R-X1"}]}, "master_table", {},
+                      {"route": {"route_id", "mode"}})
+    assert len(again["facts"]) == 2                     # not duplicated when the model already wrote it
+
+
+def test_subject_keys_not_in_the_attributes_are_not_copied():
+    facts = [{"fact_type": "oc_line", "subject": {"po_number": "P-X1", "po_line": 1}, "attribute": "qty", "value": 5}]
+    env = _envelope({"facts": facts}, "order_confirmation", {}, {"oc_line": {"qty"}})
+    assert [f["attribute"] for f in env["facts"]] == ["qty"]
+
+
+def test_measured_value_with_unit_is_split():
+    f = {**fact("1 250 kg", attribute="gross_weight"), "unit": None}
+    env = _envelope({"facts": [f]}, "delivery_note_scan", {})
+    assert (env["facts"][0]["value"], env["facts"][0]["unit"]) == (1250, "kg")
+    plain = _envelope({"facts": [fact("12 pcs", attribute="note")]}, "delivery_note_scan", {})
+    assert plain["facts"][0]["value"] == "12 pcs"          # only measured attributes are split
+
+
+def test_slash_date_is_day_first_only_for_day_first_languages():
+    f = fact("03/04/2031", attribute="note_date")
+    assert _envelope({"facts": [f], "languages": ["de"]}, "x", {})["facts"][0]["value"] == "2031-04-03"
+    assert _envelope({"facts": [f], "languages": ["en"]}, "x", {})["facts"][0]["value"] == "03/04/2031"
+    assert _envelope({"facts": [f]}, "x", {})["facts"][0]["value"] == "03/04/2031"

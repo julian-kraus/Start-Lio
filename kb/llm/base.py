@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import importlib
 import io
+import os
 from abc import ABC
 from dataclasses import dataclass, field
 
@@ -99,6 +100,30 @@ def render_pdf_pages(data: bytes) -> list[bytes]:
     return out
 
 
+XLSX_MAX_ROWS = int(os.environ.get("KB_LLM_XLSX_MAX_ROWS", "300"))
+
+
+def _xlsx_text(data: bytes) -> str:
+    """Every sheet as tab-separated rows under a `# sheet <name>` line, so a model can read a workbook. Rows past
+    XLSX_MAX_ROWS per sheet are cut and the cut is stated in the text, never hidden."""
+    from openpyxl import load_workbook
+    wb = load_workbook(io.BytesIO(data), read_only=True, data_only=True)
+    out = []
+    for ws in wb.worksheets:
+        out.append(f"# sheet {ws.title}")
+        rows = 0
+        for row in ws.iter_rows(values_only=True):
+            if all(v is None or str(v).strip() == "" for v in row):
+                continue
+            rows += 1
+            if rows <= XLSX_MAX_ROWS:
+                out.append("\t".join("" if v is None else str(v) for v in row).rstrip("\t"))
+        if rows > XLSX_MAX_ROWS:
+            out.append(f"[{rows - XLSX_MAX_ROWS} more rows in this sheet not shown]")
+    wb.close()
+    return "\n".join(out)
+
+
 def text_of(container: str, data: bytes) -> tuple[str | None, list[int]]:
     """Text layer (PDF), document text (docx) or plain text; images have none."""
     if container == "pdf":
@@ -107,6 +132,8 @@ def text_of(container: str, data: bytes) -> tuple[str | None, list[int]]:
         return "\n\f\n".join(texts), [i + 1 for i, t in enumerate(texts) if len(t.strip()) < 20]
     if container == "docx":
         return _docx_text(data), []
+    if container == "xlsx":
+        return _xlsx_text(data), []
     if container in ("image", "binary", "zip"):
         return None, []
     return data.decode("utf-8", errors="replace"), []
