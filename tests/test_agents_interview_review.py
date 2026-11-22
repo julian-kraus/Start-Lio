@@ -82,6 +82,21 @@ def test_a_refusal_is_no_trade_off(answer, quote):
     blocked(read(answer, item("trade_off", quote)))
 
 
+@pytest.mark.parametrize("answer, quote", [
+    ("I hate it when margin suffers.", "margin suffers"),
+    ("I doubt margin can suffer.", "margin can suffer"),
+    ("I am afraid that margin may suffer.", "margin may suffer"),
+    ("It would be a disaster if margin suffers.", "margin suffers"),
+    ("Margin is the last thing that may suffer.", "Margin is the last thing that may suffer"),
+    ("Margin may hardly suffer.", "Margin may hardly suffer"),
+    ("I would be horrified if margin suffers.", "margin suffers"),
+    ("It would be a shame if margin suffers.", "margin suffers"),
+    ("Over my dead body margin suffers.", "margin suffers"),
+])
+def test_a_reluctance_is_no_trade_off(answer, quote):
+    blocked(read(answer, item("trade_off", quote)))
+
+
 @pytest.mark.parametrize("answer", [
     "Supplier goodwill must not suffer", "Keep supplier goodwill intact", "Nothing may suffer"])
 def test_a_typed_refusal_is_not_replaced_by_the_prefilled_trade_off(answer):
@@ -135,6 +150,11 @@ def test_an_amount_is_not_cut_out_of_its_unit(said, number):
     blocked(read(answer, item("ceiling", number, number)))
 
 
+@pytest.mark.parametrize("answer", ["Spend at most 500. Dollars", "Spend at most 500.\nUSD, that is"])
+def test_a_currency_given_right_after_the_sentence_blocks(answer):
+    blocked(read(answer, item("ceiling", "Spend at most 500", "500")))
+
+
 # ---- the team window is what was said, or an open point ----------------------------
 
 @pytest.mark.parametrize("said, quote", [
@@ -146,6 +166,11 @@ def test_an_amount_is_not_cut_out_of_its_unit(said, number):
 ])
 def test_an_unclear_team_time_blocks(said, quote):
     blocked(read(f"Team offline {said}", item("team_until", quote)))
+
+
+@pytest.mark.parametrize("said", ["late at 9:00", "after dinner, at 8:00", "after supper at 8:00", "at bedtime, 11:00"])
+def test_a_time_late_in_the_day_needs_pm(said):
+    blocked(read(f"Team offline {said}", item("team_until", said[said.index(":") - 2:].strip())))
 
 
 @pytest.mark.parametrize("said, quote, at", [
@@ -224,6 +249,18 @@ def test_a_prefilled_trade_off_still_applies_when_nothing_contradicts_it():
                  item("ceiling", "Don't bankrupt me"), inputs=GOODWILL)
     assert draft.ready, draft.problems
     assert goal_of(draft)["sacrifices"] == GOODWILL["trade_offs"]
+
+
+@pytest.mark.parametrize("answer", ["Margin can suffer", "Let margin suffer", "I don't mind if margin suffers",
+                                    "Fine if margin suffers", "Margin may suffer"])
+def test_a_permission_is_a_trade_off(answer):
+    assert goal_of(read(answer, item("trade_off", answer)))["sacrifices"]
+
+
+def test_late_as_a_trade_off_does_not_make_the_team_time_unclear():
+    draft = read("Basic can be late and team offline Sun 10:00",
+                 item("trade_off", "Basic can be late"), item("team_until", "Sun 10:00"))
+    assert goal_of(draft)["team_window"] == {"to": SUNDAY}
 
 
 def test_an_iso_deadline_does_not_hide_the_team_time():

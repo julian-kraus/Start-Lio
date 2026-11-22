@@ -62,7 +62,7 @@ OTHER_DAY = re.compile(
     r"|jan|feb|apr|jun|jul|aug|sept?|oct|nov|dec"
     r"|morgen|übermorgen|heute|montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag|abends?|nachmittags?)\b",
     re.IGNORECASE)
-LATE = re.compile(r"\b(?:tonight|evening|afternoon|night)\b", re.IGNORECASE)
+LATE = re.compile(r"\b(?:tonight|evening|afternoon|night|dinner|supper|bedtime|(?<!be )late)\b", re.IGNORECASE)
 EARLY = re.compile(r"\bmorning\b", re.IGNORECASE)
 
 
@@ -152,7 +152,8 @@ def check_amount(answer: str, match: re.Match, names: Iterable[str] = ()) -> Non
     said = repr(match[0].strip())
     first, last = around(answer, *match.span(), SENTENCE)
     rest = answer[first:match.start()] + " " + answer[match.end():last]
-    if FOREIGN.search(rest) or SCALE_WORD.search(rest):
+    following = re.sub(r"^[\s.!?;]+", "", answer[last:])
+    if FOREIGN.search(rest) or FOREIGN.match(following) or SCALE_WORD.search(rest):
         raise UnreadableError(f"cannot tell the currency or scale of {said}")
     before, after = answer[:match.start()].rstrip(), answer[match.end():]
     if re.search(r"(?:[-−+~*×/]|\b(?:minus|negative))$", before, re.IGNORECASE):

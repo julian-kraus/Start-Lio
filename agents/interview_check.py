@@ -17,10 +17,13 @@ REFUSAL = re.compile(
     r"\bn(?:o|ot)\b(?! (?:care|mind|matter|need|important|critical|urgent|problem)\b)"
     r"|\b\w+n't\b(?! (?:care|mind|matter|need)\b)|\b(?:dont|cant|wont|shouldnt|mustnt)\b"
     r"|\b(?:never|nobody|none|nothing|neither|nor|without|cannot|refus\w*|protect\w*|unacceptable|untouch\w*"
-    r"|off.limits|sacred|intact|avoid\w*|forbid\w*|forbidden|prevent\w*|keep|rule out|nicht|kein\w*|nie|niemals)\b",
+    r"|off.limits|sacred|intact|avoid\w*|forbid\w*|forbidden|prevent\w*|keep|rule out|nicht|kein\w*|nie|niemals"
+    r"|hate\w*|dislike\w*|detest\w*|loath\w*|dread\w*|doubt\w*|afraid|fear\w*|worr(?:y|ied|ies)|disaster\w*"
+    r"|hardly|barely|scarcely|last thing|unless|only if)\b",
     re.IGNORECASE)
+# "suffers" alone describes a loss; only a word of permission accepts it
 ACCEPTS = re.compile(
-    r"\b(?:can|may|could|might|ok|okay|fine|acceptable|accept\w*|sacrific\w*|give up|given up|expendable|suffers?"
+    r"\b(?:can|may|could|might|ok|okay|fine|acceptable|accept\w*|sacrific\w*|give up|given up|expendable|let"
     r"|waits?|slip|secondary|not important|(?:don't|do not) (?:care|mind)|(?:doesn't|does not) matter)\b",
     re.IGNORECASE)
 GIVEN_UP = re.compile(r"\b(?:(?:can|may|could|might) (?:wait|suffer|slip|be late)|(?:doesn't|does not) matter)\b",
