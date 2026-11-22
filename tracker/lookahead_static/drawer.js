@@ -44,7 +44,7 @@ function drawerContent(sel) {
     const out = [head(TYPE_LABEL[e.type] || e.type, e.title, fmt(e.at), e.severity === "risk" ? "risk" : e.type === "agent" ? "planned" : "none")];
     if (e.impact && (e.impact.eur || e.impact.units)) out.push(el("section", {}, el("div", { class: "impact" },
       e.impact.eur ? el("div", { class: e.severity === "risk" ? "risk" : "" }, el("b", {}, eur(e.impact.eur)), el("span", {}, e.severity === "risk" ? "at stake" : "committed")) : null,
-      e.impact.units ? el("div", {}, el("b", {}, num(e.impact.units)), el("span", {}, "copies")) : null)));
+      e.impact.units ? el("div", {}, el("b", {}, num(e.impact.units)), el("span", {}, (st.plan && st.plan.coverage && st.plan.coverage.unit) || "units")) : null)));
     if (dt.autonomy && dt.autonomy.text) out.push(el("section", {}, autonomy(dt.autonomy)));
     if (dt.happened || dt.source) out.push(sec("What happened", el("p", {}, dt.happened || ""),
       dt.source ? el("div", { class: "src" }, `${dt.source.label}: ${dt.source.path || ""}`) : null,
@@ -75,7 +75,7 @@ function drawerContent(sel) {
     out.push(sec("How the score is built", el("p", { style: "font-size:13px" }, sc.method || ""),
       el("dl", { class: "kv", style: "margin-top:10px" },
         (sc.breakdown || []).flatMap((b) => [el("dt", {}, b.label), el("dd", {}, b.value, b.source ? el("div", { class: "src" }, b.source) : null)]),
-        el("dt", {}, "Soony average"), el("dd", {}, sc.prior != null ? Math.round(sc.prior * 100) + "%" : "n/a"),
+        el("dt", {}, "All-supplier average"), el("dd", {}, sc.prior != null ? Math.round(sc.prior * 100) + "%" : "n/a"),
         el("dt", {}, "On record"), el("dd", {}, sc.n != null ? `${sc.n} ${sc.n === 1 ? "order" : "orders"}` : "n/a"))));
     if ((s.history || []).length > 1) out.push(sec("Score changes", el("ol", { class: "why" }, s.history.map((h) => el("li", {},
       el("span", {}, fmt(h.at)), el("span", { class: "v " + scoreClass(h.value) }, Math.round(h.value * 100) + "%"), el("span", { class: "n" }, h.cause || ""))))));
@@ -101,10 +101,10 @@ function drawerContent(sel) {
     const out = [];
     const b = sel.type === "bar" && (l.bars || []).find((x) => x.id + x.kind === sel.id);
     if (b) {
-      out.push(head(b.kind === "ghost" ? "If started now" : b.kind === "hedge" ? "Backup" : "Supply", b.label, `${num(b.qty)} pcs · ${l.name}`, b.state));
+      out.push(head(b.kind === "ghost" ? "If started now" : b.kind === "hedge" ? "Backup" : "Supply", b.label, (b.qty == null ? "" : `${num(b.qty)} pcs · `) + l.name, b.state));
       out.push(sec("Timing", el("table", { class: "legs" }, (b.legs || []).map((g) => el("tr", {}, el("td", {}, g.label), el("td", {}, `${fmt(g.from)} → ${hm(g.to)}`))),
         el("tr", {}, el("td", {}, el("b", {}, "Usable")), el("td", {}, el("b", {}, fmt(b.usable_at)))),
-        l.needed_by ? el("tr", {}, el("td", {}, "Needed by"), el("td", { style: ms(b.usable_at) > ms(l.needed_by) ? "color:var(--risk);font-weight:700" : "" }, fmt(l.needed_by))) : null)));
+        l.needed_by ? el("tr", {}, el("td", {}, "Needed by"), el("td", { style: ms(b.usable_at) > ms(l.needed_by) || b.late ? "color:var(--risk);font-weight:700" : "" }, fmt(l.needed_by))) : null)));
       if (b.supplier_id) out.push(sec("Who", personaChip(b.supplier_id)));
     } else {
       out.push(head("Part", l.name, `${l.lane_id} · ${l.edition || ""}`, l.status));

@@ -3,12 +3,14 @@
 GET  /lookahead                              the timeline page
 GET  /lookahead/static/<file>                its scripts and styles
 GET  /api/lookahead/state                    folded state: launch, clock, goal, plan, events, decisions, promises, suppliers
+GET  /api/lookahead/clock                    the clock alone, polled by open pages in live mode
 GET  /api/lookahead/events/<id>              one world event with its drill-down
 GET  /api/lookahead/stream                   SSE, one message per appended record (resumes via Last-Event-ID)
 POST /api/lookahead/goal                     {answers: {id: value}} from the goal interview
 POST /api/lookahead/decisions/<id>/accept    {approver}; live mode approves and sends the decision's mail drafts
 POST /api/lookahead/advance | reset          rehearse mode only: next beat / start over
-POST /api/lookahead/clock                    {now}; rehearse mode only
+POST /api/lookahead/clock                    {now}; rehearse mode, or forward on a running scenario clock
+POST /api/lookahead/clock/next               live scenario: jump to the launch record's next demo time
 """
 
 from __future__ import annotations
@@ -16,10 +18,10 @@ from __future__ import annotations
 import json
 import queue
 import re
-from datetime import datetime
 from pathlib import Path
 
 from .lookahead import Lookahead, LookaheadError
+from .lookahead_clock import parse_time
 
 PAGE = Path(__file__).with_name("lookahead_page.html")
 STATIC = Path(__file__).with_name("lookahead_static")
@@ -43,7 +45,8 @@ def lookahead_goal(la: Lookahead, body: dict) -> dict:
     unknown = set(answers) - known
     if unknown:
         raise LookaheadError(400, f"unknown answers: {sorted(unknown)}")
-    rec = {"kind": "goal", "at": st["clock"]["now"], "answers": answers,
+    now = la.now()
+    rec = {"kind": "goal", "at": now, "answers": answers,
            "questions": [{"id": q["id"], "q": q["q"], "a": answers.get(q["id"]), "unit": q.get("unit")} for q in questions]}
     for key in ("unit_loss", "budget"):
         if key in answers:
@@ -52,7 +55,7 @@ def lookahead_goal(la: Lookahead, body: dict) -> dict:
             except (TypeError, ValueError):
                 raise LookaheadError(400, f"{key} must be a number") from None
     rec["statement"] = answers.get("goal", "")
-    la.append([rec, {"kind": "event", "type": "goal", "at": st["clock"]["now"], "severity": "info",
+    la.append([rec, {"kind": "event", "type": "goal", "at": now, "severity": "info",
                      "title": "Goal set: " + (rec["statement"] or "updated"),
                      "detail": {"happened": "Goal interview answered.",
                                 "reasoning": [{"text": q["q"], "value": str(q["a"]) + (" " + q["unit"] if q.get("unit") else "")}
@@ -71,8 +74,9 @@ def lookahead_accept(la: Lookahead, decision_id: str, body: dict) -> dict:
         raise LookaheadError(404, "unknown decision")
     if d.get("status") != "open":
         raise LookaheadError(409, f"decision is {d.get('status')}")
+    now = la.now()  # before anything is sent: without a clock the decision could not be recorded
     sent = []
-    if la.state()["mode"] == "live":
+    if la.mode == "live":
         # Live: approve and send exactly the drafts the agent attached to this decision.
         from mail import drafts as mail_drafts
         from mail.tools import MailTools
@@ -90,7 +94,7 @@ def lookahead_accept(la: Lookahead, decision_id: str, body: dict) -> dict:
             if not res.get("ok"):
                 raise LookaheadError(502, f"draft {draft_id} not sent: {res.get('error') or res}")
             sent.append(draft_id)
-    la.record_decision(decision_id, "accepted", approver, la.state()["clock"]["now"])
+    la.record_decision(decision_id, "accepted", approver, now)
     la.after_human_step()
     return {"ok": True, "sent": sent}
 
@@ -120,6 +124,8 @@ class LookaheadRoutes:
             la = self._need_lookahead()
             if path == "/api/lookahead/state":
                 return self._send(200, dumps(la.state()))
+            if path == "/api/lookahead/clock":
+                return self._send(200, dumps(la.live_clock() if la.mode == "live" else la.state()["clock"]))
             if m := re.fullmatch(r"/api/lookahead/events/(\d+)", path):
                 row = la.event_detail(int(m.group(1)))
                 return self._send(200 if row else 404, dumps(row or {"error": "not found"}))
@@ -152,15 +158,16 @@ class LookaheadRoutes:
                 la.reset()
                 return self._send(200, dumps({"ok": True}))
             if path == "/api/lookahead/clock":
-                if la.state()["mode"] != "rehearse":
-                    raise LookaheadError(409, "the clock can only be set in rehearse mode")
-                now = str(body.get("now") or "")
-                try:
-                    datetime.fromisoformat(now)
-                except ValueError:
-                    raise LookaheadError(400, "now must be an ISO timestamp") from None
-                la.append([{"kind": "clock", "now": now}])
-                return self._send(200, dumps({"ok": True}))
+                now = parse_time(body.get("now") or "").isoformat()
+                if la.mode == "live":
+                    now = la.move_clock(now)
+                else:
+                    la.append([{"kind": "clock", "now": now}])
+                return self._send(200, dumps({"ok": True, "now": now}))
+            if path == "/api/lookahead/clock/next":
+                if la.mode != "live":
+                    raise LookaheadError(409, "a rehearsal moves its clock with the next beat")
+                return self._send(200, dumps({"ok": True, "now": la.move_clock()}))
             self._send(404, dumps({"error": "not found"}))
         except (BrokenPipeError, ConnectionResetError):
             pass

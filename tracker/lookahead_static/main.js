@@ -9,7 +9,11 @@ document.addEventListener("keydown", (e) => {
     if ($("modal-root").firstChild) $("modal-root").replaceChildren();
     else if (S.decisionOpen) { S.dismissed.add(S.decisionOpen); S.decisionOpen = null; render(); }
     else select(null);
-  } else if (k === "j" && S.state && S.state.rehearsal) advance();
+  } else if (k === "j" && S.state) {
+    if (e.repeat) return;
+    if (S.state.rehearsal) advance();
+    else if (S.state.clock.simulated) jumpClock();
+  }
   else if (k === "g") openGoal();
   else if (k === "d") { const d = openDecisions()[0]; if (d) { S.decisionOpen = d.decision_id; render(); } else setView("decisions"); }
   else if (k === "f") { S.range = S.range === "all" ? "launch" : "all"; render(); }
@@ -27,3 +31,4 @@ window.addEventListener("resize", () => { clearTimeout(window.__rz); window.__rz
 window.addEventListener("hashchange", () => { applyHash(); render(); });
 applyHash();
 load().then(connect);
+setInterval(watchClock, CLOCK_POLL_MS);

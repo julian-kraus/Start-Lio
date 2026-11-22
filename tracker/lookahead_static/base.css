@@ -56,6 +56,7 @@ header { display: grid; grid-template-columns: auto 1fr auto; gap: 24px; align-i
 .pill { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; border-radius: 999px;
   padding: 3px 8px; border: 1px solid var(--border); color: var(--muted); background: var(--surface-2); white-space: nowrap; }
 .pill.sim { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 40%, transparent); background: var(--warn-bg); }
+.pill.err { color: var(--risk); background: var(--risk-bg); }
 .pill.live { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 40%, transparent); background: var(--ok-bg); }
 .btn { border: 1px solid var(--border); background: var(--surface); border-radius: 8px; padding: 6px 12px; cursor: pointer;
   font-size: 13px; text-decoration: none; color: var(--text); display: inline-flex; gap: 6px; align-items: center; }

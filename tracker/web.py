@@ -34,6 +34,7 @@ import psycopg
 from . import db
 from .config import PROJECT_ROOT, database_url, load_env
 from .lookahead import Lookahead
+from .lookahead_clock import PlanClock
 from .lookahead_web import LookaheadRoutes, lookahead_accept, lookahead_goal  # noqa: F401
 from .store import BlobStore
 
@@ -326,7 +327,7 @@ def main() -> None:
     # A rehearsal never writes into the live log unless told to explicitly.
     log_path = args.lookahead_log or (PROJECT_ROOT / "data" / "lookahead" / "rehearsal.jsonl" if args.rehearse
                                       else Path(live_log))
-    la = Lookahead(log_path, args.rehearse)
+    la = Lookahead(log_path, args.rehearse, PlanClock(url))
     app = App(url, data_dir, la)
     threading.Thread(target=la.run, daemon=True).start()
     if app.hub:
