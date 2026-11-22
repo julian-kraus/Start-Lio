@@ -4,11 +4,10 @@ It reads the key from LOOKAHEAD_ANTHROPIC_API_KEY and the model from LOOKAHEAD_L
 and, for scans, page images, and asks for a strict-JSON answer that the pipeline already knows how to use.
 
 Two findings from the extraction probe are built in:
-- quantities are returned verbatim as text and parsed in code (space-grouped numbers such as "10 000" were
-  misread by smaller models), so `extract` parses the value only for attributes the contract declares
-  `type: number`, after the model has answered, and leaves identifiers, dates and codes as text;
-- every answer is cached per sha256 and per role, so a document is read (and paid for) once. The same on-disk
-  store is how tests replay recorded answers without a key: a cache hit and a replay fixture are the same file.
+- quantities are returned verbatim and parsed in code (space-grouped numbers such as "10 000" were misread),
+  so `extract` parses only attributes the contract declares `type: number`, leaving identifiers and dates text;
+- every answer is cached per sha256 and per role, so a document is paid for once. Tests replay recorded answers
+  from the same on-disk store without a key: a cache hit and a replay fixture are the same file.
 
 Select it with KB_LLM_ADAPTER="kb.llm.anthropic:AnthropicClient".
 """
@@ -48,6 +47,9 @@ _SPACE_GROUPED = re.compile(rf"[+-]?\d{{1,3}}(?:{_SP}\d{{3}})+")
 _QUANTITY_ATTR = re.compile(r"(?:^|_)(?:qty|quantity)(?:_|$)")
 _ENVELOPE_KEYS = ("source", "doc_kind", "doc_kind_confidence", "languages", "spec_version", "extracted_by",
                   "doc_date", "facts", "unreadable", "proposed_fact_types")
+# Subject keys per fact type come from this read-only contract file (contract_summary omits them).
+_FT_CONTRACT = PROJECT_ROOT / "structured" / "contract" / "fact_types.json"
+_MAX_TOKENS_RETRY_SCALE = 4     # one retry at a larger output budget when a long document hits the output cap
 
 
 class ExtractionStop(RuntimeError):
@@ -95,11 +97,10 @@ def _store_path(store_dir: Path, role: str, model: str, sha: str, aux: str = "")
 
 
 def _aux_key(*parts) -> str:
-    """A short, stable hash of the inputs that change an answer besides the document bytes (the kind list and
-    file path for classify, the structure and contract vocabulary for extract, the sample rows and file path
-    for design). It joins the document sha in the cache key so two sheets of one workbook, a classify after a
-    new kind was added, or two paths with the same bytes do not collide on the sha alone and replay a stale
-    answer."""
+    """A short, stable hash of the inputs that change an answer besides the document bytes (kind list and path
+    for classify, structure and contract vocabulary for extract, sample rows and path for design). It joins the
+    document sha in the cache key so two sheets of one workbook, a classify after a new kind, or two paths with
+    one sha do not collide on the sha alone and replay a stale answer."""
     blob = json.dumps(parts, ensure_ascii=False, sort_keys=True, default=str)
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()[:12]
 
@@ -110,9 +111,8 @@ DEFAULT_CACHE_DIR = PROJECT_ROOT / ".cache" / "kb_llm"
 
 
 def _default_cache_dir() -> Path:
-    """Where the cache lives when KB_LLM_CACHE_DIR is unset. In the container /app is root-owned and the process
-    drops to a non-root user, so /app/.cache cannot be created; TRACKER_DATA_DIR (the writable data volume) is
-    used there. In a local checkout it is the git-ignored .cache/kb_llm under the repo root."""
+    """Where the cache lives when KB_LLM_CACHE_DIR is unset. In the container /app is root-owned, so /app/.cache
+    cannot be created; TRACKER_DATA_DIR (the writable volume) is used there. Locally, .cache/kb_llm under root."""
     base = os.environ.get("TRACKER_DATA_DIR")
     return Path(base) / "kb_llm_cache" if base else DEFAULT_CACHE_DIR
 
@@ -162,6 +162,11 @@ class AnthropicClient(LLMClient):
         request = {"model": self.model, "max_tokens": self.max_output_tokens, "system": system,
                    "messages": [{"role": "user", "content": content}]}
         reply = self._transport_or_fail().create(request)
+        if reply.stop_reason == "max_tokens":
+            # A long document (a dense scan of line items) can overrun the output cap. Retry once with a larger
+            # budget before giving up; a second max_tokens is a real hard stop, not a budget that was too small.
+            request["max_tokens"] = self.max_output_tokens * _MAX_TOKENS_RETRY_SCALE
+            reply = self._transport_or_fail().create(request)
         # Only end_turn is a finished answer. max_tokens, refusal and model_context_window_exceeded all leave a
         # truncated or missing answer: treat every other stop as a hard stop for the document.
         if reply.stop_reason != "end_turn":
@@ -178,11 +183,9 @@ class AnthropicClient(LLMClient):
         return data
 
     # ---- prompt building -----------------------------------------------------
-
     def _content(self, document: Document, instruction: str) -> tuple[list[dict], list[str]]:
-        """Build the prompt blocks and a list of notes for anything that was cut, so a caller can record what
-        did not reach the model instead of reporting a clean read. Both the text cap and the page-image cap are
-        enforced here; neither drops content silently."""
+        """Build the prompt blocks and a list of notes for anything cut, so a caller records what did not reach
+        the model instead of a clean read. Both the text cap and the page-image cap are enforced here."""
         blocks: list[dict] = [{"type": "text", "text": instruction}]
         notes: list[str] = []
         if document.text and document.text.strip():
@@ -193,8 +196,7 @@ class AnthropicClient(LLMClient):
             blocks.append({"type": "text", "text": "Document text:\n" + text})
         sparse = not document.text or len(document.text.strip()) < 200 or bool(document.pages_without_text)
         if sparse and document.images:
-            # Pages without a text layer are the ones only an image can read, so send them first; a page with
-            # text still has its text in the prompt even if its image is cut.
+            # Pages with no text layer can only be read as an image, so send those first within the page cap.
             no_text = {p for p in document.pages_without_text if 1 <= p <= len(document.images)}
             order = [i for i in range(len(document.images)) if (i + 1) in no_text]
             order += [i for i in range(len(document.images)) if (i + 1) not in no_text]
@@ -220,8 +222,7 @@ class AnthropicClient(LLMClient):
             "\"ambiguous\" when two or more fit, \"none\" when nothing fits.")
         instruction = "Known kinds:\n" + json.dumps(catalogue, ensure_ascii=False) + f"\n\nFile path: {document.path}"
         content, _notes = self._content(document, instruction)
-        # The prompt carries the file path, so two paths with the same bytes can route differently: the path
-        # joins the cache key, or a mailed copy and a portal file with one sha would share one routing answer.
+        # The path is in the prompt, so it joins the cache key: two paths with one sha route independently (#67).
         aux = _aux_key("classify", catalogue, document.path)
         data = self._answer("classify", document.sha256, system, content, aux=aux)
         decision = data.get("decision") if data.get("decision") in ("kind", "none", "ambiguous") else "none"
@@ -229,7 +230,9 @@ class AnthropicClient(LLMClient):
         return Routing(decision, kind, str(data.get("reason") or "")[:500], self.label)
 
     def extract(self, document: Document, structure: Structure, schema: dict, contract: dict) -> dict:
-        vocabulary = [{"name": t.get("name"), "attributes": t.get("attributes")}
+        declared = _declared_subject_keys()
+        vocabulary = [{"name": t.get("name"), "attributes": t.get("attributes"),
+                       "subject_keys": t.get("subject_keys") or declared.get(t.get("name")) or []}
                       for t in (contract.get("fact_types") or [])]
         system = (
             "You read one supplier document into facts that follow a fixed contract. Answer with one JSON object "
@@ -237,10 +240,12 @@ class AnthropicClient(LLMClient):
             "(array of ISO codes), doc_date (YYYY-MM-DD or null), facts (array), unreadable (array of strings), "
             "proposed_fact_types (array). Each fact is {fact_type, subject (object of entity ids, never a row or "
             "line number), attribute, value, unit, locator ({page, section}), evidence (the exact text you read "
-            "the value from), confidence (high|medium|low)}. Copy every quantity verbatim as it appears in the "
-            "document, keeping any digit grouping (for example \"10 000\"); do not round or reformat it. Use only "
-            "fact types from the contract; for genuinely new information name the type x_<something> and list it in "
-            "proposed_fact_types.")
+            "the value from), confidence (high|medium|low)}. For each contract fact type use exactly the subject "
+            "keys it lists as the subject object's keys (the entity ids that identify the record, never invented "
+            "names) and use only the attribute names it lists for that type. Copy every quantity verbatim as it "
+            "appears in the document, keeping any digit grouping (for example \"10 000\"); do not round or reformat "
+            "it. Use only fact types from the contract; for genuinely new information name the type x_<something> "
+            "and list it in proposed_fact_types.")
         instruction = (f"Document kind: {structure.name}\nReading rules:\n{(structure.description or '')[:4000]}\n\n"
                        f"Contract fact types:\n{json.dumps(vocabulary, ensure_ascii=False)}")
         content, notes = self._content(document, instruction)
@@ -268,9 +273,8 @@ class AnthropicClient(LLMClient):
         if rows:
             instruction += "\n\nSample rows:\n" + json.dumps(rows, ensure_ascii=False)
         content, _notes = self._content(document, instruction)
-        # One document (one sha) is sent to design once per unknown sheet with different sample rows, so the rows
-        # join the cache key: two sheets of a workbook no longer collide and reuse the first sheet's map. The
-        # prompt also carries the file path, so the path joins the key for the same reason as classify.
+        # The sample rows and the path are in the prompt, so both join the cache key: two sheets of one workbook
+        # (same sha, different rows) and two paths with one sha each get their own answer, not the first one.
         data = self._answer("design", document.sha256, system, content, aux=_aux_key("design", known, rows, document.path))
         target = data.get("target")
         if target not in ("doc_kind", "schema_map"):
@@ -317,6 +321,20 @@ def _coerce_number(value: str):
     return None
 
 
+def _declared_subject_keys() -> dict:
+    """Subject keys per fact type from the canonical contract file, cached; without them the model invents its
+    own subject key and no fact matches the reference. A missing file degrades to no hint, not an error."""
+    cache = _declared_subject_keys.__dict__.setdefault("cache", {})
+    if not cache:
+        try:
+            for t in json.loads(_FT_CONTRACT.read_text()).get("fact_types", []):
+                if t.get("name") and t.get("subject_keys"):
+                    cache[t["name"]] = list(t["subject_keys"])
+        except (OSError, ValueError):
+            cache["_"] = []     # mark attempted so a missing file is not re-read per document
+    return cache
+
+
 def _numeric_attrs(contract: dict) -> dict:
     """Map each contract fact type to the set of attributes whose value is parsed into a number. That is every
     attribute the contract declares `type: number`, plus every attribute whose name marks a quantity (qty,
@@ -334,11 +352,10 @@ def _numeric_attrs(contract: dict) -> dict:
 
 
 def _check_shape(role: str, data: dict) -> None:
-    """Reject an answer whose shape the pipeline cannot use, before it is cached. An extract answer must carry
-    facts as a list of objects, each with an object subject (entity ids, not a string or a row number); `{}`,
-    `{"facts": {...}}` and a fact with a string subject are refused here so a broken answer is never stored and
-    replayed, each retry is a fresh call. classify and design normalise their own fields and need no extra
-    check beyond being a JSON object (already guaranteed)."""
+    """Reject an answer whose shape the pipeline cannot use, before it is cached, so a broken answer is never
+    stored and replayed and each retry is a fresh call. An extract answer must carry facts as a list of objects,
+    each with an object subject (entity ids, not a string or row number). classify and design normalise their
+    own fields and need no extra check beyond being a JSON object."""
     if role != "extract":
         return
     facts = data.get("facts")

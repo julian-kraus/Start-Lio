@@ -9,7 +9,7 @@ from pathlib import Path
 import pytest
 
 from kb.llm.anthropic import (DEFAULT_CACHE_DIR, SPEC_VERSION, AnthropicClient, ApiTransport, ExtractionStop, Reply,
-                              _coerce_number, _envelope, _numeric_attrs)
+                              _coerce_number, _declared_subject_keys, _envelope, _numeric_attrs)
 from kb.llm.base import Document, Structure, normalise
 from tracker.config import PROJECT_ROOT
 
@@ -47,7 +47,7 @@ class FakeTransport:
 
     def create(self, request):
         self.calls += 1
-        self.requests.append(request)
+        self.requests.append(dict(request))            # snapshot: the adapter may mutate and resend the request
         if self.error:
             raise self.error
         if self.results is not None:
@@ -59,43 +59,30 @@ class FakeTransport:
 
 def test_coerce_number_only_for_clean_numbers():
     assert _coerce_number("10 000") == 10000 and isinstance(_coerce_number("10 000"), int)
-    assert _coerce_number("1 234 567") == 1234567
-    assert _coerce_number("-42") == -42
-    assert _coerce_number("3.5") == 3.5
-    assert _coerce_number("1999-12-31") is None         # a date must stay text
-    assert _coerce_number("FOB Testport") is None
-    assert _coerce_number("AB12345678") is None         # an identifier must stay text
-    assert _coerce_number("1,200") is None              # comma grouping is left verbatim, not guessed
+    assert _coerce_number("1 234 567") == 1234567 and _coerce_number("-42") == -42 and _coerce_number("3.5") == 3.5
+    for s in ("1999-12-31", "FOB Testport", "AB12345678", "1,200"):   # dates, text, identifiers, comma groups
+        assert _coerce_number(s) is None                              # stay text, never guessed into a number
 
 
 def test_coerce_number_grouping_and_ambiguity():
-    # Unambiguous thousands groups (two or more same-separator groups of three) read as one integer.
+    # Two or more same-separator groups of three read as one integer; a single group is ambiguous and stays text.
     assert _coerce_number("1.250.000") == 1250000 and isinstance(_coerce_number("1.250.000"), int)
-    assert _coerce_number("1,250,000") == 1250000 and isinstance(_coerce_number("1,250,000"), int)
-    # A single group is ambiguous with a decimal, so it stays text instead of a wrong number.
-    assert _coerce_number("10.000") is None            # not 10.0
-    assert _coerce_number("1.250") is None             # not 1.25
-    assert _coerce_number("1,250") is None
-    assert _coerce_number("2 500,5") is None           # comma decimal is left verbatim, not guessed
-    # Real decimals whose fraction is not three digits are still parsed.
-    assert _coerce_number("3.5") == 3.5
-    assert _coerce_number("0.85") == 0.85
-    assert _coerce_number("10.50") == 10.5
+    assert _coerce_number("1,250,000") == 1250000
+    for s in ("10.000", "1.250", "1,250", "2 500,5"):     # single group / comma decimal: not guessed
+        assert _coerce_number(s) is None
+    assert _coerce_number("0.85") == 0.85 and _coerce_number("10.50") == 10.5   # real decimals still parse
 
 
 def test_coerce_number_never_joins_separate_numbers():
-    # Whitespace is read only as well-formed thousands groups. Anything else keeps the text, so two adjacent
-    # numbers are never joined into one (the old code deleted all whitespace: "5 000 10 000" -> 500010000).
-    assert _coerce_number("5 000 10 000") is None       # a middle group of two digits is not a thousands group
-    assert _coerce_number("12 5") is None               # a trailing group of one digit is not either
-    assert _coerce_number("500\n450") is None           # a value split across a newline stays two numbers
-    assert _coerce_number("10 000") == 10000            # a real space-grouped thousand still parses
-    assert _coerce_number("250 000") == 250000
+    # Whitespace is read only as well-formed thousands groups, so two adjacent numbers are never joined into one
+    # (the old code deleted all whitespace: "5 000 10 000" -> 500010000).
+    for s in ("5 000 10 000", "12 5", "500\n450"):        # a bad group or a newline split stays two numbers
+        assert _coerce_number(s) is None
+    assert _coerce_number("10 000") == 10000 and _coerce_number("250 000") == 250000
 
 
 def test_numeric_attrs_includes_quantity_named_string_attrs():
-    # The real contract types some scanned quantities as string; they are still parsed by their name. A weight,
-    # a date-like count or an identifier attribute is left as text.
+    # Scanned quantities typed as string are still parsed by their name; a weight or identifier stays text.
     contract = {"fact_types": [
         {"name": "delivery_note_line", "attributes": {"final_qty": {"type": "string"},
                                                       "printed_qty": {"type": "string"},
@@ -105,7 +92,8 @@ def test_numeric_attrs_includes_quantity_named_string_attrs():
     numeric = _numeric_attrs(contract)
     assert numeric["delivery_note_line"] == {"final_qty", "printed_qty"}      # not gross_weight
     assert numeric["supplier_statement"] == {"quantity"}
-    assert numeric["stock_batch"] == {"qty"}                                  # not last_count
+    assert numeric["stock_batch"] == {"qty"}                                  # a number type, not last_count
+    assert _numeric_attrs({}) == {} and _numeric_attrs({"fact_types": []}) == {}
 
 
 def test_extract_parses_string_typed_quantity_by_name():
@@ -120,8 +108,7 @@ def test_extract_parses_string_typed_quantity_by_name():
 @pytest.mark.parametrize("raw", [{}, {"facts": {"not": "a list"}},
                                  {"facts": [{"fact_type": "oc_line", "subject": "P1", "attribute": "quantity"}]}])
 def test_bad_extract_shapes_are_not_cached(tmp_path, raw):
-    # A missing facts list, facts as an object, or a fact with a string subject is refused before caching, so
-    # every retry is a fresh call rather than a replay of the broken answer.
+    # A missing facts list, facts as an object, or a string subject is refused before caching: each retry is live.
     transport = FakeTransport(result=reply(raw))
     client = AnthropicClient(transport=transport, model="m", store_dir=tmp_path)
     for _ in range(2):
@@ -131,8 +118,7 @@ def test_bad_extract_shapes_are_not_cached(tmp_path, raw):
 
 
 def test_page_cap_records_dropped_scans_in_unreadable():
-    # A scan with more image-only pages than the cap must not report a clean read: the pages without a text
-    # layer are sent first and the ones that did not fit are recorded, never dropped silently.
+    # More image-only pages than the cap: text-less pages are sent first and the ones that did not fit recorded.
     pages = [("image/png", b"\x89PNG" + bytes([i])) for i in range(5)]
     document = Document("scan.pdf", "a" * 64, "pdf", text=None, images=pages,
                         pages_without_text=[1, 2, 3, 4, 5])
@@ -179,8 +165,7 @@ def test_extract_coerces_quantities_and_keeps_text():
 
 
 def test_extract_keeps_identifiers_and_text_attributes_verbatim():
-    # Only attributes the contract declares `type: number` are parsed. A number-looking identifier under a text
-    # attribute keeps its exact string, including a leading zero, and is never retyped to an int.
+    # Only `type: number` attributes are parsed; a number-looking identifier under a text attribute stays exact.
     raw = {"facts": [
         {"fact_type": "oc_line", "subject": {"po": "P1"}, "attribute": "item_no", "value": "007"},
         {"fact_type": "oc_header", "subject": {"po": "P1"}, "attribute": "incoterm", "value": "12 34"},
@@ -195,10 +180,19 @@ def test_extract_keeps_identifiers_and_text_attributes_verbatim():
     assert proposed["value"] == "42"                 # a proposed fact type not in the contract stays text
 
 
-def test_numeric_attrs_reads_number_types_from_contract():
-    numeric = _numeric_attrs(CONTRACT)
-    assert numeric["oc_line"] == {"quantity"} and numeric["oc_header"] == set()
-    assert _numeric_attrs({}) == {} and _numeric_attrs({"fact_types": []}) == {}
+def test_extract_sends_subject_keys_and_keys_the_cache_on_them(tmp_path):
+    # The model is told the subject keys per fact type (so it does not invent its own and miss the reference),
+    # and they fold into the cache key so a changed set is a fresh question, not a replay of the old answer.
+    t = FakeTransport(results=[reply({"facts": []}), reply({"facts": []})])
+    client = AnthropicClient(transport=t, model="m", store_dir=tmp_path)
+    c1 = {"fact_types": [{"name": "oc_line", "subject_keys": ["po_number", "po_line"], "attributes": {}}]}
+    client.extract(doc(sha="1" * 64), Structure("oc", "r"), {}, c1)
+    sent = " ".join(b.get("text", "") for b in t.requests[0]["messages"][0]["content"])
+    assert "subject_keys" in sent and "po_number" in sent and "po_line" in sent
+    c2 = {"fact_types": [{"name": "oc_line", "subject_keys": ["oc_number"], "attributes": {}}]}
+    client.extract(doc(sha="1" * 64), Structure("oc", "r"), {}, c2)
+    assert t.calls == 2                                       # a changed subject-key set is not served cached
+    assert _declared_subject_keys().get("po_line") == ["po_number", "po_line"]   # file fallback for the DB view
 
 
 def test_extract_cache_pays_once_per_sha(tmp_path):
@@ -213,8 +207,7 @@ def test_extract_cache_pays_once_per_sha(tmp_path):
 
 
 def test_design_cache_key_separates_sheets_of_one_document(tmp_path):
-    # design is called once per unknown sheet with the same document sha but different sample rows. The cache
-    # key folds in the rows, so two sheets get two answers instead of both replaying the first sheet's map.
+    # design runs once per unknown sheet (same sha, different rows); the rows fold into the key, so two answers.
     first = reply({"target": "schema_map", "name": "a", "schema_map": {"signature": "A", "fact_type": "a"}})
     second = reply({"target": "schema_map", "name": "b", "schema_map": {"signature": "B", "fact_type": "b"}})
     transport = FakeTransport(results=[first, second])
@@ -238,8 +231,7 @@ def test_classify_cache_key_follows_the_kind_list(tmp_path):
 
 
 def test_classify_and_design_cache_key_follows_the_path(tmp_path):
-    # classify and design carry the path in the prompt, so two paths with one sha must not share a routing
-    # answer: a mailed copy under a sender-chosen name could otherwise route a same-bytes portal file (#67).
+    # classify and design carry the path, so two paths with one sha route independently, not share an answer (#67).
     ct = FakeTransport(results=[reply({"decision": "none", "kind": None}), reply({"decision": "kind", "kind": "oc"})])
     cc = AnthropicClient(transport=ct, model="m", store_dir=tmp_path)
     assert cc.classify(doc(sha="9" * 64, path="mail/renamed.pdf"), [Structure("oc", "r")]).decision == "none"
@@ -252,21 +244,16 @@ def test_classify_and_design_cache_key_follows_the_path(tmp_path):
     assert dc.design(doc(sha="8" * 64, path="portal/a.pdf"), [], {}).name == "b" and dt.calls == 2
 
 
-def test_cache_is_on_by_default(monkeypatch):
-    # Without KB_LLM_CACHE_DIR the store falls back to a git-ignored default, so a document is still paid once.
+def test_default_cache_dir_is_on_and_follows_the_writable_volume(monkeypatch, tmp_path):
+    # Without KB_LLM_CACHE_DIR the cache is still on at a git-ignored default; in a container /app is root-owned,
+    # so when TRACKER_DATA_DIR points at the writable volume the default cache lives under it instead.
     monkeypatch.delenv("KB_LLM_CACHE_DIR", raising=False)
     monkeypatch.delenv("TRACKER_DATA_DIR", raising=False)
-    client = AnthropicClient(transport=FakeTransport(result=reply({"facts": []})), model="m")
-    assert client.store_dir == DEFAULT_CACHE_DIR == PROJECT_ROOT / ".cache" / "kb_llm"
-
-
-def test_default_cache_uses_the_writable_data_dir_in_a_container(monkeypatch, tmp_path):
-    # /app is root-owned and the process drops to a non-root user, so /app/.cache cannot be made. When
-    # TRACKER_DATA_DIR points at the writable data volume the default cache lives under it.
-    monkeypatch.delenv("KB_LLM_CACHE_DIR", raising=False)
+    assert AnthropicClient(transport=FakeTransport(result=reply({"facts": []})), model="m").store_dir \
+        == DEFAULT_CACHE_DIR == PROJECT_ROOT / ".cache" / "kb_llm"
     monkeypatch.setenv("TRACKER_DATA_DIR", str(tmp_path / "data"))
-    client = AnthropicClient(transport=FakeTransport(result=reply({"facts": []})), model="m")
-    assert client.store_dir == tmp_path / "data" / "kb_llm_cache"
+    assert AnthropicClient(transport=FakeTransport(result=reply({"facts": []})), model="m").store_dir \
+        == tmp_path / "data" / "kb_llm_cache"
 
 
 def test_unwritable_cache_does_not_lose_the_answer(tmp_path):
@@ -290,12 +277,24 @@ def test_bad_reply_is_not_cached(tmp_path):
     assert not list(tmp_path.glob("*.json"))
 
 
-@pytest.mark.parametrize("stop", ["max_tokens", "refusal", "model_context_window_exceeded"])
+@pytest.mark.parametrize("stop", ["refusal", "model_context_window_exceeded"])
 def test_hard_stops_raise(stop):
     client = AnthropicClient(transport=FakeTransport(result=reply({"facts": []}, stop=stop)), model="m")
     with pytest.raises(ExtractionStop) as exc:
         client.extract(doc(), Structure("oc", "r"), {}, {})
     assert stop in str(exc.value)
+
+
+def test_max_tokens_retries_once_with_a_larger_budget():
+    # A long scan can overrun the output cap: the first max_tokens is retried once at a larger budget, a second fails.
+    ok = FakeTransport(results=[reply({"facts": []}, stop="max_tokens"), reply({"facts": []})])
+    client = AnthropicClient(transport=ok, model="m", max_output_tokens=100)
+    client.extract(doc(), Structure("oc", "r"), {}, {})
+    assert ok.calls == 2 and ok.requests[0]["max_tokens"] == 100 and ok.requests[1]["max_tokens"] > 100
+    stuck = FakeTransport(result=reply({"facts": []}, stop="max_tokens"))
+    with pytest.raises(ExtractionStop) as exc:
+        AnthropicClient(transport=stuck, model="m").extract(doc(sha="e" * 64), Structure("oc", "r"), {}, {})
+    assert stuck.calls == 2 and "max_tokens" in str(exc.value)
 
 
 def test_missing_reply_without_key_fails_clearly(tmp_path, monkeypatch):
@@ -353,7 +352,8 @@ def test_normalise_renders_pdf_pages_to_image_blocks():
 def test_replay_fixtures_serve_every_role():
     client = AnthropicClient(store_dir=FIXTURES, transport=None, api_key=None, model="replay")
     structure = Structure("order_confirmation", "Read each order confirmation line.")
-    contract = {"fact_types": [{"name": "oc_line", "attributes": {"quantity": {"type": "number"}}}]}
+    contract = {"fact_types": [{"name": "oc_line", "subject_keys": ["po_number", "po_line"],
+                                "attributes": {"quantity": {"type": "number"}}}]}
     env = client.extract(doc(sha=REPLAY_SHA), structure, {}, contract)
     assert env["facts"][0]["value"] == 10000 and env["doc_kind"] == "order_confirmation"
     assert client.classify(doc(sha=REPLAY_SHA), [structure]).decision == "kind"
