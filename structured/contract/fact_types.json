@@ -55,6 +55,14 @@
         "buyer": {
           "description": "buyer",
           "type": "string"
+        },
+        "note": {
+          "description": "note on the purchase order line, as written",
+          "type": "string"
+        },
+        "plant": {
+          "description": "receiving plant of the purchase order line",
+          "type": "string"
         }
       }
     },
@@ -104,6 +112,10 @@
         "remark": {
           "description": "remark",
           "type": "string"
+        },
+        "plant": {
+          "description": "plant that received the goods",
+          "type": "string"
         }
       }
     },
@@ -134,6 +146,18 @@
         "site": {
           "description": "site",
           "type": "string"
+        },
+        "safety_stock": {
+          "description": "safety stock of the material, kept as written",
+          "type": "string"
+        },
+        "site_id": {
+          "description": "site where the batch is stored",
+          "type": "string"
+        },
+        "weeks_of_cover": {
+          "description": "weeks the stock covers, kept as written",
+          "type": "string"
         }
       }
     },
@@ -151,6 +175,14 @@
         },
         "line": {
           "description": "line",
+          "type": "string"
+        },
+        "po_line": {
+          "description": "line identifier printed on the packout record",
+          "type": "string"
+        },
+        "site_id": {
+          "description": "site where the units were packed",
           "type": "string"
         }
       }
@@ -203,6 +235,10 @@
         "drawing_rev": {
           "description": "drawing_rev",
           "type": "string"
+        },
+        "abc_class": {
+          "description": "ABC classification of the component",
+          "type": "string"
         }
       }
     },
@@ -224,6 +260,34 @@
         "plan_weekly_units": {
           "description": "plan_weekly_units",
           "type": "string"
+        },
+        "day_one_qty": {
+          "description": "quantity planned for the first day of sale",
+          "type": "number"
+        },
+        "name": {
+          "description": "name of the product",
+          "type": "string"
+        },
+        "plants": {
+          "description": "plants that make the product, as listed",
+          "type": "string"
+        },
+        "product_line": {
+          "description": "product line the product belongs to",
+          "type": "string"
+        },
+        "std_cost_eur": {
+          "description": "standard cost of one unit in EUR",
+          "type": "number"
+        },
+        "valid_from": {
+          "description": "date from which the product record is valid",
+          "type": "string"
+        },
+        "weekly_plan_qty": {
+          "description": "planned quantity per week",
+          "type": "number"
         }
       }
     },
@@ -393,6 +457,46 @@
         "notes": {
           "description": "notes",
           "type": "string"
+        },
+        "category": {
+          "description": "kind of goods or service the supplier provides",
+          "type": "string"
+        },
+        "city": {
+          "description": "city where the supplier is located",
+          "type": "string"
+        },
+        "contact_name": {
+          "description": "name of the contact person at the supplier",
+          "type": "string"
+        },
+        "lat": {
+          "description": "latitude of the supplier location in decimal degrees",
+          "type": "number"
+        },
+        "lon": {
+          "description": "longitude of the supplier location in decimal degrees",
+          "type": "number"
+        },
+        "payment_terms": {
+          "description": "agreed payment terms, as written",
+          "type": "string"
+        },
+        "phone": {
+          "description": "phone number of the supplier, as written",
+          "type": "string"
+        },
+        "preferred_language": {
+          "description": "language the supplier prefers to communicate in",
+          "type": "string"
+        },
+        "status": {
+          "description": "status of the supplier in the master data",
+          "type": "string"
+        },
+        "supplier_since": {
+          "description": "date or year since when the supplier is on record",
+          "type": "string"
         }
       }
     },
@@ -430,6 +534,18 @@
         },
         "note": {
           "description": "note",
+          "type": "string"
+        },
+        "category": {
+          "description": "category of the supplied part",
+          "type": "string"
+        },
+        "currency": {
+          "description": "currency of the price for this supplier and part",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the supplied part",
           "type": "string"
         }
       }
@@ -500,6 +616,22 @@
         "source_system": {
           "description": "source_system",
           "type": "string"
+        },
+        "dest_site": {
+          "description": "site the shipment is going to",
+          "type": "string"
+        },
+        "last_lat": {
+          "description": "last reported latitude, kept as written",
+          "type": "string"
+        },
+        "last_lon": {
+          "description": "last reported longitude, kept as written",
+          "type": "string"
+        },
+        "via": {
+          "description": "intermediate stop or routing, as written",
+          "type": "string"
         }
       }
     },
@@ -529,6 +661,30 @@
         },
         "po_number": {
           "description": "po_number",
+          "type": "string"
+        },
+        "eta": {
+          "description": "estimated arrival date or time",
+          "type": "string"
+        },
+        "etd": {
+          "description": "estimated departure date or time",
+          "type": "string"
+        },
+        "mode": {
+          "description": "transport mode of the shipped quantity",
+          "type": "string"
+        },
+        "note": {
+          "description": "comment on the shipped quantity, as written",
+          "type": "string"
+        },
+        "status": {
+          "description": "status of the shipped quantity",
+          "type": "string"
+        },
+        "supplier_id": {
+          "description": "supplier of the shipped quantity",
           "type": "string"
         }
       }
@@ -872,6 +1028,14 @@
         "reason": {
           "description": "reason",
           "type": "string"
+        },
+        "current_price": {
+          "description": "price in force before the announced change",
+          "type": "number"
+        },
+        "description": {
+          "description": "description of the part whose price changes",
+          "type": "string"
         }
       }
     },
@@ -919,6 +1083,18 @@
         "material_id": {
           "description": "material_id",
           "type": "string"
+        },
+        "lead_time_days": {
+          "description": "lead time of the supplier part in days",
+          "type": "number"
+        },
+        "moq": {
+          "description": "minimum order quantity of the supplier part",
+          "type": "number"
+        },
+        "price_per_material": {
+          "description": "price of the supplier part per unit of the internal material",
+          "type": "number"
         }
       }
     },
@@ -998,6 +1174,10 @@
         "line_status": {
           "description": "line_status",
           "type": "string"
+        },
+        "name": {
+          "description": "name of the edition as printed in the plan",
+          "type": "string"
         }
       }
     },
@@ -1042,6 +1222,34 @@
         },
         "use_up_old": {
           "description": "use_up_old",
+          "type": "string"
+        },
+        "child_id": {
+          "description": "component of the changed bill of material line",
+          "type": "string"
+        },
+        "material_id": {
+          "description": "material the change applies to",
+          "type": "string"
+        },
+        "note": {
+          "description": "note on the change, as written",
+          "type": "string"
+        },
+        "parent_id": {
+          "description": "parent item of the changed bill of material line",
+          "type": "string"
+        },
+        "primary": {
+          "description": "whether the supplier is the primary source after the change",
+          "type": "string"
+        },
+        "share": {
+          "description": "supply share of the supplier after the change, as stated",
+          "type": "number"
+        },
+        "supplier_id": {
+          "description": "supplier the change applies to",
           "type": "string"
         }
       }
@@ -1093,6 +1301,18 @@
         "status": {
           "description": "status",
           "type": "string"
+        },
+        "description": {
+          "description": "description of the part in the plan",
+          "type": "string"
+        },
+        "per_collector_s": {
+          "description": "units of the part needed for one collector's copy",
+          "type": "number"
+        },
+        "per_standard": {
+          "description": "units of the part needed for one standard copy",
+          "type": "number"
         }
       }
     },
