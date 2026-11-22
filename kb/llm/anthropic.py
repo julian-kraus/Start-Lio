@@ -24,31 +24,11 @@ from pathlib import Path
 
 from tracker.config import PROJECT_ROOT, load_env
 
+from .anthropic_parse import (_ENVELOPE_KEYS, _QUANTITY_ATTR, SPEC_VERSION, _check_shape, _coerce_number,  # noqa: F401
+                              _declared_subject_keys, _envelope, _numeric_attrs, _parse_json)
 from .base import Document, LLMClient, Routing, Structure, StructureProposal
 
-SPEC_VERSION = "anthropic-extract-v1"
-_SP = "[ 	   ]"                  # the space characters a thousands group may use, not newlines
-_GROUP_SPACES = re.compile(r"[\s   ]")
-_INT = re.compile(r"[+-]?\d+")
-_DEC = re.compile(r"[+-]?\d+\.\d+")
-# Two or more same-separator groups of three ("1.250.000", "1,250,000") cannot be a decimal, so it is
-# safe to read them as one integer. A single group ("10.000", "1,250") is ambiguous with a decimal and is
-# left as text for review, the same caution the probe finding asks for with space-grouped numbers.
-_GROUPED = re.compile(r"[+-]?\d{1,3}([.,])\d{3}(?:\1\d{3})+")
-# Space-grouped thousands: a leading group of one to three digits, then one or more groups of exactly three.
-# This is the only shape a whitespace separator is read in, so "10 000" is 10000 but "5 000 10 000" (a middle
-# group of two digits), "12 5" (a trailing group of one) and anything split across a newline stay text: two
-# numbers are never silently joined.
-_SPACE_GROUPED = re.compile(rf"[+-]?\d{{1,3}}(?:{_SP}\d{{3}})+")
-# Attributes whose name marks a quantity (qty, quantity, final_qty, printed_qty, qty_ordered ...). The real
-# contract types some of these as string (handwritten or printed scans), yet their values are counts the gate
-# must ground, so they are parsed as numbers by name as well as by a declared `type: number`. A codes, dates
-# or identifiers attribute never matches, and _coerce_number still keeps anything non-numeric verbatim.
-_QUANTITY_ATTR = re.compile(r"(?:^|_)(?:qty|quantity)(?:_|$)")
-_ENVELOPE_KEYS = ("source", "doc_kind", "doc_kind_confidence", "languages", "spec_version", "extracted_by",
-                  "doc_date", "facts", "unreadable", "proposed_fact_types")
-# Subject keys per fact type come from this read-only contract file (contract_summary omits them).
-_FT_CONTRACT = PROJECT_ROOT / "structured" / "contract" / "fact_types.json"
+
 _MAX_TOKENS_RETRY_SCALE = 4     # one retry at a larger output budget when a long document hits the output cap
 
 
@@ -150,7 +130,12 @@ class AnthropicClient(LLMClient):
         return self._transport
 
     def _answer(self, role: str, sha: str, system: str, content: list[dict], aux: str = "") -> dict:
-        cached = _store_path(self.store_dir, role, self.model, sha, aux) if self.store_dir else None
+        request = {"model": self.model, "max_tokens": self.max_output_tokens, "system": system,
+                   "messages": [{"role": "user", "content": content}]}
+        # The cache key covers the whole request sent (system prompt, reading rules, page and text caps, output
+        # budget), so a changed prompt or cap never replays an answer made from a different request.
+        key = _aux_key(aux, hashlib.sha256(json.dumps(request, sort_keys=True).encode("utf-8")).hexdigest())
+        cached = _store_path(self.store_dir, role, self.model, sha, key) if self.store_dir else None
         if cached and cached.is_file():
             try:
                 d = json.loads(cached.read_text())
@@ -159,8 +144,6 @@ class AnthropicClient(LLMClient):
                 return data
             except (ValueError, json.JSONDecodeError):
                 pass            # a malformed cached answer is ignored, never served; fall through to a live call
-        request = {"model": self.model, "max_tokens": self.max_output_tokens, "system": system,
-                   "messages": [{"role": "user", "content": content}]}
         reply = self._transport_or_fail().create(request)
         if reply.stop_reason == "max_tokens":
             # A long document (a dense scan of line items) can overrun the output cap. Retry once with a larger
@@ -282,119 +265,3 @@ class AnthropicClient(LLMClient):
         return StructureProposal(target=target, name=str(data.get("name") or "").strip(),
                                  reason=str(data.get("reason") or "")[:500], description=data.get("description"),
                                  recognise=data.get("recognise"), schema_map=data.get("schema_map"))
-
-
-def _parse_json(text: str) -> dict:
-    text = text.strip()
-    if text.startswith("```"):
-        text = re.sub(r"^```[a-zA-Z0-9]*\n?", "", text)
-        text = re.sub(r"\n?```$", "", text).strip()
-    try:
-        data = json.loads(text)
-    except json.JSONDecodeError:
-        start, end = text.find("{"), text.rfind("}")
-        if start == -1 or end <= start:
-            raise ValueError("the model did not return a JSON object")
-        data = json.loads(text[start:end + 1])
-    if not isinstance(data, dict):
-        raise ValueError("the model returned JSON that is not an object")
-    return data
-
-
-def _coerce_number(value: str):
-    s = value.strip()
-    if _INT.fullmatch(s):
-        return int(s)
-    if _SPACE_GROUPED.fullmatch(s):
-        # Whitespace is read only as well-formed thousands groups, so the separators are safe to drop. A string
-        # whose spaces do not form such groups ("5 000 10 000", "12 5", a value split over a newline) does not
-        # reach here and stays text: two numbers are never joined into one.
-        return int(_GROUP_SPACES.sub("", s))
-    if _GROUPED.fullmatch(s):
-        return int(s.replace(".", "").replace(",", ""))
-    if _DEC.fullmatch(s):
-        # A dot followed by exactly three digits ("10.000") is ambiguous between a decimal and a single
-        # thousands group, so keep it as text rather than guess a wrong number.
-        if len(s.lstrip("+-").split(".")[1]) == 3:
-            return None
-        return float(s)
-    return None
-
-
-def _declared_subject_keys() -> dict:
-    """Subject keys per fact type from the canonical contract file, cached; without them the model invents its
-    own subject key and no fact matches the reference. A missing file degrades to no hint, not an error."""
-    cache = _declared_subject_keys.__dict__.setdefault("cache", {})
-    if not cache:
-        try:
-            for t in json.loads(_FT_CONTRACT.read_text()).get("fact_types", []):
-                if t.get("name") and t.get("subject_keys"):
-                    cache[t["name"]] = list(t["subject_keys"])
-        except (OSError, ValueError):
-            cache["_"] = []     # mark attempted so a missing file is not re-read per document
-    return cache
-
-
-def _numeric_attrs(contract: dict) -> dict:
-    """Map each contract fact type to the set of attributes whose value is parsed into a number. That is every
-    attribute the contract declares `type: number`, plus every attribute whose name marks a quantity (qty,
-    quantity, final_qty, printed_qty ...), because the real contract types some scanned quantities as string
-    yet their values are counts the gate must ground. Everything else (identifiers, dates, codes, phone
-    numbers) is kept verbatim as text, so a value like "007" or a PO number keeps its leading zero, and
-    _coerce_number still leaves any non-numeric quantity text untouched."""
-    out: dict[str, set] = {}
-    for t in contract.get("fact_types") or []:
-        attrs = t.get("attributes") or {}
-        out[t.get("name")] = {a for a, spec in attrs.items()
-                              if (isinstance(spec, dict) and spec.get("type") == "number")
-                              or _QUANTITY_ATTR.search(a)}
-    return out
-
-
-def _check_shape(role: str, data: dict) -> None:
-    """Reject an answer whose shape the pipeline cannot use, before it is cached, so a broken answer is never
-    stored and replayed and each retry is a fresh call. An extract answer must carry facts as a list of objects,
-    each with an object subject (entity ids, not a string or row number). classify and design normalise their
-    own fields and need no extra check beyond being a JSON object."""
-    if role != "extract":
-        return
-    facts = data.get("facts")
-    if not isinstance(facts, list):
-        raise ValueError("extract answer has no facts list")
-    for f in facts:
-        if not isinstance(f, dict):
-            raise ValueError("a fact is not an object")
-        subject = f.get("subject")
-        if not isinstance(subject, dict):
-            raise ValueError("a fact subject is not an object of entity ids")
-
-
-def _envelope(data: dict, default_kind: str, numeric_attrs: dict | None = None) -> dict:
-    numeric_attrs = numeric_attrs or {}
-    facts = []
-    for f in data.get("facts") or []:
-        if not isinstance(f, dict):
-            continue
-        f = dict(f)
-        value = f.get("value")
-        if isinstance(value, str) and f.get("attribute") in numeric_attrs.get(f.get("fact_type"), ()):
-            number = _coerce_number(value)
-            if number is not None:
-                if f.get("evidence") is None:            # keep the verbatim text the number was read from
-                    f["evidence"] = value
-                f["value"] = number
-        facts.append(f)
-    env = {
-        "source": {},
-        "doc_kind": data.get("doc_kind") or default_kind,
-        "doc_kind_confidence": data.get("doc_kind_confidence") or "medium",
-        "languages": data.get("languages") if isinstance(data.get("languages"), list) else [],
-        "spec_version": SPEC_VERSION,
-        "extracted_by": "",
-        "doc_date": data.get("doc_date"),
-        "facts": facts,
-        "unreadable": data.get("unreadable") if isinstance(data.get("unreadable"), list) else [],
-        "proposed_fact_types": (data.get("proposed_fact_types")
-                                if isinstance(data.get("proposed_fact_types"), list) else []),
-    }
-    return {k: env[k] for k in _ENVELOPE_KEYS}
