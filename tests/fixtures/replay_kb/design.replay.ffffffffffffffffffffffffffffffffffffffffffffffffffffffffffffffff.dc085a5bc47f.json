@@ -1,0 +1,8 @@
+{
+  "stop_reason": "end_turn",
+  "text": "{\"target\": \"doc_kind\", \"name\": \"x_test_notice\", \"reason\": \"no existing kind matches\", \"description\": \"Read each line of the notice and record one fact per line.\", \"recognise\": {\"path_globs\": [\"notices/*.pdf\"], \"any_phrases\": [\"Notice\"], \"container\": \"pdf\"}}",
+  "usage": {
+    "input_tokens": 1200,
+    "output_tokens": 180
+  }
+}
