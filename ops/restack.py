@@ -50,6 +50,8 @@ def pr_of(branch: str) -> dict | None:
 def fork_point(branch: str, pr: dict | None) -> tuple[int, str] | None:
     if pr and (m := LINE.search(pr["body"] or "")):
         return int(m.group(1)), m.group(2)
+    if not run("git", "ls-remote", "--heads", "origin", branch):
+        raise SystemExit(f"origin has no branch {branch}; nothing to restack")
     msgs = run("git", "log", f"origin/main..origin/{branch}", "--format=%B%x00")
     for msg in msgs.split("\x00"):
         if (m := LINE.search(msg)):
