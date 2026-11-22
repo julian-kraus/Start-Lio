@@ -40,7 +40,7 @@ from pathlib import Path
 from .lookahead_view import plan_view, shown_live
 
 log = logging.getLogger("tracker.lookahead")
-KINDS = {"launch", "clock", "goal", "plan", "supplier", "event", "decision", "promise", "cue"}
+KINDS = {"launch", "clock", "goal", "plan", "supplier", "event", "decision", "promise", "cue", "rules"}
 UPSERT_KEYS = {"supplier": "supplier_id", "decision": "decision_id", "promise": "promise_id"}
 
 
@@ -86,7 +86,7 @@ def append_records(path: Path, records: list[dict], producer: str | None = None)
 def fold(records: list[dict]) -> dict:
     """Pure fold of the record log into the page state. Records carry their 1-based log position as id."""
     st: dict = {"launch": None, "clock": None, "goal": None, "plan": None, "suppliers": {}, "events": [],
-                "decisions": {}, "promises": {}, "last_id": 0, "beat": None}
+                "decisions": {}, "promises": {}, "last_id": 0, "beat": None, "rules": None}
     for r in records:
         kind = r["kind"]
         st["last_id"] = r["id"]
@@ -102,6 +102,8 @@ def fold(records: list[dict]) -> dict:
             st["events"].append(r)
         elif kind == "cue":
             st["beat"] = r.get("label")
+        elif kind == "rules":
+            st["rules"] = r
         else:
             key = UPSERT_KEYS[kind]
             bucket = st[kind + "s"]

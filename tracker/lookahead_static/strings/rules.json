@@ -1,0 +1,258 @@
+{
+  "rules.title": {
+    "en": "Agent rules",
+    "zh": "Agent 規則"
+  },
+  "rules.save": {
+    "en": "Save changes",
+    "zh": "儲存變更"
+  },
+  "rules.saved": {
+    "en": "Saved. Agents do not apply these rules yet.",
+    "zh": "已儲存。Agent 尚未套用這些規則。"
+  },
+  "rules.none": {
+    "en": "No rules saved yet",
+    "zh": "尚未儲存規則"
+  },
+  "rules.loading": {
+    "en": "Loading",
+    "zh": "載入中"
+  },
+  "rules.invalid": {
+    "en": "Check the highlighted value",
+    "zh": "請檢查標示的數值"
+  },
+  "rules.failed": {
+    "en": "Not saved",
+    "zh": "未儲存"
+  },
+  "rules.load_failed": {
+    "en": "Cannot load the rules",
+    "zh": "無法載入規則"
+  },
+  "rules.changed": {
+    "en": "Changed elsewhere. Reload before saving.",
+    "zh": "已在其他地方變更，請先重新載入再儲存。"
+  },
+  "rules.autonomy": {
+    "en": "What the agent may do on its own",
+    "zh": "Agent 可以自己做的"
+  },
+  "rules.quotes_and_holds": {
+    "en": "Ask backup suppliers for quotes and to hold stock",
+    "zh": "向備援供應商詢價、請對方保留貨"
+  },
+  "rules.quotes_and_holds.note": {
+    "en": "No payment, no order",
+    "zh": "不付款、不下單"
+  },
+  "rules.check_ins": {
+    "en": "Set check-ins and track supplier promises",
+    "zh": "設定確認點，追蹤供應商承諾"
+  },
+  "rules.check_ins.note": {
+    "en": "Checked automatically when due",
+    "zh": "到時間自動去確認"
+  },
+  "rules.reminders_and_calls": {
+    "en": "Remind or call suppliers who go quiet",
+    "zh": "供應商沒回應時寄提醒、打電話"
+  },
+  "rules.reminders_and_calls.note": {
+    "en": "Email first, then a call",
+    "zh": "第一次寄信，第二次打電話"
+  },
+  "rules.skip_hedge_with_substitute": {
+    "en": "Skip a hedge when a substitute exists",
+    "zh": "有替代品時，決定不避險"
+  },
+  "rules.skip_hedge_with_substitute.note": {
+    "en": "Listed on the Decisions page with the reason",
+    "zh": "會列在決策頁並說明原因"
+  },
+  "rules.binding_orders": {
+    "en": "Pay or place a binding order",
+    "zh": "付款或正式下單"
+  },
+  "rules.binding_orders.note": {
+    "en": "Always needs a person. Can’t be given to the agent",
+    "zh": "一律要人簽，不能開給 agent"
+  },
+  "rules.hedge": {
+    "en": "When to hedge",
+    "zh": "什麼時候避險"
+  },
+  "rules.formula": {
+    "en": "Failure odds × units at risk × loss per unit > hedge cost → hedge",
+    "zh": "失約機率 × 有風險的數量 × 每單位損失 > 避險成本 → 避險"
+  },
+  "rules.min_share_pct": {
+    "en": "Minimum threshold",
+    "zh": "最低門檻"
+  },
+  "rules.min_share_pct.note": {
+    "en": "Only propose a hedge that costs less than this share of total refunds",
+    "zh": "避險成本低於退款總額的這個比例才自動提出"
+  },
+  "rules.window_months": {
+    "en": "Reliability window",
+    "zh": "守約率計算期間"
+  },
+  "rules.window_months.note": {
+    "en": "Used to estimate failure odds",
+    "zh": "用來估計失約機率"
+  },
+  "rules.window.6": {
+    "en": "Last 6 months",
+    "zh": "過去 6 個月"
+  },
+  "rules.window.12": {
+    "en": "Last 12 months",
+    "zh": "過去 12 個月"
+  },
+  "rules.window.24": {
+    "en": "Last 24 months",
+    "zh": "過去 24 個月"
+  },
+  "rules.not_set": {
+    "en": "Not set",
+    "zh": "未設定"
+  },
+  "rules.size_percentile": {
+    "en": "Backup size covers",
+    "zh": "備援數量要涵蓋"
+  },
+  "rules.size_percentile.note": {
+    "en": "Percentile of shortfall scenarios, not the average",
+    "zh": "缺貨情境的百分位，而不是平均值"
+  },
+  "rules.unit_loss": {
+    "en": "Loss per missing unit",
+    "zh": "每少一套的損失"
+  },
+  "rules.unit_loss.note": {
+    "en": "Defaults to the product’s refund amount",
+    "zh": "沒設定時用該產品的退款金額"
+  },
+  "rules.refund": {
+    "en": "Use refund amount",
+    "zh": "用退款金額"
+  },
+  "rules.custom": {
+    "en": "Custom",
+    "zh": "自訂"
+  },
+  "rules.signers": {
+    "en": "Who can sign what",
+    "zh": "誰可以簽多少"
+  },
+  "rules.role": {
+    "en": "Role",
+    "zh": "角色"
+  },
+  "rules.limit": {
+    "en": "Limit",
+    "zh": "上限"
+  },
+  "rules.currently": {
+    "en": "Currently",
+    "zh": "目前"
+  },
+  "rules.jointly": {
+    "en": "together with",
+    "zh": "須共同簽核："
+  },
+  "rules.seat.vacant": {
+    "en": "Vacant",
+    "zh": "空缺"
+  },
+  "rules.seat.absent": {
+    "en": "Absent",
+    "zh": "不在"
+  },
+  "rules.seat.unclear": {
+    "en": "Needs a person to check",
+    "zh": "需要人工確認"
+  },
+  "rules.seat.not_started": {
+    "en": "Not started",
+    "zh": "尚未就任"
+  },
+  "rules.seat.ended": {
+    "en": "Ended",
+    "zh": "已卸任"
+  },
+  "rules.signers.database": {
+    "en": "The policy facts cannot be read: no database.",
+    "zh": "無法讀取政策資料：沒有資料庫。"
+  },
+  "rules.signers.policy": {
+    "en": "No approval policy in force was found in the facts.",
+    "zh": "資料中找不到有效的簽核政策。"
+  },
+  "rules.signers.reader": {
+    "en": "The approval policy reader is not installed here.",
+    "zh": "此環境未安裝簽核政策讀取模組。"
+  },
+  "rules.signers.failed": {
+    "en": "The signer table could not be loaded.",
+    "zh": "無法載入簽核表。"
+  },
+  "rules.signers.problems": {
+    "en": "Holder names are withheld until a person checks the policy and the org chart.",
+    "zh": "在人員確認政策與組織圖之前，不顯示簽核人姓名。"
+  },
+  "rules.escalation": {
+    "en": "Escalation and reminders",
+    "zh": "上報與提醒"
+  },
+  "rules.vacant_to_next_level": {
+    "en": "When a signer role is vacant",
+    "zh": "簽核人空缺時"
+  },
+  "rules.vacant_to_next_level.note": {
+    "en": "Send to the next level up",
+    "zh": "自動送給上一級"
+  },
+  "rules.remind_hours_before": {
+    "en": "Nobody acted before the deadline",
+    "zh": "期限前沒人處理"
+  },
+  "rules.remind_hours_before.note": {
+    "en": "Notify again and call the signer",
+    "zh": "再通知一次，並打電話給簽核人"
+  },
+  "rules.digest_hours_before": {
+    "en": "Digest before the team goes offline",
+    "zh": "團隊下線前整理待決清單"
+  },
+  "rules.digest_hours_before.note": {
+    "en": "Send signers one list of everything still open",
+    "zh": "把所有待決事項整理成一張清單寄給簽核人"
+  },
+  "rules.hours": {
+    "en": "h before",
+    "zh": "小時前"
+  },
+  "rules.channels": {
+    "en": "Channels",
+    "zh": "通知管道"
+  },
+  "rules.channels.note": {
+    "en": "Urgent items also go by SMS",
+    "zh": "急件另外發簡訊"
+  },
+  "rules.channel.email": {
+    "en": "Email",
+    "zh": "Email"
+  },
+  "rules.channel.teams": {
+    "en": "Teams",
+    "zh": "Teams"
+  },
+  "rules.channel.sms": {
+    "en": "SMS",
+    "zh": "簡訊"
+  }
+}

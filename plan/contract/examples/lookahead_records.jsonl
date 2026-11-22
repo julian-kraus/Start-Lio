@@ -8,3 +8,4 @@
 {"kind": "decision", "decision_id": "D-1", "status": "open", "title": "Order 200 units from the backup supplier", "signer": {"role": "Buyer"}}
 {"kind": "promise", "promise_id": "PR-1", "state": "waiting", "supplier_id": "SUP-A", "due": "2030-01-11T18:00:00+00:00", "what": "200 units loaded"}
 {"kind": "cue", "label": "Decision", "wait_for": "accept:D-1"}
+{"kind": "rules", "at": "2030-01-10T08:02:00+00:00", "source": {"scenario_input": "example"}, "autonomy": {"quotes_and_holds": true, "check_ins": true, "reminders_and_calls": false, "skip_hedge_with_substitute": false, "binding_orders": false}, "hedge": {"min_share_pct": 3, "window_months": 6, "size_percentile": 90, "unit_loss": {"mode": "refund", "value_eur": null}}, "escalation": {"vacant_to_next_level": true, "remind_hours_before": 5, "digest_hours_before": null, "channels": ["email"]}}
