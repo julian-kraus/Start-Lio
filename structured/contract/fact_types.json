@@ -563,7 +563,8 @@
       "description": "Order-confirmation line",
       "subject_keys": [
         "po_number",
-        "po_line"
+        "po_line",
+        "item_key"
       ],
       "attributes": {
         "item_no_printed": {
@@ -1050,7 +1051,8 @@
       "name": "policy_directive",
       "description": "Policy directive",
       "subject_keys": [
-        "scope"
+        "scope",
+        "directive_key"
       ],
       "attributes": {
         "directive": {
