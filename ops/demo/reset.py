@@ -2,6 +2,7 @@
 """Prepare and drive a scenario pack on a demo database. Nothing here sends email.
 
   reset.py PACK reset   --log NEW.jsonl --deadline ISO --set id=value ...   rebuild plan, start clock and log
+               [--history-supplier ID]      score the persona on that supplier's history in kb
   reset.py PACK render  BEAT --log LOG [--to ADDRESS]                       print the mail a teammate sends
   reset.py PACK replay  BEAT --log LOG --mail-data DIR                      feed that mail to the demo mail store
 
@@ -44,6 +45,7 @@ LOOPBACK = {"localhost", "127.0.0.1", "::1"}
 DEMO_SUFFIX = "_demo"
 PRODUCER = "agent:scenario"
 MAIL_SCHEMA = "mail"
+KB_SCHEMA = "kb"
 TAG_PREFIX = "DEMO"
 SUBJECT_MARK = "[Scenario]"
 NUMBER = re.compile(r"(?:[0-9]+|[0-9]{1,3}(?:[ \u00a0\u202f][0-9]{3})+)(?:\.[0-9]+)?")
@@ -202,10 +204,33 @@ def opening_records(pack: dict, deadline, inputs: dict) -> list[dict]:
     return records
 
 
+def history_card(conn, pack: dict, supplier_id: str, at: str) -> dict:
+    """The persona's supplier card: the reliability score of a real supplier's history, read from kb now.
+
+    The pack names no supplier and holds no score. The card keeps the persona's id, which its promises carry,
+    and says on its face whose history it is and that only the history is real."""
+    from sourcing import reliability
+
+    def read(table: str) -> list[dict]:
+        if not conn.execute("SELECT to_regclass(%s) IS NOT NULL AS ok", (f"{KB_SCHEMA}.{table}",)).fetchone()["ok"]:
+            raise DemoError("this database has no kb facts: load them before binding a supplier history")
+        return conn.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(KB_SCHEMA, table))).fetchall()
+
+    card = reliability.card(reliability.history(read("current_facts"), read("believed")), supplier_id)
+    if not card["score"]["history"]["n"]:
+        raise DemoError(f"kb holds no delivery history of supplier {supplier_id!r}")
+    persona, whose = pack["persona"], card.get("name") or supplier_id
+    record = {**card, "producer": PRODUCER, "supplier_id": persona["persona_id"], "name": persona["display_name"],
+              "at": at, "history_supplier_id": supplier_id, "flags": ["Scenario offer", f"Real history: {whose}"],
+              "persona": f"{persona['note']} The score is computed from the history of {whose} in kb facts."}
+    contracts.validate_record(record)
+    return record
+
+
 # ---- commands ----------------------------------------------------------------
 
 def reset(url: str, pack: dict, deadline: str, overrides: dict, log: Path,
-          live_db: str | None = None, ask=None) -> list[dict]:
+          live_db: str | None = None, ask=None, history_supplier: str | None = None) -> list[dict]:
     schema = plan_db.schema_name()
     if schema != plan_db.DEFAULT_SCHEMA:
         raise DemoError(f"PLAN_SCHEMA is {schema!r}: reset only ever drops {plan_db.DEFAULT_SCHEMA!r}")
@@ -218,6 +243,8 @@ def reset(url: str, pack: dict, deadline: str, overrides: dict, log: Path,
         with conn.transaction():
             conn.execute("SELECT pg_advisory_xact_lock(%s)", (plan_db.MIGRATION_LOCK,))
             refuse_used(conn, pack)
+            if history_supplier:
+                records.append(history_card(conn, pack, history_supplier, records[1]["at"]))
             drop_plan(conn, schema)
             plan_db.migrate(conn, schema)
             clock.set_scenario(conn, records[1]["at"], rate=0, by="demo reset")
@@ -291,6 +318,7 @@ def main(argv=None) -> int:
         if name == "reset":
             p.add_argument("--deadline", required=True, help="ISO time with offset")
             p.add_argument("--set", type=assignment, action="append", default=[])
+            p.add_argument("--history-supplier", help="kb supplier id whose real history scores the persona")
             p.add_argument("--live-db", help="for a person: the exact name of a database that is not a demo one")
         elif name == "render":
             p.add_argument("--to")
@@ -300,7 +328,8 @@ def main(argv=None) -> int:
     try:
         pack = load_pack(args.pack)
         if args.cmd == "reset":
-            launch = reset(args.database_url, pack, args.deadline, dict(args.set), args.log, args.live_db)[0]
+            launch = reset(args.database_url, pack, args.deadline, dict(args.set), args.log, args.live_db,
+                           history_supplier=args.history_supplier)[0]
             print(f"plan rebuilt, clock frozen at the start, jumps to {', '.join(launch['demo_times'])}")
         elif args.cmd == "render":
             mail = render(pack, args.beat, current_inputs(pack, args.log), args.to or pack["persona"]["desk"])
