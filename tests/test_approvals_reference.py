@@ -58,9 +58,8 @@ def test_reference_every_tier_signs_once_its_seats_are_held(reference):
     # one seat per title: an abbreviated role is the title written out, where the policy has it
     titles = {}
     for role in roles:
-        same = [r for r in roles if r != role and approval_chart.title_scope(r, role) == ""]
-        short = len(role) == 3 and role.isupper()
-        titles[role] = same[0] if short and same else f"Chief {role[1]}x Officer" if short else role
+        # the title the policy writes out for an abbreviation, otherwise the seat has to carry the abbreviation
+        titles[role] = policy.spellings(role)[-1]
     seats = [{"fact_id": f"seat{n}:{name}", "path": newest.path, "sha256": newest.sha256, "doc_kind": KINDS[1],
               "fact_type": approval_chart.SEAT_TYPE, "subject": {"title": title, "scope": ""}, "attribute": name,
               "value": value, "confidence": 0.9}
