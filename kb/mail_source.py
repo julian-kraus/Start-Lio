@@ -1,6 +1,6 @@
 """Supplier email as a kb input: follows mail.events (document_added) with a cursor in mail.consumer_cursors.
 
-Bodies and attachments go through ingest.process_file. What a sender wrote stays marked as theirs:
+Bodies and attachments go through ingest.process_file. In `kb run`, what a sender wrote stays marked as theirs:
 - every fact carries locator.mail (trust, scenario, thread_id, ...), taken from the mail event, never from the text;
 - mail never yields a `supplier` master data fact, because mail.contacts builds the recipient allowlist from those;
 - fact ids of mail are separate from those of a portal file with the same bytes.
