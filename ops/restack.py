@@ -1,6 +1,7 @@
 """Keep a stacked branch i<n> on top of its parent after the parent changed or was squash-merged.
 
 usage: python ops/restack.py <n>          (run by the author of i<n>; rebases, pushes i<n> only)
+       python ops/restack.py <n> --line   (prints the current `Stacked-on:` line for the PR body)
        python ops/restack.py <n> --check  (prints what it would do, changes nothing)
 
 A stacked branch records its fork point in a line `Stacked-on: i<m>@<sha>`: in the PR body once the PR exists,
@@ -59,6 +60,21 @@ def fork_point(branch: str, pr: dict | None) -> tuple[int, str] | None:
     return None
 
 
+def is_ancestor(a: str, b: str) -> bool:
+    return subprocess.run(["git", "merge-base", "--is-ancestor", a, b], cwd=ROOT).returncode == 0
+
+
+def current_fork(branch: str, parent: int, recorded: str, still_open: bool) -> str:
+    """The newest point the branch shares with its parent. A restack moves it; the recorded sha can lag (a restack
+    before the PR existed, or a PR body copied from the claim commit). While the parent branch exists, the merge
+    base is authoritative when it is newer than the recorded sha; a parent that was force-pushed leaves the merge
+    base older, and then the recorded sha (its old tip) is the right cut."""
+    if not still_open:
+        return recorded
+    base = run("git", "merge-base", f"origin/i{parent}", f"origin/{branch}")
+    return base if is_ancestor(recorded, base) else recorded
+
+
 def parent_open(parent: int) -> bool:
     return bool(run("git", "ls-remote", "--heads", "origin", f"i{parent}"))
 
@@ -74,13 +90,15 @@ def main() -> None:
     if fp is None:
         print(f"{branch} is not stacked (no Stacked-on line); use git rebase origin/main as usual")
         return
-    parent, old = fp
+    parent, recorded = fp
     still_open = parent_open(parent)
+    old = current_fork(branch, parent, recorded, still_open)
+    if "--line" in sys.argv:
+        print(f"Stacked-on: i{parent}@{old}" if still_open else "parent merged: no Stacked-on line, base is main")
+        return
     base_ref = f"origin/i{parent}" if still_open else "origin/main"
     new_base = run("git", "rev-parse", base_ref)
-    contains = subprocess.run(["git", "merge-base", "--is-ancestor", new_base, f"origin/{branch}"],
-                              cwd=ROOT).returncode == 0
-    if still_open and contains:
+    if still_open and is_ancestor(new_base, f"origin/{branch}"):
         print(f"{branch} already contains {base_ref} ({new_base[:8]}); nothing to do")
         return
     plan = f"git rebase --onto {base_ref} {old[:12]} {branch}"
@@ -95,6 +113,10 @@ def main() -> None:
         subprocess.run(["git", "rebase", "--abort"], cwd=wt)
         raise SystemExit(f"conflict while running {plan}; aborted, branch unchanged.\n{r.stdout}{r.stderr}\n"
                          f"Resolve by hand in {wt} with the same command.")
+    if still_open and not pr:
+        # no PR body to rewrite yet: record the new fork point in the branch so the next restack cuts here
+        run("git", "commit", "--allow-empty", "-m", f"restack #{n} onto i{parent}",
+            "-m", f"Stacked-on: i{parent}@{new_base}", cwd=wt)
     run("git", "push", "--force-with-lease", "origin", branch, cwd=wt)
     if pr:
         body = pr["body"] or ""
