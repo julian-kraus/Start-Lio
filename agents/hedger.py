@@ -11,6 +11,7 @@ terms and timing chain, `primaries` maps a part to the reliability card of the s
   guard     a figure typed by a model, or a decision other than the model's without a disputed input, is
             rejected. After the retries, or when the model fails, the deterministic result wins and that is recorded
   dispute   a judge that differs names the input. The recommendation shows it and carries no payment action
+  backup    one any spot lists as not qualified is refused and gets no signer: pass the spots of every part
   signer    follows the value of the whole order, as a limit per order does, never a single payment of it
 """
 
@@ -22,7 +23,7 @@ from collections import defaultdict
 from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
-from typing import Iterable, Mapping
+from typing import Collection, Iterable, Mapping
 
 from psycopg.types.json import Json
 
@@ -30,7 +31,7 @@ from plan import contracts
 from sourcing import approvals, hedge, timing
 from sourcing.hedge import Input, ModelError
 
-from . import llm
+from . import hedger_offers, llm
 from .tools import GroundingGuard, ToolRegistry
 from .traces import Tracer
 
@@ -138,17 +139,12 @@ def _loss(spot: Mapping, goal: Mapping) -> tuple[Input, list[Mapping]]:
 
 
 def build_case(spot: Mapping, backup: Backup, *, primary: Mapping, goal: Mapping, approval_facts: list[dict],
-               now: datetime, history=None) -> Case:
+               now: datetime, history=None, unqualified: Collection[str] = ()) -> Case:
     """Everything that is not language: the hedge verdict, decide-by and signer of one offer."""
     offer, goal = _plain(backup.offer), _plain(goal)
-    if offer.get("fixed_cost_eur"):
-        raise ModelError("the hedge rule cannot price an offer with a fixed cost")
+    hedger_offers.check(spot, offer, unqualified)
     refs = [r for r in offer.get("sources") or [] if isinstance(r, dict)]
     quantity, price = offer.get("quantity"), offer.get("unit_price_eur")
-    if not refs or quantity is None or price is None:
-        raise ModelError("the offer needs a quantity, a price and their source")
-    if quantity < (offer.get("min_quantity") or 0):
-        raise ModelError("the offer is below its own minimum quantity")
 
     loss, editions = _loss(spot, goal)
     lost = [e["copies_lost"] for e in editions]
@@ -371,7 +367,8 @@ def hedge_parts(conn, client: llm.LLMClient, spots: Iterable[Mapping], backups: 
     by_part = defaultdict(list)
     for backup in backups:
         by_part[str(backup.offer["part_id"])].append(backup)
-    written, skipped = [], []
+    written, skipped, spots = [], [], list(spots)
+    unqualified = {supplier for spot in spots for supplier in spot["detail"]["not_qualified"]}
     for spot in spots:
         part = str(spot["part_id"])
         if spot["detail"]["status"] != "critical":
@@ -381,7 +378,7 @@ def hedge_parts(conn, client: llm.LLMClient, spots: Iterable[Mapping], backups: 
             skipped.append({"part_id": part, "reasons": [f"no {missing}"]})
             continue
         case, problems = choose(spot, by_part[part], primary=primaries[part], goal=goal, now=now, history=history,
-                                approval_facts=approval_facts)
+                                approval_facts=approval_facts, unqualified=unqualified)
         if not case:
             skipped.append({"part_id": part, "reasons": problems or ["no open offer of another supplier"]})
             continue

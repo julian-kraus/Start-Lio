@@ -29,16 +29,24 @@ NEEDED = NOW + timedelta(hours=12)
 
 @pytest.fixture
 def spots():
+    return ranked()
+
+
+def ranked(unreleased=None, part="BOOK"):
+    """The weak spots, with S4 listed for the part under that qualification status where a test gives one."""
     w = World()
     w.add("plan_edition", {"product_id": "P-A"}, preorders=1100)
     w.add("plan_edition", {"product_id": "P-B"}, preorders=1100)
     w.drop("stock_batch", material_id="BOOK")
     w.stock("BOOK", 1400)
-    for part, suppliers in (("CARD", ("S1", "S2")), ("BOOK", ("S3",)), ("CASE", ("S1", "S2"))):
+    for material, suppliers in (("CARD", ("S1", "S2")), ("BOOK", ("S3",)), ("CASE", ("S1", "S2"))):
         for supplier in suppliers:
-            w.add("supplier_part", {"material_id": part, "supplier_id": supplier}, primary="Y")
+            w.add("supplier_part", {"material_id": material, "supplier_id": supplier}, primary="Y")
     for supplier in ("S1", "S2", "S3"):
         w.add("supplier", {"supplier_id": supplier}, status="active", qualification_status="qualified")
+    if unreleased:
+        w.add("supplier_part", {"material_id": part, "supplier_id": "S4"}, primary="N")
+        w.add("supplier", {"supplier_id": "S4"}, status="active", qualification_status=unreleased)
     return weakspots.rank(Facts(w.current, w.believed, w.issues), w.run(), GOAL)
 
 
@@ -119,6 +127,22 @@ def test_one_part_gets_the_offer_worth_most_for_its_cost(spots):
                                    approval_facts=approval_world())
     assert best.backup.offer["offer_id"] == "CHEAP"
     assert len(problems) == 1 and problems[0].startswith("LATE")
+
+
+@pytest.mark.parametrize("status", ["conditional", "expired", "not qualified"])
+def test_a_backup_that_is_not_qualified_gets_no_signer(status):
+    spots = ranked(status)
+    assert book(spots)["detail"]["not_qualified"] == ["S4"]
+    with pytest.raises(ModelError, match="S4 is not qualified on file"):
+        case(spots, backup(supplier="S4", price=1))
+
+
+def test_a_qualified_offer_wins_over_a_cheaper_one_that_is_not():
+    offers = [backup("UNRELEASED", supplier="S4", price=1), backup("QUALIFIED", price=2)]
+    best, problems = hedger.choose(book(ranked("conditional")), offers, primary=card(), goal=GOAL, now=NOW,
+                                   approval_facts=approval_world())
+    assert best.backup.offer["offer_id"] == "QUALIFIED"
+    assert len(problems) == 1 and problems[0].startswith("UNRELEASED") and "not qualified" in problems[0]
 
 
 def test_replayed_debate_renders_tool_figures(spots):
@@ -281,3 +305,12 @@ def test_only_critical_parts_with_an_offer_are_debated(conn, spots):
     out = hedge_parts(conn, llm.ReplayClient([]), spots, backup(valid_until=NOW - timedelta(hours=1)))
     assert "too late" in out["skipped"][0]["reasons"][0]
     assert conn.execute("SELECT count(*) AS n FROM runs").fetchone()["n"] == 0
+
+
+@pytest.mark.parametrize("listed_for", ["BOOK", "CARD"])      # qualification belongs to the supplier, not the part
+def test_an_unqualified_backup_alone_is_skipped_with_the_reason_and_pays_nothing(conn, listed_for):
+    spots = iter(ranked("conditional", listed_for))
+    out = hedge_parts(conn, llm.ReplayClient([]), spots, backup(supplier="S4", price=1))
+    assert out["recommendations"] == [] and "not qualified" in out["skipped"][0]["reasons"][0]
+    for table in ("recommendations", "offers", "runs"):
+        assert conn.execute(f"SELECT count(*) AS n FROM {table}").fetchone()["n"] == 0
