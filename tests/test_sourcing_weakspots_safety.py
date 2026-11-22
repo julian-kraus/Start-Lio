@@ -102,31 +102,37 @@ def test_one_edition_cannot_be_priced_twice(world):
         weakspots.goal_values({"unit_loss_by_edition": {"Deluxe": 5, "P-A": 0}}, world.run()["editions"])
 
 
-SENT = "suppliers/S4/documents/letter.pdf"
+SENT = [f"suppliers/S4_Vendor/{folder}/letter.pdf"
+        for folder in ("contracts", "notices", "order_confirmations", "documents", "any_new_folder", "inbox/older")]
 
 
-def test_a_suppliers_document_cannot_list_a_source(world):
-    list_source(world, "BOOK", "S4", path=SENT)
+@pytest.mark.parametrize("path", SENT)
+def test_a_suppliers_document_cannot_list_a_source(world, path):
+    list_source(world, "BOOK", "S4", path=path)
     assert status(ranked(world), "BOOK") == "critical"
 
 
-def test_a_suppliers_document_cannot_qualify_a_source(world):
+@pytest.mark.parametrize("path", SENT)
+def test_a_suppliers_document_cannot_qualify_a_source(world, path):
     list_source(world, "BOOK", "S4")
     world.add("supplier", {"supplier_id": "S4"}, as_of="2030-01-01", qualification_status="conditional")
-    world.add("supplier", {"supplier_id": "S4"}, path=SENT, as_of="2030-01-05", qualification_status="qualified")
+    world.add("supplier", {"supplier_id": "S4"}, path=path, as_of="2030-01-05", qualification_status="qualified")
     book = spot(ranked(world), "BOOK")
     assert book["detail"]["status"] == "critical" and book["detail"]["not_qualified"] == ["S4"]
 
 
-def test_a_suppliers_document_can_still_take_a_qualification_away(world):
+@pytest.mark.parametrize("path", SENT)
+def test_a_suppliers_document_can_still_take_a_qualification_away(world, path):
     list_source(world, "BOOK", "S4")
     world.add("supplier", {"supplier_id": "S4"}, as_of="2030-01-01", qualification_status="qualified")
-    world.add("supplier", {"supplier_id": "S4"}, path=SENT, as_of="2030-01-05", qualification_status="suspended")
+    world.add("supplier", {"supplier_id": "S4"}, path=path, as_of="2030-01-05", qualification_status="suspended")
     assert status(ranked(world), "BOOK") == "critical"
 
 
-def test_an_export_under_suppliers_still_lists_a_source(world):
-    list_source(world, "BOOK", "S2", path="suppliers/export.csv")
+@pytest.mark.parametrize("path", ["suppliers/export.csv", "suppliers/S2_Vendor/profile.csv",
+                                  "suppliers/S2_Vendor/profile.json"])
+def test_an_export_under_suppliers_still_lists_a_source(world, path):
+    list_source(world, "BOOK", "S2", path=path)
     assert status(ranked(world), "BOOK") != "critical"
 
 

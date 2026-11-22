@@ -31,7 +31,7 @@ from .coverage import editions as plan_editions
 from .facts import Facts, Row, figure, ids, number
 
 MAIL = "mail/"                                  # an email cannot list or qualify a source
-SENT = re.compile(r"suppliers/[^/]+/documents/")    # nor can a supplier's document, exports beside them can
+SENT = re.compile(r"suppliers/[^/]+/[^/]+/")    # nor can a file in any folder below suppliers/<id>/, root exports can
 QUALIFIED = {"status": ("active",), "qualification_status": ("qualified", "approved")}
 EVERY_EDITION = ("all", "both")
 ASSUMED = "assumed: every edition counts, the goal does not clearly single one out"
