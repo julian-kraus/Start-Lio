@@ -129,6 +129,30 @@ def _matches(promise: dict, st: Statement) -> bool:
     return shared
 
 
+def _source_fact_id(source) -> str | None:
+    """The kb fact id a source cites, however the register tool stored it: a bare id, `{"fact_id": id}`, or a
+    richer dict that also carries a fact id. Returns None for a source that names no fact (a label/value pair)."""
+    if isinstance(source, dict):
+        fid = source.get("fact_id")
+        return str(fid) if fid is not None else None
+    if isinstance(source, (str, int)) and not isinstance(source, bool):
+        return str(source)
+    return None
+
+
+def _made_the_promise(promise: dict, st: Statement) -> bool:
+    """True when the statement is one the promise already rests on: the statement that established the
+    commitment. Such a statement must not also settle the promise it made, or a confirm would prove its own
+    promise and a later cancel could never break it (the citing statement is in every ledger run, since
+    `read_statements` returns every current statement). Matched by kb fact id across the shapes the register
+    tool accepts, with a fallback to exact source identity when the statement carries no fact id."""
+    sources = promise.get("sources") or []
+    if st.fact_id is not None:
+        fid = str(st.fact_id)
+        return any(_source_fact_id(s) == fid for s in sources)
+    return st.source() in sources
+
+
 def _reference_time(promise: dict):
     """The moment from which a statement can bear on a promise: when it was made, else created, else its due."""
     for key in ("made_at", "created_at", "due"):
@@ -167,6 +191,8 @@ def _bearing(waiting: list[dict], statements: Iterable[Statement], outcomes: dic
         for promise in waiting:
             if not _matches(promise, st):
                 continue
+            if _made_the_promise(promise, st):
+                continue       # the statement that made the promise does not also settle it
             since = _reference_time(promise)
             if since is not None and inst < since:
                 continue

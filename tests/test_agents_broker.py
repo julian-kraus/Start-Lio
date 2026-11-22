@@ -147,6 +147,21 @@ def test_ledger_breaks_a_promise_and_leaves_others_watchable(plan_conn):
     assert still["state"] == "waiting"
 
 
+def test_the_statement_that_made_a_promise_does_not_prove_it_through_the_ledger(plan_conn):
+    # The demo path: a confirm makes the promise, a later cancellation breaks it. read_statements returns every
+    # current statement, so the citing confirm (fact-made) is in the run; it must not settle its own promise.
+    _save_waiting(plan_conn)                                      # PR-1 rests on fact-made
+    assert broker.open_promises(plan_conn)[0]["sources"] == [{"fact_id": "fact-made"}]
+    said = Statement(kind="confirm", at=NOW.isoformat(), supplier_id="SUP-A", part_id="PART-A", fact_id="fact-made")
+    cancel = Statement(kind="cancel", at="2030-01-11T19:00:00+00:00", supplier_id="SUP-A",
+                       part_id="PART-A", fact_id="fact-cancel")
+    updates = broker.apply_ledger(plan_conn, [said, cancel])
+    plan_conn.commit()
+    assert [(u["promise_id"], u["state"]) for u in updates] == [("PR-1", "broken")]
+    row = plan_conn.execute("SELECT state FROM promises WHERE promise_id = 'PR-1'").fetchone()
+    assert row["state"] == "broken"
+
+
 # ---- reading kb supplier statements (no email parser in agents/) --------------
 
 def _row(fact_id, attribute, value, *, statement_no="ST-1", material_id="PART-A", supplier_id="SUP-A",

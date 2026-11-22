@@ -88,6 +88,26 @@ def test_the_earliest_decisive_statement_wins():
     assert upd["state"] == "broken" and upd["source"] == {"fact_id": "early"}
 
 
+def test_the_statement_that_made_the_promise_does_not_settle_it():
+    # The citing statement is in every ledger run (read_statements returns every current statement). A confirm
+    # that made the promise must not also prove it, or a later cancellation could never break it (demo path).
+    said = Statement(kind="confirm", at=MADE, supplier_id="SUP-A", part_id="PART-A", fact_id="fact-1")
+    cancel = Statement(kind="cancel", at="2030-01-11T19:00:00+00:00", supplier_id="SUP-A", part_id="PART-A",
+                       fact_id="fact-2")
+    p = a_promise(sources=[{"fact_id": "fact-1"}])                  # rests on the confirm, fact-1
+    [upd] = promises.reconcile([p], [said, cancel])
+    assert upd["state"] == "broken" and upd["source"] == {"fact_id": "fact-2"}
+    assert promises.reconcile([p], [said]) == []                   # the confirm alone proves nothing
+    assert promises.review([p], [said]) == []                      # nor is it flagged for a human
+
+
+def test_the_citing_fact_is_recognised_across_source_shapes():
+    said = Statement(kind="confirm", at=MADE, supplier_id="SUP-A", part_id="PART-A", fact_id="fact-1")
+    for shape in ("fact-1", {"fact_id": "fact-1"}, {"fact_id": "fact-1", "label": "supplier_statement"}):
+        p = a_promise(sources=[shape])
+        assert promises.reconcile([p], [said]) == []               # the maker never settles, however it is stored
+
+
 def test_a_statement_matches_on_part_when_the_supplier_is_unknown():
     p = a_promise()
     st = Statement(kind="dispatch_info", at="2030-01-11T17:00:00+00:00", part_id="PART-A", fact_id="f")
