@@ -95,7 +95,7 @@ def test_shipment_on_hold_does_not_count(world):
 
 @pytest.mark.parametrize("slot, state", [(None, "unknown"), ("released", "released")])
 def test_dock_slot_release_is_required_by_the_policy(world, slot, state):
-    rule = world.add("policy_directive", {"directive_key": "s3"}, directive="requires a booked dock slot")
+    rule = world.add("policy_directive", {"directive_key": "s3"}, directive="a truck needs a confirmed dock slot")
     world.ship(**({"dock_slot": slot} if slot else {}))
     result = world.run()
     entry = part(result, "CARD")["inbound"][0]
