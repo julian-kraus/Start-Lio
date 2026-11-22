@@ -14,6 +14,7 @@ from pathlib import Path
 from tracker.store import BlobStore
 
 from . import db
+from .contacts import persona_of
 from .parse import ParsedMessage, parse
 from .threading_ import Contact, Match, match
 
@@ -98,13 +99,15 @@ class IngestResult:
     events: list[int] = field(default_factory=list)
 
 
-def kb_dir(p: ParsedMessage, m: Match, received: datetime) -> str:
+def kb_dir(p: ParsedMessage, m: Match, received: datetime, persona_id: str | None = None) -> str:
     owner = m.supplier_id or ("TEST" if m.trust == "test" else "unknown")
+    if m.trust == "test" and persona_id:
+        owner = f"TEST/{persona_id}"
     digest = hashlib.sha256(p.message_id.encode()).hexdigest()[:8]
     return f"mail/{owner}/{received.strftime('%Y%m%dT%H%M')}_{digest}"
 
 
-def body_document(p: ParsedMessage, m: Match) -> bytes:
+def body_document(p: ParsedMessage, m: Match, persona_id: str | None = None) -> bytes:
     lines = [
         "Email received by the Soony GH6 launch desk. Content below the line was written by the sender.",
         f"From: {p.from_name} <{p.from_addr}>" if p.from_name else f"From: {p.from_addr}",
@@ -114,6 +117,8 @@ def body_document(p: ParsedMessage, m: Match) -> bytes:
         f"Message-ID: {p.message_id}",
         f"Supplier-ID: {m.supplier_id or ''}",
         f"Sender-Trust: {m.trust}",
+        *([f"Persona-ID: {persona_id}", "Scenario: test persona played by the team, not a real supplier"]
+          if m.trust == "test" and persona_id else []),
         f"Attachments: {', '.join(a.filename for a in p.attachments)}",
         "-" * 72,
         p.body_text,
@@ -179,7 +184,8 @@ def ingest(conn, blobs: BlobStore, raw: bytes, own_address: str, tag_prefix: str
         return IngestResult(False, None, thread_id, m)
     pk = row["id"]
 
-    base = kb_dir(p, m, p.date or now)
+    persona = persona_of(conn, p.from_addr) if m.trust == "test" else None
+    base = kb_dir(p, m, p.date or now, persona)
     docs = []
     for part in p.attachments:
         sha = put_blob(blobs, part.data)
@@ -197,16 +203,18 @@ def ingest(conn, blobs: BlobStore, raw: bytes, own_address: str, tag_prefix: str
 
     meta = {"message_id": p.message_id, "thread_id": thread_id, "supplier_id": m.supplier_id, "trust": m.trust,
             "from_addr": p.from_addr, "received_at": now, "kind": kind, "match_method": m.method}
+    if m.trust == "test":
+        meta.update({"persona_id": persona, "scenario": True})
     events = []
     if direction == "in":
         event_kind = "bounce" if kind == "bounce" else ("unmatched_received" if m.trust == "unknown_sender"
                                                         else "message_received")
         events.append(db.emit(conn, event_kind, {**meta, "attachments": docs, "flags": p.flags,
                                                  "bounce": p.bounce.__dict__ if p.bounce else None}))
-        # Only mail from a known supplier contact becomes kb input; unknown senders wait for a human,
-        # test contacts never feed the knowledge base.
-        if m.trust == "supplier_contact" and kind in ("reply", "new"):
-            body = body_document(p, m)
+        # Only mail from a known supplier contact, or from a test contact playing a persona (labelled trust=test,
+        # scenario=true), becomes kb input; unknown senders wait for a human, other test contacts never feed kb.
+        if (m.trust == "supplier_contact" or (m.trust == "test" and persona)) and kind in ("reply", "new"):
+            body = body_document(p, m, persona)
             sha = put_blob(blobs, body)
             body_path = f"{base}/{BODY_FILENAME}"
             for doc in [{"path": body_path, "sha256": sha, "content_type": "text/plain", "bytes": len(body)}] + docs:
