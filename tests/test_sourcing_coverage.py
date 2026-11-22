@@ -93,7 +93,7 @@ def test_what_a_limited_edition_cannot_use_goes_to_the_next(world):
 
 # phantom lines
 
-NOTE = "fitted by supplier into BOOK; not ordered, received or stocked separately"
+NOTE = "pre-assembled by the vendor with BOOK; never stocked on its own"
 
 
 def test_phantom_line_from_a_fact_is_not_a_shortage(world):

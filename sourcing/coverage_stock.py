@@ -1,8 +1,8 @@
 """Usable stock: what kb believes is on hand, minus what waits for a decision.
 
 Three things take booked units out of usable stock:
-  - a lot that failed inspection (kb `batch_usable`);
-  - a disputed goods receipt. Where kb believes the correction, the correction wins. Where a lower count is on
+  - a lot that failed inspection (kb `batch_usable`), also where kb kept the booking because the verdict is unsure;
+  - a disputed goods receipt: the delivery note against the sum of all its bookings. Where kb believes the correction, the correction wins. Where a lower count is on
     file and kb kept the booking (an unsure scan), the difference waits for a decision: it is never usable;
   - a disputed drawing revision that may not be used up, unless the batch is shown to be at the released one.
 """
@@ -87,6 +87,27 @@ def revision_disputes(facts: Facts, parts: set[str]) -> dict[str, Revision]:
     return out
 
 
+def note_count(facts: Facts, b: dict, material: str, note: str) -> tuple[int | float | None, bool, list[str]]:
+    """(units on the delivery note, whether kb believes that count, its fact ids).
+
+    kb compares one note line with one booking, so a total over several lines is never a believed one.
+    """
+    said = [i for i in believed_ids(b)
+            if (facts.by_id.get(i) or {}).get("fact_type") != "goods_receipt"]
+    lines: dict[str, list] = {}
+    for row in facts.rows("delivery_note_line", delivery_note=note, material_id=material):
+        if (n := number(row.get("final_qty"))) is not None:
+            lines.setdefault(row.key("line"), []).append((n, row.ids("final_qty")))
+    if len(lines) > 1:
+        lowest = [min(found, key=lambda f: f[0]) for found in lines.values()]
+        return sum(n for n, _ in lowest), False, ids(*(i for _, i in lowest))
+    value = number(b.get("value"))
+    if value is not None and set(ids(b.get("winning_fact_ids") or [])) & set(said):
+        return value, True, said
+    counts = [n for i in said if (n := number(facts.value_of(i))) is not None]
+    return min(counts, default=None), False, said
+
+
 def stock_position(facts: Facts, material: str, sites: set[str], revision: Revision | None,
                    no_stock_ids: list[str]) -> tuple[dict, list[dict]]:
     """Booked, blocked, corrected and usable units of one part. `no_stock_ids` source a zero."""
@@ -102,7 +123,7 @@ def stock_position(facts: Facts, material: str, sites: set[str], revision: Revis
     receipt_of = {r.key("gr_number"): r for r in receipts}
 
     booked, booked_ids, usable = 0, [], 0
-    holds, alerts, fully_held = [], [], set()
+    holds, alerts, fully_held = [], [], {}
     for (_, batch), row in batches.items():
         qty, sources = number(row.get("qty")), row.ids("qty")
         booked += qty
@@ -113,7 +134,9 @@ def stock_position(facts: Facts, material: str, sites: set[str], revision: Revis
             value = number(b.get("value"))
             if not b.get("contradiction") and value is not None:
                 continue
-            keep = min(qty, max(0, value or 0))         # undecided is not usable
+            # undecided is not usable, and neither is a verdict kb was too unsure to believe: a word counts as 0
+            overruled = [number(facts.value_of(i)) or 0 for i in b.get("losing_fact_ids") or []]
+            keep = min(qty, max(0, min([value or 0, *overruled])))
             if keep < free:
                 holds.append({"reason": "failed_inspection", "status": BLOCKED, "batch": batch,
                               "qty": figure(free - keep, sources, believed_ids(b))})
@@ -127,31 +150,38 @@ def stock_position(facts: Facts, material: str, sites: set[str], revision: Revis
                               "qty": figure(free, sources, evidence, receipt.ids("po_number") if receipt else [])})
                 free = 0
         if qty > 0 and free == 0 and receipt:
-            fully_held.add(receipt.key("delivery_note"))
+            fully_held[batch] = qty
         usable += free
 
     # ERP stock is receipts minus consumption, so a wrong booking stays in the total after its batch is packed.
     snapshot = max((d for r in batches.values() if (d := day(r.get("snapshot_date")))), default=None)
     for b in facts.believed("received_qty", material_id=material):
         note = str(b["key"].get("delivery_note", ""))
-        if not b.get("contradiction") or note in fully_held:
-            continue
+        # all bookings of the note: kb compares only one of them, and then may see no contradiction
         bookings = [r for r in receipts if r.key("delivery_note") == note
-                    and number(r.get("qty_received")) is not None
-                    and not (snapshot and (d := day(r.get("gr_date"))) and d > snapshot)]
-        if not bookings:
+                    and number(r.get("qty_received")) is not None]
+        in_stock = [r for r in bookings if not (snapshot and (d := day(r.get("gr_date"))) and d > snapshot)]
+        if not in_stock:
             continue
+        count, believed, note_ids = note_count(facts, b, material, note)
         received = sum(number(r.get("qty_received")) for r in bookings)
-        sources = ids(believed_ids(b), *(r.ids("qty_received") for r in bookings))
-        counts = [n for i in believed_ids(b) if (n := number(facts.value_of(i))) is not None]
-        believed = number(b.get("value"))
-        if believed is not None and believed != received:
-            change = max(believed - received, -usable)
+        if count is None or count == received:
+            continue
+        sources = ids(believed_ids(b), note_ids, *(r.ids("qty_received") for r in bookings))
+        change = count - received
+        if all(r.key("gr_number") in fully_held for r in in_stock):
+            # every booking is held already: only a shortfall beyond the held units still comes out of usable
+            change = min(0, change + sum({r.key("gr_number"): fully_held[r.key("gr_number")]
+                                          for r in in_stock}.values()))
+            if not change:
+                continue
+        if believed:
+            change = max(change, -usable)
             usable += change
             holds.append({"reason": "receipt_corrected", "status": "corrected",
                           "qty": figure(change, sources), "delivery_note": note})
         else:
-            disputed = min(usable, received - min(counts + [received]))
+            disputed = min(usable, -change)
             if disputed > 0:
                 usable -= disputed
                 holds.append({"reason": "disputed_receipt", "status": BLOCKED,

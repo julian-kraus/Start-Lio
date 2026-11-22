@@ -1,7 +1,13 @@
-"""Inbound that can still be packed: ETA plus last-mile transit against the hour the part runs out."""
+"""Inbound that can still be packed: ETA plus last-mile transit against the hour the part runs out.
+
+Nothing undelivered arrives before now, and what still waits at the port then has its road leg ahead. Once the part has run out, later arrivals share the pack hours that
+remain, so splitting a shipment does not change what counts.
+"""
 
 from __future__ import annotations
 
+import math
+import re
 from collections import defaultdict
 from datetime import datetime, time, timedelta
 
@@ -12,6 +18,7 @@ from .facts import Facts, believed_ids, day, figure, id_list, ids, number
 GONE = ("cancelled", "canceled")
 LANDED = ("delivered", "received")
 REFUSED = ("refused", "rejected", "denied")
+AWAITS_PICKUP = re.compile(r"(^|_)(port|airport|terminal|customs|pick_?up)(_|$)")
 
 
 def _status(value) -> str:
@@ -90,13 +97,21 @@ def held_orders(facts: Facts) -> dict[str, list[str]]:
 
 
 def arrival(ship: dict, transit, windows: list[Window], now: datetime, deadline: datetime) -> datetime:
-    """When it is at the packing site. Facts carry dates, so a delivery counts from that day's first shift."""
+    """When it is at the packing site: that day's first shift, as facts carry dates, but never before now."""
     here = now.astimezone(deadline.tzinfo).date()
-    due = ship["eta"] + timedelta(days=transit)
+    leg = timedelta(days=math.ceil(transit))            # facts carry dates: part of a day is a day
+
+    def first_shift(due) -> datetime:
+        starts = [w.start for w in windows if w.start.date() == due]
+        return min(starts, default=datetime.combine(due, time(), deadline.tzinfo))
+
+    due = ship["eta"] + leg
     if due < here:
-        due = here + timedelta(days=transit)            # overdue or waiting for pick-up: the leg is still ahead
-    starts = [w.start for w in windows if w.start.date() == due]
-    return min(starts, default=datetime.combine(due, time(), deadline.tzinfo))
+        due = here + leg                                # overdue or waiting for pick-up: the leg is still ahead
+    at = first_shift(due)
+    if at < now and AWAITS_PICKUP.search(_status(ship["status"])):
+        at = first_shift(here + leg)                    # it should be here by now and still waits for pick-up
+    return max(at, now.astimezone(deadline.tzinfo))
 
 
 def inbound_position(facts: Facts, material: str, ships: dict[str, dict], windows: list[Window],
@@ -116,7 +131,8 @@ def inbound_position(facts: Facts, material: str, ships: dict[str, dict], window
     found.sort(key=lambda f: (f[3] is None, f[3] or deadline, f[0]["reference"]))
 
     entries, alerts = [], []
-    on_hand = usable["value"]
+    on_hand = usable["value"]           # usable stock plus what counted so far
+    idle = 0.0                          # units the lines could not pack because the part had run out
     for ship, days, day_ids, at in found:
         qty, qty_ids = quantity(facts, ship, material)
         status = _status(ship["status"])
@@ -153,10 +169,18 @@ def inbound_position(facts: Facts, material: str, ships: dict[str, dict], window
                     reason = "disputed_revision"
             if not reason:
                 count = qty
-                if burn and windows and hours(windows, until=at) * burn > on_hand:
-                    # it lands after the part ran out: only what the remaining pack hours can still take
-                    sources = ids(sources, usable["fact_ids"], burn_ids, shift_ids)
-                    count = min(qty, max(0, int(hours(windows, since=at) * burn)))
+                if burn and windows:
+                    room, left = hours(windows, since=at) * burn, on_hand + idle - hours(windows, until=at) * burn
+                    if left < 0:
+                        idle, left = idle - left, 0
+                    if not room:
+                        count = 0
+                    elif idle:
+                        # the part ran out: only what the remaining hours can take beyond what is already there
+                        count = min(qty, max(0, int(round(room - left, 6))))
+                    if idle or not room:
+                        sources = ids(sources, usable["fact_ids"], *(e["counts"]["fact_ids"] for e in entries
+                                                                    if e["counts"]["value"]), burn_ids, shift_ids)
                     if count == 0:
                         reason = "after_pack_hour"
                     elif count < qty:

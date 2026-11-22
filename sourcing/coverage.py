@@ -19,10 +19,9 @@ import re
 from dataclasses import dataclass
 from datetime import datetime
 
-from . import coverage_inbound, coverage_stock, coverage_windows
+from . import coverage_inbound, coverage_stock, coverage_windows, coverage_wording
 from .facts import Facts, believed_ids, day, figure, ids, number
 
-PHANTOM = re.compile(r"\bphantom\b|\bfitted by (the )?supplier\b|\b(not|never)\b.*\bstocked separately\b", re.I)
 PRIORITY = re.compile(r"\bpriority\b.*\bfirst\b", re.I | re.S)
 PRIORITY_SOURCES = (("policy_directive", "directive"), ("x_workbook_row", "note"), ("x_document_line", "text"))
 OUTSIDE = ("suppliers/", "mail/")                       # a supplier cannot set our priority
@@ -97,46 +96,45 @@ def bill_of_materials(facts: Facts, product: str, today) -> dict[str, tuple]:
     return out
 
 
-def phantom_evidence(facts: Facts, material: str) -> list[str]:
-    """Why a BOM line is no shortage, as kb has it. Empty when it is an ordinary part."""
+def phantom_evidence(facts: Facts, material: str) -> tuple[list[str], list[dict]]:
+    """(why a BOM line is no shortage, what to escalate). No reasons when it is an ordinary part."""
     for b in facts.believed("phantom_part", material_id=material):
-        return believed_ids(b) if b.get("value") else []
+        return (believed_ids(b) if b.get("value") else []), []
     for issue in facts.issues:
         payload = issue.get("payload") or {}
         key = payload.get("key") if isinstance(payload.get("key"), dict) else payload
         if issue.get("kind") == "phantom_part" and key.get("material_id") == material:
-            return ids(issue.get("fact_ids") or [])
+            return ids(issue.get("fact_ids") or []), []
     if any((number(r.get("qty")) or 0) > 0 for r in facts.rows("stock_batch", material_id=material)):
-        return []                                       # it is stocked, so it is no phantom
-    return ids(*(r.ids("note") for kind in ("bom_line", "component", "supplier_part", "part_xref")
-                 for r in facts.rows(kind)
-                 if material in (r.key("material_id"), r.key("child_id")) and PHANTOM.search(r.key("note"))))
+        return [], []                                   # it is stocked, so it is no phantom
+    said = [(verdict, r.ids("note")) for kind in ("bom_line", "component", "supplier_part", "part_xref")
+            for r in facts.rows(kind) if material in (r.key("material_id"), r.key("child_id"))
+            if (verdict := coverage_wording.phantom(r.key("note"))) is not None]
+    if not said:
+        return [], []
+    sources, sure = ids(*(i for _, i in said)), all(verdict for verdict, _ in said)
+    return (sources if sure else []), [{"kind": "phantom_from_note" if sure else "phantom_unclear",
+                                        "material_id": material, "fact_ids": sources}]
 
 
 def priority(facts: Facts, eds: list[Edition]) -> tuple[list[str] | None, list[str]]:
-    """(product ids in policy order, the policy's fact ids). None when no single policy says."""
+    """(product ids in policy order, the policy's fact ids). None when no single policy clearly says."""
+    labels = {e.product_id: [e.product_id, e.name] for e in eds}
     found = []
     for kind, attribute in PRIORITY_SOURCES:
         for row in facts.rows(kind):
             text = row.key(attribute)
             if row.path.startswith(OUTSIDE) or not PRIORITY.search(text):
                 continue
-            low, named = text.lower(), []
-            for e in eds:
-                hits = [m.start() for label in (e.product_id, e.name)
-                        if (m := re.search(rf"(?<!\w){re.escape(label.lower())}(?!\w)", low))]
-                if hits:
-                    named.append((min(hits), e.product_id))
-            if named:
-                order = [p for _, p in sorted(named)]
-                order += [e.product_id for e in eds if e.product_id not in order]
+            names_edition, order = coverage_wording.priority(text, labels)
+            if names_edition:
                 found.append((row.as_of, order, row.ids(attribute)))
     if not found:
         return None, []
     newest = max(f[0] for f in found)
     latest = [f for f in found if f[0] == newest]
     sources = ids(*(f[2] for f in latest))
-    return (latest[0][1] if len({tuple(f[1]) for f in latest}) == 1 else None), sources
+    return (latest[0][1] if all(f[1] == latest[0][1] for f in latest) else None), sources
 
 
 def share(available, wants: dict[str, float], order: list[str] | None) -> dict[str, float]:
@@ -182,8 +180,12 @@ def compute(facts: Facts, *, now: datetime, deadline: datetime, products: list[s
     windows = coverage_windows.pack_windows(facts, now, deadline)
 
     all_boms = {e.product_id: bill_of_materials(facts, e.product_id, today) for e in eds}
-    phantom = {m: found for m in sorted({m for bom in all_boms.values() for m in bom})
-               if (found := phantom_evidence(facts, m))}
+    phantom = {}
+    for material in sorted({m for bom in all_boms.values() for m in bom}):
+        found, phantom_alerts = phantom_evidence(facts, material)
+        alerts += phantom_alerts
+        if found:
+            phantom[material] = found
     boms = {p: {m: v for m, v in bom.items() if m not in phantom} for p, bom in all_boms.items()}
     for e in eds:
         if not all_boms[e.product_id]:
@@ -257,7 +259,8 @@ def compute(facts: Facts, *, now: datetime, deadline: datetime, products: list[s
         "covered": covered, "needed": needed, "gap": needed - covered, "unit": "copies",
         "at": now.isoformat(), "deadline": deadline.isoformat(), "fact_ids": top,
         "sources": [{"fact_id": i} for i in top["gap"]],
-        "assumptions": ["a date-only arrival is at the packing site by the first shift of that day"],
+        "assumptions": ["a date-only arrival is at the packing site by the first shift of that day, "
+                        "and never before now"],
         "priority": {"order": order, "fact_ids": policy_ids},
         "editions": out_editions, "parts": [p for p in parts if p["material_id"] in used],
         "not_shortages": [{"material_id": m, "reason": "phantom BOM line", "fact_ids": found}

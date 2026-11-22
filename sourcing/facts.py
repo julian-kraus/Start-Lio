@@ -23,7 +23,10 @@ GROUPED = re.compile(r"[+-]?\d{1,3}(,\d{3})+(\.\d+)?")
 
 
 def number(value) -> int | float | None:
-    """A number as written in a fact. Space and comma grouped thousands are accepted, anything else is None."""
+    """A number as written in a fact. Space and comma grouped thousands are accepted, anything else is None.
+
+    A dot is always a decimal point, so "2.000" is 2: thousands grouped with dots must be normalised in kb.
+    """
     if isinstance(value, bool) or value is None:
         return None
     if isinstance(value, (int, float)):
