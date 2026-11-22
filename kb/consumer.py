@@ -32,6 +32,11 @@ def _confidence_map(conn) -> dict:
     return load_rule_set(conn, version)[1].get("confidence_map", DEFAULT_CONFIDENCE)
 
 
+def _tracker_tables(conn) -> None:
+    """Until commit or rollback, unqualified names are the tracker's: kb's search_path would shadow public."""
+    conn.execute("SET LOCAL search_path TO public")
+
+
 def _current_sha(conn, path: str) -> str | None:
     row = conn.execute("SELECT sha256 FROM public.file_versions WHERE path = %s AND superseded_at IS NULL",
                        (path,)).fetchone()
@@ -96,11 +101,19 @@ def catch_up(conn, settings: KbSettings, reader: FileReader, llm,
              mail: mail_source.MailSource) -> dict | None:
     """Process all events after the cursor in batches; reconcile once if anything happened."""
     confidence_map = _confidence_map(conn)
-    # Start at the latest event: the start-up sync already covers everything that happened before.
-    cursor = tracker_db.get_cursor(conn, CONSUMER, start="latest")
-    conn.commit()
+    # A new cursor starts at the latest event: the start-up sync covers everything that happened before.
     processed, paths = 0, []
-    while rows := tracker_db.fetch_events(conn, cursor, BATCH):
+    following = db.tracker_table_exists(conn, "events")   # without a tracker there is still mail to consume
+    if following:
+        _tracker_tables(conn)
+        cursor = tracker_db.get_cursor(conn, CONSUMER, start="latest")
+    conn.commit()
+    while following:
+        _tracker_tables(conn)
+        rows = tracker_db.fetch_events(conn, cursor, BATCH)
+        conn.commit()
+        if not rows:
+            break
         for ev in rows:
             try:
                 status = handle_event(conn, ev, reader, settings, confidence_map, llm)
@@ -110,6 +123,7 @@ def catch_up(conn, settings: KbSettings, reader: FileReader, llm,
                 conn.rollback()
                 log.warning("event %s (%s %s) failed: %s", ev["id"], ev["kind"], ev["path"], exc)
             cursor = ev["id"]
+            _tracker_tables(conn)
             tracker_db.set_cursor(conn, CONSUMER, cursor)
             conn.commit()
             processed += 1
@@ -142,7 +156,9 @@ def _close(conn) -> None:
 
 def _follow(conn, listen, settings: KbSettings, reader: FileReader, llm, mail: mail_source.MailSource,
             stop: threading.Event, idle_timeout: float) -> None:
+    _tracker_tables(conn)
     tracker_db.init_schema(conn)
+    tracker_db.get_cursor(conn, CONSUMER, start="latest")   # before the sync: a drop during it has a higher id
     conn.commit()
     load_contract(conn, settings.structured_dir)
     counts = sync(conn, settings, reader, _confidence_map(conn), llm=llm)
