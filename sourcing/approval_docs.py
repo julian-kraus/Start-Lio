@@ -46,6 +46,7 @@ class Document:
     scope: str | None
     lines: list[Line]
     problems: list[str] = field(default_factory=list)
+    sha256: str = ""
 
 
 @dataclass
@@ -117,13 +118,6 @@ class Policy:
             return set(words(scope)) <= set(words(title))
         return words(VERSION_OR_DATE.sub("", self.title)) == words(VERSION_OR_DATE.sub("", other.title))
 
-    def role_terms(self) -> list[str]:
-        roles = [r for t in self.tiers for r in t.roles]
-        for rule in (self.air, self.release, self.release and self.release.extension, self.site, self.exceptions):
-            if rule:
-                roles += rule.roles + rule.above
-        return list(dict.fromkeys(roles))
-
 
 def number(text: str) -> Decimal | None:
     """An amount as printed ("10 000", "10,000.50", "10.000"). None when it is anything else."""
@@ -159,9 +153,9 @@ def documents(rows: list[dict], kind: str) -> list[Document]:
             continue
         groups.setdefault((path, row.get("sha256") or "", row.get("extractor") or ""), []).append(row)
     out = []
-    for (path, _, _), facts in sorted(groups.items()):
+    for (path, sha, _), facts in sorted(groups.items()):
         doc = Document(path, kind, next((str(f["subject"]["scope"]) for f in facts
-                                         if (f.get("subject") or {}).get("scope")), None), [])
+                                         if (f.get("subject") or {}).get("scope")), None), [], sha256=sha)
         where = [((f.get("locator") or {}).get("page", 1), (f.get("locator") or {}).get("line")) for f in facts]
         if len(facts) > 1:
             if not all(isinstance(p, int) and isinstance(n, int) for p, n in where) or len(set(where)) < len(where):

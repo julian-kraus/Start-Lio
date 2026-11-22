@@ -8,80 +8,10 @@ from plan import contracts
 from sourcing import approvals
 from sourcing.approval_docs import number
 
-POLICY = """Example Co · AP-1 Approval rules · v2.0
-Version 2.0 · Effective 2030-01-01 · Owner: Purchasing Director
-1. Purpose
-This policy says who may approve orders.
-2. Approval limits by value (per order, in EUR)
-Role
-Limit per order
-Planner
-< 700
-Area Manager
-< 7,000
-Purchasing Director
-< 63 100
-Chief Supply Officer
-< 700.000
-CSO and CTO jointly
-≥ 700,000
-3. Receiving site
-Orders delivered to a site require, in addition to the value approval, a booked slot released by the warehouse
-chief.
-4. Air freight
-Unplanned air freight up to EUR 3,500 per calendar month and category is approved by the responsible
-Area Manager. Above that, approval by the CSO is required before booking.
-5. New suppliers
-A supplier is released only after a test and written release by the Test
-Engineer and the responsible Area Manager. Conditional releases are limited to 30 days from the date of
-release. Orders placed after a conditional release has expired are held. A conditional
-release is extended in writing, once and by at most 15 days, by the responsible Area Manager together with the
-Test Engineer.
-6. Exceptions
-Exceptions must be documented and approved by the Purchasing Director."""
-
-CHART_V1 = """Example Co · Organisation (v1, 2030-01-05)
-Internal. Limits see the approval rules.
-Ada Able
-Chief Supply Officer
-Dr. Ben Baker
-Purchasing Director
-Cleo Cole
-Area Manager Paper & Board
-TBD
-Area Manager Toys
-Dan Dunn
-Senior Planner (Paper & Board)
-Eve East
-Test Engineer
-North Depot (dotted line to Purchasing Director)
-Finn Ford
-Warehouse Chief North Depot
-Also: Gus Gray (IT Lead (Purchasing)), Hana Hill (Chief Treasury Officer)"""
-
-CHART_V2 = (CHART_V1.replace("(v1, 2030-01-05)", "(v2, 2030-03-10)")
-            .replace("TBD", "Ira Iles (from 2030-03-12)").replace("Cleo Cole", "Jo James"))
+from approvals_world import CHART_V1, CHART_V2, POLICY, SEATS_V1, SEATS_V2, chart_facts, changed, facts, newest, world
 
 DAY = date(2030, 3, 11)
 SOURCE = {"scenario_input": "test amount"}
-
-
-def facts(text, path, kind, *, scope=None, extractor="test:1", mail=None):
-    out = []
-    for i, line in enumerate(text.splitlines(), 1):
-        locator = {"page": 1, "line": i, **({"mail": mail} if mail else {})}
-        out.append({"fact_id": f"{path}|{extractor}|{i}", "path": path, "sha256": path, "doc_kind": kind,
-                    "fact_type": "policy_directive" if scope else "x_document_line", "extractor": extractor,
-                    "subject": {"scope": scope} if scope else {}, "attribute": "directive" if scope else "text",
-                    "value": line, "locator": locator, "confidence": 0.9})
-    return out
-
-
-def world(policy=POLICY, *charts):
-    rows = facts(policy, "own/policy.pdf", "policy_document", scope="AP-1")
-    for i, chart in enumerate(charts or (CHART_V1, CHART_V2)):
-        rows += facts(chart, f"own/chart{i}.pdf", "org_chart")
-    return rows
 
 
 def route(rows=None, action="purchase_order", amount=1000, category="Paper & Board", on=DAY, **kw):
@@ -146,25 +76,28 @@ def test_chart_dated_later_does_not_apply_yet():
 
 
 def test_same_version_different_content_needs_a_human():
-    other = CHART_V2.replace("Jo James", "Kim King")
-    out = route(world(POLICY, CHART_V2, other))
+    other = changed(SEATS_V2, "Area Manager Paper & Board", holder="Kim King")
+    out = route(world(POLICY, (CHART_V2, SEATS_V2), (CHART_V2, other)))
     assert out["status"] == "needs_human" and "name" not in out["signer"]
 
 
 def test_undated_chart_could_be_newer_so_needs_a_human():
     undated = CHART_V2.replace(" (v2, 2030-03-10)", "")
-    assert route(world(POLICY, CHART_V1, undated))["status"] == "needs_human"
+    assert route(world(POLICY, (CHART_V1, SEATS_V1), (undated, SEATS_V2)))["status"] == "needs_human"
 
 
-@pytest.mark.parametrize("on, chart", [(date(2030, 3, 9), "TBD"), (DAY, "starts 2030-03-12")])
-def test_vacant_role_escalates_to_the_exception_approver(on, chart):
+@pytest.mark.parametrize("on, state", [(date(2030, 3, 9), "vacant"), (DAY, "not_started")])
+def test_vacant_role_goes_to_a_human_with_the_exception_rule(on, state):
     out = route(category="Toys", on=on)
-    assert out["status"] == "escalated"
-    assert out["signer"]["name"] == "Dr. Ben Baker"
-    assert out["signers"][0]["vacant_role"] == "Area Manager Toys"
-    assert "section 6" in out["signer"]["rule"]
-    if chart != "TBD":
-        assert chart in " ".join(out["reasons"])
+    assert out["status"] == "needs_human" and "name" not in out["signer"]
+    only = out["signers"][0]
+    assert (only["state"], only["role"]) == (state, "Area Manager Toys") and "name" not in only
+    assert only["exception_approver"]["role"] == "Purchasing Director"
+    assert "section 6" in only["exception_approver"]["rule"]
+    cited = {s.get("fact_id") for s in out["sources"]}
+    assert set(only["seat_fact_ids"] + only["exception_approver"]["fact_ids"][:1]) <= cited
+    if state == "not_started":
+        assert "starts 2030-03-12" in " ".join(out["reasons"])
 
 
 def test_holder_counts_from_the_start_date():
@@ -175,17 +108,19 @@ def test_holder_counts_from_the_start_date():
 def test_day_is_the_day_of_the_offset_passed():
     team = datetime.fromisoformat("2030-03-12T00:30:00+01:00")
     assert route(category="Toys", on=team)["signer"]["name"] == "Ira Iles"
-    assert route(category="Toys", on=team.astimezone(timezone.utc))["status"] == "escalated"
+    assert route(category="Toys", on=team.astimezone(timezone.utc))["status"] == "needs_human"
 
 
 def test_holder_ends_after_the_until_date():
-    chart = CHART_V2.replace("Jo James", "Jo James (until 2030-03-10)")
-    assert route(world(POLICY, chart))["status"] == "escalated"
+    out = route(newest("Area Manager Paper & Board", valid_until="2030-03-10"))
+    assert out["status"] == "needs_human" and out["signers"][0]["state"] == "ended"
+    assert route(newest("Area Manager Paper & Board", valid_until="2030-03-11"))["status"] == "resolved"
 
 
-def test_category_without_a_seat_escalates():
+def test_category_without_a_seat_needs_a_human():
     out = route(category="Magic")
-    assert out["status"] == "escalated" and out["signers"][0]["vacancy"] == "not_in_chart"
+    assert out["status"] == "needs_human" and out["signers"][0]["state"] == "not_in_chart"
+    assert out["signers"][0]["exception_approver"]["role"] == "Purchasing Director"
 
 
 def test_unknown_category_is_not_guessed():
@@ -194,23 +129,26 @@ def test_unknown_category_is_not_guessed():
 
 
 def test_vacancy_above_the_exception_approver_needs_a_human():
-    out = route(world(POLICY, CHART_V2.replace("Ada Able", "vacant")), amount=81300)
+    out = route(newest("Chief Supply Officer", holder="", status="vacant"), amount=81300)
     assert out["status"] == "needs_human" and "name" not in out["signer"]
     assert "lower limit" in " ".join(out["reasons"])
+    assert "exception_approver" not in out["signers"][0]
 
 
 def test_vacant_exception_approver_needs_a_human():
-    chart = CHART_V2.replace("Dr. Ben Baker", "TBD")
-    assert route(world(POLICY, chart), category="Toys")["status"] == "needs_human"
+    rows = newest("Purchasing Director", holder="", status="vacant")
+    assert route(rows, category="Toys")["status"] == "needs_human"
 
 
 def test_no_exception_rule_means_no_escalation():
     policy = POLICY.split("6. Exceptions")[0].rstrip()
-    assert route(world(policy), category="Toys")["status"] == "needs_human"
+    out = route(world(policy), category="Toys")
+    assert out["status"] == "needs_human" and "exception_approver" not in out["signers"][0]
+    assert "no single approver for exceptions" in " ".join(out["reasons"])
 
 
 def test_unreadable_holder_is_not_named():
-    out = route(world(POLICY, CHART_V2.replace("Jo James", "Jo James (on leave)")))
+    out = route(newest("Area Manager Paper & Board", holder="Jo James (on leave)", status="unclear"))
     assert out["status"] == "needs_human" and "name" not in out["signer"]
 
 
@@ -260,8 +198,8 @@ def test_conditional_release_is_signed_by_both_and_limited():
 
 def test_conditional_release_with_a_vacancy_keeps_both_signers():
     out = route(action="conditional_release", amount=None, category="Toys")
-    assert out["status"] == "escalated"
-    assert out["signer"]["name"] == "Eve East and Dr. Ben Baker"
+    assert out["status"] == "needs_human" and "name" not in out["signer"]
+    assert [s["state"] for s in out["signers"]] == ["held", "not_started"]
 
 
 @pytest.mark.parametrize("used, status", [(0, "resolved"), (1, "needs_human"), (None, "needs_human")])
@@ -285,11 +223,11 @@ def test_delivery_to_a_site_also_needs_the_site_release():
 
 @pytest.mark.parametrize("site", ["Example Northern Distribution Center Norwick", "DC-NOR"])
 def test_site_is_found_by_its_kb_name_or_id(site):
-    chart = CHART_V2.replace("Warehouse Chief North Depot", "Warehouse Chief DC Norwick")
+    seats = changed(SEATS_V2, "Warehouse Chief North Depot", title="Warehouse Chief DC Norwick", scope="DC Norwick")
     known = {"fact_id": "own/sites.csv|1", "path": "own/sites.csv", "doc_kind": "master_table", "fact_type": "site",
              "subject": {"site_id": "DC-NOR"}, "attribute": "name", "confidence": 0.9,
              "value": "Example Northern Distribution Center Norwick"}
-    out = route(world(POLICY, chart) + [known], delivery_site=site)
+    out = route(world(POLICY, (CHART_V2, seats)) + [known], delivery_site=site)
     assert [(s["state"], s["name"]) for s in out["also_required"]] == [("held", "Finn Ford")]
 
 
@@ -302,9 +240,10 @@ def test_unknown_site_is_not_treated_as_a_vacancy():
                                         ("own/rules.pdf", {"trust": "supplier_contact"})])
 def test_supplier_sent_documents_never_set_the_rules(path, mail):
     policy = POLICY.replace("2.0", "9.0").replace("2030-01-01", "2030-03-01").replace("< 700\n", "< 5,000\n")
-    chart = CHART_V2.replace("(v2,", "(v9,").replace("Jo James", "Mal Moss")
+    chart = CHART_V2.replace("(v2,", "(v9,")
+    seats = changed(SEATS_V2, "Area Manager Paper & Board", holder="Mal Moss")
     rows = world() + facts(policy, path, "policy_document", scope="AP-1", mail=mail)
-    rows += facts(chart, path + ".chart", "org_chart", mail=mail)
+    rows += chart_facts(chart, seats, path + ".chart", mail=mail)
     assert route(rows) == route()
 
 
@@ -338,12 +277,6 @@ def test_unreadable_or_foreign_limits_need_a_human(old, new):
     assert out["status"] == "needs_human" and "name" not in out["signer"]
 
 
-def test_title_without_a_name_does_not_borrow_the_title_before_it():
-    chart = CHART_V2.replace("North Depot (dotted line to Purchasing Director)", "Line Manager").replace("Finn Ford\n", "")
-    out = route(world(POLICY, chart.replace("Line Manager", "Line Chief")), delivery_site="North Depot")
-    assert out["status"] == "needs_human" and "name" not in out["signer"]
-
-
 def test_release_date_needs_a_source():
     with pytest.raises(ValueError, match="released_on"):
         route(action="conditional_release", amount=None, released_on=DAY)
@@ -367,7 +300,7 @@ def test_lines_that_cannot_be_trusted_need_a_human(change):
 
 
 @pytest.mark.parametrize("rows", [[], facts(POLICY, "own/policy.pdf", "policy_document", scope="AP-1"),
-                                  facts(CHART_V2, "own/chart.pdf", "org_chart")])
+                                  chart_facts(CHART_V2, SEATS_V2, "own/chart.pdf")])
 def test_missing_facts_need_a_human(rows):
     out = route(rows)
     assert out["status"] == "needs_human" and "name" not in out["signer"]
