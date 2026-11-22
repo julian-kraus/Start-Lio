@@ -66,7 +66,9 @@ function timeline() {
   (S.events || []).forEach(e => { if (e.supplier_id && !ids.includes(e.supplier_id)) ids.push(e.supplier_id); });
   openDecisions().forEach(d => { if (d.supplier_id && !ids.includes(d.supplier_id)) ids.push(d.supplier_id); });
   let html = "";
-  const step = 4 * 3600e3, first = Math.ceil(a / step) * step;
+  let step = 4 * 3600e3;                        // the prototype's 4 h grid; widen it so a long span stays readable
+  while ((b - a) / step > 8) step *= 2;          // at most ~8 labels across the axis, never an overlapping strip
+  const first = Math.ceil(a / step) * step;
   for (let t = first; t < b; t += step) html += `<div class="grid" style="left:${X(t)}%"></div>`;
   html += `<div class="pastbg" style="width:${X(S.clock.now)}%"></div>`;
   const W = $("#lanes").clientWidth || 1000;
