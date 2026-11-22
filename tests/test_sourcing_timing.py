@@ -34,7 +34,7 @@ FACTS = [fact("long", "origin", "factory"), fact("long", "destination", "harbour
          {"fact_type": "site", "subject": {"site_id": "warehouse"}, "attribute": "name", "value": "W", "fact_id": "s"}]
 
 
-def chain(load=4.0, transit=9.0, last_mile=1.0, receiving=1.0):
+def chain(load=3.0, transit=10.0, last_mile=1.0, receiving=1.0):
     return Chain(load=Leg("load", load, {"fact_id": "promise"}),
                  transit=Leg("transit", transit, {"fact_id": "offer"}),
                  last_mile=Leg("last mile", last_mile, {"fact_id": "road"}),
@@ -60,20 +60,20 @@ def test_lead_time_is_the_sum_of_the_four_legs(moved):
 
 
 def test_lead_time_from_route_facts():
-    c = Chain(load=timing.offer_leg("load", "within 4 h", {"fact_id": "statement"}),
+    c = Chain(load=timing.offer_leg("load", "within 3 h", {"fact_id": "statement"}),
               transit=timing.route_leg(FACTS, "long"),
               last_mile=timing.last_mile_leg(FACTS, "long", "warehouse"),
               receiving=Leg("receiving", 2, {"scenario_input": "receiving"}))
-    assert c.lead_time_h == 4 + 72 + 12 + 2
+    assert c.lead_time_h == 3 + 72 + 12 + 2
     assert c.sources == [{"fact_id": "statement"}, {"fact_id": "long:transit_days"},
                          {"fact_id": "short:transit_days"}, {"scenario_input": "receiving"}]
 
 
 def test_lead_time_from_offer_text():
     src = {"fact_id": "offer-text"}
-    c = replace(chain(), load=timing.offer_leg("load", "within 4 h", src),
-                transit=timing.offer_leg("transit", "about 2,5 Std.", src))
-    assert c.lead_time_h == 4 + 2.5 + 1 + 1
+    c = replace(chain(), load=timing.offer_leg("load", "within 3 h", src),
+                transit=timing.offer_leg("transit", "about 3,5 Std.", src))
+    assert c.lead_time_h == 3 + 3.5 + 1 + 1
 
 
 def test_route_that_ends_at_the_site_has_no_last_mile():
@@ -145,7 +145,7 @@ def test_load_promise_given_as_a_time():
 
 # decide_by, too_late_at
 
-@pytest.mark.parametrize("legs", [(4, 9, 1, 1), (0, 0, 0, 0), (0.25, 2.5, 0, 1 / 3), (48, 720, 24, 6)])
+@pytest.mark.parametrize("legs", [(3, 10, 1, 1), (0, 0, 0, 0), (0.25, 3.5, 0, 1 / 3), (48, 720, 24, 6)])
 def test_decide_by_is_needed_at_minus_lead_time(legs):
     c = chain(*legs)
     decide = timing.decide_by(c, DEADLINE)
@@ -260,7 +260,7 @@ def test_assess_reports_team_and_office_against_too_late_at():
 @pytest.mark.parametrize("scale", [1, 3])
 def test_hedged_early_lands_and_started_after_cancellation_misses(shift, scale):
     # moved in time and stretched, the shape holds: it follows from the inputs, not from constants
-    c = chain(4 * scale, 9 * scale, 1 * scale, 1 * scale)
+    c = chain(3 * scale, 10 * scale, 1 * scale, 1 * scale)
     early = EVE + shift
     cancelled = early + (MORNING - EVE) * scale
     deadline = early + (DEADLINE - EVE) * scale

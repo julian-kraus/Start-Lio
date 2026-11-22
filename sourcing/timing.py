@@ -1,6 +1,6 @@
 """Timing chain: when a supply option lands, and until when it is worth starting. Pure functions, no clock, no DB.
 
-    chain = Chain(load=offer_leg("load", "within 4 h", src),    # supplier promise
+    chain = Chain(load=offer_leg("load", "within 3 h", src),    # supplier promise
                   transit=route_leg(facts, route_id),           # or offer_leg("transit", text, src)
                   last_mile=last_mile_leg(facts, route_id, site),
                   receiving=Leg("receiving", hours, src))
@@ -63,7 +63,7 @@ def _number(text: str) -> float:
 
 
 def parse_hours(text: str) -> float:
-    """Hours in a duration quoted verbatim, such as "within 4 h", "2,5 Std." or "1 h 30 min".
+    """Hours in a duration quoted verbatim, such as "within 3 h", "1,5 Std." or "1 h 30 min".
 
     A range counts at its slow end. Anything not fully understood ("2 working days", "tomorrow", a bare number) is
     refused, never guessed.
