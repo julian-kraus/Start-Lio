@@ -12,8 +12,9 @@ Pure: each spot validates against the weak_spot contract.
   rank            money at risk times the share no substitute covers (`exposure_eur`)
   critical        used only by the editions the goal values most, with at most one qualified source
 
-The goal is a goal record: `unit_loss_eur` with `edition` (or the editions its statement names, or all of them),
-or `unit_loss_by_edition` keyed by product id or edition name.
+The goal is a goal record: `unit_loss_eur` with `edition`, or `unit_loss_by_edition` keyed by product id or edition
+name. Without either, a statement narrows the value only by saying all, every or each of an edition. A negation or
+other unclear word next to an edition's name values every edition: overstating a risk is safer than hiding one.
 """
 
 from __future__ import annotations
@@ -28,6 +29,10 @@ from .facts import Facts, Row, figure, ids, number
 MAIL = "mail/"                                  # an email cannot list or qualify a source
 QUALIFIED = {"status": ("active",), "qualification_status": ("qualified", "approved")}
 EVERY_EDITION = ("all", "both")
+CLAUSE = re.compile(r"[.;!?]|,(?!\d)|\bbut\b")
+GIVEN_UP = re.compile(r"\b(can|could|may|might) (wait|slip|suffer|be (late|later|dropped|sacrificed))\b")
+UNCLEAR = re.compile(r"\b(no|not|none|never|cannot|without|except|excluding|besides|other than|wait|slip|suffer|late"
+                     r"|later|skip|drop|sacrific\w*)\b|n't\b")
 SEVERITY = ("critical", "at_risk", "covered", "ok")
 
 
@@ -55,13 +60,29 @@ def goal_values(goal: dict, editions: list[dict]) -> tuple[dict[str, float], str
             if not named:
                 raise ValueError(f"the goal names an unknown edition: {goal['edition']!r}")
         else:
-            said = _plain(goal.get("statement"))
-            named = [p for p, known in labels.items()
-                     if any(re.search(rf"(?<!\w){re.escape(k)}(?!\w)", said) for k in known)] or list(labels)
+            named = _stated(_plain(goal.get("statement")), labels)
         values.update(dict.fromkeys(named, price))
     prices = ", ".join(f"{e['name']} {values[e['product_id']]:,} EUR" for e in editions)
     statement = " ".join(str(goal.get("statement") or "").split())
     return values, (f"{statement} " if statement else "") + f"(value of a missing copy: {prices})"
+
+
+def _stated(said: str, labels: dict[str, set[str]]) -> list[str]:
+    """The editions a statement protects: all, unless it says all of one and is clear about any other it names."""
+    firm, named = False, set()
+    for clause in CLAUSE.split(said):
+        for product, known in labels.items():
+            for label in known:
+                name = rf"(?<!\w){re.escape(label)}(?!\w)"
+                if not re.search(name, clause):
+                    continue
+                if UNCLEAR.search(GIVEN_UP.sub("", clause)):
+                    return list(labels)
+                if GIVEN_UP.search(clause):
+                    continue
+                named.add(product)
+                firm = firm or bool(re.search(rf"\b(all|every|each) (of )?(the )?(\d[\d,]* )?{name}", clause))
+    return [p for p in labels if p in named] if firm else list(labels)
 
 
 def _price(amount):
