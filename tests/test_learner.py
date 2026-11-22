@@ -81,3 +81,42 @@ def test_ledger_updates_real_timeline_and_is_idempotent(tmp_path):
     learn_from_ledger(Conn(), timeline)
     assert timeline.state()["suppliers"][0]["score"]["value"] < original["score"]["value"]
     assert learn_from_ledger(Conn(), timeline) == []
+
+
+def test_broken_promise_from_plan_database_reaches_timeline(tmp_path):
+    import os
+    import uuid
+    from datetime import datetime, timezone
+    from psycopg import sql
+    from agents import broker
+    from agents.learner import learn_from_ledger
+    from plan import db
+    from sourcing.promises import Statement, promise_from_statement
+    from tracker.lookahead import Lookahead
+
+    url = os.environ.get("TEST_DATABASE_URL")
+    if not url:
+        pytest.skip("TEST_DATABASE_URL not set")
+    schema = f"plan_test_{uuid.uuid4().hex[:8]}"
+    conn = db.connect(url, schema)
+    try:
+        db.migrate(conn, schema)
+        promise = promise_from_statement(promise_id="p1", supplier_id="supplier-x", what="deliver",
+                                         made_at=datetime(2030, 1, 1, tzinfo=timezone.utc),
+                                         within="within 4 h", fallback="follow up",
+                                         sources=[{"fact_id": "made"}])
+        broker.save_promise(conn, promise)
+        updates = broker.apply_ledger(conn, [Statement(kind="cancel", at="2030-01-01T01:00:00+00:00",
+                                                       supplier_id="supplier-x", fact_id="cancel")])
+        assert updates[0]["state"] == "broken"
+        timeline = Lookahead(tmp_path / "log.jsonl")
+        original = card(History({}), "supplier-x", scenario_prior={"value": 0.8, "label": "example"})
+        timeline.append([original])
+        learn_from_ledger(conn, timeline)
+        assert timeline.state()["suppliers"][0]["score"]["value"] < original["score"]["value"]
+        assert learn_from_ledger(conn, timeline) == []
+    finally:
+        conn.rollback()
+        conn.execute(sql.SQL("DROP SCHEMA IF EXISTS {} CASCADE").format(sql.Identifier(schema)))
+        conn.commit()
+        conn.close()
