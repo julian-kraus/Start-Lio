@@ -121,6 +121,7 @@ def test_two_equal_readings_of_a_seat_are_one_holder():
 def test_scope_comes_from_the_key_or_the_title(title, scope):
     rows = newest(AREA, title=title, scope=scope)
     assert route(rows)["signer"]["name"] == "Jo James"
+    assert "Paper & Board" in route(rows)["signer"]["role"]
     assert unnamed(route(rows, category="Glass"))
 
 

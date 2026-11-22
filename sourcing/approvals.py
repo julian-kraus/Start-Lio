@@ -108,20 +108,20 @@ def _holder(chart: Chart, role: str, area: str | None, today: date, sites: list[
         return {"state": "not_in_chart", "why": f"the org chart has no seat for {role}{where}", "fact_ids": site_ids}
 
     seats = [s for s, _ in matches]
-    out = {"title": seats[0].title, "fact_ids": site_ids + [i for s in seats for i in s.ids],
+    out = {"title": seats[0].label, "fact_ids": site_ids + [i for s in seats for i in s.ids],
            "seat_fact_ids": [i for s in seats for i in s.ids],
            "line_keys": list(dict.fromkeys(s.line_key for s in seats if s.line_key))}
     names = {s.name for s in seats}
     states = {s.state_on(today) for s in seats}
     if len(states) > 1:
         return {**out, "state": "unclear",
-                "why": f"the seats for {seats[0].title} disagree: " + ", ".join(sorted(states))}
+                "why": f"the seats for {seats[0].label} disagree: " + ", ".join(sorted(states))}
     if states == {HELD} and len(names) > 1:
         return {**out, "state": "unclear", "why": f"several people hold {role}: " + ", ".join(sorted(names))}
     state = states.pop()
     if state == HELD:
         return {**out, "state": HELD, "name": seats[0].name}
-    why = f"the seat {seats[0].title} is {state.replace('_', ' ')} on {today.isoformat()}"
+    why = f"the seat {seats[0].label} is {state.replace('_', ' ')} on {today.isoformat()}"
     if state == "not_started":
         why += f" (starts {min(s.start for s in seats).isoformat()})"
     return {**out, "state": state, "why": why}
