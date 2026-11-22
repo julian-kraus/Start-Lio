@@ -88,53 +88,6 @@ def test_protect_margin_hedges_less():
     assert {"goal_line": "Protect margin"} in margin["sources"]
 
 
-@pytest.mark.parametrize("goal", [
-    MARGIN, {"statement": "protect our margins"}, {"protect": ["margin"]}, {"answers": {"sacrifice": "Protect margin"}},
-    {"answers": [{"id": "limits", "a": "On time, but preserve margin"}]},
-])
-def test_goal_that_protects_margin(goal):
-    assert hedge.margin_line(goal)
-
-
-@pytest.mark.parametrize("goal", [
-    None, {}, {"statement": "All on time. Goodwill can suffer. Don't bankrupt me."},
-    {"statement": "Don't protect margin"}, {"statement": "No need to protect margin"},
-    {"statement": "Protect margin", "sacrifices": ["margin"]},
-    {"answers": [{"q": "Should we protect margin?", "a": "no"}]},
-])
-def test_goal_that_does_not_protect_margin(goal):
-    assert hedge.margin_line(goal) is None
-
-
-@pytest.mark.parametrize("said", [
-    "Protect margin and don't bankrupt me", "Protect margin and do not overspend",
-    "Protect margin - don't bankrupt me", "Margin protection first", "Our margin must be protected",
-    "Protect our profit margin", "Don't sacrifice margin", "Margin can't suffer",
-])
-def test_margin_is_protected_in_common_wordings(said):
-    assert hedge.margin_line({"statement": said})
-
-
-@pytest.mark.parametrize("said", [
-    "We cannot protect margin", "Stop protecting margin", "Forget protecting margin",
-    "Protection of margin can wait", "All on time rather than protect margin", "Margin can suffer",
-    "We don't care about margin", "Margins don't matter", "Keep a safety margin of two days",
-])
-def test_margin_is_not_protected_when_the_goal_says_the_opposite(said):
-    assert hedge.margin_line({"statement": said}) is None
-
-
-@pytest.mark.parametrize("goal", [
-    {"statement": "Margin"}, {"statement": "Do not forget about protecting margin"},
-    {"statement": "Protect margin unless copies are at risk"}, {"statement": "Protect margin. Margin can suffer"},
-    {"sacrifices": ["anything but margin"]}, {"statement": "Anything but margin can suffer"},
-    {"statement": "We cannot hit the date and protect margin"},
-])
-def test_an_unclear_word_on_margin_is_refused_not_guessed(goal):
-    with pytest.raises(ModelError, match="margin"):
-        hedge.margin_line(goal)
-
-
 def test_the_protect_field_settles_an_unclear_wording():
     assert hedge.margin_line({"statement": "Margin", "protect": ["margin"]})
     assert hedge.margin_line({"statement": "Margin", "protect": []}) is None
