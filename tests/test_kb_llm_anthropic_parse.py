@@ -329,3 +329,16 @@ def test_slash_date_is_day_first_only_for_day_first_languages():
     assert _envelope({"facts": [f], "languages": ["de"]}, "x", {})["facts"][0]["value"] == "2031-04-03"
     assert _envelope({"facts": [f], "languages": ["en"]}, "x", {})["facts"][0]["value"] == "03/04/2031"
     assert _envelope({"facts": [f]}, "x", {})["facts"][0]["value"] == "03/04/2031"
+
+
+def test_workbook_rows_reach_the_model_as_text(monkeypatch):
+    import io
+    from openpyxl import Workbook
+    import kb.llm.base as base
+    wb = Workbook(); ws = wb.active; ws.title = "Lines"
+    ws.append(["part", "qty"]); ws.append(["P-X1", 5]); ws.append([None, None]); ws.append(["P-X2", 7])
+    buf = io.BytesIO(); wb.save(buf)
+    text, _ = base.text_of("xlsx", buf.getvalue())
+    assert text.splitlines() == ["# sheet Lines", "part\tqty", "P-X1\t5", "P-X2\t7"]
+    monkeypatch.setattr(base, "XLSX_MAX_ROWS", 2)
+    assert base.text_of("xlsx", buf.getvalue())[0].splitlines()[-1] == "[1 more rows in this sheet not shown]"
