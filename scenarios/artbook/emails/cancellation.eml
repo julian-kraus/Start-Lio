@@ -1,0 +1,13 @@
+Subject: [Scenario] Cancellation for ${part}
+X-Lookahead-Scenario: scenario input
+Content-Type: text/plain; charset="utf-8"
+
+[Scenario input, not a real supplier message]
+
+Hello,
+
+we cancel the order of ${offer_quantity} pieces of ${part}: ${cancel_reason}.
+None of these pieces will be loaded.
+
+Kind regards
+${persona}
