@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grand Plan Lio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="/lookahead/static/gp_a.css">
+<link rel="stylesheet" href="/lookahead/static/gp_b.css">
+</head>
+<body>
+<header><div class="hd">
+  <div class="row" style="gap:12px"><span class="logo" data-i="trending-up"></span><div><p style="font-weight:700;font-size:16px;letter-spacing:-.01em">Grand Plan Lio</p></div></div>
+  <nav class="row" style="gap:2px" aria-label="Views">
+    <button class="tab on" data-view="timeline"><span data-i="clock"></span>Timeline</button>
+    <button class="tab" data-view="plan"><span data-i="document"></span>Plan</button>
+    <button class="tab" data-view="weak"><span data-i="alert-triangle"></span>Risks &amp; monitoring</button>
+    <button class="tab" data-view="decisions"><span data-i="gavel"></span>Decisions <span class="count" id="decCount">0</span></button>
+  </nav>
+  <div class="row" style="gap:8px"><span class="badge b-n" id="clockBadge"></span><span class="badge b-r" id="deadlineBadge"></span><div class="me"><button class="me-btn" id="meBtn" aria-label="Signer"></button></div></div>
+</div></header>
+
+<main>
+  <section class="card" id="goalCard" hidden>
+    <div class="between" style="gap:16px;flex-wrap:wrap"><div><h2 class="h-sm">Set the goal for this launch</h2>
+      <p class="sm muted" id="goalWhy"></p></div>
+      <button class="btn btn-primary" id="goalSet"><span data-i="check"></span>Use these answers</button></div>
+    <dl class="pd-why" id="goalList" style="margin-top:14px"></dl>
+  </section>
+
+  <div class="view on" id="v-timeline">
+    <section class="card tlcard"><div class="tlgrid"><div class="tlmain">
+      <div class="between" style="flex-wrap:wrap;gap:10px"><div><h2 class="h-sm">Now to deadline</h2></div><span class="sm muted" id="coverText"></span></div>
+      <div class="tl" id="tl" style="margin-top:40px">
+        <div class="lanes" id="lanes"></div>
+        <div class="axis" id="axis" style="margin-top:28px"></div>
+      </div>
+    </div>
+    <aside class="dq" aria-label="Waiting for you"><div class="dq-in"><div class="between"><h3 class="dq-h">Decision cards <span class="count" id="dqCount">0</span></h3><button class="btn btn-text dq-all" data-goview="decisions">See all</button></div><div class="dq-list" id="dq"></div></div></aside>
+    </div></section>
+    <section class="card"><div class="row" style="color:var(--v7)"><span data-i="sparkles"></span><h2 class="h-sm" style="color:var(--text)">What the agent did</h2></div><ul class="feed" id="feed" style="margin-top:18px"></ul></section>
+  </div>
+
+  <div class="view" id="v-plan"></div>
+
+  <div class="view" id="v-weak">
+    <section class="card">
+      <div class="between"><h2 class="h-sm">Weak spots</h2><span class="sm muted" id="weakNote"></span></div>
+      <div class="ghead"><span>Supplier</span><span>Part</span><span>Product</span></div>
+      <div class="graph" id="graph"><div class="gcol" id="gSup"></div><div class="gcol" id="gPart"></div><div class="gcol" id="gProd"></div></div>
+    </section>
+    <section class="card">
+      <div class="between" style="margin-bottom:8px"><div><h2 class="h-sm">Promises being watched</h2></div><span class="badge b-a" id="monBadge"></span></div>
+      <table><thead><tr><th>Who</th><th>Promise</th><th>Next check</th><th>Status</th><th>If it fails</th></tr></thead><tbody id="monBody"></tbody></table>
+    </section>
+  </div>
+
+  <div class="view" id="v-decisions">
+    <section class="card">
+      <div class="between" style="margin-bottom:8px"><h2 class="h-sm">Waiting for you</h2></div>
+      <div class="dgrid" id="decOpen"></div>
+    </section>
+    <section class="card">
+      <div class="between" style="margin-bottom:8px"><h2 class="h-sm">Decided</h2><span class="badge b-n" id="decDone"></span></div>
+      <div style="overflow-x:auto"><table><thead><tr><th>Decision</th><th>Decided by</th><th class="r">Impact</th><th class="r">Amount</th><th>Time</th><th>Result</th></tr></thead><tbody id="decClosed"></tbody></table></div>
+    </section>
+  </div>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<div class="modal" id="rejModal" role="dialog" aria-modal="true" aria-labelledby="rejH"><div class="modal-box">
+  <p class="modal-k" id="rejH">Reject this proposal?</p>
+  <p class="modal-t" id="rejTitle"></p>
+  <p class="modal-w"><span data-i="alert-triangle"></span><span>Nothing is sent. Your name and reason are recorded.</span></p>
+  <label class="sm muted rej-f">Your name<input id="rejBy" autocomplete="name"></label>
+  <label class="sm muted rej-f">Reason<textarea id="rejWhy" rows="3"></textarea></label>
+  <div class="modal-btns"><button class="btn btn-ghost" id="rejNo">Cancel</button><button class="btn btn-primary" id="rejYes">Reject</button></div>
+</div></div>
+<aside class="drawer" id="drawer" aria-label="Details"><div class="dhead"><div id="dTitle"></div><button class="btn btn-ghost" id="dClose" aria-label="Close"><span data-i="x"></span></button></div><div class="dbody" id="dBody"></div></aside>
+
+<script src="/lookahead/static/gp_icons.js"></script>
+<script src="/lookahead/static/gp_app.js"></script>
+<script src="/lookahead/static/gp_plan.js"></script>
+<div id="gpNote" class="gp-note" role="status" aria-live="polite"></div>
+</body>
+</html>

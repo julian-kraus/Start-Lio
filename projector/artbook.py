@@ -8,9 +8,12 @@ answers the presenter gives. Every scenario value is labelled as one on screen.
 """
 from __future__ import annotations
 
+import json
+
 from sourcing import hedge, weakspots
 from sourcing.facts import number
 
+from . import background
 from .world import World, goal_of, instant
 
 SCN = "scenario input"
@@ -28,16 +31,38 @@ def val(x):
     return x.get("value") if isinstance(x, dict) else x
 
 
-def ids(x) -> list[dict]:
-    fids = x.get("fact_ids", []) if isinstance(x, dict) else []
-    return [{"fact_id": f} for f in fids[:20]] or [{"scenario_input": "computed"}]
+def cite(*found) -> list[dict]:
+    """The sources behind a number as sourcing/ returned them: figures with fact_ids, or references."""
+    out = {}
+    for x in found:
+        for item in x if isinstance(x, list) else [x]:
+            if not isinstance(item, dict):
+                continue
+            for ref in [{"fact_id": f} for f in item["fact_ids"]] if "fact_ids" in item else [item]:
+                out[json.dumps(ref, sort_keys=True, default=str)] = ref
+    return list(out.values())
+
+
+MODELS = {"deposit_only": "deposit only, the backup can be cancelled", "full_order": "full order"}
+
+
+def shown(row: dict) -> str:
+    """A hedge drill-down value as the screen shows it, with its unit."""
+    v, unit = row.get("value"), str(row.get("unit") or "")
+    if isinstance(v, str):
+        return MODELS.get(v, v)
+    if "eur" in unit.casefold() or "price" in str(row.get("name", "")) or "deposit" in str(row.get("name", "")):
+        return eur(v)
+    if isinstance(v, float) and v < 1 and "p_fail" in str(row.get("name", "")):
+        return f"{v:.0%}"
+    return num(v) if isinstance(v, (int, float)) else str(v)
 
 
 def supplier_record(w: World, card: dict, master: dict, sid: str, parts: list[str], **extra) -> dict:
     return {"kind": "supplier", "supplier_id": sid, "name": master.get("name") or card.get("name") or sid,
             "country": master.get("country"), "city": master.get("city"), "lang": master.get("preferred_language"),
             "contact": master.get("contact_name"), "persona": master.get("notes") or "", "parts": parts,
-            "flags": [], "score": {k: card["score"][k] for k in ("value", "n", "prior", "k", "method", "breakdown")},
+            "flags": [], "score": {k: card["score"].get(k) for k in ("value", "n", "prior", "k", "method", "breakdown", "sources")},
             **extra}
 
 
@@ -56,13 +81,14 @@ def lanes(w: World, cov: dict, spots: list[dict], edition: dict, extra_copies: d
         status = ("covered" if added else "ok") if gap == 0 else (s["detail"].get("status") or "critical")
         out.append({"lane_id": pid, "name": w.part_name(pid), "edition": edition["name"], "need": open_,
                     "usable": open_ - gap, "gap": gap, "status": status, "reason": s.get("reason") or "",
-                    "rank": s.get("rank"), "bars": []})
+                    "rank": s.get("rank"), "bars": [],
+                    "sources": cite(edition["open"], s.get("sources"))})
     return out
 
 
-def plan(at: str, lane_list: list[dict], covered: float, needed: float) -> dict:
+def plan(at: str, lane_list: list[dict], covered: float, needed: float, sources: list[dict]) -> dict:
     return {"kind": "plan", "at": at, "lanes": lane_list,
-            "coverage": {"covered": covered, "needed": needed, "unit": "copies"}}
+            "coverage": {"covered": covered, "needed": needed, "unit": "copies", "sources": sources}}
 
 
 def build(w: World, scn: dict) -> list[dict]:
@@ -100,22 +126,34 @@ def build(w: World, scn: dict) -> list[dict]:
     price = w.price(b_id, part, start)
     qty = [r for r in w.facts.rows("bom_line") if str(r.get("child_id") or r.get("component_id")) == part
            and str(r.get("parent_id") or r.get("product_id")) == edition["product_id"]]
-    per_copy = number(qty[0].get("qty_per")) if qty and qty[0].get("qty_per") not in (None, "") else 1
+    stated = bool(qty) and qty[0].get("qty_per") not in (None, "")
+    per_copy = number(qty[0].get("qty_per")) if stated else 1
+    per_copy_src = (cite({"fact_ids": qty[0].ids("qty_per")}) if stated
+                    else [{"scenario_input": "one unit per copy assumed, no BOM quantity in kb"}])
+    risk_src = cite(top["detail"]["copies_at_risk"]) or cite(top.get("sources"))
+    money_src = cite(risk_src, top.get("sources"), {"scenario_input": "goal answer: loss per missing copy"})
+    cover_src = cite(edition["covered"], edition["open"])
     result = hedge.decide(
         p_fail=hedge.p_fail(a_card), loss_per_copy=hedge.goal_loss(goal, edition["name"]),
-        copies_at_risk=hedge.Input(at_risk, ids(top["detail"]["copies_at_risk"]), computed=True),
+        copies_at_risk=hedge.Input(at_risk, risk_src, computed=True),
         units=hedge.Input(back["units"], {"scenario_input": f"{b_name} spare lot of {num(back['units'])}"}),
-        unit_price=price, units_per_copy=hedge.Input(per_copy, {"scenario_input": "BOM quantity per copy"}),
+        unit_price=price, units_per_copy=hedge.Input(per_copy, per_copy_src),
         cost_model=hedge.Input("deposit_only", {"scenario_input": "backup cancellable, deposit only"}),
         deposit=hedge.Input(back["deposit"], {"scenario_input": f"deposit {back['deposit']}"}), goal=goal)
     deposit = result["commitment_eur"]
     order_value = back["units"] * val(price.value if hasattr(price, "value") else price)
     remaining = order_value - deposit
     unit_price = order_value / back["units"]
+    by_name = {r["name"]: r["refs"] for r in result["drilldown"]["inputs"]}
+    deposit_src = cite(by_name["deposit"])
+    order_src = cite(by_name["units"], by_name["unit_price"], deposit_src)
     signer = w.signer(remaining, {"label": f"remaining order value {eur(remaining)}"}, instant(scn["decision_at"]),
                       None, site.get("site_id"))
     rule = signer.get("rule") or "; ".join(signer.get("reasons", [])[:1])
-    if not signer.get("name") and str(signer.get("role", "")).casefold() == "buyer":
+    if signer.get("status") != "resolved":
+        signer.pop("name", None)   # an unresolved route names nobody, in no field of the record
+        signer.pop("fact_ids", None)
+    elif not signer.get("name") and str(signer.get("role", "")).casefold() == "buyer":
         # the policy names the role; the org chart's line order is unknown, so the person is the buyer who
         # places this supplier's orders for this part in the PO history
         name, fact_ids = w.buyer_of(b_id, part)
@@ -140,52 +178,63 @@ def build(w: World, scn: dict) -> list[dict]:
               "suggested": str(goal["budget_eur"]), "unit": "EUR",
               "why": f"Goal answer for this run ({SCN}). The approval policy still decides who signs."}]})
     add({"kind": "clock", "now": start.isoformat()})
-    for sid in sorted({c for c in w.history.suppliers}):
+    sids = sorted({c for c in w.history.suppliers})
+    for sid in sids:
         add(supplier_record(w, w.card(sid), masters.get(sid, {}), sid, w.parts_of(sid)))
+    # what is known at the start: open kb findings and next promised deliveries, plus coverage (needs no goal)
+    first_part = {r.get("supplier_id"): str(r.get("material_id")) for r in w.facts.rows("supplier_part")
+                  if str(r.get("primary")) == "Y"}
+    for rec in background.events(w, start, sids, first_part):
+        add(rec)
+    add(plan(start.isoformat(), [], covered, open_, cover_src))
     add({"kind": "cue", "label": "Goal interview", "wait_for": "goal"})
     at = lambda t: instant(t).isoformat()
     t_plan = start.replace(minute=start.minute + 1).isoformat()
     lane0 = lanes(w, cov, spots, edition)
-    add(plan(t_plan, lane0, covered, open_))
+    add({"kind": "clock", "now": t_plan})
+    add(plan(t_plan, lane0, covered, open_, cover_src))
     add({"kind": "event", "type": "agent", "at": t_plan, "title": f"Weak spots found: {lane0[0]['name']} is critical",
-         "lane": part, "severity": "risk", "impact": {"units": at_risk, "eur": exposure},
-         "detail": {"happened": top["reason"],
+         "lane": part, "severity": "risk", "impact": {"units": at_risk, "eur": exposure, "sources": money_src},
+         "detail": {"happened": top["reason"], "sources": money_src,
                     "actions": [{"type": "plan", "title": "Parts ranked by money at risk", "status": "done"}],
-                    "reasoning": [{"text": "Open copies", "value": num(open_)},
-                                  {"text": "Copies the stock on hand can pack", "value": num(covered)},
-                                  {"text": "Copies at risk", "value": num(at_risk)},
+                    "reasoning": [{"text": "Open copies", "value": num(open_), "sources": cite(edition["open"])},
+                                  {"text": "Copies the stock on hand can pack", "value": num(covered),
+                                   "sources": cite(edition["covered"])},
+                                  {"text": "Copies at risk", "value": num(at_risk), "sources": risk_src},
                                   {"text": "At stake", "value": f"{num(at_risk)} x {eur(goal['unit_loss_eur'])} = "
-                                                                f"{eur(exposure)}"}],
+                                                                f"{eur(exposure)}", "sources": money_src}],
                     "autonomy": {"mode": "autonomous", "text": "Analysis only."}}})
     add({"kind": "cue", "label": "Offer from A"})
     add({"kind": "clock", "now": at(back["ordered_at"])})
-    add(supplier_record(w, a_card, a_master, off["supplier_id"], [part]))
+    add(supplier_record(w, a_card, a_master, off["supplier_id"], [part], scenario=a_master["notes"]))
     add({"kind": "event", "type": "offer_in", "at": at(off["received_at"]),
-         "title": f"{off['label']} offers {num(off['units'])} units of {part}", "lane": part,
+         "title": f"{off['label']} offers {num(off['units'])} x {w.part_name(part)}", "lane": part,
          "supplier_id": off["supplier_id"], "severity": "info",
-         "detail": {"happened": f"Offer: {num(off['units'])} at {eur(off['unit_price_eur'])}, loading "
+         "detail": {"sources": [{"scenario_input": "outside offer"}],
+                    "happened": f"Offer: {num(off['units'])} at {eur(off['unit_price_eur'])}, loading "
                                 f"{instant(off['loads_at']):%a %H:%M} ({SCN}).",
                     "autonomy": {"mode": "none", "text": "Incoming offer."}}})
     add({"kind": "event", "type": "agent", "at": at(back["ordered_at"]),
          "title": f"Accept {off['label']} + backup lot from {b_name}", "lane": part, "severity": "info",
-         "impact": {"eur": deposit},
+         "impact": {"eur": deposit, "sources": deposit_src},
          "detail": {"happened": result["rationale"] if isinstance(result["rationale"], str)
                     else " ".join(map(str, result["rationale"])),
-                    "reasoning": [{"text": r.get("text"), "value": str(r.get("value"))}
+                    "sources": cite(result["sources"]),
+                    "reasoning": [{"text": r.get("text"), "value": shown(r), "sources": r["refs"]}
                                   for r in result["drilldown"]["inputs"]][:8],
                     "autonomy": {"mode": "autonomous",
                                  "text": f"Deposit {eur(deposit)} is under the goal's {eur(goal['budget_eur'])}."}}})
     add({"kind": "promise", "promise_id": "P-B-LOAD", "supplier_id": b_id, "lane": part,
-         "what": f"{num(back['units'])} loaded", "due": at(back["load_due"]), "proof": "CMR scan", "state": "waiting",
+         "what": f"{num(back['units'])} loaded", "sources": [{"scenario_input": "backup lot"}], "due": at(back["load_due"]), "proof": "CMR scan", "state": "waiting",
          "next_check": at(back["load_due"]), "fallback": "Call the supplier, then escalate to the buyer"})
     add({"kind": "promise", "promise_id": "P-A-LOAD", "supplier_id": off["supplier_id"], "lane": part,
-         "what": f"{num(off['units'])} loaded", "due": at(off["loads_at"]), "proof": "CMR scan", "state": "waiting",
+         "what": f"{num(off['units'])} loaded", "sources": [{"scenario_input": "outside offer"}], "due": at(off["loads_at"]), "proof": "CMR scan", "state": "waiting",
          "next_check": at(off["loads_at"]), "fallback": f"Rely on the {b_name} lot"})
     add({"kind": "cue", "label": "Check-in"})
     add({"kind": "clock", "now": at(back["reply_at"])})
     add({"kind": "event", "type": "email_in", "at": at(back["reply_at"]), "title": f"{b_name}: loading by "
          f"{instant(back['load_due']):%H:%M}", "lane": part, "supplier_id": b_id, "severity": "ok",
-         "detail": {"happened": f"Reply from {b_name} ({SCN}).", "autonomy": {"mode": "none", "text": ""}}})
+         "detail": {"happened": f"Reply from {b_name} ({SCN}).", "sources": [{"scenario_input": "supplier reply"}], "autonomy": {"mode": "none", "text": ""}}})
     add({"kind": "cue", "label": "Jump to the cancellation"})
     add({"kind": "clock", "now": at(back["loaded_at"])})
     add({"kind": "promise", "promise_id": "P-B-LOAD", "state": "proven", "proven_at": at(back["loaded_at"])})
@@ -194,14 +243,16 @@ def build(w: World, scn: dict) -> list[dict]:
     add({"kind": "clock", "now": at(canc["at"])})
     add({"kind": "event", "type": "cancellation", "at": at(canc["at"]),
          "title": f"{off['label']} cancels: {canc['reason']}", "lane": part, "supplier_id": off["supplier_id"],
-         "severity": "risk", "impact": {"units": at_risk, "eur": exposure},
-         "detail": {"happened": f"{off['label']} never loaded ({SCN}).",
+         "severity": "risk", "impact": {"units": at_risk, "eur": exposure, "sources": money_src},
+         "detail": {"sources": [{"scenario_input": "cancellation"}],
+                    "happened": f"{off['label']} never loaded ({SCN}).",
                     "reasoning": [{"text": "At stake", "value": f"{num(at_risk)} copies x "
-                                                              f"{eur(goal['unit_loss_eur'])} = {eur(exposure)}"}],
+                                                              f"{eur(goal['unit_loss_eur'])} = {eur(exposure)}",
+                                   "sources": money_src}],
                     "autonomy": {"mode": "needs_decision", "text": f"Keeping the {b_name} lot commits "
                                                                   f"{eur(remaining)}."}}})
     add({"kind": "promise", "promise_id": "P-A-LOAD", "state": "broken", "broken_at": at(canc["at"])})
-    add(supplier_record(w, broken, a_master, off["supplier_id"], [part], at=at(canc["at"]),
+    add(supplier_record(w, broken, a_master, off["supplier_id"], [part], at=at(canc["at"]), scenario=a_master["notes"],
                         cause="cancelled its order"))
     add({"kind": "cue", "label": "Decision"})
     add({"kind": "clock", "now": at(scn["decision_at"])})
@@ -209,9 +260,10 @@ def build(w: World, scn: dict) -> list[dict]:
          "lane": part, "supplier_id": b_id, "title": f"Confirm {b_name} in full",
          "recommendation": f"Keep all {num(back['units'])} from the {b_name} truck arriving "
                            f"{instant(back['arrives_at']):%H:%M}.",
-         "impact": {"units": at_risk, "eur": exposure, "text": f"protects {num(at_risk)} {edition['name']} copies"},
+         "impact": {"units": at_risk, "eur": exposure, "text": f"protects {num(at_risk)} {edition['name']} copies",
+                    "sources": money_src},
          "cost": {"eur": remaining, "text": f"{eur(remaining)} remaining ({num(back['units'])} x {eur(unit_price)} "
-                                            f"minus the {eur(deposit)} deposit)"},
+                                            f"minus the {eur(deposit)} deposit)", "sources": order_src},
          "signer": {"role": signer.get("role"), "name": signer.get("name"), "rule": rule,
                     "status": signer.get("status"), "fact_ids": signer.get("fact_ids", [])},
          "on_accept": [f"Confirmation to {b_name}", f"Cancellation acknowledged to {off['label']}"],
@@ -220,21 +272,25 @@ def build(w: World, scn: dict) -> list[dict]:
     end = instant(scn["decision_at"]).replace(minute=instant(scn["decision_at"]).minute + 1).isoformat()
     add({"kind": "clock", "now": end})
     add({"kind": "promise", "promise_id": "P-B-ARRIVE", "supplier_id": b_id, "lane": part,
-         "what": f"{num(back['units'])} received at {site.get('site_id')}", "due": at(back["arrives_at"]),
+         "what": f"{num(back['units'])} received at {site.get('site_id')}",
+         "sources": [{"scenario_input": "backup lot"}], "due": at(back["arrives_at"]),
          "proof": "Goods receipt", "state": "waiting", "next_check": at(back["arrives_at"])})
     after = lanes(w, cov, spots, edition, {part: int(back["units"] / per_copy)})
     covers = open_ - max([0] + [l["gap"] for l in after])   # the scarcest part limits the edition
-    add(plan(end, after, covers, open_))
+    after_src = cite(cover_src, by_name["units"], per_copy_src, *(l["sources"] for l in after if l["gap"] > 0))
+    add(plan(end, after, covers, open_, after_src))
     short = [l for l in after if l["gap"] > 0]
-    reasoning = [{"text": "Bet", "value": eur(deposit)}, {"text": "Protected", "value": eur(exposure)}]
+    reasoning = [{"text": "Bet", "value": eur(deposit), "sources": deposit_src},
+                 {"text": "Protected", "value": eur(exposure), "sources": money_src}]
     if short:
         nxt = next((s for s in spots if s["part_id"] == short[0]["lane_id"]), {})
-        reasoning.append({"text": f"Next weak spot: {short[0]['name']}", "value": nxt.get("reason", "")})
+        reasoning.append({"text": f"Next weak spot: {short[0]['name']}", "value": nxt.get("reason", ""),
+                          "sources": cite(nxt.get("sources"))})
     add({"kind": "event", "type": "goal", "at": end,
          "title": (f"Goal met: {num(covers)} of {num(open_)} {edition['name']} covered" if not short else
                    f"{w.part_name(part)} secured. {num(covers)} of {num(open_)} {edition['name']} covered; "
                    f"{short[0]['name']} still {num(short[0]['gap'])} short"),
          "severity": "ok" if not short else "risk",
-         "detail": {"reasoning": reasoning, "autonomy": {"mode": "none", "text": ""}}})
+         "detail": {"reasoning": reasoning, "sources": after_src, "autonomy": {"mode": "none", "text": ""}}})
     add({"kind": "cue", "label": "End"})
     return recs

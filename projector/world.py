@@ -38,6 +38,7 @@ class World:
     history: reliability.History
     windows: list
     zone: timezone
+    profiles: dict      # kb.supplier_profiles: delivery record, shipments and top issues per supplier
 
     @classmethod
     def load(cls, conn, schema: str = "kb") -> "World":
@@ -48,11 +49,13 @@ class World:
                                f"FROM {schema}.believed").fetchall()
         issues = cur.execute(f"SELECT kind, payload, fact_ids FROM {schema}.issues WHERE state = 'open'").fetchall()
         facts = Facts(rows, believed, issues)
+        profiles = {r["supplier_id"]: r["profile"] for r in
+                    cur.execute(f"SELECT supplier_id, profile FROM {schema}.supplier_profiles").fetchall()}
         launch = max(d for r in facts.rows("product") if (d := day(r.get("launch_date"))))
         zone = timezone(timedelta(hours=1))
         end = datetime.combine(launch, time(23, 59), zone)
         windows = coverage_windows.pack_windows(facts, end, end)
-        return cls(rows, believed, facts, reliability.history(rows, believed), windows, zone)
+        return cls(rows, believed, facts, reliability.history(rows, believed), windows, zone, profiles)
 
     @property
     def deadline(self) -> datetime:
@@ -82,7 +85,7 @@ class World:
             if str(r.get("supplier_id")) == supplier_id:
                 share = r.get("share")
                 pct = f" ({float(share):.0%})" if share not in (None, "") else ""
-                found.append(f"{r.get('material_id')} {str(r.get('description') or '').split('(')[0].strip()}{pct}")
+                found.append(f"{str(r.get('description') or r.get('material_id')).split('(')[0].strip()}{pct}")
         return found
 
     def part_name(self, part_id: str) -> str:

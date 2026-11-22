@@ -195,7 +195,8 @@ def test_screen_files_are_within_400_lines():
 
 
 def test_every_split_file_is_linked_and_served(server):
-    page = call(server, "/lookahead")[1].decode()
+    # the classic page and the Grand Plan Lio page (/lookahead/v2) share the static folder
+    page = call(server, "/lookahead")[1].decode() + call(server, "/lookahead/v2")[1].decode()
     linked = re.findall(r'(?:src|href)="(/lookahead/static/[^"]+)"', page)
     on_disk = {f.name for f in (ROOT / "tracker" / "lookahead_static").iterdir()}
     assert {p.rsplit("/", 1)[1] for p in linked} == on_disk

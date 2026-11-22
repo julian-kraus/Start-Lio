@@ -252,7 +252,7 @@ def make_handler(app: App):
                     return self._send(200 if row else 404, dumps(row or {"error": "not found"}))
                 if url.path == "/api/stream":
                     return self._stream(params)
-                if url.path == "/lookahead" or url.path.startswith(("/lookahead/static/", "/api/lookahead/")):
+                if url.path in ("/lookahead", "/lookahead/v2") or url.path.startswith(("/lookahead/static/", "/api/lookahead/")):
                     return self.lookahead_get(url.path, params)
                 self._send(404, dumps({"error": "not found"}))
             except (BrokenPipeError, ConnectionResetError):
