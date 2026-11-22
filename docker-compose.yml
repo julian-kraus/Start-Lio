@@ -30,6 +30,46 @@ services:
         condition: service_healthy
     restart: unless-stopped
 
+  kb:
+    build: .
+    command: ["python", "-m", "kb", "run"]
+    env_file:
+      - .env
+      - secrets/db.env
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_PORT: "5432"
+      TRACKER_DATA_DIR: /data
+      MAIL_DATA_DIR: /mail_data
+      KB_LLM_ADAPTER: ${KB_LLM_ADAPTER:-}
+    volumes:
+      - ./data:/data:ro
+      - ./mail_data:/mail_data:ro
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  mail:
+    build: .
+    command: ["python", "-m", "mail", "run"]
+    env_file:
+      - .env
+      - secrets/db.env
+      - secrets/mail.env
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_PORT: "5432"
+      TRACKER_DATA_DIR: /data
+      MAIL_DATA_DIR: /mail_data
+    volumes:
+      - ./data:/data:ro
+      - ./mail_data:/mail_data
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
   web:
     build: .
     command: ["python", "-m", "tracker.web"]

@@ -9,6 +9,9 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY tracker ./tracker
+COPY kb ./kb
+COPY mail ./mail
+COPY structured ./structured
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod 755 /usr/local/bin/docker-entrypoint.sh \
     && useradd --uid 10001 --create-home tracker \
