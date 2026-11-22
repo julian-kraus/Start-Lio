@@ -254,6 +254,55 @@ def test_reject_records_the_reason_and_sends_nothing(tmp_path, stores):
     refused(409, decisions.accept, la, "D", {"approver": SIGNER}, stores)
 
 
+def half_sent(tmp_path, stores):
+    first, second = draft(stores, "First"), draft(stores, "Second")
+    stores.db["mail"].execute("UPDATE drafts SET subject = 'changed' WHERE draft_id = %s", (second,))
+    la = screen(tmp_path, decision(draft_ids=[first, second]))
+    refused(502, decisions.accept, la, "D", {"approver": SIGNER}, stores)
+    return la, first
+
+
+@pytest.mark.parametrize("state", ["dry_run", "sending", "sent", "unknown"])
+def test_a_partly_sent_decision_cannot_be_rejected(tmp_path, stores, state):
+    la, first = half_sent(tmp_path, stores)
+    stores.db["mail"].execute("UPDATE sends SET state = %s WHERE draft_id = %s", (state, first))
+    why = refused(409, decisions.reject, la, "D", {"approver": "Another Person", "reason": "No"}, stores)
+    assert first in why
+    assert la.decision("D")["status"] == "open" and row(stores) is None
+
+
+def test_a_send_that_failed_for_good_can_be_rejected(tmp_path, stores):
+    la, first = half_sent(tmp_path, stores)
+    stores.db["mail"].execute("UPDATE sends SET state = 'failed' WHERE draft_id = %s", (first,))
+    decisions.reject(la, "D", {"approver": SIGNER, "reason": "No"}, stores)
+    assert row(stores)["status"] == "rejected"
+
+
+def test_a_malformed_draft_id_can_still_be_rejected(tmp_path, stores):
+    la = screen(tmp_path, decision(draft_ids=["not-an-id"]))
+    decisions.reject(la, "D", {"approver": SIGNER, "reason": "Broken draft"}, stores)
+    assert row(stores)["status"] == "rejected"
+
+
+def test_a_reused_id_with_a_new_draft_is_not_accepted(tmp_path, stores):
+    decisions.accept(screen(tmp_path / "a", decision(draft_ids=[draft(stores, "Old")])), "D",
+                     {"approver": SIGNER}, stores)
+    new = draft(stores, "New")
+    la = screen(tmp_path / "b", decision(draft_ids=[new]))
+    assert new in refused(409, decisions.accept, la, "D", {"approver": SIGNER}, stores)
+    assert la.decision("D")["status"] == "open" and count(stores, "sends") == 1
+    assert drafts.load_draft(stores.db["mail"], new)["status"] == "draft"
+
+
+@pytest.mark.parametrize("step, more", [("accept", {}), ("reject", {"reason": "No"})])
+def test_a_reused_id_for_another_decision_is_refused(tmp_path, stores, step, more):
+    body = {"approver": SIGNER, **more}
+    getattr(decisions, step)(screen(tmp_path / "a", decision()), "D", body, stores)
+    la = screen(tmp_path / "b", decision(title="Something else"))
+    assert "already used" in refused(409, getattr(decisions, step), la, "D", body, stores)
+    assert la.decision("D")["status"] == "open"
+
+
 # ---------- score and end state ----------
 
 def test_card_shows_the_score_dropping_after_the_cancellation(tmp_path, stores):

@@ -2,7 +2,7 @@
 
     card(la, decision_id, stores)     what the card shows: routed signer, score drops, end state of the goal
     accept(la, decision_id, body)     {approver}: send the attached drafts, write plan.decisions, record it
-    reject(la, decision_id, body)     {approver, reason}: write the reason, send nothing
+    reject(la, decision_id, body)     {approver, reason}: write the reason, send nothing. Refused once mail is out
 
 In live mode the signer comes from `sourcing.approvals.route` on kb facts, never from the record producer. The
 producer gives what is routed: `actions` as `sourcing.hedge` writes them, with `category` and `delivery_site`.
@@ -215,6 +215,7 @@ def accept(la: Lookahead, decision_id: str, body: dict, stores: Stores | None = 
                 outcome.update(signer=signer, approval=approval)
                 with stores.plan() as conn:
                     if earlier := _hold_row(conn, decision, outcome):
+                        _all_went_out(stores, decision, by)
                         outcome["decided_at"] = earlier  # written and sent before, only the record was missing
                     else:
                         sent = _send(stores, decision, by, signer)
@@ -243,6 +244,7 @@ def reject(la: Lookahead, decision_id: str, body: dict, stores: Stores | None = 
                     if earlier := _hold_row(conn, decision, outcome):
                         outcome["decided_at"] = earlier
                     else:
+                        _none_went_out(stores, decision, by)
                         _close_row(conn, decision_id, outcome)
             except psycopg.Error as exc:
                 raise LookaheadError(503, f"decision not recorded: {type(exc).__name__}") from exc
@@ -262,10 +264,12 @@ def _hold_row(conn, decision: dict, outcome: dict) -> str | None:
          decision.get("recommendation"), decision.get("lane"), decision.get("supplier_id"),
          *(Jsonb(decision[k]) if decision.get(k) is not None else None for k in ("impact", "cost")),
          decision.get("at"), *(Jsonb(decision.get(k) or []) for k in ("sources", "options", "on_accept"))))
-    row = conn.execute("SELECT status, decided_by, decided_at FROM decisions WHERE decision_id = %s FOR UPDATE",
-                       (key,)).fetchone()
+    row = conn.execute("SELECT status, title, decided_by, decided_at FROM decisions WHERE decision_id = %s "
+                       "FOR UPDATE", (key,)).fetchone()
     if row["status"] == "open":
         return None
+    if row["title"] != (decision.get("title") or key):
+        raise LookaheadError(409, f"decision id {key} is already used by '{row['title']}', a new one needs a new id")
     if row["status"] == outcome["status"] and _same_person(row["decided_by"], outcome["decided_by"]):
         return row["decided_at"].isoformat()
     raise LookaheadError(409, f"decision is {row['status']}")
@@ -276,6 +280,42 @@ def _close_row(conn, decision_id: str, outcome: dict) -> None:
                  "WHERE decision_id = %s",
                  (outcome["status"], outcome["decided_by"], outcome["decided_at"], Jsonb(outcome["signer"]),
                   outcome.get("reason"), decision_id))
+
+
+def _send_states(stores: Stores, decision: dict, by: str) -> dict[str, set[str]]:
+    """The sends of each attached draft that went out or may have. A dry run counts only while mail is in dry_run."""
+    ids = []
+    for draft_id in decision.get("draft_ids") or []:
+        try:
+            ids.append(str(uuid.UUID(str(draft_id))))
+        except ValueError:
+            continue  # not a draft id, so nothing can have been sent for it
+    if not ids:
+        return {}
+    tools = stores.mail(by)
+    try:
+        states = ["sending", "sent", "unknown"] + (["dry_run"] if tools.s.send_mode == "dry_run" else [])
+        found: dict[str, set[str]] = {}
+        for row in tools.conn.execute("SELECT draft_id::text AS draft_id, state FROM sends "
+                                      "WHERE draft_id = ANY(%s::uuid[]) AND state = ANY(%s)", (ids, states)):
+            found.setdefault(row["draft_id"], set()).add(row["state"])
+        return found
+    finally:
+        tools.conn.close()
+
+
+def _none_went_out(stores: Stores, decision: dict, by: str) -> None:
+    if out := _send_states(stores, decision, by):
+        raise LookaheadError(409, f"cannot reject, mail is out or may be out for draft {', '.join(sorted(out))}")
+
+
+def _all_went_out(stores: Stores, decision: dict, by: str) -> None:
+    """An accepted row answers for this step only if every draft attached now was sent."""
+    out = _send_states(stores, decision, by)
+    for draft_id in decision.get("draft_ids") or []:
+        if not out.get(str(draft_id), set()) & {"sent", "dry_run"}:
+            raise LookaheadError(409, f"decision id {decision['decision_id']} was accepted without sending draft "
+                                      f"{draft_id}, a new decision needs a new id")
 
 
 def _send(stores: Stores, decision: dict, by: str, signer: dict) -> list[str]:
