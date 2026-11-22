@@ -36,10 +36,13 @@ MONEY_TALK = re.compile(r"€|\b(?:eur|euros?|spend\w*|spent|pay|budget|ceiling|
                         r"|max\w*|tops|up to|limit|lose|loss|no more than)\b", re.IGNORECASE)
 TEAM = re.compile(r"\b(?:team|offline|online|asleep|sleep\w*|reach\w*|available|unavailable|ask|asked|bed|away)\b",
                   re.IGNORECASE)
-WHEN = re.compile(r"\b(?:morning|evening|night|noon|midnight|always|anytime|any time|o'clock)\b", re.IGNORECASE)
+WHEN = re.compile(r"\b(?:dawn|dusk|sunrise|sunset|sundown|hours?|minutes?|now|immediately|weekend"
+                  r"|morning|evening|night|noon|midnight|always|anytime|any time|o'clock)\b", re.IGNORECASE)
 EURO_WORD = re.compile(r"€|\b(?:eur|euros?)\b", re.IGNORECASE)
 NO_MONEY = re.compile(r"\b(?:spend(?:ing)? (?:nothing|anything|no money|zero)|no (?:budget|money)|not (?:spend|pay)"
-                      r"|don't (?:spend|pay)(?! (?:more|too))|(?:worth|costs?) nothing|not a (?:cent|penny))\b",
+                      r"|don't (?:spend|pay)(?! (?:more|too))|(?:worth|costs?) nothing|not a (?:cent|penny)"
+                      r"|unlimited|no (?:spend|spending|budget|cost) (?:limit|cap|ceiling)|whatever it (?:takes|costs)"
+                      r"|(?:budget|spend|costs?|worth)(?: is)? (?:nil|double|triple|twice))\b",
                       re.IGNORECASE)
 NUMBER_WORD = re.compile(
     r"\b(?:zero|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen"
@@ -48,6 +51,23 @@ NUMBER_WORD = re.compile(
     r"|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|zwanzig|fünfzig)\b|" + text.SCALES, re.IGNORECASE)
 COUNTED = (r"(?:copies|units|pieces|books|pallets|sets|editions|suppliers|offers|people|days|hours|percent"
            r"|questions)\b")
+EXCEPTION = re.compile(r"\b(?:except|excluding|other than|apart from|aside from|besides|rather than|instead of"
+                       r"|(?:all|every|everything|any|anything)(?: editions?)? but)\b", re.IGNORECASE)
+LOWER_BOUND = re.compile(
+    r"\b(?:at least|minimum|or more|and more|plus|upwards of"
+    r"|(?<!\bno )(?<!\bnot )(?<!\bnever )(?<!n't spend )(?<!not spend )(?<!never spend )(?<!n't pay )more than)\b",
+    re.IGNORECASE)
+RATE = re.compile(r"/|\b(?:per|each|every|apiece|daily|weekly|hourly|monthly)\b", re.IGNORECASE)
+PER_WHAT = re.compile(r"(?:/|\bper\b)\s*([^\W\d_]+)", re.IGNORECASE)
+A_COPY = {"copy", "copie", "unit", "piece", "book", "missing", "lost", "late", "edition"}
+OTHER_UNIT = re.compile(
+    r"\b(?:an?|each|every|missing|lost|late)\s+(pallets?|box(?:es)?|cartons?|cases?|crates?|packs?|batch(?:es)?|sets?"
+    r"|bundles?|days?|weeks?|hours?|months?|orders?)\b|\b(daily|weekly|hourly|monthly)\b", re.IGNORECASE)
+SIDE = re.compile(r"\b(?:(?P<start>from|after|since|starting)|until|till|til|(?<=\d )to|(?<=m )to)\b"
+                  r"|(?<=\d)\s*[-–]", re.IGNORECASE)
+GONE = re.compile(r"\b(?:offline|away|asleep|sleep\w*|unavailable|unreachable|gone|bed|off|not|leaves?|no calls?)\b"
+                  r"|n't\b", re.IGNORECASE)
+JOINS = {"and", "but", "also", "so", "or", "then", "however", "though", "although"}
 COMMON_WORDS = {"with", "that", "this", "time", "copy", "copie", "have", "will", "than", "more", "from", "until"}
 
 
@@ -85,6 +105,7 @@ def named(said: str, editions: list[str]) -> list[str]:
 def priority_edition(place: Place, given: str | None, editions: list[str]) -> None:
     clause = place.around()
     hit = named(clause, editions)
+    no_exception(place, editions)
     if hit and GIVEN_UP.search(place.said):
         raise text.UnreadableError(f"quote the priority {place.said!r} without what may suffer")
     if given == "all":
@@ -97,12 +118,20 @@ def priority_edition(place: Place, given: str | None, editions: list[str]) -> No
         raise text.UnreadableError(f"{clause.strip()!r} names {hit}: give the edition")
 
 
+def no_exception(place: Place, editions: list[str]) -> None:
+    """An edition named as the exception is the one that is not meant."""
+    sentence = place.around(text.SENTENCE)
+    if EXCEPTION.search(sentence) and named(sentence, editions):
+        raise text.UnreadableError(f"{sentence.strip()!r} makes an exception: name the editions that are meant")
+
+
 def value_edition(place: Place, given: str | None, editions: list[str], protected: list[str]) -> None:
     """The edition of a value is the one named where its amount is stated."""
     clause, sentence = place.around(), place.around(text.SENTENCE)
     hit = named(clause, editions)
     if not hit and len(list(text.MONEY.finditer(sentence))) == 1:
         hit = named(sentence, editions)
+    no_exception(place, editions)
     several = len(hit) > 1
     if several and len(list(text.MONEY.finditer(clause))) > 1:
         raise text.UnreadableError(f"cannot tell which edition each amount in {clause.strip()!r} is for")
@@ -124,6 +153,38 @@ def figure_field(place: Place, name: str) -> None:
     mine, other = (PER_COPY, SPEND) if name == "value" else (SPEND, PER_COPY)
     if other.search(clause) and not mine.search(clause):
         raise text.UnreadableError(f"{clause.strip()!r} does not state a {name}")
+
+
+def figure_meaning(place: Place, name: str, editions: list[str]) -> None:
+    """A ceiling is one total and a value is for one copy. Neither is a lower bound."""
+    clause = place.around()
+    names = set().union(*(text.words(e) for e in editions))
+    if any(not text.words(m[0]) <= names for m in LOWER_BOUND.finditer(clause)):
+        raise text.UnreadableError(f"{clause.strip()!r} gives a lower bound: give the figure itself")
+    if name == "ceiling":
+        if RATE.search(clause) or re.match(r"\s*an?\b", place.answer[place.end:], re.IGNORECASE):
+            raise text.UnreadableError(f"{clause.strip()!r} is a rate: give the most to spend in total")
+        return
+    per = [m[1] for m in PER_WHAT.finditer(clause) if not text.words(m[1]) & (A_COPY | names)]
+    per += [unit for m in OTHER_UNIT.finditer(clause) if not text.words(unit := m[1] or m[2]) & names]
+    if per:
+        raise text.UnreadableError(f"{clause.strip()!r} is per {per[0]}: give the value of one missing copy")
+
+
+def window_side(place: Place, name: str) -> None:
+    """'available from' starts the team window, 'offline from' ends it."""
+    first, last = text.around(place.answer, place.start, place.end)
+    before, after = place.answer[first:place.start], place.answer[place.end:last]
+    if sides := list(SIDE.finditer(before)):
+        starts = bool(sides[-1]["start"])
+    elif re.match(r"\s*onwards?\b", after, re.IGNORECASE):
+        starts = True
+    else:
+        return
+    if GONE.search(before) or (not TEAM.search(before) and GONE.search(after)):
+        starts = not starts
+    if starts != (name == "team_from"):
+        raise text.UnreadableError(f"{(before + place.said).strip()!r} is the other end of the team window")
 
 
 def figure(item: Mapping, name: str, edition: str | None, places: list[Place], taken: Mapping[Place, str], *,
@@ -153,8 +214,11 @@ def figure(item: Mapping, name: str, edition: str | None, places: list[Place], t
                     value = wanted
                     text.check_amount(place.answer, m, editions)
                     figure_field(spot, name)
+                    figure_meaning(spot, name, editions)
                     if name == "value":
                         value_edition(spot, edition, editions, protected)
+                else:
+                    window_side(spot, name)
             except text.UnreadableError as exc:
                 why = exc
             else:
@@ -170,13 +234,18 @@ def figure(item: Mapping, name: str, edition: str | None, places: list[Place], t
 
 def trade_off(place: Place) -> None:
     answer = place.answer
-    first, last = text.around(answer, place.start, place.end, text.SENTENCE)
+    end = place.start + len(place.said.rstrip(" .,;:!?\"'”"))       # a full stop is not the next sentence
+    first, last = text.around(answer, place.start, end, text.SENTENCE)
     if turns := list(TURN.finditer(answer[first:place.start])):
         first += turns[-1].end()        # "don't bankrupt me, but goodwill can suffer"
-    if REFUSAL.search(answer[first:text.around(answer, place.start, place.end)[1]]):
+    if REFUSAL.search(answer[first:text.around(answer, place.start, end)[1]]):
         raise text.UnreadableError(f"{place.said!r} refuses a trade-off, it does not accept one")
     if answer[last:last + 1] == "?" or not ACCEPTS.search(place.said):
         raise text.UnreadableError(f"{place.said!r} does not say that something may suffer")
+    # the person confirms the words that are read back, so the quote cannot leave out part of its clause
+    first, last = text.around(answer, place.start, end)
+    if text.words(answer[first:place.start] + " " + answer[end:last]) - JOINS:
+        raise text.UnreadableError(f"quote all of {answer[first:last].strip()!r}, not only {place.said!r}")
 
 
 def unread(answers: Mapping[str, str], editions: list[str], figures: Iterable[Place],

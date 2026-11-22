@@ -60,9 +60,13 @@ OTHER_DAY = re.compile(
     r"\b(?:day after|day before|yesterday|next|following|weeks?|weekend|daily|every day|days"
     r"|january|february|april|june|july|august|september|october|november|december"
     r"|jan|feb|apr|jun|jul|aug|sept?|oct|nov|dec"
+    r"|fortnight|day of"
     r"|morgen|übermorgen|heute|montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag|abends?|nachmittags?)\b",
     re.IGNORECASE)
-LATE = re.compile(r"\b(?:tonight|evening|afternoon|night|dinner|supper|bedtime|(?<!be )late)\b", re.IGNORECASE)
+LATE = re.compile(r"\b(?:tonight|evening|afternoon|night|dusk|sunset|sundown|dinner|supper|bedtime|(?<!be )late)\b",
+                  re.IGNORECASE)
+SHIFTED = re.compile(r"\b(?:hours?|minutes?|mins?|shortly|soon|just|bit|little|while) (?:before|after)\b",
+                     re.IGNORECASE)
 EARLY = re.compile(r"\bmorning\b", re.IGNORECASE)
 
 
@@ -197,6 +201,8 @@ def moment(quote: str, answer: str, now: datetime, zone: str | None, span: tuple
     context = answer[first:last]
     if not days and DAY.search(context):
         raise UnreadableError(f"quote the day together with the time {said!r}")
+    if SHIFTED.search(context):
+        raise UnreadableError(f"give the time that is meant, not one before or after {said!r}")
     if OTHER_DAY.search(context):
         raise UnreadableError(f"give the date of {said!r} as ISO 8601 with a UTC offset")
     after = answer[t.end():]

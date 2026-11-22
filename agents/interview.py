@@ -60,6 +60,7 @@ Fields:
 
 Each item has:
 - quote: the shortest complete phrase, copied exactly from one answer. A time keeps its day.
+  A trade_off keeps its whole clause.
 - amount: for value and ceiling, the figure exactly as written, with currency and scale if written. Otherwise "".
 - edition: for priority and value, one name from the given editions, "all" only when every edition is meant, or ""
   when no edition is named. "All" in front of an edition's name means that edition. Otherwise "".
