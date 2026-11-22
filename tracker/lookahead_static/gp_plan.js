@@ -43,7 +43,7 @@ function planView(S) {
     5: proven ? "done" : (waiting ? "cur" : "todo"),
     ad: f.canc ? "off" : "alt",
     ac: f.canc ? "bad" : "alt",
-    b: f.dec ? (f.dec.status === "open" ? "cur" : "done") : "alt",
+    b: f.dec ? ({open: "cur", accepted: "done"}[f.dec.status] || "off") : "alt",   // a rejection finishes nothing
     g: f.final ? (f.final.severity === "ok" ? "goal" : "todo") : "todo",
   };
   const cover = ((S.plan || {}).coverage) || {}, of = s => [].concat((s && s.score && s.score.sources) || []);
@@ -79,12 +79,13 @@ function planView(S) {
     ${box(5, "5/2", "Check-in: critical points on schedule?", next ? `Next proof: ${next.what}, ${dhm(next.next_check || next.due)}` : "Every promise needs a proof", flags)}
     ${branches ? box("ad", "6/1", f.canc ? `${aName} did not deliver` : `If ${aName} delivers`, f.canc ? "The original plan no longer holds" : `Release the ${bName} lot`) : ""}
     ${branches ? box("ac", "6/2", f.canc ? `${aName} cancelled` : `If ${aName} fails`, f.canc ? (units ? `${num(units)} copies at risk; ${bName} already moving` : `${bName} already moving`) : `${bName} carries the copies`, hp) : ""}
-    ${f.dec || branches ? box("b", "7/2", f.dec ? f.dec.title : `Confirm the ${bName} lot`, f.dec ? `${eur(f.dec.cost && f.dec.cost.eur)} to pay, ${f.dec.status === "open" ? `signer: ${signerText(signerOf(f.dec))}` : `decided by ${f.dec.decided_by || "nobody on record"}`}` : `Only if ${aName} fails: one click for the signer`, st.b === "cur" ? `<button class="btn btn-primary pf-go" data-goview="decisions">Review and confirm</button>` : "") : ""}
+    ${f.dec || branches ? box("b", "7/2", f.dec ? f.dec.title : `Confirm the ${bName} lot`, f.dec ? `${eur(f.dec.cost && f.dec.cost.eur)} to pay, ${f.dec.status === "open" ? `signer: ${signerText(signerOf(f.dec))}` : `${f.dec.status === "rejected" ? "rejected" : "decided"} by ${f.dec.decided_by || "nobody on record"}`}` : `Only if ${aName} fails: one click for the signer`, st.b === "cur" ? `<button class="btn btn-primary pf-go" data-goview="decisions">Review and confirm</button>` : "") : ""}
     ${box("g", branches || f.dec ? "8/2" : "6/2", f.final ? (f.final.severity === "ok" ? "Goal met" : "Goal not met yet") : "Goal", f.final ? f.final.title : `All ${num((S.plan || {}).coverage ? S.plan.coverage.needed : null)} ${S.launch.name} copies ship on time`)}
-    <div class="pf-loop ${f.canc ? "on" : ""}" style="grid-area:3/3/6/4"><div><b>${f.canc ? "LEVEL UP" : "Learning"}</b><span>${f.canc && f.A ? `${aName}'s score is now ${pct(f.A)} after the broken promise, so the next hedge is sized with it` : "Every outcome updates the supplier scores"}</span>${f.canc ? '<i class="pf-xp"><b></b></i>' : ""}</div></div>
+    <div class="pf-loop ${f.canc ? "on" : ""}" style="grid-area:3/3/6/4"><div><b>${f.canc ? "LEVEL UP" : "Learning"}</b><span>${f.canc && f.A ? `${esc(aName)}'s score is now ${pct(f.A)} after the broken promise, so the next hedge is sized with it` : "Every outcome updates the supplier scores"}</span>${f.canc ? '<i class="pf-xp"><b></b></i>' : ""}</div></div>
   </div>`;
   const badge = f.final ? (f.final.severity === "ok" ? B("g", "Goal met") : B("r", "Next weak spot open"))
-    : f.dec && f.dec.status === "open" ? B("r", "Needs your sign-off") : B("a", "On track");
+    : f.dec && f.dec.status === "open" ? B("r", "Needs your sign-off")
+    : f.dec && f.dec.status === "rejected" ? B("r", "Rejected, needs a new plan") : B("a", "On track");
   el.innerHTML = `<section class="card pl-canvas"><div class="between"><h2 class="h-sm">The agent's plan</h2>${badge}</div>${flow}</section>`;
   el.querySelectorAll("[data-goview]").forEach(b => b.onclick = () => show(b.dataset.goview));
   requestAnimationFrame(pfWires);

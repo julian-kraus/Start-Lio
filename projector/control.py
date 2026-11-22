@@ -51,6 +51,20 @@ AUTO = [("goal", "You set the goal on the screen", "the agent ranks the weak spo
         ("accept", "You accept the decision on the screen", "the plan updates and the outcome is shown", 6)]
 
 
+def sent_beats(script: list[list[dict]], state: dict) -> set[int]:
+    """The beats the screen already shows. A beat without events (the decision) is known by its decision id, so it
+    is never sent again over a person's decision."""
+    titles = {e.get("title") for e in state.get("events") or []}
+    decided = {d.get("decision_id") for d in state.get("decisions") or []}
+    sent = {0}
+    for i, beat in enumerate(script):
+        events = {r["title"] for r in beat if r["kind"] == "event"}
+        ids = {r["decision_id"] for r in beat if r["kind"] == "decision"}
+        if i and ((events and events <= titles) or (ids and ids <= decided)):
+            sent.add(i)
+    return sent
+
+
 class Control:
     def __init__(self, world: World, scenario: dict, log: Path, base: Path, screen: str):
         self.world, self.scenario, self.log, self.base, self.screen = world, scenario, log, base, screen
@@ -84,10 +98,7 @@ class Control:
                 s = self._state()
                 with self.lock:
                     # what the screen already shows counts as sent, whoever sent it (a restart, another page)
-                    shown = {e.get("title") for e in s.get("events") or []}
-                    self.done = {0} | {i for i, beat in enumerate(self._beats()) if i and
-                                       (titles := {r["title"] for r in beat if r["kind"] == "event"})
-                                       and titles <= shown}
+                    self.done = sent_beats(self._beats(), s)
                     if s.get("goal") and 1 not in self.done:
                         self._append([1])
                     if any(d.get("status") == "accepted" for d in s.get("decisions") or []) and 6 not in self.done:

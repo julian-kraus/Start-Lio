@@ -103,3 +103,20 @@ def test_a_number_without_a_source_says_so():
     card = render(decisions=[{"decision_id": "d1", "title": "T", "status": "open", "at": "2030-01-01T08:00:00+00:00",
                               "cost": {"eur": 5}, "impact": {"eur": 9}}])["open"]
     assert "Source not on the record" in card
+
+
+def test_a_supplier_name_is_text_in_the_plan_not_markup():
+    plan = render(suppliers=[{"supplier_id": "outside", "name": "<img src=x onerror=alert(1)>", "scenario": "input",
+                              "score": {"value": 0.5, "n": 4}}],
+                  events=[{"id": 1, "type": "cancellation", "title": "Cancelled", "supplier_id": "outside",
+                           "at": "2030-01-01T08:00:00+00:00"}])["plan"]
+    assert "<img" not in plan and "&lt;img" in plan
+
+
+def test_a_rejected_decision_is_neither_done_nor_on_track():
+    plan = render(plan={"lanes": [{"lane_id": "part", "name": "Part", "gap": 30}],
+                        "coverage": {"covered": 50, "needed": 80}},
+                  decisions=[{"decision_id": "d1", "title": "T", "status": "rejected", "decided_by": "Some Person",
+                              "at": "2030-01-01T08:00:00+00:00"}])["plan"]
+    assert "On track" not in plan and "Rejected, needs a new plan" in plan
+    assert 'class="pf done" id="pf-b"' not in plan and "rejected by Some Person" in plan

@@ -150,7 +150,10 @@ def build(w: World, scn: dict) -> list[dict]:
     signer = w.signer(remaining, {"label": f"remaining order value {eur(remaining)}"}, instant(scn["decision_at"]),
                       None, site.get("site_id"))
     rule = signer.get("rule") or "; ".join(signer.get("reasons", [])[:1])
-    if not signer.get("name") and str(signer.get("role", "")).casefold() == "buyer":
+    if signer.get("status") != "resolved":
+        signer.pop("name", None)   # an unresolved route names nobody, in no field of the record
+        signer.pop("fact_ids", None)
+    elif not signer.get("name") and str(signer.get("role", "")).casefold() == "buyer":
         # the policy names the role; the org chart's line order is unknown, so the person is the buyer who
         # places this supplier's orders for this part in the PO history
         name, fact_ids = w.buyer_of(b_id, part)

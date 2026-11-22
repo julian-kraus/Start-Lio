@@ -5,7 +5,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from projector import artbook
+from projector import artbook, control
 from sourcing import hedge, reliability
 from sourcing.facts import Facts
 from tracker.lookahead_records import validate
@@ -16,7 +16,7 @@ def fact(fact_id, fact_type, subject, attribute, value):
             "as_of": None, "path": "synthetic", "sha256": "synthetic", "confidence": 0.9}
 
 
-def records(bom=True):
+def records(bom=True, route=None):
     rows = []
     for i in range(12):
         line = {"po_number": f"order-{i}", "po_line": 1}
@@ -39,7 +39,8 @@ def records(bom=True):
         suppliers=lambda: {}, site=lambda: {"site_id": "site"}, part_name=lambda part: "Part",
         parts_of=lambda supplier: [], card=lambda sid, promises=(): reliability.card(history, sid, promises),
         price=lambda sid, part, on: hedge.Input(2, {"fact_id": "price-fact"}),
-        signer=lambda *a: {"role": "approver", "status": "needs_human", "reasons": ["unclear"]})
+        buyer_of=lambda supplier, part: ("Buyer Person", ["buyer-fact"]),
+        signer=lambda *a: dict(route or {"role": "approver", "status": "needs_human", "reasons": ["unclear"]}))
     at = lambda hour: f"2030-01-01T{hour:02d}:00:00+00:00"
     scenario = {
         "start": at(7), "edition": "Edition", "decision_at": at(15),
@@ -95,3 +96,24 @@ def test_a_bom_quantity_is_a_fact_not_a_scenario_input(built):
 
 def test_a_missing_bom_quantity_says_it_is_assumed():
     assert "assumed" in per_copy_sources(records(bom=False))[0]["scenario_input"]
+
+
+@pytest.mark.parametrize("route", [
+    {"rule": "Buyers sign up to the limit", "reasons": ["no seat"]},
+    {"reasons": ["the chart names no holder"], "reason": "the chart names no holder"},
+    {"name": "Buyer Person", "rule": "Buyers sign up to the limit", "reasons": ["seat unclear"]}])
+def test_an_unresolved_route_puts_the_buyer_in_no_field(route):
+    built = records(route={"role": "buyer", "status": "needs_human", **route})
+    signer = next(r for r in built if r["kind"] == "decision")["signer"]
+    assert signer["status"] == "needs_human" and not signer["name"]
+    assert "Buyer Person" not in str(signer) and "PO history" not in str(signer)
+
+
+@pytest.mark.parametrize("status", ["open", "accepted", "rejected"])
+def test_a_sent_decision_beat_is_not_sent_again(built, status):
+    script = control.beats(built)
+    index = next(i for i, beat in enumerate(script) if any(r["kind"] == "decision" for r in beat))
+    decision = next(r for r in script[index] if r["kind"] == "decision")
+    state = {"events": [], "decisions": [{"decision_id": decision["decision_id"], "status": status}]}
+    assert index in control.sent_beats(script, state)
+    assert control.sent_beats(script, {"events": [], "decisions": []}) == {0}, "a reset clears what was sent"
