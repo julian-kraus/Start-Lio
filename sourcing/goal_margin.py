@@ -4,9 +4,9 @@
 are not among the recognised forms. Those are never guessed: the goal's `protect` list settles them. The same
 holds in every field: a sacrifice, a protect entry and the answer to a question on margin.
 
-A sentence on margin, semicolons included, is read as a whole: each other part of it must be a known aside,
-because a negation or a condition can sit in any clause. An answer is not read apart from a question that turns
-it around. Not seen: a negation or condition in a separate sentence, other than a short withdrawal such as "Not."
+Once margin is named, the statement and all answers are read as one: each sentence and clause must be a margin form
+or a known aside (on time, what may suffer, costs, limits, when the team can be asked), because a negation or a
+condition can sit in any of them. An answer is not read apart from a question that turns it around.
 """
 
 from __future__ import annotations
@@ -15,7 +15,7 @@ import re
 from typing import Iterable, Mapping
 
 MARGIN = re.compile(r"\bmargins?\b")
-OTHER_MARGIN = re.compile(r"\b(?:safety|time) margins?\b|\bmargins? (?:of|for) (?:error|safety)\b")
+OTHER_MARGIN = re.compile(r"\b(?:safety|(?<!on )time) margins?\b|\bmargins? (?:of|for) (?:error|safety)\b")
 M = r"(?:(?:the|our|my|their|gross|profit|net|operating) )*margins?"
 V = r"(?:protect|protecting|preserve|preserving|defend|defending|safeguard|safeguarding)"
 HARM = r"(?:sacrifice|hurt|erode|risk)"
@@ -33,15 +33,24 @@ PROTECTS = re.compile("|".join((
 )))
 NOT = (r"(?:cannot|will not|do not|does not|must not|should not|need not|never|stop|forget(?: about)?|"
        r"no need to|not)")
-# A word of an aside: none that negates, limits or points back at margin
-WORD = (r"(?!(?:not|no|never|nor|if|when|once|only|unless|it|this|that|which|protect\w*|margins?)\b)"
+# A word of an aside: none that negates, limits, sums up or points back at margin
+WORD = (r"(?!(?:not|no|never|nor|if|when|once|only|unless|except|but|it|this|that|which|those|these|they|such|above"
+        r"|rest|else|all|everything|anything|priority|goal|profit\w*|protect\w*|margins?)\b)"
         r"[\w'-]+")
 ON_TIME = rf"(?:(?:all|every|each)(?: {WORD}){{0,3}} |everything )?(?:on time|by the deadline)"
+SUM = r"(?:eur |\u20ac ?)?\d+(?:[., ]\d+)*k?(?: ?(?:eur|euros?|\u20ac))?"
+DAY = r"(?:today|tomorrow|tonight|(?:mon|tues|wednes|thurs|fri|satur|sun)day)"
+WHEN = rf"(?:(?:{DAY} )?\d\d?(?::\d\d)?(?: ?(?:am|pm))?|{DAY})"
 ASIDE = re.compile("|".join((
     ON_TIME,
     r"(?:do not|never|must not|cannot) (?:bankrupt (?:me|us)|overspend|miss (?:the |our )?(?:date|deadline))",
     rf"{WORD}(?: {WORD}){{0,2}} {CAN} (?:suffer|wait|slip)",
     r"please|above all|at all costs",
+    rf"(?:a|one|each|every) (?:(?:missing|late) (?:copy|one)|copy) (?:costs|is worth) {SUM}",
+    rf"(?:a|one) (?:missing|late) one {SUM}",
+    rf"spend (?:at most|up to|no more than) {SUM}",
+    rf"(?:the )?team (?:can be asked|is available|is offline|is online|offline) (?:until|from|at) {WHEN}",
+    r"\d{4}-\d\d-\d\d[t ]\d\d:\d\d(?::\d\d)?(?:[+-]\d\d:\d\d|z)?",      # a stored team window
 )))
 GIVES_UP = re.compile("|".join((
     rf"{LEAD}{NOT} (?:(?:need to|have to|try to|want to) )?{V} {M}{TAIL}",
@@ -51,24 +60,24 @@ GIVES_UP = re.compile("|".join((
     rf"{M} (?:(?:does|do) not matter|is not (?:important|a priority))",
 )))
 NEGATION = re.compile(r"\b(?:not|never|cannot|no|stop|forget)\b")
-WITHDRAWN = re.compile(r"(?:(?:actually|well|or|just) )?(?:not|no|nope|never|do not|kidding|never mind|scratch that"
-                       r"|forget (?:it|that))")
 TURNS = re.compile(rf"{NEGATION.pattern}|\b(?:least|avoid|give up|giving up|skip)\b")
 CONDITION = re.compile(r"\b(?:unless|except|only if|only when|as long as)\b")
 GIVEN = re.compile(rf"(?:(?:some|lower|a bit of|a little) )?{M}|{GIVES_UP.pattern}")
 KEPT = re.compile(rf"{M}|{PROTECTS.pattern}")
 ASKS = re.compile(rf"(?:(?:should|do|must) (?:we|i|you) (?:(?:want to|need to|have to) )?)?{V} {M}")
 NO = re.compile(r"no|nope|false")
-CLAUSE = re.compile(r"[,:;]|\s[-\u2013]+\s|\u2014|(?<!anything )(?<!everything )(?<!nothing )\bbut\b", re.IGNORECASE)
+SENTENCE = re.compile(r"(?<=[!?\n])|(?<=\.)(?!\d)")
+CLAUSE = re.compile(r";|[,:](?!\d)|\s[-\u2013]+\s|\u2014|(?<!anything )(?<!everything )(?<!nothing )\bbut\b",
+                    re.IGNORECASE)
 
 
 def _strings(value) -> Iterable[str]:
     if isinstance(value, str):
         yield value
     elif isinstance(value, Mapping):
-        # a question is not what the goal says
+        # a question or its id is not what the goal says
         for key, item in value.items():
-            if key not in ("q", "question"):
+            if key not in ("id", "q", "question"):
                 yield from _strings(item)
     elif isinstance(value, (list, tuple)):
         for item in value:
@@ -146,17 +155,15 @@ def read(goal: Mapping | None) -> tuple[str | None, str | None]:
             gives_up.append(f"{question} {answer}")
         elif MARGIN.search(said) and TURNS.search(asked):
             return None, f"{question} {answer}"
-    for text in _strings([goal.get("statement"), goal.get("answers")]):
-        sentences = re.findall(r"[^.!?\n]+[.!?]?", text)
-        if MARGIN.search(_plain(text)) and any(WITHDRAWN.fullmatch(_plain(x).rstrip(" .;!")) for x in sentences):
-            return None, text.strip()
-        for sentence in sentences:
+    texts = list(_strings([goal.get("statement"), goal.get("answers")]))
+    if not any(MARGIN.search(_plain(line)) for text in texts for line in SENTENCE.split(text)):
+        return None, None
+    for text in texts:
+        for sentence in SENTENCE.split(text):
             whole = _plain(sentence)
-            if not MARGIN.search(whole):
-                continue
-            if whole.endswith("?") or CONDITION.search(whole):
+            if MARGIN.search(whole) and (whole.endswith("?") or CONDITION.search(whole)):
                 return None, sentence.strip()
-            for clause in CLAUSE.split(sentence.rstrip(".;!")):
+            for clause in CLAUSE.split(sentence.strip().rstrip(".;!")):
                 negated = False     # "we cannot hit the date and protect margin" has an open scope
                 for part in re.split(r"\band\b", clause, flags=re.IGNORECASE):
                     said = _plain(part)

@@ -133,3 +133,40 @@ def test_an_answer_is_not_read_without_a_question_that_turns_it_around(question)
 def test_margin_named_by_a_key_is_not_dropped(goal):
     with pytest.raises(ModelError, match="margin"):
         hedge.margin_line(goal)
+
+
+@pytest.mark.parametrize("said", [
+    "Protect margin. Only if it is cheap.", "Protect margin. That can wait.", "Protect margin. Those can wait.",
+    "Under no circumstances do this. Protect margin.", "Protect margin. Time permitting.", "Protect margin. Later.",
+    "Protect margin\nMaybe", "Margin can suffer. Within reason.", "Protect margin. All of the above can wait.",
+    "Protect margin. Profit can suffer.", "Later\nAll copies on time\nMargin protection first",
+    "All copies on time margin can suffer, maybe",
+])
+def test_words_in_another_sentence_are_not_dropped(said):
+    for goal in ({"statement": said}, {"answers": {"limits": said}}):
+        with pytest.raises(ModelError, match="margin"):
+            hedge.margin_line(goal)
+    assert hedge.margin_line({"statement": said, "protect": ["margin"]})
+
+
+@pytest.mark.parametrize("goal", [
+    {"answers": {"goal": "Protect margin", "limits": "Only if it is cheap"}},
+    {"statement": "Protect margin", "answers": [{"id": "limits", "q": "How far will you go?", "a": "Maybe later"}]},
+])
+def test_words_in_another_answer_are_not_dropped(goal):
+    with pytest.raises(ModelError, match="margin"):
+        hedge.margin_line(goal)
+
+
+@pytest.mark.parametrize("limits", [
+    "A missing copy costs 70 EUR. Spend at most 1,000 EUR. Goodwill can suffer.",
+    "One missing copy is worth 70.50 EUR, don't bankrupt me, the team can be asked until Sunday 10:00.",
+    "Each missing copy costs €70; spend up to €900. The team is offline from 10:00.",
+])
+def test_an_interview_goal_on_margin_is_still_read(limits):
+    said = "All copies on time. Protect margin."
+    stored = [{"id": "goal", "q": "What has to be true at the deadline?", "a": said},
+              {"id": "limits", "q": "How far will you go?", "a": limits},
+              {"id": "team_window", "a": {"to": "2031-05-04T10:00:00+02:00"}}]
+    for answers in ({"goal": said, "limits": limits}, stored):
+        assert hedge.margin_line({"statement": said, "answers": answers})
