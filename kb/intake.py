@@ -2,10 +2,14 @@
 
 Per document: kind from the survey (rules) -> else the LLM survey (classify) -> else the designer proposes a kind ->
 the structuring agent (extract) reads it -> the validation gate decides whether its facts count.
+A document that fits no kind stays pending, and so a visible issue, but is tried again only when the doc kinds or the
+adapter change.
 """
 
 from __future__ import annotations
 
+import hashlib
+import json
 import logging
 from pathlib import Path
 
@@ -15,10 +19,33 @@ from tracker.db import _jsonb_safe
 
 from . import designer, registry, validate
 from . import facts as facts_mod
-from .llm.base import LLMClient, normalise
+from .llm.base import LLMClient, Structure, normalise
 from .loader import load_envelope
 
 log = logging.getLogger(__name__)
+NO_FIT = "no_fit"   # in a queue item's routing: what it was tried against when no kind fitted
+
+
+def _tried_against(client: LLMClient, kinds: list[Structure]) -> str:
+    """Changes when another answer is possible. A promotion changes only the status, so it is left out."""
+    offer = [client.label, [[k.name, k.description, k.recognise] for k in kinds]]
+    return hashlib.sha256(json.dumps(offer, sort_keys=True, default=str).encode()).hexdigest()[:16]
+
+
+class _DesignCall:
+    """designer.propose_doc_kind turns an error into "no proposal". This keeps the error, so that an outage is a
+    failed attempt and is not recorded as a document that fits no kind."""
+
+    def __init__(self, client: LLMClient):
+        self.client, self.label = client, client.label
+        self.error: Exception | None = None
+
+    def design(self, *args, **kwargs):
+        try:
+            return self.client.design(*args, **kwargs)
+        except Exception as exc:
+            self.error = exc
+            raise
 
 
 def _set_queue(conn, item: dict, **fields) -> None:
@@ -34,8 +61,12 @@ def drain(conn, client: LLMClient, read_bytes, structured: Path, confidence_map:
     if not client.supports("extract"):
         raise SystemExit(f"adapter {client.label} cannot extract")
     schema = validate.load_schema(structured)
-    items = conn.execute("SELECT path, sha256, container, doc_kind, routing, attempts FROM extraction_queue "
-                         "WHERE state = 'pending' ORDER BY enqueued_at LIMIT %s", (limit,)).fetchall()
+    # Documents never tried go first, so second tries after a registry change cannot hold up the queue either.
+    items = conn.execute(
+        "SELECT path, sha256, container, doc_kind, routing, attempts FROM extraction_queue "
+        "WHERE state = 'pending' AND routing->>%s IS DISTINCT FROM %s "
+        "ORDER BY routing->>%s IS NOT NULL, enqueued_at LIMIT %s",
+        (NO_FIT, _tried_against(client, registry.structures(conn)), NO_FIT, limit)).fetchall()
     for item in items:
         try:
             outcome = _one(conn, client, item, read_bytes, structured, schema, confidence_map)
@@ -55,18 +86,22 @@ def _one(conn, client: LLMClient, item: dict, read_bytes, structured: Path, sche
     data = read_bytes(item["sha256"], item["path"])
     doc = normalise(item["path"], item["sha256"], item["container"], data, render=client.needs_images)
     kind_name = item["doc_kind"]
-    routing = dict(item["routing"] or {})
+    routing = {k: v for k, v in (item["routing"] or {}).items() if k != NO_FIT}
+    kinds = registry.structures(conn)
     if kind_name is None and client.supports("classify"):
-        r = client.classify(doc, registry.structures(conn))
-        routing = {**vars(r), "by": client.label, "rules": item["routing"]}
+        r = client.classify(doc, kinds)
+        routing = {**vars(r), "by": client.label, "rules": routing.get("rules", routing)}
         kind_name = r.kind if r.decision == "kind" else None
     if kind_name is None and client.supports("design"):
-        kind_name = designer.propose_doc_kind(conn, client, doc)
+        call = _DesignCall(client)
+        kind_name = designer.propose_doc_kind(conn, call, doc)
+        if call.error:
+            raise call.error
         if kind_name:
             routing = {**routing, "designed_kind": kind_name}
     structure = registry.structure(conn, kind_name) if kind_name else None
     if structure is None:
-        _set_queue(conn, item, routing=routing)
+        _set_queue(conn, item, routing={**routing, NO_FIT: _tried_against(client, kinds)})
         return "unrouted"
     env = client.extract(doc, structure, schema or {}, registry.contract_summary(conn))
     env["source"] = {**(env.get("source") or {}), "path": item["path"], "sha256": item["sha256"],
