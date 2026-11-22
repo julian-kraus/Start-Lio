@@ -407,47 +407,20 @@ def test_auth() -> None:
 # calls them, and the GroundingGuard refuses any number the hedge tool did not return, retrying then forcing the
 # tool result in. Models are good, so the guard should pass on every run (acceptance: guard 10/10).
 def test_agent_tools(n: int = 10, key: str = "agent_tools") -> None:
-    # The code under test lives in the worktree (this file's repo), not in the shim root argv[1]; put it on the
-    # path. The key was read from the shim into KEY at load; live_run strips it from the env, so pass it in.
+    # The code under test lives in the worktree (this file's repo), not in the shim root argv[1].
     sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-    from agents.llm import AnthropicClient, run as run_agent_role
-    from agents.tools import GroundingGuard, ToolRegistry
+    from agents.live import run_agent_tools_probe
 
-    specs = {t["name"]: t for t in TOOLS}
-    reg = ToolRegistry()
-    reg.add("hedge_math", specs["hedge_math"]["description"], specs["hedge_math"]["input_schema"],
-            lambda **kw: hedge_math(**kw), grounds_numbers=True)
-    for name in ("get_shortfall", "get_reliability", "get_offer", "get_goal"):
-        reg.add(name, specs[name]["description"], specs[name]["input_schema"],
-                (lambda nm: (lambda **_kw: FAKE[nm]))(name))
-    guard = GroundingGuard({"hedge": "hedge", "expected_loss_eur": "expected_loss_eur",
-                            "break_even_p_fail": "break_even_p_fail"})
-    client = AnthropicClient(api_key=KEY, model=MODEL, max_output_tokens=8000)
-    expected = hedge_math(0.35, 3100, 90, 0.25 * 4000 * 3.5)
-    system = ("You decide whether to place a backup order. Get every input from the tools. Every number in your "
-              "answer must come from a tool result; never compute numbers yourself. Cite the goal line.")
-    prompt = ("Part P-ALPHA is short for the premium edition. Should we hedge with the backup offer? The "
-              "commitment now is the deposit share of the backup order value.")
-    runs = []
-    for _ in range(n):
-        res = run_agent_role(client, reg, role="hedger", system=system, prompt=prompt,
-                             schema=VERDICT_SCHEMA, guard=guard)
-        v = res.verdict or {}
-        checks = {
-            "answered": res.ok,
-            "used_hedge_math": "hedge_math" in res.calls,
-            "guard_held_without_fallback": res.ok and not res.guard_failed,
-            "hedge_matches_tool": v.get("hedge") == expected["hedge"],
-            "expected_loss_matches_tool": abs(v.get("expected_loss_eur", -1) - expected["expected_loss_eur"]) < 0.01,
-        }
-        usage_total["input"] += res.usage.get("input_tokens", 0)
-        usage_total["output"] += res.usage.get("output_tokens", 0)
-        usage_total["calls"] += 1
-        runs.append({"calls": res.calls, "guard_retries": res.guard_retries, "guard_failed": res.guard_failed,
-                     "verdict": v, "checks": checks})
-        save()
-    results["tests"][key] = {"expected": expected, "runs": runs,
-                             "all_checks_pass": sum(all(r["checks"].values()) for r in runs), "of": n}
+    report, usage = run_agent_tools_probe(
+        key=KEY, model=MODEL, n=n, tool_specs=TOOLS, tool_values=FAKE,
+        hedge_math=hedge_math, verdict_schema=VERDICT_SCHEMA,
+        system=("You decide whether to place a backup order. Get every input from the tools. Every number in your "
+                "answer must come from a tool result; never compute numbers yourself. Cite the goal line."),
+        prompt=("Part P-ALPHA is short for the premium edition. Should we hedge with the backup offer? The "
+                "commitment now is the deposit share of the backup order value."))
+    for name, value in usage.items():
+        usage_total[name] += value
+    results["tests"][key] = report
 
 
 if __name__ == "__main__":
