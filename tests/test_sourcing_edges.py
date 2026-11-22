@@ -186,6 +186,9 @@ def clip(world, *notes):
     ["isn’t installed by the vendor"], ["phantom: no"], ["no longer phantom: buy separately"],
     ["was a phantom until the redesign"], ["Is this a phantom?"], ["not a phantom; not stocked separately"],
     ["must not be forgotten, it is stocked separately"], ["phantom", "not a phantom"],
+    ["phantom status withdrawn"], ["phantom flag removed, order separately"], ["phantom cancelled"],
+    ["ceased to be a phantom"], ["phantom in error"], ["wrongly marked phantom"], ["phantom, but buy separately"],
+    ["phantom status ended"],
 ])
 def test_a_negated_or_doubtful_note_never_hides_a_shortage(world, notes):
     result = clip(world, *notes)
@@ -237,6 +240,8 @@ def test_the_edition_said_to_be_first_is_first(world, text, first):
     "Priority: Basic is not first", "Priority: Deluxe first, Basic first",
     "Priority: Basic waits until Deluxe is packed first", "Priority as discussed for Basic. Who is first?",
     "Priority: is Basic first?",
+    "Priority: previously Deluxe first, now Basic", "Priority: Deluxe first, now Basic",
+    "Priority: Deluxe first, Basic instead",
 ])
 def test_an_unclear_priority_is_escalated_not_guessed(world, text):
     result = reworded(world, text)

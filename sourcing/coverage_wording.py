@@ -13,10 +13,15 @@ NOT_STOCKED = re.compile(r"\b(?:not|never)\s+(?:(?:ordered|bought|purchased|rece
 PHANTOM = re.compile(r"\bphantom\b|\b(?:pre-?)?(?:fitted|mounted|assembled|installed) by (?:the |our )?"
                      r"(?:supplier|vendor)\b", re.I)
 DOUBT = re.compile(r"\b(?:no|not|never|non|nor|cannot|without|false|former|formerly|was|were|longer|until|used to"
-                   r"|should|if|whether|unless|maybe|possibly|isnt)\b|n['\u2019]t\b|\?", re.I)
+                   r"|should|if|whether|unless|maybe|possibly|isnt)\b|n['\u2019]t\b|\?"
+                   # taken back, called a mistake, or contradicted by an instruction to buy
+                   r"|\b(?:withdr[ae]w|remov|cancel|ceas|revok|rescind|revers|retract|lifted|dropped|obsolete|ended|expired"
+                   r"|error|mistak|wrong|incorrect|disput|previous|earlier)\w*"
+                   r"|\b(?:buy|reorder|order (?:it|them|separately)|(?:must|to) be (?:ordered|bought))\b", re.I)
 SENTENCE = re.compile(r"(?<=[.;!?\n])")
 CLAUSE = re.compile(r"(?<=[,;.:!?\n])|\bthen\b|\bfollowed by\b")
 NEXT = re.compile(r"\bthen\b|\bfollowed by\b")
+SWITCH = re.compile(r"\b(?:now|instead)\b")
 BEHIND = re.compile(r"\b(?:waits?|last|second|after|until)\b")
 TOKEN = re.compile(r"@(\d+)@")
 
@@ -50,6 +55,8 @@ def priority(text: str, labels: dict[str, list[str]]) -> tuple[bool, list[str] |
     leaders = set()
     for clause in CLAUSE.split(masked):
         if not re.search(r"\bfirst\b", clause):
+            if named(clause) and SWITCH.search(clause):
+                return True, None                       # an edition takes over without being said to be first
             continue
         who = named(clause)
         if len(who) != 1 or DOUBT.search(clause) or BEHIND.search(clause):
