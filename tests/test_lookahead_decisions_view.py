@@ -21,3 +21,18 @@ if(!submit.disabled)throw Error('empty reason must not submit');reason.value='No
 (async()=>{await submit.listeners.click();if(call.path!=='/api/lookahead/decisions/d-1/reject'||call.body.approver!=='A signer'||call.body.reason!=='Not suitable')throw Error('incorrect route or body');console.log('ok')})().catch(e=>{console.error(e);process.exitCode=1});
 '''
     subprocess.run(["node", "-e", script], cwd=ROOT, check=True, capture_output=True, text=True)
+
+
+def test_actions_wait_for_routed_signer():
+    script = r'''
+const fs=require('fs'),vm=require('vm');
+class E {constructor(tag,a={}){this.tag=tag;this.attrs=a;this.children=[];this.disabled=!!a.disabled;this.textContent=''} append(...v){this.children.push(...v)} replaceChildren(...v){this.children=v}}
+global.window={};global.document={createTextNode:x=>x};global.el=(tag,a,...v)=>{const n=new E(tag,a);n.append(...v);return n};
+let resolve;global.api=()=>new Promise(r=>resolve=r);global.acceptButton=(d)=>{const n=new E('button');n.routed=d;return n};
+vm.runInThisContext(fs.readFileSync('tracker/lookahead_static/decision_card.js','utf8'));
+const error=new E('p'),signer=new E('span');const actions=window.decisionActions({decision_id:'d1',signer:{name:'Untrusted'}},x=>x,error,signer);
+if(!actions.children.every(x=>x.disabled))throw Error('actions enabled before routing');
+resolve({decision_id:'d1',signer:{name:'Routed'},approval:{status:'resolved'}});
+setImmediate(()=>{if(!signer.children.includes('Routed')||actions.children[1].disabled)throw Error('routing not used')});
+'''
+    subprocess.run(["node", "-e", script], cwd=ROOT, check=True, capture_output=True, text=True)

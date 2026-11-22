@@ -68,3 +68,24 @@ function openRejectDialog(decision, translate) {
   $("modal-root").replaceChildren(el("div",{class:"decision-backdrop",onclick:event=>{if(event.target===event.currentTarget)close()}},content));
   reason.focus();
 }
+
+window.decisionActions = function(decision, translate, error, signerLine) {
+  const tr = key => translate("decisions." + key);
+  const actions=el("div",{class:"dq-btns2"});
+  const unavailable=()=>actions.replaceChildren(
+    el("button",{class:"btn btn-secondary",type:"button",disabled:true},tr("reject")),
+    el("button",{class:"btn btn-primary",type:"button",disabled:true},tr("accept")));
+  unavailable();
+  api(`/api/lookahead/decisions/${encodeURIComponent(decision.decision_id)}`)
+    .then(routed=>{
+      const signer=routed && routed.signer;
+      if(!routed.approval || routed.approval.status!=="resolved" || !signer || !signer.name) {
+        error.textContent=tr("signer_unavailable");return;
+      }
+      signerLine.replaceChildren(document.createTextNode([signer.name,signer.role,signer.rule].filter(Boolean).join(" · ")));
+      const accept=acceptButton(routed,error,()=>{});accept.textContent=tr("accept");accept.className="btn btn-primary";
+      const reject=el("button",{class:"btn btn-secondary",type:"button",onclick:()=>openRejectDialog(routed,translate)},tr("reject"));
+      actions.replaceChildren(reject,accept);
+    }).catch(()=>{error.textContent=tr("signer_unavailable")});
+  return actions;
+};

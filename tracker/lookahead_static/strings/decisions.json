@@ -94,5 +94,9 @@
   "decisions.decision": {
     "en": "Decision",
     "zh": "決策"
+  },
+  "decisions.signer_unavailable": {
+    "en": "Signer routing is unavailable.",
+    "zh": "目前無法確認簽署人。"
   }
 }

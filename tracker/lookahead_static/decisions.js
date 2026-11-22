@@ -32,13 +32,10 @@
       const line=el("p",{},text);if(item&&typeof item==="object"&&item.source)line.title=JSON.stringify(item.source);why.append(line);
     }
     outer.append(el("div",{class:"dc2-cols"},plan,why));
-    const signer=d.signer||{}, signerText=[signer.name,signer.role,signer.rule].filter(Boolean).join(" · ");
+    const signerLine=el("b",{});
     const error=el("div",{class:"err",role:"alert"});
-    const accept=acceptButton(d,error,()=>{});accept.textContent=tr(t,"accept");accept.className="btn btn-primary";
-    if(!signer.name)accept.disabled=true;
-    const reject=el("button",{class:"btn btn-secondary",type:"button",disabled:!signer.name,onclick:()=>openRejectDialog(d,t)},tr(t,"reject"));
-    outer.append(el("div",{class:"dc2-foot"},el("div",{class:"dc-sign"},tr(t,"signer")," ",el("b",{},signerText)),
-      el("div",{class:"dq-btns2"},reject,accept)),error);
+    const actions=window.decisionActions(d,t,error,signerLine);
+    outer.append(el("div",{class:"dc2-foot"},el("div",{class:"dc-sign"},tr(t,"signer")," ",signerLine),actions),error);
     return outer;
   }
   function render(root,state,t){
