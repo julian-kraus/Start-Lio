@@ -124,7 +124,7 @@ function decisions() {
   const done = (S.decisions || []).filter(d => d.status !== "open");
   $("#decDone").textContent = done.length;
   $("#decClosed").innerHTML = done.length ? done.map(d => `<tr><td style="font-weight:600">${esc(d.title)}<p class="xs subtle" style="font-weight:400">${esc(d.recommendation || "")}</p></td>
-    <td><span class="who"><span class="who-av">${esc(initials(d.by || (d.signer || {}).name))}</span>${esc(d.by || (d.signer || {}).name || "")}</span></td>
+    <td><span class="who"><span class="who-av">${esc(initials(d.decided_by))}</span>${esc(d.decided_by || "")}</span></td>
     <td class="r">${num(d.impact && d.impact.units)} copies</td><td class="r">${eur(d.cost && d.cost.eur)}</td><td>${esc(dhm(d.decided_at || d.at))}</td>
     <td>${d.status === "accepted" ? B("g", "Approved") : B("r", d.status)}</td></tr>`).join("") : `<tr><td colspan="6" class="subtle">No decisions yet.</td></tr>`;
   document.querySelectorAll("[data-act]").forEach(b => b.onclick = e => { e.stopPropagation(); accept(b.dataset.act); });

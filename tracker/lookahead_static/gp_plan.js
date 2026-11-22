@@ -38,8 +38,8 @@ function planView(S) {
   const st = {
     1: S.goal ? "done" : "cur",
     2: (S.suppliers || []).length ? "done" : "todo",
-    3: S.plan ? "done" : (S.goal ? "cur" : "todo"),
-    4: f.hedge ? "done" : (S.plan ? "cur" : "todo"),
+    3: lanes.length ? "done" : (S.goal ? "cur" : "todo"),   // a plan with coverage only has ranked nothing
+    4: f.hedge ? "done" : (lanes.length ? "cur" : "todo"),
     5: proven ? "done" : (waiting ? "cur" : "todo"),
     ad: f.canc ? "off" : "alt",
     ac: f.canc ? "bad" : "alt",
