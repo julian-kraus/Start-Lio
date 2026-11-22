@@ -34,8 +34,10 @@ def supplier_updates(cards: list[dict], promises: list[dict]) -> list[dict]:
             raise ValueError(f"duplicate settled promise: {pid}")
         seen.add(identity)
         before = current[sid]
-        after = reliability.update(before, outcome, pid, sources=promise.get("sources") or [],
-                                   at=promise.get("proven_at") or promise.get("broken_at"))
+        at = promise.get("proven_at") or promise.get("broken_at")
+        if hasattr(at, "isoformat"):
+            at = at.isoformat()
+        after = reliability.update(before, outcome, pid, sources=promise.get("sources") or [], at=at)
         if after != before:
             current[sid] = after
             changed.add(sid)
@@ -75,3 +77,12 @@ def classify_email(client, email_text: str) -> str | None:
         return None
     outcome = answer["outcome"]
     return outcome if outcome in ("kept", "broken") else None
+
+
+def learn_from_ledger(plan_conn, timeline) -> list[dict]:
+    """Read settled plan promises and append the corresponding supplier cards."""
+    promises = plan_conn.execute(
+        "SELECT promise_id, supplier_id, state, sources, proven_at, broken_at "
+        "FROM promises WHERE state IN ('proven', 'broken') ORDER BY promise_id"
+    ).fetchall()
+    return publish_updates(timeline, timeline.state()["suppliers"], promises)

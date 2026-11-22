@@ -59,3 +59,25 @@ def test_email_classification_fails_closed():
     assert classify_email(client, "We are checking.") is None
     assert classify_email(client, "ambiguous") is None
     assert classify_email(client, "ambiguous") is None
+
+
+def test_ledger_updates_real_timeline_and_is_idempotent(tmp_path):
+    from datetime import datetime, timezone
+    from agents.learner import learn_from_ledger
+    from tracker.lookahead import Lookahead
+
+    timeline = Lookahead(tmp_path / "log.jsonl")
+    original = card(History({}), "supplier-x", scenario_prior={"value": 0.8, "label": "example"})
+    timeline.append([original])
+
+    class Conn:
+        def execute(self, sql):
+            assert "FROM promises" in sql
+            return self
+        def fetchall(self):
+            return [{"promise_id": "p1", "supplier_id": "supplier-x", "state": "broken",
+                     "broken_at": datetime(2026, 1, 1, tzinfo=timezone.utc), "sources": [{"fact_id": "f1"}]}]
+
+    learn_from_ledger(Conn(), timeline)
+    assert timeline.state()["suppliers"][0]["score"]["value"] < original["score"]["value"]
+    assert learn_from_ledger(Conn(), timeline) == []
