@@ -70,12 +70,13 @@
       el("div", {class:"dq-t"},d.title || ""), el("div", {class:"dq-cause"},d.recommendation || ""));
     if(d.cost && d.cost.eur != null) box.append(el("div", {class:"dq-cost"},label(t,"pay"),el("b",{},eur(d.cost.eur))));
     if(d.impact && d.impact.eur != null) box.append(el("div", {class:"dq-cost"},label(t,"risk"),el("b",{},eur(d.impact.eur))));
-    if(d.signer && (d.signer.name || d.signer.role))box.append(el("div", {class:"dq-cause"},[d.signer.name,d.signer.role].filter(Boolean).join(", ")));
+    const signer=el("div", {class:"dq-cause"});
     const error=el("div", {class:"err"});
-    const accept=acceptButton(d,error,()=>{});accept.className="btn btn-primary";
-    if(!d.signer || !d.signer.name)accept.disabled=true;
-    const reject=el("button", {class:"btn btn-secondary",type:"button",disabled:!d.signer || !d.signer.name || typeof openRejectDialog!=="function",title:typeof openRejectDialog!=="function"?label(t,"reject_unavailable"):"",onclick:()=>openRejectDialog(d,t)},label(t,"reject"));
-    box.append(el("div", {class:"dq-btns2"},reject,accept),error);return box;
+    const actions=typeof window.decisionActions === "function" ? window.decisionActions(d,t,error,signer) :
+      el("div", {class:"dq-btns2"},
+        el("button", {class:"btn btn-secondary",type:"button",disabled:true,title:label(t,"reject_unavailable")},label(t,"reject")),
+        el("button", {class:"btn btn-primary",type:"button",disabled:true},label(t,"accept_unavailable")));
+    box.append(signer,actions,error);return box;
   }
   function feed(events,t) {
     const list=el("ul", {class:"feed",style:"margin-top:18px"});

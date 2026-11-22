@@ -8,5 +8,6 @@
   "timeline.pay":{"en":"To pay","zh":"待支付"},
   "timeline.risk":{"en":"At risk","zh":"面臨風險"},
   "timeline.reject":{"en":"Reject","zh":"拒絕"},
+  "timeline.accept_unavailable":{"en":"Accept","zh":"接受"},
   "timeline.reject_unavailable":{"en":"Rejection is not available yet","zh":"目前無法拒絕"}
 }
