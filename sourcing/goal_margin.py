@@ -23,7 +23,7 @@ CAN = r"(?:can|could|may|might)"
 MUST = r"(?:must|should|has to|have to|needs to|need to)"
 LEAD = (r"(?:(?:we|i|you|please|and|also|always|just|first|above all|must|should|need to|have to|want to|will|"
         r"it is important to|the goal is to|our priority is to) )*")
-TAIL = r"(?: (?:first|above all|at all costs|too|as well|please|where possible))?"
+TAIL = r"(?: (?:first|above all|at all costs|too|as well|please))?"
 PROTECTS = re.compile("|".join((
     rf"{LEAD}{V} {M}{TAIL}",
     rf"{LEAD}(?:do not|never|must not|cannot) (?:{HARM} {M}|let {M} (?:suffer|slip))",
@@ -60,7 +60,8 @@ GIVES_UP = re.compile("|".join((
     rf"{M} (?:(?:does|do) not matter|is not (?:important|a priority))",
 )))
 NEGATION = re.compile(r"\b(?:not|never|cannot|no|stop|forget)\b")
-TURNS = re.compile(rf"{NEGATION.pattern}|\b(?:least|avoid|give up|giving up|skip)\b")
+TURNS = re.compile(rf"{NEGATION.pattern}|\b(?:least|avoid|give up|giving up|skip)\b"
+                   r"|^(?:what|which)\b[^?]*\b(?:sacrific\w*|suffer|wait|slip|drop)\b")
 CONDITION = re.compile(r"\b(?:unless|except|only if|only when|as long as)\b")
 GIVEN = re.compile(rf"(?:(?:some|lower|a bit of|a little) )?{M}|{GIVES_UP.pattern}")
 KEPT = re.compile(rf"{M}|{PROTECTS.pattern}")
