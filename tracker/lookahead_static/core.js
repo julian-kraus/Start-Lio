@@ -80,6 +80,7 @@ async function load() {
   if (fresh && !first && S.view !== "overview") S.decisionOpen = fresh.decision_id;
   if (S.decisionOpen && !openDecisions().some((d) => d.decision_id === S.decisionOpen)) S.decisionOpen = null;
   S.lastId = st.last_id;
+  S.clockLoaded = nowMs();
   render();
   // animations belong to the load that brought the change, not to later re-renders
   S.newIds = new Set(); S.flashLanes = new Set(); S.prevCover = null; S.prevNow = null;

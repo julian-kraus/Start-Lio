@@ -48,12 +48,13 @@ svg.tl .bar rect.body { rx: 5; }
 svg.tl .bar.supply rect.body { fill: var(--supply-bg); stroke: var(--supply); stroke-width: 1.2; }
 svg.tl .bar.supply.moving rect.body { fill: color-mix(in srgb, var(--supply) 22%, var(--surface)); }
 svg.tl .bar.hedge rect.body { fill: var(--hedge-bg); stroke: var(--hedge); stroke-width: 1.5; stroke-dasharray: 5 3; }
-svg.tl .bar.ghost rect.body { fill: url(#hatch); stroke: var(--ghost); stroke-width: 1.5; stroke-dasharray: 3 3; }
+svg.tl .bar.ghost.late rect.body { fill: url(#hatch); stroke: var(--ghost); }
+svg.tl .bar.ghost rect.body { fill: var(--surface-2); stroke: var(--faint); stroke-width: 1.5; stroke-dasharray: 3 3; }
 svg.tl .bar.failed rect.body { fill: var(--risk-bg); stroke: var(--risk); }
 svg.tl .bar .strike { stroke: var(--risk); stroke-width: 1.5; }
 svg.tl .bar .leg { stroke: color-mix(in srgb, var(--text) 25%, transparent); }
 svg.tl .bar .bar-label { font-size: 12px; font-weight: 600; }
-svg.tl .bar.ghost .bar-label, svg.tl .bar.failed .bar-label { fill: var(--risk); }
+svg.tl .bar.ghost.late .bar-label, svg.tl .bar.failed .bar-label { fill: var(--risk); }
 svg.tl .bar .leg-label { font-size: 10px; fill: var(--muted); }
 svg.tl .bar:hover rect.body, svg.tl .bar.sel rect.body { stroke-width: 2.5; }
 svg.tl .bar.new { animation: grow .8s ease-out 1; transform-box: fill-box; transform-origin: left center; }

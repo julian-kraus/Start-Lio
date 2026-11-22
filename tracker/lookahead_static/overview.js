@@ -32,16 +32,18 @@ function needsYou() {
   if (!st.goal && st.launch && (st.launch.goal_questions || []).length) {
     return el("div", { class: "needs card" }, el("div", { class: "kicker" }, "Needs you"),
       el("h2", {}, "Set the goal for this launch"),
-      el("p", { class: "rec" }, "Lookahead prices every risk against your goal. Four answers, then it watches the launch and only comes back when you have to decide."),
+      el("p", { class: "rec" }, "Lookahead prices every risk against your goal. A few answers, then it watches the launch and only comes back when you have to decide."),
       el("div", { class: "acts" }, el("button", { class: "btn primary big", onclick: openGoal }, "Start goal interview")));
   }
   if (!d) {
     const cov = st.plan && st.plan.coverage;
-    const ok = !cov || cov.met || cov.hedged;
+    if (!cov) return el("div", { class: "needs card calm" }, el("div", { class: "kicker" }, "Watching"),
+      el("h2", {}, "No plan yet"), el("p", { class: "rec" }, "This page fills up when the agents or the monitor publish a plan."));
+    const ok = cov.met || cov.hedged;
     const nextP = st.promises.filter((p) => p.state === "waiting").sort((a, b) => ms(a.next_check || a.due) - ms(b.next_check || b.due))[0];
-    return el("div", { class: "needs card calm" + (cov && cov.met ? " met" : "") },
-      el("div", { class: "kicker" }, cov && cov.met ? "Goal met" : ok ? "Nothing needs you" : "Watching"),
-      el("h2", {}, cov && cov.met ? `${num(cov.covered)} of ${num(cov.needed)} ${cov.unit} covered` : ok ? "The launch is on track" : (st.plan && st.plan.summary) || "Working on it"),
+    return el("div", { class: "needs card calm" + (cov.met ? " met" : "") },
+      el("div", { class: "kicker" }, cov.met ? "Goal met" : ok ? "Nothing needs you" : "Watching"),
+      el("h2", {}, cov.met ? `${num(cov.covered)} of ${num(cov.needed)} ${cov.unit} covered` : ok ? "The launch is on track" : (st.plan && st.plan.summary) || "Working on it"),
       el("p", { class: "rec" }, nextP ? `Next check: ${fmt(nextP.next_check || nextP.due)}, ${(supplier(nextP.supplier_id) || {}).name || ""}: ${nextP.what}. The agent chases if there is no proof.`
         : "The agent keeps watching and will ask you if a decision exceeds your limits."));
   }
@@ -67,12 +69,11 @@ function needsYou() {
 function earlyLine(d) {
   const l = lanes().find((x) => x.lane_id === d.lane);
   if (!l) return null;
-  const ghost = (l.bars || []).find((b) => b.kind === "ghost");
+  const ghost = (l.bars || []).find((b) => b.kind === "ghost" && (!b.supplier_id || b.supplier_id === d.supplier_id));
   const live = (l.bars || []).find((b) => b.kind !== "ghost" && b.state !== "failed" && b.supplier_id === d.supplier_id);
   if (!ghost || !live) return null;
-  const late = l.needed_by && ms(ghost.usable_at) > ms(l.needed_by);
   return el("div", { class: "early" },
-    el("span", { class: "g" }, `Started now: usable ${hm(ghost.usable_at)}${late ? `, after the ${hm(l.needed_by)} needed-by` : ""}.`),
+    el("span", { class: ghost.late ? "g" : "" }, `Started now: usable ${hm(ghost.usable_at)}${lateText(ghost)}.`),
     el("span", { class: "k" }, ` It was started ${fmt(live.start)}, so it is usable ${hm(live.usable_at)}.`));
 }
 function storyItem(e) {
@@ -97,7 +98,7 @@ function upcoming() {
   for (const p of st.promises) if (p.state === "waiting" && ms(p.next_check || p.due) > n)
     out.push({ at: p.next_check || p.due, title: `Check: ${(supplier(p.supplier_id) || {}).name || p.supplier_id}, ${p.what}`, why: `Proof expected: ${p.proof || "confirmation"}. If it is missing: ${p.fallback || "the agent chases"}.` });
   for (const l of lanes()) for (const b of l.bars || []) if (b.kind !== "ghost" && b.state !== "failed" && ms(b.usable_at) > n)
-    out.push({ at: b.usable_at, title: `${b.label} usable at Hamburg`, why: l.needed_by ? `Needed by ${hm(l.needed_by)} for ${l.name.toLowerCase()}.` : "" });
+    out.push({ at: b.usable_at, title: L.site ? `${b.label} usable at ${L.site}` : `${b.label} usable`, why: l.needed_by ? `Needed by ${hm(l.needed_by)} for ${l.name.toLowerCase()}.` : "" });
   for (const l of lanes()) if (l.needed_by && ms(l.needed_by) > n && ["critical", "hedged"].includes(l.status))
     out.push({ at: l.needed_by, title: `Last moment for ${l.name.toLowerCase()} to arrive`, why: l.needed_by_why || "", risk: l.status === "critical" });
   if (L.deadline && ms(L.deadline) > n) out.push({ at: L.deadline, title: `Launch: trucks leave ${L.site || ""}`.trim(), why: "" });

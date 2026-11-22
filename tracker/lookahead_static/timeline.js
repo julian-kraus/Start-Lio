@@ -48,6 +48,8 @@ function windowRange() {
     if (ts.length) { t0 = Math.min(t0, Math.min(...ts) - 3600000); t1 = Math.max(t1, Math.max(...ts) + 3600000); }
   }
   t0 = Math.min(t0, nowMs() - 3600000);
+  // the ghost is never cut off: its late landing is the point
+  for (const l of lanes()) for (const b of l.bars) if (b.kind === "ghost" && b.usable_at) t1 = Math.max(t1, ms(b.usable_at) + 3600000);
   return [t0, t1];
 }
 
@@ -69,7 +71,7 @@ function viewTimeline() {
   if (!st.goal && st.launch && (st.launch.goal_questions || []).length) {
     box.append(el("div", { class: "empty-goal" },
       el("h2", {}, "What is the goal, and how far will you go?"),
-      el("p", {}, "Lookahead prices every risk against your goal. Four answers, then it finds the weak spots."),
+      el("p", {}, "Lookahead prices every risk against your goal. A few answers, then it finds the weak spots."),
       el("button", { class: "btn primary big", onclick: openGoal }, "Start goal interview ", el("kbd", {}, "G"))));
   }
   wrap.append(box);

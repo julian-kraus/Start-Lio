@@ -27,7 +27,7 @@ function renderHeader() {
       el("div", { class: "goalbar" }, el("div", { class: "fill", style: "width:0" })),
       st.goal ? el("span") : el("button", { class: "btn", onclick: openGoal }, "Set goal ", el("kbd", {}, "G")));
   } else {
-    const pct = Math.max(0, Math.min(1, cov.covered / cov.needed));
+    const pct = cov.fraction;
     const state = cov.met ? "met" : cov.hedged ? "hedged" : "risk";
     const fill = el("div", { class: "fill", style: `width:${pct * 100}%` });
     g.className = "goal";
@@ -37,18 +37,29 @@ function renderHeader() {
       el("div", { class: "goalbar " + state }, fill),
       el("div", { class: "num" }, num(cov.covered), el("small", {}, ` / ${num(cov.needed)}`)));
     if (S.prevCover && S.prevCover.covered !== cov.covered) {
-      const from = Math.max(0, Math.min(1, S.prevCover.covered / S.prevCover.needed));
+      const from = S.prevCover.fraction;
       fill.animate([{ width: from * 100 + "%" }, { width: pct * 100 + "%" }], { duration: 1000, easing: "cubic-bezier(.2,.8,.2,1)" });
     }
   }
-  // clock
-  const c = st.clock;
+  renderClock();
+}
+
+function renderClock() {
+  const st = S.state, L = st.launch || {}, c = st.clock;
   const left = L.deadline ? ms(L.deadline) - ms(c.now) : null;
   const leftTxt = left == null ? "" : left <= 0 ? "launch passed" :
     `T−${Math.floor(left / 3600000)}:${String(Math.floor(left / 60000) % 60).padStart(2, "0")} to launch`;
-  $("clock").replaceChildren(
-    el("span", { class: "pill " + (c.simulated ? "sim" : "live"), title: c.simulated ? "Rehearsal on a scenario clock" : "Wall clock" }, c.simulated ? "Simulated" : "Live"),
-    el("div", { class: "clock" }, el("span", { class: "now" }, fmt(c.now)), el("span", { class: "left" }, leftTxt)));
+  $("clock").replaceChildren(...[
+    st.hidden_records ? el("span", { class: "pill", title: "Records in the log that neither an agent nor the monitor produced. Live mode does not show them." }, `${st.hidden_records} hidden`) : null,
+    el("span", { class: "pill " + (c.error ? "err" : c.simulated ? "sim" : "live"), title: c.error || clockTitle() },
+      c.error ? "Clock error" : c.simulated ? (st.mode === "live" ? "Live scenario" : "Simulated") : "Live"),
+    el("div", { class: "clock" }, el("span", { class: "now" }, fmt(c.now)), el("span", { class: "left" }, leftTxt)),
+  ].filter(Boolean));
+}
+
+function clockTitle() {
+  if (S.state.mode !== "live") return "Rehearsal on a scenario clock";
+  return S.state.clock.simulated ? "Live records on the shared scenario clock" : "Wall clock";
 }
 
 const VIEWS = [["overview", "Overview"], ["timeline", "Detailed timeline"], ["decisions", "Decisions"], ["promises", "Promises"], ["suppliers", "Suppliers"], ["weak", "Weak spots"]];
