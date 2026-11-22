@@ -78,9 +78,18 @@ def _chart(rows: list[dict], policy: Policy, today: date) -> tuple[Chart | None,
     return best, found, problems
 
 
+def _covered(part: list[str], whole: list[str]) -> bool:
+    """Every word of `part` is in `whole`: as is, as the initials of adjacent words or as a three letter code."""
+    initials = "".join(w[0] for w in whole)
+    return all(w in whole or (len(w) == 2 and w in initials) or (len(w) == 3 and any(x.startswith(w) for x in whole))
+               for w in part)
+
+
 def _same_area(scope: str, wanted: str, loose: bool) -> bool:
-    have, want = set(words(scope)), set(words(wanted))
-    return bool(have and want) and (have == want or (loose and (have <= want or want <= have)))
+    """A category matches exactly. A site also matches by its longer name or its short id."""
+    have, want = words(scope), words(wanted)
+    return bool(have and want) and (set(have) == set(want)
+                                    or (loose and (_covered(have, want) or _covered(want, have))))
 
 
 def _holder(chart: Chart, role: str, area: str | None, today: date, loose: bool) -> dict:
@@ -175,7 +184,8 @@ class _Routing:
         if found["state"] == "held":
             return {**signer, "name": found["name"]}
         self.reasons.append(found["why"])
-        if found["state"] == "unclear":
+        if found["state"] == "unclear" or (loose and found["state"] == "not_in_chart"):
+            # a site nobody recognises is a lookup failure, not a vacancy an exception could cover
             self.blocked = True
             return signer
         return self.escalate(signer, role, area)
