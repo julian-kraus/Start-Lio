@@ -124,7 +124,7 @@
       const rows = signers.rows.map((row) => el("tr", null,
         el("td", null, row.role, row.with.length ? el("div", { class: "xs subtle" }, label("jointly") + " " + row.with.join(", ")) : null),
         el("td", { class: "r", title: row.limit.fact_ids.join(", ") }, money(row.limit)),
-        el("td", null, row.seats.length ? row.seats.map(seatLine) : "—")));
+        el("td", null, row.seats.length ? row.seats.map(seatLine) : "–")));
       card.append(el("table", null,
         el("thead", null, el("tr", null, el("th", null, label("role")), el("th", { class: "r" }, label("limit")), el("th", null, label("currently")))),
         el("tbody", null, rows)));
