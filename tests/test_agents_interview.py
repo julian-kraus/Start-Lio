@@ -379,7 +379,11 @@ def test_confirmed_goal_reaches_the_goal_bar_and_releases_the_interview_cue(conn
     screen = lookahead.Lookahead(tmp_path / "log.jsonl", script)
     with pytest.raises(lookahead.LookaheadError):
         screen.advance()
-    screen.append(store.records(store.confirm(conn, demo(), "Test Person")))
+    made = store.records(store.confirm(conn, demo(), "Test Person"))
+    assert all(r["producer"] == "agent:goal_interview" for r in made)       # else a live screen hides them
+    for record in made:
+        contracts.validate_record(record)
+    screen.append(made)
     screen.after_human_step()
     state = screen.state()
     assert state["goal"]["statement"] == DEMO["answers"]["goal"]

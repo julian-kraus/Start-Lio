@@ -8,7 +8,7 @@ from psycopg.types.json import Json
 
 from plan import clock, contracts
 
-from .interview import NOT_A_PERSON, QUESTIONS, Draft, InterviewError
+from .interview import NOT_A_PERSON, QUESTIONS, ROLE, Draft, InterviewError
 from .interview_text import one_line
 
 
@@ -85,14 +85,16 @@ def _record(row: Mapping) -> dict:
 
 
 def records(goal: Mapping) -> list[dict]:
-    """What to append to the timeline: the goal and the event that shows who set it."""
-    event = {"kind": "event", "type": "goal", "at": goal["at"], "severity": "info",
+    """What to append to the timeline: the goal and the event that shows who set it.
+    Both name their producer: a live screen shows only what an agent, the monitor or the app produced."""
+    producer = f"agent:{ROLE}"
+    event = {"kind": "event", "producer": producer, "type": "goal", "at": goal["at"], "severity": "info",
              "title": f"Goal set: {goal['statement']}",
              "detail": {"happened": f"{goal['author']} confirmed the goal.",
                         "reasoning": [{"text": x["goal_line"]} for x in goal["goal_lines"]],
                         "autonomy": {"mode": "none", "text": f"Set by {goal['author']}."}}}
     contracts.validate_record(event)
-    return [dict(goal), event]
+    return [{**goal, "producer": producer}, event]
 
 
 def cite(goal: Mapping, name: str, edition: str | None = None) -> dict:
