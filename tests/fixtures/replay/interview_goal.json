@@ -1,0 +1,11 @@
+{
+  "answers": {"goal": "All Collector's on time. Supplier goodwill can suffer. Don't bankrupt me."},
+  "editions": ["Collector's", "Standard"],
+  "script": [
+    {
+      "stop_reason": "end_turn",
+      "text": "{\"items\": [{\"field\": \"priority\", \"quote\": \"All Collector's on time\", \"amount\": \"\", \"edition\": \"Collector's\"}, {\"field\": \"trade_off\", \"quote\": \"Supplier goodwill can suffer\", \"amount\": \"\", \"edition\": \"\"}, {\"field\": \"ceiling\", \"quote\": \"Don't bankrupt me\", \"amount\": \"\", \"edition\": \"\"}]}",
+      "usage": {"input_tokens": 400, "output_tokens": 90}
+    }
+  ]
+}
