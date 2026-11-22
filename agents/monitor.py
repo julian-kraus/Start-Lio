@@ -199,7 +199,7 @@ class Monitor:
             said = {k: v for k, v in vars(s).items() if v not in (None, "", (), [])}
             try:
                 result, registered = broker.run_broker(
-                    self.client, self.plan, self.mail, now=s.at or clock.now(self.plan), statements=[s],
+                    self.client, self.plan, self.mail, statements=[s],
                     prompt="A supplier statement arrived. Register the commitment it makes, citing its fact id.\n"
                            + json.dumps(_plain(said), default=str))
                 if not registered:      # llm.run returns a timeout as result.error, it does not raise

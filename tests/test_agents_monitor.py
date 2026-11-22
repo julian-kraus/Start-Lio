@@ -44,7 +44,7 @@ demo = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(demo)
 
 URL = os.environ.get("TEST_DATABASE_URL")
-VALUES = {"unit_loss": "100", "budget": "300", "part": "BOOK", "offer_quantity": "600", "offer_price": "4"}
+VALUES = {"unit_loss": "100", "budget": "300", "part": "BOOK", "offer_quantity": "600", "offer_price": "4", "offer_b_price": "5"}
 GOAL = {"kind": "goal", "statement": "Every Deluxe copy on time.", "unit_loss_eur": 100}
 
 
@@ -58,12 +58,16 @@ class ReplayedExtraction(LLMClient):
         text = document.text
         said = datetime.fromisoformat(re.search(r"(?m)^Date: (.+)$", text)[1].strip()).isoformat()
         kind = "cancel" if "we cancel" in text else "confirm" if "load within" in text else None
+        sentence = next((line.strip() for line in text.splitlines() if "within" in line or "cancel" in line), text.strip())
         return {"source": {}, "doc_kind": structure.name, "doc_kind_confidence": "high", "languages": ["en"],
                 "spec_version": "1", "extracted_by": self.name, "doc_date": said, "unreadable": [],
                 "proposed_fact_types": [],
                 "facts": [{"fact_type": "supplier_statement", "subject": {"statement_no": "1"},
-                           "attribute": "promise_kind", "value": kind, "as_of": said, "confidence": "high",
-                           "locator": {"line": 1}, "evidence": "replayed answer"}] if kind else []}
+                           "attribute": attribute, "value": value, "as_of": said, "confidence": "high",
+                           "locator": {"line": 1}, "evidence": "replayed answer"}
+                          # like live extraction: the kind, and the sentence itself as `value`, which the broker
+                          # grounds a promise's duration in
+                          for attribute, value in (("promise_kind", kind), ("value", sentence))] if kind else []}
 
 
 class KbWithRows:
