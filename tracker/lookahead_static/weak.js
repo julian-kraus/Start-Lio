@@ -56,7 +56,8 @@
     });
     lanes.forEach(lane => {
       const critical = lane.status === "critical" || lane.status === "at_risk";
-      const n = pair(lane.name || lane.lane_id, lane.reason || "", api.number(lane.gap),
+      const gap = typeof lane.gap === "number" && lane.gap > 0 ? "−" + api.number(lane.gap) : api.number(lane.gap);
+      const n = pair(lane.name || lane.lane_id, lane.reason || "", gap,
         t(lane.substitute ? "weak.substitute" : "weak.gap"), critical ? "crit" : "");
       n.dataset.laneId = lane.lane_id;
       n.addEventListener("click", () => api.openSuppliers(root, suppliers, t, lane.supplier_id));

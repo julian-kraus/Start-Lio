@@ -6,9 +6,9 @@
     const section = h("section", "card");
     const header = h("div", "between weak-promises-head");
     const count = promises.filter(p => p.state === "waiting").length;
-    header.append(h("h2", "h-sm", t("weak.promises")), h("span", "badge b-a", `${t("weak.watching")} ${count}`));
+    header.append(h("h2", "h-sm", t("weak.promises")), h("span", "badge accent", `${t("weak.watching")} ${count}`));
     section.append(header);
-    const table = h("table"); const head = h("thead"); const row = h("tr");
+    const table = h("table", "table"); const head = h("thead"); const row = h("tr");
     ["weak.who", "weak.promise", "weak.next", "weak.status", "weak.fallback"].forEach(key => row.append(h("th", "", t(key))));
     head.append(row); table.append(head);
     const body = h("tbody");
@@ -18,7 +18,7 @@
       tr.append(h("td", "", supplier && supplier.name || p.supplier_id || "—"), h("td", "", p.what || "—"),
         h("td", "mono", p.next_check || "—"));
       const status = h("td");
-      status.append(h("span", "badge " + (p.state === "broken" ? "b-r" : p.state === "proven" ? "b-g" : "b-a"), t("weak." + p.state)));
+      status.append(h("span", "badge " + (p.state === "broken" ? "risk" : p.state === "proven" ? "good" : "accent"), t("weak." + p.state)));
       tr.append(status, h("td", "", p.fallback || "—")); body.append(tr);
     });
     table.append(body); section.append(table); root.append(section);

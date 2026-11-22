@@ -34,7 +34,7 @@ const strings=JSON.parse(fs.readFileSync('tracker/lookahead_static/strings/weak.
 window.LookaheadWeak.render(root,data,k=>strings[k]?.en || k);
 function all(n) { return [n,...n.children.flatMap(all)]; }
 const nodes=all(root); const texts=nodes.map(x=>x.textContent);
-if (!['Example supplier','Example part','6 / 10 covered','Deliver','Call'].every(x=>texts.includes(x))) throw Error('missing record data');
+if (!['Example supplier','Example part','−4','6 / 10 covered','Deliver','Call'].every(x=>texts.includes(x))) throw Error('missing record data');
 const allButton=nodes.find(x=>x.textContent==='See all suppliers'); allButton.listeners.click();
 const after=all(root).map(x=>x.textContent);
 if (!after.includes('All suppliers') || !after.includes('Example city') || !after.includes('80%')) throw Error('missing supplier panel');

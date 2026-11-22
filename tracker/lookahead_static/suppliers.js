@@ -9,13 +9,13 @@
     const scrim = h("div", "scrim on");
     const drawer = h("aside", "ldrawer on");
     drawer.setAttribute("aria-label", t("weak.suppliers"));
-    const header = h("div", "dhead");
+    const header = h("div", "drawer-head");
     const title = h("div"); title.append(h("p", "h-sm", t("weak.suppliers")));
     const close = h("button", "btn btn-ghost", t("weak.close")); close.type = "button";
     const dismiss = () => overlay.remove();
     close.addEventListener("click", dismiss); scrim.addEventListener("click", dismiss);
     header.append(title, close); drawer.append(header);
-    const body = h("div", "dbody supl");
+    const body = h("div", "drawer-body supl");
     suppliers.forEach(s => {
       const article = h("article", "sup" + (s.supplier_id === selected ? " flash" : ""));
       const top = h("div", "sup-h");
