@@ -1,6 +1,6 @@
 "use strict";
 window.LOOKAHEAD_STRINGS={
-  "brand":{"en":"Lookahead","zh":"Lookahead"},
+  "brand":{"en":"Grand Plan Lio","zh":"Grand Plan Lio"},
   "deadline":{"en":"Deadline","zh":"截止"},
   "agent_rules":{"en":"Agent rules","zh":"Agent 規則"},
   "nav.timeline":{"en":"Timeline","zh":"時間線"},

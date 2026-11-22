@@ -48,9 +48,24 @@ def test_ui_shot_builds_a_headless_command(monkeypatch, tmp_path):
 
     calls = []
     monkeypatch.setattr(ui_shot, "browser", lambda: "/browser")
-    monkeypatch.setattr(subprocess, "run", lambda command, check: calls.append((command, check)))
+    monkeypatch.setattr(subprocess, "run", lambda command, check, timeout: calls.append((command, check, timeout)))
     output = tmp_path / "shots" / "shell.png"
     ui_shot.capture("file:///lookahead.html", output, 1440, 900, 700)
-    command, check = calls[0]
+    command, check, timeout = calls[0]
+    assert timeout == 30
     assert check and "--headless=new" in command and "--window-size=1440,900" in command
     assert f"--screenshot={output}" in command
+
+
+def test_route_registry_discovers_real_modules(tmp_path, monkeypatch):
+    package = tmp_path / "routes_fixture"
+    package.mkdir()
+    (package / "__init__.py").write_text("")
+    (package / "unrelated.py").write_text("raise RuntimeError('must not import')\n")
+    (package / "lookahead_api_example.py").write_text(
+        "def handler(*args): return {'ok': True}\n"
+        "ROUTES = [('GET', r'/api/lookahead/example', handler)]\n"
+    )
+    monkeypatch.syspath_prepend(str(tmp_path))
+    routes = load_routes("routes_fixture")
+    assert len(routes) == 1 and routes[0].pattern.fullmatch("/api/lookahead/example")

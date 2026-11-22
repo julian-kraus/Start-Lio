@@ -140,9 +140,16 @@ class LookaheadRoutes:
     def _lookahead_file(self, path: str):
         if path == "/lookahead":
             return self._send(200, PAGE.read_bytes(), "text/html; charset=utf-8")
+        if path == "/lookahead/static/views/index.json":
+            names = sorted(p.name for pattern in ("*_view.js", "*_wires.js", "*_view.css", "weak.css", "suppliers.css")
+                           for p in STATIC.glob(pattern) if p.is_file())
+            return self._send(200, dumps(names), "application/json; charset=utf-8")
+        if path == "/lookahead/static/strings/index.json":
+            names = sorted(p.name for p in (STATIC / "strings").glob("*.json") if p.name != "index.json")
+            return self._send(200, dumps(names), "application/json; charset=utf-8")
         m = STATIC_FILE.fullmatch(path)
         candidate = STATIC / m.group(1) if m else None
-        if not m or not candidate.is_file() or STATIC not in candidate.resolve().parents:
+        if not m or not candidate.is_file() or STATIC.resolve() not in candidate.resolve().parents:
             raise LookaheadError(404, "not found")
         self._send(200, (STATIC / m.group(1)).read_bytes(), STATIC_TYPES[m.group(2)])
 

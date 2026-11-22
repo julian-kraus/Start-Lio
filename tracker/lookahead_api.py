@@ -52,10 +52,11 @@ def _module_routes(module: ModuleType) -> list[Route]:
 def load_routes(package: str = "tracker") -> tuple[Route, ...]:
     """Import every sibling ``lookahead_api_*.py`` and return its routes."""
     root = importlib.import_module(package)
-    prefix = package + ".lookahead_api_"
+    prefix = package + "."
     found: list[Route] = []
     for info in sorted(pkgutil.iter_modules(root.__path__, prefix), key=lambda item: item.name):
-        found.extend(_module_routes(importlib.import_module(info.name)))
+        if info.name.startswith(prefix + "lookahead_api_"):
+            found.extend(_module_routes(importlib.import_module(info.name)))
     return tuple(found)
 
 

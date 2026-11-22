@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import shutil
 import subprocess
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 from pathlib import Path
 
 
@@ -23,7 +24,7 @@ def browser() -> str:
     ]
     for candidate in candidates:
         path = candidate if candidate.startswith("/") else shutil.which(candidate)
-        if path:
+        if path and Path(path).is_file():
             return path
     raise SystemExit("no Chrome or Chromium executable found")
 
@@ -32,10 +33,15 @@ def capture(url: str, output: Path, width: int = 1440, height: int = 900, wait_m
     if width < 1 or height < 1 or wait_ms < 0:
         raise ValueError("width and height must be positive; wait-ms cannot be negative")
     output.parent.mkdir(parents=True, exist_ok=True)
+    parsed = urlsplit(url)
+    if parsed.scheme in ("http", "https"):
+        query = parse_qsl(parsed.query, keep_blank_values=True)
+        query.append(("screenshot", "1"))
+        url = urlunsplit((parsed.scheme, parsed.netloc, parsed.path, urlencode(query), parsed.fragment))
     command = [browser(), "--headless=new", "--disable-gpu", "--hide-scrollbars",
                f"--window-size={width},{height}", f"--virtual-time-budget={wait_ms}",
                f"--screenshot={output}", url]
-    subprocess.run(command, check=True)
+    subprocess.run(command, check=True, timeout=30)
 
 
 def main() -> None:
