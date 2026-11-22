@@ -9,8 +9,9 @@ the due time is computed in code, not by a model.
     updates = reconcile([p], [Statement(kind="dispatch_info", at=later, supplier_id="SUP-A", fact_id="f-9")])
     #   -> [{"promise_id": "PR-1", "state": "proven", "proven_at": later, "source": {"fact_id": "f-9"}}]
 
-Matching a statement to a promise is deterministic: every key the two both name (supplier, part, lane) must be
-equal, and at least one must be shared. The earliest decisive statement at or after the promise was made wins.
+To settle a promise a statement must name the promise's supplier (a statement with no supplier could be any
+supplier's, so it is surfaced for review, not applied); any part or lane the two both name must also agree. The
+earliest decisive statement at or after the promise was made wins.
 """
 
 from __future__ import annotations
@@ -27,11 +28,11 @@ WAITING, PROVEN, BROKEN, CANCELLED = "waiting", "proven", "broken", "cancelled"
 
 # How a supplier_statement kind moves an open promise. Two vocabularies land here, both from the kb (not Soony
 # data): the statement `kind` (dispatch_info, on_hold, ...) and the contract's `promise_kind` (confirm, delay,
-# cancel, short-ship). A kind not listed is informational and leaves the promise waiting. Callers may pass their
-# own map to `reconcile`.
+# cancel, short-ship). A kind not listed is informational and leaves the promise waiting. A `confirm` is not
+# listed on purpose: confirming the commitment is not evidence it was met, so it must not close the promise (a
+# later cancellation still has to be able to break it). Callers may pass their own map to `reconcile`.
 OUTCOMES: dict[str, str] = {
     "dispatch_info": PROVEN,
-    "confirm": PROVEN,
     "on_hold": BROKEN,
     "delay": BROKEN,
     "short_shipment": BROKEN,
@@ -51,11 +52,14 @@ class PromiseError(ValueError):
 @dataclass(frozen=True)
 class Statement:
     """A supplier statement as the kb recorded it (fact_type `supplier_statement`), normalized for the ledger.
-    `kind` is the statement kind (or the contract's `promise_kind`); `at` is when the supplier said it; `fact_id`
-    cites the kb fact it came from. `due_time` and `quantity` are kept verbatim as the kb has them and parsed in
-    code by the caller, never guessed (the probe finding)."""
+    `kind` is the statement kind (or the contract's `promise_kind`); `at` is when the supplier said it (None when
+    no real time is known, so the ledger treats the time as unknown rather than guessing); `fact_id` cites the
+    classifying kb fact, and `fact_ids` are every kb fact of the grouped statement (one email yields several
+    facts). Keeping them all lets a promise be recognised as resting on this statement whichever of its facts was
+    cited (finding: citing another fact of the same email re-opened the self-proof). `due_time` and `quantity` are
+    kept verbatim as the kb has them and parsed in code by the caller, never guessed (the probe finding)."""
     kind: str
-    at: str
+    at: str | None
     supplier_id: str | None = None
     part_id: str | None = None
     lane: str | None = None
@@ -63,6 +67,15 @@ class Statement:
     fact_id: str | int | None = None
     due_time: str | None = None
     quantity: str | None = None
+    fact_ids: tuple = ()
+
+    def all_fact_ids(self) -> set[str]:
+        """Every kb fact id this statement rests on, as strings: the classifying `fact_id` and the grouped
+        `fact_ids`."""
+        ids = {str(f) for f in self.fact_ids if f is not None}
+        if self.fact_id is not None:
+            ids.add(str(self.fact_id))
+        return ids
 
     def source(self) -> dict:
         if self.fact_id is not None:
@@ -118,7 +131,9 @@ def promise_from_statement(*, promise_id: str, supplier_id: str, what: str, made
     return promise
 
 
-def _matches(promise: dict, st: Statement) -> bool:
+def _shares(promise: dict, st: Statement) -> bool:
+    """Loose overlap, used only to surface a statement for review: every key the two both name is equal and at
+    least one is shared. It does not by itself permit settlement (see `_matches`)."""
     shared = False
     for key in _MATCH_KEYS:
         pv, sv = promise.get(key), getattr(st, key)
@@ -127,6 +142,21 @@ def _matches(promise: dict, st: Statement) -> bool:
                 return False
             shared = True
     return shared
+
+
+def _matches(promise: dict, st: Statement) -> bool:
+    """Settle-grade match: the statement must name the supplier and it must equal the promise's, and any part or
+    lane the two both name must agree. A statement with no supplier could be any supplier's, so it may not settle
+    a promise; `review` surfaces it as `supplier_unknown` instead (finding: a supplier-less statement settled an
+    unrelated supplier's promise on a shared part)."""
+    ps, ss = promise.get("supplier_id"), st.supplier_id
+    if ps is None or ss is None or str(ps) != str(ss):
+        return False
+    for key in ("part_id", "lane"):
+        pv, sv = promise.get(key), getattr(st, key)
+        if pv is not None and sv is not None and str(pv) != str(sv):
+            return False
+    return True
 
 
 def _source_fact_id(source) -> str | None:
@@ -144,12 +174,15 @@ def _made_the_promise(promise: dict, st: Statement) -> bool:
     """True when the statement is one the promise already rests on: the statement that established the
     commitment. Such a statement must not also settle the promise it made, or a confirm would prove its own
     promise and a later cancel could never break it (the citing statement is in every ledger run, since
-    `read_statements` returns every current statement). Matched by kb fact id across the shapes the register
-    tool accepts, with a fallback to exact source identity when the statement carries no fact id."""
+    `read_statements` returns every current statement). Matched across every kb fact of the statement (an email
+    yields several) and the source shapes the register tool accepts, so citing any fact of the email counts, with
+    a fallback to exact source identity when the statement carries no fact id."""
     sources = promise.get("sources") or []
-    if st.fact_id is not None:
-        fid = str(st.fact_id)
-        return any(_source_fact_id(s) == fid for s in sources)
+    st_ids = st.all_fact_ids()
+    if st_ids:
+        cited = {_source_fact_id(s) for s in sources}
+        cited.discard(None)
+        return bool(cited & st_ids)
     return st.source() in sources
 
 
@@ -243,8 +276,9 @@ def _instant_or_none(value):
 def review(promises: Iterable[dict], statements: Iterable[Statement], *,
            outcomes: dict[str, str] = OUTCOMES) -> list[dict]:
     """Decisive statements that cannot be applied automatically and need a human: `ambiguous` (one statement bears
-    on several open promises, e.g. a dispatch that names only the supplier) and `unreadable_time` (the statement's
-    time cannot be read). Pure: it reports, it does not change anything."""
+    on several open promises, e.g. a dispatch that names only the supplier), `supplier_unknown` (a decisive
+    statement with no supplier that overlaps a waiting promise on part or lane, which could be any supplier's), and
+    `unreadable_time` (the statement's time cannot be read). Pure: it reports, it does not change anything."""
     statements = list(statements)
     waiting = [p for p in promises if p.get("state", WAITING) == WAITING]
     out: list[dict] = []
@@ -252,14 +286,21 @@ def review(promises: Iterable[dict], statements: Iterable[Statement], *,
         if len(hits) > 1:
             out.append({"reason": "ambiguous", "statement_kind": st.kind, "at": st.at,
                         "source": st.source(), "candidates": [p["promise_id"] for p in hits]})
-    _, unreadable = _timed(statements)
+    readable, unreadable = _timed(statements)
+    for st, _inst in readable:
+        if outcomes.get(st.kind) is None or st.supplier_id is not None:
+            continue
+        cands = [p for p in waiting if _shares(p, st) and not _made_the_promise(p, st)]
+        if cands:
+            out.append({"reason": "supplier_unknown", "statement_kind": st.kind, "at": st.at,
+                        "source": st.source(), "candidates": [p["promise_id"] for p in cands]})
     for st in unreadable:
         if outcomes.get(st.kind) is None:
             continue
-        if any(_matches(p, st) for p in waiting):
+        cands = [p for p in waiting if _shares(p, st) and not _made_the_promise(p, st)]
+        if cands:
             out.append({"reason": "unreadable_time", "statement_kind": st.kind, "at": st.at,
-                        "source": st.source(),
-                        "candidates": [p["promise_id"] for p in waiting if _matches(p, st)]})
+                        "source": st.source(), "candidates": [p["promise_id"] for p in cands]})
     return out
 
 

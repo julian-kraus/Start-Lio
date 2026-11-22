@@ -98,12 +98,34 @@ def _supplier_of(locator, subject) -> str | None:
     return None
 
 
+def _statement_time(row: dict) -> str | None:
+    """When the supplier made the statement, as an ISO string, or None when no real time is known. The
+    supplier-stated time (`as_of`) first, then a document or mail time carried on the locator; never the kb load
+    time (`observed_at`), which is today's clock and would break any promise made before the load and settle
+    nothing once the scenario clock passes it (finding: the kb load time was used as the statement time). None
+    lets the ledger treat the time as unknown and surface it for a human rather than settle on the wrong clock."""
+    candidates = [row.get("as_of")]
+    locator = row.get("locator")
+    if isinstance(locator, dict):
+        mail = locator.get("mail")
+        if isinstance(mail, dict):
+            candidates += [mail.get("date_header"), mail.get("sent_at"), mail.get("date")]
+        candidates.append(locator.get("at"))
+    for cand in candidates:
+        inst = _instant_or_none(cand)
+        if inst is not None:
+            return inst.isoformat()
+    return None
+
+
 def statements_from_rows(rows: Iterable[dict]) -> list[promises.Statement]:
     """Group `kb.current_facts` rows of a supplier statement into one `Statement` each. Per the extraction
     contract the subject is `statement_no`, while `material_id`, `kind`/`promise_kind`, `value`, `due_time` and
     `quantity` are attributes, and the supplier is in `locator.mail`. Rows are grouped by document and subject so
     two emails that reuse a statement number do not merge and cite each other's fact (finding: different emails
-    merge). `at` is when the supplier said it (`as_of`) or when the kb saw it (`observed_at`)."""
+    merge). Each statement keeps every grouped fact id (`fact_ids`) so the ledger still recognises it as the maker
+    of a promise however the register tool cited it. `at` is the supplier-stated or document time, never the kb
+    load time (see `_statement_time`)."""
     grouped: dict[str, dict] = {}
     for row in rows:
         if row.get("fact_type") != "supplier_statement":
@@ -121,11 +143,10 @@ def statements_from_rows(rows: Iterable[dict]) -> list[promises.Statement]:
         if not kind:
             continue
         kind_row = next((r for r in group_rows if r.get("attribute") in ("kind", "promise_kind")), group_rows[0])
-        at = kind_row.get("as_of") or kind_row.get("observed_at")
-        instant = _instant_or_none(at)
+        fact_ids = tuple(r.get("fact_id") for r in group_rows if r.get("fact_id") is not None)
         out.append(promises.Statement(
             kind=str(kind),
-            at=instant.isoformat() if instant else str(at),
+            at=_statement_time(kind_row),
             supplier_id=_supplier_of(kind_row.get("locator"), subject),
             part_id=attrs.get("material_id") or attrs.get("part_id") or subject.get("material_id"),
             lane=attrs.get("lane") or subject.get("lane"),
@@ -133,6 +154,7 @@ def statements_from_rows(rows: Iterable[dict]) -> list[promises.Statement]:
             fact_id=kind_row.get("fact_id"),
             due_time=attrs.get("due_time"),
             quantity=attrs.get("quantity"),
+            fact_ids=fact_ids,
         ))
     return out
 
@@ -140,7 +162,7 @@ def statements_from_rows(rows: Iterable[dict]) -> list[promises.Statement]:
 def read_statements(kb_conn) -> list[promises.Statement]:
     """Every current supplier statement in the kb, as ledger `Statement`s. `kb_conn` has search_path on kb."""
     rows = kb_conn.execute(
-        "SELECT fact_id, fact_type, subject, attribute, value, as_of, observed_at, locator, path, sha256 "
+        "SELECT fact_id, fact_type, subject, attribute, value, as_of, locator, path, sha256 "
         "FROM current_facts WHERE fact_type = 'supplier_statement'").fetchall()
     return statements_from_rows(rows)
 
@@ -235,7 +257,9 @@ def parse_quantity(text) -> float | None:
 
 
 def _statement_for(sources, by_fact: dict) -> promises.Statement | None:
-    """The cited statement for a register call, matched by the first fact id the model cites."""
+    """The cited statement for a register call, matched by the first cited fact id that is a known supplier
+    statement. `by_fact` is keyed by every fact id of each statement, so citing any fact of the email resolves it.
+    Returns None when no cited id is a known statement, so the register tool can refuse invented ids."""
     for src in sources or []:
         fid = src.get("fact_id") if isinstance(src, dict) else src
         if fid is not None and str(fid) in by_fact:
@@ -254,16 +278,20 @@ def _register_tool(plan_conn, now_iso: str, registered: list[dict], by_fact: dic
         if existing and existing["state"] in _SETTLED:
             return {"error": f"promise {pid!r} is already {existing['state']}; a settled promise is not reopened"}
         st = _statement_for(sources, by_fact)
-        # The clock and the numbers come from the cited statement, not the model: made_at is when the supplier
-        # spoke, the quantity is parsed in code from the statement's verbatim text. The run clock is the fallback
-        # only when nothing was cited.
-        kwargs["made_at"] = st.at if st is not None else now_iso
-        if st is not None:
-            qty = parse_quantity(st.quantity)
-            if qty is not None:
-                kwargs["quantity"] = qty
-            if st.supplier_id and not kwargs.get("supplier_id"):
-                kwargs["supplier_id"] = st.supplier_id
+        if st is None:
+            # Refuse an invented fact id: a promise must rest on a supplier statement the kb actually holds, or the
+            # model could register a watched promise (with a model-written due) on nothing (finding: not grounded).
+            return {"error": "none of the cited facts is a known supplier statement; a promise must cite one"}
+        # The clock, the quantity and the supplier come from the cited statement, not the model: made_at is when the
+        # supplier spoke (the run clock only when the statement itself has no readable time), the quantity is parsed
+        # in code from the statement's verbatim text, and the supplier is the statement's, overriding any the model
+        # passed (the schema says so, and a model must not reassign a statement to another supplier).
+        kwargs["made_at"] = st.at or now_iso
+        qty = parse_quantity(st.quantity)
+        if qty is not None:
+            kwargs["quantity"] = qty
+        if st.supplier_id:
+            kwargs["supplier_id"] = str(st.supplier_id)
         if not kwargs.get("supplier_id"):
             return {"error": "no supplier: the cited statement has none and none was given"}
         if kwargs.get("within"):
@@ -287,7 +315,10 @@ def broker_registry(plan_conn, mail, *, now_iso: str, registered: list[dict],
     """The tools the broker role is given: a grounded promise register (plan) and the MailTools draft/read tools.
     The send path is never exposed (`tools.mail_tools` drops it). The `statements` the broker is briefing on let
     the register tool take the made time and the quantity from the cited kb fact, not from the model."""
-    by_fact = {str(s.fact_id): s for s in statements if s.fact_id is not None}
+    by_fact: dict = {}
+    for s in statements:
+        for fid in s.all_fact_ids():       # any fact of the email resolves to its statement
+            by_fact.setdefault(fid, s)
     registry = ToolRegistry()
     registry.add("register_promise",
                  "Register a watched promise from a supplier statement. Pass the words and cite the kb fact in "
