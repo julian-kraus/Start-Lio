@@ -11,8 +11,9 @@ An empty list gives exactly `coverage.compute`. Two kinds of action, both plain 
 
 Every action comes back in `actions` as feasible or with the reason it is not; only feasible ones count.
 Added units follow the rule of inbound: what lands after the part ran out only helps in the pack hours left.
-Priority is the policy's, so a supply can move copies from a later edition to an earlier one. The total can then
-fall only where the earlier edition uses more of a shared part per copy than the later one.
+Priority is the policy's, so a supply can move copies from later editions to an earlier one and the total can fall,
+also with equal use per copy: one copy of the earlier edition can displace one of each later edition.
+`min_quantity` holds for what an action gets. An earlier take can leave a later one under it, which then gets nothing.
 """
 
 from __future__ import annotations
@@ -49,6 +50,7 @@ class Supply:
     at: datetime
     inputs: list
     evidence: list = field(default_factory=list)
+    minimum: float = 0          # the least one action may take
 
 
 def _instant(value, name: str) -> datetime:
@@ -138,7 +140,7 @@ def _offer(facts: Facts, index: int, action: dict, parts: dict, revisions: dict,
             raise Infeasible("disputed_revision")
     return Supply(index, "offer", part["material_id"], wanted, limit,
                   ("offer", part["material_id"], offer["supplier_id"], offer["offer_id"]), at,
-                  offer["sources"], evidence)
+                  offer["sources"], evidence, offer.get("min_quantity", 0))
 
 
 def _release(facts: Facts, index: int, action: dict, parts: dict, revisions: dict,
@@ -251,6 +253,9 @@ def _count(plan: dict, result: dict, supplies: list[Supply], report: list[dict],
         units = min(s.quantity, max(0, s.limit - taken[s.pool]))
         if not units:
             entry.update(feasible=False, reason="already_used")
+            continue
+        if units < s.minimum:                           # again, now that earlier takes have clipped it
+            entry.update(feasible=False, reason="below_min_quantity")
             continue
         taken[s.pool] += units
         using, on_hand = users[s.material], part["usable"]["value"]

@@ -227,6 +227,18 @@ def test_two_takes_share_one_offer(world):
     assert [a["quantity"]["value"] for a in result["actions"]] == [300, 100]
 
 
+def test_a_take_clipped_below_the_minimum_is_infeasible(world):
+    first, second = sim(world, offer(500, take=400, min_quantity=400),
+                        offer(500, take=400, min_quantity=400))["actions"]
+    assert first["quantity"]["value"] == 400
+    assert (second["feasible"], second["reason"], second.get("quantity")) == (False, "below_min_quantity", None)
+
+
+def test_a_take_clipped_to_exactly_the_minimum_counts(world):
+    result = sim(world, offer(800, take=500, min_quantity=300), offer(800, take=500, min_quantity=300))
+    assert [a["quantity"]["value"] for a in result["actions"]] == [500, 300]
+
+
 def test_an_offer_already_inbound_is_not_counted_again(world):
     world.ship(ref="O1", qty=100)
     assert only(sim(world, offer(100)))["reason"] == "already_inbound"
