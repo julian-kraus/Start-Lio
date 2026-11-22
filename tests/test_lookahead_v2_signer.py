@@ -77,8 +77,17 @@ def test_without_a_signer_the_screen_says_needs_human_and_posts_nothing():
 
 
 def test_an_unresolved_script_signer_is_not_presented_as_resolved():
-    for html in run(UNRESOLVED, UNRESOLVED)["shown"].values():
+    r = run(UNRESOLVED, UNRESOLVED)
+    for html in r["shown"].values():
         assert "needs_human" in html
+        assert "Accept as Script Person" not in html, "an unresolved signer is never offered as the one who accepts"
+    assert "disabled" in r["shown"]["card"] and "disabled" in r["shown"]["queue"]
+    assert r["posts"] == []
+
+
+def test_a_failed_or_changed_lookup_never_opens_a_browser_dialog():
+    for answers in (["hold"], ["fail"], [ROUTED, "fail"], [ROUTED, OTHER]):
+        assert run(*answers)["alerts"] == [], "a dialog blocks the page; the screen says it inline"
 
 
 @pytest.mark.parametrize("answers", [["hold"], ["fail"], [ROUTED, "fail"], [ROUTED, OTHER]])

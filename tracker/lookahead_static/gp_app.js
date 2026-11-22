@@ -113,10 +113,16 @@ function feed() {
 const SIG = new Map();
 let sigAsk = 0;
 const signerOf = d => SIG.get(d.decision_id) || {wait: true};
+const canSign = s => !!(s && s.name && s.status !== "needs_human");
+function note(m) {   // inline, never a browser dialog
+  const n = $("#gpNote"); if (!n) return;
+  n.textContent = m || ""; n.classList.toggle("on", !!m);
+}
 function signerText(s) {
   if (s.wait) return "Loading the signer…";
   if (s.failed) return "Signer unavailable";
-  return [s.name, s.status === "needs_human" ? "needs_human" : ""].filter(Boolean).join(", ");
+  if (s.status === "needs_human") return s.name ? `needs_human: a person confirms the signer (proposed ${s.name})` : "needs_human";
+  return s.name;
 }
 async function routedSigner(id) {
   const r = await fetch(`/api/lookahead/decisions/${encodeURIComponent(id)}`);
@@ -138,8 +144,8 @@ function signerLine(d) {
 }
 function acts(d) {
   const s = signerOf(d);
-  const label = s.wait || s.failed ? signerText(s) : s.name ? `Accept as ${s.name}` : "No signer can accept";
-  return `<div class="dq-btns2"><button class="btn btn-ghost" data-rej="${esc(d.decision_id)}">Reject</button><button class="btn btn-primary" data-act="${esc(d.decision_id)}"${s.name ? "" : " disabled"}>${ic("check")}${esc(label)}</button></div>`;
+  const label = s.wait || s.failed || s.status === "needs_human" ? signerText(s) : s.name ? `Accept as ${s.name}` : "No signer can accept";
+  return `<div class="dq-btns2"><button class="btn btn-ghost" data-rej="${esc(d.decision_id)}">Reject</button><button class="btn btn-primary" data-act="${esc(d.decision_id)}"${canSign(s) ? "" : " disabled"}>${ic("check")}${esc(label)}</button></div>`;
 }
 function dqCard(d) {
   const plan = (d.on_accept || []).map(t => `<li>${ic("send")}<span>${esc(t)}</span></li>`).join("");
@@ -185,24 +191,24 @@ function decisions() {
 }
 async function accept(id) {
   const shown = SIG.get(id);
-  if (!shown || !shown.name || shown.busy) return;
+  if (!canSign(shown) || shown.busy) return;
   shown.busy = true;
   let fresh;
   try { fresh = await routedSigner(id); } catch (e) {
     shown.busy = false;
-    alert("Could not confirm the signer. Nothing was sent; try again.");
+    note("Could not confirm the signer. Nothing was sent; try again.");
     return;
   }
   if (fresh.name !== shown.name || fresh.status !== shown.status) {
     SIG.set(id, fresh); render();
-    alert("The signer changed. Nothing was sent; check the name and click again.");
+    note("The signer changed. Nothing was sent; check the name and click again.");
     return;
   }
   const approver = shown.name;
   const r = await fetch(`/api/lookahead/decisions/${encodeURIComponent(id)}/accept`, {method: "POST",
     headers: {"Content-Type": "application/json"}, body: JSON.stringify({approver})});
   shown.busy = false;
-  if (!r.ok) alert((await r.json().catch(() => ({}))).error || "Accept failed");
+  note(r.ok ? "" : (await r.json().catch(() => ({}))).error || "Accept failed");
   load();
 }
 function openRej(id) {
@@ -240,7 +246,7 @@ function goal() {
 async function setGoal() {
   const answers = Object.fromEntries(((S.launch || {}).goal_questions || []).map(q => [q.id, q.suggested]));
   const r = await fetch("/api/lookahead/goal", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({answers})});
-  if (!r.ok) alert((await r.json().catch(() => ({}))).error || "Setting the goal failed");
+  note(r.ok ? "" : (await r.json().catch(() => ({}))).error || "Setting the goal failed");
   load();
 }
 function openEvent(id) {
