@@ -121,14 +121,15 @@ function note(m) {   // inline, never a browser dialog
 function signerText(s) {
   if (s.wait) return "Loading the signer…";
   if (s.failed) return "Signer unavailable";
-  if (s.status === "needs_human") return s.name ? `needs_human: a person confirms the signer (proposed ${s.name})` : "needs_human";
+  if (s.status === "needs_human") return "needs_human: a person has to confirm who signs";
   return s.name;
 }
 async function routedSigner(id) {
   const r = await fetch(`/api/lookahead/decisions/${encodeURIComponent(id)}`);
   if (!r.ok) throw new Error("no signer");
   const card = await r.json(), s = card.signer || {};
-  return {...s, status: s.name ? ((card.approval || {}).status || s.status) : "needs_human"};
+  const status = s.name ? ((card.approval || {}).status || s.status) : "needs_human";
+  return {...s, status, name: status === "needs_human" ? "" : s.name};   // an unresolved route names nobody
 }
 async function lookupSigners() {
   const ask = ++sigAsk;
@@ -211,7 +212,23 @@ async function accept(id) {
   note(r.ok ? "" : (await r.json().catch(() => ({}))).error || "Accept failed");
   load();
 }
+let REJ = null;
+async function rejectDecision() {
+  const approver = $("#rejBy").value.trim(), reason = $("#rejWhy").value.trim(), yes = $("#rejYes");
+  if (!REJ || yes.disabled) return;
+  if (!approver || !reason) return note("A rejection needs your name and a reason.");
+  yes.disabled = true;
+  try {
+    const r = await fetch(`/api/lookahead/decisions/${encodeURIComponent(REJ)}/reject`, {method: "POST",
+      headers: {"Content-Type": "application/json"}, body: JSON.stringify({approver, reason})});
+    if (!r.ok) return note((await r.json().catch(() => ({}))).error || "Reject failed");
+    note(""); closeAll(); load();
+  } catch (e) {
+    note("Reject failed: the screen could not reach the server.");
+  } finally { yes.disabled = false; }
+}
 function openRej(id) {
+  REJ = id; note(""); $("#rejBy").value = ""; $("#rejWhy").value = "";
   const d = (S.decisions || []).find(x => x.decision_id === id);
   $("#rejTitle").textContent = d ? d.title : id; $("#rejModal").classList.add("on");
 }
@@ -241,7 +258,7 @@ function goal() {
   const qs = (S.launch || {}).goal_questions || [];
   $("#goalCard").hidden = !!S.goal || !qs.length;
   $("#goalWhy").textContent = qs.length ? qs[0].why : "";
-  $("#goalList").innerHTML = qs.map(q => `<div><dt>${esc(q.q)}</dt><dd><b>${esc(q.suggested)}${q.unit ? " " + esc(q.unit) : ""}</b> · ${esc(q.why)}</dd></div>`).join("");
+  $("#goalList").innerHTML = qs.map(q => `<div><dt>${esc(q.q)}</dt><dd><b>${esc(q.suggested)}${q.unit ? " " + esc(q.unit) : ""}</b> · ${esc(q.why)}${srcLine(q.sources || [{label: `launch record, goal question ${q.id}${S.launch.scenario ? " (scenario input)" : ""}`}])}</dd></div>`).join("");
 }
 async function setGoal() {
   const answers = Object.fromEntries(((S.launch || {}).goal_questions || []).map(q => [q.id, q.suggested]));
@@ -259,6 +276,7 @@ function openEvent(id) {
 function closeAll() { ["#drawer", "#scrim", "#rejModal"].forEach(s => $(s).classList.remove("on")); }
 function header() {
   $("#deadlineBadge").textContent = S.launch ? "Deadline " + dhm(S.launch.deadline) : "";
+  $("#deadlineBadge").title = S.launch ? srcText([{label: `launch record${S.launch.scenario ? " (scenario input)" : ""}`}]) : "";
   $("#clockBadge").textContent = S.clock ? "Now " + dhm(S.clock.now) : "";
   const open = openDecisions()[0], last = (S.decisions || [])[0];
   const s = open ? signerOf(open) : {name: last && last.decided_by};
@@ -285,7 +303,7 @@ async function load() {
 }
 document.querySelectorAll(".tab").forEach(t => t.onclick = () => show(t.dataset.view));
 document.querySelectorAll("[data-goview]").forEach(b => b.onclick = () => show(b.dataset.goview));
-$("#goalSet").onclick = setGoal; $("#dClose").onclick = closeAll; $("#scrim").onclick = closeAll; $("#rejNo").onclick = closeAll;
+$("#goalSet").onclick = setGoal; $("#dClose").onclick = closeAll; $("#scrim").onclick = closeAll; $("#rejNo").onclick = closeAll; $("#rejYes").onclick = rejectDecision;
 show((location.hash.match(/v=(\w+)/) || [])[1] || "timeline");
 hydrate(); load();
 let pending = null;

@@ -45,8 +45,8 @@ def beats(records: list[dict]) -> list[list[dict]]:
 # the decision card once A cancels, the outcome once a person accepts) follows automatically, as in the product.
 # Beat indices of the art-book script: 0 base, 1 weak spots, 2 offer + hedge, 3 reply, 4 cancellation,
 # 5 decision card, 6 outcome after the accept.
-WORLD = [("Supplier A offers the missing art books", [2]), ("Karton Nowak confirms the truck", [3]),
-         ("Supplier A cancels", [4, 5])]
+WORLD = [("The outside supplier offers the missing units", [2]), ("The backup supplier confirms the truck", [3]),
+         ("The outside supplier cancels", [4, 5])]
 AUTO = [("goal", "You set the goal on the screen", "the agent ranks the weak spots and plans", 1),
         ("accept", "You accept the decision on the screen", "the plan updates and the outcome is shown", 6)]
 

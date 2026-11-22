@@ -71,8 +71,10 @@
 <div class="modal" id="rejModal" role="dialog" aria-modal="true" aria-labelledby="rejH"><div class="modal-box">
   <p class="modal-k" id="rejH">Reject this proposal?</p>
   <p class="modal-t" id="rejTitle"></p>
-  <p class="modal-w"><span data-i="alert-triangle"></span><span>Reject is not connected yet (#199). The card stays open.</span></p>
-  <div class="modal-btns"><button class="btn btn-ghost" id="rejNo">Close</button></div>
+  <p class="modal-w"><span data-i="alert-triangle"></span><span>Nothing is sent. Your name and reason are recorded.</span></p>
+  <label class="sm muted rej-f">Your name<input id="rejBy" autocomplete="name"></label>
+  <label class="sm muted rej-f">Reason<textarea id="rejWhy" rows="3"></textarea></label>
+  <div class="modal-btns"><button class="btn btn-ghost" id="rejNo">Cancel</button><button class="btn btn-primary" id="rejYes">Reject</button></div>
 </div></div>
 <aside class="drawer" id="drawer" aria-label="Details"><div class="dhead"><div id="dTitle"></div><button class="btn btn-ghost" id="dClose" aria-label="Close"><span data-i="x"></span></button></div><div class="dbody" id="dBody"></div></aside>
 

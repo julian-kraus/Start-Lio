@@ -41,7 +41,12 @@ const tick = () => new Promise(r => setTimeout(r, 10));
 (async () => {
   await tick();
   const shown = {queue: els["#dq"].innerHTML, card: els["#decOpen"].innerHTML, plan: els["#v-plan"].innerHTML};
-  vm.runInContext('accept("replan:P-1:x")', ctx);
+  if (process.argv[3] === "reject") {
+    const id = "replan:P-1:x";
+    vm.runInContext(`openRej("${id}")`, ctx);
+    els["#rejBy"].value = process.argv[4] || ""; els["#rejWhy"].value = process.argv[5] || "";
+    vm.runInContext("rejectDecision()", ctx);
+  } else vm.runInContext('accept("replan:P-1:x")', ctx);
   await tick();
   console.log(JSON.stringify({shown, posts, alerts}));
   process.exit(0);
@@ -54,8 +59,8 @@ NOBODY = {"signer": {"role": "Approver", "reason": "no holder"}, "approval": {"s
 UNRESOLVED = {"signer": {"name": "Script Person", "role": "Buyer", "status": "needs_human"}}
 
 
-def run(*answers):
-    out = subprocess.run(["node", "-e", HARNESS, str(STATIC), json.dumps(answers)], capture_output=True, text=True,
+def run(*answers, then=()):
+    out = subprocess.run(["node", "-e", HARNESS, str(STATIC), json.dumps(answers), *then], capture_output=True, text=True,
                          timeout=30, check=True)
     return json.loads(out.stdout)
 
@@ -80,7 +85,7 @@ def test_an_unresolved_script_signer_is_not_presented_as_resolved():
     r = run(UNRESOLVED, UNRESOLVED)
     for html in r["shown"].values():
         assert "needs_human" in html
-        assert "Accept as Script Person" not in html, "an unresolved signer is never offered as the one who accepts"
+        assert "Script Person" not in html, "an unresolved route names no signer"
     assert "disabled" in r["shown"]["card"] and "disabled" in r["shown"]["queue"]
     assert r["posts"] == []
 
@@ -93,3 +98,14 @@ def test_a_failed_or_changed_lookup_never_opens_a_browser_dialog():
 @pytest.mark.parametrize("answers", [["hold"], ["fail"], [ROUTED, "fail"], [ROUTED, OTHER]])
 def test_a_missing_failed_or_changed_lookup_posts_nothing(answers):
     assert run(*answers)["posts"] == []
+
+
+def test_reject_posts_the_person_and_reason_to_the_reject_route():
+    r = run(ROUTED, ROUTED, then=("reject", "Some Person", "Too dear"))
+    assert r["posts"] == [{"path": "/api/lookahead/decisions/replan%3AP-1%3Ax/reject",
+                           "body": {"approver": "Some Person", "reason": "Too dear"}}]
+
+
+@pytest.mark.parametrize("person,reason", [("", "Too dear"), ("Some Person", "")])
+def test_reject_without_a_name_or_a_reason_posts_nothing(person, reason):
+    assert run(ROUTED, ROUTED, then=("reject", person, reason))["posts"] == []
