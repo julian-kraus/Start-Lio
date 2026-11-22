@@ -27,7 +27,11 @@ def connect(url: str, schema: str | None = None, autocommit: bool = False) -> ps
 
 
 def migrate(conn: psycopg.Connection, schema: str | None = None) -> list[str]:
-    """Apply pending migrations in name order under the plan advisory lock. Safe to run repeatedly."""
+    """Apply pending migrations in name order under the plan advisory lock. Safe to run repeatedly.
+
+    On a connection that already has a transaction open this only sets a savepoint: the caller must commit,
+    or the returned migrations are rolled back when the connection closes.
+    """
     schema = schema or schema_name()
     applied = []
     with conn.transaction():

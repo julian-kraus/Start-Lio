@@ -208,9 +208,46 @@
       "type": "array",
       "items": {
         "$ref": "#/$defs/source"
-      }
+      },
+      "minItems": 1
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "hedge"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "hedge"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "buffer"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "buffer"
+        ]
+      }
+    }
+  ],
   "additionalProperties": true,
   "$defs": {
     "source": {

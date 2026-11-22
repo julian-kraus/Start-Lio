@@ -9,7 +9,7 @@ import pytest
 from psycopg import sql
 from psycopg.rows import dict_row, tuple_row
 
-from plan import clock, db
+from plan import clock, contracts, db
 
 URL = os.environ.get("TEST_DATABASE_URL")
 pytestmark = pytest.mark.skipif(not URL, reason="TEST_DATABASE_URL not set")
@@ -113,3 +113,18 @@ def test_constraints_guard_the_contract(conn):
     with pytest.raises(psycopg.errors.CheckViolation):
         c.execute("INSERT INTO clock (id) VALUES (2)")
     c.rollback()
+
+
+# contract field -> column, where the names differ
+COLUMN_FOR = {"hedge": "hedge_inputs", "buffer": "buffer_inputs"}
+
+
+@pytest.mark.parametrize("name,table", [("decision", "decisions"), ("recommendation", "recommendations"),
+                                        ("promise", "promises"), ("offer", "offers")])
+def test_every_contract_field_can_be_stored(conn, name, table):
+    c, schema = conn
+    db.migrate(c, schema)
+    rows = c.execute("SELECT column_name FROM information_schema.columns WHERE table_schema = %s AND table_name = %s",
+                     (schema, table))
+    wanted = {COLUMN_FOR.get(f, f) for f in contracts.validator(name).schema["properties"]}
+    assert wanted <= {r["column_name"] for r in rows}

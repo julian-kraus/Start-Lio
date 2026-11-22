@@ -13,10 +13,14 @@
     },
     "statement": {
       "type": "string",
-      "minLength": 1
+      "description": "Empty when the interview has no 'goal' answer."
     },
     "answers": {
-      "type": "array"
+      "type": [
+        "object",
+        "array"
+      ],
+      "description": "The app writes an object keyed by question id; a list is accepted as well."
     },
     "unit_loss_eur": {
       "type": [
@@ -31,6 +35,14 @@
         "null"
       ],
       "minimum": 0
+    },
+    "budget_eur": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "The name the goal interview writes for budget_cap_eur; consumers read either."
     },
     "sacrifices": {
       "type": "array"

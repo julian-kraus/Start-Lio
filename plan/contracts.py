@@ -8,19 +8,43 @@
 from __future__ import annotations
 
 import json
+import math
+import re
+from datetime import datetime
 from functools import lru_cache
 from pathlib import Path
 
-from jsonschema import Draft202012Validator, FormatChecker
+from jsonschema import Draft202012Validator, FormatChecker, validators
 from referencing import Registry, Resource
 
 CONTRACT_DIR = Path(__file__).resolve().parent / "contract"
 EXAMPLES_DIR = CONTRACT_DIR / "examples"
 RECORD_PREFIX = "record_"
+# RFC 3339 date-time. jsonschema skips this format without an optional package, so it is checked here.
+DATE_TIME = re.compile(r"[0-9]{4}-[0-9]{2}-[0-9]{2}[Tt][0-9]{2}:[0-9]{2}:[0-9]{2}(\.[0-9]+)?"
+                       r"([Zz]|[+-]([01][0-9]|2[0-3]):[0-5][0-9])")
+FORMATS = FormatChecker()
+IS_NUMBER = Draft202012Validator.TYPE_CHECKER.is_type
+# NaN and infinity pass every minimum and maximum and are not JSON, so they are not numbers here.
+Validator = validators.extend(Draft202012Validator, type_checker=Draft202012Validator.TYPE_CHECKER.redefine(
+    "number", lambda _, v: IS_NUMBER(v, "number") and (isinstance(v, int) or math.isfinite(v))))
 
 
 class ContractError(ValueError):
     pass
+
+
+@FORMATS.checks("date-time")
+def is_date_time(value) -> bool:
+    if not isinstance(value, str):
+        return True   # the type keyword reports those
+    if not DATE_TIME.fullmatch(value):
+        return False
+    try:
+        datetime.fromisoformat(value.upper().replace("Z", "+00:00"))
+    except ValueError:   # shaped like a time, but no such day or hour
+        return False
+    return True
 
 
 @lru_cache(maxsize=1)
@@ -43,12 +67,12 @@ def record_kinds() -> list[str]:
 
 
 @lru_cache(maxsize=None)
-def validator(name: str) -> Draft202012Validator:
+def validator(name: str):
     try:
         schema = _schemas()[name]
     except KeyError:
         raise ContractError(f"no contract named {name!r}") from None
-    return Draft202012Validator(schema, registry=_registry(), format_checker=FormatChecker())
+    return Validator(schema, registry=_registry(), format_checker=FORMATS)
 
 
 def errors(name: str, obj) -> list[str]:
