@@ -22,6 +22,7 @@ import math
 import re
 
 from .coverage import OUTSIDE
+from .coverage import editions as plan_editions
 from .facts import Facts, Row, figure, ids, number
 
 MAIL = "mail/"                                  # an email cannot list or qualify a source
@@ -169,8 +170,15 @@ def _why(status: str, good: list[str], out: list[str], risk: dict, names: dict, 
     return " ".join(f"{lead}{sources}: {text}.".split())
 
 
-def _spot(facts: Facts, part: dict, coverage: dict, values: dict, goal_line: str, retail: dict) -> dict:
-    editions = {e["product_id"]: e for e in coverage["editions"]}
+def _editions(facts: Facts) -> dict[str, dict]:
+    """Every edition in the plan: coverage may report fewer, but a shared part is split over all of them."""
+    return {e.product_id: {"product_id": e.product_id, "name": e.name, "demand": figure(e.demand, e.demand_ids),
+                           "packed": figure(e.packed, e.open_ids), "open": figure(e.open, e.open_ids)}
+            for e in plan_editions(facts)[0]}
+
+
+def _spot(facts: Facts, part: dict, coverage: dict, editions: dict, values: dict, goal_line: str,
+          retail: dict) -> dict:
     open_copies = {p: e["open"]["value"] for p, e in editions.items()}
     short = _shortage(part, values, open_copies)
     lenders = _substitute(short, values, coverage["priority"]["order"], retail)
@@ -228,9 +236,10 @@ def _spot(facts: Facts, part: dict, coverage: dict, values: dict, goal_line: str
 
 def rank(facts: Facts, coverage: dict, goal: dict) -> list[dict]:
     """Every part in the coverage, by exposure; on a tie the more severe status, then more copies at risk."""
-    values, goal_line = goal_values(goal, coverage["editions"])
-    retail = {e["product_id"]: retail_copies(facts, e) for e in coverage["editions"]}
-    spots = [_spot(facts, p, coverage, values, goal_line, retail) for p in coverage["parts"]]
+    editions = _editions(facts)
+    values, goal_line = goal_values(goal, list(editions.values()))
+    retail = {product: retail_copies(facts, edition) for product, edition in editions.items()}
+    spots = [_spot(facts, p, coverage, editions, values, goal_line, retail) for p in coverage["parts"]]
     spots.sort(key=lambda s: (-s["exposure_eur"], SEVERITY.index(s["detail"]["status"]),
                               -s["detail"]["copies_at_risk"]["value"], s["part_id"]))
     return [{**spot, "rank": n} for n, spot in enumerate(spots, 1)]
