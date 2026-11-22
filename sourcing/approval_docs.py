@@ -17,12 +17,12 @@ POLICY_KIND, CHART_KIND = "policy_document", "org_chart"
 SUPPLIER_SENT = ("mail/", "suppliers/")
 MIN_CONFIDENCE = 0.6
 
-SPACE = "   "
+SPACE = " \u00a0\u202f"
 NUMBER = rf"\d{{1,3}}(?:(?P<sep>[,.'{SPACE}])\d{{3}})(?:(?P=sep)\d{{3}})*(?:[.,]\d{{1,2}})?|\d+(?:[.,]\d{{1,2}})?"
-OPS = {"<": "<", "under": "<", "below": "<", "<=": "<=", "≤": "<=", "up to": "<=",
-       ">": ">", "over": ">", "above": ">", ">=": ">=", "≥": ">=", "from": ">="}
-LIMIT_START = r"(?:<=|>=|[<>≤≥]|(?i:up to|under|below|over|above|from)\s+(?=(?:[A-Z]{3}\s+)?\d))"
-LIMIT_CELL = re.compile(rf"(?:(?P<role>[^<>≤≥:|]+?)[\s:|]+)?(?P<op>{LIMIT_START})\s*(?P<rest>.+)")
+OPS = {"<": "<", "under": "<", "below": "<", "<=": "<=", "\u2264": "<=", "up to": "<=",
+       ">": ">", "over": ">", "above": ">", ">=": ">=", "\u2265": ">=", "from": ">="}
+LIMIT_START = r"(?:<=|>=|[<>\u2264\u2265]|(?i:up to|under|below|over|above|from)\s+(?=(?:[A-Z]{3}\s+)?\d))"
+LIMIT_CELL = re.compile(rf"(?:(?P<role>[^<>\u2264\u2265:|]+?)[\s:|]+)?(?P<op>{LIMIT_START})\s*(?P<rest>.+)")
 HEADING = re.compile(r"(\d{1,2})\.\s+([A-Z].{0,100}?[^.,;:])")
 WORD = r"[A-Z][\w&'-]*"
 ROLE = rf"{WORD}(?:\s+(?:of\s+|&\s+|for\s+)?{WORD})*"
@@ -31,7 +31,7 @@ BY_ROLE = re.compile(
     rf"(?:responsible\s+)?({ROLE})")
 DATED = re.compile(r"\s*\((from|as of|starting|until|to)\s+(\d{4}-\d\d-\d\d)\)", re.I)
 VACANT = {"tbd", "tba", "tbc", "vacant", "open", "open position", "position open", "n.n.", "nn", "n/a", "-", "?",
-          "–", "—", "to be hired", "to be confirmed"}
+          "\u2013", "\u2014", "to be hired", "to be confirmed"}
 SENIORITY = {"senior", "junior", "principal", "acting"}
 
 
@@ -289,7 +289,7 @@ def read_policy(doc: Document) -> Policy | None:
 
 
 def words(text: str) -> list[str]:
-    return re.findall(r"[^\W_]+(?:'[^\W_]+)?", text.replace("’", "'").replace("&", " and ").casefold())
+    return re.findall(r"[^\W_]+(?:'[^\W_]+)?", text.replace("\u2019", "'").replace("&", " and ").casefold())
 
 
 def title_scope(title: str, term: str) -> str | None:

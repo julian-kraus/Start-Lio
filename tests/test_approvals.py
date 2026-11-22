@@ -20,10 +20,10 @@ Planner
 Area Manager
 < 7,000
 Purchasing Director
-< 70 000
+< 63 100
 Chief Supply Officer
 < 700.000
-CSO and CFO jointly
+CSO and CTO jointly
 ≥ 700,000
 3. Receiving site
 Orders delivered to a site require, in addition to the value approval, a booked slot released by the warehouse
@@ -57,7 +57,7 @@ Test Engineer
 North Depot (dotted line to Purchasing Director)
 Finn Ford
 Warehouse Chief North Depot
-Also: Gus Gray (IT Lead (Purchasing)), Hana Hill (Chief Financial Officer)"""
+Also: Gus Gray (IT Lead (Purchasing)), Hana Hill (Chief Treasury Officer)"""
 
 CHART_V2 = (CHART_V1.replace("(v1, 2030-01-05)", "(v2, 2030-03-10)")
             .replace("TBD", "Ira Iles (from 2030-03-12)").replace("Cleo Cole", "Jo James"))
@@ -104,9 +104,9 @@ def air(amount, used=None, **kw):
     (700, "Area Manager Paper & Board", "Jo James"),
     (6999.99, "Area Manager Paper & Board", "Jo James"),
     (7000, "Purchasing Director", "Dr. Ben Baker"),
-    (70000, "Chief Supply Officer", "Ada Able"),
+    (63100, "Chief Supply Officer", "Ada Able"),
     (699999.99, "Chief Supply Officer", "Ada Able"),
-    (700000, "Chief Supply Officer and Chief Financial Officer", "Ada Able and Hana Hill"),
+    (700000, "Chief Supply Officer and Chief Treasury Officer", "Ada Able and Hana Hill"),
 ])
 def test_value_tiers(amount, role, name):
     out = route(amount=amount)
@@ -194,7 +194,7 @@ def test_unknown_category_is_not_guessed():
 
 
 def test_vacancy_above_the_exception_approver_needs_a_human():
-    out = route(world(POLICY, CHART_V2.replace("Ada Able", "vacant")), amount=80000)
+    out = route(world(POLICY, CHART_V2.replace("Ada Able", "vacant")), amount=81300)
     assert out["status"] == "needs_human" and "name" not in out["signer"]
     assert "lower limit" in " ".join(out["reasons"])
 
@@ -328,8 +328,8 @@ def test_two_equal_readings_are_one_policy():
 
 
 @pytest.mark.parametrize("old, new", [("< 7,000", "< 7,0000"), ("< 7,000", "< 7 million"),
-                                      ("< 70 000", "< 60"), (", in EUR)", ")"), (", in EUR)", ", in USD)"), ("< 7,000", "< USD 7,000"),
-                                      ("< 70 000", "70,000 - 90,000")])
+                                      ("< 63 100", "< 60"), (", in EUR)", ")"), (", in EUR)", ", in USD)"), ("< 7,000", "< USD 7,000"),
+                                      ("< 63 100", "63,100 - 91,700")])
 def test_unreadable_or_foreign_limits_need_a_human(old, new):
     out = route(world(POLICY.replace(old, new)))
     assert out["status"] == "needs_human" and "name" not in out["signer"]
@@ -387,8 +387,8 @@ def test_bad_action_and_naive_time_are_refused():
         route(on=datetime(2030, 3, 11, 9))
 
 
-@pytest.mark.parametrize("text, value", [("10 000", "10000"), ("10 000", "10000"), ("10.000", "10000"),
-                                         ("10,000.50", "10000.50"), ("10.000,5", "10000.5"), ("700", "700"),
+@pytest.mark.parametrize("text, value", [("12 340", "12340"), ("12 340", "12340"), ("12.340", "12340"),
+                                         ("12,340.50", "12340.50"), ("12.340,5", "12340.5"), ("700", "700"),
                                          ("1,23,456", None), ("2m", None)])
 def test_numbers_as_printed(text, value):
     assert (None if number(text) is None else str(number(text))) == value
