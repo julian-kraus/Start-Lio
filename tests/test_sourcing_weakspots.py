@@ -297,3 +297,13 @@ def test_rank_is_pure(world):
     before = copy.deepcopy((coverage, DELUXE, world.current))
     assert weakspots.rank(facts, coverage, DELUXE) == weakspots.rank(facts, coverage, DELUXE)
     assert (coverage, DELUXE, world.current) == before
+
+
+@pytest.mark.parametrize("product", ["P-A", "P-B"])
+def test_a_report_narrowed_to_one_edition_still_prices_the_shared_part_over_all(world, product):
+    facts, whole = Facts(world.current), spot(ranked(world), "CARD")
+    narrow = weakspots.rank(facts, world.run(products=[product]), DELUXE)
+    card = spot(narrow, "CARD")
+    assert (card["exposure_eur"], card["detail"]) == (whole["exposure_eur"], whole["detail"])
+    for s in narrow:
+        contracts.validate("weak_spot", s)
