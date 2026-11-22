@@ -12,6 +12,8 @@ ROOT = Path(sys.argv[1]); OUT = Path(sys.argv[2]); TESTS = set(sys.argv[3:]) or 
     "auth", "scans", "newscans", "offer", "agent", "inject", "errors"}
 DATA = ROOT / "data" / "current"
 DOCS = ROOT / "structured" / "docs"
+sys.path.insert(0, str(ROOT))
+from tests.live.agent_tools import test_agent_tools
 
 
 def load_key() -> tuple[str, str]:
@@ -408,7 +410,17 @@ if __name__ == "__main__":
              ("scans_verbatim", lambda: test_scans([MODEL, "claude-sonnet-5-5", "claude-haiku-5-5"],
                                                   key="scans_verbatim", verbatim=True)),
              ("agent_guard", lambda: test_agent(6, key="agent_guard", guard=True)),
-             ("agent_noguard", lambda: test_agent(6, key="agent_noguard", guard=False))]
+             ("agent_noguard", lambda: test_agent(6, key="agent_noguard", guard=False)),
+             ("agent_tools", lambda: test_agent_tools(
+                 root=ROOT, api_key=KEY, model=MODEL, n=10, result_key="agent_tools",
+                 tool_specs=TOOLS, tool_values=FAKE, hedge_math=hedge_math,
+                 verdict_schema=VERDICT_SCHEMA,
+                 system=("You decide whether to place a backup order. Get every input from the tools. Every number "
+                         "in your answer must come from a tool result; never compute numbers yourself. Cite the goal "
+                         "line."),
+                 prompt=("Part P-ALPHA is short for the premium edition. Should we hedge with the backup offer? The "
+                         "commitment now is the deposit share of the backup order value."),
+                 results=results, usage_total=usage_total))]
     for name, fn in steps:
         if name not in TESTS:
             continue
