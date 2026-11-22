@@ -106,6 +106,40 @@ def test_goal_that_does_not_protect_margin(goal):
     assert hedge.margin_line(goal) is None
 
 
+@pytest.mark.parametrize("said", [
+    "Protect margin and don't bankrupt me", "Protect margin and do not overspend",
+    "Protect margin - don't bankrupt me", "Margin protection first", "Our margin must be protected",
+    "Protect our profit margin", "Don't sacrifice margin", "Margin can't suffer",
+])
+def test_margin_is_protected_in_common_wordings(said):
+    assert hedge.margin_line({"statement": said})
+
+
+@pytest.mark.parametrize("said", [
+    "We cannot protect margin", "Stop protecting margin", "Forget protecting margin",
+    "Protection of margin can wait", "All on time rather than protect margin", "Margin can suffer",
+    "We don't care about margin", "Margins don't matter", "Keep a safety margin of two days",
+])
+def test_margin_is_not_protected_when_the_goal_says_the_opposite(said):
+    assert hedge.margin_line({"statement": said}) is None
+
+
+@pytest.mark.parametrize("goal", [
+    {"statement": "Margin"}, {"statement": "Do not forget about protecting margin"},
+    {"statement": "Protect margin unless copies are at risk"}, {"statement": "Protect margin. Margin can suffer"},
+    {"sacrifices": ["anything but margin"]}, {"statement": "Anything but margin can suffer"},
+    {"statement": "We cannot hit the date and protect margin"},
+])
+def test_an_unclear_word_on_margin_is_refused_not_guessed(goal):
+    with pytest.raises(ModelError, match="margin"):
+        hedge.margin_line(goal)
+
+
+def test_the_protect_field_settles_an_unclear_wording():
+    assert hedge.margin_line({"statement": "Margin", "protect": ["margin"]})
+    assert hedge.margin_line({"statement": "Margin", "protect": []}) is None
+
+
 def cases(n=4000):
     rng = random.Random(15)
     for _ in range(n):
@@ -300,6 +334,25 @@ def test_p_fail_comes_from_the_reliability_card():
     assert worse.value > given.value
     with pytest.raises(ModelError):
         hedge.p_fail(reliability.card(reliability.history([]), "S2"))
+
+
+def test_supplier_without_history_cites_the_facts_behind_the_average():
+    facts = [{"fact_id": f"{n}:{name}", "fact_type": "po_line", "subject": {"po_number": str(n), "po_line": 1},
+              "attribute": name, "value": value}
+             for n in range(6)
+             for name, value in (("supplier_id", "S1"), ("promised_date", "2030-01-10"),
+                                 ("actual_delivery_date", "2030-01-09"))]
+    history = reliability.history(facts)
+    card = reliability.card(history, "NEW")
+    given = hedge.p_fail(card, history)
+    behind = {i for p in history.suppliers["S1"].promises for i in p["fact_ids"]}
+    assert {r["fact_id"] for r in given.refs if r.get("fact_id")} == behind
+    shown = hedge.row("p_fail", "Chance", given)["source"]
+    assert shown.startswith("fact ") and "more facts" in shown and "all-supplier average: 6 of 6" in shown
+    with pytest.raises(ModelError, match="history"):
+        hedge.p_fail(card)
+    with pytest.raises(ModelError, match="history"):
+        hedge.p_fail(card, reliability.history(facts[:3]))
 
 
 def test_supplier_without_history_cites_the_prior():

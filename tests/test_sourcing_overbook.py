@@ -116,6 +116,23 @@ def test_property_quantity_is_the_best_orderable_amount():
         assert cost(r["quantity"]) <= min(map(cost, options)) + 1e-6, case
 
 
+def test_a_fractional_shortfall_takes_the_cheaper_neighbour():
+    assert size([(40.1, 1.0)], price=5, loss=10, p=1)["quantity"] == 40
+
+
+def test_property_fractional_shortfalls_get_the_best_orderable_amount():
+    rng = random.Random(401)
+    for _ in range(5000):
+        price, loss, p = rng.uniform(0.5, 12), rng.uniform(0, 30), rng.random()
+        lot, outcomes = rng.choice((1, 1, 3, 10)), [(round(rng.uniform(0, 90), 1), 0.5) for _ in range(2)]
+        r = size(outcomes, price=price, loss=loss, p=p, lot=lot)
+
+        def cost(q):
+            return price * q - p * loss * sum(w * min(q, units) for units, w in outcomes)
+
+        assert cost(r["quantity"]) <= min(map(cost, range(0, 101, lot))) + 1e-6, (price, loss, p, lot, outcomes)
+
+
 def test_property_higher_loss_per_copy_never_books_less():
     rng = random.Random(51)
     for case in cases():
@@ -194,6 +211,36 @@ def test_price_basis_per_many_is_refused():
     for said in ("per 100", "per 1,000 pcs", "per thousand", "EUR per hundred"):
         with pytest.raises(ModelError, match="not per unit"):
             overbook.price(offered() + [fact("offer", key, "price_basis", said)], "B", "PART", offer_ref="O-1")
+
+
+@pytest.mark.parametrize("said", ["100", "100 pcs", "per box of 500", "per 1k", "pro 100", "per box", "/1000"])
+def test_only_known_per_one_bases_are_accepted(said):
+    key = {"supplier_id": "B", "offer_ref": "O-1", "item": "cover"}
+    with pytest.raises(ModelError, match="not per unit"):
+        overbook.price(offered() + [fact("offer", key, "price_basis", said)], "B", "PART", offer_ref="O-1")
+
+
+@pytest.mark.parametrize("said", ["1", "per unit", "per piece", "EUR/pc", "each", "je Stück", "per 1 pc"])
+def test_known_per_one_bases_are_read(said):
+    key = {"supplier_id": "B", "offer_ref": "O-1", "item": "cover"}
+    rows = offered() + [fact("offer", key, "price_basis", said)]
+    assert overbook.price(rows, "B", "PART", offer_ref="O-1").value == 2.1
+
+
+@pytest.mark.parametrize("unit", ["PLN/1000", "EUR/1000", "per 100", "box", "XYZ"])
+def test_a_fact_unit_that_is_not_per_one_is_refused(unit):
+    rows = listed("2.40")
+    rows[0]["unit"] = unit
+    with pytest.raises(ModelError):
+        overbook.price(rows, "B", "PART")
+
+
+def test_a_fact_unit_per_one_names_the_currency():
+    rows = listed("2.40")
+    rows[0]["unit"] = "PLN/pc"
+    with pytest.raises(ModelError, match="PLN"):
+        overbook.price(rows, "B", "PART")
+    assert overbook.price(rows, "B", "PART", fx=Input(0.25, SCENARIO)).value == pytest.approx(0.6)
 
 
 def test_newest_price_wins_and_a_conflict_is_refused():

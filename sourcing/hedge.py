@@ -23,12 +23,13 @@ import re
 from dataclasses import dataclass
 from typing import Iterable, Mapping
 
+from sourcing import goal_margin
+
 ORIGINS = ("fact_id", "goal_line", "scenario_input")
 COST_MODELS = ("deposit_only", "full_order")
 NUMBER = r"\d+(?:[.,\s]\d+)*"
 EURO = r"(?:€|eur|euros?)"
-NEGATION = re.compile(r"n['’]t\b|\b(?:not|never|dont|no need)\b")
-MARGIN = re.compile(r"\b(?:protect\w*|preserv\w*)\s+(?:\w+\s+)?margins?\b")
+FACTS_SHOWN = 3     # the rest are in `refs`
 
 
 class ModelError(ValueError):
@@ -40,14 +41,13 @@ class Input:
     value: float | str
     source: dict | list
     note: str = ""
-    computed: bool = False      # output of another sourcing model, which may cite a labelled average
+    computed: bool = False      # output of another sourcing model, which may add labels to what it cites
 
     def __post_init__(self):
-        allowed = ORIGINS + (("label",) if self.computed else ())
         refs = self.refs
         if not refs or not all(isinstance(r, Mapping) for r in refs):
             raise ModelError("an input needs a source")
-        if not any(r.get(key) not in (None, "") for r in refs for key in allowed):
+        if not any(r.get(key) not in (None, "") for r in refs for key in ORIGINS):
             raise ModelError("a source is a fact id, a goal line or a labelled scenario input")
 
     @property
@@ -121,20 +121,36 @@ def deposit_amount(given: Input, order_value: Input) -> Input:
     return Input(round(value, 2), given.source, f"quoted as {given.value}")
 
 
-def keeps_promise(card: Mapping) -> Input:
-    """P(a supplier delivers and passes quality): the reliability score, where a failed inspection breaks a promise."""
+def _behind_average(start: Mapping, history) -> list[dict]:
+    """The facts behind the all-supplier starting score, if `history` is the one the card was computed from."""
+    judged = {sid: s.promises for sid, s in history.suppliers.items() if s.promises}
+    counts = {sid: {"kept": sum(p["kept"] for p in found), "n": len(found)} for sid, found in judged.items()}
+    if counts != start.get("by_supplier"):
+        raise ModelError("the history is not the one this reliability card was computed from")
+    return [{"fact_id": i} for i in sorted({i for found in judged.values() for p in found for i in p["fact_ids"]})]
+
+
+def keeps_promise(card: Mapping, history=None) -> Input:
+    """P(a supplier delivers and passes quality): the reliability score, where a failed inspection breaks a promise.
+    Without deliveries of its own it is the all-supplier average: pass the `history` so that its facts are cited."""
     score = card.get("score") or {}
     if "value" not in score:
         raise ModelError(f"reliability of {card.get('supplier_id')} is unknown")
+    refs = list(score.get("sources") or [])
+    start = score.get("starting_point") or {}
+    if start.get("kind") == "all_suppliers" and not (score.get("history") or {}).get("n"):
+        if history is None:
+            raise ModelError(f"{card.get('supplier_id')} has no deliveries: give the history behind the average")
+        refs = unique(_behind_average(start, history) + refs)
     note = f"reliability of {card.get('supplier_id')}: on time, in full, no failed inspection"
     quality = [m for m in score.get("measures", []) if m.get("measure") == "quality" and m.get("n")]
     if quality:
         note += f" (quality {quality[0]['kept']} of {quality[0]['n']})"
-    return Input(score["value"], list(score.get("sources") or []), note, computed=True)
+    return Input(score["value"], refs, note, computed=True)
 
 
-def p_fail(card: Mapping) -> Input:
-    kept = keeps_promise(card)
+def p_fail(card: Mapping, history=None) -> Input:
+    kept = keeps_promise(card, history)
     return Input(1 - amount(kept, "reliability", 1), kept.source, f"1 minus {kept.note}", computed=True)
 
 
@@ -172,31 +188,12 @@ def _stated(goal: Mapping, lines: list[Mapping], value: float, wanted: str) -> d
     return source
 
 
-def _strings(value) -> Iterable[str]:
-    if isinstance(value, str):
-        yield value
-    elif isinstance(value, Mapping):
-        # a question is not what the goal says
-        for key, item in value.items():
-            if key not in ("q", "question"):
-                yield from _strings(item)
-    elif isinstance(value, (list, tuple)):
-        for item in value:
-            yield from _strings(item)
-
-
 def margin_line(goal: Mapping | None) -> str | None:
-    """The goal line that protects margin: `protect` names it, or the statement or an answer says so."""
-    if not goal or any("margin" in s.lower() for s in _strings(goal.get("sacrifices"))):
-        return None
-    for text in _strings(goal.get("protect")):
-        if "margin" in text.lower():
-            return f"protect: {text}"
-    for text in _strings([goal.get("statement"), goal.get("answers")]):
-        for clause in re.split(r"[.,;!?\n]|\bbut\b", text):
-            if MARGIN.search(clause.lower()) and not NEGATION.search(clause.lower()):
-                return clause.strip()
-    return None
+    """The goal line that protects margin. Words on margin that cannot be read are refused, not guessed."""
+    line, unclear = goal_margin.read(goal)
+    if unclear:
+        raise ModelError(f"unclear whether the goal protects margin: {unclear!r}. Set the goal's protect list")
+    return line
 
 
 def describe(ref: Mapping) -> str:
@@ -209,9 +206,17 @@ def describe(ref: Mapping) -> str:
     return str(ref.get("label") or "")
 
 
+def cited(refs: list[dict]) -> str:
+    facts = [r for r in refs if r.get("fact_id") not in (None, "")]
+    shown = list(map(describe, facts[:FACTS_SHOWN]))
+    if len(facts) > FACTS_SHOWN:
+        shown.append(f"and {len(facts) - FACTS_SHOWN} more facts")
+    return "; ".join(filter(None, shown + [describe(r) for r in refs if r not in facts]))
+
+
 def row(name: str, text: str, given: Input, unit: str = "") -> dict:
     out = {"name": name, "text": text, "value": given.value, "unit": unit, "refs": given.refs,
-           "source": "; ".join(filter(None, map(describe, given.refs)))}
+           "source": cited(given.refs)}
     return {**out, "note": given.note} if given.note else out
 
 

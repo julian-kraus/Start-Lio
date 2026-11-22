@@ -7,7 +7,7 @@
   quantile   1 - C_o / (p x C_u). C_o: cost of a leftover part from the price facts, less salvage.
              C_u: loss per missing copy / units per copy. p: B delivers and passes quality.
   target     the smallest shortfall that this share of outcomes does not exceed
-  quantity   the cheapest orderable amount next to the target: nothing, or whole lots of at least the MOQ and at
+  quantity   the cheapest orderable amount next to the unrounded target: nothing, or whole lots of at least the MOQ and at
              most what B has. The expected cost C_o x Q - p x C_u x E[min(Q, shortfall)] is convex, so that is the
              best of all orderable amounts, and a higher loss per copy never books less.
 
@@ -31,8 +31,10 @@ CURRENCIES = frozenset(
 CODE = r"(€|\$|£|zł|[a-z]{3})"
 PER_ONE = r"(?:\s*(?:/|per\s|je\s|za\s)\s*(?:1\s*)?(?:pcs?|pieces?|piece|units?|stück|stk|szt|each|ea)\.?)?"
 PRICE = re.compile(rf"(?:{CODE}\s*)?({NUMBER})(?:\s*{CODE})?{PER_ONE}")
-PER_MANY = re.compile(r"(?:/|\bper\b|\bje\b|\bza\b)\s*(\d[\d.,\s]*)")
-PER_WORD = re.compile(r"\b(?:hundred|thousand|dozen|hundert|tausend|dutzend|sto|tysiąc|mille)\b")
+ONE = r"(?:pcs?|pieces?|units?|stück|stk|szt|each|ea)\.?"
+CODES = "|".join(map(re.escape, [*SYMBOLS, *sorted(c.lower() for c in CURRENCIES)]))
+# all that a price basis or a fact's unit may say: a currency, per one, or both
+PER_UNIT = re.compile(rf"(?=.)({CODES})?(?:\s*(?:/|\b(?:per|je|za|pro)\b)?\s*(?:1(?:\s*{ONE})?|(?:one\s+)?{ONE}))?")
 COUNT = re.compile(rf"(?:min\.?\s*|minimum\s+)?({NUMBER})\s*(?:pcs?|pieces?|units?|stück|stk|szt)?\.?")
 MAIL = "mail/"          # an email may make an offer, it cannot change the price list
 TOLERANCE = 1e-9
@@ -77,6 +79,15 @@ def _terms(facts: list[Mapping], supplier_id: str, part_id: str, offer_ref: str 
     return [f for f in rows if key(f, "item") in items]
 
 
+def _per_unit(said: str) -> set[str]:
+    """The currency in a price basis or a fact's unit. Anything that is not per one is refused."""
+    found = PER_UNIT.fullmatch(said.strip().lower())
+    if not found:
+        raise ModelError(f"the price is not per unit: {said!r}")
+    code = found.group(1)
+    return {SYMBOLS.get(code, code.upper())} if code else set()
+
+
 def _quote(text: str, rows: list[Mapping]) -> tuple[str, set[str]]:
     """The digits of a price per unit, and the currencies that the text and the facts' units name."""
     found = PRICE.fullmatch(text.lower())
@@ -86,7 +97,10 @@ def _quote(text: str, rows: list[Mapping]) -> tuple[str, set[str]]:
     named = {SYMBOLS.get(code, code.upper()) for code in (before, after) if code}
     if named - CURRENCIES:
         raise ModelError(f"unknown currency in {text!r}")
-    return digits, named | {u for f in rows if (u := _text(f.get("unit")).upper()) in CURRENCIES}
+    for f in rows:
+        if unit := _text(f.get("unit")):
+            named |= _per_unit(unit)
+    return digits, named
 
 
 def _day(value: date | str) -> date:
@@ -173,9 +187,7 @@ def price(facts: Iterable[Mapping], supplier_id: str, part_id: str, *, offer_ref
 
     if basis := [f for f in terms if f.get("attribute") == "price_basis"]:
         said, basis = _newest(basis, "price_basis")
-        per = PER_MANY.search(said.lower())
-        if PER_WORD.search(said.lower()) or (per and parse_number(per.group(1).strip(" .,"), grouped=True) != 1):
-            raise ModelError(f"the price is not per unit: {said!r}")
+        stated |= _per_unit(said)
         used = used + basis
     if not stated:
         own = [f for f in terms if f.get("attribute") == "currency"]
@@ -280,13 +292,14 @@ def size(*, outcomes: Sequence[tuple[Input, Input]], unit_price: Input, loss_per
 
     leftover, per_unit = cost - salvaged, loss / per_copy
     share = critical_ratio(leftover, per_unit, p)
-    target = math.ceil(round(quantile(spread, share), 6))
+    wanted = round(quantile(spread, share), 6)
+    target = math.ceil(wanted)      # what is shown: whole units
 
     low = max(math.ceil(least / lot), 1) * lot
     high = most if most == math.inf else most // lot * lot
     options = {0}
     if low <= high:
-        options |= {min(max(x, low), high) for x in (target // lot * lot, math.ceil(target / lot) * lot)}
+        options |= {min(max(x, low), high) for x in (math.floor(wanted / lot) * lot, math.ceil(wanted / lot) * lot)}
 
     def expected_cost(q: float) -> float:
         return leftover * q - p * per_unit * sum(chance * min(q, units) for units, chance in spread)
