@@ -17,7 +17,6 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import datetime, timezone
 from typing import Iterable
 
 from psycopg import sql
@@ -41,10 +40,10 @@ REGISTER_SCHEMA = {
     "required": ["promise_id", "what", "fallback", "sources"],
     "properties": {
         "promise_id": {"type": "string"},
-        "supplier_id": {"type": "string", "description": "the supplier; taken from the cited statement when it has one"},
+        "supplier_id": {"type": "string", "description": "ignored: the supplier is taken from the cited statement"},
         "what": {"type": "string", "description": "the commitment being watched, e.g. 'loads the backup order'"},
-        "within": {"type": "string", "description": "the quoted duration from the statement, e.g. 'within 4 h'"},
-        "due": {"type": "string", "description": "an absolute ISO 8601 due time (only when there is no `within`)"},
+        "within": {"type": "string", "description": "the duration quoted verbatim from the statement text, e.g. 'within 4 h'"},
+        "due": {"type": "string", "description": "the statement's own due time, ISO 8601 (only when there is no `within`)"},
         "grace_h": {"type": "number", "description": "hours after due before the first check (default 0)"},
         "fallback": {"type": "string", "description": "what to do the moment the promise breaks"},
         "part_id": {"type": "string"},
@@ -256,25 +255,62 @@ def parse_quantity(text) -> float | None:
         return None
 
 
+def _cited_fact_ids(sources) -> set[str]:
+    """The kb fact ids a register call cites, however they were given (a bare id or `{"fact_id": id}`)."""
+    ids: set[str] = set()
+    for src in sources or []:
+        fid = src.get("fact_id") if isinstance(src, dict) else src
+        if fid is not None:
+            ids.add(str(fid))
+    return ids
+
+
 def _statement_for(sources, by_fact: dict) -> promises.Statement | None:
     """The cited statement for a register call, matched by the first cited fact id that is a known supplier
     statement. `by_fact` is keyed by every fact id of each statement, so citing any fact of the email resolves it.
     Returns None when no cited id is a known statement, so the register tool can refuse invented ids."""
-    for src in sources or []:
-        fid = src.get("fact_id") if isinstance(src, dict) else src
-        if fid is not None and str(fid) in by_fact:
-            return by_fact[str(fid)]
+    for fid in _cited_fact_ids(sources):
+        if fid in by_fact:
+            return by_fact[fid]
     return None
 
 
-def _register_tool(plan_conn, now_iso: str, registered: list[dict], by_fact: dict):
+def _norm(text) -> str:
+    """A string with its whitespace collapsed and lower-cased, for a verbatim-substring test."""
+    return re.sub(r"\s+", " ", text).strip().lower() if isinstance(text, str) else ""
+
+
+def _grounded_within(within, text) -> str | None:
+    """The model's quoted duration, only when it appears verbatim in the cited statement's text. The model quotes,
+    the code grounds: a `within` the statement does not hold is the model inventing a due time (finding: a duration
+    not in the source was saved). Returns None when there is no grounded duration to use."""
+    needle = _norm(within)
+    return within if needle and needle in _norm(text) else None
+
+
+def _grounded_due(due, due_time) -> str | None:
+    """The statement's own `due_time` (the source of truth), when it has one and any `due` the model passed agrees
+    with it. None when the statement has no due_time or the model's due contradicts it (finding: an invented
+    absolute due was saved)."""
+    if not due_time:
+        return None
+    if due:
+        a, b = _instant_or_none(due), _instant_or_none(due_time)
+        matches = a == b if a is not None and b is not None else str(due).strip() == str(due_time).strip()
+        if not matches:
+            return None
+    return due_time
+
+
+def _register_tool(plan_conn, registered: list[dict], by_fact: dict):
     def register_promise(**kwargs):
         kwargs = {k: v for k, v in kwargs.items() if k in _REGISTER_KEYS}   # the code owns every number
         sources = kwargs.get("sources") or []
         if not sources:
             return {"error": "a promise must cite the kb fact it rests on (sources)"}
         pid = str(kwargs.get("promise_id") or "")
-        existing = plan_conn.execute("SELECT state FROM promises WHERE promise_id = %s", (pid,)).fetchone()
+        existing = plan_conn.execute(
+            "SELECT state, sources FROM promises WHERE promise_id = %s", (pid,)).fetchone()
         if existing and existing["state"] in _SETTLED:
             return {"error": f"promise {pid!r} is already {existing['state']}; a settled promise is not reopened"}
         st = _statement_for(sources, by_fact)
@@ -282,22 +318,35 @@ def _register_tool(plan_conn, now_iso: str, registered: list[dict], by_fact: dic
             # Refuse an invented fact id: a promise must rest on a supplier statement the kb actually holds, or the
             # model could register a watched promise (with a model-written due) on nothing (finding: not grounded).
             return {"error": "none of the cited facts is a known supplier statement; a promise must cite one"}
-        # The clock, the quantity and the supplier come from the cited statement, not the model: made_at is when the
-        # supplier spoke (the run clock only when the statement itself has no readable time), the quantity is parsed
-        # in code from the statement's verbatim text, and the supplier is the statement's, overriding any the model
-        # passed (the schema says so, and a model must not reassign a statement to another supplier).
-        kwargs["made_at"] = st.at or now_iso
+        # A waiting id that already watches a different statement must not be overwritten: the model picks the id
+        # without seeing the open ones, so reusing one would silently replace another promise (finding: a reused
+        # waiting id deleted the first promise). Re-registering the same statement under its id is idempotent.
+        if existing and not (_cited_fact_ids(existing.get("sources")) & st.all_fact_ids()):
+            return {"error": f"promise {pid!r} already watches another statement; choose a new promise id"}
+        # The supplier, the made time, the part and the quantity come from the cited statement, not the model; each
+        # is refused when the statement lacks it (finding: a supplier, made time and due not in the source were saved).
+        if not st.supplier_id:
+            return {"error": "the cited statement names no supplier; it cannot settle against a known supplier"}
+        kwargs["supplier_id"] = str(st.supplier_id)
+        if not st.at:
+            return {"error": "the cited statement has no readable time; the promise cannot be anchored"}
+        kwargs["made_at"] = st.at
+        # The due is grounded too: a duration quoted verbatim from the text, or the statement's due_time; else refused.
+        within = _grounded_within(kwargs.get("within"), st.text)
+        due = _grounded_due(kwargs.get("due"), st.due_time)
+        if within is not None:
+            kwargs["within"], kwargs["due"] = within, None
+        elif due is not None:
+            kwargs["due"], kwargs["within"] = due, None
+        else:
+            return {"error": "the due time is not in the cited statement; quote its duration (`within`) or `due_time`"}
+        if st.part_id:
+            kwargs["part_id"] = str(st.part_id)      # the statement's part wins over any the model passed
         qty = parse_quantity(st.quantity)
         if qty is not None:
             kwargs["quantity"] = qty
-        if st.supplier_id:
-            kwargs["supplier_id"] = str(st.supplier_id)
-        if not kwargs.get("supplier_id"):
-            return {"error": "no supplier: the cited statement has none and none was given"}
-        if kwargs.get("within"):
-            kwargs.pop("due", None)        # a quoted duration is grounded; an absolute due from the model is not
         try:
-            promise = promises.promise_from_statement(**kwargs)
+            promise = promises.promise_from_statement(**{k: v for k, v in kwargs.items() if v is not None})
         except promises.PromiseError as exc:
             return {"error": str(exc)}
         try:
@@ -310,11 +359,12 @@ def _register_tool(plan_conn, now_iso: str, registered: list[dict], by_fact: dic
     return register_promise
 
 
-def broker_registry(plan_conn, mail, *, now_iso: str, registered: list[dict],
+def broker_registry(plan_conn, mail, *, registered: list[dict],
                     statements: Iterable[promises.Statement] = ()) -> ToolRegistry:
     """The tools the broker role is given: a grounded promise register (plan) and the MailTools draft/read tools.
     The send path is never exposed (`tools.mail_tools` drops it). The `statements` the broker is briefing on let
-    the register tool take the made time and the quantity from the cited kb fact, not from the model."""
+    the register tool take the made time, the supplier, the part and the quantity from the cited kb fact, not from
+    the model; a call whose cited statement lacks any of them, or whose due is not in it, is refused."""
     by_fact: dict = {}
     for s in statements:
         for fid in s.all_fact_ids():       # any fact of the email resolves to its statement
@@ -322,26 +372,26 @@ def broker_registry(plan_conn, mail, *, now_iso: str, registered: list[dict],
     registry = ToolRegistry()
     registry.add("register_promise",
                  "Register a watched promise from a supplier statement. Pass the words and cite the kb fact in "
-                 "`sources`; the due time, the next check, the made time and any quantity are computed in code "
-                 "from the quoted `within` (or an absolute `due`) and the cited statement, never by you.",
-                 REGISTER_SCHEMA, _register_tool(plan_conn, now_iso, registered, by_fact))
+                 "`sources`; the due time, the next check, the made time, the supplier and any quantity are "
+                 "computed in code from the quoted `within` (or the statement's `due_time`) and the cited "
+                 "statement, never by you.",
+                 REGISTER_SCHEMA, _register_tool(plan_conn, registered, by_fact))
     for tool in tools.mail_tools(mail):
         registry.register(tool)
     return registry
 
 
-def run_broker(client: llm.LLMClient, plan_conn, mail, *, prompt: str, now, system: str = SYSTEM,
+def run_broker(client: llm.LLMClient, plan_conn, mail, *, prompt: str, system: str = SYSTEM,
                statements: Iterable[promises.Statement] = (), tracer=None,
                max_turns: int = 12) -> tuple[llm.AgentResult, list[dict]]:
     """Drive the broker: register promises and draft the hedge. Returns the agent result and the promises it
-    registered (already saved to plan.promises). `now` sets the fallback clock (a datetime or ISO string) when a
-    call cites no statement; `statements` are the kb statements the broker is briefing on, so a registered promise
-    takes its made time and quantity from the fact it cites. The answer's `promises` list is reconciled to the ids
-    actually registered, so it cannot name a promise that does not exist."""
-    now_iso = now.astimezone(timezone.utc).isoformat() if isinstance(now, datetime) else str(now)
+    registered (already saved to plan.promises). `statements` are the kb statements the broker is briefing on, so a
+    registered promise takes its made time, supplier, part and quantity from the fact it cites, and a call whose
+    statement lacks a supplier, a time or a grounded due is refused. The answer's `promises` list is reconciled to
+    the ids actually registered, so it cannot name a promise that does not exist."""
     registered: list[dict] = []
     statements = list(statements)
-    registry = broker_registry(plan_conn, mail, now_iso=now_iso, registered=registered, statements=statements)
+    registry = broker_registry(plan_conn, mail, registered=registered, statements=statements)
     result = llm.run(client, registry, role="broker", system=system, prompt=prompt,
                      schema=None, guard=None, tracer=tracer, max_turns=max_turns)
     if isinstance(result.verdict, dict):
