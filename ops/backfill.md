@@ -8,13 +8,16 @@ credential files.
 
 ## 0. Preconditions
 
-- The checkout has #7 (the extraction adapter) and #65 (kb reads mail). Before #65, `kb sync` deletes mail documents
-  and `kb extract` loses their sender label. Both imports must work:
+- The checkout has #7 (the extraction adapter), #65 (kb reads mail) and #78 (kb run follows portal events). Before
+  #65, `kb sync` deletes mail documents and `kb extract` loses their sender label. Before #78, a running worker does
+  not see new portal files. All three checks must print ok:
 
 ```sh
 git pull --ff-only
 python -m pip install -r requirements.txt
-python -c "import kb.mail_source, kb.llm.anthropic; print('ok')"
+python -c "import kb.mail_source; print('ok')"
+python -c "import kb.llm.anthropic; print('ok')"
+git merge-base --is-ancestor 752dbc0 HEAD && echo ok     # #78
 ```
 
 - The API key is in its file as described in AGENTS.md. The adapter reads it itself: do not export it or print it.
@@ -113,11 +116,12 @@ KB_LLM_ADAPTER="$ADAPTER" kbl run >> exports/logs/kb-run.log 2>&1 &        # or:
 Run one of the two lines, not both. Use the second only when step 6 left nothing pending (#66: it classifies an
 unroutable document again on every poll, every 5 seconds).
 
-Until #78 is fixed, a running worker does not see new portal files. After each drop run:
+Either worker sees new portal files by itself, so a drop needs no `kbl sync`. The first only queues what needs the
+model: drain it with steps 2, 5 and 7. The second extracts it, so do not run `kbl extract` next to it (step 2).
 
-```sh
-kbl sync && kbl extract --adapter "$ADAPTER" --limit 1000
-```
+Known gap of the second: a document that fails or lands in review in a later round can keep its `pending_extraction`
+issue until something reconciles (#89). When `kbl status` shows `failed` or `review` in `queue`, run
+`kbl reconcile --by "<your name>"` before you read the issues.
 
 ## 8. Report
 
