@@ -388,3 +388,8 @@ def test_extract_names_the_source_path(tmp_path):
     client.extract(Document(path="senders/S-X1/notices/n.pdf", sha256="c" * 64, container="txt", text="t"),
                    Structure("price_list", "", None, "core"), {}, CONTRACT)
     assert "Source path: senders/S-X1/notices/n.pdf" in json.dumps(seen["messages"])
+
+
+def test_raw_tabs_inside_answer_strings_are_accepted():
+    from kb.llm.anthropic_parse import _parse_json
+    assert _parse_json('{"facts": [], "unreadable": ["a\tb"]}')["unreadable"] == ["a\tb"]

@@ -70,13 +70,14 @@ def _parse_json(text: str) -> dict:
     if text.startswith("```"):
         text = re.sub(r"^```[a-zA-Z0-9]*\n?", "", text)
         text = re.sub(r"\n?```$", "", text).strip()
+    # strict=False: a model quoting table rows copies raw tabs and newlines into its strings
     try:
-        data = json.loads(text)
+        data = json.loads(text, strict=False)
     except json.JSONDecodeError:
         start, end = text.find("{"), text.rfind("}")
         if start == -1 or end <= start:
             raise ValueError("the model did not return a JSON object")
-        data = json.loads(text[start:end + 1])
+        data = json.loads(text[start:end + 1], strict=False)
     if not isinstance(data, dict):
         raise ValueError("the model returned JSON that is not an object")
     return data
