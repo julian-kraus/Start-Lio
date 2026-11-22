@@ -32,6 +32,12 @@ class Seat:
     line_key: str | None
     ids: list[str]
 
+    @property
+    def label(self) -> str:
+        """The title with its scope, which extraction may keep out of the title."""
+        in_title = set(words(self.scope)) <= set(words(self.title))
+        return self.title if in_title else f"{self.title} {self.scope}"
+
     def state_on(self, day: date) -> str:
         if self.state != HELD:
             return self.state
