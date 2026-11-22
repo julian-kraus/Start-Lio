@@ -7,6 +7,7 @@ agent behaviour. The signer table is read-only and uses the reader that routes a
 
 from __future__ import annotations
 
+import threading
 from datetime import date
 
 from .lookahead import Lookahead, LookaheadError
@@ -14,6 +15,7 @@ from .lookahead import Lookahead, LookaheadError
 HUMAN_STEP = {"live": ("app",), "rehearse": ("app", "rehearsal")}
 SECTIONS = ("autonomy", "hedge", "escalation")
 SOURCE = {"label": "Set by a person on the Agent rules page"}
+SAVING = threading.Lock()  # the server handles requests in threads
 COLUMNS = "fact_id, path, sha256, doc_kind, fact_type, extractor, subject, attribute, value, locator, confidence"
 
 
@@ -37,10 +39,11 @@ def save(la: Lookahead, body: dict) -> dict:
     problems = contracts.errors("record_rules", record)
     if problems:
         raise LookaheadError(400, "; ".join(problems))
-    current = saved(la)["rules"]
-    if body.get("based_on") != (current["id"] if current else None):
-        raise LookaheadError(409, "the rules were changed in the meantime, reload the page")
-    la.append([record])
+    with SAVING:  # compare and append are one step, or two saves at once both pass the comparison
+        current = saved(la)["rules"]
+        if body.get("based_on") != (current["id"] if current else None):
+            raise LookaheadError(409, "the rules were changed in the meantime, reload the page")
+        la.append([record])
     return saved(la)
 
 

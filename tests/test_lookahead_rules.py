@@ -2,8 +2,10 @@
 
 import json
 import threading
+import time
 import urllib.error
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date
 from http.server import ThreadingHTTPServer
 from pathlib import Path
@@ -80,6 +82,20 @@ def test_a_stale_page_does_not_overwrite(la, call):
     assert call("/api/lookahead/rules", body())[0] == 200
     assert call("/api/lookahead/rules", body())[0] == 409
     assert lookahead_rules.saved(la)["saves"] == 1
+
+
+def test_two_saves_at_once_keep_one(la, call, monkeypatch):
+    read = lookahead_rules.saved
+
+    def slow_read(log):
+        found = read(log)
+        time.sleep(0.2)  # both requests are past the read before either appends
+        return found
+
+    monkeypatch.setattr(lookahead_rules, "saved", slow_read)
+    with ThreadPoolExecutor(2) as pool:
+        results = sorted(pool.map(lambda sent: call("/api/lookahead/rules", sent)[0], [body(), body()]))
+    assert results == [200, 409] and read(la)["saves"] == 1
 
 
 @pytest.mark.parametrize("section, key, value", [
