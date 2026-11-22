@@ -414,13 +414,7 @@ if __name__ == "__main__":
              ("agent_tools", lambda: test_agent_tools(
                  root=ROOT, api_key=KEY, model=MODEL, n=10, result_key="agent_tools",
                  tool_specs=TOOLS, tool_values=FAKE, hedge_math=hedge_math,
-                 verdict_schema=VERDICT_SCHEMA,
-                 system=("You decide whether to place a backup order. Get every input from the tools. Every number "
-                         "in your answer must come from a tool result; never compute numbers yourself. Cite the goal "
-                         "line."),
-                 prompt=("Part P-ALPHA is short for the premium edition. Should we hedge with the backup offer? The "
-                         "commitment now is the deposit share of the backup order value."),
-                 results=results, usage_total=usage_total))]
+                 verdict_schema=VERDICT_SCHEMA, results=results, usage_total=usage_total))]
     for name, fn in steps:
         if name not in TESTS:
             continue
