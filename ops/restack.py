@@ -124,7 +124,10 @@ def main() -> None:
         raise SystemExit(f"origin has no branch {branch}; nothing to restack")
     pr = pr_of(branch)
     rec = recorded_fork(branch, pr)
-    if rec is None or rec == "done":
+    if rec is None:
+        print(f"{branch} is not stacked; use git rebase origin/main as usual")
+        return   # never stacked: leave its PR exactly as it is
+    if rec == "done":
         if pr and not dry and not line_only and set_pr(pr, None):
             print(f"{branch}: repaired PR #{pr['number']} (no Stacked-on line, base main)")
         print(f"{branch} is not stacked or no longer stacked; use git rebase origin/main as usual")
@@ -140,6 +143,8 @@ def main() -> None:
         print(f"{branch} is no longer stacked (parent i{parent} merged, no parent commits left)")
         return
     if line_only:
+        if still_open and not is_ancestor(old, f"origin/{branch}"):
+            old = run("git", "merge-base", f"origin/i{parent}", f"origin/{branch}")   # only print a point it holds
         print(f"Stacked-on: i{parent}@{old}" if still_open else
               f"parent i{parent} merged but {branch} still carries its commits: run python ops/restack.py {n} first")
         return

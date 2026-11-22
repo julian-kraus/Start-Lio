@@ -151,3 +151,22 @@ def test_line_reports_the_merge_base_not_the_stale_claim(repo, monkeypatch, caps
     git(repo, "rebase", "-q", "origin/i1"); git(repo, "push", "-q", "--force", "origin", "i2")
     Stub(monkeypatch)(monkeypatch, "2", "--line")
     assert capsys.readouterr().out.strip() == "Stacked-on: i1@" + git(repo, "rev-parse", "origin/i1")
+
+
+def test_a_branch_never_stacked_is_left_alone(repo, monkeypatch, capsys):
+    git(repo, "switch", "-q", "-c", "i2"); commit(repo, "c1"); git(repo, "push", "-q", "origin", "i2")
+    pr = {"number": 7, "body": "Closes #2", "baseRefName": "feature"}
+    stub = Stub(monkeypatch, pr=pr)
+    stub(monkeypatch, "2")
+    assert stub.gh_calls == [], "a PR that was never stacked is neither retargeted nor edited"
+    assert "not stacked" in capsys.readouterr().out
+
+
+def test_line_prints_a_fork_point_the_branch_holds(repo, monkeypatch, capsys):
+    p1, _ = stack_child(repo)
+    git(repo, "switch", "-q", "i1"); git(repo, "commit", "-q", "--amend", "-m", "p1 reworded")
+    git(repo, "push", "-q", "--force", "origin", "i1")          # parent force-pushed: recorded p1 still in i2
+    git(repo, "switch", "-q", "i2")
+    Stub(monkeypatch)(monkeypatch, "2", "--line")
+    sha = capsys.readouterr().out.strip().split("@")[1]
+    assert git(repo, "merge-base", "--is-ancestor", sha, "origin/i2") == ""
