@@ -34,7 +34,7 @@ DAYS = {word: day for day, words in enumerate(("mon monday", "tue tues tuesday",
 RELATIVE = {"today": 0, "tonight": 0, "tomorrow": 1}
 DAY = re.compile(r"\b(" + "|".join(sorted([*DAYS, *RELATIVE], key=len, reverse=True)) + r")\b", re.IGNORECASE)
 ISO = re.compile(r"\d{4}-\d\d-\d\dT\d\d:\d\d(?::\d\d)?(?:Z|[+-]\d\d:\d\d)", re.IGNORECASE)
-END = r"(?<![ap]\.m)[.!?;](?=\s|$)|\n"
+END = r"(?<![ap]\.m)[.!?;](?=\s|$)|\n(?!(?:or|and|nor)\b)"
 SENTENCE = re.compile(END, re.IGNORECASE)
 PART = re.compile(END + r"|,\s|\s(?:and|but|while|whereas)(?=\s)", re.IGNORECASE)
 PUNCT = r"[ ]*(?:$|\n|[.,;:!?)\"'”]+(?:\s|$))"
@@ -169,8 +169,8 @@ def check_amount(answer: str, match: re.Match, names: Iterable[str] = ()) -> Non
 
 def times(answer: str, start: int, end: int) -> list[re.Match]:
     """The times the answer gives at this place, each as a whole: a quote cannot cut off its am or pm."""
-    found = list(ISO.finditer(answer)) or list(CLOCK.finditer(answer))
-    return [m for m in found if m.start() < end and m.end() > start]
+    here = lambda pattern: [m for m in pattern.finditer(answer) if m.start() < end and m.end() > start]      # noqa: E731
+    return here(ISO) or here(CLOCK)
 
 
 def moment(quote: str, answer: str, now: datetime, zone: str | None, span: tuple[int, int] | None = None) -> str:

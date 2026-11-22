@@ -72,6 +72,7 @@ def test_one_edition_is_not_all_editions(answer, items):
     ("Never, ever, let goodwill suffer.", "let goodwill suffer"),
     ("Supplier goodwill, of course, must not suffer.", "Supplier goodwill"),
     ("Goodwill must be protected.", "Goodwill must be protected"),
+    ("Never cut quality\nor let margin suffer", "margin suffer"),
     *[(said, said) for said in (
         "Supplier goodwill should not suffer", "Supplier goodwill shouldn't suffer",
         "Supplier goodwill shouldn’t suffer", "Supplier goodwill mustn't suffer",
@@ -223,6 +224,13 @@ def test_a_prefilled_trade_off_still_applies_when_nothing_contradicts_it():
                  item("ceiling", "Don't bankrupt me"), inputs=GOODWILL)
     assert draft.ready, draft.problems
     assert goal_of(draft)["sacrifices"] == GOODWILL["trade_offs"]
+
+
+def test_an_iso_deadline_does_not_hide_the_team_time():
+    deadline = "On time by 2030-01-13T20:00:00+01:00"
+    draft = read(f"{deadline}. Team until Sun 10:00", item("priority", deadline), item("team_until", "Sun 10:00"))
+    assert draft.ready, draft.problems
+    assert goal_of(draft)["team_window"] == {"to": SUNDAY}
 
 
 # ---- who confirms, what can be cited -----------------------------------------------

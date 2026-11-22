@@ -219,7 +219,8 @@ def _harmless(answer: str, number: re.Match, editions: list[str]) -> bool:
     first, last = text.around(answer, *number.span())
     if MONEY_TALK.search(answer[first:last]) or TEAM.search(answer[first:last]):
         return False
-    if any(m.start() <= number.start() and number.end() <= m.end() for m in text.CLOCK.finditer(answer)):
+    if any(m.start() <= number.start() and number.end() <= m.end()
+           for pattern in (text.ISO, text.CLOCK) for m in pattern.finditer(answer)):
         return number.re is not NUMBER_WORD or number[0].lower() == "noon"
     names = sorted({w for e in editions for w in re.findall(r"[^\W\d_]+", e)}, key=len, reverse=True)
     between = rf"(?:(?:{'|'.join(map(re.escape, names))})(?:'s)?\s+){{0,3}}" if names else ""
