@@ -4,7 +4,7 @@
   const SWITCHES = ["quotes_and_holds", "check_ins", "reminders_and_calls", "skip_hedge_with_substitute"];
   const CHANNELS = ["email", "teams", "sms"], WINDOWS = [6, 12, 24];
   let base = null, draft = null, signers = null, note = null, error = false, saving = false;
-  let seenId = null, page = null, focused = null;
+  let seenId = null, page = null, focused = null, painted = null;
 
   const blank = () => ({
     autonomy: { ...Object.fromEntries(SWITCHES.map((key) => [key, false])), binding_orders: false },
@@ -135,8 +135,17 @@
   function card(title, ...content) {
     return el("section", { class: "card" }, el("h3", { class: "h-xs" }, label(title)), content);
   }
+  const shown = () => JSON.stringify([S.language, draft === null, base, signers]);
+  // a live update rebuilds the form only when what it shows changed: typing, focus and an open select survive
+  function sync() {
+    if (shown() !== painted) return paint();
+    const target = document.activeElement === document.body && focused && page.querySelector(`[data-field="${focused}"]`);
+    if (target) target.focus({ preventScroll: true });
+    status();
+  }
   function paint() {
     if (!page) return;
+    painted = shown();
     const active = document.activeElement;
     const field = (page.contains(active) && active.dataset.field) || (active === document.body && focused);
     page.replaceChildren(
@@ -178,9 +187,9 @@
       if (draft === null) draft = original();
       if (note === "load_failed") note = null;
     } catch (exc) { note = "load_failed"; }
-    paint();
+    sync();
     try { signers = await api("/api/lookahead/rules/signers"); } catch (exc) { signers = { available: false, reason: "failed" }; }
-    paint();
+    sync();
   }
   document.addEventListener("focusin", (event) => { focused = event.target.dataset.field || null; });
   document.addEventListener("pointerdown", () => { focused = null; });
@@ -188,7 +197,7 @@
   window.LOOKAHEAD_VIEWS.rules = (view, state) => {
     if (!page) page = el("div", { class: "rules" });
     view.append(page);
-    paint();
+    sync();
     if (state && state.last_id !== seenId) { seenId = state.last_id; refresh(); }
   };
 })();
