@@ -32,7 +32,7 @@ from tracker.lookahead import append_records, fold
 from tracker.lookahead_records import LookaheadError, validate
 from tracker.lookahead_view import shown_live
 
-from . import broker, hedger, llm
+from . import broker, hedger, kb_offers, llm
 
 log = logging.getLogger("agents.monitor")
 
@@ -165,6 +165,11 @@ class Monitor:
         statements = broker.read_statements(self.kb)
         self.kb.commit()
         self._broker_new(statements)
+        try:      # offers read from mail reach the re-plan (plan.offers is all it reads)
+            kb_offers.sync(self.kb, self.plan)
+        except Exception as exc:     # an unreadable offer must not stop the ledger
+            self.plan.rollback()
+            log.warning("kb offers not synced (%s)", exc)
         for update in broker.apply_ledger(self.plan, statements):
             log.info("promise %s is %s", update["promise_id"], update["state"])
         self.plan.commit()
@@ -191,8 +196,10 @@ class Monitor:
                     prompt="A supplier statement arrived. Register the commitment it makes, citing its fact id.\n"
                            + json.dumps(_plain(said), default=str))
                 log.info("brokered statement %s: %d promise(s)", s.fact_id, len(registered))
-            except (llm.AgentStop, ValueError) as exc:
+            except Exception as exc:     # retried next tick; a failure must not stop the ledger below
+                self.plan.rollback()
                 log.warning("broker could not register statement %s (%s)", s.fact_id, exc)
+                continue
             self.plan.execute("INSERT INTO timeline_events (at, type, title, severity, supplier_id, payload, scenario) "
                               "VALUES (%s, %s, %s, 'info', %s, %s, %s)",
                               (s.at or clock.now(self.plan), BROKERED, f"Watching what {s.supplier_id} said",

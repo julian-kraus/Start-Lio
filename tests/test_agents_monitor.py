@@ -316,3 +316,47 @@ def test_the_monitor_brokers_the_check_in_so_the_cancellation_breaks_it(demo_run
     assert r.plan.execute("SELECT state FROM promises").fetchone()["state"] == "broken"
     assert decision_id in {d["decision_id"] for d in screen(r.log).state()["decisions"]}
     assert watch.tick() == [], "a statement is brokered once and a break published once"
+
+
+def _offer_rows(**attrs):
+    subject = {"supplier_id": "S9", "offer_ref": "Q-1", "item": "BOOK"}
+    return [{"fact_id": f"f{i}", "fact_type": "offer", "subject": subject, "attribute": k, "value": v}
+            for i, (k, v) in enumerate(attrs.items())]
+
+
+def test_an_offer_read_from_mail_reaches_plan_offers_once(demo_run):
+    from agents import kb_offers
+    r = demo_run
+    r.plan.execute("DELETE FROM offers")
+    r.plan.commit()
+    rows = _offer_rows(qty="600", unit_price="4,20 EUR", lead_time="within 48 h", valid_until="2026-12-01")
+    assert kb_offers.sync(r.kb, r.plan, rows) == ["kb:S9/Q-1/BOOK"]
+    row = r.plan.execute("SELECT * FROM offers").fetchone()
+    assert (row["supplier_id"], row["part_id"], float(row["quantity"]), float(row["unit_price_eur"]),
+            row["lead_time_h"]) == ("S9", "BOOK", 600.0, 4.2, 48.0)
+    assert {s["fact_id"] for s in row["sources"]} == {"f0", "f1", "f2", "f3"}, "every value cites its fact"
+    assert kb_offers.sync(r.kb, r.plan, rows) == [], "an offer is copied once"
+
+
+def test_an_offer_value_that_cannot_be_read_stays_empty():
+    from agents import kb_offers
+    [o] = kb_offers.offers_from_rows(_offer_rows(qty="about 600", lead_time="2 working days", valid_until="soon"))
+    assert o["quantity"] is None and o["lead_time_h"] is None and o["valid_until"] is None
+
+
+def test_a_broker_failure_is_retried_and_does_not_stop_the_ledger(demo_run, monkeypatch):
+    r, facts = demo_run, launch_facts()
+    r.plan.execute("DELETE FROM promises")
+    r.plan.commit()
+    calls = []
+
+    def boom(*a, **k):
+        calls.append(1)
+        raise RuntimeError("model down")
+
+    monkeypatch.setattr(monitor.broker, "run_broker", boom)
+    watch = monitor.Monitor(r.plan, KbWithRows(r.kb, [*approval_world(), *facts.current]), llm.ReplayClient([]),
+                            r.log, load_facts=lambda *_: Facts(facts.current, facts.believed, facts.issues))
+    assert watch.tick() == [] and watch.tick() == []
+    assert len(calls) == 2, "a statement the broker could not handle is tried again, not marked done"
+    assert not r.plan.execute("SELECT 1 FROM timeline_events WHERE type = %s", (monitor.BROKERED,)).fetchall()
