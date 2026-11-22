@@ -245,6 +245,47 @@ def test_loss_comes_from_the_goal_and_is_never_guessed():
             hedge.goal_loss(goal, edition)
 
 
+def confirmed(*values):
+    """A goal as the interview confirms it, with a line per value: (edition, value, scenario label or None)."""
+    lines = [{"field": "priority", "goal_line": "Goal: all on time", "value": None, "edition": None}]
+    for edition, value, label in values:
+        lines.append({"field": "value", "edition": edition, "value": value,
+                      "goal_line": f"Value of a missing copy: {value} EUR",
+                      **({"scenario_input": label} if label else {"quote": f"{value} EUR"})})
+    goal = {"statement": "All on time.", "goal_lines": lines, "goal_id": "g-1", "author": "Sam Example"}
+    if len(values) == 1:
+        return {**goal, "edition": values[0][0], "unit_loss_eur": values[0][1]}
+    return {**goal, "unit_loss_by_edition": {edition: value for edition, value, _ in values}}
+
+
+@pytest.mark.parametrize("edition,asked", [("Deluxe", "deluxe"), ("Deluxe", None), ("all", "Deluxe"), (None, None),
+                                           (None, "Deluxe")])
+def test_a_prefilled_loss_is_shown_as_a_scenario_input(edition, asked):
+    given = hedge.goal_loss(confirmed((edition, 50, "pre-filled")), asked)
+    assert given.refs == [{"goal_line": "Value of a missing copy: 50 EUR", "value": 50, "goal_id": "g-1",
+                           "author": "Sam Example", "scenario_input": "pre-filled"}]
+    assert hedge.row("loss_per_copy", "Loss per missing copy", given)["source"] == "scenario input: pre-filled"
+
+
+def test_a_typed_loss_cites_its_own_goal_line():
+    goal = confirmed(("Deluxe", 70, None), ("Plain", 20, "pre-filled"))
+    typed, filled = hedge.goal_loss(goal, "deluxe"), hedge.goal_loss(goal, "plain")
+    assert hedge.row("loss", "Loss", typed)["source"] == "goal: Value of a missing copy: 70 EUR"
+    assert hedge.row("loss", "Loss", filled)["source"] == "scenario input: pre-filled"
+    assert "scenario_input" not in typed.refs[0] and typed.refs[0]["goal_id"] == "g-1"
+
+
+@pytest.mark.parametrize("change", [{"unit_loss_eur": 80}, {"edition": "Plain"}, {"twice": True}])
+def test_a_loss_its_goal_lines_do_not_state_is_refused(change):
+    goal = confirmed(("Deluxe", 50, "pre-filled"))
+    if change.get("twice"):
+        goal["goal_lines"].append(dict(goal["goal_lines"][-1]))
+    else:
+        goal.update(change)
+    with pytest.raises(ModelError):
+        hedge.goal_loss(goal, goal["edition"])
+
+
 def test_p_fail_comes_from_the_reliability_card():
     facts = [{"fact_id": f"{n}:{name}", "fact_type": "po_line", "subject": {"po_number": str(n), "po_line": 1},
               "attribute": name, "value": value}
