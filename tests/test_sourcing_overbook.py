@@ -211,8 +211,8 @@ def test_an_email_cannot_change_the_price_list():
 
 
 def changed(valid_from="2031-03-03", old="2.40", new="2.73", path="own/change1.csv", code="EUR",
-            old_name="current_price"):
-    key = {"supplier_id": "B", "material_id": "PART"}
+            old_name="current_price", part="PART"):
+    key = {"supplier_id": "B", "material_id": part}
     return [fact("price_change", key, name, text, f"{path}:{name}", path=path)
             for name, text in ((old_name, old), ("new_price", new), ("valid_from", valid_from), ("currency", code))]
 
@@ -235,6 +235,26 @@ def test_the_latest_change_by_the_order_date_applies():
 
 def test_a_list_that_already_shows_the_change_keeps_its_price():
     assert overbook.price(listed("2.73") + changed(), "B", "PART", on="2031-05-05").value == 2.73
+
+
+def crossref(part="PART", number="B-COVER", path="own/xref.csv"):
+    key = {"supplier_id": "B", "supplier_part_no": number}
+    return [fact("part_xref", key, "material_id", part, f"{path}:{part}", path=path)]
+
+
+def test_a_change_under_the_suppliers_part_number_applies():
+    change = changed(part="B-COVER")
+    given = overbook.price(listed() + crossref() + change, "B", "PART", on="2031-05-05")
+    assert given.value == 2.73 and {"fact_id": "own/xref.csv:PART"} in given.refs
+    assert overbook.price(listed() + change, "B", "PART", on="2031-05-05").value == 2.4
+    forged = crossref(path="mail/4.eml")
+    assert overbook.price(listed() + forged + change, "B", "PART", on="2031-05-05").value == 2.4
+
+
+def test_a_part_number_of_two_parts_is_refused():
+    both = crossref() + crossref("OTHER", path="own/xref2.csv")
+    with pytest.raises(ModelError, match="several parts"):
+        overbook.price(listed() + both + changed(part="B-COVER"), "B", "PART", on="2031-05-05")
 
 
 def test_a_changed_price_needs_the_order_date():

@@ -103,18 +103,30 @@ def _day(value: date | str) -> date:
 def _revised(facts: list[Mapping], supplier_id: str, part_id: str, listed: float, currency: str,
              on: date | str | None) -> tuple[float, list[Mapping], str]:
     """The list price after the changes in force on the order date. An email cannot announce one."""
-    documents: dict[str, list[Mapping]] = {}
-    for f in facts:
-        subject, path = f.get("subject") or {}, _text(f.get("path"))
-        if f.get("fact_type") == "price_change" and not path.startswith(MAIL) \
-                and (_text(subject.get("supplier_id")), _text(subject.get("material_id"))) == (supplier_id, part_id):
-            documents.setdefault(path, []).append(f)
+    own = [(f, f.get("subject") or {}) for f in facts if not _text(f.get("path")).startswith(MAIL)]
+    own = [(f, subject) for f, subject in own if _text(subject.get("supplier_id")) == supplier_id]
+    names: dict[str, list[Mapping]] = {}                # a change may name the supplier's own part number
+    for f, subject in own:
+        if f.get("fact_type") == "part_xref" and f.get("attribute") == "material_id":
+            names.setdefault(_text(subject.get("supplier_part_no")), []).append(f)
+    documents: dict[tuple[str, str], list[Mapping]] = {}
+    for f, subject in own:
+        if f.get("fact_type") != "price_change":
+            continue
+        named_part = _text(subject.get("material_id"))
+        if named_part != part_id:
+            parts = {_text(x.get("value")) for x in names.get(named_part, [])}
+            if part_id not in parts:
+                continue
+            if len(parts) > 1:
+                raise ModelError(f"supplier part number {named_part!r} stands for several parts: {sorted(parts)}")
+        documents.setdefault((_text(f.get("path")), named_part), []).append(f)
     if not documents:
         return listed, [], ""
     if on is None:
         raise ModelError("the price has announced changes: give the order date")
     day, known, in_force = _day(on), set(), []
-    for rows in documents.values():
+    for (_, named_part), rows in documents.items():
         def stated(*names: str) -> list[Mapping]:
             return [f for f in rows if f.get("attribute") in names and _text(f.get("value"))]
 
@@ -135,6 +147,8 @@ def _revised(facts: list[Mapping], supplier_id: str, part_id: str, listed: float
             said, before = _newest(before, "price before the change")
             known.add(parse_number(_quote(said, before)[0]))
             used = used + before
+        if named_part != part_id:
+            used = used + names[named_part]
         in_force.append((start, value, used))
     if not in_force:
         return listed, [], ""
