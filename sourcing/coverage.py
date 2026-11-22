@@ -8,7 +8,7 @@ Every number is a figure with fact_ids; covered, needed and gap are plain number
   need        launch plan demand minus the pack-out log, times BOM qty_per
   usable      see coverage_stock; safety stock is reported and is never a launch buffer
   inbound     see coverage_inbound; counted units may still need a dock slot release
-  allocated   a shared part reserved in policy order, up to each edition's full need
+  allocated   a shared part reserved in policy order, up to each edition's need and what its line can still pack
   covered     copies that can be packed, editions in policy order; what one cannot use goes to the next
   products    narrows what is reported; shared parts are always split over every edition in the plan
 """
@@ -19,12 +19,19 @@ import re
 from dataclasses import dataclass
 from datetime import datetime
 
-from . import coverage_inbound, coverage_stock, coverage_windows, coverage_wording
-from .facts import Facts, believed_ids, day, figure, ids, number
+from . import coverage_inbound, coverage_share, coverage_stock, coverage_windows, coverage_wording
+from .facts import Facts, believed_ids, day, figure, ids, moment, number
 
-PRIORITY = re.compile(r"\bpriority\b.*\bfirst\b", re.I | re.S)
+PRIORITY = re.compile(r"\bpriority\b", re.I)
 PRIORITY_SOURCES = (("policy_directive", "directive"), ("x_workbook_row", "note"), ("x_document_line", "text"))
 OUTSIDE = ("suppliers/", "mail/")                       # a supplier cannot set our priority
+
+
+def supplier_sent(path: str) -> bool:
+    """Mail, and the documents in a supplier's folder. Our own exports are the tables at that folder's root."""
+    if path.startswith("suppliers/"):
+        return path.count("/") > 2 or not path.lower().endswith((".csv", ".json"))
+    return path.startswith("mail/")
 
 
 @dataclass
@@ -100,8 +107,8 @@ def part_names(facts: Facts) -> frozenset[str]:
     """The words our parts are called by, which a note may use without making it unclear."""
     called = [r.key(k) for kind, keys in (("bom_line", ("child_id",)), ("component", ("material_id", "description")),
                                          ("supplier_part", ("description",)))
-              for r in facts.rows(kind) for k in keys]
-    return frozenset(w for text in called for w in coverage_wording.WORD.findall(text.lower()))
+              for r in facts.rows(kind) if not supplier_sent(r.path) for k in keys]
+    return frozenset(w for text in called for w in coverage_wording.PART_WORD.findall(text.lower()))
 
 
 def phantom_evidence(facts: Facts, material: str) -> tuple[list[str], list[dict]]:
@@ -116,7 +123,7 @@ def phantom_evidence(facts: Facts, material: str) -> tuple[list[str], list[dict]
     if any((number(r.get("qty")) or 0) > 0 for r in facts.rows("stock_batch", material_id=material)):
         return [], []                                   # it is stocked, so it is no phantom
     names = part_names(facts)
-    said = [(verdict, r.ids("note")) for kind in ("bom_line", "component", "supplier_part", "part_xref")
+    said = [(verdict and not supplier_sent(r.path), r.ids("note")) for kind in ("bom_line", "component", "supplier_part", "part_xref")
             for r in facts.rows(kind) if material in (r.key("material_id"), r.key("child_id"))
             if (verdict := coverage_wording.phantom(r.key("note"), names)) is not None]
     if not said:
@@ -126,7 +133,18 @@ def phantom_evidence(facts: Facts, material: str) -> tuple[list[str], list[dict]
                                         "material_id": material, "fact_ids": sources}]
 
 
-def priority(facts: Facts, eds: list[Edition]) -> tuple[list[str] | None, list[str]]:
+def expiry(row, now: datetime, zone) -> bool | None:
+    """Whether a policy has expired, None when its end cannot be read."""
+    if not (text := row.key("valid_until")):
+        return False
+    if (last := day(text)) is None:
+        return None
+    if at := moment(text):
+        return (at if at.tzinfo else at.replace(tzinfo=zone)) < now
+    return last < now.astimezone(zone).date()
+
+
+def priority(facts: Facts, eds: list[Edition], now: datetime, zone) -> tuple[list[str] | None, list[str]]:
     """(product ids in policy order, the policy's fact ids). None when no single policy clearly says."""
     labels = {e.product_id: [e.product_id, e.name] for e in eds}
     found = []
@@ -135,45 +153,17 @@ def priority(facts: Facts, eds: list[Edition]) -> tuple[list[str] | None, list[s
             text = row.key(attribute)
             if row.path.startswith(OUTSIDE) or not PRIORITY.search(text):
                 continue
+            if expired := expiry(row, now, zone):
+                continue
             names_edition, order = coverage_wording.priority(text, labels)
             if names_edition:
-                found.append((row.as_of, order, row.ids(attribute)))
+                found.append((row.as_of, None if expired is None else order, row.ids(attribute, "valid_until")))
     if not found:
         return None, []
     newest = max(f[0] for f in found)
     latest = [f for f in found if f[0] == newest]
     sources = ids(*(f[2] for f in latest))
     return (latest[0][1] if all(f[1] == latest[0][1] for f in latest) else None), sources
-
-
-def share(available, wants: dict[str, float], order: list[str] | None) -> dict[str, float]:
-    """Split one part: in policy order, or in proportion to need when no policy decides."""
-    if order is None:
-        total = sum(wants.values())
-        if total <= available:
-            return dict(wants)
-        return {p: int(available * want // total) for p, want in wants.items()}
-    out, left = {}, available
-    for product in (p for p in order if p in wants):
-        out[product] = min(left, wants[product])
-        left -= out[product]
-    return out
-
-
-def packable(eds: list[Edition], boms: dict, available: dict, order: list[str] | None,
-             allocated: dict) -> dict[str, tuple[int, list[str]]]:
-    """Copies per edition and the parts that limit it."""
-    out, left = {}, dict(available)
-    by_id = {e.product_id: e for e in eds}
-    for product in order or by_id:
-        edition, bom = by_id[product], boms[product]
-        pool = left if order else {m: allocated[m][product] for m in bom}
-        limits = {m: int(pool[m] // qty) for m, (qty, _) in bom.items()}
-        copies = min([edition.open, *limits.values()]) if bom else 0
-        out[product] = copies, sorted(m for m, n in limits.items() if n == copies and n < edition.open)
-        for m, (qty, _) in bom.items():
-            left[m] -= copies * qty
-    return out
 
 
 def compute(facts: Facts, *, now: datetime, deadline: datetime, products: list[str] | None = None) -> dict:
@@ -200,7 +190,7 @@ def compute(facts: Facts, *, now: datetime, deadline: datetime, products: list[s
         if not all_boms[e.product_id]:
             alerts.append({"kind": "bom_missing", "product_id": e.product_id, "fact_ids": ids(e.open_ids)})
 
-    order, policy_ids = priority(facts, eds)
+    order, policy_ids = priority(facts, eds, now, deadline.tzinfo)
     materials = sorted({m for bom in boms.values() for m in bom})
     used = {m for p in wanted for m in all_boms[p]}
     if any(sum(m in bom for bom in boms.values()) > 1 for m in used):
@@ -212,7 +202,8 @@ def compute(facts: Facts, *, now: datetime, deadline: datetime, products: list[s
     sites = {r.key("site_id") for r in facts.rows("packout") if r.key("site_id")}
     sites = sites or {r.key("site_id") for r in facts.rows("site") if r.key("site_id")}
 
-    parts, available, allocated, part_ids = [], {}, {}, {}
+    parts, lots, allocated, part_ids = [], {}, {}, {}
+    shift_ids = ids(*(w.fact_ids for w in windows))
     for material in materials:
         users = [e for e in eds if material in boms[e.product_id]]
         wants = {e.product_id: e.open * boms[e.product_id][material][0] for e in users}
@@ -230,9 +221,12 @@ def compute(facts: Facts, *, now: datetime, deadline: datetime, products: list[s
         stock_ids = stock["usable"]["fact_ids"]
         have = stock["usable"]["value"] + sum(c["value"] for c in counted)
         have_ids = ids(stock_ids, *(c["fact_ids"] for c in counted))
-        available[material] = have
+        lots[material] = [(None, stock["usable"]["value"])] + sorted(
+            (datetime.fromisoformat(i["arrives_at"]), i["counts"]["value"]) for i in inbound if i["counts"]["value"])
         part_ids[material] = have_ids
-        allocated[material] = share(have, wants, order)
+        rates = {e.product_id: (e.rate or 0) * boms[e.product_id][material][0] for e in users}
+        allocated[material] = coverage_share.share(lots[material], wants, rates, order, windows)
+        split_ids = ids(policy_ids, *([*(e.rate_ids for e in users), shift_ids] if counted else []))
         parts.append({
             "material_id": material, "need": figure(need, need_ids), **stock, "inbound": inbound,
             "inbound_counted": figure(sum(c["value"] for c in counted),
@@ -241,17 +235,19 @@ def compute(facts: Facts, *, now: datetime, deadline: datetime, products: list[s
             "gap": figure(max(0, need - have), need_ids, have_ids),
             "gap_on_stock": figure(max(0, need - stock["usable"]["value"]), need_ids, stock_ids),
             "allocation": [{"product_id": p, "need": figure(wants[p], need_ids),
-                            "allocated": figure(n, need_ids, have_ids, policy_ids)}
+                            "allocated": figure(n, need_ids, have_ids, split_ids)}
                            for p, n in allocated[material].items()],
         })
 
-    packed = packable(eds, boms, available, order, allocated)
+    packed = coverage_share.packable(eds, boms, lots, order, allocated, windows)
     out_editions = []
     shown = [e for e in eds if e.product_id in wanted]
     for e in shown:
         copies, limited_by = packed[e.product_id]
         bom = boms[e.product_id]
         sources = ids(e.open_ids, policy_ids, *(bom[m][1] for m in bom), *(part_ids[m] for m in bom))
+        if any(len(lots[m]) > 1 for m in limited_by):
+            sources = ids(sources, e.rate_ids, shift_ids)       # what arrives late is limited by the line's hours
         capacity, capacity_alerts = coverage_windows.capacity(facts, e, windows, now)
         alerts += capacity_alerts
         out_editions.append({
