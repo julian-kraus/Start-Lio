@@ -1,0 +1,8 @@
+{
+  "stop_reason": "end_turn",
+  "text": "{\"decision\": \"kind\", \"kind\": \"order_confirmation\", \"reason\": \"path and header match an order confirmation\"}",
+  "usage": {
+    "input_tokens": 1200,
+    "output_tokens": 180
+  }
+}

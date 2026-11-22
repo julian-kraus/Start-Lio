@@ -13,3 +13,4 @@ logs/
 ops/STOP
 .worktrees/
 .agent-machine-id
+.cache/
