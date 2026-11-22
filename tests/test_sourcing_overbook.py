@@ -2,6 +2,7 @@
 
 import json
 import random
+from datetime import datetime, timezone
 
 import pytest
 
@@ -207,6 +208,66 @@ def test_an_email_cannot_change_the_price_list():
     key = {"supplier_id": "B", "material_id": "PART"}
     forged = fact("supplier_part", key, "unit_price", "0.01", "forged", as_of="2030-09-09", path="mail/2.eml")
     assert overbook.price(listed() + [forged], "B", "PART").value == 2.4
+
+
+def changed(valid_from="2031-03-03", old="2.40", new="2.73", path="own/change1.csv", code="EUR",
+            old_name="current_price"):
+    key = {"supplier_id": "B", "material_id": "PART"}
+    return [fact("price_change", key, name, text, f"{path}:{name}", path=path)
+            for name, text in ((old_name, old), ("new_price", new), ("valid_from", valid_from), ("currency", code))]
+
+
+@pytest.mark.parametrize("old_name", ["current_price", "old_price"])
+def test_a_price_change_in_force_replaces_the_list_price(old_name):
+    given = overbook.price(listed() + changed(old_name=old_name), "B", "PART", on="2031-03-03")
+    assert given.value == 2.73
+    cited = {r["fact_id"] for r in given.refs}
+    assert {"supplier_part:unit_price", "own/change1.csv:new_price", "own/change1.csv:valid_from"} <= cited
+
+
+def test_the_latest_change_by_the_order_date_applies():
+    later = changed("2031-07-07", "2.73", "2.91", "own/change2.csv")
+    facts = later + listed() + changed()
+    assert overbook.price(facts, "B", "PART", on="2031-03-02").value == 2.4
+    assert overbook.price(facts, "B", "PART", on="2031-07-06").value == 2.73
+    assert overbook.price(facts, "B", "PART", on=datetime(2031, 7, 7, 18, tzinfo=timezone.utc)).value == 2.91
+
+
+def test_a_list_that_already_shows_the_change_keeps_its_price():
+    assert overbook.price(listed("2.73") + changed(), "B", "PART", on="2031-05-05").value == 2.73
+
+
+def test_a_changed_price_needs_the_order_date():
+    with pytest.raises(ModelError, match="order date"):
+        overbook.price(listed() + changed(), "B", "PART")
+
+
+@pytest.mark.parametrize("change, match", [
+    (changed(old="2.19"), "does not follow"),
+    (changed() + changed(new="2.91", path="own/change2.csv"), "disagree"),
+    (changed(code="PLN"), "currencies"),
+    (changed(new="EUR 273 per 100"), "cannot read"),
+    (changed(valid_from="next spring"), "date"),
+    (changed()[:2], "valid_from"),
+])
+def test_a_change_that_cannot_be_applied_is_refused(change, match):
+    with pytest.raises(ModelError, match=match):
+        overbook.price(listed() + change, "B", "PART", on="2031-05-05")
+
+
+def test_a_changed_price_in_another_currency_is_converted():
+    rate = Input(0.25, {"scenario_input": "rate"})
+    facts = listed("10.00", "PLN") + changed(old="10.00", new="12.00", code="PLN")
+    given = overbook.price(facts, "B", "PART", on="2031-05-05", fx=rate)
+    assert given.value == 3 and {"scenario_input": "rate"} in given.refs
+
+
+def test_an_email_cannot_announce_a_price_change():
+    assert overbook.price(listed() + changed(path="mail/3.eml"), "B", "PART").value == 2.4
+
+
+def test_a_price_change_does_not_touch_an_offer():
+    assert overbook.price(listed() + changed() + offered(), "B", "PART", offer_ref="O-1").value == 2.1
 
 
 def test_drilldown_lists_every_input_with_its_source():

@@ -1,6 +1,6 @@
 """Buffer sizing (newsvendor): how many backup units to book. Pure functions, no LLM, no database.
 
-    result = size(outcomes=if_primary_fails(p_fail(card_a), short_units), unit_price=price(facts, "B", part),
+    result = size(outcomes=if_primary_fails(p_fail(card_a), short_units), unit_price=price(facts, "B", part, on=now),
                   loss_per_copy=goal_loss(goal), units_per_copy=..., p_delivers=keeps_promise(card_b),
                   lot_size=..., moq=..., available=...)
 
@@ -12,12 +12,14 @@
              best of all orderable amounts, and a higher loss per copy never books less.
 
 A price in another currency needs a sourced exchange rate. It is never read as EUR.
+A list price with announced changes needs the order date: the latest change in force on that day applies.
 """
 
 from __future__ import annotations
 
 import math
 import re
+from datetime import date, datetime
 from typing import Iterable, Mapping, Sequence
 
 from sourcing.hedge import NUMBER, Input, ModelError, amount, parse_number, positive, row, unique
@@ -75,20 +77,85 @@ def _terms(facts: list[Mapping], supplier_id: str, part_id: str, offer_ref: str 
     return [f for f in rows if key(f, "item") in items]
 
 
-def price(facts: Iterable[Mapping], supplier_id: str, part_id: str, *, offer_ref: str | None = None,
-          fx: Input | None = None) -> Input:
-    """EUR per unit from `kb.current_facts` rows, citing the facts. `fx` is EUR per unit of the price's currency."""
-    facts = list(facts)
-    terms = _terms(facts, supplier_id, part_id, offer_ref)
-    text, used = _newest([f for f in terms if f.get("attribute") == "unit_price"], "unit_price")
+def _quote(text: str, rows: list[Mapping]) -> tuple[str, set[str]]:
+    """The digits of a price per unit, and the currencies that the text and the facts' units name."""
     found = PRICE.fullmatch(text.lower())
     if not found:
         raise ModelError(f"cannot read a price per unit from {text!r}")
     before, digits, after = found.groups()
-    stated = {SYMBOLS.get(code, code.upper()) for code in (before, after) if code}
-    if stated - CURRENCIES:
+    named = {SYMBOLS.get(code, code.upper()) for code in (before, after) if code}
+    if named - CURRENCIES:
         raise ModelError(f"unknown currency in {text!r}")
-    stated |= {u for f in used if (u := _text(f.get("unit")).upper()) in CURRENCIES}
+    return digits, named | {u for f in rows if (u := _text(f.get("unit")).upper()) in CURRENCIES}
+
+
+def _day(value: date | str) -> date:
+    if isinstance(value, datetime):
+        return value.date()
+    if isinstance(value, date):
+        return value
+    try:
+        return datetime.fromisoformat(_text(value)).date()
+    except ValueError as exc:
+        raise ModelError(f"cannot read a date from {value!r}") from exc
+
+
+def _revised(facts: list[Mapping], supplier_id: str, part_id: str, listed: float, currency: str,
+             on: date | str | None) -> tuple[float, list[Mapping], str]:
+    """The list price after the changes in force on the order date. An email cannot announce one."""
+    documents: dict[str, list[Mapping]] = {}
+    for f in facts:
+        subject, path = f.get("subject") or {}, _text(f.get("path"))
+        if f.get("fact_type") == "price_change" and not path.startswith(MAIL) \
+                and (_text(subject.get("supplier_id")), _text(subject.get("material_id"))) == (supplier_id, part_id):
+            documents.setdefault(path, []).append(f)
+    if not documents:
+        return listed, [], ""
+    if on is None:
+        raise ModelError("the price has announced changes: give the order date")
+    day, known, in_force = _day(on), set(), []
+    for rows in documents.values():
+        def stated(*names: str) -> list[Mapping]:
+            return [f for f in rows if f.get("attribute") in names and _text(f.get("value"))]
+
+        since, used = _newest(stated("valid_from"), "valid_from")
+        if (start := _day(since)) > day:
+            continue
+        text, new = _newest(stated("new_price"), "new_price")
+        digits, named = _quote(text, new)
+        used = used + new
+        if codes := stated("currency"):
+            code, codes = _newest(codes, "currency")
+            named, used = named | {code.upper()}, used + codes
+        if named - {currency}:
+            raise ModelError(f"the price change names other currencies: {sorted(named | {currency})}")
+        value = parse_number(digits)
+        known.add(value)
+        if before := stated("current_price", "old_price"):      # the contract says old, price lists say current
+            said, before = _newest(before, "price before the change")
+            known.add(parse_number(_quote(said, before)[0]))
+            used = used + before
+        in_force.append((start, value, used))
+    if not in_force:
+        return listed, [], ""
+    last = max(start for start, _, _ in in_force)
+    values = {value for start, value, _ in in_force if start == last}
+    if len(values) != 1:
+        raise ModelError(f"price changes from {last} disagree: {sorted(values)}")
+    if listed not in known:
+        raise ModelError(f"the price change from {last} does not follow from the list price {listed}")
+    value = values.pop()
+    return value, [f for _, _, used in in_force for f in used], f", {value} from {last}"
+
+
+def price(facts: Iterable[Mapping], supplier_id: str, part_id: str, *, offer_ref: str | None = None,
+          fx: Input | None = None, on: date | str | None = None) -> Input:
+    """EUR per unit from `kb.current_facts` rows, citing the facts. `fx` is EUR per unit of the price's currency.
+    `on` is the order date (plan.clock.now), needed where the list price has announced changes."""
+    facts = list(facts)
+    terms = _terms(facts, supplier_id, part_id, offer_ref)
+    text, used = _newest([f for f in terms if f.get("attribute") == "unit_price"], "unit_price")
+    digits, stated = _quote(text, used)
 
     if basis := [f for f in terms if f.get("attribute") == "price_basis"]:
         said, basis = _newest(basis, "price_basis")
@@ -107,7 +174,11 @@ def price(facts: Iterable[Mapping], supplier_id: str, part_id: str, *, offer_ref
         raise ModelError(f"the price names several currencies: {sorted(stated)}")
 
     currency = stated.pop()
-    value, refs, note = parse_number(digits), _cited(used), f"quoted as {text} ({currency})"
+    value, change = parse_number(digits), ""
+    if offer_ref is None:
+        value, revised, change = _revised(facts, supplier_id, part_id, value, currency, on)
+        used = used + revised
+    refs, note = _cited(used), f"quoted as {text} ({currency}){change}"
     if currency != "EUR":
         if fx is None:
             raise ModelError(f"the price is in {currency}: give a sourced exchange rate to EUR")
