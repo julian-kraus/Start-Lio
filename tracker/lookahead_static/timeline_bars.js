@@ -17,8 +17,8 @@ function drawBar(b, l, x, cy, inWin) {
     if (lx1 - lx0 > leg.label.length * 5.6 + 6) g.append(sv("text", { class: "leg-label", x: (lx0 + lx1) / 2, y: by + bh + 12, "text-anchor": "middle" }, leg.label));
   }
   if (failed) g.append(sv("line", { class: "strike", x1: bx + 3, x2: bx + bw - 3, y1: cy, y2: cy }));
-  g.append(sv("text", { class: "bar-label", x: bx + 2, y: by - 6 }, b.label,
-    b.kind === "ghost" ? ` · lands ${hm(b.usable_at)}${lateText(b)}` : null));
+  g.append(sv("text", { class: "bar-label", x: bx + 2, y: by - 6 },
+    b.kind === "ghost" ? `If started now: lands ${hm(b.usable_at)}${lateText(b)}` : b.label));
   g.append(sv("path", { d: `M${bx + bw} ${by - 3} L${bx + bw + 5} ${by - 9} L${bx + bw - 5} ${by - 9} Z`, fill: b.late || failed ? "var(--risk)" : b.kind === "hedge" ? "var(--hedge)" : "var(--supply)" }));
   return g;
 }
