@@ -113,3 +113,20 @@ def test_fact_with_non_string_type_or_attribute_is_refused_before_caching(tmp_pa
             _extract(tmp_path, t)
     assert t.calls == 2, "each retry is a fresh call, not a cached bad answer"
     assert not list(tmp_path.glob("extract.*"))
+
+
+# ---------- po_line is the ERP line index, not the printed item number ----------
+
+def test_po_line_copied_from_the_printed_item_number_becomes_the_line_index():
+    subject = {"po_number": "PO-X1", "po_line": "30"}
+    facts = [{"fact_type": "oc_line", "subject": dict(subject), "attribute": a, "value": v}
+             for a, v in (("item_no_printed", "00030"), ("qty", "5"))]
+    env = _envelope({"facts": facts}, "order_confirmation", {"oc_line": {"qty"}})
+    assert {f["subject"]["po_line"] for f in env["facts"]} == {3}
+
+
+def test_po_line_that_already_differs_from_the_printed_item_is_kept():
+    facts = [{"fact_type": "oc_line", "subject": {"po_number": "PO-X1", "po_line": 3}, "attribute": "item_no_printed",
+              "value": "00030"}]
+    env = _envelope({"facts": facts}, "order_confirmation", {})
+    assert env["facts"][0]["subject"]["po_line"] == 3

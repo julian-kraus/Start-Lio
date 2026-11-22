@@ -38,6 +38,10 @@ _NUMERIC_LOOKING = re.compile(r"[+-]?[\d\s   .,']*\d[\d\s   .,']*")
 # subject key names but not their types, so the type is fixed here by name; every other key stays text, which
 # keeps leading zeros in PO numbers, material ids and the like.
 _INT_SUBJECT = re.compile(r"(?:^|_)line$|^statement_no$")
+# Order-confirmation lines print the PO item number (10, 20, 30 ...), while po_line in the records is the ERP line
+# index, the printed item number divided by ten. A model copies the printed number, so po_line is corrected in code
+# when it equals the record's own item_no_printed.
+_PRINTED_ITEM_ATTR, _PRINTED_ITEM_STEP = "item_no_printed", 10
 _ENVELOPE_KEYS = ("source", "doc_kind", "doc_kind_confidence", "languages", "spec_version", "extracted_by",
                   "doc_date", "facts", "unreadable", "proposed_fact_types")
 # Subject keys per fact type come from this read-only contract file (contract_summary omits them).
@@ -139,6 +143,24 @@ def _coerce_subject(subject: dict) -> dict:
     return out
 
 
+def _po_line_from_printed_item(facts: list[dict]) -> None:
+    """po_line = printed item number // 10 for every fact of a record whose po_line is the printed item number."""
+    printed = {}
+    for f in facts:
+        if f.get("attribute") == _PRINTED_ITEM_ATTR and isinstance(f.get("subject"), dict):
+            key = json.dumps(f["subject"], sort_keys=True, default=str)
+            digits = str(f.get("value") or "").strip()
+            if _INT.fullmatch(digits):
+                printed[key] = int(digits)
+    for f in facts:
+        subject = f.get("subject")
+        if not isinstance(subject, dict) or not isinstance(subject.get("po_line"), int):
+            continue
+        item = printed.get(json.dumps(subject, sort_keys=True, default=str))
+        if item and item == subject["po_line"] and item % _PRINTED_ITEM_STEP == 0:
+            f["subject"] = {**subject, "po_line": item // _PRINTED_ITEM_STEP}
+
+
 def _envelope(data: dict, default_kind: str, numeric_attrs: dict | None = None) -> dict:
     numeric_attrs = numeric_attrs or {}
     facts, ambiguous = [], []
@@ -162,6 +184,7 @@ def _envelope(data: dict, default_kind: str, numeric_attrs: dict | None = None) 
                 f["note"] = ((f.get("note") or "") + " [ambiguous quantity, needs review]").strip()
                 ambiguous.append(f"{f.get('fact_type')}.{attr}: quantity text could not be read as one number")
         facts.append(f)
+    _po_line_from_printed_item(facts)
     unreadable = data.get("unreadable") if isinstance(data.get("unreadable"), list) else []
     env = {
         "source": {},
