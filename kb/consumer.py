@@ -9,7 +9,7 @@ import psycopg
 
 from tracker import db as tracker_db
 
-from . import db, mail_source, reconcile
+from . import db, facts as facts_mod, mail_source, reconcile
 from .config import KbSettings
 from .ingest import FileReader, process_file, remove_path, sync_current
 from .intake import drain
@@ -37,6 +37,39 @@ def _current_sha(conn, path: str) -> str | None:
     return row["sha256"] if row else None
 
 
+def _ingest(conn, path: str, sha: str, data: bytes, settings: KbSettings, confidence_map: dict, llm) -> str:
+    """A portal file. Facts it reuses from an email lose the mail label before their event can be read."""
+    since = mail_source.last_fact_event(conn)
+    status = process_file(conn, path, sha, data, settings.structured_dir, confidence_map, llm)
+    mail_source.release_copies(conn, path)
+    mail_source.announce_stored_types(conn, path, since)
+    return status
+
+
+def _ingest_mailed_copies(conn, current: dict[str, str], reader: FileReader, settings: KbSettings,
+                          confidence_map: dict, llm) -> dict[str, int]:
+    """sync_current commits a file's event straight away, so new files with the bytes of an email go first."""
+    mailed = mail_source.hashes_with_facts(conn)
+    known = {(r["path"], r["sha256"]) for r in conn.execute("SELECT path, sha256 FROM documents WHERE active")}
+    counts: dict[str, int] = {}
+    for path, sha in sorted(current.items()):
+        if sha not in mailed or (path, sha) in known:
+            continue
+        try:
+            status = _ingest(conn, path, sha, reader(sha, path), settings, confidence_map, llm)
+        except (psycopg.OperationalError, psycopg.InterfaceError):
+            raise
+        except Exception as exc:
+            conn.rollback()
+            facts_mod.upsert_document(conn, path, sha, container=None, status="failed",
+                                      detail={"error": f"{type(exc).__name__}: {exc}"})
+            status = "failed"
+            log.warning("failed to process %s: %s", path, exc)
+        conn.commit()
+        counts[status] = counts.get(status, 0) + 1
+    return counts
+
+
 def handle_event(conn, ev: dict, reader: FileReader, settings: KbSettings, confidence_map: dict,
                  llm=None) -> str | None:
     """Events can arrive late or twice; only the tracker's current version of a path is ever ingested."""
@@ -50,11 +83,7 @@ def handle_event(conn, ev: dict, reader: FileReader, settings: KbSettings, confi
         sha = ev["new_sha"]
         if sha != current:
             return None
-        since = mail_source.last_fact_event(conn)
-        status = process_file(conn, path, sha, reader(sha, path), settings.structured_dir, confidence_map, llm)
-        mail_source.release_copies(conn, path)
-        mail_source.announce_stored_types(conn, path, since)
-        return status
+        return _ingest(conn, path, sha, reader(sha, path), settings, confidence_map, llm)
     if kind == "removed":
         if current is not None:
             return None
@@ -123,7 +152,11 @@ def _follow(conn, listen, settings: KbSettings, reader: FileReader, llm, mail: m
     current = {path: sha for path, sha in current_sha_by_path(conn, settings.data_dir).items()
                if not mail_source.is_mail(path)}
     current.update(mail_source.active_documents(conn))   # emails are current until kb says otherwise
-    counts = sync_current(conn, current, reader, settings.structured_dir, _confidence_map(conn), llm=llm)
+    confidence_map = _confidence_map(conn)
+    copies = _ingest_mailed_copies(conn, current, reader, settings, confidence_map, llm)
+    counts = sync_current(conn, current, reader, settings.structured_dir, confidence_map, llm=llm)
+    for status, n in copies.items():
+        counts[status] = counts.get(status, 0) + n
     mail_source.release_copies(conn)
     conn.commit()
     log.info("start-up sync: %s", counts)

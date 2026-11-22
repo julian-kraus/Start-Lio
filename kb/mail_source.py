@@ -62,6 +62,11 @@ def active_documents(conn) -> dict[str, str]:
         "SELECT path, sha256 FROM documents WHERE active AND starts_with(path, %s)", (PREFIX,))}
 
 
+def hashes_with_facts(conn) -> set[str]:
+    return {r["source_sha256"] for r in conn.execute(
+        "SELECT DISTINCT source_sha256 FROM facts WHERE valid AND starts_with(source_path, %s)", (PREFIX,))}
+
+
 def last_fact_event(conn) -> int:
     return conn.execute("SELECT coalesce(max(id), 0) AS id FROM fact_events").fetchone()["id"]
 

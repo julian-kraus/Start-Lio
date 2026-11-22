@@ -1,5 +1,4 @@
-"""kb follows mail.events: a raw email stored by mail.store.ingest becomes labelled facts. Synthetic data, fake LLM.
-Runs when TEST_DATABASE_URL points at a throwaway Postgres. Each test has its own kb and mail schema."""
+"""kb follows mail.events (synthetic data, fake LLM, own schemas per test on the TEST_DATABASE_URL Postgres)."""
 
 import dataclasses
 import hashlib
@@ -35,7 +34,6 @@ pytestmark = pytest.mark.skipif(not URL, reason="TEST_DATABASE_URL not set")
 CONTRACT = Path(__file__).resolve().parent.parent / "structured" / "contract"
 OWN, SUPPLIER, SUPPLIER_ADDR = "desk@example.com", "PARTNER-A", "sales@partner.example.net"
 PERSONA, TEST_ADDR = "PERSONA-A", "player@team.example.org"
-SEED = "rules: []\nsettings:\n  confidence_map: {high: 0.9, medium: 0.75, low: 0.4}\n"
 
 
 def master_map(code: str, email: str) -> dict:
@@ -91,7 +89,7 @@ class Env:
         for folder in ("docs", "schema_maps"):
             (structured / folder).mkdir()
         (structured / "schema_maps" / "master.json").write_text(json.dumps(master_map("code", "contact_email")))
-        seed.write_text(SEED)
+        seed.write_text("rules: []\nsettings:\n  confidence_map: {high: 0.9, medium: 0.75, low: 0.4}\n")
         self.settings = KbSettings(database_url=URL, schema=self.kb_schema, data_dir=tmp / "data",
                                    structured_dir=structured, seed_path=seed, llm_adapter=None)
         self.conn, self.mail = db.connect(URL, self.kb_schema), mail_db.connect(URL, self.mail_schema)
@@ -298,17 +296,19 @@ def test_mailed_copy_does_not_load_a_portal_envelope(env):
     assert "portal/old.pdf" not in env.documents() and env.rows("SELECT 1 FROM current_facts") == []
 
 
-def test_portal_file_reusing_mail_facts_loses_the_mail_label(env, monkeypatch):
-    pdf = make_pdf(["Profile"])
-    env.deliver(TEST_ADDR, ("profile.pdf", pdf), llm=FakeLLM("supplier"))
-    path = f"portal/{uuid.uuid4().hex}.pdf"
-    monkeypatch.setattr(consumer, "_current_sha", lambda conn, path: sha(pdf))
-    event = {"kind": "added", "path": path, "new_sha": sha(pdf)}
-    consumer.handle_event(env.conn, event, lambda *_: pdf, env.settings, {})
-    env.conn.commit()
+@pytest.mark.parametrize("startup", [False, True])
+def test_portal_file_reusing_mail_facts_loses_the_mail_label(env, monkeypatch, startup):
+    env.deliver(TEST_ADDR, ("profile.pdf", pdf := make_pdf(["Profile"])), llm=FakeLLM("supplier"))
+    path, read = f"portal/{uuid.uuid4().hex}.pdf", lambda *_: pdf
+    monkeypatch.setattr(consumer, "_current_sha", lambda *_: sha(pdf))
+    monkeypatch.setattr(consumer, "current_sha_by_path", lambda *_: {path: sha(pdf)})
+    if startup:   # stopped before it follows the feed, so only the start-up sync runs
+        consumer._follow(env.conn, env.conn, env.settings, read, None, env.source, Mock(is_set=lambda: True), 0)
+    else:
+        consumer.handle_event(env.conn, {"kind": "added", "path": path, "new_sha": sha(pdf)}, read, env.settings, {})
     (fact,) = env.rows("SELECT fact_type, locator FROM current_facts WHERE path = %s", path)
     assert fact["fact_type"] == "supplier" and "mail" not in fact["locator"]
-    assert env.rows("SELECT fact_types FROM fact_events WHERE path = %s", path)[0]["fact_types"] == ["supplier"]
+    assert [e["fact_types"] for e in env.rows("SELECT * FROM fact_events WHERE path = %s", path)] == [["supplier"]]
 
 
 def test_attachments_with_a_taken_name_do_not_replace_each_other(env):
