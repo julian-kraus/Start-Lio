@@ -157,6 +157,19 @@ def test_braces_left_after_substitution_are_rejected_naming_the_type(tmp_path, s
         catalog.load_catalog(tmp_path)
 
 
+@pytest.mark.parametrize("type_id, key", [("capacity.stock_update", "material_id"), ("proof.goods_receipt", "gr_number")])
+def test_table_row_uses_the_columns_and_key_kb_maps_to_the_expected_fact(type_id, key):
+    import json
+
+    event = catalog.load_catalog().by_id()[type_id]
+    table, expected = event.produces["table"], event.expects[0]
+    maps = [json.loads(p.read_text()) for p in (catalog.CATALOG_DIR.parents[1] / "structured/schema_maps").glob("*.json")]
+    columns = next(m["columns"] for m in maps
+                   if m.get("fact_type") == expected["fact_type"] and m["example_path"].endswith(table["path"]))
+    assert set(table["row"]) <= set(columns), f"{type_id}: a row key is not a column of {table['path']}"
+    assert {key, expected["attribute"]} <= {columns[c]["field"] for c in table["row"]}
+
+
 # --------------------------------------------------------------------------- reference resolution (database)
 
 @needs_db

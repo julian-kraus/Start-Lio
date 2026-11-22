@@ -31,7 +31,7 @@ types:
         path: "erp/stock_snapshot.csv"
         row:
           material_id: "{part.material_id}"
-          qty: "{on_hand}"
+          quantity: "{on_hand}"
     expects:
       - {fact_type: stock_batch, attribute: qty, change: update}
 

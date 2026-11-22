@@ -34,11 +34,13 @@ types:
     channel: table
     parameters:
       line: {type: ref, ref: order_line}
+      gr_number: {type: text}
       received_qty: {type: number}
     produces:
       table:
         path: "erp/goods_receipts.csv"
         row:
+          gr_number: "{gr_number}"
           po_number: "{line.po_number}"
           po_line: "{line.po_line}"
           qty_received: "{received_qty}"
