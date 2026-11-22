@@ -361,7 +361,6 @@ def test_document_of_no_known_kind_stays_visible(pipeline):
 
 @pytest.mark.parametrize("adapter", [REPLAY, None], ids=["worker", "backfill"])
 def test_supplier_email_after_the_drop_ends_as_facts(pipeline, adapter):
-    pytest.importorskip("kb.mail_source", reason="kb reads mail from #65 on; this base predates it")
     docs = documents()
     for path, data in docs.items():
         pipeline.record(data, GOOD[path])
