@@ -5,7 +5,7 @@ from datetime import timedelta
 
 import pytest
 
-from sourcing import simulate
+from sourcing import simulate, simulate_takes
 from sourcing.coverage_windows import Window
 from sourcing.facts import Facts
 from sourcing_world import DEADLINE, NOW, World
@@ -147,7 +147,7 @@ def test_an_earlier_take_does_not_cost_later_takes_their_minimum():
 
 
 @pytest.mark.parametrize("batch", range(10))
-def test_takes_competing_for_a_minimum_never_lower_the_part_or_the_copies(batch):
+def test_takes_competing_for_a_minimum_lower_a_part_only_for_more_copies_in_policy_order(batch):
     for seed in range(batch * 300, (batch + 1) * 300):
         rng = random.Random(seed)
         world = World()
@@ -171,8 +171,9 @@ def test_takes_competing_for_a_minimum_never_lower_the_part_or_the_copies(batch)
         after = simulate.simulate(facts, actions, now=NOW, deadline=DEADLINE)
         old, new = (next(p for p in r["parts"] if p["material_id"] == "CARD")["available"]["value"]
                     for r in (before, after))
-        assert new >= old, seed
-        assert [copies(after)[p] for p in ("P-A", "P-B")] >= [copies(before)[p] for p in ("P-A", "P-B")], seed
+        gained, had = ([copies(r)[p] for p in ("P-A", "P-B")] for r in (after, before))
+        assert gained >= had, seed
+        assert new >= old or gained > had, seed         # fewer late units can be more copies for the first line
         used = dict.fromkeys(offers, 0)
         for action, entry in zip(actions, after["actions"]):
             quantity, least = offers[action["offer"]["offer_id"]]
@@ -205,6 +206,6 @@ def test_pack_hours_match_an_hour_by_hour_count():
                 take = min(burn, left)
                 left, used = left - take, used + take
         expected = used if starved else stock + sum(q for _, q in arrivals)
-        got = simulate.packed_by_deadline(stock, [(start + timedelta(hours=h), q) for h, q in arrivals],
-                                          burn, windows)
+        got = simulate_takes.packed_by_deadline(stock, [(start + timedelta(hours=h), q) for h, q in arrivals],
+                                                 burn, windows)
         assert got == expected, (stock, burn, arrivals)

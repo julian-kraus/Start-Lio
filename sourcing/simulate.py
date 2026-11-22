@@ -10,11 +10,12 @@ An empty list gives exactly `coverage.compute`. Two kinds of action, both plain 
       lets units held for failed inspection back in, at most what is held
 
 Every action comes back in `actions` as feasible or with the reason it is not; only feasible ones count.
-Added units follow the rule of inbound: what lands after the part ran out only helps in the pack hours left.
+Added units follow the rule of inbound: what lands after the part ran out only helps in the pack hours left, and
+each line gets no more of a shared part than it can still pack.
 Priority is the policy's, so a supply can move copies from later editions to an earlier one and the total can fall,
 also with equal use per copy: one copy of the earlier edition can displace one of each later edition.
-`min_quantity` holds for what an action gets. Where takes of one offer compete, the ones that make most units usable
-count, earlier first on a tie, so one more action never lowers copies in policy order.
+`min_quantity` holds for what an action gets. Where takes of one offer compete, the ones that pack most copies in
+policy order count (most copies in all without a policy), so one more action never lowers copies in policy order.
 """
 
 from __future__ import annotations
@@ -23,11 +24,13 @@ import math
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
+from itertools import product as combinations_of
 
 from plan import clock, contracts
 
 from . import coverage, coverage_stock, coverage_windows
 from .facts import Facts, figure, ids, number
+from .simulate_takes import Way, ways_to_take
 
 CLOSED = ("declined", "expired")
 
@@ -182,62 +185,6 @@ def _release(facts: Facts, index: int, action: dict, parts: dict, revisions: dic
 KINDS = {"offer": _offer, "conditional_release": _release}
 
 
-def packed_by_deadline(on_hand, arrivals: list[tuple], burn: float,
-                       windows: list[coverage_windows.Window]) -> int:
-    """Units of one part that can still be used. Pack time lost while the part was out does not come back."""
-    total = on_hand + sum(qty for _, qty in arrivals)
-    if not burn or not windows:
-        return int(total)
-    idle = _idle(on_hand, arrivals, burn, windows)
-    if not idle:
-        return int(total)
-    return int(min(total, burn * coverage_windows.hours(windows) - idle) + 1e-9)      # 1e-9: float noise
-
-
-def _idle(on_hand, arrivals: list[tuple], burn: float, windows: list[coverage_windows.Window]) -> float:
-    """What could have been packed while the part was out, up to its last arrival."""
-    have, idle, by_time = on_hand, 0, defaultdict(int)
-    for at, qty in arrivals:
-        by_time[at] += qty
-    for at in sorted(by_time):
-        idle = max(idle, burn * coverage_windows.hours(windows, until=at) - have)
-        have += by_time[at]
-    return idle
-
-
-def _best_takes(supplies: list[Supply], on_hand, arrivals: list[tuple], burn: float,
-                windows: list[coverage_windows.Window]) -> tuple[list[tuple], Counter]:
-    """(supply, units, units that count) for one part, and what that takes from each pool.
-
-    Earliest first, so one more action can never push a pool's units to a later hour. A minimum breaks that, as an
-    earlier take can clip a later one to nothing. Leaving a take out is then tried too, and the most usable wins.
-    Ways that leave the same pools, count and idle time are one way: no later take can tell them apart.
-    """
-    ways = [([], Counter(), [], packed_by_deadline(on_hand, arrivals, burn, windows), 0)]
-    for n, s in enumerate(supplies):
-        rivals = [r for r in supplies[n:] if r.pool == s.pool]
-        grown: dict = {}
-        for takes, taken, landed, packed, counted in ways:
-            units = min(s.quantity, max(0, s.limit - taken[s.pool]))
-            options = [units] if units and units >= s.minimum else [0]
-            after = taken[s.pool] + units + sum(r.quantity for r in rivals[1:])
-            if options[0] and any(r.minimum and after > r.limit for r in rivals[1:]):
-                options.append(0)                       # taking it may cost a later take its minimum
-            for got in options:
-                now_landed, now_taken, now_packed, counts = landed, taken, packed, 0
-                if got:
-                    now_landed, now_taken = [*landed, (s.at, got)], taken + Counter({s.pool: got})
-                    now_packed = packed_by_deadline(on_hand, [*arrivals, *now_landed], burn, windows)
-                    counts = min(got, max(0, now_packed - packed))
-                way = ([*takes, (s, got, counts)], now_taken, now_landed, now_packed, counted + counts)
-                so_far = [*(a for a in arrivals if a[0] <= s.at), *now_landed]
-                idle = _idle(on_hand, so_far, burn, windows) if burn and windows else 0
-                grown.setdefault((frozenset(now_taken.items()), way[4], idle), way)
-        ways = list(grown.values())
-    takes, taken, *_ = max(ways, key=lambda way: (way[4], sum(way[1].values())))
-    return takes, taken
-
-
 def simulate(facts: Facts, actions: list[dict], *, now: datetime, deadline: datetime,
              products: list[str] | None = None) -> dict:
     """Coverage as it would be with the feasible actions taken now.
@@ -286,14 +233,26 @@ def _count(plan: dict, result: dict, supplies: list[Supply], report: list[dict],
     shift_ids = ids(*(w.fact_ids for w in windows))
     arrivals = {m: [(datetime.fromisoformat(i["arrives_at"]), i["counts"]["value"])
                     for i in p["inbound"] if i["counts"]["value"]] for m, p in parts.items()}
-    by_part, chosen, taken = defaultdict(list), [], Counter()
+    by_part, options = defaultdict(list), {}
     for s in sorted(supplies, key=lambda s: (s.at, s.index)):
         by_part[s.material].append(s)
     for material, offered in by_part.items():
         burn = sum((e.rate or 0) * boms[e.product_id][material][0] for e in users[material] if e.open)
-        takes, used = _best_takes(offered, parts[material]["usable"]["value"], arrivals[material], burn, windows)
-        chosen += takes
-        taken += used
+        options[material] = ways_to_take(offered, parts[material]["usable"]["value"], arrivals[material], burn, windows)
+
+    order, policy_ids = plan["priority"]["order"], plan["priority"]["fact_ids"]
+    rates = {m: {e.product_id: (e.rate or 0) * boms[e.product_id][m][0] for e in users[m]} for m in parts}
+    wants = {m: {e.product_id: e.open * boms[e.product_id][m][0] for e in users[m]} for m in parts}
+
+    def pack(ways: dict[str, Way]) -> tuple[dict, dict]:
+        lots = {m: [(None, p["usable"]["value"]),
+                    *sorted([*arrivals[m], *(ways[m].counted() if m in ways else [])])] for m, p in parts.items()}
+        allocated = {m: coverage.share(lots[m], wants[m], order, rates[m], windows) for m in parts}
+        return allocated, coverage.packable(eds, boms, lots, order, allocated, windows)
+
+    ways = _best_ways(options, order, pack)
+    chosen = [take for way in ways.values() for take in way.takes]
+    taken = sum((way.taken for way in ways.values()), Counter())
 
     added = defaultdict(list)
     for s, units, counts in chosen:
@@ -316,7 +275,7 @@ def _count(plan: dict, result: dict, supplies: list[Supply], report: list[dict],
     if not added:
         return
 
-    order, policy_ids = plan["priority"]["order"], plan["priority"]["fact_ids"]
+    allocated, packed = pack(ways)
     for material, counted in added.items():
         part = parts[material]
         inputs = _unique(i for c in counted for i in c["inputs"])
@@ -328,20 +287,18 @@ def _count(plan: dict, result: dict, supplies: list[Supply], report: list[dict],
         part["added"] = {**figure(more, more_ids), "inputs": inputs}
         part["available"] = {**figure(have, have_ids), "inputs": inputs}
         part["gap"] = {**figure(max(0, need - have), need_ids, have_ids), "inputs": inputs}
-        wants = {e.product_id: e.open * boms[e.product_id][material][0] for e in users[material]}
-        shares = coverage.share(have, wants, order)
+        split_ids = ids(policy_ids, shift_ids, *(e.rate_ids for e in users[material]))
         for row in part["allocation"]:
-            row["allocated"] = {**figure(shares[row["product_id"]], need_ids, have_ids, policy_ids),
+            row["allocated"] = {**figure(allocated[material][row["product_id"]], need_ids, have_ids, split_ids),
                                 "inputs": inputs}
 
-    available = {m: p["available"]["value"] for m, p in parts.items()}
-    allocated = {m: {a["product_id"]: a["allocated"]["value"] for a in p["allocation"]} for m, p in parts.items()}
-    packed = coverage.packable(eds, boms, available, order, allocated)
     used_ids = ids(*(parts[m]["added"]["fact_ids"] for m in added))
     inputs = _unique(i for m in added for i in parts[m]["added"]["inputs"])
     for e, row in zip(eds, plan["editions"]):
         copies, limited_by = packed[e.product_id]
         sources = ids(row["covered"]["fact_ids"], used_ids)
+        if any(arrivals[m] or m in added for m in limited_by):
+            sources = ids(sources, e.rate_ids, shift_ids)   # what arrives late is limited by the line's hours
         row.update(covered={**figure(copies, sources), "inputs": inputs},
                    gap={**figure(e.open - copies, sources), "inputs": inputs}, limited_by=limited_by)
 
@@ -353,6 +310,20 @@ def _count(plan: dict, result: dict, supplies: list[Supply], report: list[dict],
     top["covered"], top["gap"] = ids(top["covered"], used_ids), ids(top["gap"], used_ids)
     result.update(covered=covered, gap=result["needed"] - covered,
                   sources=_unique([*({"fact_id": i} for i in top["gap"]), *inputs]))
+
+
+def _best_ways(options: dict[str, list[Way]], order: list[str] | None, pack) -> dict[str, Way]:
+    """One way per part, chosen over all parts at once, as copies need every part of a bill of materials."""
+    every = [dict(zip(options, picked)) for picked in combinations_of(*options.values())]
+    if len(every) == 1:
+        return every[0]
+
+    def worth(ways: dict[str, Way]) -> tuple:
+        packed = pack(ways)[1]
+        copies = [packed[p][0] for p in order] if order else [sum(n for n, _ in packed.values())]
+        return copies, sum(q for way in ways.values() for _, q in way.counted())
+
+    return max(every, key=worth)
 
 
 def _unique(items) -> list:
