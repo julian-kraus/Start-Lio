@@ -1,0 +1,50 @@
+{
+  "recommendation_id": "00000000-0000-4000-8000-000000000002",
+  "run_id": "00000000-0000-4000-8000-000000000001",
+  "kind": "hedge",
+  "part_id": "PART-A",
+  "supplier_id": "SUP-A",
+  "backup_supplier_id": "SUP-B",
+  "offer_id": "OFF-1",
+  "quantity": 200,
+  "hedge": {
+    "p_fail": 0.3,
+    "p_fail_source": {
+      "fact_id": "fact-0005"
+    },
+    "loss_per_copy_eur": 60,
+    "loss_per_copy_source": {
+      "goal_line": "unit loss 60 EUR"
+    },
+    "copies_at_risk": 200,
+    "commitment_eur": 600,
+    "cost_model": {
+      "kind": "fixed_plus_per_unit",
+      "fixed_eur": 100,
+      "unit_eur": 2.5,
+      "cancel_fee_eur": 50
+    },
+    "expected_loss_eur": 3600,
+    "hedge_cost_eur": 600
+  },
+  "buffer": {
+    "demand": 1000,
+    "usable": 900,
+    "lead_time_h": 48,
+    "lead_time_sd_h": 12,
+    "service_level": 0.95,
+    "safety_units": 40
+  },
+  "decide_by": "2030-01-10T12:00:00+00:00",
+  "decide_by_why": "48 h lead time before the pack start",
+  "rationale": "Expected loss 3600 EUR exceeds the 600 EUR hedge cost.",
+  "status": "proposed",
+  "sources": [
+    {
+      "fact_id": "fact-0005"
+    },
+    {
+      "goal_line": "unit loss 60 EUR"
+    }
+  ]
+}

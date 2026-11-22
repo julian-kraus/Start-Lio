@@ -1,0 +1,292 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lookahead.local/plan/contract/recommendation.schema.json",
+  "title": "recommendation",
+  "description": "A hedge, buffer or other move proposed by sourcing, with every model input it used.",
+  "type": "object",
+  "required": [
+    "kind",
+    "part_id",
+    "rationale",
+    "sources"
+  ],
+  "properties": {
+    "recommendation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "enum": [
+        "hedge",
+        "buffer",
+        "expedite",
+        "substitute",
+        "hold"
+      ]
+    },
+    "part_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lane": {
+      "type": "string",
+      "minLength": 1
+    },
+    "supplier_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "backup_supplier_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "offer_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "quantity": {
+      "type": "number",
+      "minimum": 0
+    },
+    "hedge": {
+      "type": "object",
+      "description": "Inputs of the hedge model.",
+      "required": [
+        "p_fail",
+        "loss_per_copy_eur",
+        "commitment_eur",
+        "cost_model"
+      ],
+      "properties": {
+        "p_fail": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "p_fail_source": {
+          "$ref": "#/$defs/source"
+        },
+        "loss_per_copy_eur": {
+          "type": "number",
+          "minimum": 0
+        },
+        "loss_per_copy_source": {
+          "$ref": "#/$defs/source"
+        },
+        "copies_at_risk": {
+          "type": "number",
+          "minimum": 0
+        },
+        "commitment_eur": {
+          "type": "number",
+          "minimum": 0
+        },
+        "cost_model": {
+          "type": "object",
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "fixed",
+                "per_unit",
+                "fixed_plus_per_unit",
+                "tiered"
+              ]
+            },
+            "fixed_eur": {
+              "type": "number",
+              "minimum": 0
+            },
+            "unit_eur": {
+              "type": "number",
+              "minimum": 0
+            },
+            "cancel_fee_eur": {
+              "type": "number",
+              "minimum": 0
+            },
+            "tiers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "from_qty",
+                  "unit_eur"
+                ],
+                "properties": {
+                  "from_qty": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "unit_eur": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "expected_loss_eur": {
+          "type": "number",
+          "minimum": 0
+        },
+        "hedge_cost_eur": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "buffer": {
+      "type": "object",
+      "description": "Inputs of the buffer model.",
+      "required": [
+        "demand",
+        "lead_time_h"
+      ],
+      "properties": {
+        "demand": {
+          "type": "number",
+          "minimum": 0
+        },
+        "usable": {
+          "type": "number",
+          "minimum": 0
+        },
+        "lead_time_h": {
+          "type": "number",
+          "minimum": 0
+        },
+        "lead_time_sd_h": {
+          "type": "number",
+          "minimum": 0
+        },
+        "service_level": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "safety_units": {
+          "type": "number",
+          "minimum": 0
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          }
+        }
+      }
+    },
+    "decide_by": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "decide_by_why": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "proposed",
+        "decided",
+        "superseded",
+        "expired"
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      },
+      "minItems": 1
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "hedge"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "hedge"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "buffer"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "buffer"
+        ]
+      }
+    }
+  ],
+  "additionalProperties": true,
+  "$defs": {
+    "source": {
+      "description": "Where a number comes from: a kb fact id, a goal line, a labelled scenario input or a file.",
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "fact_id": {
+              "type": [
+                "string",
+                "integer"
+              ]
+            },
+            "goal_line": {
+              "type": "string",
+              "minLength": 1
+            },
+            "scenario_input": {
+              "type": "string",
+              "minLength": 1
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1
+            },
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "value": {}
+          }
+        }
+      ]
+    }
+  }
+}
