@@ -45,59 +45,80 @@ function supName(id) { const s = (S.suppliers || []).find(x => x.supplier_id ===
 function openDecisions() { return (S.decisions || []).filter(d => d.status === "open"); }
 
 // ---------- timeline ----------
-function range() {
-  const end = ms(S.launch.deadline) + 3600e3;
-  const ats = (S.events || []).map(e => ms(e.at)).filter(t => t < end).concat([ms(S.clock.now)]);
-  const start = Math.min(end - 26 * 3600e3, Math.min(...ats) - 1800e3);
-  return [start, end];
+const HOUR = 3600e3, MIN_CHIP = 120;
+function range() {   // the prototype's window: 23 h up to the deadline, 2 h after it per 23 h shown
+  const dead = ms(S.launch.deadline);
+  const ats = (S.events || []).map(e => ms(e.at)).filter(t => t < dead).concat([ms(S.clock.now)]);
+  const start = Math.min(dead - 23 * HOUR, Math.min(...ats) - HOUR / 2);
+  return [start, dead + (dead - start) * 2 / 23];
 }
-function placeRows(items) {   // each chip takes the first row where it covers no other, left to right
-  const ends = [];
+function ticks(a, b) {   // local whole hours, a step from the prototype's 4 h upwards, at most 7 labels
+  const step = [4, 6, 8, 12, 24].find(h => (b - a) / (h * HOUR) <= 7) || 24;
+  let t = Math.ceil(a / HOUR) * HOUR;
+  while (t < b && (+parts(t).hour % step || +parts(t).minute)) t += HOUR;
+  const out = [];
+  for (; t < b - (b - a) * .04; t += step * HOUR) out.push(t);   // no label cut off at the right edge
+  return out;
+}
+function placeRows(items) {   // first row where the chip fits at its shortest; it then grows up to the next chip
+  const rows = [];
   [...items].sort((a, b) => a.from - b.from).forEach(it => {
-    let row = ends.findIndex(to => to + 4 <= it.from);
-    if (row < 0) row = ends.length;
-    ends[row] = it.to; it.row = row;
+    const short = it.win ? it.to : it.from + Math.min(it.w, MIN_CHIP);
+    let row = rows.findIndex(r => r.end + 4 <= it.from);
+    if (row < 0) { row = rows.length; rows.push({end: 0, items: []}); }
+    rows[row].end = short; rows[row].items.push(it); it.row = row;
   });
-  return Math.max(1, ends.length);
+  rows.forEach(r => r.items.forEach((it, i) => {
+    const next = r.items[i + 1];
+    if (next && !it.win && !it.cls.includes("end")) it.w = Math.max(Math.min(it.w, MIN_CHIP), Math.min(it.w, next.from - it.from - 4));
+  }));
+  return Math.max(1, rows.length);
+}
+function criticalSuppliers() {   // suppliers of the parts the plan marks critical, and of open decisions
+  const ids = new Set(openDecisions().map(d => d.supplier_id));
+  ((S.plan || {}).lanes || []).filter(l => l.status === "critical" || l.gap > 0)
+    .forEach(l => (l.bars || []).forEach(b => ids.add(b.supplier_id)));
+  ids.delete(undefined);
+  return ids;
 }
 function timeline() {
   const [a, b] = range(), X = t => ((ms(t) - a) / (b - a) * 100).toFixed(2);
-  const ids = [];
+  const ids = [], decs = S.decisions || [];
   (S.events || []).forEach(e => { if (e.supplier_id && !ids.includes(e.supplier_id)) ids.push(e.supplier_id); });
   openDecisions().forEach(d => { if (d.supplier_id && !ids.includes(d.supplier_id)) ids.push(d.supplier_id); });
-  let html = "";
-  let step = 4 * 3600e3;                        // the prototype's 4 h grid; widen it so a long span stays readable
-  while ((b - a) / step > 8) step *= 2;          // at most ~8 labels across the axis, never an overlapping strip
-  const first = Math.ceil(a / step) * step;
-  for (let t = first; t < b; t += step) html += `<div class="grid" style="left:${X(t)}%"></div>`;
+  const crit = criticalSuppliers(), axisT = ticks(a, b);
+  let html = axisT.map(t => `<div class="grid" style="left:${X(t)}%"></div>`).join("");
   html += `<div class="pastbg" style="width:${X(S.clock.now)}%"></div>`;
   const W = $("#lanes").clientWidth || 1000;
   ids.forEach(id => {
-    const items = (S.events || []).filter(e => e.supplier_id === id && EV[e.type]).map(e => {
+    const mine = decs.filter(d => d.supplier_id === id);
+    const items = (S.events || []).filter(e => e.supplier_id === id && EV[e.type] && !(e.type === "decision" && mine.length)).map(e => {
       let [cls, icon] = EV[e.type], x = +X(e.at);
       if (x > 96) { x = 96; cls = "muted end"; }               // after the shown range: pinned at the lane's end
       if (!cls && e.severity === "risk") cls = "bad";
-      const w = Math.min(260, 44 + String(e.title).length * 7.5), from = x * W / 100 + (cls === "muted end" ? 11 - w : -11);
+      let w = Math.min(260, 44 + String(e.title).length * 7.5);
+      const from = x * W / 100 + (cls === "muted end" ? 11 - w : -11);
+      if (cls !== "muted end") w = Math.max(Math.min(w, MIN_CHIP), Math.min(w, W - from));   // stays inside the lane
       return {e, cls, icon, x, w, from, to: from + w};
     });
-    openDecisions().filter(d => d.supplier_id === id).forEach(d => {
-      const x = +X(d.at), pct = Math.max(2, X(S.launch.deadline) - x), from = x * W / 100;
-      items.push({win: true, x, pct, from, to: from + Math.max(pct * W / 100, 24)});
+    mine.forEach(d => {   // the decision window: open until the deadline, a decided one until it was decided
+      const x = +X(d.at), until = d.status === "open" ? X(S.launch.deadline) : d.decided_at ? X(d.decided_at) : x;
+      const pct = Math.max(2, until - x), from = x * W / 100;
+      items.push({win: true, done: d.status !== "open", x, pct, from, to: from + Math.max(pct * W / 100, 24)});
     });
-    const rows = placeRows(items), tall = Math.max(96, rows * 40);
+    const rows = placeRows(items);
     const chips = items.map(it => {
-      const top = rows < 3 ? (it.row ? "74%" : "28%") : `${((it.row + .5) / rows * 100).toFixed(1)}%`;
-      if (it.win) return `<div class="win" style="left:${it.x}%;width:${it.pct}%;top:${top}"><span class="flag">${ic("gavel")}Decide</span></div>`;
-      return `<button class="ev ${it.cls}" style="left:${it.x}%;top:${top};max-width:${it.w}px" title="${esc(it.e.title)}" data-ev="${it.e.id}"><span class="pin">${ic(it.icon)}</span><span class="lbl" style="overflow:hidden;text-overflow:ellipsis">${esc(it.e.title)}</span></button>`;
+      const top = rows < 2 ? "" : rows === 2 ? `top:${it.row ? "74%" : "28%"}` : `top:${((it.row + .5) / rows * 100).toFixed(1)}%`;
+      if (it.win) return `<div class="win${it.done ? " done" : ""}" style="left:${it.x}%;width:${it.pct}%;${top}"><span class="flag">${ic("gavel")}Decide</span></div>`;
+      return `<button class="ev ${it.cls}" style="left:${it.x}%;${top};max-width:${Math.round(it.w)}px" title="${esc(it.e.title)}" data-ev="${it.e.id}"><span class="pin">${ic(it.icon)}</span><span class="lbl" style="overflow:hidden;text-overflow:ellipsis">${esc(it.e.title)}</span></button>`;
     }).join("");
-    html += `<div class="lane tall"${tall > 96 ? ` style="height:${tall}px"` : ""}><button class="lname"><b>${esc(supName(id))}</b></button>${chips}</div>`;
+    const cls = (rows > 1 ? " tall" : "") + (crit.size && !crit.has(id) ? " dim" : "");
+    html += `<div class="lane${cls}"${rows > 2 ? ` style="height:${rows * 40}px"` : ""}><button class="lname"><b>${esc(supName(id))}</b></button>${chips}</div>`;
   });
   if (!ids.length) html += `<div class="lane"><span class="lname subtle">No supplier events yet</span></div>`;
   html += `<div class="after" style="left:${X(S.launch.deadline)}%"></div><div class="vline dead" style="left:${X(S.launch.deadline)}%"><span class="vlab" style="color:var(--redtext)">Deadline ${hm(S.launch.deadline)}</span></div><div class="now" style="left:${X(S.clock.now)}%"><span>Now</span></div>`;
   $("#lanes").innerHTML = html;
-  let ticks = "";
-  for (let t = first; t < b; t += step) ticks += `<span class="tick" style="left:${X(t)}%">${dhm(t)}</span>`;
-  $("#axis").innerHTML = ticks;
+  $("#axis").innerHTML = axisT.map(t => `<span class="tick" style="left:${X(t)}%">${dhm(t)}</span>`).join("");
   document.querySelectorAll("[data-ev]").forEach(el => el.onclick = () => openEvent(+el.dataset.ev));
 }
 function feed() {
@@ -152,10 +173,10 @@ function acts(d) {
 }
 function dqCard(d) {
   const plan = (d.on_accept || []).map(t => `<li>${ic("send")}<span>${esc(t)}</span></li>`).join("");
-  return `<article class="dq-card"><div class="dc-meta">${B("r", "Open")}<span class="dc-due">${ic("clock")}Raised ${esc(dhm(d.at))}</span></div>
+  return `<article class="dq-card" id="dq-${esc(d.decision_id)}"><div class="dc-meta">${B("r", "Open")}<span class="dc-due">${ic("clock")}Raised ${esc(dhm(d.at))}</span></div>
   <h4 class="dc-t">${esc(d.title)}</h4><p class="dc-cause">${esc(d.recommendation || "")}</p>
   <div class="dc-stats"><div${srcTip(d.cost && d.cost.sources)}><b>${eur(d.cost && d.cost.eur)}</b><span>To pay</span></div><div${srcTip(d.impact && d.impact.sources)}><b class="bad">${eur(d.impact && d.impact.eur)}</b><span>Refunds if ignored</span></div></div>
-  <div class="dc-plan"><div class="dc-plan-h"><span>On accept</span></div><ul>${plan}</ul></div>
+  <div class="dc-plan"><div class="dc-plan-h"><span>On accept · ${esc(supName(d.supplier_id))}</span><span class="dc-more">${ic("arrow-right")}</span></div><ul>${plan}</ul></div>
   <div class="dc-foot">${signerLine(d)}${acts(d)}</div></article>`;
 }
 function why(d) {
@@ -189,6 +210,7 @@ function decisions() {
     <td><span class="who"><span class="who-av">${esc(initials(d.decided_by))}</span>${esc(d.decided_by || "")}</span></td>
     <td class="r"${srcTip(d.impact && d.impact.sources)}>${num(d.impact && d.impact.units)} copies</td><td class="r"${srcTip(d.cost && d.cost.sources)}>${eur(d.cost && d.cost.eur)}</td><td>${esc(dhm(d.decided_at || d.at))}</td>
     <td>${d.status === "accepted" ? B("g", "Approved") : B("r", d.status)}</td></tr>`).join("") : `<tr><td colspan="6" class="subtle">No decisions yet.</td></tr>`;
+  document.querySelectorAll("#dq .dq-card[id]").forEach(c => c.onclick = e => { if (!e.target.closest("button")) show("decisions"); });
   document.querySelectorAll("[data-act]").forEach(b => b.onclick = e => { e.stopPropagation(); accept(b.dataset.act); });
   document.querySelectorAll("[data-rej]").forEach(b => b.onclick = e => { e.stopPropagation(); openRej(b.dataset.rej); });
 }
