@@ -10,6 +10,7 @@ Every number is a figure with fact_ids; covered, needed and gap are plain number
   inbound     see coverage_inbound; counted units may still need a dock slot release
   allocated   a shared part reserved in policy order, up to each edition's full need
   covered     copies that can be packed, editions in policy order; what one cannot use goes to the next
+  products    narrows what is reported; shared parts are always split over every edition in the plan
 """
 
 from __future__ import annotations
@@ -44,11 +45,10 @@ class Edition:
     line_status: str
 
 
-def editions(facts: Facts, products: list[str] | None = None) -> tuple[list[Edition], list[dict]]:
+def editions(facts: Facts) -> tuple[list[Edition], list[dict]]:
     grouped: dict[str, list] = {}
     for row in facts.rows("plan_edition"):
-        if products is None or row.key("product_id") in products:
-            grouped.setdefault(row.key("product_id"), []).append(row)
+        grouped.setdefault(row.key("product_id"), []).append(row)
     out, alerts = [], []
     for product, rows in sorted(grouped.items()):
         demands = [(n, r.ids("demand")) for r in rows if (n := number(r.get("demand"))) is not None]
@@ -76,10 +76,6 @@ def editions(facts: Facts, products: list[str] | None = None) -> tuple[list[Edit
             reported, reported_ids, rate, rate_ids,
             next((r.key("po_line") for r in log if r.key("po_line")), product),
             next((r.key("line_status") for r in rows if r.key("line_status")), "unknown")))
-    if products:
-        missing = set(products) - {e.product_id for e in out}
-        if missing:
-            raise ValueError(f"no launch plan demand for {sorted(missing)}")
     return out, alerts
 
 
@@ -176,8 +172,11 @@ def packable(eds: list[Edition], boms: dict, available: dict, order: list[str] |
 def compute(facts: Facts, *, now: datetime, deadline: datetime, products: list[str] | None = None) -> dict:
     if now.tzinfo is None or deadline.tzinfo is None:
         raise ValueError("now and deadline need a UTC offset")
-    eds, alerts = editions(facts, products)
-    if not eds:
+    eds, alerts = editions(facts)
+    wanted = {e.product_id for e in eds} if products is None else set(products)
+    if missing := wanted - {e.product_id for e in eds}:
+        raise ValueError(f"no launch plan demand for {sorted(missing)}")
+    if not wanted:
         raise ValueError("no launch plan demand in the facts")
     today = now.astimezone(deadline.tzinfo).date()
     windows = coverage_windows.pack_windows(facts, now, deadline)
@@ -192,7 +191,8 @@ def compute(facts: Facts, *, now: datetime, deadline: datetime, products: list[s
 
     order, policy_ids = priority(facts, eds)
     materials = sorted({m for bom in boms.values() for m in bom})
-    if order is None and any(sum(m in bom for bom in boms.values()) > 1 for m in materials):
+    used = {m for p in wanted for m in all_boms[p]}
+    if order is None and any(sum(m in bom for bom in boms.values()) > 1 for m in used):
         alerts.append({"kind": "priority_unknown", "fact_ids": ids(policy_ids, *(e.demand_ids for e in eds))})
 
     revisions = coverage_stock.revision_disputes(facts, set(materials))
@@ -235,7 +235,8 @@ def compute(facts: Facts, *, now: datetime, deadline: datetime, products: list[s
 
     packed = packable(eds, boms, available, order, allocated)
     out_editions = []
-    for e in eds:
+    shown = [e for e in eds if e.product_id in wanted]
+    for e in shown:
         copies, limited_by = packed[e.product_id]
         bom = boms[e.product_id]
         sources = ids(e.open_ids, policy_ids, *(bom[m][1] for m in bom), *(part_ids[m] for m in bom))
@@ -248,9 +249,9 @@ def compute(facts: Facts, *, now: datetime, deadline: datetime, products: list[s
             "limited_by": limited_by, "capacity": capacity,
         })
 
-    covered, needed = sum(n for n, _ in packed.values()), sum(e.open for e in eds)
+    covered, needed = sum(packed[e.product_id][0] for e in shown), sum(e.open for e in shown)
     top = {"covered": ids(*(e["covered"]["fact_ids"] for e in out_editions)),
-           "needed": ids(*(e.open_ids for e in eds))}
+           "needed": ids(*(e.open_ids for e in shown))}
     top["gap"] = ids(top["needed"], top["covered"])
     return {
         "covered": covered, "needed": needed, "gap": needed - covered, "unit": "copies",
@@ -258,10 +259,11 @@ def compute(facts: Facts, *, now: datetime, deadline: datetime, products: list[s
         "sources": [{"fact_id": i} for i in top["gap"]],
         "assumptions": ["a date-only arrival is at the packing site by the first shift of that day"],
         "priority": {"order": order, "fact_ids": policy_ids},
-        "editions": out_editions, "parts": parts,
+        "editions": out_editions, "parts": [p for p in parts if p["material_id"] in used],
         "not_shortages": [{"material_id": m, "reason": "phantom BOM line", "fact_ids": found}
-                          for m, found in phantom.items()],
+                          for m, found in phantom.items() if m in used],
         "windows": [{"start": w.start.isoformat(), "end": w.end.isoformat(),
                      "hours": figure(coverage_windows.hours([w]), w.fact_ids)} for w in windows],
-        "escalations": alerts,
+        "escalations": [a for a in alerts if ("product_id" not in a or a["product_id"] in wanted)
+                        and ("material_id" not in a or a["material_id"] in used)],
     }
