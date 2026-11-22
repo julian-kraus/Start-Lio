@@ -283,6 +283,18 @@ def test_delivery_to_a_site_also_needs_the_site_release():
     assert [(s["role"], s["name"]) for s in out["also_required"]] == [("Warehouse Chief North Depot", "Finn Ford")]
 
 
+@pytest.mark.parametrize("site", ["Example Northern Distribution Center Norwick", "DC-NOR"])
+def test_site_is_found_by_its_kb_name_or_id(site):
+    chart = CHART_V2.replace("Warehouse Chief North Depot", "Warehouse Chief DC Norwick")
+    out = route(world(POLICY, chart), delivery_site=site)
+    assert [(s["state"], s["name"]) for s in out["also_required"]] == [("held", "Finn Ford")]
+
+
+def test_unknown_site_is_not_treated_as_a_vacancy():
+    out = route(delivery_site="South Depot")
+    assert out["status"] == "needs_human" and "name" not in out["signer"]
+
+
 @pytest.mark.parametrize("path, mail", [("mail/t/rules.pdf", None), ("suppliers/x/rules.pdf", None),
                                         ("own/rules.pdf", {"trust": "supplier_contact"})])
 def test_supplier_sent_documents_never_set_the_rules(path, mail):
