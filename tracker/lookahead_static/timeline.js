@@ -27,7 +27,7 @@
       const lanes = el("div", {class:"lanes"});
       const past = el("div", {class:"after", style:`left:${percent(deadline,start,end)}%`});
       const deadlineLine = el("div", {class:"vline dead", style:`left:${percent(deadline,start,end)}%`},
-        el("span", {class:"vlab"}, label(t,"deadline")));
+        el("span", {class:"vlab"}, label(t,"deadline")+" "+fmt(new Date(deadline).toISOString(),{weekday:undefined})));
       const now = el("div", {class:"now", style:`left:${percent(clock,start,end)}%`}, el("span", {}, label(t,"now")));
       lanes.append(past, deadlineLine, now);
       for (const supplier of suppliers) {
@@ -58,7 +58,7 @@
     const open=(state.decisions || []).filter(d=>d.status === "open");
     const aside=el("aside", {class:"dq","aria-label":label(t,"decisions")});
     const list=el("div", {class:"dq-list"});
-    open.forEach(decision=>list.append(decisionCard(decision,t)));
+    if(open[0])list.append(decisionCard(open[0],t));
     const all=el("button", {class:"btn btn-text dq-all",onclick:()=>setRoute("decisions")}, label(t,"all"));
     aside.append(el("div", {class:"dq-in"}, el("div", {class:"between"},
       el("h3", {class:"dq-h"}, label(t,"decisions"),el("span", {class:"count"},open.length)),all),list));
@@ -70,6 +70,12 @@
       el("div", {class:"dq-t"},d.title || ""), el("div", {class:"dq-cause"},d.recommendation || ""));
     if(d.cost && d.cost.eur != null) box.append(el("div", {class:"dq-cost"},label(t,"pay"),el("b",{},eur(d.cost.eur))));
     if(d.impact && d.impact.eur != null) box.append(el("div", {class:"dq-cost"},label(t,"risk"),el("b",{},eur(d.impact.eur))));
+    const detail=el("div",{class:"dc-plan"});
+    for(const item of [...(Array.isArray(d.plan_steps)?d.plan_steps:[]),...(Array.isArray(d.reasons)?d.reasons:[])].slice(0,3)) {
+      const text=typeof item==="string"?item:item.text||item.label||"";
+      const line=el("p",{},text);if(item && typeof item==="object" && item.source)line.title=JSON.stringify(item.source);detail.append(line);
+    }
+    box.append(detail);
     const signer=el("div", {class:"dq-cause"});
     const error=el("div", {class:"err"});
     const actions=typeof window.decisionActions === "function" ? window.decisionActions(d,t,error,signer) :
