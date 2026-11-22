@@ -7,7 +7,8 @@
 Pure functions. One order line is one promise, kept when nothing known about it failed: delivered by the promised
 date, received in full, no failed inspection. The score is the mean of a Beta posterior that starts at the
 all-supplier rate with the weight of k promises, so a thin history stays close to the average. A supplier without
-history may start from a labelled scenario prior; real history always wins over one.
+history may start from a labelled scenario prior; real history always wins over one. An inspection report is
+identified by its receipt: several documents count as one report, and a failure stands if any of them reports one.
 """
 
 from __future__ import annotations
@@ -141,6 +142,11 @@ def _received(receipts: dict[tuple, Record], believed) -> dict[tuple, tuple[floa
     return out
 
 
+def _may_miss_receipt(order: str, material: str, unplaced: set[tuple[str, str]]) -> bool:
+    """An unplaced receipt may be this line's unless both name a material and the materials differ."""
+    return any(o == order and (not m or not material or m == material) for o, m in unplaced)
+
+
 def history(facts, believed=()) -> History:
     """Every supplier's promises and checks from PO lines, goods receipts and inspection reports."""
     records = _records(facts)
@@ -170,6 +176,7 @@ def history(facts, believed=()) -> History:
         owner[key] = _text(r.get("supplier_id")) or (_text(line.get("supplier_id")) if line else "")
 
     failed: defaultdict[tuple, list[str]] = defaultdict(list)
+    reported: defaultdict[tuple, set[str]] = defaultdict(set)
     for r in records:
         if r.fact_type != "inspection_result" or "decision" not in r.attrs:
             continue
@@ -178,9 +185,12 @@ def history(facts, believed=()) -> History:
             continue
         word = normalise(r.get("decision"), "text")
         verdict = "failed" if word in FAILED else "passed" if word in PASSED else "unclear"
-        suppliers[owner[key]].inspections[verdict] += 1
+        reported[key].add(verdict)
         if verdict == "failed":
             failed[key] += _ids(r, "decision")
+    for key, verdicts in reported.items():
+        worst = next(v for v in ("failed", "passed", "unclear") if v in verdicts)
+        suppliers[owner[key]].inspections[worst] += 1
 
     for key, r in receipts.items():
         if owner[key]:
@@ -193,7 +203,7 @@ def history(facts, believed=()) -> History:
         sid = _text(line.get("supplier_id"))
         if sid:
             _judge_line(key, line, suppliers[sid], on_line[key], received, failed,
-                        (key[0], _text(line.get("material_id"))) in unplaced)
+                        _may_miss_receipt(key[0], _text(line.get("material_id")), unplaced))
     for key, ids in failed.items():
         if ids and owner[key] and not line_of[key]:
             suppliers[owner[key]].promises.append(
