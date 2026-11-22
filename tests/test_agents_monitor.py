@@ -188,6 +188,8 @@ def test_the_cancellation_mail_becomes_a_hedged_decision_on_the_live_screen(demo
     assert cards["old"]["status"] == "superseded"
     assert [i for i, d in cards.items() if d["status"] == "open"] == [decision_id]
     card = cards[decision_id]
+    assert "name" not in card["signer"], "today's route takes a name on the card as the one signature"
+    assert "warehouse" in card["signer"]["role"].lower(), "the release is shown next to the value approval"
     assert card["producer"] == "monitor" and card["offer_id"] == "BACKUP" and card["actions"]
     assert card["category"] == "Paper & Board" and card["delivery_site"] == "HUB"
     assert card["hedge"]["loss_per_copy_eur"] == 100 and card["hedge"]["copies_at_risk"] == 300
@@ -274,3 +276,19 @@ def test_site_and_category_are_never_guessed():
     two = [{"fact_type": "packout", "attribute": "site_id", "value": site} for site in ("A", "B")]
     assert monitor.site_of(two) == monitor.NO_SITE
     assert monitor.category_of([], "BOOK") is None
+
+
+@pytest.mark.parametrize("status, others, named", [
+    ("resolved", {}, True),
+    ("resolved", {"also_required": [{"role": "Site", "name": "B", "rule": "R2"}]}, False),
+    ("resolved", {"signers": [{"role": "Lead", "name": "A"}, {"role": "Chief", "name": "C"}]}, False),
+    ("needs_human", {}, False),
+    ("held", {}, False),
+])
+def test_a_name_is_on_the_card_only_when_one_person_signs(status, others, named):
+    approval = {"status": status, "signer": {"role": "Lead", "name": "A", "rule": "R1"},
+                "signers": [{"role": "Lead", "name": "A"}], "also_required": [], "reasons": [], **others}
+    shown = monitor.card_signer(approval)
+    assert ("name" in shown) == named and "Lead" in shown["role"]
+    for extra in approval["also_required"]:
+        assert extra["role"] in shown["role"] and extra["rule"] in shown["rule"]

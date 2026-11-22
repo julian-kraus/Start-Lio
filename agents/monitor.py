@@ -107,6 +107,19 @@ def site_of(rows: list[dict]) -> str:
     return found.pop() if len(found) == 1 else NO_SITE
 
 
+def card_signer(approval: dict) -> dict:
+    """Who signs, for the card. A name only when that person alone is enough: the accept button signs with it."""
+    asked = [*approval["signers"], *approval["also_required"]]
+    signer = dict(approval["signer"])
+    if approval["status"] != "resolved" or len(asked) != 1:
+        signer.pop("name", None)
+    for key in ("role", "rule"):
+        parts = [signer.get(key), *(s.get(key) for s in approval["also_required"])]
+        if said := list(dict.fromkeys(part for part in parts if part)):
+            signer[key] = ("; " if key == "rule" else " and ").join(said)
+    return signer
+
+
 def open_backups(conn, part: str, deadline, now, per_copy: Input, category: str | None,
                  site: str) -> tuple[list[hedger.Backup], list[str]]:
     """Open offers of suppliers that have not broken a promise on this part."""
@@ -248,7 +261,7 @@ class Monitor:
                 title=f"{title}. {verb} {rec['backup_supplier_id']}?", recommendation=rec["rationale"],
                 recommendation_id=rec["recommendation_id"], backup_supplier_id=rec["backup_supplier_id"],
                 offer_id=rec["offer_id"], decide_by=rec["decide_by"], decide_by_why=rec["decide_by_why"],
-                actions=rec["actions"], category=category, delivery_site=site, signer=rec["signer"],
+                actions=rec["actions"], category=category, delivery_site=site, signer=card_signer(rec["approval"]),
                 hedge=rec["hedge"], drilldown=rec["drilldown"], sources=[*promise["sources"], *rec["sources"]])
         else:
             decision.update(title=f"{title}. A person has to re-plan.",
