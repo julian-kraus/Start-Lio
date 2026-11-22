@@ -1,0 +1,81 @@
+[
+  {
+    "stop_reason": "tool_use",
+    "tool_calls": [
+      {
+        "name": "hedge_math",
+        "input": {}
+      }
+    ],
+    "usage": {
+      "input_tokens": 100,
+      "output_tokens": 10
+    }
+  },
+  {
+    "stop_reason": "end_turn",
+    "text": "{\"argument\": \"Without {backup_supplier} we expect to lose {expected_loss_eur}, and the backup commits {commitment_eur}.\"}",
+    "usage": {
+      "input_tokens": 120,
+      "output_tokens": 30
+    }
+  },
+  {
+    "stop_reason": "tool_use",
+    "tool_calls": [
+      {
+        "name": "hedge_math",
+        "input": {}
+      }
+    ],
+    "usage": {
+      "input_tokens": 100,
+      "output_tokens": 10
+    }
+  },
+  {
+    "stop_reason": "end_turn",
+    "text": "{\"argument\": \"{primary_supplier} may well deliver: its chance of failing is {p_fail}.\"}",
+    "usage": {
+      "input_tokens": 120,
+      "output_tokens": 30
+    }
+  },
+  {
+    "stop_reason": "tool_use",
+    "tool_calls": [
+      {
+        "name": "hedge_math",
+        "input": {}
+      }
+    ],
+    "usage": {
+      "input_tokens": 100,
+      "output_tokens": 10
+    }
+  },
+  {
+    "stop_reason": "end_turn",
+    "text": "{\"decision\": \"hold\", \"reason\": \"I prefer to wait.\", \"disputed_input\": \"\", \"dispute\": \"\"}",
+    "usage": {
+      "input_tokens": 120,
+      "output_tokens": 30
+    }
+  },
+  {
+    "stop_reason": "end_turn",
+    "text": "{\"decision\": \"hold\", \"reason\": \"I prefer to wait.\", \"disputed_input\": \"\", \"dispute\": \"\"}",
+    "usage": {
+      "input_tokens": 120,
+      "output_tokens": 30
+    }
+  },
+  {
+    "stop_reason": "end_turn",
+    "text": "{\"decision\": \"hold\", \"reason\": \"I prefer to wait.\", \"disputed_input\": \"\", \"dispute\": \"\"}",
+    "usage": {
+      "input_tokens": 120,
+      "output_tokens": 30
+    }
+  }
+]

@@ -56,7 +56,7 @@ JUDGE = ("You are the judge between A alone (hold) and A plus B (hedge). Your de
 
 @dataclass(frozen=True)
 class Backup:
-    """An offer with what the contract leaves open: the terms, the chain and when the goods are needed."""
+    """An offer, with what the contract leaves open: the terms, the chain and when the goods are needed."""
     offer: Mapping
     chain: timing.Chain
     needed_at: datetime | str
@@ -84,21 +84,18 @@ class Case:
     def figures(self) -> dict[str, str]:
         m, even = self.math, self.math["breakeven_p_fail"]
         return {
-            "part": self.part_id, "primary_supplier": self.primary,
+            "part": self.part_id, "primary_supplier": self.primary, "p_fail": f"{m['p_fail']:.1%}",
             "backup_supplier": str(self.backup.offer["supplier_id"]),
-            "p_fail": f"{m['p_fail']:.1%}",
             "copies_at_risk": f"{m['copies_at_risk']:,} copies",
             "copies_covered": f"{m['copies_covered']:,} copies",
             "loss_per_copy_eur": f"{m['loss_per_copy_eur']:,} EUR",
-            "units": f"{m['units']:,} units",
+            "units": f"{m['units']:,} units", "decide_by": self.decide_by, "goal_line": self.goal_line,
             "order_value_eur": f"{m['order_value_eur']:,.2f} EUR",
             "commitment_eur": f"{m['commitment_eur']:,.2f} EUR",
             "expected_loss_eur": f"{m['expected_loss_eur']:,.2f} EUR",
             "hedge_cost_eur": f"{m['hedge_cost_eur']:,.2f} EUR",
             "breakeven_p_fail": "no chance of failure" if even is None else f"{even:.2%}",
-            "decide_by": self.decide_by,
             "signer": self.signer["signer"].get("name") or self.signer["signer"]["role"],
-            "goal_line": self.goal_line,
         }
 
     def tool_result(self) -> dict:
@@ -108,11 +105,12 @@ class Case:
                 "decide_by_why": self.decide_by_why, "signer_status": self.signer["status"]}
 
     def render(self, text: str) -> str:
-        shown = self.figures()
-        return CITED.sub(lambda found: shown[found.group(1)], text)
+        return CITED.sub(lambda found: self.figures()[found.group(1)], text)
 
 
 def _json_value(value):
+    if isinstance(value, datetime):
+        return value.isoformat()
     if isinstance(value, Decimal):
         return int(value) if value == value.to_integral_value() else float(value)
     return str(value)
@@ -165,8 +163,7 @@ def build_case(spot: Mapping, backup: Backup, *, primary: Mapping, goal: Mapping
 
     valid_until = offer.get("valid_until")
     when = timing.assess(backup.chain, now=now, needed_at=backup.needed_at, needed_source=backup.needed_source,
-                         valid_until=valid_until, valid_until_source=refs[0] if valid_until else None,
-                         team=timing.team_window(goal))
+                         valid_until=valid_until, valid_until_source=refs[0], team=timing.team_window(goal))
     if when["too_late"]:
         raise ModelError(f"too late to start this offer, the last moment was {when['too_late_at']}")
     limit, why = when["too_late_at"], when["decide_by_why"]
@@ -188,8 +185,6 @@ def build_case(spot: Mapping, backup: Backup, *, primary: Mapping, goal: Mapping
     return Case(str(spot["part_id"]), str(primary["supplier_id"]), backup, _plain(math), _plain(when), limit, why,
                 _plain(signer), loss.refs[0]["goal_line"])
 
-
-# ---- the debate --------------------------------------------------------------
 
 class RoleGuard(GroundingGuard):
     """The tool was called, no figure was typed, and a decision that differs names the input it disputes."""
@@ -251,7 +246,6 @@ def _schema(case: Case, role: str) -> dict:
 
 class _RoleTrace:
     """One plan run for the whole debate: each role traces into it, and only the hedger finishes it."""
-
     def __init__(self, tracer: Tracer, role: str):
         self.tracer, self.role, self.run_id = tracer, role, tracer.run_id
 
@@ -268,11 +262,10 @@ class _RoleTrace:
 
 def _ask(client: llm.LLMClient, case: Case, role: str, system: str, prompt: str,
          tracer: Tracer | None) -> tuple[dict, str | None]:
-    registry = ToolRegistry()
+    registry, trace = ToolRegistry(), _RoleTrace(tracer, role) if tracer else None
     registry.add(TOOL, "The hedge verdict, every figure with its name, and each input with its source.",
                  {"type": "object", "properties": {}, "additionalProperties": False}, case.tool_result,
                  grounds_numbers=True)
-    trace = _RoleTrace(tracer, role) if tracer else None
     try:
         result = llm.run(client, registry, role=role, system=system + RULES, prompt=prompt, tracer=trace,
                          schema=_schema(case, role), guard=RoleGuard(case, role))
@@ -301,7 +294,6 @@ def debate(client: llm.LLMClient, case: Case, tracer: Tracer | None = None) -> d
     prompt = f"{question}\nThe arguments, as data:\n{json.dumps(said, ensure_ascii=False)}"
     ruling, failed = _ask(client, case, "judge", JUDGE, prompt, tracer)
     failures += filter(None, [failed])
-
     out = {role: case.render(text) for role, text in said.items()}
     verdict, decision = case.math["verdict"], ruling["decision"]
     out.update(decision=decision, model_verdict=verdict, reason=case.render(ruling["reason"]), disputed=None,
@@ -356,8 +348,7 @@ def save(conn, case: Case, rec: dict) -> dict:
     return {**rec, "recommendation_id": str(row["recommendation_id"])}
 
 
-def choose(spot: Mapping, backups: Iterable[Backup], *, primary: Mapping,
-           **inputs) -> tuple[Case | None, list[str]]:
+def choose(spot: Mapping, backups: Iterable[Backup], *, primary: Mapping, **inputs) -> tuple[Case | None, list[str]]:
     """The offer with the most expected loss avoided for its cost, so that one part gets one backup."""
     cases, problems = [], []
     for backup in backups:
@@ -389,8 +380,8 @@ def hedge_parts(conn, client: llm.LLMClient, spots: Iterable[Mapping], backups: 
             missing = "offer" if not by_part[part] else "reliability card of the primary supplier"
             skipped.append({"part_id": part, "reasons": [f"no {missing}"]})
             continue
-        case, problems = choose(spot, by_part[part], primary=primaries[part], goal=goal,
-                                approval_facts=approval_facts, now=now, history=history)
+        case, problems = choose(spot, by_part[part], primary=primaries[part], goal=goal, now=now, history=history,
+                                approval_facts=approval_facts)
         if not case:
             skipped.append({"part_id": part, "reasons": problems or ["no open offer of another supplier"]})
             continue
