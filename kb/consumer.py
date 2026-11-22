@@ -5,6 +5,8 @@ from __future__ import annotations
 import logging
 import threading
 
+import psycopg
+
 from tracker import db as tracker_db
 
 from . import db, reconcile
@@ -18,6 +20,8 @@ from .rules import active_version, load_rule_set
 log = logging.getLogger("kb")
 CONSUMER = "kb-extraction"
 BATCH = 500
+WORKER_LOCK = db.MIGRATION_LOCK   # one kb worker follows the feed at a time (AGENTS.md: kb advisory lock)
+RECONNECT_BACKOFF = (1, 2, 5, 15, 30)
 
 
 def _confidence_map(conn) -> dict:
@@ -83,28 +87,66 @@ def catch_up(conn, settings: KbSettings, reader: FileReader, llm) -> dict | None
     return None
 
 
+def _take_lock(conn) -> bool:
+    """Session-level advisory lock, released automatically when the connection drops: only one kb worker follows
+    the feed, so two workers (or a worker that lost its connection and a restart) never process the same event."""
+    return conn.execute("SELECT pg_try_advisory_lock(%s) AS ok", (WORKER_LOCK,)).fetchone()["ok"]
+
+
+def _close(conn) -> None:
+    if conn is not None and not conn.closed:
+        try:
+            conn.close()
+        except Exception:
+            pass
+
+
+def _follow(conn, listen, settings: KbSettings, reader: FileReader, llm, stop: threading.Event,
+            idle_timeout: float) -> None:
+    tracker_db.init_schema(conn)
+    conn.commit()
+    load_contract(conn, settings.structured_dir)
+    counts = sync_current(conn, current_sha_by_path(conn, settings.data_dir), reader, settings.structured_dir,
+                          _confidence_map(conn), llm=llm)
+    log.info("start-up sync: %s", counts)
+    result = reconcile.run(conn, "startup_sync", {"sync": counts})
+    log.info("reconcile run %s: %s issues", result["run_id"], result["issues"])
+    listen.execute(f"LISTEN {tracker_db.NOTIFY_CHANNEL}")
+    while not stop.is_set():
+        result = catch_up(conn, settings, reader, llm)
+        if result:
+            log.info("reconcile run %s: %s issues, changes %s", result["run_id"], result["issues"],
+                     {k: len(v) for k, v in result["changes"].items()})
+        for _ in listen.notifies(timeout=idle_timeout, stop_after=1):
+            pass
+
+
 def run(settings: KbSettings, stop: threading.Event, idle_timeout: float = 5.0) -> None:
-    conn = db.connect(settings.database_url, settings.schema)
-    listen = db.connect(settings.database_url, settings.schema, autocommit=True)
+    """Follow the tracker's change feed holding the single-worker lock. A lost connection backs off, reconnects,
+    re-takes the lock and resumes from the stored cursor; a worker that cannot take the lock waits and retries."""
     reader = FileReader(settings.data_dir)
     llm = load_adapter(settings.llm_adapter)
-    try:
-        tracker_db.init_schema(conn)
-        conn.commit()
-        load_contract(conn, settings.structured_dir)
-        counts = sync_current(conn, current_sha_by_path(conn, settings.data_dir), reader, settings.structured_dir,
-                              _confidence_map(conn), llm=llm)
-        log.info("start-up sync: %s", counts)
-        result = reconcile.run(conn, "startup_sync", {"sync": counts})
-        log.info("reconcile run %s: %s issues", result["run_id"], result["issues"])
-        listen.execute(f"LISTEN {tracker_db.NOTIFY_CHANNEL}")
-        while not stop.is_set():
-            result = catch_up(conn, settings, reader, llm)
-            if result:
-                log.info("reconcile run %s: %s issues, changes %s", result["run_id"], result["issues"],
-                         {k: len(v) for k, v in result["changes"].items()})
-            for _ in listen.notifies(timeout=idle_timeout, stop_after=1):
-                pass
-    finally:
-        conn.close()
-        listen.close()
+    failures = 0
+    while not stop.is_set():
+        conn = listen = None
+        try:
+            conn = db.connect(settings.database_url, settings.schema)
+            if not _take_lock(conn):
+                wait = RECONNECT_BACKOFF[min(failures, len(RECONNECT_BACKOFF) - 1)]
+                failures += 1
+                log.info("another kb worker holds the lock; waiting %ss", wait)
+                _close(conn)
+                conn = None
+                stop.wait(wait)
+                continue
+            listen = db.connect(settings.database_url, settings.schema, autocommit=True)
+            failures = 0
+            _follow(conn, listen, settings, reader, llm, stop, idle_timeout)
+        except (psycopg.OperationalError, psycopg.InterfaceError) as exc:
+            wait = RECONNECT_BACKOFF[min(failures, len(RECONNECT_BACKOFF) - 1)]
+            failures += 1
+            log.warning("kb db connection lost (%s); reconnecting in %ss", type(exc).__name__, wait)
+            stop.wait(wait)
+        finally:
+            _close(conn)
+            _close(listen)

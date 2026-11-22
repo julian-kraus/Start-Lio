@@ -7,6 +7,8 @@ import threading
 import time
 from datetime import date, timedelta
 
+import psycopg
+
 from tracker.store import BlobStore
 
 from . import contacts, db, send
@@ -17,6 +19,7 @@ from .transport import Fetcher
 log = logging.getLogger("mail")
 POLL_FOLDERS = ("\\All", "\\Junk")
 CONTACT_SYNC_EVERY = 600
+WORKER_LOCK = db.MIGRATION_LOCK   # one mail worker polls at a time (AGENTS.md: mail advisory lock)
 
 
 def poll_once(conn, s: MailSettings, fetcher: Fetcher, blobs: BlobStore) -> dict:
@@ -58,15 +61,41 @@ def poll_once(conn, s: MailSettings, fetcher: Fetcher, blobs: BlobStore) -> dict
     return counts
 
 
+def _connect_locked(s: MailSettings):
+    """Open a mail connection and take the single-worker advisory lock, or None if another worker holds it."""
+    conn = db.connect(s.require_db(), s.schema)
+    if conn.execute("SELECT pg_try_advisory_lock(%s) AS ok", (WORKER_LOCK,)).fetchone()["ok"]:
+        conn.commit()
+        return conn
+    conn.close()
+    return None
+
+
+def _close(conn) -> None:
+    if conn is not None and not conn.closed:
+        try:
+            conn.close()
+        except Exception:
+            pass
+
+
 def run(s: MailSettings, stop: threading.Event) -> None:
     s.require_credentials()
-    conn = db.connect(s.require_db(), s.schema)
     blobs = BlobStore(s.data_dir)
     backoff = (5, 30, 120)
     failures, last_contacts = 0, 0.0
+    conn = None
     try:
         while not stop.is_set():
             try:
+                if conn is None or conn.closed:
+                    conn = _connect_locked(s)
+                    if conn is None:
+                        wait = backoff[min(failures, len(backoff) - 1)]
+                        failures += 1
+                        log.info("another mail worker holds the lock; waiting %ss", wait)
+                        stop.wait(wait)
+                        continue
                 if time.monotonic() - last_contacts > CONTACT_SYNC_EVERY:
                     log.info("contacts: %s", contacts.sync(conn, s))
                     conn.commit()
@@ -80,11 +109,24 @@ def run(s: MailSettings, stop: threading.Event) -> None:
                         stop.wait(s.poll_interval)
                         if time.monotonic() - last_contacts > CONTACT_SYNC_EVERY:
                             break
+            except (psycopg.OperationalError, psycopg.InterfaceError) as exc:
+                # The connection is gone: drop it so the next iteration reconnects and re-takes the lock.
+                _close(conn)
+                conn = None
+                wait = backoff[min(failures, len(backoff) - 1)]
+                failures += 1
+                log.warning("mail db connection lost (%s); reconnecting in %ss", type(exc).__name__, wait)
+                stop.wait(wait)
             except Exception as exc:
-                conn.rollback()
+                try:
+                    if conn is not None and not conn.closed:
+                        conn.rollback()
+                except (psycopg.OperationalError, psycopg.InterfaceError):
+                    _close(conn)
+                    conn = None
                 wait = backoff[min(failures, len(backoff) - 1)]
                 failures += 1
                 log.warning("mail loop error (%s), retrying in %ss", type(exc).__name__, wait)
                 stop.wait(wait)
     finally:
-        conn.close()
+        _close(conn)
