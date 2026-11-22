@@ -131,6 +131,24 @@ def test_no_single_signer_means_no_name_and_a_reason(change):
     assert out["status"] == "needs_human" and "name" not in out["signer"] and out["signer"]["reason"]
 
 
+@pytest.mark.parametrize("where", ["decision", "action"])
+def test_a_second_required_approval_is_not_one_click(where):
+    site = {"delivery_site": "North Depot"}
+    given = decision(**site) if where == "decision" else decision(actions=[{**payment(), **site}])
+    out = decisions.routed_signer(given, world(), datetime.fromisoformat(NOW))
+    assert out["status"] == "needs_human" and "name" not in out["signer"]
+    assert out["signer"]["role"] == "Area Manager Paper & Board and Warehouse Chief North Depot"
+    assert "more than one signature" in out["signer"]["reason"]
+    assert "section 2" in out["signer"]["rule"] and "section 3" in out["signer"]["rule"]
+
+
+def test_accept_is_refused_while_a_second_approval_is_required(tmp_path, stores):
+    la = screen(tmp_path, decision(delivery_site="North Depot", draft_ids=[draft(stores)]))
+    refused(409, decisions.accept, la, "D", {"approver": SIGNER}, stores)
+    assert la.decision("D")["status"] == "open" and row(stores) is None
+    assert count(stores, "approvals") == count(stores, "sends") == 0
+
+
 def test_no_policy_facts_means_no_signer():
     out = decisions.routed_signer(decision(), [], datetime.now(timezone.utc))
     assert out["status"] == "needs_human" and "name" not in out["signer"]

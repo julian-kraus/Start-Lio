@@ -7,7 +7,7 @@
 In live mode the signer comes from `sourcing.approvals.route` on kb facts, never from the record producer. The
 producer gives what is routed: `actions` as `sourcing.hedge` writes them, with `category` and `delivery_site`.
 A payment is routed on the larger of itself and its order, so a split cannot lower the signer. Without a
-resolved single signer nobody can accept here.
+resolved single signer, counting the approvals required on top of the value, nobody can accept here.
 A rehearsal has no database: it shows its script's signer, writes no plan row and never reaches mail.
 """
 
@@ -113,16 +113,19 @@ def routed_signer(decision: dict, rows: list[dict], on: datetime) -> dict:
         except (ValueError, TypeError, AttributeError) as exc:
             reasons.append(f"an action cannot be routed: {exc}")
     reasons += [why for r in results for why in r["reasons"]]
-    if any(len(r["signers"]) > 1 for r in results):
+    needed = [[*r["signers"], *r["also_required"]] for r in results]  # a site release comes on top of the value
+    if any(len(people) > 1 for people in needed):
         reasons.append("the rule needs more than one signature, one click cannot give them")
     names = {r["signer"]["name"] for r in results if "name" in r["signer"]}
     if len(names) > 1:
         reasons.append("the actions have different signers, one click cannot sign for them all")
     resolved = (len(results) == len(actions) > 0 and len(names) == 1
-                and all(r["status"] == "resolved" and len(r["signers"]) == 1 for r in results))
-    roles = " and ".join(dict.fromkeys(r["signer"]["role"] for r in results)) or approvals.UNRESOLVED
+                and all(r["status"] == "resolved" for r in results) and all(len(people) == 1 for people in needed))
+    asked = [role for r in results for role in (r["signer"]["role"], *(s["role"] for s in r["also_required"]))]
+    roles = " and ".join(dict.fromkeys(asked)) or approvals.UNRESOLVED
     signer = {"role": roles}
-    if rules := list(dict.fromkeys(r["signer"]["rule"] for r in results if r["signer"].get("rule"))):
+    cited = [s.get("rule") for r in results for s in (r["signer"], *r["also_required"])]
+    if rules := list(dict.fromkeys(rule for rule in cited if rule)):
         signer["rule"] = "; ".join(rules)
     if resolved:
         signer["name"] = names.pop()
