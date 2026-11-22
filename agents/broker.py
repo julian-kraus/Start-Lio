@@ -174,7 +174,7 @@ def open_promises(plan_conn) -> list[dict]:
     """The promises still waiting, with the keys the ledger needs to match and time statements against. `created_at`
     carries the made time (there is no made_at column), so the ledger's clock survives a reload."""
     return plan_conn.execute(
-        "SELECT promise_id, supplier_id, part_id, lane, what, due, next_check, fallback, state, created_at "
+        "SELECT promise_id, supplier_id, part_id, lane, what, due, next_check, fallback, state, created_at, sources "
         "FROM promises WHERE state = 'waiting' ORDER BY promise_id").fetchall()
 
 
