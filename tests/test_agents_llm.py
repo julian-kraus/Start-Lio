@@ -81,6 +81,27 @@ def test_a_verdict_with_no_tool_result_is_refused_not_passed():
     assert "expected_loss_eur" not in res.verdict and "hedge" not in res.verdict   # the invented values are gone
 
 
+def test_a_non_grounding_tool_cannot_ground_a_verdict():
+    reg = make_registry()
+    reg.add("note", "Not a grounding tool.", {"type": "object"}, lambda: {"expected_loss_eur": 5.0})
+    script = [{"stop_reason": "tool_use", "tool_calls": [{"name": "note", "input": {}}]},
+              *[{"stop_reason": "end_turn", "text": '{"expected_loss_eur": 5.0}'}] * 3]
+    res = llm.run(llm.ReplayClient(script), reg, role="hedger", system=SYSTEM, prompt=PROMPT, guard=GUARD)
+    assert not res.ok and res.guard_failed and "expected_loss_eur" not in res.verdict
+
+
+def test_a_grounding_tool_wins_over_a_non_grounding_one():
+    reg = make_registry()
+    reg.add("note", "Not a grounding tool.", {"type": "object"}, lambda: {"expected_loss_eur": 5.0})
+    hedge_in = {"p_fail": 0.21, "copies_at_risk": 1550, "loss_per_copy_eur": 300, "commitment_eur": 3500}
+    script = [{"stop_reason": "tool_use", "tool_calls": [{"name": "hedge", "input": hedge_in},
+                                                          {"name": "note", "input": {}}]},
+              *[{"stop_reason": "end_turn", "text": '{"expected_loss_eur": 5.0}'}] * 3]
+    res = llm.run(llm.ReplayClient(script), reg, role="hedger", system=SYSTEM, prompt=PROMPT, guard=GUARD)
+    assert res.guard_retries == 2 and res.guard_failed is True
+    assert res.verdict["expected_loss_eur"] == 97650.0      # the grounding tool's value, never the other tool's
+
+
 def test_an_exhausted_script_ends_the_run_with_an_error():
     # only a tool-use turn, no final answer: the loop asks for another reply and the script runs out.
     res = llm.run(llm.ReplayClient([{"stop_reason": "tool_use", "tool_calls": [{"name": "hedge", "input": {}}]}]),
