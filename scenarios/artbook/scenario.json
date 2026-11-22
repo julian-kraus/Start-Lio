@@ -1,0 +1,32 @@
+{
+  "name": "Art-book backup rehearsal",
+  "persona": {
+    "persona_id": "supplier-a",
+    "display_name": "Supplier A",
+    "address": "supplier-a@scenario.invalid",
+    "desk": "launch-desk@scenario.invalid",
+    "note": "Scenario persona. The offer, check-in and cancellation are scenario inputs. Only a reliability history read from kb facts is real; that supplier did not make this offer."
+  },
+  "inputs": [
+    {"id": "goal", "q": "What has to be true at the deadline?", "suggested": "Every copy of the first-priority edition is on time."},
+    {"id": "sacrifice", "q": "What may suffer to get there?", "suggested": "Supplier goodwill."},
+    {"id": "unit_loss", "q": "What does one missing copy cost?", "unit": "EUR", "min": 0, "suggested": null},
+    {"id": "budget", "q": "How much may the agent commit alone, per hedge?", "unit": "EUR", "min": 0, "suggested": null},
+    {"id": "part", "q": "Which part does the scenario offer cover?", "suggested": null},
+    {"id": "offer_quantity", "q": "How many pieces does Supplier A offer?", "unit": "pcs", "min": 1, "suggested": null},
+    {"id": "offer_price", "q": "What is the offered price per piece?", "unit": "EUR", "min": 0, "suggested": null},
+    {"id": "deposit_pct", "q": "What deposit does Supplier A ask for?", "unit": "%", "min": 0, "max": 100, "suggested": 20},
+    {"id": "loads_within_h", "q": "Within how many hours does Supplier A promise to load?", "unit": "h", "min": 1, "max": 48, "suggested": 4},
+    {"id": "cancel_reason", "q": "What reason does Supplier A give for cancelling?", "suggested": "our press is not available"}
+  ],
+  "clock": {
+    "start_h_before_deadline": 26,
+    "stops_h_before_deadline": [22, 14],
+    "offline_h_before_deadline": 10
+  },
+  "beats": {
+    "offer": "emails/offer.eml",
+    "check_in": "emails/check_in.eml",
+    "cancellation": "emails/cancellation.eml"
+  }
+}

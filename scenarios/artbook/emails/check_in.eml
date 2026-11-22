@@ -1,0 +1,13 @@
+Subject: [Scenario] Check-in for ${part}
+X-Lookahead-Scenario: scenario input
+Content-Type: text/plain; charset="utf-8"
+
+[Scenario input, not a real supplier message]
+
+Hello,
+
+we confirm the order of ${offer_quantity} pieces of ${part}.
+We load within ${loads_within_h} h.
+
+Kind regards
+${persona}
