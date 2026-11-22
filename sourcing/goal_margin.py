@@ -3,6 +3,9 @@
 `read` gives (line, None) when it does, (None, None) when it does not and (None, words) when the words on margin
 are not among the recognised forms. Those are never guessed: the goal's `protect` list settles them. The same
 holds in every field: a sacrifice, a protect entry and the answer to a question on margin.
+
+A sentence on margin is read as a whole: each other part of it must be a known aside, because a negation or a
+condition can sit in any clause. An answer is not read apart from a question that turns it around.
 """
 
 from __future__ import annotations
@@ -29,14 +32,27 @@ PROTECTS = re.compile("|".join((
 )))
 NOT = (r"(?:cannot|will not|do not|does not|must not|should not|need not|never|stop|forget(?: about)?|"
        r"no need to|not)")
+# A word of an aside: none that negates, limits or points back at margin
+WORD = (r"(?!(?:not|no|never|nor|if|when|once|only|unless|it|this|that|which|protect\w*|margins?)\b)"
+        r"[\w'-]+")
+ON_TIME = rf"(?:(?:all|every|each)(?: {WORD}){{0,3}} |everything )?(?:on time|by the deadline)"
+ASIDE = re.compile("|".join((
+    ON_TIME,
+    r"(?:do not|never|must not|cannot) (?:bankrupt (?:me|us)|overspend|miss (?:the |our )?(?:date|deadline))",
+    rf"{WORD}(?: {WORD}){{0,2}} {CAN} (?:suffer|wait|slip)",
+    r"please|above all|at all costs",
+)))
 GIVES_UP = re.compile("|".join((
     rf"{LEAD}{NOT} (?:(?:need to|have to|try to|want to) )?{V} {M}{TAIL}",
     rf"{LEAD}(?:do not|does not) (?:care about|mind) {M}",
-    rf"(?:.+ )?(?:rather than|instead of) {V} {M}",
+    rf"(?:{ON_TIME} )?(?:rather than|instead of) {V} {M}",
     rf"(?:{M} protection|protection of {M}|{M}) {CAN} (?:suffer|wait|slip|shrink|drop|give)",
     rf"{M} (?:(?:does|do) not matter|is not (?:important|a priority))",
 )))
 NEGATION = re.compile(r"\b(?:not|never|cannot|no|stop|forget)\b")
+WITHDRAWN = re.compile(r"(?:(?:actually|well|or|just) )?(?:not|no|nope|never|do not|kidding|never mind|scratch that"
+                       r"|forget (?:it|that))")
+TURNS = re.compile(rf"{NEGATION.pattern}|\b(?:least|avoid|give up|giving up|skip)\b")
 CONDITION = re.compile(r"\b(?:unless|except|only if|only when|as long as)\b")
 GIVEN = re.compile(rf"(?:(?:some|lower|a bit of|a little) )?{M}|{GIVES_UP.pattern}")
 KEPT = re.compile(rf"{M}|{PROTECTS.pattern}")
@@ -56,6 +72,21 @@ def _strings(value) -> Iterable[str]:
     elif isinstance(value, (list, tuple)):
         for item in value:
             yield from _strings(item)
+
+
+def _entries(value) -> Iterable[str]:
+    """The entries of a protect or sacrifice field. A key on margin is shown with its value, so it is never dropped."""
+    if isinstance(value, Mapping):
+        for key, item in value.items():
+            if MARGIN.search(str(key).lower().replace("_", " ")):
+                yield f"{str(key).replace('_', ' ')}: {item}"
+            elif key not in ("q", "question"):
+                yield from _entries(item)
+    elif isinstance(value, (list, tuple)):
+        for item in value:
+            yield from _entries(item)
+    else:
+        yield from _strings(value)
 
 
 def _plain(text: str) -> str:
@@ -86,7 +117,7 @@ def read(goal: Mapping | None) -> tuple[str | None, str | None]:
     if not goal:
         return None, None
     given, unclear = False, None
-    for text in _strings(goal.get("sacrifices")):
+    for text in _entries(goal.get("sacrifices")):
         if MARGIN.search(said := _plain(text).rstrip(" .!;")):
             if GIVEN.fullmatch(said):
                 given = True
@@ -96,7 +127,7 @@ def read(goal: Mapping | None) -> tuple[str | None, str | None]:
         return None, None
     if goal.get("protect") is not None:
         kept = None
-        for text in _strings(goal["protect"]):
+        for text in _entries(goal["protect"]):
             if MARGIN.search(said := _plain(text).rstrip(" .!;")):
                 if not KEPT.fullmatch(said):
                     return None, text
@@ -112,8 +143,13 @@ def read(goal: Mapping | None) -> tuple[str | None, str | None]:
             if not (ASKS.fullmatch(asked) and NO.fullmatch(said)):
                 return None, f"{question} {answer}"
             gives_up.append(f"{question} {answer}")
+        elif MARGIN.search(said) and TURNS.search(asked):
+            return None, f"{question} {answer}"
     for text in _strings([goal.get("statement"), goal.get("answers")]):
-        for sentence in re.findall(r"[^.;!?\n]+[.;!?]?", text):
+        sentences = re.findall(r"[^.;!?\n]+[.;!?]?", text)
+        if MARGIN.search(_plain(text)) and any(WITHDRAWN.fullmatch(_plain(x).rstrip(" .;!")) for x in sentences):
+            return None, text.strip()
+        for sentence in sentences:
             whole = _plain(sentence)
             if not MARGIN.search(whole):
                 continue
@@ -129,7 +165,9 @@ def read(goal: Mapping | None) -> tuple[str | None, str | None]:
                         elif PROTECTS.fullmatch(said) and not negated:
                             protects.append(part.strip())
                         else:
-                            return None, clause.strip()
+                            return None, sentence.strip()
+                    elif said and not ASIDE.fullmatch(said):
+                        return None, sentence.strip()
                     negated = negated or bool(NEGATION.search(said))
     if protects and gives_up:
         return None, f"{protects[0]} / {gives_up[0]}"

@@ -88,3 +88,47 @@ def test_a_safety_margin_in_the_protect_list_is_not_margin():
 def test_an_answer_to_a_question_on_margin_is_not_dropped(answers):
     with pytest.raises(ModelError, match="margin"):
         hedge.margin_line({"answers": answers})
+
+
+@pytest.mark.parametrize("said", [
+    "Do not, under any circumstances, protect margin", "Never, ever, protect margin", "Not a priority: protect margin",
+    "Under no circumstances, protect margin", "Protect margin, not", "Protect margin - no", "Forget it: protect margin",
+    "If there is money left, protect margin", "Protect margin, if possible", "Protect margin, time permitting",
+    "Protect margin, but only after the deadline is safe", "Protect margin and forget it",
+    "Protect margin, that can wait",
+    "Never, margin can suffer", "It is not true: margin can suffer", "Margin can suffer, if goodwill holds",
+    "I would never choose speed rather than protect margin", "Protect margin. Actually no", "Protect margin... not",
+    "Don't. Protect margin",
+])
+def test_words_elsewhere_in_the_sentence_are_not_dropped(said):
+    for goal in ({"statement": said}, {"answers": {"limits": said}}):
+        with pytest.raises(ModelError, match="margin"):
+            hedge.margin_line(goal)
+    assert hedge.margin_line({"statement": said, "protect": ["margin"]})
+    assert hedge.margin_line({"statement": said, "protect": []}) is None
+
+
+@pytest.mark.parametrize("said", [
+    "All copies on time, protect margin", "Protect margin, goodwill can suffer", "Don't miss the date, protect margin",
+    "All first copies on time, goodwill can suffer, don't bankrupt me, protect margin",
+    "A missing copy costs 70 EUR, a late one 20 EUR. Protect margin. Spend at most 900 EUR.",
+])
+def test_plain_asides_next_to_margin_are_still_read(said):
+    assert hedge.margin_line({"statement": said})
+
+
+@pytest.mark.parametrize("question", [
+    "What must we never do?", "What is least important?", "What should we avoid?", "What would you give up?",
+])
+def test_an_answer_is_not_read_without_a_question_that_turns_it_around(question):
+    for answers in ([{"q": question, "a": "Protect margin"}], {question: "Protect margin"}):
+        with pytest.raises(ModelError, match="margin"):
+            hedge.margin_line({"answers": answers})
+
+
+@pytest.mark.parametrize("goal", [
+    {"protect": {"margin": True}}, {"protect": [{"margin": True}]}, {"sacrifices": [{"margin": "no"}]},
+])
+def test_margin_named_by_a_key_is_not_dropped(goal):
+    with pytest.raises(ModelError, match="margin"):
+        hedge.margin_line(goal)
