@@ -21,6 +21,7 @@ from tracker.db import _jsonb_safe
 from . import facts as facts_mod
 from .engine import issue_key
 from .llm.base import text_of
+from .tabular import TABULAR_CONTAINERS
 
 EXTRACTOR = "triage-agent"
 DEFAULT_CONFIDENCE_CAP = 0.5
@@ -215,7 +216,9 @@ def candidate_documents(conn, limit: int = 20) -> list[dict]:
     limit = max(1, min(int(limit), 100))
     rows = conn.execute(
         "SELECT path, sha256, container, doc_kind, status FROM documents WHERE active "
-        "AND (doc_kind IS NULL OR doc_kind = 'other') ORDER BY updated_at, path LIMIT %s", (limit,)).fetchall()
+        "AND (doc_kind = 'other' OR (doc_kind IS NULL AND status = 'queued')) "
+        "AND (container IS NULL OR NOT (container = ANY(%s))) ORDER BY updated_at, path LIMIT %s",
+        (list(TABULAR_CONTAINERS), limit)).fetchall()
     return [_row_dict(row) for row in rows]
 
 
