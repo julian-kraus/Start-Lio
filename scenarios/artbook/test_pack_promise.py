@@ -47,13 +47,15 @@ class ReplayedAnswers(LLMClient):
         text = document.text
         said = datetime.fromisoformat(re.search(r"(?m)^Date: (.+)$", text)[1].strip()).isoformat()
         kind = "cancel" if "we cancel" in text else "confirm" if "load within" in text else None
+        line = re.search(r"(?m)^.*(?:we cancel|load within).*$", text)
         return {"source": {}, "doc_kind": structure.name, "doc_kind_confidence": "high", "languages": ["en"],
                 "spec_version": "1", "extracted_by": self.name, "doc_date": said, "unreadable": [],
                 "proposed_fact_types": [],
                 "facts": [{"fact_type": "supplier_statement", "subject": {"statement_no": "1"},
-                           "attribute": "promise_kind", "value": kind,
+                           "attribute": attribute, "value": value,
                            **({"as_of": said} if self.dated else {}), "confidence": "high",
-                           "locator": {"line": 1}, "evidence": "replayed answer"}] if kind else []}
+                           "locator": {"line": 1}, "evidence": "replayed answer"}
+                          for attribute, value in (("promise_kind", kind), ("value", line[0].strip()))] if kind else []}
 
 
 @pytest.fixture
@@ -97,11 +99,17 @@ def test_the_replayed_cancellation_breaks_the_check_in_promise(demo_db, tmp_path
 
         [check_in] = deliver("check_in")
         assert check_in.supplier_id == pack["persona"]["persona_id"]
-        promise = promises.promise_from_statement(
-            promise_id="p", supplier_id=check_in.supplier_id, what="loads", fallback="use the backup",
-            made_at=check_in.at or clock.now(plan), within="within 4 h", sources=[check_in.source()])
-        broker.save_promise(plan, promise)
+        # The broker's own tool, so the pack's mail has to carry what the tool insists on: supplier, time, duration.
+        registry = broker.broker_registry(plan, None, registered=[], statements=[check_in])
+        quoted = re.search(r"within \d+ h", check_in.text)[0]
+        saved = registry.call("register_promise", {"promise_id": "p", "what": "loads", "fallback": "use the backup",
+                                                  "within": quoted, "sources": [check_in.source()]})
         plan.commit()
+        if not dated and check_in.at is None:
+            assert "no readable time" in saved.get("error", ""), saved
+            assert broker.open_promises(plan) == [], "a check-in without a time registers nothing"
+            pytest.xfail("#171: kb carries no mail time, so the broker refuses to watch the check-in")
+        assert "error" not in saved, saved
         assert broker.apply_ledger(plan, [check_in]) == [], "a promise is not proven by the mail that made it"
         plan.commit()
 
@@ -109,9 +117,6 @@ def test_the_replayed_cancellation_breaks_the_check_in_promise(demo_db, tmp_path
         plan.commit()
         statements = deliver("cancellation")
         settled = broker.apply_ledger(plan, statements)
-        if not dated and all(statement.at is None for statement in statements):
-            assert settled == [], "a statement without a time settles nothing"
-            pytest.xfail("#171: kb carries no mail time, so the cancellation breaks no promise")
         assert len(settled) == 1, "the cancellation broke no promise"
         [broken] = settled
         assert broken["state"] == promises.BROKEN and broken["statement_kind"] == "cancel"
