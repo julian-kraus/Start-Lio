@@ -11,11 +11,10 @@ import threading
 
 import yaml
 
-from . import consumer, db, reconcile, rules
+from . import consumer, db, mail_source, reconcile, rules
 from .config import load_settings
-from .ingest import FileReader, sync_current
+from .ingest import FileReader
 from . import eval_extraction, registry
-from .intake import drain
 from .llm.base import load_adapter
 from .loader import current_sha_by_path, load_contract, load_envelopes
 
@@ -46,9 +45,7 @@ def cmd_load(args, s, conn):
 
 def cmd_sync(args, s, conn):
     load_contract(conn, s.structured_dir)
-    counts = sync_current(conn, current_sha_by_path(conn, s.data_dir), FileReader(s.data_dir), s.structured_dir,
-                          _conf_map(conn), force=args.force)
-    _print(counts)
+    _print(consumer.sync(conn, s, FileReader(s.data_dir), _conf_map(conn), force=args.force))
 
 
 def cmd_reconcile(args, s, conn):
@@ -66,7 +63,9 @@ def _adapter(spec):
 
 def cmd_extract(args, s, conn):
     client = _adapter(args.adapter or s.llm_adapter)
-    _print(drain(conn, client, FileReader(s.data_dir), s.structured_dir, _conf_map(conn), limit=args.limit))
+    drained, parked = consumer.extract(conn, s, FileReader(s.data_dir), client, mail_source.MailSource.from_env(),
+                                       _conf_map(conn), limit=args.limit)
+    _print({**drained, "mail_parked": len(parked)})
     result = reconcile.run(conn, "llm_extraction", {"adapter": client.label})
     _print({"changes": {k: len(v) for k, v in result["changes"].items()}})
 
