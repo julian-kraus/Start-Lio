@@ -38,7 +38,7 @@ GIVES_UP = re.compile("|".join((
 NEGATION = re.compile(r"\b(?:not|never|cannot|no|stop|forget)\b")
 CONDITION = re.compile(r"\b(?:unless|except|only if|only when|as long as)\b")
 ALL_BUT = re.compile(r"\b(?:except|other than|apart from|but|not)\b")
-CLAUSE = re.compile(r"[,:]|\s[-–]+\s|—|(?<!anything )(?<!everything )(?<!nothing )\bbut\b", re.IGNORECASE)
+CLAUSE = re.compile(r"[,:]|\s[-\u2013]+\s|\u2014|(?<!anything )(?<!everything )(?<!nothing )\bbut\b", re.IGNORECASE)
 
 
 def _strings(value) -> Iterable[str]:
@@ -55,7 +55,7 @@ def _strings(value) -> Iterable[str]:
 
 
 def _plain(text: str) -> str:
-    text = " ".join(text.lower().replace("’", "'").split())
+    text = " ".join(text.lower().replace("\u2019", "'").split())
     for short, full in (("can't", "cannot"), ("can not", "cannot"), ("won't", "will not"), ("n't", " not"),
                         ("dont ", "do not ")):
         text = text.replace(short, full)
