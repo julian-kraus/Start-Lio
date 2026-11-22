@@ -17,7 +17,7 @@ const IK = {1: "brief", 2: "hp", 3: "aim", 4: "shield", 5: "flag", ad: "shield",
 
 function planFacts(S) {
   const ev = S.events || [], sup = S.suppliers || [], dec = (S.decisions || [])[0];
-  const A = sup.find(s => s.supplier_id.startsWith("SCN"));
+  const A = sup.find(s => s.scenario);
   const backupId = (dec && dec.supplier_id) || ((S.promises || []).find(p => A && p.supplier_id !== A.supplier_id) || {}).supplier_id;
   const B = sup.find(s => s.supplier_id === backupId);
   const goals = ev.filter(e => e.type === "goal");
@@ -52,17 +52,19 @@ function planView(S) {
       <div class="pf-tx"><b>${esc(t)}</b><span>${esc(x)}</span>${extra}</div>
       ${k === "done" ? `<span class="pf-ic">${ic("check")}</span>` : k === "cur" ? `<span class="badge b-a pf-bd">Now</span>` : k === "bad" ? `<span class="badge b-r pf-bd">Happened</span>` : ""}</div>`;
   };
-  const nf = Math.min(3, proven);
-  const flags = `<span class="pf-flags">${[0, 1, 2].map(i => `<i class="${i < nf ? "on" : ""}" style="--d:${i * .18}s">${gi("flag", 13)}</i>`).join("")}<em>Checkpoints ${nf} / ${Math.max(nf, Math.min(3, P.length))}</em></span>`;
+  const nf = proven;
+  const flags = `<span class="pf-flags">${P.map((_, i) => i).map(i => `<i class="${i < nf ? "on" : ""}" style="--d:${i * .18}s">${gi("flag", 13)}</i>`).join("")}<em>Checkpoints ${nf} / ${P.length}</em></span>`;
   const units = f.canc && f.canc.impact ? f.canc.impact.units : null;
-  const hp = st.ac === "bad" && units ? `<span class="pf-hp"><i><b></b></i><em>−${num(units)}</em></span>` : "";
+  const needed = (((S.plan || {}).coverage) || {}).needed;
+  const left = needed ? Math.max(0, 100 - units / needed * 100) : null;   // the copies not at risk
+  const hp = st.ac === "bad" && units ? `<span class="pf-hp">${left == null ? "" : `<i><b style="width:${left}%"></b></i>`}<em>−${num(units)}</em></span>` : "";
   const aName = f.A ? f.A.name : "The first offer", bName = f.B ? f.B.name : "the backup";
   // the outcomes of a hedge exist only once a hedge was placed: before that the plan names no supplier's future
   const branches = !!(f.hedge && f.A);
   const next = P.find(p => p.state === "waiting");
   const flow = `<div class="pf-grid" id="pfGrid"><svg class="pf-svg" id="pfSvg"></svg>
     ${box(1, "1/2", "Goal interview", S.goal ? `${f.weak ? "At stake " + eur(f.weak.impact.eur) + ", " : ""}deadline ${dhm(S.launch.deadline)}` : "Waiting for the goal")}
-    ${box(2, "2/2", "Supplier reliability", f.A && f.B ? `From order history: ${aName} ${pct(f.A)}, ${bName} ${pct(f.B)}` : `${(S.suppliers || []).length} suppliers scored from their order history`)}
+    ${box(2, "2/2", "Supplier reliability", f.A && f.B ? `${bName} ${pct(f.B)} from its order history; ${aName} ${pct(f.A)}. ${f.A.scenario}` : `${(S.suppliers || []).length} suppliers scored from their order history`)}
     ${box(3, "3/2", "Critical points", crit.length ? crit.map(l => l.name).join(", ") + " critical" : "Ranked once the goal is set")}
     ${box(4, "4/2", f.hedge ? "Hedge placed" : "Hedge", f.hedge ? f.hedge.title : "Waiting for an offer to hedge")}
     ${box(5, "5/2", "Check-in: critical points on schedule?", next ? `Next proof: ${next.what}, ${dhm(next.next_check || next.due)}` : "Every promise needs a proof", flags)}

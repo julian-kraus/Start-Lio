@@ -65,3 +65,18 @@ def test_a_fact_with_a_date_only_shows_no_time():
     feed = render(events=[{"id": 1, "type": "delivery", "title": "Arrived", "date_only": True,
                            "at": "2030-01-01T08:00:00+00:00"}])["feed"]
     assert "01 Jan" in feed and "09:00" not in feed
+
+
+def test_the_outside_supplier_is_known_by_its_record_and_names_its_scenario_input():
+    suppliers = [{"supplier_id": "outside", "name": "Outside", "score": {"value": 0.5, "n": 4},
+                  "scenario": "Borrowed history, scenario input"},
+                 {"supplier_id": "known", "name": "Known", "score": {"value": 0.9, "n": 4}}]
+    plan = render(suppliers=suppliers, decisions=[{"decision_id": "d1", "title": "T", "status": "open",
+                  "supplier_id": "known", "at": "2030-01-01T08:00:00+00:00"}])["plan"]
+    assert "Borrowed history, scenario input" in plan
+    assert "From order history: Outside" not in plan
+
+
+def test_every_checkpoint_is_counted():
+    promises = [{"promise_id": str(i), "state": "proven", "what": "Proof"} for i in range(4)]
+    assert "Checkpoints 4 / 4" in render(promises=promises)["plan"]

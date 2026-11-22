@@ -183,7 +183,7 @@ def build(w: World, scn: dict) -> list[dict]:
                     "autonomy": {"mode": "autonomous", "text": "Analysis only."}}})
     add({"kind": "cue", "label": "Offer from A"})
     add({"kind": "clock", "now": at(back["ordered_at"])})
-    add(supplier_record(w, a_card, a_master, off["supplier_id"], [part]))
+    add(supplier_record(w, a_card, a_master, off["supplier_id"], [part], scenario=a_master["notes"]))
     add({"kind": "event", "type": "offer_in", "at": at(off["received_at"]),
          "title": f"{off['label']} offers {num(off['units'])} x {w.part_name(part)}", "lane": part,
          "supplier_id": off["supplier_id"], "severity": "info",
@@ -225,7 +225,7 @@ def build(w: World, scn: dict) -> list[dict]:
                     "autonomy": {"mode": "needs_decision", "text": f"Keeping the {b_name} lot commits "
                                                                   f"{eur(remaining)}."}}})
     add({"kind": "promise", "promise_id": "P-A-LOAD", "state": "broken", "broken_at": at(canc["at"])})
-    add(supplier_record(w, broken, a_master, off["supplier_id"], [part], at=at(canc["at"]),
+    add(supplier_record(w, broken, a_master, off["supplier_id"], [part], at=at(canc["at"]), scenario=a_master["notes"],
                         cause="cancelled its order"))
     add({"kind": "cue", "label": "Decision"})
     add({"kind": "clock", "now": at(scn["decision_at"])})

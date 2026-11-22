@@ -118,7 +118,7 @@ function acts(d) {
 }
 function dqCard(d) {
   const plan = (d.on_accept || []).map(t => `<li>${ic("send")}<span>${esc(t)}</span></li>`).join("");
-  return `<article class="dq-card"><div class="dc-meta">${B("r", "Urgent")}<span class="dc-due">${ic("clock")}${esc(dhm(d.at))}</span></div>
+  return `<article class="dq-card"><div class="dc-meta">${B("r", "Open")}<span class="dc-due">${ic("clock")}Raised ${esc(dhm(d.at))}</span></div>
   <h4 class="dc-t">${esc(d.title)}</h4><p class="dc-cause">${esc(d.recommendation || "")}</p>
   <div class="dc-stats"><div><b>${eur(d.cost && d.cost.eur)}</b><span>To pay</span></div><div><b class="bad">${eur(d.impact && d.impact.eur)}</b><span>Refunds if ignored</span></div></div>
   <div class="dc-plan"><div class="dc-plan-h"><span>On accept</span></div><ul>${plan}</ul></div>
@@ -135,7 +135,7 @@ function decCard(d) {
     const k = p.state === "proven" ? "done" : p.state === "broken" ? "bad" : "";
     return `<li class="k-${k}"><span class="pd-t">${esc(dhm(p.due || p.next_check))}</span><i>${k === "done" ? ic("check") : k === "bad" ? ic("x") : ""}</i><span class="pd-x">${esc(supName(p.supplier_id))}: ${esc(p.what)}</span></li>`;
   }).join("") + `<li class="k-dead"><span class="pd-t">${esc(dhm(S.launch.deadline))}</span><i></i><span class="pd-x">Deadline</span></li>`;
-  return `<article class="dc2"><div class="dc2-meta">${B("r", "Urgent")}<span class="dc2-kind">Backup</span><span class="dc2-due">${ic("clock")}<b>${esc(dhm(d.at))}</b></span></div>
+  return `<article class="dc2"><div class="dc2-meta">${B("r", "Open")}<span class="dc2-due">${ic("clock")}<b>Raised ${esc(dhm(d.at))}</b></span></div>
   <h3 class="dc2-t">${esc(d.title)}</h3><p class="dc2-sum">${esc(d.recommendation || "")}</p>
   <div class="dc2-kpi"><div><span>To pay, on delivery</span><b>${eur(d.cost && d.cost.eur)}</b><small>${esc(d.cost && d.cost.text)}</small></div>
    <div><span>Refunds if ignored</span><b class="bad">${eur(d.impact && d.impact.eur)}</b><small>${esc(d.impact && d.impact.text)}</small></div>
@@ -190,7 +190,7 @@ function risks() {
   const plan = S.plan || {}, lanes = plan.lanes || [], cov = plan.coverage || {};
   const crit = lanes.filter(l => l.gap > 0 || l.status === "covered");
   const show = crit.length ? crit : lanes.slice(0, 3);
-  const sups = (S.suppliers || []).filter(s => s.score && s.score.n > 0 && !s.supplier_id.startsWith("SCN"))
+  const sups = (S.suppliers || []).filter(s => s.score && s.score.n > 0 && !s.scenario)
     .sort((x, y) => x.score.value - y.score.value);
   $("#gSup").innerHTML = sups.map(s => `<div class="gnode"><div class="gn-t"><b>${esc(s.name)}</b><span>${esc((s.parts || [])[0] || "")}</span></div><div class="gn-m"><b class="${tone(s.score.value)}">${Math.round(s.score.value * 100)}%</b><span>Reliability</span></div></div>`).join("");
   $("#gPart").innerHTML = show.map(l => `<div class="gnode ${l.gap > 0 ? "crit" : ""}"><div class="gn-t"><b>${esc(l.name)}</b><span>${esc(l.edition)} · ${esc(l.status)}</span></div><div class="gn-m"><b class="${l.gap > 0 ? "tone-r" : "tone-g"}">${l.gap > 0 ? "−" + num(l.gap) : "0"}</b><span>Gap</span></div></div>`).join("") || `<p class="sm subtle">Set the goal to rank the parts.</p>`;
@@ -221,7 +221,7 @@ function openEvent(id) {
   const e = (S.events || []).find(x => x.id === id); if (!e) return;
   const d = e.detail || {};
   $("#dTitle").innerHTML = `<p class="h-sm">${esc(e.title)}</p><p class="xs subtle">${esc(when(e))} · ${esc(e.type)}</p>`;
-  $("#dBody").innerHTML = `${d.happened ? `<p>${esc(d.happened)}</p>` : ""}<dl class="pd-why">${(d.reasoning || []).map(r => `<div><dt>${esc(r.text)}</dt><dd>${esc(r.value || "")}</dd></div>`).join("")}</dl>${d.autonomy && d.autonomy.text ? `<p class="xs subtle">${esc(d.autonomy.text)}</p>` : ""}`;
+  $("#dBody").innerHTML = `${d.happened ? `<p>${esc(d.happened)}</p>` : ""}<dl class="pd-why">${(d.reasoning || []).map(r => `<div><dt>${esc(r.text)}</dt><dd>${esc(r.value || "")}</dd></div>`).join("")}</dl>${d.source ? `<p class="xs subtle">Source: ${esc([d.source.label, d.source.issue_key].filter(Boolean).join(", "))}</p>` : ""}${d.autonomy && d.autonomy.text ? `<p class="xs subtle">${esc(d.autonomy.text)}</p>` : ""}`;
   $("#drawer").classList.add("on"); $("#scrim").classList.add("on");
 }
 function closeAll() { ["#drawer", "#scrim", "#rejModal"].forEach(s => $(s).classList.remove("on")); }
