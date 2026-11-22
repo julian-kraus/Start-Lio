@@ -225,7 +225,8 @@ class AnthropicClient(LLMClient):
             "record), attribute, value, unit, locator ({page, section}), evidence (the exact text you read the "
             "value from), confidence (high|medium|low)}. For each contract fact type use exactly the subject keys "
             "it lists as the subject object's keys (never invented names) and use only the attribute names it "
-            "lists for that type. A subject key named line, ending in _line, or statement_no is the 1-based "
+            "lists for that type. An identifier the document does not print but its source path names (for "
+            "example the folder of the sender) may be taken from the path. A subject key named line, ending in _line, or statement_no is the 1-based "
             "position of the record in the document, counted from the top: 1 for the first line, never a part, "
             "material or item number. For every record you report, give one fact for each attribute its fact type "
             "lists. The value is the text you read, the same text you quote as evidence; use null only when the "
@@ -235,10 +236,11 @@ class AnthropicClient(LLMClient):
             "appears in the document, keeping any digit grouping (for example \"10 000\"); do not round or reformat "
             "it. Use only fact types from the contract; for genuinely new information name the type x_<something> "
             "and list it in proposed_fact_types.")
-        instruction = (f"Document kind: {structure.name}\nReading rules:\n{(structure.description or '')[:4000]}\n\n"
+        instruction = (f"Document kind: {structure.name}\nSource path: {document.path}\n"
+                       f"Reading rules:\n{(structure.description or '')[:4000]}\n\n"
                        f"Contract fact types:\n{json.dumps(vocabulary, ensure_ascii=False)}")
         content, notes = self._content(document, instruction)
-        aux = _aux_key("extract", structure.name, vocabulary)
+        aux = _aux_key("extract", structure.name, vocabulary, document.path)
         data = self._answer("extract", document.sha256, system, content, aux=aux)
         attrs = {v["name"]: set(v.get("attributes") or {}) for v in vocabulary if v.get("name")}
         env = _envelope(data, structure.name, _numeric_attrs(contract), attrs)

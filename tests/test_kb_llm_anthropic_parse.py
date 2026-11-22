@@ -374,3 +374,17 @@ def test_prompt_forbids_null_for_a_quotable_value(tmp_path):
     client.extract(Document(path="x", sha256="b" * 64, container="txt", text="t"),
                    Structure("order_confirmation", "", None, "core"), {}, CONTRACT)
     assert "never for a value you can quote" in json.dumps(seen["system"])
+
+
+def test_extract_names_the_source_path(tmp_path):
+    seen = {}
+
+    class Capture:
+        def create(self, request):
+            seen.update(request)
+            return Reply("end_turn", json.dumps({"facts": []}), {"input_tokens": 1, "output_tokens": 1})
+
+    client = AnthropicClient(api_key="test", store_dir=tmp_path, transport=Capture(), record=False)
+    client.extract(Document(path="senders/S-X1/notices/n.pdf", sha256="c" * 64, container="txt", text="t"),
+                   Structure("price_list", "", None, "core"), {}, CONTRACT)
+    assert "Source path: senders/S-X1/notices/n.pdf" in json.dumps(seen["messages"])
