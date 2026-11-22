@@ -39,6 +39,8 @@ log = logging.getLogger("agents.monitor")
 LOCK = 7_222_001
 PRODUCER = "monitor"
 HANDLED = "promise_broken"
+BROKERED = "statement_brokered"
+COMMITMENTS = ("confirm",)      # statements that make a promise worth watching (sourcing.promises.OUTCOMES settles)
 BACKOFF = (1, 2, 5, 10, 30)
 NO_SITE = "delivery site not on file"    # routed as a site, so a required release cannot be skipped
 
@@ -154,14 +156,15 @@ def open_backups(conn, part: str, deadline, now, per_copy: Input, category: str 
 
 class Monitor:
     def __init__(self, plan_conn, kb_conn, client: llm.LLMClient, log_path: Path,
-                 load_facts: Callable = kb_facts.load, kb_schema: str = "kb"):
+                 load_facts: Callable = kb_facts.load, kb_schema: str = "kb", mail=None):
         self.plan, self.kb, self.client, self.log = plan_conn, kb_conn, client, Path(log_path)
-        self.load_facts, self.kb_schema = load_facts, kb_schema
+        self.load_facts, self.kb_schema, self.mail = load_facts, kb_schema, mail
 
     def tick(self) -> list[str]:
         """Settle what the suppliers said, then publish each break that is not handled. Returns decision ids."""
         statements = broker.read_statements(self.kb)
         self.kb.commit()
+        self._broker_new(statements)
         for update in broker.apply_ledger(self.plan, statements):
             log.info("promise %s is %s", update["promise_id"], update["state"])
         self.plan.commit()
@@ -171,6 +174,30 @@ class Monitor:
             (HANDLED,)).fetchall()
         self.plan.commit()
         return [self._publish(promise) for promise in broken]
+
+    def _broker_new(self, statements) -> None:
+        """Hand each new commitment (a `confirm` statement) to the broker once, so a later cancellation has a
+        registered promise to break. Done statements are marked in timeline_events, so a restart does not repeat."""
+        done = {r["f"] for r in self.plan.execute(
+            "SELECT payload->>'fact_id' AS f FROM timeline_events WHERE type = %s UNION "
+            "SELECT src->>'fact_id' FROM promises, jsonb_array_elements(sources) src", (BROKERED,))}
+        for s in statements:     # a statement an existing promise already cites is watched already
+            if s.kind not in COMMITMENTS or done & {str(f) for f in s.all_fact_ids()}:
+                continue
+            said = {k: v for k, v in vars(s).items() if v not in (None, "", (), [])}
+            try:
+                _, registered = broker.run_broker(
+                    self.client, self.plan, self.mail, now=s.at or clock.now(self.plan), statements=[s],
+                    prompt="A supplier statement arrived. Register the commitment it makes, citing its fact id.\n"
+                           + json.dumps(_plain(said), default=str))
+                log.info("brokered statement %s: %d promise(s)", s.fact_id, len(registered))
+            except (llm.AgentStop, ValueError) as exc:
+                log.warning("broker could not register statement %s (%s)", s.fact_id, exc)
+            self.plan.execute("INSERT INTO timeline_events (at, type, title, severity, supplier_id, payload, scenario) "
+                              "VALUES (%s, %s, %s, 'info', %s, %s, %s)",
+                              (s.at or clock.now(self.plan), BROKERED, f"Watching what {s.supplier_id} said",
+                               s.supplier_id, Json({"fact_id": str(s.fact_id)}), clock.is_scenario(self.plan)))
+            self.plan.commit()
 
     def _replan(self, promise: dict, part: str, state: dict, card: dict, rows: list[dict], now) -> tuple:
         """(recommendation or None, why there is none, category, delivery site)."""
@@ -275,6 +302,17 @@ class Monitor:
         return _plain([*records, decision])
 
 
+def _mail_tools():
+    """Draft-only mail tools for the broker when the mail layer is configured; none otherwise (sending is never
+    exposed to the broker, see agents.tools.mail_tools)."""
+    try:
+        from mail.tools import MailTools
+        return MailTools(actor="agent:broker")
+    except (Exception, SystemExit) as exc:      # mail settings missing: the broker still registers promises
+        log.info("broker runs without mail tools (%s)", type(exc).__name__)
+        return None
+
+
 def run(url: str, client: llm.LLMClient, log_path: Path, stop: threading.Event, *, kb_schema: str = "kb",
         idle: float = 1.0) -> None:
     """Follow kb and mail under a singleton lock. A lost connection backs off, reconnects and takes it again."""
@@ -289,7 +327,7 @@ def run(url: str, client: llm.LLMClient, log_path: Path, stop: threading.Event, 
                 conns.append(plan)
                 kb = kb_db.connect(url, kb_schema)
                 conns.append(kb)
-                monitor = Monitor(plan, kb, client, log_path, kb_schema=kb_schema)
+                monitor = Monitor(plan, kb, client, log_path, kb_schema=kb_schema, mail=_mail_tools())
                 for channel in (kb_events.FACT_CHANNEL, kb_db.ISSUE_CHANNEL, mail_db.NOTIFY_CHANNEL):
                     listen.execute(f"LISTEN {channel}")
                 while not stop.is_set():

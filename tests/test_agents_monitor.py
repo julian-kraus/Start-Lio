@@ -5,6 +5,7 @@ facts are synthetic. Everything runs on a local throwaway Postgres and nothing c
 """
 
 import importlib.util
+import json
 import os
 import re
 import shutil
@@ -292,3 +293,26 @@ def test_a_name_is_on_the_card_only_when_one_person_signs(status, others, named)
     assert ("name" in shown) == named and "Lead" in shown["role"]
     for extra in approval["also_required"]:
         assert extra["role"] in shown["role"] and extra["rule"] in shown["rule"]
+
+
+def test_the_monitor_brokers_the_check_in_so_the_cancellation_breaks_it(demo_run):
+    r, facts = demo_run, launch_facts()
+    r.plan.execute("DELETE FROM promises")            # nothing registered by hand: the monitor must broker it
+    r.plan.commit()
+    [said] = broker.read_statements(r.kb)
+    r.kb.commit()
+    register = {"stop_reason": "tool_use", "tool_calls": [{"name": "register_promise", "input": {
+        "promise_id": "p", "supplier_id": r.persona, "what": "loads", "within": "within 4 h",
+        "fallback": "use the backup", "part_id": "BOOK", "sources": [{"fact_id": said.fact_id}]}}]}
+    script = [register, {"stop_reason": "end_turn", "text": '{"promises": ["p"], "drafts": [], "note": "watching"}'},
+              *json.loads((ROOT / "tests" / "fixtures" / "replay" / "hedger_debate.json").read_text())]
+    offer(r.plan, "BACKUP", "S9", 4)
+    watch = monitor.Monitor(r.plan, KbWithRows(r.kb, [*approval_world(), *facts.current]), llm.ReplayClient(script),
+                            r.log, load_facts=lambda *_: Facts(facts.current, facts.believed, facts.issues))
+    assert watch.tick() == [], "the check-in alone breaks nothing"
+    assert r.plan.execute("SELECT state FROM promises").fetchone()["state"] == "waiting"
+    r.deliver("cancellation")
+    [decision_id] = watch.tick()
+    assert r.plan.execute("SELECT state FROM promises").fetchone()["state"] == "broken"
+    assert decision_id in {d["decision_id"] for d in screen(r.log).state()["decisions"]}
+    assert watch.tick() == [], "a statement is brokered once and a break published once"
