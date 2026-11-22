@@ -1,0 +1,34 @@
+{
+  "en": {
+    "tab": "Email log",
+    "title": "Email log",
+    "all": "All",
+    "sent": "Sent",
+    "received": "Received",
+    "sent_badge": "Sent by agent",
+    "received_badge": "Received",
+    "from": "From",
+    "to": "To",
+    "time": "Time",
+    "related": "See related decision",
+    "empty": "No emails.",
+    "unavailable": "The mail store is not connected, so there is no email to show.",
+    "no_subject": "(no subject)"
+  },
+  "zh": {
+    "tab": "郵件紀錄",
+    "title": "郵件紀錄",
+    "all": "全部",
+    "sent": "寄出",
+    "received": "收到",
+    "sent_badge": "Agent 寄出",
+    "received_badge": "收到",
+    "from": "寄件人",
+    "to": "收件人",
+    "time": "時間",
+    "related": "查看相關決策",
+    "empty": "沒有郵件。",
+    "unavailable": "郵件資料庫未連線，沒有郵件可顯示。",
+    "no_subject": "（無主旨）"
+  }
+}
