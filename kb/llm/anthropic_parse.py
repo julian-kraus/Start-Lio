@@ -32,6 +32,9 @@ _SPACE_GROUPED = re.compile(rf"[+-]?\d{{1,3}}(?:{_SP}\d{{3}})+")
 # types some of these as string (handwritten or printed scans), yet their values are counts the gate must
 # ground, so they are parsed by name as well as by a declared `type: number`.
 _QUANTITY_ATTR = re.compile(r"(?:^|_)(?:qty|quantity)(?:_|$)")
+# A per-unit ratio (qty_per, qty_per_pallet ...) carries a "per" segment. It is a quantity attribute but not a
+# count: "1.250" there is 1.25 per unit, not 1250, so a single thousands group must not be read into it.
+_RATIO_ATTR = re.compile(r"(?:^|_)per(?:_|$)")
 # Text that is meant as a number but did not parse cleanly: digits with separators only.
 _NUMERIC_LOOKING = re.compile(r"[+-]?[\d\s   .,']*\d[\d\s   .,']*")
 # Subject keys whose reference values are integers (line positions and statement numbers). The contract lists
@@ -78,17 +81,23 @@ def _coerce_number(value: str, count: bool = False):
     s = value.strip()
     if _INT.fullmatch(s):
         return int(s)
-    if _SPACE_GROUPED.fullmatch(s):
-        # Whitespace is read only as well-formed thousands groups, so the separators are safe to drop.
-        return int(_GROUP_SPACES.sub("", s))
-    if _GROUPED.fullmatch(s):
-        return int(s.replace(".", "").replace(",", ""))
-    if count and _SINGLE_GROUP.fullmatch(s):
-        return int(s.replace(".", "").replace(",", ""))
+    stripped = s.lstrip("+-")
+    # A thousands group never starts with a zero group, so a value such as "0.125" or "0 750" is a fraction or
+    # plain text, never the grouped integer 125 or 750. Only the digit-grouping readings below are blocked; a
+    # leading-zero decimal falls through to the decimal reading unchanged.
+    leading_zero = stripped[:1] == "0"
+    if not leading_zero:
+        if _SPACE_GROUPED.fullmatch(s):
+            # Whitespace is read only as well-formed thousands groups, so the separators are safe to drop.
+            return int(_GROUP_SPACES.sub("", s))
+        if _GROUPED.fullmatch(s):
+            return int(s.replace(".", "").replace(",", ""))
+        if count and _SINGLE_GROUP.fullmatch(s):
+            return int(s.replace(".", "").replace(",", ""))
     if _DEC.fullmatch(s):
-        # Outside a count, a dot followed by exactly three digits is ambiguous between a decimal and a single
-        # thousands group, so keep it as text rather than guess a wrong number.
-        if len(s.lstrip("+-").split(".")[1]) == 3:
+        # A dot followed by exactly three digits is ambiguous between a decimal and a single thousands group, so
+        # outside a count (and only when there is no leading zero) keep it as text rather than guess a number.
+        if len(stripped.split(".")[1]) == 3 and not leading_zero:
             return None
         return float(s)
     return None
@@ -185,21 +194,35 @@ def _typed_by_name(f: dict) -> None:
 
 
 def _po_line_from_printed_item(facts: list[dict]) -> None:
-    """po_line = printed item number // 10 for every fact of a record whose po_line is the printed item number."""
-    printed = {}
+    """po_line = printed item number // 10, but only for a confirmation that numbers its lines 10, 20, 30 ...
+    (every printed item a multiple of the step). A document numbered 1, 2, 3 ... prints its own line index, so it
+    is left alone; and a mapped line is never written onto a line that is already present, so no line is lost to a
+    collision (item 10 would otherwise become line 1 and overwrite line 1)."""
+    printed = {}                                        # subject key -> printed item number
     for f in facts:
         if f.get("attribute") == _PRINTED_ITEM_ATTR and isinstance(f.get("subject"), dict):
             key = json.dumps(f["subject"], sort_keys=True, default=str)
             digits = str(f.get("value") or "").strip()
             if _INT.fullmatch(digits):
                 printed[key] = int(digits)
+    if not printed or any(item % _PRINTED_ITEM_STEP for item in printed.values()):
+        return                                          # not the tens convention: the printed number is the line
+    # A record is remapped only where its po_line still equals its printed item (the model copied it in).
+    remapped = {key: item for key, item in printed.items()}
+    kept_lines = {subj.get("po_line") for f in facts
+                  if isinstance((subj := f.get("subject")), dict) and isinstance(subj.get("po_line"), int)
+                  and remapped.get(json.dumps(subj, sort_keys=True, default=str)) != subj["po_line"]}
     for f in facts:
         subject = f.get("subject")
         if not isinstance(subject, dict) or not isinstance(subject.get("po_line"), int):
             continue
-        item = printed.get(json.dumps(subject, sort_keys=True, default=str))
-        if item and item == subject["po_line"] and item % _PRINTED_ITEM_STEP == 0:
-            f["subject"] = {**subject, "po_line": item // _PRINTED_ITEM_STEP}
+        item = remapped.get(json.dumps(subject, sort_keys=True, default=str))
+        if item != subject["po_line"]:
+            continue
+        new_line = item // _PRINTED_ITEM_STEP
+        if new_line in kept_lines:                      # a line already present: do not overwrite it
+            continue
+        f["subject"] = {**subject, "po_line": new_line}
 
 
 def _envelope(data: dict, default_kind: str, numeric_attrs: dict | None = None) -> dict:
@@ -214,17 +237,19 @@ def _envelope(data: dict, default_kind: str, numeric_attrs: dict | None = None) 
         _typed_by_name(f)
         value, attr = f.get("value"), f.get("attribute")
         if isinstance(value, str) and attr in numeric_attrs.get(f.get("fact_type"), ()):
-            count = bool(_QUANTITY_ATTR.search(str(attr)))
+            count = bool(_QUANTITY_ATTR.search(str(attr))) and not _RATIO_ATTR.search(str(attr))
             number = _coerce_number(value, count=count)
             if number is not None:
                 if f.get("evidence") is None:            # keep the verbatim text the number was read from
                     f["evidence"] = value
                 f["value"] = number
             elif count and _NUMERIC_LOOKING.fullmatch(value.strip()):
-                # a count that does not parse cleanly is not passed on as text: mark it for review
-                f["confidence"] = "low"
-                f["note"] = ((f.get("note") or "") + " [ambiguous quantity, needs review]").strip()
-                ambiguous.append(f"{f.get('fact_type')}.{attr}: quantity text could not be read as one number")
+                # A count whose text is not one clean number is never emitted as a usable fact: left in facts it
+                # would pass the gate as text and kb.engine.normalise("21 3", "number") would read 213. Drop it
+                # and record it in unreadable so the gap is visible, never a wrong number.
+                ambiguous.append(f"{f.get('fact_type')}.{attr}: quantity text could not be read as one number; "
+                                 f"not loaded as a fact")
+                continue
         facts.append(f)
     _po_line_from_printed_item(facts)
     unreadable = data.get("unreadable") if isinstance(data.get("unreadable"), list) else []

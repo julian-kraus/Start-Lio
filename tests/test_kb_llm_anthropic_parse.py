@@ -1,17 +1,27 @@
-"""Answer handling and cache keys of the Anthropic adapter, for the 07:49 UTC review of PR #56. No database, no
-network, no key. Synthetic values only."""
+"""Answer handling and cache keys of the Anthropic adapter, for the 07:49 UTC review of PR #56. Most tests need no
+database, network or key; the one drain test needs TEST_DATABASE_URL. Synthetic values only."""
 
 import json
+import os
+import uuid
 
 import pytest
+from psycopg import sql
+from psycopg.types.json import Jsonb
 
-from kb.llm.anthropic import AnthropicClient, Reply, _coerce_number, _envelope
+from tracker.config import PROJECT_ROOT
+
+from kb.llm.anthropic import AnthropicClient, Reply, _coerce_number, _envelope, _numeric_attrs
 from kb.llm.base import Document, Structure
 
 CONTRACT = {"fact_types": [
     {"name": "delivery_note_line", "attributes": {"quantity": {"type": "string"}, "unit_price": {"type": "number"}}},
 ]}
 NUMERIC = {"delivery_note_line": {"quantity", "unit_price"}}
+
+# The real contract, read only, so the quantity-attribute rules are proven against the names the records use.
+REAL_CONTRACT = json.loads((PROJECT_ROOT / "structured" / "contract" / "fact_types.json").read_text())
+REAL_NUMERIC = _numeric_attrs(REAL_CONTRACT)
 
 
 @pytest.fixture(autouse=True)
@@ -54,11 +64,12 @@ def test_one_group_outside_a_count_stays_ambiguous():
     assert env["facts"][0]["value"] == "98.765"
 
 
-def test_unreadable_count_goes_to_review_not_through_as_text():
+def test_an_unreadable_count_is_not_emitted_as_a_fact():
+    # A count whose text is not one clean number must not pass as a text fact: left in facts it would reach
+    # kb.engine.normalise("98,76", "number") and be read as 9876. It is dropped and recorded in unreadable.
     env = _envelope({"facts": [fact("98,76")]}, "delivery_note_scan", NUMERIC)
-    f = env["facts"][0]
-    assert f["confidence"] == "low" and "needs review" in f["note"]
-    assert any("quantity" in u for u in env["unreadable"])
+    assert env["facts"] == []
+    assert any("quantity" in u and "not loaded" in u for u in env["unreadable"])
 
 
 def test_a_word_in_a_count_is_left_alone():
@@ -156,3 +167,91 @@ def test_flags_become_booleans(raw, flag):
 def test_a_flag_word_outside_a_flag_attribute_is_text():
     env = _envelope({"facts": [fact("yes", attribute="remark")]}, "delivery_note_scan", NUMERIC)
     assert env["facts"][0]["value"] == "yes"
+
+
+# ---------- regressions found on d7feaa9, against the real contract ----------
+
+@pytest.mark.parametrize("value,expected", [("0.125", 0.125), ("0.500", 0.5), ("1.250", "1.250")])
+def test_qty_per_ratio_is_never_read_as_thousands(value, expected):
+    # bom_line.qty_per is a per-unit ratio, not a count: a single thousands group must never turn "0.125" into
+    # 125 or "1.250" into 1250. It reads a leading-zero fraction and leaves the ambiguous "1.250" as text.
+    subject = {"parent_id": "P-1", "child_id": "C-1"}
+    env = _envelope({"facts": [{"fact_type": "bom_line", "subject": subject, "attribute": "qty_per",
+                                "value": value}]}, "bom", REAL_NUMERIC)
+    assert env["facts"][0]["value"] == expected
+
+
+@pytest.mark.parametrize("value,expected", [("0.750", 0.75), ("0.500", 0.5)])
+def test_leading_zero_in_a_count_is_never_thousands(value, expected):
+    # offer.qty is a count, but a leading zero is never a thousands group: "0.750" is 0.75, never 750.
+    subject = {"supplier_id": "S-1", "offer_ref": "O-1", "item": "I-1"}
+    env = _envelope({"facts": [{"fact_type": "offer", "subject": subject, "attribute": "qty", "value": value}]},
+                    "offer", REAL_NUMERIC)
+    assert env["facts"][0]["value"] == expected
+
+
+def test_po_line_1_to_12_keeps_every_line():
+    # A confirmation numbered 1..12 prints its own line index. Item 10 must not be divided to line 1 and overwrite
+    # the real line 1: all 12 lines survive and line 1 keeps its own quantity.
+    facts = []
+    for i in range(1, 13):
+        subject = {"po_number": "PO-1", "po_line": i}
+        facts.append({"fact_type": "oc_line", "subject": dict(subject), "attribute": "item_no_printed",
+                      "value": str(i)})
+        facts.append({"fact_type": "oc_line", "subject": dict(subject), "attribute": "qty", "value": str(100 + i)})
+    env = _envelope({"facts": facts}, "order_confirmation", REAL_NUMERIC)
+    qty = {f["subject"]["po_line"]: f["value"] for f in env["facts"] if f["attribute"] == "qty"}
+    assert set(qty) == set(range(1, 13)) and qty[1] == 101
+
+
+def test_tens_convention_still_divides_the_printed_item():
+    # The intended case is unchanged: a confirmation printing 10, 20, 30 maps po_line to the ERP line index.
+    facts = [{"fact_type": "oc_line", "subject": {"po_number": "PO-1", "po_line": n}, "attribute": a, "value": v}
+             for n in (10, 20, 30) for a, v in (("item_no_printed", str(n)), ("qty", "5"))]
+    env = _envelope({"facts": facts}, "order_confirmation", REAL_NUMERIC)
+    assert {f["subject"]["po_line"] for f in env["facts"]} == {1, 2, 3}
+
+
+# ---------- defect 3 proven through the live intake queue ----------
+
+URL = os.environ.get("TEST_DATABASE_URL")
+needs_db = pytest.mark.skipif(not URL, reason="TEST_DATABASE_URL not set")
+
+
+class _Fixed:
+    def __init__(self, answer):
+        self.answer = answer
+
+    def create(self, request):
+        return Reply("end_turn", json.dumps(self.answer), {"input_tokens": 1, "output_tokens": 1})
+
+
+@needs_db
+def test_an_unreadable_count_never_becomes_a_fact_through_drain(tmp_path):
+    from conftest import make_pdf
+    from kb import db, intake, registry
+
+    schema = f"kb_test_{uuid.uuid4().hex[:8]}"
+    conn = db.connect(URL, schema)
+    db.migrate(conn, schema)
+    try:
+        registry.upsert_doc_kind(conn, "dns", "Read each line.", origin="test", status="core")
+        conn.execute("INSERT INTO fact_types (name, origin, attributes) VALUES (%s, %s, %s)",
+                     ("delivery_note_line", "test", Jsonb({"quantity": {"type": "string"}})))
+        pdf = make_pdf(["Delivery note", "quantity 98,76"])
+        sha = __import__("hashlib").sha256(pdf).hexdigest()
+        conn.execute("INSERT INTO extraction_queue (path, sha256, container, doc_kind, state) "
+                     "VALUES (%s, %s, 'pdf', 'dns', 'pending')", ("receiving/a.pdf", sha))
+        conn.commit()
+        answer = {"facts": [{"fact_type": "delivery_note_line", "subject": {"delivery_note": "DN-1", "line": 1},
+                             "attribute": "quantity", "value": "98,76"}]}
+        client = AnthropicClient(transport=_Fixed(answer), model="m", store_dir=tmp_path, record=False)
+        counts = intake.drain(conn, client, lambda s, p: pdf, tmp_path, {"high": 0.9, "medium": 0.75, "low": 0.4})
+        assert counts["failed"] == 0
+        rows = conn.execute("SELECT value FROM facts WHERE source_path = 'receiving/a.pdf'").fetchall()
+        assert all("98" not in str(r["value"]) for r in rows), "the ambiguous count must never be loaded as a fact"
+    finally:
+        conn.rollback()
+        conn.execute(sql.SQL("DROP SCHEMA {} CASCADE").format(sql.Identifier(schema)))
+        conn.commit()
+        conn.close()
