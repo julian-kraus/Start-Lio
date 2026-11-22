@@ -189,6 +189,13 @@ def clip(world, *notes):
     ["phantom status withdrawn"], ["phantom flag removed, order separately"], ["phantom cancelled"],
     ["ceased to be a phantom"], ["phantom in error"], ["wrongly marked phantom"], ["phantom, but buy separately"],
     ["phantom status ended"],
+    # wording no doubt list would think of: only a note understood word for word clears a shortage
+    ["phantom status void"], ["phantom: to be procured on its own"], ["phantom line deleted"],
+    ["treat as a normal part, phantom tag is stale"], ["phantom, but procure separately"],
+    ["phantom in the old BOM only"], ["phantom flag under review"], ["phantom tag to be confirmed"],
+    ["phantom, pending confirmation"], ["ex-phantom part"], ["phantom superseded by revision C"],
+    ["phantom, purchase separately"], ["phantom status suspended"], ["phantom assumption unverified"],
+    ["phantom claim is doubtful"], ["phantom. Procure it as a spare"], ["Phantom. Besorgung separat"],
 ])
 def test_a_negated_or_doubtful_note_never_hides_a_shortage(world, notes):
     result = clip(world, *notes)
@@ -242,11 +249,22 @@ def test_the_edition_said_to_be_first_is_first(world, text, first):
     "Priority: is Basic first?",
     "Priority: previously Deluxe first, now Basic", "Priority: Deluxe first, now Basic",
     "Priority: Deluxe first, Basic instead",
+    "Priority: Deluxe first is superseded", "Priority: Deluxe first is void", "Priority: Deluxe first rule suspended",
+    "Priority: Deluxe first, replaced by Basic", "Priority: Deluxe first, Basic takes over",
+    "Priority: Deluxe first. Update: Basic has priority", "Priority: old rule Deluxe first; new rule Basic ahead",
+    "Priority: Deluxe first on paper, Basic leads", "Priority: Deluxe at first, Basic from today",
+    "Priority: Deluxe first. Withdrawn by the board", "Outdated priority: Deluxe first",
+    "Priority: whoever is first, Deluxe",
 ])
 def test_an_unclear_priority_is_escalated_not_guessed(world, text):
     result = reworded(world, text)
     assert result["priority"]["order"] is None
     assert "priority_unknown" in alerts(result)
+
+
+def test_a_priority_known_only_from_wording_is_escalated(world):
+    result = world.run()
+    assert result["priority"]["order"] and "priority_from_note" in alerts(result)
 
 
 def test_an_unclear_newer_priority_does_not_fall_back_to_the_older(world):

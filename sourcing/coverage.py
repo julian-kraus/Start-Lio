@@ -96,6 +96,14 @@ def bill_of_materials(facts: Facts, product: str, today) -> dict[str, tuple]:
     return out
 
 
+def part_names(facts: Facts) -> frozenset[str]:
+    """The words our parts are called by, which a note may use without making it unclear."""
+    called = [r.key(k) for kind, keys in (("bom_line", ("child_id",)), ("component", ("material_id", "description")),
+                                         ("supplier_part", ("description",)))
+              for r in facts.rows(kind) for k in keys]
+    return frozenset(w for text in called for w in coverage_wording.WORD.findall(text.lower()))
+
+
 def phantom_evidence(facts: Facts, material: str) -> tuple[list[str], list[dict]]:
     """(why a BOM line is no shortage, what to escalate). No reasons when it is an ordinary part."""
     for b in facts.believed("phantom_part", material_id=material):
@@ -107,9 +115,10 @@ def phantom_evidence(facts: Facts, material: str) -> tuple[list[str], list[dict]
             return ids(issue.get("fact_ids") or []), []
     if any((number(r.get("qty")) or 0) > 0 for r in facts.rows("stock_batch", material_id=material)):
         return [], []                                   # it is stocked, so it is no phantom
+    names = part_names(facts)
     said = [(verdict, r.ids("note")) for kind in ("bom_line", "component", "supplier_part", "part_xref")
             for r in facts.rows(kind) if material in (r.key("material_id"), r.key("child_id"))
-            if (verdict := coverage_wording.phantom(r.key("note"))) is not None]
+            if (verdict := coverage_wording.phantom(r.key("note"), names)) is not None]
     if not said:
         return [], []
     sources, sure = ids(*(i for _, i in said)), all(verdict for verdict, _ in said)
@@ -194,8 +203,9 @@ def compute(facts: Facts, *, now: datetime, deadline: datetime, products: list[s
     order, policy_ids = priority(facts, eds)
     materials = sorted({m for bom in boms.values() for m in bom})
     used = {m for p in wanted for m in all_boms[p]}
-    if order is None and any(sum(m in bom for bom in boms.values()) > 1 for m in used):
-        alerts.append({"kind": "priority_unknown", "fact_ids": ids(policy_ids, *(e.demand_ids for e in eds))})
+    if any(sum(m in bom for bom in boms.values()) > 1 for m in used):
+        kind = "priority_unknown" if order is None else "priority_from_note"     # wording is never silent
+        alerts.append({"kind": kind, "fact_ids": ids(policy_ids, *(e.demand_ids for e in eds))})
 
     revisions = coverage_stock.revision_disputes(facts, set(materials))
     ships = coverage_inbound.shipments(facts)
