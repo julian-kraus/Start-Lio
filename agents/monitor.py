@@ -33,7 +33,7 @@ from tracker.lookahead import append_records, fold
 from tracker.lookahead_records import LookaheadError, validate
 from tracker.lookahead_view import shown_live
 
-from . import broker, hedger, kb_offers, llm
+from . import broker, hedger, kb_offers, llm, monitor_feed
 
 log = logging.getLogger("agents.monitor")
 
@@ -176,6 +176,12 @@ class Monitor:
         for update in broker.apply_ledger(self.plan, statements):
             log.info("promise %s is %s", update["promise_id"], update["state"])
         self.plan.commit()
+        try:      # show offers and watched promises before any break, so the screen follows each mail
+            names = {sid: s.get("name") for sid, s in screen_state(self.log)["suppliers"].items()}
+            monitor_feed.feed(self.plan, self.log, names, PRODUCER)
+        except Exception as exc:     # the screen lagging must not stop the re-plan
+            self.plan.rollback()
+            log.warning("screen feed not written (%s)", exc)
         broken = self.plan.execute(
             "SELECT * FROM promises p WHERE state = 'broken' AND NOT EXISTS (SELECT 1 FROM timeline_events e "
             "WHERE e.type = %s AND e.payload->>'promise_id' = p.promise_id) ORDER BY broken_at, promise_id",

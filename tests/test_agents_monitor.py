@@ -206,7 +206,7 @@ def test_the_cancellation_mail_becomes_a_hedged_decision_on_the_live_screen(demo
 
     saved = r.plan.execute("SELECT recommendation_id::text AS id, kind FROM recommendations").fetchone()
     assert saved["id"] == card["recommendation_id"] and saved["kind"] == "hedge"
-    diff = r.plan.execute("SELECT payload FROM timeline_events").fetchone()["payload"]["diff"]
+    diff = r.plan.execute("SELECT payload FROM timeline_events WHERE type = %s", (monitor.HANDLED,)).fetchone()["payload"]["diff"]
     assert diff["before"] == ["old"] and diff["after"]["decision_id"] == decision_id
 
     shown = lookahead_decisions.card(la, decision_id, SimpleNamespace(facts=lambda: rows))
