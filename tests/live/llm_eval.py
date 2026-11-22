@@ -12,6 +12,8 @@ ROOT = Path(sys.argv[1]); OUT = Path(sys.argv[2]); TESTS = set(sys.argv[3:]) or 
     "auth", "scans", "newscans", "offer", "agent", "inject", "errors"}
 DATA = ROOT / "data" / "current"
 DOCS = ROOT / "structured" / "docs"
+sys.path.insert(0, str(ROOT))
+from tests.live.agent_tools import test_agent_tools
 
 
 def load_key() -> tuple[str, str]:
@@ -401,27 +403,6 @@ def test_auth() -> None:
                                 "models_available": [m for m in ids if any(x in m for x in ("5-5", "5-2"))]}
 
 
-# ---------- production agent tools (issue A1) ----------
-# The probes above use an inline tool loop. This one drives the shipped package (agents.llm + agents.tools) so
-# the same guard finding is proven against the production code: the registry hands the model the tools, the loop
-# calls them, and the GroundingGuard refuses any number the hedge tool did not return, retrying then forcing the
-# tool result in. Models are good, so the guard should pass on every run (acceptance: guard 10/10).
-def test_agent_tools(n: int = 10, key: str = "agent_tools") -> None:
-    from tests.live.agent_tools import run_agent_tools
-
-    report, usage = run_agent_tools(
-        root=ROOT,
-        key=KEY, model=MODEL, n=n, tool_specs=TOOLS, tool_values=FAKE,
-        hedge_math=hedge_math, verdict_schema=VERDICT_SCHEMA,
-        system=("You decide whether to place a backup order. Get every input from the tools. Every number in your "
-                "answer must come from a tool result; never compute numbers yourself. Cite the goal line."),
-        prompt=("Part P-ALPHA is short for the premium edition. Should we hedge with the backup offer? The "
-                "commitment now is the deposit share of the backup order value."))
-    for name, value in usage.items():
-        usage_total[name] += value
-    results["tests"][key] = report
-
-
 if __name__ == "__main__":
     steps = [("auth", test_auth), ("errors", test_errors), ("offer", test_offer), ("inject", test_inject),
              ("agent", test_agent), ("scans", lambda: test_scans([MODEL])), ("newscans", test_newscans),
@@ -430,7 +411,16 @@ if __name__ == "__main__":
                                                   key="scans_verbatim", verbatim=True)),
              ("agent_guard", lambda: test_agent(6, key="agent_guard", guard=True)),
              ("agent_noguard", lambda: test_agent(6, key="agent_noguard", guard=False)),
-             ("agent_tools", lambda: test_agent_tools(10))]
+             ("agent_tools", lambda: test_agent_tools(
+                 root=ROOT, api_key=KEY, model=MODEL, n=10, result_key="agent_tools",
+                 tool_specs=TOOLS, tool_values=FAKE, hedge_math=hedge_math,
+                 verdict_schema=VERDICT_SCHEMA,
+                 system=("You decide whether to place a backup order. Get every input from the tools. Every number "
+                         "in your answer must come from a tool result; never compute numbers yourself. Cite the goal "
+                         "line."),
+                 prompt=("Part P-ALPHA is short for the premium edition. Should we hedge with the backup offer? The "
+                         "commitment now is the deposit share of the backup order value."),
+                 results=results, usage_total=usage_total))]
     for name, fn in steps:
         if name not in TESTS:
             continue
