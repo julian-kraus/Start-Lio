@@ -32,8 +32,8 @@ def _never_touch_the_key(tmp_path, monkeypatch):
     monkeypatch.delenv("LOOKAHEAD_ANTHROPIC_API_KEY", raising=False)
 
 
-def doc(sha="a" * 64, text="Order Confirmation\nquantity 10 000 pcs"):
-    return Document("confirmations/a.pdf", sha, "pdf", text=text)
+def doc(sha="a" * 64, text="Order Confirmation\nquantity 10 000 pcs", path="confirmations/a.pdf"):
+    return Document(path, sha, "pdf", text=text)
 
 
 def reply(obj, stop="end_turn"):
@@ -235,6 +235,21 @@ def test_classify_cache_key_follows_the_kind_list(tmp_path):
     assert client.classify(doc(sha="7" * 64), [Structure("k1", "r")]).decision == "none"
     hit = client.classify(doc(sha="7" * 64), [Structure("k1", "r"), Structure("k2", "r")])
     assert transport.calls == 2 and hit.kind == "k2"                    # a new kind list is a fresh question
+
+
+def test_classify_and_design_cache_key_follows_the_path(tmp_path):
+    # classify and design carry the path in the prompt, so two paths with one sha must not share a routing
+    # answer: a mailed copy under a sender-chosen name could otherwise route a same-bytes portal file (#67).
+    ct = FakeTransport(results=[reply({"decision": "none", "kind": None}), reply({"decision": "kind", "kind": "oc"})])
+    cc = AnthropicClient(transport=ct, model="m", store_dir=tmp_path)
+    assert cc.classify(doc(sha="9" * 64, path="mail/renamed.pdf"), [Structure("oc", "r")]).decision == "none"
+    assert cc.classify(doc(sha="9" * 64, path="portal/order.pdf"), [Structure("oc", "r")]).kind == "oc"  # fresh path
+    hit = cc.classify(doc(sha="9" * 64, path="mail/renamed.pdf"), [Structure("oc", "r")])
+    assert ct.calls == 2 and hit.decision == "none"                    # two calls, then the mail path served cached
+    dt = FakeTransport(results=[reply({"target": "doc_kind", "name": "a"}), reply({"target": "doc_kind", "name": "b"})])
+    dc = AnthropicClient(transport=dt, model="m", store_dir=tmp_path)
+    assert dc.design(doc(sha="8" * 64, path="mail/a.pdf"), [], {}).name == "a"
+    assert dc.design(doc(sha="8" * 64, path="portal/a.pdf"), [], {}).name == "b" and dt.calls == 2
 
 
 def test_cache_is_on_by_default(monkeypatch):

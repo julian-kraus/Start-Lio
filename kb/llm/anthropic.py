@@ -95,10 +95,11 @@ def _store_path(store_dir: Path, role: str, model: str, sha: str, aux: str = "")
 
 
 def _aux_key(*parts) -> str:
-    """A short, stable hash of the inputs that change an answer besides the document bytes (the kind list for
-    classify, the structure and contract vocabulary for extract, the sample rows for design). It joins the
-    document sha in the cache key so two sheets of one workbook, or a classify after a new kind was added, do
-    not collide on the sha alone and replay a stale answer."""
+    """A short, stable hash of the inputs that change an answer besides the document bytes (the kind list and
+    file path for classify, the structure and contract vocabulary for extract, the sample rows and file path
+    for design). It joins the document sha in the cache key so two sheets of one workbook, a classify after a
+    new kind was added, or two paths with the same bytes do not collide on the sha alone and replay a stale
+    answer."""
     blob = json.dumps(parts, ensure_ascii=False, sort_keys=True, default=str)
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()[:12]
 
@@ -219,7 +220,10 @@ class AnthropicClient(LLMClient):
             "\"ambiguous\" when two or more fit, \"none\" when nothing fits.")
         instruction = "Known kinds:\n" + json.dumps(catalogue, ensure_ascii=False) + f"\n\nFile path: {document.path}"
         content, _notes = self._content(document, instruction)
-        data = self._answer("classify", document.sha256, system, content, aux=_aux_key("classify", catalogue))
+        # The prompt carries the file path, so two paths with the same bytes can route differently: the path
+        # joins the cache key, or a mailed copy and a portal file with one sha would share one routing answer.
+        aux = _aux_key("classify", catalogue, document.path)
+        data = self._answer("classify", document.sha256, system, content, aux=aux)
         decision = data.get("decision") if data.get("decision") in ("kind", "none", "ambiguous") else "none"
         kind = data.get("kind") if decision == "kind" else None
         return Routing(decision, kind, str(data.get("reason") or "")[:500], self.label)
@@ -265,8 +269,9 @@ class AnthropicClient(LLMClient):
             instruction += "\n\nSample rows:\n" + json.dumps(rows, ensure_ascii=False)
         content, _notes = self._content(document, instruction)
         # One document (one sha) is sent to design once per unknown sheet with different sample rows, so the rows
-        # join the cache key: two sheets of a workbook no longer collide and reuse the first sheet's map.
-        data = self._answer("design", document.sha256, system, content, aux=_aux_key("design", known, rows))
+        # join the cache key: two sheets of a workbook no longer collide and reuse the first sheet's map. The
+        # prompt also carries the file path, so the path joins the key for the same reason as classify.
+        data = self._answer("design", document.sha256, system, content, aux=_aux_key("design", known, rows, document.path))
         target = data.get("target")
         if target not in ("doc_kind", "schema_map"):
             target = "schema_map" if data.get("schema_map") else "doc_kind"
