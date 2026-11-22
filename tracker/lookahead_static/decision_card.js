@@ -56,6 +56,9 @@ function openRejectDialog(decision, translate) {
     if(!text){error.textContent=tr("reason_required");return}
     submit.disabled=true;error.textContent="";
     try {
+      const fresh=await api(`/api/lookahead/decisions/${encodeURIComponent(decision.decision_id)}`);
+      if(!fresh.approval || fresh.approval.status!=="resolved" || !fresh.signer ||
+         fresh.signer.name!==(decision.signer && decision.signer.name))throw new Error(tr("signer_unavailable"));
       await api(`/api/lookahead/decisions/${encodeURIComponent(decision.decision_id)}/reject`,
         {approver:decision.signer && decision.signer.name || "",reason:text});
       close();await load();
@@ -83,8 +86,13 @@ window.decisionActions = function(decision, translate, error, signerLine) {
         error.textContent=tr("signer_unavailable");return;
       }
       signerLine.replaceChildren(document.createTextNode([signer.name,signer.role,signer.rule].filter(Boolean).join(" · ")));
-      const accept=acceptButton(routed,error,()=>{});accept.textContent=tr("accept");accept.className="btn btn-primary";
-      const reject=el("button",{class:"btn btn-secondary",type:"button",onclick:()=>openRejectDialog(routed,translate)},tr("reject"));
+      let currentSigner=signer;
+      const reject=el("button",{class:"btn btn-secondary",type:"button",onclick:()=>openRejectDialog({...routed,signer:currentSigner},translate)},tr("reject"));
+      const accept=acceptButton(routed,error,()=>{},next=>{
+        currentSigner=next;
+        signerLine.replaceChildren(document.createTextNode([next.name,next.role,next.rule].filter(Boolean).join(" · ")));
+        reject.disabled=!next.name;
+      });accept.textContent=tr("accept");accept.className="btn btn-primary";
       actions.replaceChildren(reject,accept);
     }).catch(()=>{error.textContent=tr("signer_unavailable")});
   return actions;
