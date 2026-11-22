@@ -29,9 +29,15 @@ ROLE = rf"{WORD}(?:\s+(?:of\s+|&\s+|for\s+)?{WORD})*"
 BY_ROLE = re.compile(
     rf"(?:(?i:approved|approval|released|release|signed|extended)\b[^.]*?\bby|together with|\band)\s+the\s+"
     rf"(?:responsible\s+)?({ROLE})")
+VERSION_OR_DATE = re.compile(r"\bv(?:ersion\s*)?\d+(?:\.\d+)*\b|\d{4}-\d\d-\d\d", re.I)
 DATED = re.compile(r"\s*\((from|as of|starting|until|to)\s+(\d{4}-\d\d-\d\d)\)", re.I)
 VACANT = {"tbd", "tba", "tbc", "vacant", "open", "open position", "position open", "n.n.", "nn", "n/a", "-", "?",
-          "\u2013", "\u2014", "to be hired", "to be confirmed"}
+          "\u2013", "\u2014", "vacancy", "unassigned", "unfilled", "n.n"}
+VACANT_PHRASE = re.compile(
+    r"to be \w+|not yet \w+|(?:vacant|open) (?:position|role|post|seat)|(?:position|role|post|seat) (?:vacant|open)")
+# Words that say something about a seat and are no part of a person's name.
+NOT_A_NAME = {"tbd", "tba", "tbc", "vacant", "vacancy", "unassigned", "unfilled", "interim", "acting", "recruiting",
+              "recruitment", "pending", "none", "nobody", "unknown", "position", "role", "appointed", "hiring"}
 SENIORITY = {"senior", "junior", "principal", "acting"}
 
 
@@ -106,6 +112,19 @@ class Policy:
     release: Rule | None = None
     site: Rule | None = None
     exceptions: Rule | None = None
+    scope: str | None = None
+    title: str = ""
+
+    def same_policy(self, other: "Policy") -> bool:
+        """Versions or readings of one policy, as opposed to another policy that also states limits."""
+        if self.path == other.path:
+            return True
+        if self.scope and other.scope:
+            return words(self.scope) == words(other.scope)
+        if self.scope or other.scope:
+            scope, title = (self.scope, other.title) if self.scope else (other.scope, self.title)
+            return set(words(scope)) <= set(words(title))
+        return words(VERSION_OR_DATE.sub("", self.title)) == words(VERSION_OR_DATE.sub("", other.title))
 
     def role_terms(self) -> list[str]:
         roles = [r for t in self.tiers for r in t.roles]
@@ -271,7 +290,8 @@ def read_policy(doc: Document) -> Policy | None:
     policy = Policy(doc.path, doc.scope or doc.lines[0].text, version[1] if version else None,
                     _date(effective[1]) if effective else None, list(doc.problems),
                     [x.fact_id for x in doc.lines if (version and version[0] in x.text)
-                     or (effective and effective[0] in x.text)], value)
+                     or (effective and effective[0] in x.text)], value,
+                    scope=doc.scope, title=doc.lines[0].text)
     _tiers(value, policy)
     for section in parts:
         if section is value:
@@ -323,8 +343,11 @@ def _seat(title: str, person: str | None, ids: list[str]) -> Seat:
         else:
             start = parsed
     name = DATED.sub("", person).strip()
-    if name.casefold() in VACANT:
+    plain = name.casefold().rstrip(".")
+    if name.casefold() in VACANT or plain in VACANT or VACANT_PHRASE.fullmatch(plain):
         return Seat(title, None, "vacant", None, None, ids)
+    if NOT_A_NAME & set(words(name)):
+        return Seat(title, None, "unclear", None, None, ids)
     readable = valid and re.fullmatch(r"[^\W\d_][^\d:;()<>@/|]*", name) and len(name.split()) <= 6 \
         and name[0].isupper() and not (name.endswith(".") and len(name.split()) > 3)
     if not readable:
