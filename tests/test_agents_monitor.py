@@ -379,3 +379,43 @@ def test_a_promise_whose_sources_are_bare_fact_ids_still_re_plans(demo_run):
     [decision_id] = watch.tick()
     card = {d["decision_id"]: d for d in screen(r.log).state()["decisions"]}[decision_id]
     assert card["offer_id"] == "BACKUP" and card["actions"]
+
+
+def test_a_timeout_is_not_marked_done_and_is_asked_a_limited_number_of_times(demo_run):
+    r, asked = demo_run, []
+    r.plan.execute("DELETE FROM promises")
+    r.plan.commit()
+
+    class Down(llm.LLMClient):
+        def message(self, **request):
+            asked.append(request)
+            raise llm.AgentStop("timeout")
+
+    watch = monitor.Monitor(r.plan, r.kb, Down(), r.log)
+    for _ in range(monitor.BROKER_ATTEMPTS + 2):
+        watch.tick()
+    assert len(asked) == monitor.BROKER_ATTEMPTS
+    assert [tool["name"] for tool in asked[0]["tools"]] == ["register_promise"]
+    assert not r.plan.execute("SELECT 1 FROM timeline_events WHERE type = %s", (monitor.BROKERED,)).fetchall()
+
+
+@pytest.mark.parametrize("attrs, field, value", [
+    ({"unit_price": "1.200 EUR"}, "unit_price_eur", None),
+    ({"qty": "10,000"}, "quantity", None),
+    ({"unit_price": "420", "price_basis": "per 100"}, "unit_price_eur", None),
+    ({"unit_price": "4,20 EUR", "price_basis": "per piece"}, "unit_price_eur", 4.2),
+])
+def test_an_ambiguous_offer_number_is_never_guessed(attrs, field, value):
+    from agents import kb_offers
+    assert kb_offers.offers_from_rows(_offer_rows(**attrs))[0][field] == value
+
+
+def test_one_impossible_date_does_not_lose_the_other_offers(demo_run):
+    from agents import kb_offers
+    r, good = demo_run, _offer_rows(qty="600")
+    bad = [{**row, "subject": {**row["subject"], "offer_ref": "Q-2"}} for row in _offer_rows(valid_until="2026-02-30")]
+    assert kb_offers.sync(r.kb, r.plan, bad + good) == ["kb:S9/Q-1/BOOK"]
+
+
+def test_run_gives_the_broker_no_connection_of_its_own():
+    assert not hasattr(monitor, "_mail_tools"), "mail tools would read another database url than the monitor's"

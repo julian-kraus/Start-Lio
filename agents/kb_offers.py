@@ -12,13 +12,15 @@ import json
 import logging
 import re
 
+import psycopg
 from psycopg.types.json import Json
 
 from sourcing import timing
 
 log = logging.getLogger("agents.kb_offers")
 ISO_DATE = re.compile(r"^\d{4}-\d{2}-\d{2}(?:[T ][\d:.+Z-]*)?$")
-NUMBER = re.compile(r"^\s*(?:EUR|€)?\s*(\d+(?:[.,]\d+)?)\s*(?:EUR|€)?\s*$", re.I)
+NUMBER = re.compile(r"^\s*(?:EUR|€)?\s*(\d+(?:[.,]\d{1,2})?)\s*(?:EUR|€)?\s*$", re.I)
+PER_UNIT = re.compile(r"^(?:per |/ ?)?(?:1 )?(?:unit|piece|pc|pcs|each|ea)s?$", re.I)
 
 
 def _number(value):
@@ -59,7 +61,9 @@ def offers_from_rows(rows) -> list[dict]:
         ref = "/".join(str(s.get(k) or "") for k in ("supplier_id", "offer_ref", "item"))
         offers.append({
             "offer_id": f"kb:{ref}", "supplier_id": str(supplier), "part_id": str(part),
-            "quantity": _number(a.get("qty")), "unit_price_eur": _number(a.get("unit_price")),
+            "quantity": _number(a.get("qty")),
+            "unit_price_eur": (_number(a.get("unit_price"))
+                               if PER_UNIT.match(str(a.get("price_basis") or "each")) else None),
             "lead_time_h": _hours(a.get("lead_time")) if a.get("lead_time") else _hours(a.get("ready_time")),
             "valid_until": a.get("valid_until") if ISO_DATE.match(str(a.get("valid_until") or "")) else None,
             "sources": sorted(entry["sources"], key=lambda x: x["fact_id"])})
@@ -76,11 +80,16 @@ def sync(kb_conn, plan_conn, rows=None) -> list[str]:
     for o in offers_from_rows(rows):
         if o["quantity"] is not None and o["quantity"] <= 0:
             continue
-        cur = plan_conn.execute(
-            "INSERT INTO offers (offer_id, supplier_id, part_id, quantity, unit_price_eur, lead_time_h, valid_until, "
-            "sources) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) ON CONFLICT (offer_id) DO NOTHING",
-            (o["offer_id"], o["supplier_id"], o["part_id"], o["quantity"], o["unit_price_eur"], o["lead_time_h"],
-             o["valid_until"], Json(o["sources"])))
+        try:
+            with plan_conn.transaction():       # one unreadable offer must not lose the others
+                cur = plan_conn.execute(
+                    "INSERT INTO offers (offer_id, supplier_id, part_id, quantity, unit_price_eur, lead_time_h, "
+                    "valid_until, sources) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) ON CONFLICT (offer_id) DO NOTHING",
+                    (o["offer_id"], o["supplier_id"], o["part_id"], o["quantity"], o["unit_price_eur"],
+                     o["lead_time_h"], o["valid_until"], Json(o["sources"])))
+        except (psycopg.DataError, psycopg.IntegrityError) as exc:
+            log.warning("offer %s not stored (%s)", o["offer_id"], type(exc).__name__)
+            continue
         if cur.rowcount:
             added.append(o["offer_id"])
             log.info("offer %s from %d kb facts", o["offer_id"], len(o["sources"]))
