@@ -51,6 +51,13 @@ _DATE_ATTR = re.compile(r"(?:^|_)date$")
 _FLAG_ATTR = re.compile(r"(?:_present$|^struck_through$|^is_|^has_)")
 _ISO = re.compile(r"(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})")
 _DMY = re.compile(r"(\d{1,2})([./])(\d{1,2})\2(\d{4})")
+_DATE_IN_TEXT = re.compile(r"(?<!\d)(?:\d{4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{1,2}([./])\d{1,2}\1\d{4})(?!\d)")
+# a measured value printed with its unit ("1 250 kg", "12 pcs"): number in value, unit in unit
+_FRACTION = re.compile(r"[+-]?0[.,]\d+")       # 0.125 is a fraction, never 125
+_MEASURE_ATTR = re.compile(r"(?:^|_)(?:weight|qty|quantity|packages)(?:_|$)")
+_WITH_UNIT = re.compile(r"\s*([+-]?\d[\d\s.,']*?)\s*([A-Za-z]{1,5}\.?)\s*")
+# languages whose slash dates put the day first; with English in the document a slash date stays ambiguous
+_DAY_FIRST = {"de", "fr", "it", "es", "nl", "pl", "pt", "cs", "da", "sv", "nb", "no", "fi", "hu", "ro", "tr"}
 _YES, _NO = {"yes", "y", "true", "ja", "x", "1", "present", "signed"}, {"no", "n", "false", "nein", "0", "absent", "none"}
 _ENVELOPE_KEYS = ("source", "doc_kind", "doc_kind_confidence", "languages", "spec_version", "extracted_by",
                   "doc_date", "facts", "unreadable", "proposed_fact_types")
@@ -63,13 +70,14 @@ def _parse_json(text: str) -> dict:
     if text.startswith("```"):
         text = re.sub(r"^```[a-zA-Z0-9]*\n?", "", text)
         text = re.sub(r"\n?```$", "", text).strip()
+    # strict=False: a model quoting table rows copies raw tabs and newlines into its strings
     try:
-        data = json.loads(text)
+        data = json.loads(text, strict=False)
     except json.JSONDecodeError:
         start, end = text.find("{"), text.rfind("}")
         if start == -1 or end <= start:
             raise ValueError("the model did not return a JSON object")
-        data = json.loads(text[start:end + 1])
+        data = json.loads(text[start:end + 1], strict=False)
     if not isinstance(data, dict):
         raise ValueError("the model returned JSON that is not an object")
     return data
@@ -159,7 +167,7 @@ def _coerce_subject(subject: dict) -> dict:
     return out
 
 
-def _iso_date(value: str) -> str | None:
+def _iso_date(value: str, day_first: bool = False) -> str | None:
     """ISO date for an unambiguous printed date: year first, a dotted day-month-year, or a slash date whose first
     part cannot be a month. Anything else (a slash date that could be either order) stays as printed."""
     s = value.strip()
@@ -167,7 +175,7 @@ def _iso_date(value: str) -> str | None:
         y, mo, d = m.groups()
     elif (m := _DMY.fullmatch(s)):
         d, sep, mo, y = m.groups()
-        if sep == "/" and int(d) <= 12:
+        if sep == "/" and int(d) <= 12 and not day_first:
             return None
     else:
         return None
@@ -176,17 +184,33 @@ def _iso_date(value: str) -> str | None:
     return f"{int(y):04d}-{int(mo):02d}-{int(d):02d}"
 
 
-def _typed_by_name(f: dict) -> None:
-    """Dates to ISO and flags to booleans by attribute name, keeping the printed text as evidence."""
+def _typed_by_name(f: dict, day_first: bool = False) -> None:
+    """Dates to ISO and flags to booleans by attribute name, keeping the printed text as evidence. A date attribute
+    left null whose evidence quotes exactly one readable date takes that date."""
     value, attr = f.get("value"), str(f.get("attribute") or "")
+    if value is None and _DATE_ATTR.search(attr) and isinstance(f.get("evidence"), str):
+        found = {d for m in _DATE_IN_TEXT.finditer(f["evidence"]) if (d := _iso_date(m.group(0), day_first))}
+        if len(found) == 1:
+            f["value"] = found.pop()
+        return
     if not isinstance(value, str):
         return
     new = None
     if _DATE_ATTR.search(attr):
-        new = _iso_date(value)
+        new = _iso_date(value, day_first)
     elif _FLAG_ATTR.search(attr):
         low = value.strip().lower()
         new = True if low in _YES else False if low in _NO else None
+    elif _MEASURE_ATTR.search(attr) and (m := _WITH_UNIT.fullmatch(value)):
+        digits = m.group(1).strip()
+        if _FRACTION.fullmatch(digits):      # 0.125 / 0,500: a fraction below one, never thousands
+            number = float(digits.replace(",", "."))
+        else:
+            number = _coerce_number(digits, count=bool(_QUANTITY_ATTR.search(attr)))
+        if number is not None:
+            if not f.get("unit"):
+                f["unit"] = m.group(2).rstrip(".")
+            new = number
     if new is not None and new != value:
         if f.get("evidence") is None:
             f["evidence"] = value
@@ -225,16 +249,64 @@ def _po_line_from_printed_item(facts: list[dict]) -> None:
         f["subject"] = {**subject, "po_line": new_line}
 
 
-def _envelope(data: dict, default_kind: str, numeric_attrs: dict | None = None) -> dict:
+def _positions(facts: list[dict]) -> None:
+    """A positional subject key (line, *_line, statement_no) that the model filled with a code instead of a number is
+    renumbered 1, 2, 3 ... in order of first appearance within its record group (same fact type and other keys).
+    Groups that mix numbers and codes are left alone: there is no safe mapping."""
+    groups: dict[str, dict] = {}
+    for f in facts:
+        subject = f.get("subject")
+        if not isinstance(subject, dict):
+            continue
+        for k in subject:
+            if _INT_SUBJECT.search(str(k)):
+                rest = {kk: vv for kk, vv in subject.items() if kk != k}
+                gkey = json.dumps([f.get("fact_type"), k, rest], sort_keys=True, default=str)
+                g = groups.setdefault(gkey, {"key": k, "values": [], "facts": []})
+                if subject[k] not in g["values"]:
+                    g["values"].append(subject[k])
+                g["facts"].append(f)
+    for g in groups.values():
+        values = g["values"]
+        if not values or any(isinstance(v, int) or v is None for v in values):
+            continue
+        number = {v: i for i, v in enumerate(values, start=1)}
+        for f in g["facts"]:
+            f["subject"] = {**f["subject"], g["key"]: number[f["subject"][g["key"]]]}
+
+
+def _identifiers_as_attributes(facts: list[dict], attrs_by_type: dict) -> None:
+    """When the contract lists an attribute under the same name as a subject key (supplier_id, route_id, ...), the
+    record carries that value in its subject; state it as the attribute too if the model did not. Copied, not read:
+    the fact cites the subject and keeps the confidence of the record's other facts."""
+    records: dict[str, dict] = {}
+    for f in facts:
+        subject = f.get("subject")
+        if isinstance(subject, dict) and f.get("fact_type") in attrs_by_type:
+            key = json.dumps([f["fact_type"], subject], sort_keys=True, default=str)
+            records.setdefault(key, {"first": f, "attrs": set()})["attrs"].add(f.get("attribute"))
+    for rec in records.values():
+        first = rec["first"]
+        for k, v in first["subject"].items():
+            if k in attrs_by_type[first["fact_type"]] and k not in rec["attrs"] and v not in (None, ""):
+                facts.append({"fact_type": first["fact_type"], "subject": dict(first["subject"]), "attribute": k,
+                              "value": v, "unit": None, "locator": first.get("locator"),
+                              "evidence": f"identifier of the record ({k})", "confidence": first.get("confidence")})
+
+
+def _envelope(data: dict, default_kind: str, numeric_attrs: dict | None = None,
+              attrs_by_type: dict | None = None) -> dict:
     numeric_attrs = numeric_attrs or {}
     facts, ambiguous = [], []
+    langs = {str(x).lower().split("-")[0] for x in (data.get("languages") or []) if isinstance(x, str)}
+    day_first = bool(langs) and "en" not in langs and langs <= _DAY_FIRST
     for f in data.get("facts") or []:
         if not isinstance(f, dict):
             continue
         f = dict(f)
         if isinstance(f.get("subject"), dict):
             f["subject"] = _coerce_subject(f["subject"])
-        _typed_by_name(f)
+        _typed_by_name(f, day_first)
         value, attr = f.get("value"), f.get("attribute")
         if isinstance(value, str) and attr in numeric_attrs.get(f.get("fact_type"), ()):
             count = bool(_QUANTITY_ATTR.search(str(attr))) and not _RATIO_ATTR.search(str(attr))
@@ -252,6 +324,8 @@ def _envelope(data: dict, default_kind: str, numeric_attrs: dict | None = None) 
                 continue
         facts.append(f)
     _po_line_from_printed_item(facts)
+    _positions(facts)
+    _identifiers_as_attributes(facts, attrs_by_type or {})
     unreadable = data.get("unreadable") if isinstance(data.get("unreadable"), list) else []
     env = {
         "source": {},

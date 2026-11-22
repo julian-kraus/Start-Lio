@@ -255,3 +255,141 @@ def test_an_unreadable_count_never_becomes_a_fact_through_drain(tmp_path):
         conn.execute(sql.SQL("DROP SCHEMA {} CASCADE").format(sql.Identifier(schema)))
         conn.commit()
         conn.close()
+
+
+def _lines(env):
+    return [f["subject"]["line"] for f in env["facts"]]
+
+
+def test_code_in_a_line_key_is_renumbered_by_position():
+    facts = [fact("5", subject={"delivery_note": "DN-X1", "line": "PRT-AA-01"}),
+             fact("6", subject={"delivery_note": "DN-X1", "line": "PRT-BB-02"}),
+             fact("7", attribute="unit_price", subject={"delivery_note": "DN-X1", "line": "PRT-AA-01"})]
+    env = _envelope({"facts": facts}, "delivery_note_scan", NUMERIC)
+    assert _lines(env) == [1, 2, 1]
+
+
+def test_numeric_or_mixed_line_keys_are_left_alone():
+    numbered = [fact("5", subject={"delivery_note": "DN-X1", "line": "3"})]
+    assert _lines(_envelope({"facts": numbered}, "delivery_note_scan", NUMERIC)) == [3]
+    mixed = [fact("5", subject={"delivery_note": "DN-X1", "line": 2}),
+             fact("6", subject={"delivery_note": "DN-X1", "line": "PRT-AA-01"})]
+    assert _lines(_envelope({"facts": mixed}, "delivery_note_scan", NUMERIC)) == [2, "PRT-AA-01"]
+
+
+def test_line_codes_are_numbered_per_delivery_note():
+    facts = [fact("5", subject={"delivery_note": "DN-X1", "line": "PRT-AA-01"}),
+             fact("6", subject={"delivery_note": "DN-X2", "line": "PRT-CC-09"})]
+    assert _lines(_envelope({"facts": facts}, "delivery_note_scan", NUMERIC)) == [1, 1]
+
+
+def test_extract_prompt_defines_positions_and_asks_for_every_attribute(tmp_path):
+    seen = {}
+
+    class Capture:
+        def create(self, request):
+            seen.update(request)
+            return Reply("end_turn", json.dumps({"facts": []}), {"input_tokens": 1, "output_tokens": 1})
+
+    client = AnthropicClient(api_key="test", store_dir=tmp_path, transport=Capture(), record=False)
+    doc = Document(path="x/note.txt", sha256="a" * 64, container="txt", text="synthetic")
+    client.extract(doc, Structure("delivery_note_scan", "", None, "core"), {}, CONTRACT)
+    system = seen["system"] if isinstance(seen["system"], str) else json.dumps(seen["system"])
+    assert "1-based" in system and "never a part" in system
+    assert "use null only" in system
+
+
+def test_identifier_attributes_are_stated_from_the_subject():
+    facts = [{"fact_type": "route", "subject": {"route_id": "R-X1"}, "attribute": "mode", "value": "road",
+              "confidence": "high"}]
+    env = _envelope({"facts": facts}, "master_table", {}, {"route": {"route_id", "mode"}})
+    got = {(f["attribute"], f["value"]) for f in env["facts"]}
+    assert got == {("mode", "road"), ("route_id", "R-X1")}
+    again = _envelope({"facts": facts + [{**facts[0], "attribute": "route_id", "value": "R-X1"}]}, "master_table", {},
+                      {"route": {"route_id", "mode"}})
+    assert len(again["facts"]) == 2                     # not duplicated when the model already wrote it
+
+
+def test_subject_keys_not_in_the_attributes_are_not_copied():
+    facts = [{"fact_type": "oc_line", "subject": {"po_number": "P-X1", "po_line": 1}, "attribute": "qty", "value": 5}]
+    env = _envelope({"facts": facts}, "order_confirmation", {}, {"oc_line": {"qty"}})
+    assert [f["attribute"] for f in env["facts"]] == ["qty"]
+
+
+def test_measured_value_with_unit_is_split():
+    f = {**fact("1 250 kg", attribute="gross_weight"), "unit": None}
+    env = _envelope({"facts": [f]}, "delivery_note_scan", {})
+    assert (env["facts"][0]["value"], env["facts"][0]["unit"]) == (1250, "kg")
+    plain = _envelope({"facts": [fact("12 pcs", attribute="note")]}, "delivery_note_scan", {})
+    assert plain["facts"][0]["value"] == "12 pcs"          # only measured attributes are split
+
+
+def test_slash_date_is_day_first_only_for_day_first_languages():
+    f = fact("03/04/2031", attribute="note_date")
+    assert _envelope({"facts": [f], "languages": ["de"]}, "x", {})["facts"][0]["value"] == "2031-04-03"
+    assert _envelope({"facts": [f], "languages": ["en"]}, "x", {})["facts"][0]["value"] == "03/04/2031"
+    assert _envelope({"facts": [f]}, "x", {})["facts"][0]["value"] == "03/04/2031"
+
+
+def test_workbook_rows_reach_the_model_as_text(monkeypatch):
+    import io
+    from openpyxl import Workbook
+    import kb.llm.base as base
+    wb = Workbook(); ws = wb.active; ws.title = "Lines"
+    ws.append(["part", "qty"]); ws.append(["P-X1", 5]); ws.append([None, None]); ws.append(["P-X2", 7])
+    buf = io.BytesIO(); wb.save(buf)
+    text, _ = base.text_of("xlsx", buf.getvalue())
+    assert text.splitlines() == ["# sheet Lines", "part\tqty", "P-X1\t5", "P-X2\t7"]
+    monkeypatch.setattr(base, "XLSX_MAX_ROWS", 2)
+    assert base.text_of("xlsx", buf.getvalue())[0].splitlines()[-1] == "[1 more rows in this sheet not shown]"
+
+
+@pytest.mark.parametrize("printed,expected", [("0.125 kg", 0.125), ("0.500 l", 0.5), ("0,250 kg", 0.25)])
+def test_a_leading_zero_fraction_with_a_unit_is_never_thousands(printed, expected):
+    env = _envelope({"facts": [fact(printed, attribute="qty_per")]}, "x", {})
+    assert env["facts"][0]["value"] == pytest.approx(expected)
+
+
+def test_sequential_line_numbers_one_to_twelve_are_kept():
+    facts = [fact(str(i), subject={"delivery_note": "DN-X1", "line": i}) for i in range(1, 13)]
+    assert _lines(_envelope({"facts": facts}, "delivery_note_scan", NUMERIC)) == list(range(1, 13))
+
+
+def test_a_null_date_takes_the_one_date_quoted_in_its_evidence():
+    f = {**fact(None, attribute="oc_date"), "evidence": "Order confirmation dated 2031-04-03"}
+    assert _envelope({"facts": [f]}, "x", {})["facts"][0]["value"] == "2031-04-03"
+    two = {**f, "evidence": "2031-04-03 replaces 2031-03-01"}
+    assert _envelope({"facts": [two]}, "x", {})["facts"][0]["value"] is None
+
+
+def test_prompt_forbids_null_for_a_quotable_value(tmp_path):
+    seen = {}
+
+    class Capture:
+        def create(self, request):
+            seen.update(request)
+            return Reply("end_turn", json.dumps({"facts": []}), {"input_tokens": 1, "output_tokens": 1})
+
+    client = AnthropicClient(api_key="test", store_dir=tmp_path, transport=Capture(), record=False)
+    client.extract(Document(path="x", sha256="b" * 64, container="txt", text="t"),
+                   Structure("order_confirmation", "", None, "core"), {}, CONTRACT)
+    assert "never for a value you can quote" in json.dumps(seen["system"])
+
+
+def test_extract_names_the_source_path(tmp_path):
+    seen = {}
+
+    class Capture:
+        def create(self, request):
+            seen.update(request)
+            return Reply("end_turn", json.dumps({"facts": []}), {"input_tokens": 1, "output_tokens": 1})
+
+    client = AnthropicClient(api_key="test", store_dir=tmp_path, transport=Capture(), record=False)
+    client.extract(Document(path="senders/S-X1/notices/n.pdf", sha256="c" * 64, container="txt", text="t"),
+                   Structure("price_list", "", None, "core"), {}, CONTRACT)
+    assert "Source path: senders/S-X1/notices/n.pdf" in json.dumps(seen["messages"])
+
+
+def test_raw_tabs_inside_answer_strings_are_accepted():
+    from kb.llm.anthropic_parse import _parse_json
+    assert _parse_json('{"facts": [], "unreadable": ["a\tb"]}')["unreadable"] == ["a\tb"]
