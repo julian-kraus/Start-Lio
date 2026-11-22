@@ -12,7 +12,7 @@ import os
 import re
 from collections import defaultdict
 from dataclasses import dataclass, field
-from datetime import date
+from datetime import date, datetime, time
 from typing import Iterable
 
 from psycopg import sql
@@ -46,6 +46,18 @@ def day(value) -> date | None:
         return date.fromisoformat(str(value).strip()[:10])
     except ValueError:
         return None
+
+
+def moment(value) -> datetime | None:
+    """The time in a dated value, None when it carries only a date. A time that cannot be read is the day's end."""
+    text, on = str(value).strip(), day(value)
+    if on is None or ":" not in text:
+        return None
+    try:
+        at = datetime.fromisoformat(text)
+    except ValueError:
+        return datetime.combine(on, time(23, 59, 59))
+    return None if at.tzinfo is None and at.time() == time() else at            # an exported date
 
 
 def id_list(value) -> list[str]:

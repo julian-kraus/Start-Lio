@@ -9,11 +9,11 @@ from __future__ import annotations
 import math
 import re
 from collections import defaultdict
-from datetime import datetime, time, timedelta
+from datetime import datetime, time, timedelta, timezone
 
 from .coverage_stock import BLOCKED, Revision
 from .coverage_windows import Window, hours
-from .facts import Facts, believed_ids, day, figure, id_list, ids, number
+from .facts import Facts, believed_ids, day, figure, id_list, ids, moment, number
 
 GONE = ("cancelled", "canceled")
 LANDED = ("delivered", "received")
@@ -23,6 +23,12 @@ AWAITS_PICKUP = re.compile(r"(^|_)(port|airport|terminal|customs|pick_?up)(_|$)"
 
 def _status(value) -> str:
     return str(value or "").strip().lower().replace(" ", "_")
+
+
+def _latest(eta: tuple) -> datetime:
+    on, at, _ = eta
+    at = at or datetime.combine(on, time())
+    return at.astimezone(timezone.utc).replace(tzinfo=None) if at.tzinfo else at
 
 
 def shipments(facts: Facts) -> dict[str, dict]:
@@ -46,8 +52,8 @@ def shipments(facts: Facts) -> dict[str, dict]:
         for b in facts.believed("shipment_status", shipment_id=ship["shipment_id"]):
             if b.get("value") is not None:
                 ship["status"], ship["ids"]["status"] = b["value"], believed_ids(b)
-        etas = [(d, r.ids("eta")) for r in rows if (d := day(r.get("eta")))]
-        ship["eta"], ship["ids"]["eta"] = max(etas, key=lambda e: e[0]) if etas else (None, [])
+        etas = [(d, moment(r.get("eta")), r.ids("eta")) for r in rows if (d := day(r.get("eta")))]
+        ship["eta"], ship["eta_at"], ship["ids"]["eta"] = max(etas, key=_latest) if etas else (None, None, [])
         ship["pos"] = sorted({p for r in rows for name in ("po_numbers", "po_number") for p in id_list(r.get(name))})
         for line in group["lines"]:
             ship["lines"][facts.material(line.key("material_id"))].append(line)
@@ -97,7 +103,7 @@ def held_orders(facts: Facts) -> dict[str, list[str]]:
 
 
 def arrival(ship: dict, transit, windows: list[Window], now: datetime, deadline: datetime) -> datetime:
-    """When it is at the packing site: that day's first shift, as facts carry dates, but never before now."""
+    """When it is at the packing site, never before now: at the ETA's time, or that day's first shift for a date."""
     here = now.astimezone(deadline.tzinfo).date()
     leg = timedelta(days=math.ceil(transit))            # facts carry dates: part of a day is a day
 
@@ -105,10 +111,14 @@ def arrival(ship: dict, transit, windows: list[Window], now: datetime, deadline:
         starts = [w.start for w in windows if w.start.date() == due]
         return min(starts, default=datetime.combine(due, time(), deadline.tzinfo))
 
-    due = ship["eta"] + leg
+    timed, due = ship["eta_at"], ship["eta"] + leg
+    if timed:
+        timed = timed.astimezone(deadline.tzinfo) if timed.tzinfo else timed.replace(tzinfo=deadline.tzinfo)
+        timed += leg
+        due = timed.date()
     if due < here:
-        due = here + leg                                # overdue or waiting for pick-up: the leg is still ahead
-    at = first_shift(due)
+        timed, due = None, here + leg                   # overdue or waiting for pick-up: the leg is still ahead
+    at = timed or first_shift(due)
     if at < now and AWAITS_PICKUP.search(_status(ship["status"])):
         at = first_shift(here + leg)                    # it should be here by now and still waits for pick-up
     return max(at, now.astimezone(deadline.tzinfo))

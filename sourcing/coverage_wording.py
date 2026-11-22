@@ -20,6 +20,8 @@ DOUBT = re.compile(r"\b(?:no|not|never|non|nor|cannot|without|false|former|forme
                    r"|error|mistak|wrong|incorrect|disput|previous|earlier)\w*"
                    r"|\b(?:buy|reorder|order (?:it|them|separately)|(?:must|to) be (?:ordered|bought))\b", re.I)
 WORD = re.compile(r"[^\W\d_]+")
+PART_WORD = re.compile(r"[^\W_]+")                       # with digits: a date or a 0 in a note is something said
+SIGN = re.compile(r"[^\w\s.,;:!()\[\]'\"\u2019/&-]")      # a cross or an equals sign is something said too
 # all a phantom note may say, besides the names of the parts
 PHANTOM_WORDS = frozenset("""a an the and or is are as it its this that part parts line lines bom item component
     phantom pre prefitted fitted premounted mounted preassembled assembled preinstalled installed by with in into
@@ -45,7 +47,7 @@ def phantom(note: str, part_names: frozenset[str] = frozenset()) -> bool | None:
     if not said:
         return None
     known = PHANTOM_WORDS | part_names
-    return not any(DOUBT.search(r) or set(WORD.findall(r.lower())) - known for r in rests)
+    return not any(DOUBT.search(r) or SIGN.search(r) or set(PART_WORD.findall(r.lower())) - known for r in rests)
 
 
 def priority(text: str, labels: dict[str, list[str]]) -> tuple[bool, list[str] | None]:
