@@ -7,7 +7,10 @@ GET  /api/lookahead/clock                    the clock alone, polled by open pag
 GET  /api/lookahead/events/<id>              one world event with its drill-down
 GET  /api/lookahead/stream                   SSE, one message per appended record (resumes via Last-Event-ID)
 POST /api/lookahead/goal                     {answers: {id: value}} from the goal interview
-POST /api/lookahead/decisions/<id>/accept    {approver}; live mode approves and sends the decision's mail drafts
+GET  /api/lookahead/decisions/<id>           the decision card: routed signer, score drops, end state
+POST /api/lookahead/decisions/<id>/accept    {approver}; only the routed signer; live mode writes plan.decisions and sends
+                                             the attached drafts (as the mail send mode says)
+POST /api/lookahead/decisions/<id>/reject    {approver, reason}; writes the reason, sends nothing
 POST /api/lookahead/advance | reset          rehearse mode only: next beat / start over
 POST /api/lookahead/clock                    {now}; rehearse mode, or forward on a running scenario clock
 POST /api/lookahead/clock/next               live scenario: jump to the launch record's next demo time
@@ -23,8 +26,9 @@ import json
 import queue
 import re
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import unquote, urlsplit
 
+from . import lookahead_decisions as decisions
 from .lookahead import Lookahead, LookaheadError
 from .lookahead_clock import parse_time
 
@@ -33,6 +37,7 @@ STATIC = Path(__file__).with_name("lookahead_static")
 STATIC_FILE = re.compile(r"/lookahead/static/([a-z0-9_]+\.(js|css))")
 STATIC_TYPES = {"js": "text/javascript; charset=utf-8", "css": "text/css; charset=utf-8"}
 MAX_BODY = 64 * 1024
+DECISION = r"/api/lookahead/decisions/([^/]+)"  # ids are URL-encoded: the monitor's contain ':'
 HEARTBEAT = 15
 
 
@@ -97,44 +102,20 @@ def lookahead_goal(la: Lookahead, body: dict) -> dict:
     return {"ok": True}
 
 
-def lookahead_accept(la: Lookahead, decision_id: str, body: dict) -> dict:
-    approver = str(body.get("approver") or "").strip()
-    if not approver or approver.lower().startswith(("agent", "mail:", "system")):
-        raise LookaheadError(400, "approver must name a person")
-    d = la.decision(decision_id)
-    if not d:
-        raise LookaheadError(404, "unknown decision")
-    if d.get("status") != "open":
-        raise LookaheadError(409, f"decision is {d.get('status')}")
-    now = la.now()  # before anything is sent: without a clock the decision could not be recorded
-    sent = []
-    if la.mode == "live":
-        # Live: approve and send exactly the drafts the agent attached to this decision.
-        from mail import drafts as mail_drafts
-        from mail.tools import MailTools
-        tools = MailTools(actor=approver)
-        signer = d.get("signer") or {}
-        for draft_id in d.get("draft_ids", []):
-            try:
-                ok = mail_drafts.approve(tools.conn, draft_id, approver, role=signer.get("role"),
-                                         policy_ref=signer.get("rule"))
-                tools.conn.commit()
-            except mail_drafts.DraftError as exc:
-                tools.conn.rollback()
-                raise LookaheadError(409, f"draft {draft_id}: {exc.code}") from exc
-            res = tools.send_approved(draft_id, ok["approval_id"])
-            if not res.get("ok"):
-                raise LookaheadError(502, f"draft {draft_id} not sent: {res.get('error') or res}")
-            sent.append(draft_id)
-    la.record_decision(decision_id, "accepted", approver, now)
-    la.after_human_step()
-    return {"ok": True, "sent": sent}
+def lookahead_accept(la: Lookahead, decision_id: str, body: dict, stores=None) -> dict:
+    """Accept through the decision card: only the routed signer, plan row, drafts sent as the mail mode says."""
+    return decisions.accept(la, decision_id, body, stores)
+
+
+def lookahead_reject(la: Lookahead, decision_id: str, body: dict, stores=None) -> dict:
+    return decisions.reject(la, decision_id, body, stores)
 
 
 class LookaheadRoutes:
     """Handler methods; the host class provides `lookahead` and `_send(status, body, ctype)`."""
 
     lookahead: Lookahead | None = None
+    decision_stores = None  # kb, plan and mail for the decision card; None reads the configured databases
 
     def _lookahead_file(self, path: str):
         if path == "/lookahead":
@@ -161,6 +142,8 @@ class LookaheadRoutes:
             if m := re.fullmatch(r"/api/lookahead/events/(\d+)", path):
                 row = la.event_detail(int(m.group(1)))
                 return self._send(200 if row else 404, dumps(row or {"error": "not found"}))
+            if m := re.fullmatch(DECISION, path):
+                return self._send(200, dumps(decisions.card(la, unquote(m.group(1)), self.decision_stores)))
             if path == "/api/lookahead/stream":
                 return self._lookahead_stream(la, params)
             self._send(404, dumps({"error": "not found"}))
@@ -183,8 +166,10 @@ class LookaheadRoutes:
                 raise LookaheadError(400, "body must be a JSON object")
             if path == "/api/lookahead/goal":
                 return self._send(200, dumps(lookahead_goal(la, body)))
-            if m := re.fullmatch(r"/api/lookahead/decisions/([\w.-]+)/accept", path):
-                return self._send(200, dumps(lookahead_accept(la, m.group(1), body)))
+            if m := re.fullmatch(DECISION + "/accept", path):
+                return self._send(200, dumps(lookahead_accept(la, unquote(m.group(1)), body, self.decision_stores)))
+            if m := re.fullmatch(DECISION + "/reject", path):
+                return self._send(200, dumps(lookahead_reject(la, unquote(m.group(1)), body, self.decision_stores)))
             if path == "/api/lookahead/advance":
                 return self._send(200, dumps(la.advance()))
             if path == "/api/lookahead/reset":
