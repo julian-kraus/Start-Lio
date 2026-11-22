@@ -46,9 +46,18 @@ function planView(S) {
     b: f.dec ? (f.dec.status === "open" ? "cur" : "done") : "alt",
     g: f.final ? (f.final.severity === "ok" ? "goal" : "todo") : "todo",
   };
+  const cover = ((S.plan || {}).coverage) || {}, of = s => [].concat((s && s.score && s.score.sources) || []);
+  const from = {   // the sources behind each node's numbers
+    1: f.weak && f.weak.impact.sources,
+    2: f.A && f.B ? of(f.B).concat(of(f.A), {scenario_input: f.A.scenario}) : null,
+    4: f.hedge && f.hedge.impact && f.hedge.impact.sources,
+    ac: f.canc && f.canc.impact && f.canc.impact.sources,
+    b: f.dec && f.dec.cost && f.dec.cost.sources,
+    g: cover.sources,
+  };
   const box = (id, area, t, x, extra = "") => {
     const k = st[id];
-    return `<div class="pf ${k}" id="pf-${id}" style="grid-area:${area}"><span class="pf-tile">${gi(IK[id])}${id === "g" && k === "goal" ? `<i class="pf-st s1">${gi("star", 10)}</i><i class="pf-st s2">${gi("star", 9)}</i><i class="pf-st s3">${gi("star", 8)}</i>` : ""}</span>
+    return `<div class="pf ${k}" id="pf-${id}"${from[id] ? srcTip(from[id]) : ""} style="grid-area:${area}"><span class="pf-tile">${gi(IK[id])}${id === "g" && k === "goal" ? `<i class="pf-st s1">${gi("star", 10)}</i><i class="pf-st s2">${gi("star", 9)}</i><i class="pf-st s3">${gi("star", 8)}</i>` : ""}</span>
       <div class="pf-tx"><b>${esc(t)}</b><span>${esc(x)}</span>${extra}</div>
       ${k === "done" ? `<span class="pf-ic">${ic("check")}</span>` : k === "cur" ? `<span class="badge b-a pf-bd">Now</span>` : k === "bad" ? `<span class="badge b-r pf-bd">Happened</span>` : ""}</div>`;
   };

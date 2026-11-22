@@ -26,7 +26,7 @@ const vm = require("vm"), fs = require("fs");
 vm.createContext(ctx);
 for (const f of ["gp_app.js", "gp_plan.js"]) vm.runInContext(fs.readFileSync(process.argv[1] + "/" + f, "utf8"), ctx);
 vm.runInContext("S = " + process.argv[2] + "; decisions(); feed(); timeline(); planView(S);", ctx);
-console.log(JSON.stringify({lanes: els["#lanes"].innerHTML, feed: els["#feed"].innerHTML, decided: els["#decClosed"].innerHTML, plan: els["#v-plan"].innerHTML}));
+console.log(JSON.stringify({lanes: els["#lanes"].innerHTML, feed: els["#feed"].innerHTML, decided: els["#decClosed"].innerHTML, open: els["#decOpen"].innerHTML, plan: els["#v-plan"].innerHTML}));
 """
 
 
@@ -88,3 +88,18 @@ def test_chips_at_the_same_time_each_get_a_row():
                "at": "2030-01-01T09:00:00+00:00"} for i in range(4)]
     tops = re.findall(r'class="ev [^"]*" style="[^"]*top:([^;]+);', render(events=events)["lanes"])
     assert len(tops) == 4 and len(set(tops)) == 4
+
+
+def test_the_decision_card_names_the_sources_of_its_amounts_and_escapes_them():
+    card = render(decisions=[{"decision_id": "d1", "title": "T", "status": "open", "at": "2030-01-01T08:00:00+00:00",
+                              "cost": {"eur": 5, "sources": [{"fact_id": "fact-cost"}]},
+                              "impact": {"eur": 9, "units": 3, "sources": [{"scenario_input": "<goal answer>"}]}}])["open"]
+    assert "Source: kb facts fact-cost" in card
+    assert "scenario input: &lt;goal answer&gt;" in card
+    assert "<goal answer>" not in card
+
+
+def test_a_number_without_a_source_says_so():
+    card = render(decisions=[{"decision_id": "d1", "title": "T", "status": "open", "at": "2030-01-01T08:00:00+00:00",
+                              "cost": {"eur": 5}, "impact": {"eur": 9}}])["open"]
+    assert "Source not on the record" in card

@@ -19,6 +19,16 @@ const dhm = t => { const p = parts(t); return `${p.weekday} ${p.hour}:${p.minute
 const B = (c, t) => `<span class="badge b-${c}"><span class="dot"></span>${esc(t)}</span>`;
 const day = t => new Intl.DateTimeFormat("en-GB", {timeZone: TZ, weekday: "short", day: "2-digit", month: "short"}).format(new Date(t));
 const when = e => e.date_only ? day(e.at) : dhm(e.at);   // kb has some facts as a date, without a time
+function srcText(refs) {   // where a number comes from, as its record says
+  const all = [].concat(refs || []), facts = all.filter(r => r.fact_id).map(r => r.fact_id);
+  const shown = facts.length ? [`kb facts ${facts.slice(0, 2).join(", ")}${facts.length > 2 ? ` and ${facts.length - 2} more` : ""}`] : [];
+  all.filter(r => !r.fact_id).forEach(r => shown.push(r.scenario_input ? `scenario input: ${r.scenario_input}` : r.goal_line ? `goal: ${r.goal_line}` : r.label || ""));
+  const text = [...new Set(shown.filter(Boolean))].join("; ");
+  return text ? `Source: ${text}` : "Source not on the record";
+}
+const srcTip = refs => ` title="${esc(srcText(refs))}"`;
+const srcLine = refs => `<small class="xs subtle" style="display:block;overflow-wrap:anywhere">${esc(srcText(refs))}</small>`;
+const whyRow = r => `<div><dt>${esc(r.text)}</dt><dd>${esc(r.value || "")}${r.sources ? srcLine(r.sources) : ""}</dd></div>`;
 const initials = n => String(n || "?").split(/\s+/).filter(Boolean).map(w => w[0]).slice(0, 2).join("").toUpperCase();
 const tone = v => v >= 0.75 ? "tone-g" : v >= 0.55 ? "tone-am" : "tone-r";
 
@@ -135,14 +145,14 @@ function dqCard(d) {
   const plan = (d.on_accept || []).map(t => `<li>${ic("send")}<span>${esc(t)}</span></li>`).join("");
   return `<article class="dq-card"><div class="dc-meta">${B("r", "Open")}<span class="dc-due">${ic("clock")}Raised ${esc(dhm(d.at))}</span></div>
   <h4 class="dc-t">${esc(d.title)}</h4><p class="dc-cause">${esc(d.recommendation || "")}</p>
-  <div class="dc-stats"><div><b>${eur(d.cost && d.cost.eur)}</b><span>To pay</span></div><div><b class="bad">${eur(d.impact && d.impact.eur)}</b><span>Refunds if ignored</span></div></div>
+  <div class="dc-stats"><div${srcTip(d.cost && d.cost.sources)}><b>${eur(d.cost && d.cost.eur)}</b><span>To pay</span></div><div${srcTip(d.impact && d.impact.sources)}><b class="bad">${eur(d.impact && d.impact.eur)}</b><span>Refunds if ignored</span></div></div>
   <div class="dc-plan"><div class="dc-plan-h"><span>On accept</span></div><ul>${plan}</ul></div>
   <div class="dc-foot">${signerLine(d)}${acts(d)}</div></article>`;
 }
 function why(d) {
   const ev = (S.events || []).filter(e => e.lane === d.lane && e.detail && (e.detail.reasoning || []).length);
   const rows = ev.flatMap(e => e.detail.reasoning).slice(-6);
-  return rows.map(r => `<div><dt>${esc(r.text)}</dt><dd>${esc(r.value || "")}</dd></div>`).join("");
+  return rows.map(whyRow).join("");
 }
 function decCard(d) {
   const proms = (S.promises || []).filter(p => p.lane === d.lane);
@@ -152,9 +162,9 @@ function decCard(d) {
   }).join("") + `<li class="k-dead"><span class="pd-t">${esc(dhm(S.launch.deadline))}</span><i></i><span class="pd-x">Deadline</span></li>`;
   return `<article class="dc2"><div class="dc2-meta">${B("r", "Open")}<span class="dc2-due">${ic("clock")}<b>Raised ${esc(dhm(d.at))}</b></span></div>
   <h3 class="dc2-t">${esc(d.title)}</h3><p class="dc2-sum">${esc(d.recommendation || "")}</p>
-  <div class="dc2-kpi"><div><span>To pay, on delivery</span><b>${eur(d.cost && d.cost.eur)}</b><small>${esc(d.cost && d.cost.text)}</small></div>
-   <div><span>Refunds if ignored</span><b class="bad">${eur(d.impact && d.impact.eur)}</b><small>${esc(d.impact && d.impact.text)}</small></div>
-   <div><span>Copies protected</span><b>${num(d.impact && d.impact.units)}</b><small>${esc((S.launch || {}).name || "")}</small></div></div>
+  <div class="dc2-kpi"><div><span>To pay, on delivery</span><b>${eur(d.cost && d.cost.eur)}</b><small>${esc(d.cost && d.cost.text)}</small>${srcLine(d.cost && d.cost.sources)}</div>
+   <div><span>Refunds if ignored</span><b class="bad">${eur(d.impact && d.impact.eur)}</b><small>${esc(d.impact && d.impact.text)}</small>${srcLine(d.impact && d.impact.sources)}</div>
+   <div><span>Copies protected</span><b>${num(d.impact && d.impact.units)}</b><small>${esc((S.launch || {}).name || "")}</small>${srcLine(d.impact && d.impact.sources)}</div></div>
   <div class="dc2-cols"><section><p class="pd-h">${esc(supName(d.supplier_id))}</p><ol class="pd-steps">${steps}</ol></section>
    <section><p class="pd-h">${ic("sparkles")}Why the agent suggests this</p><dl class="pd-why">${why(d)}</dl></section></div>
   <div class="dc2-foot"><div class="pd-sign"><span class="act-av${signerOf(d).name ? "" : " empty"}">${esc(signerOf(d).name ? initials(signerOf(d).name) : "?")}</span><span><b>${esc(signerText(signerOf(d)))}</b><small>${esc([signerOf(d).rule, signerOf(d).reason].filter(Boolean).join(". "))}</small></span></div>${acts(d)}</div></article>`;
@@ -168,7 +178,7 @@ function decisions() {
   $("#decDone").textContent = done.length;
   $("#decClosed").innerHTML = done.length ? done.map(d => `<tr><td style="font-weight:600">${esc(d.title)}<p class="xs subtle" style="font-weight:400">${esc(d.recommendation || "")}</p></td>
     <td><span class="who"><span class="who-av">${esc(initials(d.decided_by))}</span>${esc(d.decided_by || "")}</span></td>
-    <td class="r">${num(d.impact && d.impact.units)} copies</td><td class="r">${eur(d.cost && d.cost.eur)}</td><td>${esc(dhm(d.decided_at || d.at))}</td>
+    <td class="r"${srcTip(d.impact && d.impact.sources)}>${num(d.impact && d.impact.units)} copies</td><td class="r"${srcTip(d.cost && d.cost.sources)}>${eur(d.cost && d.cost.eur)}</td><td>${esc(dhm(d.decided_at || d.at))}</td>
     <td>${d.status === "accepted" ? B("g", "Approved") : B("r", d.status)}</td></tr>`).join("") : `<tr><td colspan="6" class="subtle">No decisions yet.</td></tr>`;
   document.querySelectorAll("[data-act]").forEach(b => b.onclick = e => { e.stopPropagation(); accept(b.dataset.act); });
   document.querySelectorAll("[data-rej]").forEach(b => b.onclick = e => { e.stopPropagation(); openRej(b.dataset.rej); });
@@ -207,15 +217,16 @@ function risks() {
   const show = crit.length ? crit : lanes.slice(0, 3);
   const sups = (S.suppliers || []).filter(s => s.score && s.score.n > 0 && !s.scenario)
     .sort((x, y) => x.score.value - y.score.value);
-  $("#gSup").innerHTML = sups.map(s => `<div class="gnode"><div class="gn-t"><b>${esc(s.name)}</b><span>${esc((s.parts || [])[0] || "")}</span></div><div class="gn-m"><b class="${tone(s.score.value)}">${Math.round(s.score.value * 100)}%</b><span>Reliability</span></div></div>`).join("");
-  $("#gPart").innerHTML = show.map(l => `<div class="gnode ${l.gap > 0 ? "crit" : ""}"><div class="gn-t"><b>${esc(l.name)}</b><span>${esc(l.edition)} · ${esc(l.status)}</span></div><div class="gn-m"><b class="${l.gap > 0 ? "tone-r" : "tone-g"}">${l.gap > 0 ? "−" + num(l.gap) : "0"}</b><span>Gap</span></div></div>`).join("") || `<p class="sm subtle">Set the goal to rank the parts.</p>`;
+  $("#gSup").innerHTML = sups.map(s => `<div class="gnode"${srcTip(s.score.sources)}><div class="gn-t"><b>${esc(s.name)}</b><span>${esc((s.parts || [])[0] || "")}</span></div><div class="gn-m"><b class="${tone(s.score.value)}">${Math.round(s.score.value * 100)}%</b><span>Reliability</span></div></div>`).join("");
+  $("#gPart").innerHTML = show.map(l => `<div class="gnode ${l.gap > 0 ? "crit" : ""}"${srcTip(l.sources)}><div class="gn-t"><b>${esc(l.name)}</b><span>${esc(l.edition)} · ${esc(l.status)}</span></div><div class="gn-m"><b class="${l.gap > 0 ? "tone-r" : "tone-g"}">${l.gap > 0 ? "−" + num(l.gap) : "0"}</b><span>Gap</span></div></div>`).join("") || `<p class="sm subtle">Set the goal to rank the parts.</p>`;
   const ok = cov.needed && cov.covered >= cov.needed, pct = cov.needed ? Math.round(cov.covered / cov.needed * 100) : 0;
-  $("#gProd").innerHTML = cov.needed ? `<div class="gnode prod ${ok ? "" : "crit"}"><div class="gn-t"><b>${esc((S.launch || {}).name)}</b><span>${num(cov.covered)} of ${num(cov.needed)} covered</span></div><div class="gbar ${ok ? "ok" : ""}"><i style="width:${pct}%"></i></div></div>` : "";
+  $("#gProd").innerHTML = cov.needed ? `<div class="gnode prod ${ok ? "" : "crit"}"${srcTip(cov.sources)}><div class="gn-t"><b>${esc((S.launch || {}).name)}</b><span>${num(cov.covered)} of ${num(cov.needed)} covered</span></div><div class="gbar ${ok ? "ok" : ""}"><i style="width:${pct}%"></i></div></div>` : "";
   $("#weakNote").textContent = sups.length ? "Reliability from the order history in kb" : "";
   $("#coverText").textContent = cov.needed ? `${(S.launch || {}).name}: ${num(cov.covered)} of ${num(cov.needed)} covered` : "";
+  $("#coverText").title = cov.needed ? srcText(cov.sources) : "";
   const P = S.promises || [];
   const st = p => p.state === "proven" ? '<span class="badge b-g">Kept</span>' : p.state === "broken" ? '<span class="badge b-n">Broken</span>' : '<span class="badge b-a">Watching</span>';
-  $("#monBody").innerHTML = P.length ? P.map(p => `<tr><td style="font-weight:600">${esc(supName(p.supplier_id))}</td><td>${esc(p.what)}</td><td class="mono" style="font-size:13px">${p.state === "waiting" ? esc(dhm(p.next_check || p.due)) : "—"}</td><td>${st(p)}</td><td class="sm muted">${esc(p.fallback || "")}</td></tr>`).join("") : '<tr><td colspan="5" class="subtle">No promises yet.</td></tr>';
+  $("#monBody").innerHTML = P.length ? P.map(p => `<tr><td style="font-weight:600">${esc(supName(p.supplier_id))}</td><td${srcTip(p.sources)}>${esc(p.what)}</td><td class="mono" style="font-size:13px">${p.state === "waiting" ? esc(dhm(p.next_check || p.due)) : "—"}</td><td>${st(p)}</td><td class="sm muted">${esc(p.fallback || "")}</td></tr>`).join("") : '<tr><td colspan="5" class="subtle">No promises yet.</td></tr>';
   $("#monBadge").textContent = "Watching " + P.filter(p => p.state === "waiting").length;
 }
 
@@ -236,7 +247,7 @@ function openEvent(id) {
   const e = (S.events || []).find(x => x.id === id); if (!e) return;
   const d = e.detail || {};
   $("#dTitle").innerHTML = `<p class="h-sm">${esc(e.title)}</p><p class="xs subtle">${esc(when(e))} · ${esc(e.type)}</p>`;
-  $("#dBody").innerHTML = `${d.happened ? `<p>${esc(d.happened)}</p>` : ""}<dl class="pd-why">${(d.reasoning || []).map(r => `<div><dt>${esc(r.text)}</dt><dd>${esc(r.value || "")}</dd></div>`).join("")}</dl>${d.source ? `<p class="xs subtle">Source: ${esc([d.source.label, d.source.issue_key].filter(Boolean).join(", "))}</p>` : ""}${d.autonomy && d.autonomy.text ? `<p class="xs subtle">${esc(d.autonomy.text)}</p>` : ""}`;
+  $("#dBody").innerHTML = `${d.happened ? `<p>${esc(d.happened)}</p>` : ""}<dl class="pd-why">${(d.reasoning || []).map(whyRow).join("")}</dl>${d.sources ? srcLine(d.sources) : ""}${d.source ? `<p class="xs subtle">Source: ${esc([d.source.label, d.source.issue_key].filter(Boolean).join(", "))}</p>` : ""}${d.autonomy && d.autonomy.text ? `<p class="xs subtle">${esc(d.autonomy.text)}</p>` : ""}`;
   $("#drawer").classList.add("on"); $("#scrim").classList.add("on");
 }
 function closeAll() { ["#drawer", "#scrim", "#rejModal"].forEach(s => $(s).classList.remove("on")); }
