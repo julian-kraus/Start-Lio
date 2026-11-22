@@ -217,6 +217,7 @@ def run(client: LLMClient, registry: ToolRegistry, *, role: str, system: str, pr
     and retry up to `max_guard_retries`; after that the deterministic tool result wins and the trace is marked."""
     messages: list[dict] = [{"role": "user", "content": prompt}]
     tool_outputs: list[dict] = []
+    grounded: list[dict] = []
     calls: list[str] = []
     guard_retries = 0
     run_id = tracer.run_id if tracer else None
@@ -246,6 +247,8 @@ def run(client: LLMClient, registry: ToolRegistry, *, role: str, system: str, pr
                 calls.append(c.name)
                 out = registry.call(c.name, c.input)
                 tool_outputs.append(out)
+                if c.name in registry.grounding_names():
+                    grounded.append(out)
                 results.append({"type": "tool_result", "tool_use_id": c.id,
                                 "content": json.dumps(out, ensure_ascii=False, default=str)})
                 if tracer:
@@ -274,7 +277,7 @@ def run(client: LLMClient, registry: ToolRegistry, *, role: str, system: str, pr
             return AgentResult(text=reply.text, calls=calls, tool_outputs=tool_outputs, error=err,
                                run_id=run_id, usage=usage)
 
-        problems = guard.check(verdict, tool_outputs) if guard else []
+        problems = guard.check(verdict, grounded) if guard else []
         if problems and guard_retries < max_guard_retries:
             guard_retries += 1
             if tracer:
@@ -284,8 +287,8 @@ def run(client: LLMClient, registry: ToolRegistry, *, role: str, system: str, pr
             messages.append({"role": "user", "content": _rejection(problems)})
             continue
         if problems:
-            missing = guard.ungrounded(verdict, tool_outputs)
-            fixed = guard.apply(verdict, tool_outputs)
+            missing = guard.ungrounded(verdict, grounded)
+            fixed = guard.apply(verdict, grounded)
             if missing:                     # no tool result exists for these: refuse, never pass the model's number
                 err = (f"guard failed after {guard_retries} retries; no grounding tool result for "
                        f"{', '.join(missing)}, verdict refused")
