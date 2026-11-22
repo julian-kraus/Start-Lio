@@ -30,6 +30,7 @@ ADDED = {
     "shipment": ("", "dest_site last_lat last_lon via"),
     "shipment_qty": ("", "eta etd mode note status supplier_id"),
     "stock_batch": ("", "safety_stock site_id weeks_of_cover"),
+    "x_workbook_row": ("", "note"),
 }
 EXPECTED = sorted((fact_type, name, kind)
                   for fact_type, groups in ADDED.items()
@@ -38,9 +39,6 @@ EXPECTED = sorted((fact_type, name, kind)
 
 # The same attribute under another name in a source: not a contract name of its own.
 ALIASES = {("po_line", "werks"): "plant"}
-# Recorded by the reference but outside the approved list of issue 127, which asks for the decision. Compared
-# exactly, so this fails when another gap appears and when this one is closed.
-NOT_APPROVED = {("x_workbook_row", "note")}
 
 
 def by_name(text: str) -> dict:
@@ -111,7 +109,7 @@ def test_every_reference_attribute_is_in_the_contract_or_an_alias(contract, reco
         # An identifier is declared as a subject key and recorded as an attribute as well.
         if name not in spec["attributes"] and name not in spec["subject_keys"]:
             unlisted.add((fact_type, name))
-    assert unlisted - set(ALIASES) == NOT_APPROVED
+    assert not unlisted - set(ALIASES)
 
 
 def test_alias_targets_are_contract_attributes(contract):
