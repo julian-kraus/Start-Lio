@@ -29,7 +29,8 @@ demo = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(demo)
 
 URL = os.environ.get("TEST_DATABASE_URL")
-VALUES = {"unit_loss": "7", "budget": "300", "part": "printed booklet", "offer_quantity": "250", "offer_price": "2.5"}
+VALUES = {"unit_loss": "7", "budget": "300", "part": "printed booklet", "offer_quantity": "250", "offer_price": "2.5",
+          "offer_b_price": "2.9"}
 
 
 class ReplayedAnswers(LLMClient):

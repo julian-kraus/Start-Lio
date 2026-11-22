@@ -27,7 +27,8 @@ spec.loader.exec_module(demo)
 
 URL = os.environ.get("TEST_DATABASE_URL")
 DEADLINE = "2031-03-09T20:00:00+01:00"
-VALUES = {"unit_loss": "7", "budget": "300", "part": "printed booklet", "offer_quantity": "250", "offer_price": "2.5"}
+VALUES = {"unit_loss": "7", "budget": "300", "part": "printed booklet", "offer_quantity": "250", "offer_price": "2.5",
+          "offer_b_price": "2.9"}
 
 
 @pytest.fixture(autouse=True)
@@ -153,7 +154,7 @@ def test_inputs_edited_on_the_screen_reach_the_mail(pack, inputs, tmp_path):
     assert b"35 percent" in demo.render(pack, "offer", demo.current_inputs(pack, log), "desk@example.org")
 
 
-@pytest.mark.parametrize("beat", ["offer", "check_in", "cancellation"])
+@pytest.mark.parametrize("beat", ["offer", "check_in", "cancellation", "offer_b"])
 def test_every_mail_says_it_is_a_scenario(pack, inputs, beat):
     inputs["part"] = "Broschüre"
     msg = message_from_bytes(demo.render(pack, beat, inputs, "desk@example.org"), policy=policy.default)
@@ -223,15 +224,16 @@ def test_replay_reaches_kb_as_scenario_mail_and_sends_nothing(pack, demo_db, tmp
         docs = [r[0] for r in conn.execute("SELECT payload FROM mail.events WHERE kind = 'document_added'")]
         assert conn.execute("SELECT count(*) FROM mail.sends").fetchone()[0] == 0
         assert conn.execute("SELECT count(*) FROM mail.drafts").fetchone()[0] == 0
-    assert len(docs) == 3
+    assert len(docs) == len(pack["beats"])
     for doc in docs:
-        assert doc["trust"] == "test" and doc["scenario"] is True and doc["persona_id"] == "supplier-a"
+        assert doc["trust"] == "test" and doc["scenario"] is True
         assert b"Scenario input" in BlobStore(blobs).read(doc["sha256"])
+    assert sorted(d["persona_id"] for d in docs) == ["supplier-a"] * 3 + ["supplier-b"]
     with kb_db.connect(demo_db, "kb") as conn:
         kb_db.migrate(conn, "kb")
         conn.commit()
         seen = MailSource("mail", blobs).catch_up(conn, tmp_path / "structured", {})
-    assert len(seen) == 3 and all(d["status"] != "failed" for d in seen), json.dumps(seen)
+    assert len(seen) == len(pack["beats"]) and all(d["status"] != "failed" for d in seen), json.dumps(seen)
 
 
 @pytest.fixture
@@ -258,11 +260,12 @@ def test_a_second_rehearsal_on_the_same_log_path_delivers_its_mail_again(pack, d
     assert len(set(sent)) == 2 * len(pack["beats"])
 
 
-@pytest.mark.parametrize("how", ["replayed", "from a test inbox"])
+@pytest.mark.parametrize("how", ["replayed", "backup offer replayed", "from a test inbox"])
 def test_a_database_with_the_last_rehearsals_mail_is_not_reset(pack, inputs, demo_db, tmp_path, how):
     demo.reset(demo_db, pack, DEADLINE, VALUES, tmp_path / "one")
-    if how == "replayed":
-        demo.replay(demo_db, pack, "cancellation", tmp_path / "one", tmp_path / "mail")
+    if how != "from a test inbox":
+        beat = "offer_b" if how.startswith("backup") else "cancellation"
+        demo.replay(demo_db, pack, beat, tmp_path / "one", tmp_path / "mail")
     else:
         raw = demo.render(pack, "cancellation", {**inputs, "part": "Broschüre"}, pack["persona"]["desk"],
                           sender="teammate@example.org", message_id="<inbox-1@example.org>")
@@ -310,3 +313,21 @@ def test_space_grouped_numbers_are_read(pack, typed):
 def test_a_quantity_that_is_not_a_plain_whole_number_is_refused(pack, typed):
     with pytest.raises(demo.DemoError):
         demo.initial_inputs(pack, {**VALUES, "offer_quantity": typed})
+
+
+def test_the_backup_offer_is_a_scenario_mail_from_supplier_b(pack, inputs):
+    text = message_from_bytes(demo.render(pack, "offer_b", inputs, "desk@example.org"),
+                              policy=policy.default).get_content()
+    assert "backup" in text and f"EUR {inputs['offer_b_price']} per piece" in text
+    assert f"{inputs['offer_quantity']} pieces of {inputs['part']}" in text
+    assert text.rstrip().endswith("Supplier B") and "Supplier A" not in text
+    labelled = demo.opening_records(pack, demo.clock.parse(DEADLINE), inputs)[1]
+    assert labelled["title"] == "Scenario: Supplier A and Supplier B are played by the team"
+    assert any("Supplier B" in r["text"] for r in labelled["detail"]["reasoning"])
+
+
+def test_an_unknown_persona_is_refused_before_connecting(pack, tmp_path):
+    with pytest.raises(demo.DemoError, match="unknown persona"):
+        demo.reset("postgresql://localhost/x_demo", pack, DEADLINE, VALUES, tmp_path / "log",
+                   persona_history={"supplier-c": "S-ONE"})
+    assert not (tmp_path / "log").exists()

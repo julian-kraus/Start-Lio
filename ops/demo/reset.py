@@ -60,6 +60,28 @@ def load_pack(folder: Path) -> dict:
     return {**pack, "folder": folder}
 
 
+def personas(pack: dict) -> list[dict]:
+    """Supplier A first, then the other scenario personas (a backup supplier)."""
+    return [pack["persona"], *pack.get("personas", {}).values()]
+
+
+def persona_by_id(pack: dict, persona_id: str) -> dict:
+    for persona in personas(pack):
+        if persona["persona_id"] == persona_id:
+            return persona
+    raise DemoError(f"unknown persona {persona_id!r}: one of {', '.join(p['persona_id'] for p in personas(pack))}")
+
+
+def beat_mail(pack: dict, beat: str) -> tuple[str, dict]:
+    """A beat is a mail file sent by Supplier A, or {"mail": file, "persona": id} for another persona."""
+    if beat not in pack["beats"]:
+        raise DemoError(f"unknown beat {beat!r}: one of {', '.join(pack['beats'])}")
+    spec = pack["beats"][beat]
+    if isinstance(spec, str):
+        return spec, pack["persona"]
+    return spec["mail"], persona_by_id(pack, spec["persona"])
+
+
 # ---- which database may be touched -------------------------------------------
 
 def check_target(url: str, live_db: str | None = None, ask=None) -> str:
@@ -94,9 +116,9 @@ def refuse_used(conn, pack: dict) -> None:
     table = f"{MAIL_SCHEMA}.messages"
     if not conn.execute("SELECT to_regclass(%s) IS NOT NULL AS ok", (table,)).fetchone()["ok"]:
         return
-    if conn.execute(sql.SQL("SELECT EXISTS (SELECT 1 FROM {} WHERE from_addr = %s OR strpos(subject, %s) > 0) AS used")
+    if conn.execute(sql.SQL("SELECT EXISTS (SELECT 1 FROM {} WHERE from_addr = ANY(%s) OR strpos(subject, %s) > 0) AS used")
                     .format(sql.Identifier(MAIL_SCHEMA, "messages")),
-                    (pack["persona"]["address"], SUBJECT_MARK)).fetchone()["used"]:
+                    ([p["address"] for p in personas(pack)], SUBJECT_MARK)).fetchone()["used"]:
         raise DemoError("this database holds the mail of an earlier rehearsal: create a fresh demo database")
 
 
@@ -178,7 +200,7 @@ def current_inputs(pack: dict, log: Path, warn=warn_operator) -> dict:
 
 
 def opening_records(pack: dict, deadline, inputs: dict) -> list[dict]:
-    script, persona = pack["clock"], pack["persona"]
+    script, cast = pack["clock"], personas(pack)
 
     def before(hours) -> str:
         return (deadline - timedelta(hours=hours)).isoformat()
@@ -192,9 +214,10 @@ def opening_records(pack: dict, deadline, inputs: dict) -> list[dict]:
               "team_offline_at": before(script["offline_h_before_deadline"]),
               "demo_times": [before(h) for h in script["stops_h_before_deadline"]], "goal_questions": questions}
     labelled = {"kind": "event", "type": "scenario", "severity": "info", "at": start,
-                "title": f"Scenario: {persona['display_name']} is played by the team",
+                "title": f"Scenario: {' and '.join(p['display_name'] for p in cast)} "
+                         f"{'is' if len(cast) == 1 else 'are'} played by the team",
                 "source": {"scenario_input": pack["name"]},
-                "detail": {"happened": persona["note"],
+                "detail": {"happened": " ".join(p["note"] for p in cast),
                            "reasoning": [{"text": f"Scenario input: {s['q']}",
                                           "value": " ".join(filter(None, (inputs[s["id"]], s.get("unit"))))}
                                          for s in pack["inputs"]]}}
@@ -204,7 +227,7 @@ def opening_records(pack: dict, deadline, inputs: dict) -> list[dict]:
     return records
 
 
-def history_card(conn, pack: dict, supplier_id: str, at: str) -> dict:
+def history_card(conn, pack: dict, supplier_id: str, at: str, persona: dict | None = None) -> dict:
     """The persona's supplier card: the reliability score of a real supplier's history, read from kb now.
 
     The pack names no supplier and holds no score. The card keeps the persona's id, which its promises carry,
@@ -219,7 +242,7 @@ def history_card(conn, pack: dict, supplier_id: str, at: str) -> dict:
     card = reliability.card(reliability.history(read("current_facts"), read("believed")), supplier_id)
     if not card["score"]["history"]["n"]:
         raise DemoError(f"kb holds no delivery history of supplier {supplier_id!r}")
-    persona, whose = pack["persona"], card.get("name") or supplier_id
+    persona, whose = persona or pack["persona"], card.get("name") or supplier_id
     record = {**card, "producer": PRODUCER, "supplier_id": persona["persona_id"], "name": persona["display_name"],
               "at": at, "history_supplier_id": supplier_id, "flags": ["Scenario offer", f"Real history: {whose}"],
               "persona": f"{persona['note']} The score is computed from the history of {whose} in kb facts."}
@@ -230,7 +253,8 @@ def history_card(conn, pack: dict, supplier_id: str, at: str) -> dict:
 # ---- commands ----------------------------------------------------------------
 
 def reset(url: str, pack: dict, deadline: str, overrides: dict, log: Path,
-          live_db: str | None = None, ask=None, history_supplier: str | None = None) -> list[dict]:
+          live_db: str | None = None, ask=None, history_supplier: str | None = None,
+          persona_history: dict | None = None) -> list[dict]:
     schema = plan_db.schema_name()
     if schema != plan_db.DEFAULT_SCHEMA:
         raise DemoError(f"PLAN_SCHEMA is {schema!r}: reset only ever drops {plan_db.DEFAULT_SCHEMA!r}")
@@ -238,6 +262,7 @@ def reset(url: str, pack: dict, deadline: str, overrides: dict, log: Path,
     records = opening_records(pack, due, initial_inputs(pack, overrides))
     if log.exists() and log.stat().st_size:
         raise DemoError(f"{log} already has records: give each rehearsal a new log")
+    bound = {persona_id: (persona_by_id(pack, persona_id), supplier) for persona_id, supplier in (persona_history or {}).items()}
     check_target(url, live_db, ask)
     with plan_db.connect(url, schema) as conn:
         with conn.transaction():
@@ -245,6 +270,8 @@ def reset(url: str, pack: dict, deadline: str, overrides: dict, log: Path,
             refuse_used(conn, pack)
             if history_supplier:
                 records.append(history_card(conn, pack, history_supplier, records[1]["at"]))
+            for persona, supplier in bound.values():
+                records.append(history_card(conn, pack, supplier, records[1]["at"], persona))
             drop_plan(conn, schema)
             plan_db.migrate(conn, schema)
             clock.set_scenario(conn, records[1]["at"], rate=0, by="demo reset")
@@ -256,10 +283,8 @@ def reset(url: str, pack: dict, deadline: str, overrides: dict, log: Path,
 
 def render(pack: dict, beat: str, inputs: dict, to: str, sender: str | None = None, at=None,
            message_id: str | None = None) -> bytes:
-    if beat not in pack["beats"]:
-        raise DemoError(f"unknown beat {beat!r}: one of {', '.join(pack['beats'])}")
-    persona = pack["persona"]
-    text = Template((pack["folder"] / pack["beats"][beat]).read_text(encoding="utf-8")).substitute(
+    mail, persona = beat_mail(pack, beat)
+    text = Template((pack["folder"] / mail).read_text(encoding="utf-8")).substitute(
         inputs, persona=persona["display_name"])
     head, _, body = text.partition("\n\n")
     msg = message_from_string(head + "\n\n", policy=policy.SMTP)
@@ -278,21 +303,21 @@ def replay(url: str, pack: dict, beat: str, log: Path, mail_data: Path):
     """The mail path of a real inbox, minus IMAP: mail.store.ingest emits the events kb consumes."""
     check_target(url)
     inputs = current_inputs(pack, log)
-    persona = pack["persona"]
+    persona, desk = beat_mail(pack, beat)[1], pack["persona"]["desk"]
     with plan_db.connect(url) as plan_conn:
         if not clock.is_scenario(plan_conn):
             raise DemoError("no scenario clock is running: run reset first")
         at = clock.now(plan_conn)
     # one message per beat and rehearsal, so a second key press adds nothing
     key = hashlib.sha256(f"{log.resolve()}|{log.read_text(encoding='utf-8').splitlines()[0]}|{beat}".encode())
-    raw = render(pack, beat, inputs, persona["desk"], persona["address"], at,
+    raw = render(pack, beat, inputs, desk, persona["address"], at,
                  f"<{key.hexdigest()[:32]}@scenario.invalid>")
     with mail_db.connect(url, MAIL_SCHEMA) as conn:
         mail_db.migrate(conn, MAIL_SCHEMA)
         conn.commit()
         contacts.add_manual(conn, persona["address"], None, True, "demo replay")
         contacts.set_persona(conn, persona["address"], persona["persona_id"], "demo replay")
-        result = mail_store.ingest(conn, BlobStore(mail_data), raw, persona["desk"], TAG_PREFIX, now=at)
+        result = mail_store.ingest(conn, BlobStore(mail_data), raw, desk, TAG_PREFIX, now=at)
         conn.commit()
     return result
 
@@ -319,6 +344,8 @@ def main(argv=None) -> int:
             p.add_argument("--deadline", required=True, help="ISO time with offset")
             p.add_argument("--set", type=assignment, action="append", default=[])
             p.add_argument("--history-supplier", help="kb supplier id whose real history scores the persona")
+            p.add_argument("--persona-history", type=assignment, action="append", default=[],
+                           help="persona_id=kb supplier id, e.g. the backup supplier's real history")
             p.add_argument("--live-db", help="for a person: the exact name of a database that is not a demo one")
         elif name == "render":
             p.add_argument("--to")
@@ -329,7 +356,8 @@ def main(argv=None) -> int:
         pack = load_pack(args.pack)
         if args.cmd == "reset":
             launch = reset(args.database_url, pack, args.deadline, dict(args.set), args.log, args.live_db,
-                           history_supplier=args.history_supplier)[0]
+                           history_supplier=args.history_supplier,
+                           persona_history=dict(args.persona_history))[0]
             print(f"plan rebuilt, clock frozen at the start, jumps to {', '.join(launch['demo_times'])}")
         elif args.cmd == "render":
             mail = render(pack, args.beat, current_inputs(pack, args.log), args.to or pack["persona"]["desk"])

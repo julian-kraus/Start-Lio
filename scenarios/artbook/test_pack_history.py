@@ -23,7 +23,8 @@ spec.loader.exec_module(demo)
 
 URL = os.environ.get("TEST_DATABASE_URL")
 DEADLINE = "2031-03-09T20:00:00+01:00"
-VALUES = {"unit_loss": "7", "budget": "300", "part": "printed booklet", "offer_quantity": "250", "offer_price": "2.5"}
+VALUES = {"unit_loss": "7", "budget": "300", "part": "printed booklet", "offer_quantity": "250", "offer_price": "2.5",
+          "offer_b_price": "2.9"}
 
 
 @pytest.fixture
@@ -98,3 +99,14 @@ def test_a_missing_history_is_refused_and_keeps_the_old_plan(demo_db, tmp_path, 
     assert not (tmp_path / "two").exists()
     with plan_db.connect(demo_db) as conn:
         assert conn.execute("SELECT count(*) AS n FROM goals").fetchone()["n"] == 1
+
+
+def test_the_backup_persona_shows_its_own_real_history(demo_db, tmp_path):
+    facts, pack, log = load_history(demo_db), demo.load_pack(HERE), tmp_path / "log"
+    records = demo.reset(demo_db, pack, DEADLINE, VALUES, log, history_supplier="S-ONE",
+                         persona_history={"supplier-b": "S-TWO"})
+    a, b = records[2], records[3]
+    assert a["supplier_id"] == "supplier-a" and a["history_supplier_id"] == "S-ONE"
+    assert b["supplier_id"] == "supplier-b" and b["name"] == "Supplier B" and b["history_supplier_id"] == "S-TWO"
+    assert b["score"] == reliability.card(reliability.history(facts), "S-TWO")["score"]
+    assert "did not make this offer" in b["persona"]

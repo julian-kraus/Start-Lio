@@ -1,0 +1,14 @@
+Subject: [Scenario] Backup offer for ${part}
+X-Lookahead-Scenario: scenario input
+Content-Type: text/plain; charset="utf-8"
+
+[Scenario input, not a real supplier message]
+
+Hello,
+
+as your backup we can offer ${offer_quantity} pieces of ${part} at EUR ${offer_b_price} per piece.
+The deposit is ${offer_b_deposit_pct} percent, due with your acceptance.
+After acceptance we load within ${offer_b_loads_within_h} h.
+
+Kind regards
+${persona}
