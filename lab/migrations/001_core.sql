@@ -19,3 +19,16 @@ CREATE TABLE IF NOT EXISTS injections (
 );
 
 CREATE INDEX IF NOT EXISTS injections_run ON injections (run, at_scenario_time);
+
+-- Append only, enforced: a row may be inserted but never updated or deleted, so a run and its injections stay a
+-- faithful record of what was fed in. The trigger raises on every UPDATE or DELETE.
+CREATE OR REPLACE FUNCTION append_only() RETURNS trigger LANGUAGE plpgsql AS $$
+BEGIN
+    RAISE EXCEPTION 'append only: % on %.% is not allowed', TG_OP, TG_TABLE_SCHEMA, TG_TABLE_NAME;
+END;
+$$;
+
+CREATE OR REPLACE TRIGGER runs_append_only BEFORE UPDATE OR DELETE ON runs
+    FOR EACH ROW EXECUTE FUNCTION append_only();
+CREATE OR REPLACE TRIGGER injections_append_only BEFORE UPDATE OR DELETE ON injections
+    FOR EACH ROW EXECUTE FUNCTION append_only();

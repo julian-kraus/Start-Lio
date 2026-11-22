@@ -31,7 +31,7 @@ def _url(managed_ok: bool) -> tuple[str, bool]:
 def cmd_init(args) -> None:
     url, managed = _url(managed_ok=True)
     applied = db.create_schemas(url, db.schemas())
-    _print({"database": "managed lab-db" if managed else url, "applied": applied})
+    _print({"database": "managed lab-db" if managed else db.db_label(url), "applied": applied})
 
 
 def cmd_seed(args) -> None:

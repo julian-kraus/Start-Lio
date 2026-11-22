@@ -63,6 +63,13 @@ def test_assert_local_refuses_shared_and_remote_urls():
         "postgresql://u:p@aws-0-eu-central-1.pooler.supabase.com:6543/postgres",
         "postgresql://u:p@203.0.113.9:5432/live",
         "postgresql://u:p@db.example.com/live",
+        # the host libpq actually connects to is not the URL's authority: a query host or hostaddr wins
+        "postgresql:///x?host=db.example.com",
+        "postgresql://localhost/x?host=db.example.com",
+        "postgresql://localhost/x?hostaddr=203.0.113.9",
+        "host=db.example.com dbname=x",                      # keyword/value form, not a URL
+        "postgresql://db%2Eexample%2Ecom/x",                 # percent-encoded dots
+        "postgresql://3405803785/x",                         # a public IPv4 as a decimal integer
     ):
         with pytest.raises(SystemExit):
             db.assert_local(bad)
@@ -72,6 +79,38 @@ def test_assert_local_refuses_shared_and_remote_urls():
         "postgresql://lab:lab@lab-db:5432/lab",
     ):
         db.assert_local(ok)   # a local host or a Docker service name is allowed
+
+
+def test_assert_local_accounts_for_libpq_environment(monkeypatch):
+    for var in ("PGHOST", "PGHOSTADDR", "PGSERVICE"):
+        monkeypatch.delenv(var, raising=False)
+    monkeypatch.setenv("PGHOST", "db.example.com")
+    with pytest.raises(SystemExit):
+        db.assert_local("postgresql:///x")                   # no URL host, PGHOST decides
+    db.assert_local("postgresql://localhost/x")              # an explicit URL host overrides PGHOST
+    monkeypatch.delenv("PGHOST")
+    monkeypatch.setenv("PGHOSTADDR", "203.0.113.9")
+    with pytest.raises(SystemExit):
+        db.assert_local("postgresql:///x")
+    monkeypatch.delenv("PGHOSTADDR")
+    monkeypatch.setenv("PGSERVICE", "prod")
+    with pytest.raises(SystemExit):
+        db.assert_local("postgresql:///x")                   # a service file could point anywhere
+
+
+def test_db_label_omits_the_password():
+    label = db.db_label("postgresql://user:secret@127.0.0.1:5441/lab")
+    assert "secret" not in label
+    assert "127.0.0.1" in label and "5441" in label and label.endswith("/lab")
+
+
+def test_snapshot_and_restore_reject_unsafe_names(tmp_path):
+    s = db.Schemas("kb", "mail", "plan", "lab")
+    for bad in ("../escape", "a/b", ".hidden", "..", "a b", ""):
+        with pytest.raises(SystemExit):
+            db.snapshot("postgresql://localhost/x", bad, s, managed=False, out_dir=tmp_path)
+        with pytest.raises(SystemExit):
+            db.restore("postgresql://localhost/x", bad, s, managed=False, out_dir=tmp_path)
 
 
 def test_seed_ingests_through_kb_and_is_idempotent(lab, tmp_path):
@@ -123,6 +162,42 @@ def test_injections_are_append_only_under_a_run(lab):
         c.execute("INSERT INTO injections (run, event_type, parameters) VALUES (%s, %s, %s)",
                   (run_id, "offer", "{}"))
         assert c.execute("SELECT count(*) AS n FROM injections").fetchone()["n"] == 1
+    finally:
+        c.close()
+
+
+def test_runs_and_injections_reject_update_and_delete(lab):
+    db.create_schemas(URL, lab)
+    c = db.connect(URL, lab.lab, autocommit=True)
+    try:
+        run_id = c.execute("INSERT INTO runs (scenario) VALUES ('base') RETURNING id").fetchone()["id"]
+        c.execute("INSERT INTO injections (run, event_type) VALUES (%s, 'offer')", (run_id,))
+        for stmt, params in (
+            ("UPDATE runs SET scenario = 'x' WHERE id = %s", (run_id,)),
+            ("DELETE FROM runs WHERE id = %s", (run_id,)),
+            ("UPDATE injections SET event_type = 'x' WHERE run = %s", (run_id,)),
+            ("DELETE FROM injections WHERE run = %s", (run_id,)),
+        ):
+            with pytest.raises(psycopg.errors.RaiseException):
+                c.execute(stmt, params)
+        assert c.execute("SELECT count(*) AS n FROM runs").fetchone()["n"] == 1
+        assert c.execute("SELECT count(*) AS n FROM injections").fetchone()["n"] == 1
+    finally:
+        c.close()
+
+
+def test_restore_rejects_a_bad_dump_before_touching_data(lab, tmp_path):
+    db.create_schemas(URL, lab)
+    out = tmp_path / "snaps"
+    out.mkdir()
+    (out / "corrupt.dump").write_bytes(b"not a pg_dump archive")   # bad magic, no custom-format header
+    c = db.connect(URL, lab.lab, autocommit=True)
+    try:
+        c.execute("INSERT INTO runs (scenario) VALUES ('keep')")
+        with pytest.raises(SystemExit):
+            db.restore(URL, "corrupt", lab, managed=False, out_dir=out)
+        # the guard runs before any schema is dropped, so the existing data is intact
+        assert c.execute("SELECT count(*) AS n FROM runs").fetchone()["n"] == 1
     finally:
         c.close()
 
