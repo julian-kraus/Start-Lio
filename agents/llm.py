@@ -284,7 +284,18 @@ def run(client: LLMClient, registry: ToolRegistry, *, role: str, system: str, pr
             messages.append({"role": "user", "content": _rejection(problems)})
             continue
         if problems:
+            missing = guard.ungrounded(verdict, tool_outputs)
             fixed = guard.apply(verdict, tool_outputs)
+            if missing:                     # no tool result exists for these: refuse, never pass the model's number
+                err = (f"guard failed after {guard_retries} retries; no grounding tool result for "
+                       f"{', '.join(missing)}, verdict refused")
+                if tracer:
+                    tracer.trace(step=step, output=fixed, model=client.model, tokens_in=ti, tokens_out=to,
+                                 verdict_ok=False, error=err)
+                    tracer.finish("failed", error=err)
+                return AgentResult(verdict=fixed, text=reply.text, calls=calls, tool_outputs=tool_outputs,
+                                   guard_retries=guard_retries, guard_failed=True, stop_reason="end_turn",
+                                   error=err, run_id=run_id, usage=usage)
             err = f"guard failed after {guard_retries} retries; tool result used: " + "; ".join(problems)
             if tracer:
                 tracer.trace(step=step, output=fixed, model=client.model, tokens_in=ti, tokens_out=to,

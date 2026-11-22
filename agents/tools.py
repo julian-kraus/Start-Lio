@@ -160,12 +160,21 @@ class GroundingGuard:
                 problems.append(f"{vkey}={verdict.get(vkey)!r} does not match the tool result {tkey}={src[tkey]!r}")
         return problems
 
+    def ungrounded(self, verdict: dict, tool_outputs: list[dict]) -> list[str]:
+        """Mapped verdict fields that no grounding tool result backs: their value can only be the model's own."""
+        src = self.sources(tool_outputs)
+        return [vkey for vkey, tkey in self.fields.items()
+                if isinstance(verdict, dict) and vkey in verdict and tkey not in src]
+
     def apply(self, verdict: dict, tool_outputs: list[dict]) -> dict:
         """The deterministic result wins: overwrite each mapped verdict field with the tool value when it exists.
-        Used once the guard's retries are spent, so the answer that is stored carries the tool's numbers."""
+        A mapped field with no tool value is removed, never kept: the model's own number is not a result.
+        Used once the guard's retries are spent, so the answer that is stored carries only the tool's numbers."""
         src = self.sources(tool_outputs)
         fixed = dict(verdict) if isinstance(verdict, dict) else {}
         for vkey, tkey in self.fields.items():
             if tkey in src:
                 fixed[vkey] = src[tkey]
+            else:
+                fixed.pop(vkey, None)
         return fixed
