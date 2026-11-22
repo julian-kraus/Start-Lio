@@ -1,0 +1,84 @@
+:root {
+  --bg: #f4f5f7; --surface: #ffffff; --surface-2: #f8f9fb; --border: #e2e5ea; --text: #13161b; --muted: #636a75;
+  --faint: #9aa1ab; --accent: #3b5bdb; --accent-bg: #e8edfd;
+  --risk: #c92a2a; --risk-bg: #fdeceb; --warn: #b26a00; --warn-bg: #fff3dc;
+  --ok: #1e8a4a; --ok-bg: #e5f5eb; --hedge: #3b5bdb; --hedge-bg: #e8edfd;
+  --supply: #495466; --supply-bg: #e7eaef; --ghost: #c92a2a; --agent: #3b5bdb;
+  --night: rgba(20, 30, 50, 0.045); --grid: #eceef2; --ink: #13161b;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --shadow: 0 10px 30px rgba(20, 25, 35, 0.12), 0 2px 6px rgba(20, 25, 35, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1014; --surface: #161a20; --surface-2: #1b2028; --border: #2a303a; --text: #e8eaee; --muted: #9aa1ad;
+    --faint: #6b7280; --accent: #8ea4ff; --accent-bg: #1c2440;
+    --risk: #ff8a85; --risk-bg: #3a1b1a; --warn: #f2bb5c; --warn-bg: #33280f; --ok: #5fd08f; --ok-bg: #15301f;
+    --hedge: #8ea4ff; --hedge-bg: #1c2440; --supply: #aab3c2; --supply-bg: #262c36; --ghost: #ff8a85; --agent: #8ea4ff;
+    --night: rgba(255, 255, 255, 0.025); --grid: #20252d; --ink: #e8eaee; --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1014; --surface: #161a20; --surface-2: #1b2028; --border: #2a303a; --text: #e8eaee; --muted: #9aa1ad;
+  --faint: #6b7280; --accent: #8ea4ff; --accent-bg: #1c2440;
+  --risk: #ff8a85; --risk-bg: #3a1b1a; --warn: #f2bb5c; --warn-bg: #33280f; --ok: #5fd08f; --ok-bg: #15301f;
+  --hedge: #8ea4ff; --hedge-bg: #1c2440; --supply: #aab3c2; --supply-bg: #262c36; --ghost: #ff8a85; --agent: #8ea4ff;
+  --night: rgba(255, 255, 255, 0.025); --grid: #20252d; --ink: #e8eaee; --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body { margin: 0; background: var(--bg); color: var(--text); overflow: hidden;
+  font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif; font-variant-numeric: tabular-nums; }
+button { font: inherit; color: inherit; }
+.app { display: grid; grid-template-rows: auto auto 1fr; height: 100vh; }
+
+/* header */
+header { display: grid; grid-template-columns: auto 1fr auto; gap: 24px; align-items: center; padding: 14px 20px;
+  background: var(--surface); border-bottom: 1px solid var(--border); }
+.brand { display: flex; align-items: baseline; gap: 10px; }
+.brand b { font-size: 17px; letter-spacing: -0.01em; }
+.brand .launch { color: var(--muted); }
+.goal { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; min-width: 0; max-width: 720px; }
+.goal .label { font-size: 12px; color: var(--muted); white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.goal .label strong { overflow: hidden; text-overflow: ellipsis; }
+.goal .label strong { display: block; color: var(--text); font-size: 13px; }
+.goalbar { position: relative; height: 12px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); overflow: hidden; }
+.goalbar .fill { position: absolute; inset: 0 auto 0 0; border-radius: 999px; background: var(--risk); }
+.goalbar.hedged .fill { background: repeating-linear-gradient(135deg, var(--hedge) 0 8px, color-mix(in srgb, var(--hedge) 75%, transparent) 8px 16px); }
+.goalbar.met .fill { background: var(--ok); }
+.goal .num { font-weight: 700; font-size: 15px; white-space: nowrap; }
+.goal .num small { color: var(--muted); font-weight: 500; font-size: 12px; }
+.goal.empty .goalbar { opacity: .4; }
+.clockbox { display: flex; gap: 10px; align-items: center; }
+.clock { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.2; }
+.clock .now { font-weight: 700; font-size: 16px; }
+.clock .left { font-size: 12px; color: var(--muted); }
+.pill { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; border-radius: 999px;
+  padding: 3px 8px; border: 1px solid var(--border); color: var(--muted); background: var(--surface-2); white-space: nowrap; }
+.pill.sim { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 40%, transparent); background: var(--warn-bg); }
+.pill.live { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 40%, transparent); background: var(--ok-bg); }
+.btn { border: 1px solid var(--border); background: var(--surface); border-radius: 8px; padding: 6px 12px; cursor: pointer;
+  font-size: 13px; text-decoration: none; color: var(--text); display: inline-flex; gap: 6px; align-items: center; }
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn.big { padding: 12px 22px; font-size: 15px; border-radius: 10px; }
+.btn:disabled { opacity: .5; cursor: default; }
+kbd { font: 11px var(--mono); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; color: var(--muted); background: var(--surface-2); }
+
+/* tabs */
+nav { display: flex; gap: 2px; padding: 0 16px; background: var(--surface); border-bottom: 1px solid var(--border); align-items: center; }
+nav button { border: 0; background: none; padding: 10px 12px; cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent; font-weight: 500; }
+nav button[aria-selected="true"] { color: var(--text); border-bottom-color: var(--accent); }
+nav .count { display: inline-block; min-width: 18px; padding: 0 5px; margin-left: 4px; border-radius: 999px; font-size: 11px;
+  background: var(--surface-2); color: var(--muted); text-align: center; font-weight: 700; }
+nav .count.hot { background: var(--risk); color: #fff; }
+nav .spacer { flex: 1; }
+nav a { color: var(--muted); font-size: 13px; text-decoration: none; padding: 10px 8px; }
+nav a:hover { color: var(--text); }
+
+/* main */
+main { position: relative; display: grid; grid-template-columns: 1fr auto; min-height: 0; }
+.stage { position: relative; min-width: 0; overflow: auto; transition: transform .5s ease, opacity .5s ease, filter .5s ease; transform-origin: 50% 30%; }
+main.stepped .stage { transform: scale(.94); opacity: .28; filter: blur(1.5px); pointer-events: none; }
+.view { padding: 16px 20px 80px; }
