@@ -234,16 +234,79 @@ def test_replay_reaches_kb_as_scenario_mail_and_sends_nothing(pack, demo_db, tmp
     assert len(seen) == 3 and all(d["status"] != "failed" for d in seen), json.dumps(seen)
 
 
-def test_a_second_rehearsal_on_the_same_log_path_delivers_its_mail_again(pack, demo_db, tmp_path):
-    log, blobs = tmp_path / "log", tmp_path / "mail"
-    for _ in range(2):
+@pytest.fixture
+def second_db(demo_db):
+    name = f"pack_{uuid.uuid4().hex[:8]}_demo"
+    with psycopg.connect(URL, autocommit=True) as admin:
+        admin.execute(sql.SQL("CREATE DATABASE {}").format(sql.Identifier(name)))
+        try:
+            yield conninfo.make_conninfo(URL, dbname=name)
+        finally:
+            admin.execute(sql.SQL("DROP DATABASE {} WITH (FORCE)").format(sql.Identifier(name)))
+
+
+def test_a_second_rehearsal_on_the_same_log_path_delivers_its_mail_again(pack, demo_db, second_db, tmp_path):
+    log, blobs, sent = tmp_path / "log", tmp_path / "mail", []
+    for url in (demo_db, second_db):
         log.unlink(missing_ok=True)
-        demo.reset(demo_db, pack, DEADLINE, VALUES, log)
+        demo.reset(url, pack, DEADLINE, VALUES, log)
         for beat in pack["beats"]:
-            assert demo.replay(demo_db, pack, beat, log, blobs).new
-            assert not demo.replay(demo_db, pack, beat, log, blobs).new
-    with kb_db.connect(demo_db, "kb") as conn:
-        kb_db.migrate(conn, "kb")
-        conn.commit()
-        seen = MailSource("mail", blobs).catch_up(conn, tmp_path / "structured", {})
-    assert len(seen) == 6 and all(d["status"] != "failed" for d in seen), json.dumps(seen)
+            assert demo.replay(url, pack, beat, log, blobs).new
+            assert not demo.replay(url, pack, beat, log, blobs).new
+        with psycopg.connect(url) as conn:
+            sent += [r[0] for r in conn.execute("SELECT message_id FROM mail.messages")]
+    assert len(set(sent)) == 2 * len(pack["beats"])
+
+
+@pytest.mark.parametrize("how", ["replayed", "from a test inbox"])
+def test_a_database_with_the_last_rehearsals_mail_is_not_reset(pack, inputs, demo_db, tmp_path, how):
+    demo.reset(demo_db, pack, DEADLINE, VALUES, tmp_path / "one")
+    if how == "replayed":
+        demo.replay(demo_db, pack, "cancellation", tmp_path / "one", tmp_path / "mail")
+    else:
+        raw = demo.render(pack, "cancellation", {**inputs, "part": "Broschüre"}, pack["persona"]["desk"],
+                          sender="teammate@example.org", message_id="<inbox-1@example.org>")
+        with demo.mail_db.connect(demo_db, demo.MAIL_SCHEMA) as conn:
+            demo.mail_db.migrate(conn, demo.MAIL_SCHEMA)
+            demo.mail_store.ingest(conn, BlobStore(tmp_path / "mail"), raw, pack["persona"]["desk"], demo.TAG_PREFIX)
+            conn.commit()
+    with psycopg.connect(demo_db) as conn:
+        conn.execute("INSERT INTO plan.goals (statement) VALUES ('old')")
+    with pytest.raises(demo.DemoError, match="fresh demo database"):
+        demo.reset(demo_db, pack, DEADLINE, VALUES, tmp_path / "two")
+    assert not (tmp_path / "two").exists()
+    with psycopg.connect(demo_db) as conn:
+        assert conn.execute("SELECT count(*) FROM plan.goals").fetchone()[0] == 1
+
+
+@pytest.mark.parametrize("key,bad", [("deposit_pct", "500"), ("offer_quantity", "many"), ("part", "")])
+def test_one_bad_edit_keeps_the_last_valid_value_and_says_so(pack, inputs, tmp_path, key, bad):
+    log, good = tmp_path / "log.jsonl", {**inputs, "loads_within_h": "6"}
+    append_records(log, demo.opening_records(pack, clock.parse(DEADLINE), inputs))
+    append_records(log, [{"kind": "goal", "answers": good}, {"kind": "goal", "answers": {**good, key: bad}}])
+    said = []
+    values = demo.current_inputs(pack, log, said.append)
+    assert values == good
+    assert len(said) == 1 and key in said[0] and good[key] in said[0]
+    for beat in pack["beats"]:
+        assert demo.render(pack, beat, values, "desk@example.org")
+
+
+def test_a_corrected_edit_clears_the_warning(pack, inputs, tmp_path):
+    log = tmp_path / "log.jsonl"
+    append_records(log, demo.opening_records(pack, clock.parse(DEADLINE), inputs))
+    append_records(log, [{"kind": "goal", "answers": {**inputs, "deposit_pct": v}} for v in ("500", "35")])
+    said = []
+    assert demo.current_inputs(pack, log, said.append)["deposit_pct"] == "35"
+    assert said == []
+
+
+@pytest.mark.parametrize("typed", ["7 000", "7\u00a0000", "7\u202f000"])
+def test_space_grouped_numbers_are_read(pack, typed):
+    assert demo.initial_inputs(pack, {**VALUES, "offer_quantity": typed})["offer_quantity"] == "7000"
+
+
+@pytest.mark.parametrize("typed", ["2.5", "1e3", "7,000", "1 00", "7 0000"])
+def test_a_quantity_that_is_not_a_plain_whole_number_is_refused(pack, typed):
+    with pytest.raises(demo.DemoError):
+        demo.initial_inputs(pack, {**VALUES, "offer_quantity": typed})

@@ -13,7 +13,7 @@
     {"id": "unit_loss", "q": "What does one missing copy cost?", "unit": "EUR", "min": 0, "suggested": null},
     {"id": "budget", "q": "How much may the agent commit alone, per hedge?", "unit": "EUR", "min": 0, "suggested": null},
     {"id": "part", "q": "Which part does the scenario offer cover?", "suggested": null},
-    {"id": "offer_quantity", "q": "How many pieces does Supplier A offer?", "unit": "pcs", "min": 1, "suggested": null},
+    {"id": "offer_quantity", "q": "How many pieces does Supplier A offer?", "unit": "pcs", "whole": true, "min": 1, "suggested": null},
     {"id": "offer_price", "q": "What is the offered price per piece?", "unit": "EUR", "min": 0, "suggested": null},
     {"id": "deposit_pct", "q": "What deposit does Supplier A ask for?", "unit": "%", "min": 0, "max": 100, "suggested": 20},
     {"id": "loads_within_h", "q": "Within how many hours does Supplier A promise to load?", "unit": "h", "min": 1, "max": 48, "suggested": 4},
