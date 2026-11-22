@@ -9,8 +9,9 @@
     cite(goal, "value", edition)                # the source a recommendation gives for a number from the goal
 
 The model classifies and quotes, nothing more. Every quote must be in the answers; amounts and times are parsed
-from the words by code (agents/interview_text.py). A rejected answer is retried twice, then only what checked out is
-kept and the trace records the failure. What was rejected blocks the confirmation, so a figure the person typed
+from the words by code (agents/interview_text.py) and checked against the words around them
+(agents/interview_check.py). A rejected answer is retried twice, then only what checked out is kept and the trace
+records the failure. What was rejected blocks the confirmation, so a figure the person typed
 can never be replaced silently by a pre-filled one.
 
 Pre-filled figures are labelled scenario inputs. What the person types wins over them. Nothing has a default.
@@ -26,6 +27,7 @@ from typing import Any, Iterable, Mapping
 
 from plan import clock
 
+from . import interview_check as check
 from . import interview_text as text
 from .llm import LLMClient, run
 from .tools import GroundingGuard, ToolRegistry
@@ -64,10 +66,9 @@ Each item has:
 
 One item per statement, edition and time. Leave out what the person did not say. Answer with JSON only."""
 
-NOT_A_PERSON = re.compile(r"^(?:agent|system|worker|llm)(?![a-z])|^mail:|-(?:worker|reviewer|coordinator)-\d",
-                          re.IGNORECASE)
-REFUSAL = re.compile(r"\b(?:don't|do not|never|must not|cannot|can't|won't)\b(?! (?:care|mind|matter|need))",
-                     re.IGNORECASE)
+NOT_A_PERSON = re.compile(
+    r"^(?:agent|system|worker|llm|bot|monitor|hedger|planner|broker|coordinator|reviewer|goal[ _-]interview)(?![a-z])"
+    r"|^mail:|-(?:worker|reviewer|coordinator)-\d|[-_]bot$", re.IGNORECASE)
 LABELS = {"priority": "Goal", "ceiling": "Spend ceiling", "trade_off": "May suffer",
           "team_from": "Team can be asked from", "team_until": "Team can be asked until"}
 
@@ -138,52 +139,72 @@ class QuoteGuard(GroundingGuard):
         items = verdict.get("items") if isinstance(verdict, Mapping) else None
         if not isinstance(items, list):
             return Reading(problems=["the answer needs a list of items"])
+        protected = [e for x in items if isinstance(x, Mapping) and x.get("field") == "priority"
+                     for e in self.editions if text.plain(x.get("edition")) == text.plain(e)]
+        protected = list(dict.fromkeys(protected))
         out, seen = Reading(), {}
+        figures: dict[check.Place, str] = {}        # each amount or time in the answers, once
+        statements: list[check.Place] = []
         for n, item in enumerate(items, 1):
             try:
-                line = self._item(item)
-                key = (line["field"], line["edition"])
-                if line["value"] is not None and line["field"] != "priority":
-                    if key in seen and seen[key] != line["value"]:
-                        raise text.UnreadableError("a second, different answer for the same thing")
-                    if key in seen:
-                        continue
-                    seen[key] = line["value"]
+                line, place, figure = self._item(item, figures, protected)
+                name, value = line["field"], line["value"]
+                if figure:
+                    figures[figure] = name
+                if name in ("priority", "trade_off"):
+                    statements.append(place)
+                    key = (name, line["edition"], text.plain(line["quote"]))
+                else:
+                    # no edition and "all" are the same claim: two values there are two different answers
+                    key = (name, (line["edition"] or "all") if name == "value" else None, value is None)
+                if key in seen and seen[key] != value:
+                    raise text.UnreadableError("a second, different answer for the same thing")
             except text.UnreadableError as exc:
                 out.problems.append(f"item {n}: {exc}")
             else:
-                out.items.append(item)
-                out.lines.append(line)
-        out.problems += self._unread(out.lines)
+                out.items.append(item)      # a repeat still accounts for the words it quotes
+                if key not in seen:
+                    out.lines.append(line)
+                seen[key] = value
+        said = self._said()
+        out.problems += check.unread(said, self.editions, figures, statements)
+        out.problems += check.unprotected(said, self.editions, out.lines)
         return out
 
-    def _item(self, item: Any) -> dict:
+    def _said(self) -> dict[str, str]:
+        return {k: text.normal(v) for k, v in self.answers.items()}
+
+    def _item(self, item: Any, taken: Mapping[check.Place, str],
+              protected: list[str]) -> tuple[dict, check.Place, check.Place | None]:
+        """The line of one item, where it is said and the figure it accounts for."""
         if not isinstance(item, Mapping) or item.get("field") not in FIELDS:
             raise text.UnreadableError("unknown field")
         name, quote = item["field"], text.one_line(item.get("quote")).strip("\"'“”")
         if not quote:
             raise text.UnreadableError("the quote is empty")
-        found = [k for k, v in self.answers.items()
-                 if re.search(rf"(?<!\w){re.escape(text.plain(quote))}(?!\w)", text.plain(v))]
-        if not found:
+        places = [check.Place(key, answer, *span) for key, answer in self._said().items()
+                  for span in text.spans(quote, answer)]
+        if not places:
             raise text.UnreadableError(f"{quote!r} is not in the answers")
-        origin = {"quote": quote, "question": found[0]}
         edition, value = None, None
         if name in ("priority", "value"):
-            edition = self._edition(text.one_line(item.get("edition")), quote if name == "priority" else None)
-        if name == "value" or (name == "ceiling" and item.get("amount")):
-            value = text.amount(item.get("amount"))
-            if value not in [v for v, _ in text.amounts(quote)]:
-                raise text.UnreadableError(f"{item.get('amount')!r} is not the figure in {quote!r}")
-        elif name == "ceiling" and re.search(r"\d", quote):
-            raise text.UnreadableError(f"give the figure in {quote!r} as the amount")
-        elif name.startswith("team_"):
-            value = text.moment(quote, self.answers[found[0]], self.now, self.zone)
-        elif name == "trade_off" and REFUSAL.search(quote):
-            raise text.UnreadableError(f"{quote!r} refuses a trade-off, it does not accept one")
-        return _line(name, origin, value, edition)
+            edition = self._edition(text.one_line(item.get("edition")))
+        if name == "priority":
+            for place in places:
+                check.priority_edition(place, edition, self.editions)
+        elif name == "trade_off":
+            for place in places:
+                check.trade_off(place)
+        elif name == "ceiling" and not item.get("amount"):
+            if re.search(r"\d", quote):
+                raise text.UnreadableError(f"give the figure in {quote!r} as the amount")
+        else:
+            value, place, figure = check.figure(item, name, edition, places, taken, editions=self.editions,
+                                                protected=protected, now=self.now, zone=self.zone)
+            return _line(name, {"quote": quote, "question": place.question}, value, edition), place, figure
+        return _line(name, {"quote": quote, "question": places[0].question}, value, edition), places[0], None
 
-    def _edition(self, given: str, quote: str | None) -> str | None:
+    def _edition(self, given: str) -> str | None:
         if not given:
             return None
         if text.plain(given) == "all":
@@ -191,26 +212,7 @@ class QuoteGuard(GroundingGuard):
         match = [e for e in self.editions if text.plain(e) == text.plain(given)]
         if len(match) != 1:
             raise text.UnreadableError(f"{given!r} is not one of the editions {self.editions}")
-        said = quote if quote is not None else " ".join(self.answers.values())
-        if not text.names_edition(said, match[0], self.editions):
-            raise text.UnreadableError(f"the answer does not name {match[0]!r}")
         return match[0]
-
-    def _unread(self, lines: list[dict]) -> list[str]:
-        """Money and numbers in the answers that no item accounts for."""
-        used = [x["value"] for x in lines if x["field"] in ("value", "ceiling")]
-        out = [f"the amount {value:,} is in the answers and in no value or ceiling item"
-               for answer in self.answers.values() for value, marked in text.amounts(answer)
-               if marked and value not in used]
-        for key, answer in self.answers.items():
-            rest = text.plain(answer)
-            quoted = [text.plain(x["quote"]) for x in lines if x["question"] == key]
-            for quote in sorted(quoted, key=len, reverse=True):
-                rest = rest.replace(quote, " ")
-            names = {word for e in self.editions for word in re.findall(r"\d+", e)}
-            out += [f"the number {n!r} is in the answers and in no item"
-                    for n in re.findall(r"\d+(?:[.,:]\d+)*", rest) if n not in names]
-        return out
 
 
 # ---- pre-filled scenario inputs ----------------------------------------------
@@ -243,7 +245,10 @@ def _prefilled(inputs: Mapping | None, editions: list[str]) -> list[dict]:
                 out.append(_line(name, origin, clock.parse(window[key]).isoformat()))
     except (text.UnreadableError, clock.ClockError) as exc:
         raise InterviewError(f"pre-filled inputs: {exc}") from exc
-    for what in given.get("trade_offs") or []:
+    offered = given.get("trade_offs") or []
+    if not isinstance(offered, (list, tuple)):
+        raise InterviewError("pre-filled trade_offs are a list")
+    for what in offered:
         out.append(_line("trade_off", origin, text.one_line(what)))
     return out
 
@@ -312,6 +317,10 @@ def _combine(said: list[dict], filled: list[dict], editions: list[str]) -> tuple
             lines += [x for x in filled if x["field"] == name]
 
     problems = []
+    if scope != ["all"]:
+        shared = {x["value"] for x in said if x["field"] == "value" and not x["edition"]}
+        problems += [f"two different values for a missing copy of {x['edition']}" for x in said
+                     if x["field"] == "value" and x["edition"] in scope and shared - {x["value"]}]
     if not values:
         problems.append("the value of a missing copy is missing")
     elif protected and "all" not in values:
@@ -348,6 +357,7 @@ def interview(client: LLMClient, answers: str | Mapping[str, str], *, editions: 
     reading = guard.read(result.verdict)
     unread = result.verdict["rejected"] if result.guard_failed else reading.problems
     lines, gaps = _combine(reading.lines, filled, names)
+    gaps += check.contradicted({k: text.normal(v) for k, v in said.items()}, reading.lines, filled)
     return Draft(answers=said, editions=names, lines=lines, problems=[*unread, *gaps], product=product,
                  deadline=deadline, run_id=str(result.run_id) if result.run_id else None,
                  guard_failed=result.guard_failed)

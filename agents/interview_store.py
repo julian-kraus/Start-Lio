@@ -99,14 +99,17 @@ def records(goal: Mapping) -> list[dict]:
 
 def cite(goal: Mapping, name: str, edition: str | None = None) -> dict:
     """The source of a number from the goal, as recommendations carry it: the line, its value and who set it."""
-    found = [x for x in goal.get("goal_lines") or [] if x["field"] == name and x["value"] is not None]
+    found = [x for x in goal.get("goal_lines") or [] if x["field"] == name
+             and (name in ("priority", "trade_off") or x["value"] is not None)]
     if edition is not None:
         wanted = one_line(edition).casefold()
         found = [x for x in found if str(x["edition"]).casefold() in (wanted, "all")]
     if len(found) != 1:
         raise InterviewError(f"the goal has no single {name} line" + (f" for {edition!r}" if edition else ""))
     line = found[0]
-    source = {"goal_line": line["goal_line"], "value": line["value"]}
+    source = {"goal_line": line["goal_line"]}
+    if line["value"] is not None:
+        source["value"] = line["value"]
     for key in ("goal_id", "author", "at"):
         if goal.get(key):
             source[key] = goal[key]
