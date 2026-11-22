@@ -12,7 +12,7 @@ function viewWeak() {
       el("td", {}, l.edition || ""),
       el("td", {}, el("span", { class: "st " + l.status }, statusText(l.status))),
       el("td", { class: "num" }, num(l.need)), el("td", { class: "num" }, num(l.usable)),
-      el("td", { class: "num" }, l.gap ? el("span", { class: "neg" }, "−" + num(l.gap)) : "0"),
+      el("td", { class: "num" }, l.gap ? el("span", { class: "neg" }, "−" + num(l.gap)) : num(l.gap)),
       el("td", {}, l.reason || ""),
       el("td", {}, (l.bars || []).filter((b) => b.kind === "hedge").map((b) => b.label).join(", ") || "none")))))));
   return v;
