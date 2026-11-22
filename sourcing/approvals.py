@@ -3,7 +3,8 @@
     result = route(rows, action="purchase_order", on=clock.now(conn), amount_eur=total, amount_source=source,
                    category=category)
 
-`rows` are rows of `kb.current_facts`. No database, no LLM, and it approves nothing: it names who has to.
+`rows` are rows of `kb.current_facts`: the policy, the org charts and, to link a delivery site to its seat, the
+site facts. No database, no LLM, and it approves nothing: it names who has to.
 `result["signer"]` fits the `decision` contract. It carries a name only when `status` is `resolved` or
 `escalated`; with `held` or `needs_human` the reasons say what a person has to settle first.
 `on` decides which chart and which holder are valid, so pass the time in the team's own time zone.
@@ -14,8 +15,9 @@ from __future__ import annotations
 from datetime import date, datetime, timedelta
 from decimal import Decimal, InvalidOperation
 
-from sourcing.approval_docs import (CHART_KIND, POLICY_KIND, Chart, Policy, Rule, Section, Seat, documents,
-                                    read_chart, read_policy, title_scope, words)
+from sourcing.approval_chart import Chart, Seat, read_chart, title_scope
+from sourcing.approval_docs import CHART_KIND, POLICY_KIND, Policy, Rule, Section, documents, read_policy, words
+from sourcing.approval_sites import Site, read_sites, seat_scopes
 
 ACTIONS = ("purchase_order", "air_freight", "conditional_release", "release_extension")
 UNRESOLVED = "Unresolved"
@@ -82,37 +84,30 @@ def _chart(rows: list[dict], policy: Policy, today: date) -> tuple[Chart | None,
     return best, found, problems
 
 
-def _covered(part: list[str], whole: list[str]) -> bool:
-    """Every word of `part` is in `whole`: as is, as the initials of adjacent words or as a three letter code."""
-    initials = "".join(w[0] for w in whole)
-    return all(w in whole or (len(w) == 2 and w in initials) or (len(w) == 3 and any(x.startswith(w) for x in whole))
-               for w in part)
+def _holder(chart: Chart, role: str, area: str | None, today: date, sites: list[Site] | None = None) -> dict:
+    """The holder of a role on that day: state is held, vacant, not_in_chart or unclear.
 
-
-def _same_area(scope: str, wanted: str, loose: bool) -> bool:
-    """A category matches exactly. A site also matches by its longer name or its short id."""
-    have, want = words(scope), words(wanted)
-    return bool(have and want) and (set(have) == set(want)
-                                    or (loose and (_covered(have, want) or _covered(want, have))))
-
-
-def _holder(chart: Chart, role: str, area: str | None, today: date, loose: bool) -> dict:
-    """The holder of a role on that day: state is held, vacant, not_in_chart or unclear."""
+    With `sites` the area is a delivery site, otherwise a category, which matches exactly."""
     matches = [(s, scope) for s in chart.seats if (scope := title_scope(s.title, role)) is not None]
-    if area:
-        scoped = [m for m in matches if _same_area(m[1], area, loose)]
-        matches = scoped or [m for m in matches if not m[1]]
+    site_ids: list[str] = []
+    if area and sites is not None:
+        fitting, site_ids = seat_scopes({scope for _, scope in matches}, area, sites)
+        matches = [m for m in matches if m[1] in fitting]
+    elif area:
+        matches = [m for m in matches if set(words(m[1])) == set(words(area))] or [m for m in matches if not m[1]]
     elif any(scope for _, scope in matches):
         return {"state": "unclear", "why": f"{role} is held per category or site and none was given"}
     if not matches:
         where = f" for {area}" if area else ""
-        return {"state": "not_in_chart", "why": f"the org chart lists no {role}{where}"}
+        if sites is not None:
+            where += " that can be linked to it by the site's id or name"
+        return {"state": "not_in_chart", "why": f"the org chart lists no {role}{where}", "fact_ids": site_ids}
 
     def active(seat: Seat) -> bool:
         return seat.state == "held" and (not seat.start or seat.start <= today) and (not seat.end or today <= seat.end)
 
     seats = [s for s, _ in matches]
-    out = {"title": seats[0].title, "fact_ids": [i for s in seats for i in s.ids]}
+    out = {"title": seats[0].title, "fact_ids": site_ids + [i for s in seats for i in s.ids]}
     if any(s.state == "unclear" for s in seats):
         return {**out, "state": "unclear", "why": f"the holder of {seats[0].title} cannot be read"}
     now = [s for s in seats if active(s)]
@@ -130,6 +125,7 @@ def _holder(chart: Chart, role: str, area: str | None, today: date, loose: bool)
 class _Routing:
     def __init__(self, rows: list[dict], action: str, today: date):
         self.action, self.today = action, today
+        self.sites = read_sites(rows)
         self.reasons: list[str] = []
         self.sources: list = []
         self.signers: list[dict] = []
@@ -178,17 +174,17 @@ class _Routing:
                     return i
         return None
 
-    def sign(self, role: str, rule: str, area: str | None, loose: bool = False) -> dict:
+    def sign(self, role: str, rule: str, area: str | None, sites: list[Site] | None = None) -> dict:
         signer = {"role": role, "required_role": role, "rule": rule}
         if not self.chart:
             return {**signer, "state": "unclear"}
-        found = _holder(self.chart, role, area, self.today, loose)
+        found = _holder(self.chart, role, area, self.today, sites)
         self.cite(found.get("fact_ids", []))
         signer.update(role=found.get("title", role), state=found["state"])
         if found["state"] == "held":
             return {**signer, "name": found["name"]}
         self.reasons.append(found["why"])
-        if found["state"] == "unclear" or (loose and found["state"] == "not_in_chart"):
+        if found["state"] == "unclear" or (sites is not None and found["state"] == "not_in_chart"):
             # a site nobody recognises is a lookup failure, not a vacancy an exception could cover
             self.blocked = True
             return signer
@@ -205,7 +201,7 @@ class _Routing:
         if needed is not None and (limit is None or needed > limit):
             self.stop(f"{approver} approves exceptions but has a lower limit than {role}: a person has to decide")
             return signer
-        found = _holder(self.chart, approver, area, self.today, False)
+        found = _holder(self.chart, approver, area, self.today)
         self.cite(found.get("fact_ids", []))
         if found["state"] != "held":
             self.stop(f"cannot escalate: {found['why']}")
@@ -236,7 +232,7 @@ class _Routing:
             why = self.use(rule.section)
             if not rule.roles:
                 return self.stop(f"cannot read who releases the delivery in {why}")
-            self.also = [self.sign(role, why, delivery_site, loose=True) for role in rule.roles]
+            self.also = [self.sign(role, why, delivery_site, self.sites) for role in rule.roles]
 
     def air(self, amount: Decimal | None, source, category: str | None, used: Decimal | None, used_source) -> None:
         rule = self.policy.air
@@ -304,6 +300,9 @@ class _Routing:
 
     def result(self) -> dict:
         everyone = self.signers + self.also
+        people = [" ".join(words(s["name"])) for s in self.signers if "name" in s]
+        if len(set(people)) < len(people):
+            self.stop("the rule needs two people and one person would sign for both: a person has to decide")
         if self.blocked or not self.signers or any(s["state"] not in ("held", "escalated") for s in everyone):
             status = "needs_human"
         elif self.held:

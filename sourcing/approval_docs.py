@@ -1,7 +1,7 @@
-"""Read the approval policy and the org chart out of kb facts (rows of `kb.current_facts`).
+"""Read the approval policy out of kb facts (rows of `kb.current_facts`).
 
-Pure and deterministic. The code knows how such documents are written (numbered sections, a limit table, a name
-above its title), not what they say: roles, names, amounts, dates and document ids all come from the facts.
+Pure and deterministic. The code knows how such documents are written (numbered sections, a limit table), not
+what they say: roles, names, amounts, dates and document ids all come from the facts.
 Whatever cannot be read is reported as a problem, so that routing asks a human instead of guessing.
 """
 
@@ -30,15 +30,6 @@ BY_ROLE = re.compile(
     rf"(?:(?i:approved|approval|released|release|signed|extended)\b[^.]*?\bby|together with|\band)\s+the\s+"
     rf"(?:responsible\s+)?({ROLE})")
 VERSION_OR_DATE = re.compile(r"\bv(?:ersion\s*)?\d+(?:\.\d+)*\b|\d{4}-\d\d-\d\d", re.I)
-DATED = re.compile(r"\s*\((from|as of|starting|until|to)\s+(\d{4}-\d\d-\d\d)\)", re.I)
-VACANT = {"tbd", "tba", "tbc", "vacant", "open", "open position", "position open", "n.n.", "nn", "n/a", "-", "?",
-          "\u2013", "\u2014", "vacancy", "unassigned", "unfilled", "n.n"}
-VACANT_PHRASE = re.compile(
-    r"to be \w+|not yet \w+|(?:vacant|open) (?:position|role|post|seat)|(?:position|role|post|seat) (?:vacant|open)")
-# Words that say something about a seat and are no part of a person's name.
-NOT_A_NAME = {"tbd", "tba", "tbc", "vacant", "vacancy", "unassigned", "unfilled", "interim", "acting", "recruiting",
-              "recruitment", "pending", "none", "nobody", "unknown", "position", "role", "appointed", "hiring"}
-SENIORITY = {"senior", "junior", "principal", "acting"}
 
 
 @dataclass(frozen=True)
@@ -134,26 +125,6 @@ class Policy:
         return list(dict.fromkeys(roles))
 
 
-@dataclass
-class Seat:
-    title: str
-    name: str | None
-    state: str                     # held | vacant | unclear
-    start: date | None
-    end: date | None
-    ids: list[str]
-
-
-@dataclass
-class Chart:
-    path: str
-    version: str | None
-    dated: date | None
-    problems: list[str]
-    ids: list[str]
-    seats: list[Seat] = field(default_factory=list)
-
-
 def number(text: str) -> Decimal | None:
     """An amount as printed ("10 000", "10,000.50", "10.000"). None when it is anything else."""
     text = text.strip()
@@ -166,11 +137,15 @@ def number(text: str) -> Decimal | None:
     return Decimal(text.replace(",", "."))
 
 
-def _date(text: str | None) -> date | None:
+def iso_date(text: str | None) -> date | None:
     try:
         return date.fromisoformat(text) if text else None
     except ValueError:
         return None
+
+
+def ours(row: dict) -> bool:
+    return not (row.get("path") or "").startswith(SUPPLIER_SENT) and not (row.get("locator") or {}).get("mail")
 
 
 def documents(rows: list[dict], kind: str) -> list[Document]:
@@ -178,7 +153,7 @@ def documents(rows: list[dict], kind: str) -> list[Document]:
     groups: dict[tuple, list[dict]] = {}
     for row in rows:
         path = row.get("path") or ""
-        if row.get("doc_kind") != kind or path.startswith(SUPPLIER_SENT) or (row.get("locator") or {}).get("mail"):
+        if row.get("doc_kind") != kind or not ours(row):
             continue
         if row.get("attribute") not in ("directive", "text") or not isinstance(row.get("value"), str):
             continue
@@ -225,7 +200,7 @@ def _tiers(section: Section, policy: Policy) -> None:
     for i, line in enumerate(body):
         match = LIMIT_CELL.fullmatch(line.text)
         if not match:
-            if re.search(r"\d[,.']\d{3}", line.text):
+            if re.search(r"\d[,.']\d{3}", line.text) or re.match(r"(?:[A-Z]{3}\s*)?\d", line.text):
                 policy.problems.append(f"section {section.number}: cannot read the amount in {line.text!r}")
             continue
         rest = re.fullmatch(r"(?:([A-Z]{3})\s*)?(.+?)(?:\s*([A-Z]{3}))?", match["rest"].strip())
@@ -288,7 +263,7 @@ def read_policy(doc: Document) -> Policy | None:
     version = re.search(r"\b(?:Version\s+|v)(\d+(?:\.\d+)*)\b", text)
     effective = re.search(r"\bEffective\s+(\d{4}-\d\d-\d\d)\b", text, re.I)
     policy = Policy(doc.path, doc.scope or doc.lines[0].text, version[1] if version else None,
-                    _date(effective[1]) if effective else None, list(doc.problems),
+                    iso_date(effective[1]) if effective else None, list(doc.problems),
                     [x.fact_id for x in doc.lines if (version and version[0] in x.text)
                      or (effective and effective[0] in x.text)], value,
                     scope=doc.scope, title=doc.lines[0].text)
@@ -310,89 +285,3 @@ def read_policy(doc: Document) -> Policy | None:
 
 def words(text: str) -> list[str]:
     return re.findall(r"[^\W_]+(?:'[^\W_]+)?", text.replace("\u2019", "'").replace("&", " and ").casefold())
-
-
-def title_scope(title: str, term: str) -> str | None:
-    """None when the title is not this role; otherwise what the title is limited to, "" for the whole company."""
-    paren = re.fullmatch(r"(.*?)\s*\((.*)\)", title.strip())
-    base = words(paren[1] if paren else title)
-    while base and base[0] in SENIORITY:
-        base = base[1:]
-    wanted = words(term)
-    if re.fullmatch(r"C[A-Z]O", term.strip()):
-        if len(base) < 3 or base[0] != "chief" or base[2] != "officer" or base[1][0] != term.strip()[1].lower():
-            return None
-        size = 3
-    elif wanted and base[:len(wanted)] == wanted:
-        size = len(wanted)
-    else:
-        return None
-    return " ".join(base[size:] + (words(paren[2]) if paren else []))
-
-
-def _seat(title: str, person: str | None, ids: list[str]) -> Seat:
-    if person is None:
-        return Seat(title, None, "unclear", None, None, ids)
-    start = end = None
-    valid = True
-    for kind, when in DATED.findall(person):
-        parsed = _date(when)
-        valid = valid and parsed is not None
-        if kind.lower() in ("until", "to"):
-            end = parsed
-        else:
-            start = parsed
-    name = DATED.sub("", person).strip()
-    plain = name.casefold().rstrip(".")
-    if name.casefold() in VACANT or plain in VACANT or VACANT_PHRASE.fullmatch(plain):
-        return Seat(title, None, "vacant", None, None, ids)
-    if NOT_A_NAME & set(words(name)):
-        return Seat(title, None, "unclear", None, None, ids)
-    readable = valid and re.fullmatch(r"[^\W\d_][^\d:;()<>@/|]*", name) and len(name.split()) <= 6 \
-        and name[0].isupper() and not (name.endswith(".") and len(name.split()) > 3)
-    if not readable:
-        return Seat(title, None, "unclear", None, None, ids)
-    return Seat(title, name, "held", start, end, ids)
-
-
-def _items(text: str) -> list[str]:
-    """Split at the commas that are outside parentheses."""
-    out, depth, start = [], 0, 0
-    for i, char in enumerate(text):
-        depth += (char == "(") - (char == ")")
-        if char == "," and not depth:
-            out.append(text[start:i].strip())
-            start = i + 1
-    return out + [text[start:].strip()]
-
-
-def read_chart(doc: Document, terms: list[str]) -> Chart:
-    header = None
-    for line in doc.lines[:4]:
-        header = re.search(r"\bv(?:ersion\s*)?(\d+(?:\.\d+)*)\b.*?(\d{4}-\d\d-\d\d)", line.text, re.I)
-        if header:
-            ids = [line.fact_id]
-            break
-    if not header or not _date(header[2]):
-        return Chart(doc.path, None, None, doc.problems + [f"{doc.path}: no version and date"], [])
-    chart = Chart(doc.path, header[1], _date(header[2]), list(doc.problems), ids)
-
-    role_nouns = {words(term)[-1] for term in terms if words(term)}
-
-    def is_title(text: str) -> bool:
-        return len(text.split()) <= 10 and not text.endswith(".") and any(
-            title_scope(text, term) is not None for term in terms)
-
-    for i, line in enumerate(doc.lines):
-        listed = re.fullmatch(r"\w+:\s*(.+\(.+\))", line.text)
-        if listed:
-            for item in _items(listed[1]):
-                pair = re.fullmatch(r"([^()]+?)\s*\((.+)\)", item)
-                if pair and is_title(pair[2]):
-                    chart.seats.append(_seat(pair[2], pair[1], [line.fact_id]))
-        elif is_title(line.text):
-            above = doc.lines[i - 1] if i and doc.lines[i - 1].fact_id not in ids else None
-            # a title without a name above it must not borrow the title before it as a name
-            person = above.text if above and not role_nouns & set(words(DATED.sub("", above.text))) else None
-            chart.seats.append(_seat(line.text, person, [line.fact_id] + ([above.fact_id] if above else [])))
-    return chart
