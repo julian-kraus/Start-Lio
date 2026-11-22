@@ -74,7 +74,7 @@
     const error=el("div", {class:"err"});
     const accept=acceptButton(d,error,()=>{});accept.className="btn btn-primary";
     if(!d.signer || !d.signer.name)accept.disabled=true;
-    const reject=el("button", {class:"btn btn-secondary",type:"button",disabled:true,title:label(t,"reject_unavailable")},label(t,"reject"));
+    const reject=el("button", {class:"btn btn-secondary",type:"button",disabled:!d.signer || !d.signer.name || typeof openRejectDialog!=="function",title:typeof openRejectDialog!=="function"?label(t,"reject_unavailable"):"",onclick:()=>openRejectDialog(d,t)},label(t,"reject"));
     box.append(el("div", {class:"dq-btns2"},reject,accept),error);return box;
   }
   function feed(events,t) {
