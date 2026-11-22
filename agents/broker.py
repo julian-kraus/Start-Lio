@@ -16,6 +16,7 @@ Every number a promise carries comes from the deterministic tool, and every prom
 from __future__ import annotations
 
 import json
+import re
 from datetime import datetime, timezone
 from typing import Iterable
 
@@ -30,26 +31,35 @@ from .tools import ToolRegistry
 # plan.checkins.outcome is a closed vocabulary; a reconcile outcome maps onto it.
 _CHECKIN_OUTCOME = {promises.PROVEN: "proven", promises.BROKEN: "broken"}
 
-# What the broker role may set when it registers a promise. `made_at` is bound to the run's clock, not the model.
+# What the broker role may set when it registers a promise. It passes words and the cited fact; the code supplies
+# every number. `made_at`, the quantity and the next check are not the model's to set: made_at and the quantity
+# come from the cited statement, the check is computed from the due time. `additionalProperties` is closed so a
+# stray `next_check` or `quantity` from the model is rejected rather than stored.
 REGISTER_SCHEMA = {
     "type": "object",
-    "required": ["promise_id", "supplier_id", "what", "fallback"],
+    "additionalProperties": False,
+    "required": ["promise_id", "what", "fallback", "sources"],
     "properties": {
         "promise_id": {"type": "string"},
-        "supplier_id": {"type": "string"},
+        "supplier_id": {"type": "string", "description": "the supplier; taken from the cited statement when it has one"},
         "what": {"type": "string", "description": "the commitment being watched, e.g. 'loads the backup order'"},
         "within": {"type": "string", "description": "the quoted duration from the statement, e.g. 'within 4 h'"},
-        "due": {"type": "string", "description": "an absolute ISO 8601 due time (use instead of `within`)"},
+        "due": {"type": "string", "description": "an absolute ISO 8601 due time (only when there is no `within`)"},
         "grace_h": {"type": "number", "description": "hours after due before the first check (default 0)"},
         "fallback": {"type": "string", "description": "what to do the moment the promise breaks"},
         "part_id": {"type": "string"},
         "lane": {"type": "string"},
-        "quantity": {"type": "number"},
         "proof": {"type": "string"},
         "decision_id": {"type": "string"},
-        "sources": {"type": "array", "items": {}, "description": "the kb fact id(s) the promise rests on"},
+        "sources": {"type": "array", "items": {}, "minItems": 1,
+                    "description": "the kb fact id(s) the promise rests on; at least one is required"},
     },
 }
+
+# The model passes words and the cited fact; everything else the code decides. Keys outside this set are dropped
+# before the deterministic tool runs, so the model cannot inject a due time, a quantity or a next check.
+_REGISTER_KEYS = frozenset({"promise_id", "supplier_id", "what", "within", "due", "grace_h",
+                            "fallback", "part_id", "lane", "proof", "decision_id", "sources"})
 
 SYSTEM = (
     "You are the promise broker. A supplier statement is a commitment to watch (for example 'loads within 4 h'). "
@@ -73,36 +83,56 @@ def _instant_or_none(value):
         return None
 
 
+def _supplier_of(locator, subject) -> str | None:
+    """The supplier a statement is from. A supplier email carries it in `locator.mail` (supplier_id, or the
+    persona_id when the mail is a scenario persona and supplier_id is null, kb/mail_source.py). A tabular fact may
+    instead carry it in the subject."""
+    if isinstance(locator, dict):
+        mail = locator.get("mail")
+        if isinstance(mail, dict):
+            sup = mail.get("supplier_id") or mail.get("persona_id")
+            if sup is not None:
+                return str(sup)
+    if isinstance(subject, dict) and subject.get("supplier_id") is not None:
+        return str(subject["supplier_id"])
+    return None
+
+
 def statements_from_rows(rows: Iterable[dict]) -> list[promises.Statement]:
-    """Group `kb.current_facts` rows of a supplier statement into one `Statement` each. A statement is a subject
-    (statement_no + material_id, and supplier_id when the kb carries it) with a `kind` and the quoted `value`
-    text. `at` is when the supplier said it (`as_of`) or when the kb saw it (`observed_at`)."""
+    """Group `kb.current_facts` rows of a supplier statement into one `Statement` each. Per the extraction
+    contract the subject is `statement_no`, while `material_id`, `kind`/`promise_kind`, `value`, `due_time` and
+    `quantity` are attributes, and the supplier is in `locator.mail`. Rows are grouped by document and subject so
+    two emails that reuse a statement number do not merge and cite each other's fact (finding: different emails
+    merge). `at` is when the supplier said it (`as_of`) or when the kb saw it (`observed_at`)."""
     grouped: dict[str, dict] = {}
     for row in rows:
         if row.get("fact_type") != "supplier_statement":
             continue
         subject = row.get("subject") or {}
-        key = json.dumps(subject, sort_keys=True, default=str)
+        doc = (row.get("path"), row.get("sha256"))
+        key = json.dumps([doc, subject], sort_keys=True, default=str)
         rec = grouped.setdefault(key, {"subject": subject, "attrs": {}, "rows": []})
         rec["attrs"][row.get("attribute")] = row.get("value")
         rec["rows"].append(row)
     out: list[promises.Statement] = []
     for rec in grouped.values():
         attrs, subject, group_rows = rec["attrs"], rec["subject"], rec["rows"]
-        kind = attrs.get("kind")
+        kind = attrs.get("kind") or attrs.get("promise_kind")
         if not kind:
             continue
-        kind_row = next((r for r in group_rows if r.get("attribute") == "kind"), group_rows[0])
+        kind_row = next((r for r in group_rows if r.get("attribute") in ("kind", "promise_kind")), group_rows[0])
         at = kind_row.get("as_of") or kind_row.get("observed_at")
         instant = _instant_or_none(at)
         out.append(promises.Statement(
             kind=str(kind),
             at=instant.isoformat() if instant else str(at),
-            supplier_id=subject.get("supplier_id"),
-            part_id=subject.get("material_id") or subject.get("part_id"),
-            lane=subject.get("lane"),
+            supplier_id=_supplier_of(kind_row.get("locator"), subject),
+            part_id=attrs.get("material_id") or attrs.get("part_id") or subject.get("material_id"),
+            lane=attrs.get("lane") or subject.get("lane"),
             text=attrs.get("value"),
             fact_id=kind_row.get("fact_id"),
+            due_time=attrs.get("due_time"),
+            quantity=attrs.get("quantity"),
         ))
     return out
 
@@ -110,15 +140,17 @@ def statements_from_rows(rows: Iterable[dict]) -> list[promises.Statement]:
 def read_statements(kb_conn) -> list[promises.Statement]:
     """Every current supplier statement in the kb, as ledger `Statement`s. `kb_conn` has search_path on kb."""
     rows = kb_conn.execute(
-        "SELECT fact_id, fact_type, subject, attribute, value, as_of, observed_at "
+        "SELECT fact_id, fact_type, subject, attribute, value, as_of, observed_at, locator, path, sha256 "
         "FROM current_facts WHERE fact_type = 'supplier_statement'").fetchall()
     return statements_from_rows(rows)
 
 
 # ---- the plan.promises ledger ------------------------------------------------
 
+# `created_at` carries the promise's made time: the table has no made_at column, so persisting it here keeps the
+# ledger's clock correct after a reload (it reads made_at, then created_at, then due).
 _PROMISE_COLS = ("promise_id", "supplier_id", "part_id", "lane", "decision_id", "what", "quantity",
-                 "due", "proof", "state", "next_check", "fallback", "sources")
+                 "due", "proof", "state", "next_check", "fallback", "sources", "created_at")
 
 
 def save_promise(plan_conn, promise: dict) -> None:
@@ -139,7 +171,8 @@ def save_promise(plan_conn, promise: dict) -> None:
 
 
 def open_promises(plan_conn) -> list[dict]:
-    """The promises still waiting, with the keys the ledger needs to match and time statements against."""
+    """The promises still waiting, with the keys the ledger needs to match and time statements against. `created_at`
+    carries the made time (there is no made_at column), so the ledger's clock survives a reload."""
     return plan_conn.execute(
         "SELECT promise_id, supplier_id, part_id, lane, what, due, next_check, fallback, state, created_at "
         "FROM promises WHERE state = 'waiting' ORDER BY promise_id").fetchall()
@@ -148,55 +181,138 @@ def open_promises(plan_conn) -> list[dict]:
 def apply_ledger(plan_conn, statements: Iterable[promises.Statement], *,
                  outcomes: dict[str, str] = promises.OUTCOMES) -> list[dict]:
     """Fold the statements onto the open promises and write each proof or break back: the promise's new state and
-    time, the citing source appended, and a check-in row. Returns the updates applied. The caller commits."""
+    time, the citing source appended, and a check-in row (its outcome is `late` when a proof lands after the due
+    time). Returns the updates applied. Each write is isolated in a savepoint so one bad row does not abort the
+    others. The caller commits. Statements that bear on several promises or whose time cannot be read settle
+    nothing here; `promises.review` surfaces them."""
     waiting = open_promises(plan_conn)
     updates = promises.reconcile(waiting, statements, outcomes=outcomes)
+    applied: list[dict] = []
     for upd in updates:
         at = upd.get("proven_at") or upd.get("broken_at")
         at_col = "proven_at" if upd["state"] == promises.PROVEN else "broken_at"
-        plan_conn.execute(
-            sql.SQL("UPDATE promises SET state = %s, {at_col} = %s, sources = sources || %s::jsonb, "
-                    "updated_at = now() WHERE promise_id = %s").format(at_col=sql.Identifier(at_col)),
-            (upd["state"], at, Json([upd["source"]]), upd["promise_id"]))
-        plan_conn.execute(
-            "INSERT INTO checkins (promise_id, at, outcome, note, evidence) VALUES (%s, %s, %s, %s, %s)",
-            (upd["promise_id"], at, _CHECKIN_OUTCOME[upd["state"]],
-             f"supplier statement: {upd['statement_kind']}", Json([upd["source"]])))
-    return updates
+        outcome = "late" if upd.get("late") else _CHECKIN_OUTCOME[upd["state"]]
+        try:
+            with plan_conn.transaction():
+                plan_conn.execute(
+                    sql.SQL("UPDATE promises SET state = %s, {at_col} = %s, sources = sources || %s::jsonb, "
+                            "updated_at = now() WHERE promise_id = %s").format(at_col=sql.Identifier(at_col)),
+                    (upd["state"], at, Json([upd["source"]]), upd["promise_id"]))
+                plan_conn.execute(
+                    "INSERT INTO checkins (promise_id, at, outcome, note, evidence) VALUES (%s, %s, %s, %s, %s)",
+                    (upd["promise_id"], at, outcome,
+                     f"supplier statement: {upd['statement_kind']}", Json([upd["source"]])))
+        except Exception:
+            continue
+        applied.append(upd)
+    return applied
 
 
 # ---- the broker role (LLM) ---------------------------------------------------
 
-def _register_tool(plan_conn, now_iso: str, registered: list[dict]):
+_SETTLED = (promises.PROVEN, promises.BROKEN, promises.CANCELLED)
+_QTY = re.compile(r"-?\d+(?:[.,]\d+)?")
+
+
+def parse_quantity(text) -> float | None:
+    """A quantity parsed in code from verbatim text (the probe finding: "10 000" was misread when the model did
+    the arithmetic). Spaces group digits and are dropped; a comma is a decimal point. Returns None when there is
+    no number to read, so the model can never inject a quantity."""
+    if text is None or isinstance(text, bool):
+        return None
+    if isinstance(text, (int, float)):
+        return float(text)
+    if not isinstance(text, str):
+        return None
+    cleaned = re.sub(r"[\s ]", "", text)
+    m = _QTY.search(cleaned)
+    if not m:
+        return None
+    try:
+        return float(m.group().replace(",", "."))
+    except ValueError:
+        return None
+
+
+def _statement_for(sources, by_fact: dict) -> promises.Statement | None:
+    """The cited statement for a register call, matched by the first fact id the model cites."""
+    for src in sources or []:
+        fid = src.get("fact_id") if isinstance(src, dict) else src
+        if fid is not None and str(fid) in by_fact:
+            return by_fact[str(fid)]
+    return None
+
+
+def _register_tool(plan_conn, now_iso: str, registered: list[dict], by_fact: dict):
     def register_promise(**kwargs):
-        kwargs["made_at"] = now_iso                       # the clock is the run's, never the model's
-        promise = promises.promise_from_statement(**kwargs)
-        save_promise(plan_conn, promise)
+        kwargs = {k: v for k, v in kwargs.items() if k in _REGISTER_KEYS}   # the code owns every number
+        sources = kwargs.get("sources") or []
+        if not sources:
+            return {"error": "a promise must cite the kb fact it rests on (sources)"}
+        pid = str(kwargs.get("promise_id") or "")
+        existing = plan_conn.execute("SELECT state FROM promises WHERE promise_id = %s", (pid,)).fetchone()
+        if existing and existing["state"] in _SETTLED:
+            return {"error": f"promise {pid!r} is already {existing['state']}; a settled promise is not reopened"}
+        st = _statement_for(sources, by_fact)
+        # The clock and the numbers come from the cited statement, not the model: made_at is when the supplier
+        # spoke, the quantity is parsed in code from the statement's verbatim text. The run clock is the fallback
+        # only when nothing was cited.
+        kwargs["made_at"] = st.at if st is not None else now_iso
+        if st is not None:
+            qty = parse_quantity(st.quantity)
+            if qty is not None:
+                kwargs["quantity"] = qty
+            if st.supplier_id and not kwargs.get("supplier_id"):
+                kwargs["supplier_id"] = st.supplier_id
+        if not kwargs.get("supplier_id"):
+            return {"error": "no supplier: the cited statement has none and none was given"}
+        if kwargs.get("within"):
+            kwargs.pop("due", None)        # a quoted duration is grounded; an absolute due from the model is not
+        try:
+            promise = promises.promise_from_statement(**kwargs)
+        except promises.PromiseError as exc:
+            return {"error": str(exc)}
+        try:
+            with plan_conn.transaction():
+                save_promise(plan_conn, promise)
+        except Exception as exc:           # one bad call (e.g. an unknown decision_id) must not lose the others
+            return {"error": f"could not save promise {pid!r}: {type(exc).__name__}: {exc}"}
         registered.append(promise)
         return promise
     return register_promise
 
 
-def broker_registry(plan_conn, mail, *, now_iso: str, registered: list[dict]) -> ToolRegistry:
+def broker_registry(plan_conn, mail, *, now_iso: str, registered: list[dict],
+                    statements: Iterable[promises.Statement] = ()) -> ToolRegistry:
     """The tools the broker role is given: a grounded promise register (plan) and the MailTools draft/read tools.
-    The send path is never exposed (`tools.mail_tools` drops it)."""
+    The send path is never exposed (`tools.mail_tools` drops it). The `statements` the broker is briefing on let
+    the register tool take the made time and the quantity from the cited kb fact, not from the model."""
+    by_fact = {str(s.fact_id): s for s in statements if s.fact_id is not None}
     registry = ToolRegistry()
     registry.add("register_promise",
-                 "Register a watched promise from a supplier statement. The due time and next check are computed "
-                 "in code from the quoted `within` (or an absolute `due`); you pass the words, not the arithmetic.",
-                 REGISTER_SCHEMA, _register_tool(plan_conn, now_iso, registered))
+                 "Register a watched promise from a supplier statement. Pass the words and cite the kb fact in "
+                 "`sources`; the due time, the next check, the made time and any quantity are computed in code "
+                 "from the quoted `within` (or an absolute `due`) and the cited statement, never by you.",
+                 REGISTER_SCHEMA, _register_tool(plan_conn, now_iso, registered, by_fact))
     for tool in tools.mail_tools(mail):
         registry.register(tool)
     return registry
 
 
 def run_broker(client: llm.LLMClient, plan_conn, mail, *, prompt: str, now, system: str = SYSTEM,
-               tracer=None, max_turns: int = 12) -> tuple[llm.AgentResult, list[dict]]:
+               statements: Iterable[promises.Statement] = (), tracer=None,
+               max_turns: int = 12) -> tuple[llm.AgentResult, list[dict]]:
     """Drive the broker: register promises and draft the hedge. Returns the agent result and the promises it
-    registered (already saved to plan.promises). `now` sets the promises' clock (a datetime or ISO string)."""
+    registered (already saved to plan.promises). `now` sets the fallback clock (a datetime or ISO string) when a
+    call cites no statement; `statements` are the kb statements the broker is briefing on, so a registered promise
+    takes its made time and quantity from the fact it cites. The answer's `promises` list is reconciled to the ids
+    actually registered, so it cannot name a promise that does not exist."""
     now_iso = now.astimezone(timezone.utc).isoformat() if isinstance(now, datetime) else str(now)
     registered: list[dict] = []
-    registry = broker_registry(plan_conn, mail, now_iso=now_iso, registered=registered)
+    statements = list(statements)
+    registry = broker_registry(plan_conn, mail, now_iso=now_iso, registered=registered, statements=statements)
     result = llm.run(client, registry, role="broker", system=system, prompt=prompt,
                      schema=None, guard=None, tracer=tracer, max_turns=max_turns)
+    if isinstance(result.verdict, dict):
+        result.verdict["promises"] = [p["promise_id"] for p in registered]
     return result, registered
