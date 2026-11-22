@@ -189,7 +189,7 @@ def serve(tmp_path):  # live or rehearsal, any number per test
 
 
 def test_screen_files_are_within_400_lines():
-    files = [*(ROOT / "tracker").glob("lookahead*.*"), *(ROOT / "tracker" / "lookahead_static").iterdir(),
+    files = [*(ROOT / "tracker").glob("lookahead*.*"), *(f for f in (ROOT / "tracker" / "lookahead_static").rglob("*") if f.is_file()),
              ROOT / "tracker" / "web.py", Path(__file__)]
     assert {f.name: n for f in files if (n := len(f.read_text().splitlines())) > 400} == {}
 
@@ -197,8 +197,9 @@ def test_screen_files_are_within_400_lines():
 def test_every_split_file_is_linked_and_served(server):
     page = call(server, "/lookahead")[1].decode()
     linked = re.findall(r'(?:src|href)="(/lookahead/static/[^"]+)"', page)
-    on_disk = {f.name for f in (ROOT / "tracker" / "lookahead_static").iterdir()}
-    assert {p.rsplit("/", 1)[1] for p in linked} == on_disk
+    on_disk = {f.name for f in (ROOT / "tracker" / "lookahead_static").iterdir() if f.is_file()}
+    assert {p.rsplit("/", 1)[1] for p in linked} | set(call(server, "/lookahead/static/views/index.json")[1]) == on_disk
+    assert "shell.json" in call(server, "/lookahead/static/strings/index.json")[1]
     for path in linked:
         with urllib.request.urlopen(server + path, timeout=5) as r:
             assert r.status == 200 and r.read()

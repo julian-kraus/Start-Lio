@@ -1,34 +1,48 @@
 "use strict";
-// ---------- keyboard and deep links ----------
-document.addEventListener("keydown", (e) => {
-  if (e.target.closest && e.target.closest("input, textarea, select")) return;
-  if (e.metaKey || e.ctrlKey || e.altKey) return;
-  const k = e.key.toLowerCase();
-  if ($("modal-root").firstChild && k !== "escape") return;
-  if (k === "escape") {
-    if ($("modal-root").firstChild) $("modal-root").replaceChildren();
-    else if (S.decisionOpen) { S.dismissed.add(S.decisionOpen); S.decisionOpen = null; render(); }
-    else select(null);
-  } else if (k === "j" && S.state) {
-    if (e.repeat) return;
-    if (S.state.rehearsal) advance();
-    else if (S.state.clock.simulated) jumpClock();
-  }
-  else if (k === "g") openGoal();
-  else if (k === "d") { const d = openDecisions()[0]; if (d) { S.decisionOpen = d.decision_id; render(); } else setView("decisions"); }
-  else if (k === "f") { S.range = S.range === "all" ? "launch" : "all"; render(); }
-  else if (k === "t") setView("timeline");
-  else if (k === "o") setView("overview");
-});
-function applyHash() {
-  const h = location.hash.slice(1);
-  let m;
-  if ((m = h.match(/^event-(\d+)$/))) S.sel = { type: "event", id: Number(m[1]) };
-  else if ((m = h.match(/^supplier-([\w.-]+)$/))) S.sel = { type: "supplier", id: m[1] };
-  else if ((m = h.match(/^view-(\w+)$/)) && VIEWS.some(([k]) => k === m[1])) S.view = m[1];
+window.LOOKAHEAD_VIEWS=window.LOOKAHEAD_VIEWS||{};
+const VIEW_KEYS={timeline:"view.timeline",plan:"view.plan",weak:"view.weak",decisions:"view.decisions",mail:"view.mail",rules:"view.rules"};
+function renderGoal(){
+  const root=$("goal-summary");root.replaceChildren();
+  const goal=S.state&&S.state.goal;
+  if(goal&&goal.statement){const q=document.createElement("p");q.className="q";q.textContent=goal.statement;root.append(q)}
 }
-window.addEventListener("resize", () => { clearTimeout(window.__rz); window.__rz = setTimeout(render, 120); });
-window.addEventListener("hashchange", () => { applyHash(); render(); });
-applyHash();
-load().then(connect);
-setInterval(watchClock, CLOCK_POLL_MS);
+function renderViews(){
+  const current=route();
+  document.querySelectorAll(".view[data-view]").forEach(view=>{
+    const active=view.dataset.view===current;
+    view.classList.toggle("on",active);view.setAttribute("aria-hidden",String(!active));
+    if(!active)return;
+    view.replaceChildren();
+    const renderer=window.LOOKAHEAD_VIEWS[current];
+    if(typeof renderer==="function"){renderer(view,S.state,t);return}
+    const legacy=current==="timeline"&&typeof viewTimeline==="function"?viewTimeline:
+      current==="decisions"&&typeof viewDecisions==="function"?viewDecisions:null;
+    if(legacy){const child=legacy();child.style.display="block";view.append(child)}
+  });
+}
+function render(){
+  if(!S.state)return;
+  S.view=route();renderHeader();renderGoal();renderViews();
+  if(typeof renderDrawer==="function"){renderDrawer();$("drawer").classList.toggle("on",!$("drawer").hidden)}
+  if(typeof renderOverlay==="function")renderOverlay();
+  if(typeof renderOperator==="function")renderOperator();
+}
+async function loadViewModules(){
+  const response=await fetch("/lookahead/static/views/index.json");
+  if(!response.ok)throw new Error("Unable to load view list");
+  const files=await response.json();
+  for(const name of files){
+    if(!/^[a-z0-9_]+\.(js|css)$/.test(name))throw new Error("Invalid view file");
+    if(name.endsWith(".css")){const link=document.createElement("link");link.rel="stylesheet";link.href="/lookahead/static/"+name;document.head.append(link);continue}
+    await new Promise((resolve,reject)=>{const script=document.createElement("script");script.src="/lookahead/static/"+name;script.onload=resolve;script.onerror=reject;document.head.append(script)});
+  }
+}
+function renderClock(){renderHeader()}
+async function start(){
+  await loadStrings();
+  try{await loadViewModules()}catch(error){console.error("Unable to load view modules",error)}
+  await load();
+  if(!new URLSearchParams(location.search).has("screenshot"))connect();
+  if(typeof watchClock==="function")setInterval(watchClock,CLOCK_POLL_MS);
+}
+document.addEventListener("DOMContentLoaded",start);

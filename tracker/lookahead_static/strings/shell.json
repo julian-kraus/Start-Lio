@@ -1,0 +1,78 @@
+{
+  "brand": {
+    "en": "Grand Plan Lio",
+    "zh": "Grand Plan Lio"
+  },
+  "deadline": {
+    "en": "Deadline",
+    "zh": "截止"
+  },
+  "agent_rules": {
+    "en": "Agent rules",
+    "zh": "Agent 規則"
+  },
+  "nav.timeline": {
+    "en": "Timeline",
+    "zh": "時間線"
+  },
+  "nav.plan": {
+    "en": "Plan",
+    "zh": "計畫"
+  },
+  "nav.weak": {
+    "en": "Risks & monitoring",
+    "zh": "風險與監看"
+  },
+  "nav.decisions": {
+    "en": "Decisions",
+    "zh": "決策"
+  },
+  "nav.mail": {
+    "en": "Email log",
+    "zh": "Email 記錄"
+  },
+  "view.timeline": {
+    "en": "Timeline",
+    "zh": "時間線"
+  },
+  "view.plan": {
+    "en": "Plan",
+    "zh": "計畫"
+  },
+  "view.weak": {
+    "en": "Risks & monitoring",
+    "zh": "風險與監看"
+  },
+  "view.decisions": {
+    "en": "Decisions",
+    "zh": "決策"
+  },
+  "view.mail": {
+    "en": "Email log",
+    "zh": "Email 記錄"
+  },
+  "view.rules": {
+    "en": "Agent rules",
+    "zh": "Agent 規則"
+  },
+  "view.empty": {
+    "en": "This view is ready for its records.",
+    "zh": "此檢視已準備好載入記錄。"
+  },
+  "goal.empty": {
+    "en": "Set a goal to start the plan.",
+    "zh": "設定目標以開始計畫。"
+  },
+  "goal.met": {
+    "en": "Goal covered",
+    "zh": "目標已涵蓋"
+  },
+  "goal.hedged": {
+    "en": "Backup in flight",
+    "zh": "備援進行中"
+  },
+  "goal.risk": {
+    "en": "Coverage at risk",
+    "zh": "涵蓋有風險"
+  }
+}

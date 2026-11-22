@@ -30,12 +30,13 @@ from urllib.parse import unquote, urlsplit
 
 from . import lookahead_decisions as decisions
 from .lookahead import Lookahead, LookaheadError
+from .lookahead_api import match_route
 from .lookahead_clock import parse_time
 
 PAGE = Path(__file__).with_name("lookahead_page.html")
 STATIC = Path(__file__).with_name("lookahead_static")
-STATIC_FILE = re.compile(r"/lookahead/static/([a-z0-9_]+\.(js|css))")
-STATIC_TYPES = {"js": "text/javascript; charset=utf-8", "css": "text/css; charset=utf-8"}
+STATIC_FILE = re.compile(r"/lookahead/static/([a-z0-9_/]+\.(js|css|json))")
+STATIC_TYPES = {"js": "text/javascript; charset=utf-8", "css": "text/css; charset=utf-8", "json": "application/json; charset=utf-8"}
 MAX_BODY = 64 * 1024
 DECISION = r"/api/lookahead/decisions/([^/]+)"  # ids are URL-encoded: the monitor's contain ':'
 HEARTBEAT = 15
@@ -120,8 +121,16 @@ class LookaheadRoutes:
     def _lookahead_file(self, path: str):
         if path == "/lookahead":
             return self._send(200, PAGE.read_bytes(), "text/html; charset=utf-8")
+        if path == "/lookahead/static/views/index.json":
+            names = sorted(p.name for pattern in ("*_view.js", "*_wires.js", "*_view.css", "weak.css", "suppliers.css")
+                           for p in STATIC.glob(pattern) if p.is_file())
+            return self._send(200, dumps(names), "application/json; charset=utf-8")
+        if path == "/lookahead/static/strings/index.json":
+            names = sorted(p.name for p in (STATIC / "strings").glob("*.json") if p.name != "index.json")
+            return self._send(200, dumps(names), "application/json; charset=utf-8")
         m = STATIC_FILE.fullmatch(path)
-        if not m or not (STATIC / m.group(1)).is_file():
+        candidate = STATIC / m.group(1) if m else None
+        if not m or not candidate.is_file() or STATIC.resolve() not in candidate.resolve().parents:
             raise LookaheadError(404, "not found")
         self._send(200, (STATIC / m.group(1)).read_bytes(), STATIC_TYPES[m.group(2)])
 
@@ -146,6 +155,10 @@ class LookaheadRoutes:
                 return self._send(200, dumps(decisions.card(la, unquote(m.group(1)), self.decision_stores)))
             if path == "/api/lookahead/stream":
                 return self._lookahead_stream(la, params)
+            registered = match_route("GET", path)
+            if registered:
+                route, match = registered
+                return self._send_registered(route.handler(self, la, match, params, None))
             self._send(404, dumps({"error": "not found"}))
         except LookaheadError as exc:
             self._send(exc.status, dumps({"error": str(exc)}))
@@ -186,11 +199,22 @@ class LookaheadRoutes:
                 if la.mode != "live":
                     raise LookaheadError(409, "a rehearsal moves its clock with the next beat")
                 return self._send(200, dumps({"ok": True, "now": la.move_clock()}))
+            registered = match_route("POST", path)
+            if registered:
+                route, match = registered
+                return self._send_registered(route.handler(self, la, match, {}, body))
             self._send(404, dumps({"error": "not found"}))
         except (BrokenPipeError, ConnectionResetError):
             pass
         except LookaheadError as exc:
             self._send(exc.status, dumps({"error": str(exc)}))
+
+    def _send_registered(self, result):
+        """Send an extension result; handlers may return a payload or ``(status, payload)``."""
+        status, payload = (200, result)
+        if isinstance(result, tuple) and len(result) == 2 and isinstance(result[0], int):
+            status, payload = result
+        return self._send(status, payload if isinstance(payload, bytes) else dumps(payload))
 
     def _lookahead_stream(self, la: Lookahead, params: dict):
         q = la.subscribe()

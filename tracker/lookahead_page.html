@@ -1,48 +1,25 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Lookahead</title>
-<link rel="stylesheet" href="/lookahead/static/base.css">
-<link rel="stylesheet" href="/lookahead/static/timeline.css">
-<link rel="stylesheet" href="/lookahead/static/drawer.css">
-<link rel="stylesheet" href="/lookahead/static/decision.css">
-<link rel="stylesheet" href="/lookahead/static/lists.css">
-<link rel="stylesheet" href="/lookahead/static/overview.css">
-<link rel="stylesheet" href="/lookahead/static/chrome.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/lookahead/static/timeline.css"><link rel="stylesheet" href="/lookahead/static/drawer.css"><link rel="stylesheet" href="/lookahead/static/decision.css"><link rel="stylesheet" href="/lookahead/static/lists.css"><link rel="stylesheet" href="/lookahead/static/overview.css">
+<link rel="stylesheet" href="/lookahead/static/base.css"><link rel="stylesheet" href="/lookahead/static/chrome.css"><link rel="stylesheet" href="/lookahead/static/components.css">
 </head>
 <body>
-<div class="app">
-  <header>
-    <div class="brand"><b>Lookahead</b><span class="launch" id="launch-name"></span></div>
-    <div class="goal empty" id="goal"></div>
-    <div class="clockbox" id="clock"></div>
-  </header>
-  <nav id="tabs" role="tablist"></nav>
-  <main id="main">
-    <div class="stage" id="stage"></div>
-    <aside class="drawer" id="drawer" hidden></aside>
-    <div class="overlay" id="overlay" hidden></div>
-  </main>
-</div>
-<div id="modal-root"></div>
-<div id="operator" class="operator" hidden></div>
-<div id="toast-root"></div>
-
+<header id="header"><div class="hd">
+  <div class="row" style="gap:12px"><button class="logo" id="logo" aria-label="Lookahead home"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><path d="m2 17 6.5-6.5 5 5L22 7M16 7h6v6"/></svg></button>
+  <div class="brand"><span class="brand-name" id="brand-name">Lookahead</span><span class="brand-sub" id="launch-name"></span></div></div>
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Lookahead views"></nav>
+  <div class="header-actions"><span class="language" aria-label="Language"><button class="lang" data-lang="zh">中文</button><button class="lang on" data-lang="en">EN</button></span><span class="deadline" id="deadline"></span><span class="profile"><button class="avatar" id="avatar" aria-expanded="false">?</button><span class="profile-menu" id="profile-menu" hidden><button id="rules-link"></button></span></span></div>
+</div></header>
+<main id="main"><section class="shell-goal" id="goal-summary"></section><section class="stage" id="stage">
+  <section class="view" data-view="timeline"></section><section class="view" data-view="plan"></section><section class="view" data-view="weak"></section><section class="view" data-view="decisions"></section><section class="view" data-view="mail"></section><section class="view" data-view="rules"></section>
+</section></main>
+<div class="overlay" id="overlay" hidden></div><div id="modal-root"></div><div id="operator" class="operator" hidden></div><div id="toast-root"></div>
+<div class="scrim" id="scrim" hidden></div><aside class="drawer" id="drawer" hidden></aside><div class="modal" id="modal" hidden><div class="modal-box" id="modal-box"></div></div>
 <script src="/lookahead/static/core.js"></script>
-<script src="/lookahead/static/header.js"></script>
-<script src="/lookahead/static/timeline.js"></script>
-<script src="/lookahead/static/timeline_bars.js"></script>
-<script src="/lookahead/static/overview.js"></script>
-<script src="/lookahead/static/weak.js"></script>
-<script src="/lookahead/static/promises.js"></script>
-<script src="/lookahead/static/suppliers.js"></script>
-<script src="/lookahead/static/decisions.js"></script>
-<script src="/lookahead/static/drawer.js"></script>
-<script src="/lookahead/static/decision_card.js"></script>
-<script src="/lookahead/static/goal.js"></script>
-<script src="/lookahead/static/operator.js"></script>
-<script src="/lookahead/static/main.js"></script>
-</body>
-</html>
+<script src="/lookahead/static/timeline.js"></script><script src="/lookahead/static/timeline_bars.js"></script><script src="/lookahead/static/overview.js"></script><script src="/lookahead/static/weak.js"></script><script src="/lookahead/static/promises.js"></script><script src="/lookahead/static/suppliers.js"></script><script src="/lookahead/static/decisions.js"></script><script src="/lookahead/static/drawer.js"></script><script src="/lookahead/static/decision_card.js"></script><script src="/lookahead/static/goal.js"></script><script src="/lookahead/static/operator.js"></script>
+<script src="/lookahead/static/strings.js"></script><script src="/lookahead/static/i18n.js"></script><script src="/lookahead/static/header.js"></script><script src="/lookahead/static/main.js"></script>
+</body></html>
