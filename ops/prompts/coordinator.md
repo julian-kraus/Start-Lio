@@ -12,8 +12,9 @@ Do one round:
    in a fresh worktree under .worktrees/; if main fails, stop merging and open a P0 issue naming the PR.
 2. Ready: for each issue labelled status:waiting whose blocking issues are all closed,
    `python ops/gh_status.py ready <n>`. Also ready the stackable ones (all blockers closed but one, which has an
-   open PR; see "Stacked PRs" in AGENTS.md) and comment `ready, stacked on #<m> (i<m>)`. Move acceptance items
-   no agent can run to a human-only follow-up as "Acceptance items a headless agent cannot run" says.
+   open PR; see "Stacked PRs" in AGENTS.md) and comment `ready, stacked on #<m> (i<m>)`. Live-model acceptance
+   items are run by agents with `python ops/live_run.py` (see "Live runs"); only deployment and human
+   decisions go to a human-only follow-up.
 3. Stale claims: status:claimed, no push to i<n> and no comment for 120 minutes:
    `python ops/gh_status.py release <n> "<reason>"`.
 4. Verify every merged PR closed its issue; reopen an issue closed without a merged, reviewed PR.

@@ -75,11 +75,18 @@ Work that is in review rarely changes its interfaces, so an issue may start on t
   after the parent merges, its author restacks, the coordinator reruns the check and merges if it still passes
   (a clean restack keeps `review:pass`; a restack with conflicts needs a new review).
 
-## Acceptance items a headless agent cannot run
-Items that need the live key, real data outside `data/current`, a deployment or a human decision do not block a
-merge. The author marks them `needs-human-run` in the PR body with the exact command; the reviewer judges the rest;
-the coordinator copies the unrun items into one follow-up issue labelled `human-only`, links it, and merges if
-everything else passed.
+## Live runs (agents run them, nobody waits for a human)
+Acceptance items that need the live model are run by the author before the PR and again by the reviewer, on a
+machine whose agent clone has `secrets/anthropic.env` and `data/current`:
+- `python ops/live_run.py .worktrees/i<n> eval-extraction [--kind K] [--limit N]`, `... extract`,
+  `... llm-eval [tests]`. Each run builds a fresh database on the local throwaway Postgres from `data/current`
+  offline, runs your worktree's code with the key in the child process only, and prints the result.
+- Answers are cached and shared, so reruns are cheap. Keep `--limit` small (6 per kind is enough to judge).
+  `python ops/live_run.py --spend` shows the estimated spend; runs stop at the budget.
+- Paste counts, agreement and the run id into the PR, never values from the data.
+- No key or no `data/current` on your machine: mark the item `needs-live-run` with the exact command; a reviewer
+  on a machine that has them runs it. Only deployment and human decisions go to a `human-only` follow-up.
+- Never read, print, copy or log the key, and never write code that does. A diff containing `sk-ant-` is a stop.
 
 ## Never
 - Send email, approve drafts, or change `MAIL_SEND_MODE`. Approvals are human, by name.
@@ -102,8 +109,8 @@ everything else passed.
 
 ## LLM key and models
 - The Anthropic key lives only in `secrets/anthropic.env` as `LOOKAHEAD_ANTHROPIC_API_KEY` (git-ignored).
-  Agents never read it. Tests use recorded replay fixtures. Live runs go through `tests/live/llm_eval.py`, started by a
-  human or the coordinator on the laptop that has the key.
+  Agents never read it. Tests use recorded replay fixtures. Live runs go through `python ops/live_run.py`, which
+  passes the key to the child process only (see "Live runs").
 - Default model for development and tests: `claude-haiku-5-5` (`LOOKAHEAD_LLM_MODEL`). Switch a role to
   `claude-opus-5-5` only where a measured quality problem needs it.
 - Probe findings to respect: extract quantities verbatim as text and parse them in code (space-grouped numbers
