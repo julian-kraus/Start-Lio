@@ -8,6 +8,8 @@
 The database is named with --database-url or LOOKAHEAD_DEMO_DATABASE_URL. DATABASE_URL and .env are never read.
 A demo database is on loopback and its name ends in `_demo`. `reset` refuses any other database before connecting,
 unless a person passes --live-db <name> and types that name at a terminal. `replay` has no such override.
+Each rehearsal needs a fresh database: `reset` refuses one that already holds scenario mail, because that mail
+and the facts read from it outlive the plan schema and would break the next rehearsal's promises.
 """
 
 from __future__ import annotations
@@ -17,6 +19,7 @@ import hashlib
 import json
 import math
 import os
+import re
 import sys
 import uuid
 from datetime import timedelta
@@ -42,6 +45,8 @@ DEMO_SUFFIX = "_demo"
 PRODUCER = "agent:scenario"
 MAIL_SCHEMA = "mail"
 TAG_PREFIX = "DEMO"
+SUBJECT_MARK = "[Scenario]"
+NUMBER = re.compile(r"(?:[0-9]+|[0-9]{1,3}(?:[ \u00a0\u202f][0-9]{3})+)(?:\.[0-9]+)?")
 
 
 class DemoError(ValueError):
@@ -83,6 +88,16 @@ def check_target(url: str, live_db: str | None = None, ask=None) -> str:
     return name
 
 
+def refuse_used(conn, pack: dict) -> None:
+    table = f"{MAIL_SCHEMA}.messages"
+    if not conn.execute("SELECT to_regclass(%s) IS NOT NULL AS ok", (table,)).fetchone()["ok"]:
+        return
+    if conn.execute(sql.SQL("SELECT EXISTS (SELECT 1 FROM {} WHERE from_addr = %s OR strpos(subject, %s) > 0) AS used")
+                    .format(sql.Identifier(MAIL_SCHEMA, "messages")),
+                    (pack["persona"]["address"], SUBJECT_MARK)).fetchone()["used"]:
+        raise DemoError("this database holds the mail of an earlier rehearsal: create a fresh demo database")
+
+
 def drop_plan(conn, schema: str) -> None:
     """Drop the schema's own tables without CASCADE: anything outside that depends on them stops the reset."""
     tables = [r["relname"] for r in conn.execute(
@@ -100,15 +115,17 @@ def checked(spec: dict, value) -> str:
     text = "" if value is None else str(value).strip()
     if not text:
         raise DemoError(f"scenario input {spec['id']} has no value: pass --set {spec['id']}=...")
-    if not text.isprintable():   # values end up in mail headers
-        raise DemoError(f"scenario input {spec['id']} must be one printable line")
     if "unit" in spec:
-        try:
-            number = float(text)
-        except ValueError:
-            raise DemoError(f"scenario input {spec['id']} must be a number") from None
+        if not NUMBER.fullmatch(text):
+            raise DemoError(f"scenario input {spec['id']} must be a number")
+        text = re.sub(r"\s", "", text)   # space-grouped, as people type it
+        if spec.get("whole") and "." in text:
+            raise DemoError(f"scenario input {spec['id']} must be a whole number")
+        number = float(text)
         if not math.isfinite(number) or not spec.get("min", -math.inf) <= number <= spec.get("max", math.inf):
             raise DemoError(f"scenario input {spec['id']} is out of range")
+    if not text.isprintable():   # values end up in mail headers
+        raise DemoError(f"scenario input {spec['id']} must be one printable line")
     return text
 
 
@@ -119,25 +136,43 @@ def initial_inputs(pack: dict, overrides: dict) -> dict:
     return {s["id"]: checked(s, overrides.get(s["id"], s.get("suggested"))) for s in pack["inputs"]}
 
 
-def current_inputs(pack: dict, log: Path) -> dict:
-    """What the launch record suggested, replaced by the last answers given on the screen."""
+def warn_operator(text: str) -> None:
+    print(f"WARNING: {text}", file=sys.stderr)
+
+
+def current_inputs(pack: dict, log: Path, warn=warn_operator) -> dict:
+    """What the launch record suggested, replaced by the last valid answers given on the screen.
+
+    The screen saves any text, so an invalid edit is reported and the value before it stays: no beat is blocked."""
     if not log.is_file():
         raise DemoError(f"no record log at {log}: run reset first")
-    launch, answers = None, {}
+    launch, answers = None, []
     for line in log.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
         record = json.loads(line)
         if record.get("kind") == "launch":
-            launch, answers = record, {}
+            launch, answers = record, []
         elif record.get("kind") == "goal" and record.get("producer") in (None, "app"):
             if isinstance(record.get("answers"), dict):
-                answers = record["answers"]
+                answers.append(record["answers"])
     if not launch or not launch.get("scenario"):
         raise DemoError("the log holds no scenario launch: run reset first")
     values = {q["id"]: q.get("suggested") for q in launch.get("goal_questions", [])}
-    values.update(answers)
-    return {s["id"]: checked(s, values.get(s["id"])) for s in pack["inputs"]}
+    result = {}
+    for spec in pack["inputs"]:
+        key = spec["id"]
+        value, problem = checked(spec, values.get(key)), None
+        for given in answers:
+            if key in given:
+                try:
+                    value, problem = checked(spec, given[key]), None
+                except DemoError as exc:
+                    problem = str(exc)
+        if problem:
+            warn(f"{problem}. The edit of {key} on the screen is ignored, using {value}")
+        result[key] = value
+    return result
 
 
 def opening_records(pack: dict, deadline, inputs: dict) -> list[dict]:
@@ -182,6 +217,7 @@ def reset(url: str, pack: dict, deadline: str, overrides: dict, log: Path,
     with plan_db.connect(url, schema) as conn:
         with conn.transaction():
             conn.execute("SELECT pg_advisory_xact_lock(%s)", (plan_db.MIGRATION_LOCK,))
+            refuse_used(conn, pack)
             drop_plan(conn, schema)
             plan_db.migrate(conn, schema)
             clock.set_scenario(conn, records[1]["at"], rate=0, by="demo reset")
