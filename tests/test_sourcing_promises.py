@@ -101,6 +101,47 @@ def test_a_statement_that_shares_no_key_never_matches():
     assert promises.reconcile([p], [st]) == []
 
 
+def test_a_supplier_only_statement_over_several_parts_settles_none_and_is_flagged():
+    ps = [a_promise(promise_id="PR-A", part_id="PART-A"),
+          a_promise(promise_id="PR-B", part_id="PART-B"),
+          a_promise(promise_id="PR-C", part_id="PART-C")]
+    st = Statement(kind="dispatch_info", at="2030-01-11T17:00:00+00:00", supplier_id="SUP-A", fact_id="f")
+    assert promises.reconcile(ps, [st]) == []                      # ambiguous: it does not prove all three
+    [flag] = promises.review(ps, [st])
+    assert flag["reason"] == "ambiguous" and set(flag["candidates"]) == {"PR-A", "PR-B", "PR-C"}
+
+
+def test_a_part_only_statement_over_two_suppliers_settles_none():
+    ps = [a_promise(promise_id="PR-A", supplier_id="SUP-A", part_id="PART-X"),
+          a_promise(promise_id="PR-B", supplier_id="SUP-B", part_id="PART-X")]
+    st = Statement(kind="on_hold", at="2030-01-11T16:00:00+00:00", part_id="PART-X", fact_id="f")
+    assert promises.reconcile(ps, [st]) == []
+    [flag] = promises.review(ps, [st])
+    assert flag["reason"] == "ambiguous" and set(flag["candidates"]) == {"PR-A", "PR-B"}
+
+
+def test_a_proof_after_the_due_time_is_marked_late():
+    p = a_promise()                                                # due 2030-01-11 18:00
+    st = Statement(kind="dispatch_info", at="2030-01-13T17:00:00+00:00", supplier_id="SUP-A",
+                   part_id="PART-A", fact_id="f")
+    [upd] = promises.reconcile([p], [st])
+    assert upd["state"] == "proven" and upd["late"] is True
+    on_time = Statement(kind="dispatch_info", at="2030-01-11T17:00:00+00:00", supplier_id="SUP-A",
+                        part_id="PART-A", fact_id="g")
+    assert "late" not in promises.reconcile([p], [on_time])[0]
+
+
+def test_an_unreadable_statement_time_is_isolated_not_raised():
+    p = a_promise()
+    good = Statement(kind="dispatch_info", at="2030-01-11T17:00:00+00:00", supplier_id="SUP-A",
+                     part_id="PART-A", fact_id="good")
+    bad = Statement(kind="on_hold", at="2030-01-11", supplier_id="SUP-A", part_id="PART-A", fact_id="bad")
+    [upd] = promises.reconcile([p], [bad, good])                   # does not raise on the date-only time
+    assert upd["state"] == "proven" and upd["source"] == {"fact_id": "good"}
+    [flag] = promises.review([p], [bad, good])
+    assert flag["reason"] == "unreadable_time" and flag["source"] == {"fact_id": "bad"}
+
+
 def test_watch_gaps_flags_unwatched_open_promises_only():
     good = a_promise()
     no_check = {"promise_id": "PR-2", "state": "waiting", "fallback": "x"}
