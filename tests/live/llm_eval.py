@@ -407,11 +407,10 @@ def test_auth() -> None:
 # calls them, and the GroundingGuard refuses any number the hedge tool did not return, retrying then forcing the
 # tool result in. Models are good, so the guard should pass on every run (acceptance: guard 10/10).
 def test_agent_tools(n: int = 10, key: str = "agent_tools") -> None:
-    # The code under test lives in the worktree (this file's repo), not in the shim root argv[1].
-    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-    from agents.live import run_agent_tools_probe
+    from tests.live.agent_tools import run_agent_tools
 
-    report, usage = run_agent_tools_probe(
+    report, usage = run_agent_tools(
+        root=ROOT,
         key=KEY, model=MODEL, n=n, tool_specs=TOOLS, tool_values=FAKE,
         hedge_math=hedge_math, verdict_schema=VERDICT_SCHEMA,
         system=("You decide whether to place a backup order. Get every input from the tools. Every number in your "
