@@ -16,6 +16,7 @@ Select it with KB_LLM_ADAPTER="kb.llm.anthropic:AnthropicClient".
 from __future__ import annotations
 
 import base64
+import hashlib
 import json
 import os
 import re
@@ -27,13 +28,24 @@ from tracker.config import PROJECT_ROOT, load_env
 from .base import Document, LLMClient, Routing, Structure, StructureProposal
 
 SPEC_VERSION = "anthropic-extract-v1"
-_WS = re.compile(r"[\s   ]")
+_SP = "[ 	   ]"                  # the space characters a thousands group may use, not newlines
+_GROUP_SPACES = re.compile(r"[\s   ]")
 _INT = re.compile(r"[+-]?\d+")
 _DEC = re.compile(r"[+-]?\d+\.\d+")
 # Two or more same-separator groups of three ("1.250.000", "1,250,000") cannot be a decimal, so it is
 # safe to read them as one integer. A single group ("10.000", "1,250") is ambiguous with a decimal and is
 # left as text for review, the same caution the probe finding asks for with space-grouped numbers.
 _GROUPED = re.compile(r"[+-]?\d{1,3}([.,])\d{3}(?:\1\d{3})+")
+# Space-grouped thousands: a leading group of one to three digits, then one or more groups of exactly three.
+# This is the only shape a whitespace separator is read in, so "10 000" is 10000 but "5 000 10 000" (a middle
+# group of two digits), "12 5" (a trailing group of one) and anything split across a newline stay text: two
+# numbers are never silently joined.
+_SPACE_GROUPED = re.compile(rf"[+-]?\d{{1,3}}(?:{_SP}\d{{3}})+")
+# Attributes whose name marks a quantity (qty, quantity, final_qty, printed_qty, qty_ordered ...). The real
+# contract types some of these as string (handwritten or printed scans), yet their values are counts the gate
+# must ground, so they are parsed as numbers by name as well as by a declared `type: number`. A codes, dates
+# or identifiers attribute never matches, and _coerce_number still keeps anything non-numeric verbatim.
+_QUANTITY_ATTR = re.compile(r"(?:^|_)(?:qty|quantity)(?:_|$)")
 _ENVELOPE_KEYS = ("source", "doc_kind", "doc_kind_confidence", "languages", "spec_version", "extracted_by",
                   "doc_date", "facts", "unreadable", "proposed_fact_types")
 
@@ -76,14 +88,32 @@ class ApiTransport:
         return Reply(msg.stop_reason or "end_turn", text, usage)
 
 
-def _store_path(store_dir: Path, role: str, model: str, sha: str) -> Path:
+def _store_path(store_dir: Path, role: str, model: str, sha: str, aux: str = "") -> Path:
     model_slug = re.sub(r"[^A-Za-z0-9_.-]", "-", model or "model")
-    return store_dir / f"{role}.{model_slug}.{sha}.json"
+    tail = f".{aux}" if aux else ""
+    return store_dir / f"{role}.{model_slug}.{sha}{tail}.json"
+
+
+def _aux_key(*parts) -> str:
+    """A short, stable hash of the inputs that change an answer besides the document bytes (the kind list for
+    classify, the structure and contract vocabulary for extract, the sample rows for design). It joins the
+    document sha in the cache key so two sheets of one workbook, or a classify after a new kind was added, do
+    not collide on the sha alone and replay a stale answer."""
+    blob = json.dumps(parts, ensure_ascii=False, sort_keys=True, default=str)
+    return hashlib.sha256(blob.encode("utf-8")).hexdigest()[:12]
 
 
 # A document is paid for once, so the cache is on by default. It lives in a git-ignored directory so answers
 # are never committed; set KB_LLM_CACHE_DIR to move it.
 DEFAULT_CACHE_DIR = PROJECT_ROOT / ".cache" / "kb_llm"
+
+
+def _default_cache_dir() -> Path:
+    """Where the cache lives when KB_LLM_CACHE_DIR is unset. In the container /app is root-owned and the process
+    drops to a non-root user, so /app/.cache cannot be created; TRACKER_DATA_DIR (the writable data volume) is
+    used there. In a local checkout it is the git-ignored .cache/kb_llm under the repo root."""
+    base = os.environ.get("TRACKER_DATA_DIR")
+    return Path(base) / "kb_llm_cache" if base else DEFAULT_CACHE_DIR
 
 
 class AnthropicClient(LLMClient):
@@ -105,7 +135,7 @@ class AnthropicClient(LLMClient):
         self.max_input_chars = (max_input_chars if max_input_chars is not None
                                 else int(env.get("KB_LLM_MAX_INPUT_CHARS", "120_000")))
         self.record = _bool_env("KB_LLM_RECORD", True) if record is None else record
-        store = store_dir if store_dir is not None else env.get("KB_LLM_CACHE_DIR") or DEFAULT_CACHE_DIR
+        store = store_dir if store_dir is not None else env.get("KB_LLM_CACHE_DIR") or _default_cache_dir()
         self.store_dir = Path(store)
         self._transport = transport
 
@@ -118,11 +148,16 @@ class AnthropicClient(LLMClient):
             self._transport = ApiTransport(self._api_key, self._timeout)
         return self._transport
 
-    def _answer(self, role: str, sha: str, system: str, content: list[dict]) -> dict:
-        cached = _store_path(self.store_dir, role, self.model, sha) if self.store_dir else None
+    def _answer(self, role: str, sha: str, system: str, content: list[dict], aux: str = "") -> dict:
+        cached = _store_path(self.store_dir, role, self.model, sha, aux) if self.store_dir else None
         if cached and cached.is_file():
-            d = json.loads(cached.read_text())
-            return _parse_json(d.get("text", ""))
+            try:
+                d = json.loads(cached.read_text())
+                data = _parse_json(d.get("text", ""))
+                _check_shape(role, data)
+                return data
+            except (ValueError, json.JSONDecodeError):
+                pass            # a malformed cached answer is ignored, never served; fall through to a live call
         request = {"model": self.model, "max_tokens": self.max_output_tokens, "system": system,
                    "messages": [{"role": "user", "content": content}]}
         reply = self._transport_or_fail().create(request)
@@ -130,25 +165,50 @@ class AnthropicClient(LLMClient):
         # truncated or missing answer: treat every other stop as a hard stop for the document.
         if reply.stop_reason != "end_turn":
             raise ExtractionStop(f"{reply.stop_reason}: the model did not finish a usable answer")
-        data = _parse_json(reply.text)                      # parse before caching: a bad reply is never stored
+        data = _parse_json(reply.text)        # parse and shape-check before caching: a bad reply is never stored
+        _check_shape(role, data)
         if cached and self.record:
-            cached.parent.mkdir(parents=True, exist_ok=True)
-            cached.write_text(json.dumps({"stop_reason": reply.stop_reason, "text": reply.text, "usage": reply.usage},
-                                         ensure_ascii=False, indent=2))
+            try:
+                cached.parent.mkdir(parents=True, exist_ok=True)
+                cached.write_text(json.dumps({"stop_reason": reply.stop_reason, "text": reply.text,
+                                              "usage": reply.usage}, ensure_ascii=False, indent=2))
+            except OSError:
+                pass            # an unwritable cache (read-only volume) must not discard a paid-for answer
         return data
 
     # ---- prompt building -----------------------------------------------------
 
-    def _content(self, document: Document, instruction: str) -> list[dict]:
+    def _content(self, document: Document, instruction: str) -> tuple[list[dict], list[str]]:
+        """Build the prompt blocks and a list of notes for anything that was cut, so a caller can record what
+        did not reach the model instead of reporting a clean read. Both the text cap and the page-image cap are
+        enforced here; neither drops content silently."""
         blocks: list[dict] = [{"type": "text", "text": instruction}]
+        notes: list[str] = []
         if document.text and document.text.strip():
-            blocks.append({"type": "text", "text": "Document text:\n" + document.text[:self.max_input_chars]})
+            text = document.text
+            if len(text) > self.max_input_chars:
+                notes.append(f"document text was truncated to {self.max_input_chars} of {len(text)} characters")
+                text = text[:self.max_input_chars]
+            blocks.append({"type": "text", "text": "Document text:\n" + text})
         sparse = not document.text or len(document.text.strip()) < 200 or bool(document.pages_without_text)
         if sparse and document.images:
-            for media_type, data in document.images[:self.max_pages]:
+            # Pages without a text layer are the ones only an image can read, so send them first; a page with
+            # text still has its text in the prompt even if its image is cut.
+            no_text = {p for p in document.pages_without_text if 1 <= p <= len(document.images)}
+            order = [i for i in range(len(document.images)) if (i + 1) in no_text]
+            order += [i for i in range(len(document.images)) if (i + 1) not in no_text]
+            for i in order[:self.max_pages]:
+                media_type, data = document.images[i]
                 blocks.append({"type": "image", "source": {"type": "base64", "media_type": media_type,
                                                            "data": base64.b64encode(data).decode("ascii")}})
-        return blocks
+            dropped = order[self.max_pages:]
+            if dropped:
+                notes.append(f"{len(dropped)} of {len(document.images)} page images exceeded the cap of "
+                             f"{self.max_pages} and were not sent; pages without a text layer were sent first")
+                for i in sorted(p for p in dropped if (p + 1) in no_text):
+                    notes.append(f"page {i + 1}: scanned page with no text layer was not sent (image cap "
+                                 f"{self.max_pages} reached)")
+        return blocks, notes
 
     def classify(self, document: Document, kinds: list[Structure]) -> Routing:
         catalogue = [{"name": k.name, "description": (k.description or "")[:600]} for k in kinds]
@@ -158,7 +218,8 @@ class AnthropicClient(LLMClient):
             "\"kind\": <name or null>, \"reason\": <short string>}. Use \"kind\" only when one kind clearly fits, "
             "\"ambiguous\" when two or more fit, \"none\" when nothing fits.")
         instruction = "Known kinds:\n" + json.dumps(catalogue, ensure_ascii=False) + f"\n\nFile path: {document.path}"
-        data = self._answer("classify", document.sha256, system, self._content(document, instruction))
+        content, _notes = self._content(document, instruction)
+        data = self._answer("classify", document.sha256, system, content, aux=_aux_key("classify", catalogue))
         decision = data.get("decision") if data.get("decision") in ("kind", "none", "ambiguous") else "none"
         kind = data.get("kind") if decision == "kind" else None
         return Routing(decision, kind, str(data.get("reason") or "")[:500], self.label)
@@ -178,8 +239,13 @@ class AnthropicClient(LLMClient):
             "proposed_fact_types.")
         instruction = (f"Document kind: {structure.name}\nReading rules:\n{(structure.description or '')[:4000]}\n\n"
                        f"Contract fact types:\n{json.dumps(vocabulary, ensure_ascii=False)}")
-        data = self._answer("extract", document.sha256, system, self._content(document, instruction))
-        return _envelope(data, structure.name, _numeric_attrs(contract))
+        content, notes = self._content(document, instruction)
+        aux = _aux_key("extract", structure.name, vocabulary)
+        data = self._answer("extract", document.sha256, system, content, aux=aux)
+        env = _envelope(data, structure.name, _numeric_attrs(contract))
+        if notes:                       # pages or text the cap cut never reach the model: record, do not hide
+            env["unreadable"] = list(env["unreadable"]) + notes
+        return env
 
     def design(self, document: Document, similar: list[Structure], contract: dict,
                sample_rows: list[list[str]] | None = None) -> StructureProposal:
@@ -194,9 +260,13 @@ class AnthropicClient(LLMClient):
             "\"type\": ...}}}}. Subjects are entity ids, never row or line numbers.")
         instruction = ("Nearest known kinds:\n" + json.dumps(known, ensure_ascii=False) +
                        f"\n\nFile path: {document.path}")
-        if sample_rows:
-            instruction += "\n\nSample rows:\n" + json.dumps(sample_rows[:30], ensure_ascii=False)
-        data = self._answer("design", document.sha256, system, self._content(document, instruction))
+        rows = sample_rows[:30] if sample_rows else None
+        if rows:
+            instruction += "\n\nSample rows:\n" + json.dumps(rows, ensure_ascii=False)
+        content, _notes = self._content(document, instruction)
+        # One document (one sha) is sent to design once per unknown sheet with different sample rows, so the rows
+        # join the cache key: two sheets of a workbook no longer collide and reuse the first sheet's map.
+        data = self._answer("design", document.sha256, system, content, aux=_aux_key("design", known, rows))
         target = data.get("target")
         if target not in ("doc_kind", "schema_map"):
             target = "schema_map" if data.get("schema_map") else "doc_kind"
@@ -223,30 +293,58 @@ def _parse_json(text: str) -> dict:
 
 
 def _coerce_number(value: str):
-    compact = _WS.sub("", value.strip())
-    if _INT.fullmatch(compact):
-        return int(compact)
-    if _GROUPED.fullmatch(compact):
-        return int(compact.replace(".", "").replace(",", ""))
-    if _DEC.fullmatch(compact):
+    s = value.strip()
+    if _INT.fullmatch(s):
+        return int(s)
+    if _SPACE_GROUPED.fullmatch(s):
+        # Whitespace is read only as well-formed thousands groups, so the separators are safe to drop. A string
+        # whose spaces do not form such groups ("5 000 10 000", "12 5", a value split over a newline) does not
+        # reach here and stays text: two numbers are never joined into one.
+        return int(_GROUP_SPACES.sub("", s))
+    if _GROUPED.fullmatch(s):
+        return int(s.replace(".", "").replace(",", ""))
+    if _DEC.fullmatch(s):
         # A dot followed by exactly three digits ("10.000") is ambiguous between a decimal and a single
         # thousands group, so keep it as text rather than guess a wrong number.
-        if len(compact.lstrip("+-").split(".")[1]) == 3:
+        if len(s.lstrip("+-").split(".")[1]) == 3:
             return None
-        return float(compact)
+        return float(s)
     return None
 
 
 def _numeric_attrs(contract: dict) -> dict:
-    """Map each contract fact type to the set of its attributes declared `type: number`. Only those values are
-    parsed into numbers; everything else (identifiers, dates, codes, phone numbers) is kept verbatim as text,
-    so a value like "007" or a PO number is never retyped and stripped of its leading zero."""
+    """Map each contract fact type to the set of attributes whose value is parsed into a number. That is every
+    attribute the contract declares `type: number`, plus every attribute whose name marks a quantity (qty,
+    quantity, final_qty, printed_qty ...), because the real contract types some scanned quantities as string
+    yet their values are counts the gate must ground. Everything else (identifiers, dates, codes, phone
+    numbers) is kept verbatim as text, so a value like "007" or a PO number keeps its leading zero, and
+    _coerce_number still leaves any non-numeric quantity text untouched."""
     out: dict[str, set] = {}
     for t in contract.get("fact_types") or []:
         attrs = t.get("attributes") or {}
         out[t.get("name")] = {a for a, spec in attrs.items()
-                              if isinstance(spec, dict) and spec.get("type") == "number"}
+                              if (isinstance(spec, dict) and spec.get("type") == "number")
+                              or _QUANTITY_ATTR.search(a)}
     return out
+
+
+def _check_shape(role: str, data: dict) -> None:
+    """Reject an answer whose shape the pipeline cannot use, before it is cached. An extract answer must carry
+    facts as a list of objects, each with an object subject (entity ids, not a string or a row number); `{}`,
+    `{"facts": {...}}` and a fact with a string subject are refused here so a broken answer is never stored and
+    replayed, each retry is a fresh call. classify and design normalise their own fields and need no extra
+    check beyond being a JSON object (already guaranteed)."""
+    if role != "extract":
+        return
+    facts = data.get("facts")
+    if not isinstance(facts, list):
+        raise ValueError("extract answer has no facts list")
+    for f in facts:
+        if not isinstance(f, dict):
+            raise ValueError("a fact is not an object")
+        subject = f.get("subject")
+        if not isinstance(subject, dict):
+            raise ValueError("a fact subject is not an object of entity ids")
 
 
 def _envelope(data: dict, default_kind: str, numeric_attrs: dict | None = None) -> dict:
