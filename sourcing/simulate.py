@@ -198,18 +198,22 @@ def packed_by_deadline(on_hand, arrivals: list[tuple], burn: float,
 
 def simulate(facts: Facts, actions: list[dict], *, now: datetime, deadline: datetime,
              products: list[str] | None = None) -> dict:
-    """Coverage as it would be with the feasible actions taken now."""
+    """Coverage as it would be with the feasible actions taken now.
+
+    As in coverage, `products` only narrows the report: an action works on the whole plan.
+    """
     result = coverage.compute(facts, now=now, deadline=deadline, products=products)
     if not actions:
         return result
 
-    eds, _ = coverage.editions(facts, products)
+    plan = result if products is None else coverage.compute(facts, now=now, deadline=deadline)
+    eds, _ = coverage.editions(facts)
     today = now.astimezone(deadline.tzinfo).date()
-    phantom = {n["material_id"] for n in result["not_shortages"]}
+    phantom = {n["material_id"] for n in plan["not_shortages"]}
     boms = {e.product_id: {m: v for m, v in coverage.bill_of_materials(facts, e.product_id, today).items()
                            if m not in phantom} for e in eds}
     windows = coverage_windows.pack_windows(facts, now, deadline)
-    parts = {p["material_id"]: p for p in result["parts"]}
+    parts = {p["material_id"]: p for p in plan["parts"]}
     revisions = coverage_stock.revision_disputes(facts, set(parts))
 
     supplies, report = [], []
@@ -227,15 +231,15 @@ def simulate(facts: Facts, actions: list[dict], *, now: datetime, deadline: date
             if no.detail:
                 entry["detail"] = no.detail
 
-    _count(result, supplies, report, eds, boms, windows, deadline)
+    _count(plan, result, supplies, report, eds, boms, windows, deadline)
     result["actions"] = report
     return result
 
 
-def _count(result: dict, supplies: list[Supply], report: list[dict], eds: list, boms: dict,
+def _count(plan: dict, result: dict, supplies: list[Supply], report: list[dict], eds: list, boms: dict,
            windows: list, deadline: datetime) -> None:
-    """Add the supplies to the parts they feed, then pack again."""
-    parts = {p["material_id"]: p for p in result["parts"]}
+    """Add the supplies to the parts they feed, pack the whole plan again, then report what was asked for."""
+    parts = {p["material_id"]: p for p in plan["parts"]}
     users = {m: [e for e in eds if m in boms[e.product_id]] for m in parts}
     shift_ids = ids(*(w.fact_ids for w in windows))
     arrivals = {m: [(datetime.fromisoformat(i["arrives_at"]), i["counts"]["value"])
@@ -268,7 +272,7 @@ def _count(result: dict, supplies: list[Supply], report: list[dict], eds: list, 
     if not added:
         return
 
-    order, policy_ids = result["priority"]["order"], result["priority"]["fact_ids"]
+    order, policy_ids = plan["priority"]["order"], plan["priority"]["fact_ids"]
     for material, counted in added.items():
         part = parts[material]
         inputs = _unique(i for c in counted for i in c["inputs"])
@@ -291,13 +295,16 @@ def _count(result: dict, supplies: list[Supply], report: list[dict], eds: list, 
     packed = coverage.packable(eds, boms, available, order, allocated)
     used_ids = ids(*(parts[m]["added"]["fact_ids"] for m in added))
     inputs = _unique(i for m in added for i in parts[m]["added"]["inputs"])
-    for e, row in zip(eds, result["editions"]):
+    for e, row in zip(eds, plan["editions"]):
         copies, limited_by = packed[e.product_id]
         sources = ids(row["covered"]["fact_ids"], used_ids)
         row.update(covered={**figure(copies, sources), "inputs": inputs},
                    gap={**figure(e.open - copies, sources), "inputs": inputs}, limited_by=limited_by)
 
-    covered = sum(n for n, _ in packed.values())
+    by_id = {e["product_id"]: e for e in plan["editions"]}
+    result["editions"] = [by_id[e["product_id"]] for e in result["editions"]]
+    result["parts"] = [parts[p["material_id"]] for p in result["parts"]]
+    covered = sum(e["covered"]["value"] for e in result["editions"])
     top = result["fact_ids"]
     top["covered"], top["gap"] = ids(top["covered"], used_ids), ids(top["gap"], used_ids)
     result.update(covered=covered, gap=result["needed"] - covered,

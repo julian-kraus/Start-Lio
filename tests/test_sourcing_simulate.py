@@ -358,3 +358,15 @@ def test_a_quantity_that_is_no_number_is_infeasible(world, bad):
 
 def test_a_kind_that_is_no_text_is_not_echoed(world):
     assert only(sim(world, {"kind": 5}))["kind"] is None
+
+
+@pytest.mark.parametrize("supply", ["CARD", "BOOK", "CASE"])
+@pytest.mark.parametrize("product", ["P-A", "P-B"])
+def test_choosing_an_edition_only_narrows_the_report(world, supply, product):
+    world.drop("stock_batch", batch="B-BOOK")
+    world.stock("BOOK", 1000)
+    every, one = sim(world, offer(400, part_id=supply)), sim(world, offer(400, part_id=supply), products=[product])
+    assert one["editions"] == [edition(every, product)]
+    assert one["covered"] == edition(every, product)["covered"]["value"]
+    assert one["gap"] == edition(every, product)["gap"]["value"]
+    assert part(one, "CARD") == part(every, "CARD")
