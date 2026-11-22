@@ -12,7 +12,7 @@ types:
       clock:
         move: "{until}"
     expects:
-      - {fact_type: confirmed_date, attribute: eta, change: none}
+      - {fact_type: oc_line, attribute: confirmed_date, change: none}
 
   - id: silence.quote_lapsed
     description: A quote validity date for a part passes with no renewal.

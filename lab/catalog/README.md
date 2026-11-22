@@ -37,7 +37,7 @@ is a reference resolved from kb facts on the seeded lab database; nothing here c
 | id | channel | references | description |
 | --- | --- | --- | --- |
 | `capacity.allocation_cut` | mail | part, supplier | Supplier reduces the quantity it can allocate to us for a part. |
-| `capacity.stock_update` | table | part | A stock-level table shows a new on-hand quantity for a part. |
+| `capacity.stock_update` | table | part | A stock-snapshot table shows a new on-hand quantity for a part. |
 | `capacity.moq_change` | mail | part, supplier | Supplier raises the minimum order quantity for a part. |
 
 ## confirmations
@@ -76,8 +76,8 @@ is a reference resolved from kb facts on the seeded lab database; nothing here c
 
 | id | channel | references | description |
 | --- | --- | --- | --- |
-| `demand.preorders_up` | table | edition, part | Pre-orders for an edition rise, increasing the quantity of a part needed. |
-| `demand.preorders_down` | table | edition, part | Pre-orders for an edition fall, reducing the quantity of a part needed. |
+| `demand.preorders_up` | table | edition | Pre-orders for an edition rise, increasing the quantity of a part needed. |
+| `demand.preorders_down` | table | edition | Pre-orders for an edition fall, reducing the quantity of a part needed. |
 | `demand.forecast_revision` | document | edition, part | A revised demand forecast document changes the planned quantity for an edition. |
 
 ## logistics
@@ -108,9 +108,9 @@ is a reference resolved from kb facts on the seeded lab database; nothing here c
 
 | id | channel | references | description |
 | --- | --- | --- | --- |
-| `policy.signer_vacant` | table | none | The role that must sign a class of decisions becomes vacant. |
-| `policy.approval_limit_change` | table | none | The approval limit for a signer role changes. |
-| `policy.signer_appointed` | table | none | A role that was vacant has a signer appointed again. |
+| `policy.signer_vacant` | document | none | The role that must sign a class of decisions becomes vacant. |
+| `policy.approval_limit_change` | document | none | The approval limit for a signer role changes. |
+| `policy.signer_appointed` | document | none | A role that was vacant has a signer appointed again. |
 
 ## proof
 
@@ -141,5 +141,5 @@ is a reference resolved from kb facts on the seeded lab database; nothing here c
 | id | channel | references | description |
 | --- | --- | --- | --- |
 | `terms.price_increase` | mail | part, supplier | Supplier announces a higher unit price for a part. |
-| `terms.price_list_update` | table | part, supplier | A new price list version changes the unit price row for a part. |
+| `terms.price_list_update` | document | part, supplier | A new price list document changes the unit price for a part. |
 | `terms.payment_terms_change` | mail | supplier | Supplier changes the payment terms that apply to future orders. |

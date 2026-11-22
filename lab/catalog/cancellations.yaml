@@ -15,7 +15,7 @@ types:
         body:
           en: "Dear team,\n\nWe must cancel line {line.po_line} on order {line.po_number}. Reason: {reason}.\n\nKind regards"
     expects:
-      - {fact_type: confirmed_date, attribute: eta, change: deactivate}
+      - {fact_type: oc_line, attribute: confirmed_date, change: deactivate}
 
   - id: cancellations.order_cancelled
     description: Supplier cancels every line on an order.
@@ -31,7 +31,7 @@ types:
         body:
           en: "Dear team,\n\nWe can no longer supply order {line.po_number} and are cancelling it in full. Reason: {reason}.\n\nKind regards"
     expects:
-      - {fact_type: confirmed_date, attribute: eta, change: deactivate}
+      - {fact_type: oc_line, attribute: confirmed_date, change: deactivate}
 
   - id: cancellations.force_majeure
     description: Supplier invokes force majeure and halts supply for a line.
@@ -47,4 +47,4 @@ types:
         body:
           en: "Dear team,\n\nDue to {reason} we invoke force majeure and must suspend line {line.po_line} on order {line.po_number} until further notice.\n\nKind regards"
     expects:
-      - {fact_type: confirmed_date, attribute: eta, change: deactivate}
+      - {fact_type: oc_line, attribute: confirmed_date, change: deactivate}

@@ -1,5 +1,5 @@
 family: terms
-# Price and terms changes: a price increase by mail, a price list row change, a payment-terms change.
+# Price and terms changes: a price increase by mail, a price list document, a payment-terms change.
 types:
   - id: terms.price_increase
     description: Supplier announces a higher unit price for a part.
@@ -16,23 +16,22 @@ types:
         body:
           en: "Dear team,\n\nFrom {effective} the unit price for part {part.material_id} will be {new_price}.\n\nKind regards"
     expects:
-      - {fact_type: price, attribute: unit_price, change: update}
+      - {fact_type: price_change, attribute: new_price, change: update}
 
   - id: terms.price_list_update
-    description: A new price list version changes the unit price row for a part.
-    channel: table
+    description: A new price list document changes the unit price for a part.
+    channel: document
     parameters:
       supplier: {type: ref, ref: supplier}
       part: {type: ref, ref: part}
       new_price: {type: money}
     produces:
-      table:
-        path: "pricelists/{supplier.supplier_id}.csv"
-        row:
-          material_id: "{part.material_id}"
-          unit_price: "{new_price}"
+      document:
+        filename: "price_list_{part.material_id}.pdf"
+        kind: pdf
+        body: "Price list from {supplier.supplier_id}. Part {part.material_id} new unit price {new_price}."
     expects:
-      - {fact_type: price, attribute: unit_price, change: update}
+      - {fact_type: price_change, attribute: new_price, change: update}
 
   - id: terms.payment_terms_change
     description: Supplier changes the payment terms that apply to future orders.
@@ -47,4 +46,4 @@ types:
         body:
           en: "Dear team,\n\nOur payment terms change to {new_terms} for future orders.\n\nKind regards"
     expects:
-      - {fact_type: payment_terms, attribute: terms, change: update}
+      - {fact_type: oc_header, attribute: payment_terms, change: update}

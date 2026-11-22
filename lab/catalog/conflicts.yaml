@@ -17,7 +17,7 @@ types:
         body:
           en: "Dear team,\n\nOur records show line {line.po_line} on order {line.po_number} arriving {claimed_date}, which differs from your portal record {disputed.fact_id}.\n\nKind regards"
     expects:
-      - {fact_type: confirmed_date, attribute: eta, change: conflict}
+      - {fact_type: oc_line, attribute: confirmed_date, change: conflict}
 
   - id: conflicts.email_vs_portal_qty
     description: Supplier mail gives a shipped quantity that contradicts the delivery note on record.
@@ -51,4 +51,4 @@ types:
         body:
           en: "Dear team,\n\nThe agreed unit price for part {part.material_id} is {claimed_price}, which differs from record {disputed.fact_id}.\n\nKind regards"
     expects:
-      - {fact_type: price, attribute: unit_price, change: conflict}
+      - {fact_type: supplier_part, attribute: unit_price, change: conflict}

@@ -37,7 +37,7 @@ types:
       received_qty: {type: number}
     produces:
       table:
-        path: "receiving/goods_receipts.csv"
+        path: "erp/goods_receipts.csv"
         row:
           po_number: "{line.po_number}"
           po_line: "{line.po_line}"

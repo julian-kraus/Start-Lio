@@ -127,38 +127,55 @@ def test_invalid_types_fail_validation_naming_the_problem(tmp_path, mutate, need
     assert needle in str(err.value)
 
 
+@pytest.mark.parametrize("mutate, needle", [
+    # An expected change must name a kb contract fact type and one of its attributes, or no runner can check it.
+    (lambda d: d["types"][0]["expects"][0].update(fact_type="no_such_type"), "no_such_type"),
+    (lambda d: d["types"][0]["expects"][0].update(attribute="not_an_attribute"), "not_an_attribute"),
+    # A placeholder the renderer cannot match (a hyphen here) would otherwise render literally; reject it.
+    (lambda d: d["types"][0]["produces"]["mail"].update(subject="{line.po-number} today"), "po-number"),
+])
+def test_contract_and_placeholder_validation_names_the_type(tmp_path, mutate, needle):
+    import yaml
+
+    doc = yaml.safe_load((catalog.CATALOG_DIR / "delays.yaml").read_text())
+    mutate(doc)
+    (tmp_path / "delays.yaml").write_text(yaml.safe_dump(doc))
+    with pytest.raises(catalog.CatalogError) as err:
+        catalog.load_catalog(tmp_path)
+    message = str(err.value)
+    assert needle in message and "delays.new_eta" in message, message
+
+
 # --------------------------------------------------------------------------- reference resolution (database)
 
 @needs_db
 def test_load_resolves_every_reference_and_renders_against_a_seeded_database():
     kb_schema = f"kb_cat_{uuid.uuid4().hex[:8]}"
-    plan_schema = f"plan_cat_{uuid.uuid4().hex[:8]}"
-    conn = _seed(kb_schema, plan_schema, editions=True)
+    conn = _seed(kb_schema, editions=True)
     try:
-        cat = catalog.load(conn, kb_schema=kb_schema, plan_schema=plan_schema)
+        cat = catalog.load(conn, kb_schema=kb_schema)
         assert len(cat.types) >= 40
-        resolved = catalog.resolve_references(conn, kb_schema, plan_schema)
+        resolved = catalog.resolve_references(conn, kb_schema)
         for ref in catalog.REFERENCES:
             assert resolved[ref], f"{ref} did not resolve"
         # The language seeded on the supplier flows into a mail example.
         new_eta = cat.by_id()["delays.new_eta"]
         assert catalog.render_example(new_eta, resolved)["language"] == "de"
     finally:
-        _drop(conn, kb_schema, plan_schema)
+        _drop(conn, kb_schema)
 
 
 @needs_db
 def test_load_raises_naming_the_types_when_a_reference_cannot_resolve():
     kb_schema = f"kb_cat_{uuid.uuid4().hex[:8]}"
-    plan_schema = f"plan_cat_{uuid.uuid4().hex[:8]}"
-    conn = _seed(kb_schema, plan_schema, editions=False)  # no goals -> edition unresolvable
+    conn = _seed(kb_schema, editions=False)  # no plan_edition fact -> edition unresolvable
     try:
         with pytest.raises(catalog.CatalogError) as err:
-            catalog.load(conn, kb_schema=kb_schema, plan_schema=plan_schema)
+            catalog.load(conn, kb_schema=kb_schema)
         message = str(err.value)
         assert "edition" in message and "demand.preorders_up" in message
     finally:
-        _drop(conn, kb_schema, plan_schema)
+        _drop(conn, kb_schema)
 
 
 # --------------------------------------------------------------------------- helpers
@@ -191,21 +208,17 @@ def _fact(conn, fact_type, subject, attribute, value):
         (uuid.uuid4().hex, fact_type, Jsonb(subject), attribute, Jsonb(value)))
 
 
-def _seed(kb_schema, plan_schema, *, editions):
+def _seed(kb_schema, *, editions):
     import kb.db as kbdb
-    from plan import db as plandb
 
     conn = kbdb.connect(URL, kb_schema)
     kbdb.migrate(conn, kb_schema)
     _fact(conn, "supplier", {"supplier_id": "SUP-TEST-A"}, "name", "Synthetic A")
     _fact(conn, "supplier", {"supplier_id": "SUP-TEST-A"}, "preferred_language", "de")
     _fact(conn, "part_xref", {"material_id": "MAT-TEST-1", "supplier_part_no": "SPN-TEST-1"}, "supplier_part_no", "SPN-TEST-1")
-    _fact(conn, "confirmed_date", {"po_number": "PO-TEST-0001", "po_line": "10"}, "eta", "soon")
-    conn.commit()
-    plandb.migrate(conn, plan_schema)
-    if editions:
-        conn.execute(sql.SQL("INSERT INTO {}.goals (statement, edition) VALUES (%s, %s)").format(
-            sql.Identifier(plan_schema)), ("synthetic goal", "edition-one"))
+    _fact(conn, "oc_line", {"po_number": "PO-TEST-0001", "po_line": "10"}, "confirmed_date", "2026-12-01")
+    if editions:  # editions are read from kb plan_edition facts, not from plan.goals
+        _fact(conn, "plan_edition", {"product_id": "PRD-TEST-1"}, "edition_name", "edition-one")
     conn.commit()
     conn.execute(sql.SQL("SET search_path TO {}, public").format(sql.Identifier(kb_schema)))
     return conn

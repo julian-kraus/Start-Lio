@@ -18,7 +18,7 @@ types:
           en: "Dear team,\n\nWe confirm line {line.po_line} on order {line.po_number} for delivery on {confirmed_date}.\n\nKind regards"
           zh: "您好,\n\n我们确认订单 {line.po_number} 第 {line.po_line} 行的交货日期为 {confirmed_date}。\n\n此致"
     expects:
-      - {fact_type: confirmed_date, attribute: eta, change: new}
+      - {fact_type: oc_line, attribute: confirmed_date, change: new}
 
   - id: confirmations.order_confirmed_doc
     description: Supplier sends an order confirmation document for a line.
@@ -32,7 +32,7 @@ types:
         kind: pdf
         body: "Order confirmation from {supplier.supplier_id}. Order {line.po_number} line {line.po_line} with a confirmed date."
     expects:
-      - {fact_type: confirmed_date, attribute: eta, change: new}
+      - {fact_type: oc_line, attribute: confirmed_date, change: new}
 
   - id: confirmations.partial_confirm
     description: Supplier confirms only part of the ordered quantity for a line.
@@ -48,4 +48,4 @@ types:
         body:
           en: "Dear team,\n\nWe can confirm {confirmed_qty} units of line {line.po_line} on order {line.po_number}; the remainder is under review.\n\nKind regards"
     expects:
-      - {fact_type: confirmed_date, attribute: confirmed_qty, change: new}
+      - {fact_type: oc_line, attribute: qty, change: new}

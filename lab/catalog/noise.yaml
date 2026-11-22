@@ -15,7 +15,7 @@ types:
         body:
           en: "Dear team,\n\nResending our earlier message for reference {original.fact_id}.\n\nKind regards"
     expects:
-      - {fact_type: confirmed_date, attribute: eta, change: none}
+      - {fact_type: oc_line, attribute: confirmed_date, change: none}
 
   - id: noise.out_of_scope
     description: Supplier sends an unrelated message (marketing or general enquiry) that yields no fact.

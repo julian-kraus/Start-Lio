@@ -19,7 +19,7 @@ types:
           en: "Dear team,\n\nLine {line.po_line} on order {line.po_number} will now arrive on {new_eta}. Reason: {reason}.\n\nKind regards"
           de: "Sehr geehrtes Team,\n\nPosition {line.po_line} der Bestellung {line.po_number} trifft nun am {new_eta} ein. Grund: {reason}.\n\nMit freundlichen Gruessen"
     expects:
-      - {fact_type: confirmed_date, attribute: eta, change: update}
+      - {fact_type: oc_line, attribute: confirmed_date, change: update}
 
   - id: delays.eta_unknown
     description: Supplier can no longer give an arrival date for a confirmed line.
@@ -35,7 +35,7 @@ types:
         body:
           en: "Dear team,\n\nWe cannot confirm an arrival date for line {line.po_line} on order {line.po_number} yet. Reason: {reason}. We will follow up.\n\nKind regards"
     expects:
-      - {fact_type: confirmed_date, attribute: eta, change: deactivate}
+      - {fact_type: oc_line, attribute: confirmed_date, change: deactivate}
 
   - id: delays.recovery
     description: A previously slipped line recovers to an earlier arrival date.
@@ -51,4 +51,4 @@ types:
         body:
           en: "Dear team,\n\nGood news: line {line.po_line} on order {line.po_number} can now arrive by {new_eta}.\n\nKind regards"
     expects:
-      - {fact_type: confirmed_date, attribute: eta, change: update}
+      - {fact_type: oc_line, attribute: confirmed_date, change: update}

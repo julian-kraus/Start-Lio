@@ -18,22 +18,22 @@ types:
           en: "Dear team,\n\nOur allocation for part {part.material_id} is reduced to {available_qty} units for the current period.\n\nKind regards"
           de: "Sehr geehrtes Team,\n\nUnser Kontingent fuer Teil {part.material_id} wird fuer die laufende Periode auf {available_qty} Einheiten reduziert.\n\nMit freundlichen Gruessen"
     expects:
-      - {fact_type: capacity, attribute: available_qty, change: update}
+      - {fact_type: capacity_window, attribute: capacity_during, change: update}
 
   - id: capacity.stock_update
-    description: A stock-level table shows a new on-hand quantity for a part.
+    description: A stock-snapshot table shows a new on-hand quantity for a part.
     channel: table
     parameters:
       part: {type: ref, ref: part}
       on_hand: {type: number}
     produces:
       table:
-        path: "stock/on_hand.csv"
+        path: "erp/stock_snapshot.csv"
         row:
           material_id: "{part.material_id}"
-          on_hand: "{on_hand}"
+          qty: "{on_hand}"
     expects:
-      - {fact_type: stock_level, attribute: on_hand, change: update}
+      - {fact_type: stock_batch, attribute: qty, change: update}
 
   - id: capacity.moq_change
     description: Supplier raises the minimum order quantity for a part.
@@ -49,4 +49,4 @@ types:
         body:
           en: "Dear team,\n\nThe minimum order quantity for part {part.material_id} is now {moq} units.\n\nKind regards"
     expects:
-      - {fact_type: capacity, attribute: moq, change: update}
+      - {fact_type: supplier_part, attribute: moq, change: update}

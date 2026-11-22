@@ -1,46 +1,43 @@
 family: policy
-# Policy and people: the signer for a decision becomes vacant, an approval limit changes, a signer is
-# appointed. These enter through the approval-routing table, not supplier mail.
+# Policy and people: the signer for a class of decisions becomes vacant, an approval limit changes, a signer is
+# appointed. These enter as an updated approval-policy document, the same channel the base policy arrives on.
 types:
   - id: policy.signer_vacant
     description: The role that must sign a class of decisions becomes vacant.
-    channel: table
+    channel: document
     parameters:
       role: {type: text}
     produces:
-      table:
-        path: "policy/signers.csv"
-        row:
-          role: "{role}"
-          status: vacant
+      document:
+        filename: "approval_policy_update.pdf"
+        kind: pdf
+        body: "Approval policy update: the signer role {role} is vacant until further notice."
     expects:
-      - {fact_type: signer, attribute: status, change: update}
+      - {fact_type: policy_directive, attribute: directive, change: update}
 
   - id: policy.approval_limit_change
     description: The approval limit for a signer role changes.
-    channel: table
+    channel: document
     parameters:
       role: {type: text}
       limit: {type: money}
     produces:
-      table:
-        path: "policy/approval_limits.csv"
-        row:
-          role: "{role}"
-          limit: "{limit}"
+      document:
+        filename: "approval_policy_update.pdf"
+        kind: pdf
+        body: "Approval policy update: the approval limit for role {role} is now {limit}."
     expects:
-      - {fact_type: approval_limit, attribute: amount, change: update}
+      - {fact_type: policy_directive, attribute: directive, change: update}
 
   - id: policy.signer_appointed
     description: A role that was vacant has a signer appointed again.
-    channel: table
+    channel: document
     parameters:
       role: {type: text}
     produces:
-      table:
-        path: "policy/signers.csv"
-        row:
-          role: "{role}"
-          status: active
+      document:
+        filename: "approval_policy_update.pdf"
+        kind: pdf
+        body: "Approval policy update: the signer role {role} is filled again and may approve decisions."
     expects:
-      - {fact_type: signer, attribute: status, change: update}
+      - {fact_type: policy_directive, attribute: directive, change: update}
