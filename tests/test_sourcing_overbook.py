@@ -190,7 +190,7 @@ def test_price_that_cannot_be_read_is_refused(text):
 
 def test_price_basis_per_many_is_refused():
     key = {"supplier_id": "B", "offer_ref": "O-1", "item": "cover"}
-    for said in ("per 100", "per 1,000 pcs"):
+    for said in ("per 100", "per 1,000 pcs", "per thousand", "EUR per hundred"):
         with pytest.raises(ModelError, match="not per unit"):
             overbook.price(offered() + [fact("offer", key, "price_basis", said)], "B", "PART", offer_ref="O-1")
 

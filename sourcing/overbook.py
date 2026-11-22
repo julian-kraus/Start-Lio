@@ -30,6 +30,7 @@ CODE = r"(€|\$|£|zł|[a-z]{3})"
 PER_ONE = r"(?:\s*(?:/|per\s|je\s|za\s)\s*(?:1\s*)?(?:pcs?|pieces?|piece|units?|stück|stk|szt|each|ea)\.?)?"
 PRICE = re.compile(rf"(?:{CODE}\s*)?({NUMBER})(?:\s*{CODE})?{PER_ONE}")
 PER_MANY = re.compile(r"(?:/|\bper\b|\bje\b|\bza\b)\s*(\d[\d.,\s]*)")
+PER_WORD = re.compile(r"\b(?:hundred|thousand|dozen|hundert|tausend|dutzend|sto|tysiąc|mille)\b")
 COUNT = re.compile(rf"(?:min\.?\s*|minimum\s+)?({NUMBER})\s*(?:pcs?|pieces?|units?|stück|stk|szt)?\.?")
 MAIL = "mail/"          # an email may make an offer, it cannot change the price list
 TOLERANCE = 1e-9
@@ -92,7 +93,7 @@ def price(facts: Iterable[Mapping], supplier_id: str, part_id: str, *, offer_ref
     if basis := [f for f in terms if f.get("attribute") == "price_basis"]:
         said, basis = _newest(basis, "price_basis")
         per = PER_MANY.search(said.lower())
-        if per and parse_number(per.group(1).strip(" .,"), grouped=True) != 1:
+        if PER_WORD.search(said.lower()) or (per and parse_number(per.group(1).strip(" .,"), grouped=True) != 1):
             raise ModelError(f"the price is not per unit: {said!r}")
         used = used + basis
     if not stated:
