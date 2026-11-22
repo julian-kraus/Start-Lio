@@ -17,6 +17,8 @@ const parts = t => Object.fromEntries(new Intl.DateTimeFormat("en-GB", {timeZone
 const hm = t => { const p = parts(t); return `${p.hour}:${p.minute}`; };
 const dhm = t => { const p = parts(t); return `${p.weekday} ${p.hour}:${p.minute}`; };
 const B = (c, t) => `<span class="badge b-${c}"><span class="dot"></span>${esc(t)}</span>`;
+const day = t => new Intl.DateTimeFormat("en-GB", {timeZone: TZ, weekday: "short", day: "2-digit", month: "short"}).format(new Date(t));
+const when = e => e.date_only ? day(e.at) : dhm(e.at);   // kb has some facts as a date, without a time
 const initials = n => String(n || "?").split(/\s+/).filter(Boolean).map(w => w[0]).slice(0, 2).join("").toUpperCase();
 const tone = v => v >= 0.75 ? "tone-g" : v >= 0.55 ? "tone-am" : "tone-r";
 
@@ -72,10 +74,11 @@ function timeline() {
   document.querySelectorAll("[data-ev]").forEach(el => el.onclick = () => openEvent(+el.dataset.ev));
 }
 function feed() {
-  const items = [...(S.events || [])].sort((x, y) => ms(y.at) - ms(x.at));
+  const now = ms(S.clock.now);
+  const items = (S.events || []).filter(e => ms(e.at) <= now).sort((x, y) => ms(y.at) - ms(x.at));
   $("#feed").innerHTML = items.length ? items.map(e => {
     const i = FEED_IC[e.type] || "info", k = e.severity === "risk" ? "k-bad" : e.severity === "ok" ? "k-good" : "";
-    return `<li class="${k}" data-ev="${e.id}"><span class="ft">${dhm(e.at)}</span><span class="fn">${ic(i)}</span><span class="fx">${esc(e.title)}</span></li>`;
+    return `<li class="${k}" data-ev="${e.id}"><span class="ft">${when(e)}</span><span class="fn">${ic(i)}</span><span class="fx">${esc(e.title)}</span></li>`;
   }).join("") : `<li><span class="fx subtle">Nothing yet. Set the goal to start.</span></li>`;
   document.querySelectorAll("#feed [data-ev]").forEach(el => el.onclick = () => openEvent(+el.dataset.ev));
 }
@@ -217,7 +220,7 @@ async function setGoal() {
 function openEvent(id) {
   const e = (S.events || []).find(x => x.id === id); if (!e) return;
   const d = e.detail || {};
-  $("#dTitle").innerHTML = `<p class="h-sm">${esc(e.title)}</p><p class="xs subtle">${esc(dhm(e.at))} · ${esc(e.type)}</p>`;
+  $("#dTitle").innerHTML = `<p class="h-sm">${esc(e.title)}</p><p class="xs subtle">${esc(when(e))} · ${esc(e.type)}</p>`;
   $("#dBody").innerHTML = `${d.happened ? `<p>${esc(d.happened)}</p>` : ""}<dl class="pd-why">${(d.reasoning || []).map(r => `<div><dt>${esc(r.text)}</dt><dd>${esc(r.value || "")}</dd></div>`).join("")}</dl>${d.autonomy && d.autonomy.text ? `<p class="xs subtle">${esc(d.autonomy.text)}</p>` : ""}`;
   $("#drawer").classList.add("on"); $("#scrim").classList.add("on");
 }

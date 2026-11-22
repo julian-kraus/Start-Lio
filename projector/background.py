@@ -55,6 +55,7 @@ def events(w: World, start: datetime, supplier_ids: list[str], first_part: dict[
             at = datetime.combine(day, time(12, 0), w.zone)
             late = at > deadline
             out.append({"kind": "event", "type": "delivery", "at": at.isoformat(),
+                        "date_only": True,
                         "title": f"Next promised delivery {day:%d %b}" + (", after the deadline" if late else ""),
                         "lane": lane, "supplier_id": sid, "severity": "info",
                         "detail": {"happened": f"{delivery.get('open_lines', 0)} open order lines; the earliest "

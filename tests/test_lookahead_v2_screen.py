@@ -24,8 +24,8 @@ ctx.window = ctx;
 const vm = require("vm"), fs = require("fs");
 vm.createContext(ctx);
 for (const f of ["gp_app.js", "gp_plan.js"]) vm.runInContext(fs.readFileSync(process.argv[1] + "/" + f, "utf8"), ctx);
-vm.runInContext("S = " + process.argv[2] + "; decisions(); planView(S);", ctx);
-console.log(JSON.stringify({decided: els["#decClosed"].innerHTML, plan: els["#v-plan"].innerHTML}));
+vm.runInContext("S = " + process.argv[2] + "; decisions(); feed(); planView(S);", ctx);
+console.log(JSON.stringify({feed: els["#feed"].innerHTML, decided: els["#decClosed"].innerHTML, plan: els["#v-plan"].innerHTML}));
 """
 
 
@@ -51,3 +51,17 @@ def test_coverage_alone_does_not_finish_the_critical_points_step():
     assert 'class="pf cur" id="pf-1"' in plan
     assert 'class="pf todo" id="pf-3"' in plan
     assert 'class="pf todo" id="pf-4"' in plan
+
+
+def test_the_feed_lists_only_what_happened_by_the_clock():
+    events = [{"id": i, "type": "agent", "title": title, "at": f"2030-01-01T{hour}:00:00+00:00"}
+              for i, (title, hour) in enumerate([("Already done", "08"), ("Right now", "09"), ("Still ahead", "10")])]
+    feed = render(events=events)["feed"]
+    assert "Already done" in feed and "Right now" in feed
+    assert "Still ahead" not in feed
+
+
+def test_a_fact_with_a_date_only_shows_no_time():
+    feed = render(events=[{"id": 1, "type": "delivery", "title": "Arrived", "date_only": True,
+                           "at": "2030-01-01T08:00:00+00:00"}])["feed"]
+    assert "01 Jan" in feed and "09:00" not in feed

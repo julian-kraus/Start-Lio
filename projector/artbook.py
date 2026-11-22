@@ -169,6 +169,7 @@ def build(w: World, scn: dict) -> list[dict]:
     at = lambda t: instant(t).isoformat()
     t_plan = start.replace(minute=start.minute + 1).isoformat()
     lane0 = lanes(w, cov, spots, edition)
+    add({"kind": "clock", "now": t_plan})
     add(plan(t_plan, lane0, covered, open_))
     add({"kind": "event", "type": "agent", "at": t_plan, "title": f"Weak spots found: {lane0[0]['name']} is critical",
          "lane": part, "severity": "risk", "impact": {"units": at_risk, "eur": exposure},
