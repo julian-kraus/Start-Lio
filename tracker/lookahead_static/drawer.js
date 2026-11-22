@@ -110,7 +110,7 @@ function drawerContent(sel) {
       out.push(head("Part", l.name, `${l.lane_id} · ${l.edition || ""}`, l.status));
     }
     out.push(sec("Coverage", el("dl", { class: "kv" }, el("dt", {}, "Need"), el("dd", {}, num(l.need)), el("dt", {}, "Usable"), el("dd", {}, num(l.usable)),
-      el("dt", {}, "Gap"), el("dd", {}, l.gap ? el("span", { class: "neg" }, "−" + num(l.gap)) : "0"),
+      el("dt", {}, "Gap"), el("dd", {}, l.gap ? el("span", { class: "neg" }, "−" + num(l.gap)) : num(l.gap)),
       l.needed_by ? [el("dt", {}, "Needed by"), el("dd", {}, fmt(l.needed_by), el("div", { class: "src" }, l.needed_by_why || ""))] : null),
       el("p", { style: "margin-top:10px" }, l.reason || "")));
     const evs = st.events.filter((e) => e.lane === l.lane_id).slice(-6).reverse();

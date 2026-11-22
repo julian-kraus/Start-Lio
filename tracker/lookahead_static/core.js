@@ -37,7 +37,7 @@ function fmt(iso, opts) {
 }
 const hm = (iso) => fmt(iso, { weekday: undefined });
 const eur = (v) => "€" + Math.round(v).toLocaleString("en-US");
-const num = (v) => Math.round(v).toLocaleString("en-US");
+const num = (v) => (v == null || isNaN(v) ? "–" : Math.round(v).toLocaleString("en-US"));  // a missing number is never drawn as one
 function scoreClass(v) { return v >= 0.75 ? "s-good" : v >= 0.6 ? "s-mid" : "s-bad"; }
 function initials(name) { return (name || "?").split(/\s+/).map((w) => w[0]).join("").slice(0, 2).toUpperCase(); }
 function toast(msg, err) {
