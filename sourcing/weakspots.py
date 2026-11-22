@@ -8,7 +8,7 @@ Pure: each spot validates against the weak_spot contract.
                   not stock. On a shared part the shortage is priced on the most valuable edition first
   money at risk   copies at risk times the goal's value of a missing copy of that edition
   substitute      copies beyond an edition's pre-orders lend their units of a shared part to editions the goal
-                  values higher, unless the priority policy puts the lender first
+                  values higher, unless the priority policy puts the lender first or is unclear
   rank            money at risk times the share no substitute covers (`exposure_eur`)
   critical        used only by the editions the goal values most, with at most one qualified source
 
@@ -141,7 +141,13 @@ def _shortage(part: dict, values: dict, open_copies: dict) -> dict[str, dict]:
     return out
 
 
-def _substitute(short: dict[str, dict], values: dict, order: list[str] | None, retail: dict) -> set[str]:
+def _may_lend(policy: dict, lender: str, borrower: str) -> bool:
+    if policy["order"] is None:
+        return not policy["fact_ids"]                   # no policy lends, one that cannot be read does not
+    return policy["order"].index(borrower) < policy["order"].index(lender)
+
+
+def _substitute(short: dict[str, dict], values: dict, policy: dict, retail: dict) -> set[str]:
     """Let retail copies absorb a shared part's shortage. Returns the editions whose retail copies were used."""
     if len(short) < 2:
         return set()
@@ -162,8 +168,8 @@ def _substitute(short: dict[str, dict], values: dict, order: list[str] | None, r
         for lender in reversed(short):                  # least valuable lends first
             if lender not in spare or values[lender] >= values[borrower]:
                 continue
-            if order and order.index(lender) < order.index(borrower):
-                continue                                # the policy serves the lender first
+            if not _may_lend(policy, lender, borrower):
+                continue
             short[lender]["held"] -= absorb(borrower, lender, short[lender]["held"])
     for product in spare:
         absorb(product, product, short[product]["short"])       # its own loss falls on retail copies
@@ -202,11 +208,12 @@ def _spot(facts: Facts, part: dict, coverage: dict, editions: dict, values: dict
           retail: dict) -> dict:
     open_copies = {p: e["open"]["value"] for p, e in editions.items()}
     short = _shortage(part, values, open_copies)
-    lenders = _substitute(short, values, coverage["priority"]["order"], retail)
+    lenders = _substitute(short, values, coverage["priority"], retail)
     good, out, source_ids = qualified_sources(facts, part["material_id"])
 
     basis = ids(part["gap_on_stock"]["fact_ids"], part["need"]["fact_ids"])
-    lent_ids = ids(*(retail[p][1] for p in lenders), coverage["priority"]["fact_ids"] if lenders else [])
+    policy_decides = len(short) > 1 and any(entry["short"] for entry in short.values())
+    lent_ids = ids(*(retail[p][1] for p in lenders), coverage["priority"]["fact_ids"] if policy_decides else [])
     per_edition, copies, uncovered, money, exposure = [], 0, 0, 0, 0
     for product, entry in short.items():
         at_risk = _copies(entry["short"], entry["qty_per"])

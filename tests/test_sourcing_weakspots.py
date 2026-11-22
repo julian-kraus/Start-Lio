@@ -164,6 +164,24 @@ def test_the_policy_can_forbid_lending(world):
     assert spot(ranked(world), "CARD")["exposure_eur"] == 500 * PRICE
 
 
+@pytest.mark.parametrize("notes", [
+    ["Priority by memo: Basic first unless told otherwise."],
+    ["Priority by memo: Basic first.", "Priority by memo: Deluxe first."],
+])
+def test_an_unclear_policy_does_not_allow_lending(world, notes):
+    world.drop("x_workbook_row", record_id="memo")
+    policy = [world.add("x_workbook_row", {"record_id": f"memo-{n}"}, note=note)["note"]
+              for n, note in enumerate(notes)]
+    card = spot(ranked(world), "CARD")
+    assert card["exposure_eur"] == 500 * PRICE and card["detail"]["status"] == "at_risk"
+    assert set(policy) <= set(card["detail"]["without_substitute"]["fact_ids"])
+
+
+def test_without_a_policy_retail_copies_lend(world):
+    world.drop("x_workbook_row", record_id="memo")
+    assert spot(ranked(world), "CARD")["exposure_eur"] == 0
+
+
 def test_exclusive_part_of_the_protected_edition_with_one_source_is_critical(world):
     restock(world, "BOOK", 1400)
     spots = ranked(world)
