@@ -1,0 +1,19 @@
+[
+  {
+    "stop_reason": "end_turn",
+    "text": "{\"hedge\": true, \"expected_loss_eur\": 97650.0, \"break_even_p_fail\": 0.01254, \"reason\": \"I worked it out myself\"}",
+    "usage": {"input_tokens": 300, "output_tokens": 40}
+  },
+  {
+    "stop_reason": "tool_use",
+    "tool_calls": [
+      {"name": "hedge", "input": {"p_fail": 0.35, "copies_at_risk": 3100, "loss_per_copy_eur": 90, "commitment_eur": 3500}}
+    ],
+    "usage": {"input_tokens": 520, "output_tokens": 42}
+  },
+  {
+    "stop_reason": "end_turn",
+    "text": "{\"hedge\": true, \"expected_loss_eur\": 97650.0, \"break_even_p_fail\": 0.01254, \"reason\": \"from the hedge tool result\"}",
+    "usage": {"input_tokens": 640, "output_tokens": 58}
+  }
+]
