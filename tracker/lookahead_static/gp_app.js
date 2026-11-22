@@ -183,7 +183,7 @@ function dqCard(d) {
 function decisions() {
   const open = openDecisions();
   $("#decCount").textContent = open.length; $("#dqCount").textContent = open.length;
-  $("#dq").innerHTML = open.length ? dqCard(open[0]) : `<article class="dq-card ac"><p class="sm muted">Nothing waiting for you.</p></article>`;
+  $("#dq").innerHTML = open.length ? dqCard(open[0]) : fxAllClear();
   $("#decOpen").innerHTML = open.length ? open.map(decCard).join("") : `<p class="sm muted">Nothing waiting for you.</p>`;
   const done = (S.decisions || []).filter(d => d.status !== "open");
   $("#decDone").textContent = done.length;
@@ -210,11 +210,13 @@ async function accept(id) {
     note("The signer changed. Nothing was sent; check the name and click again.");
     return;
   }
-  const approver = shown.name;
+  const approver = shown.name, dec = (S.decisions || []).find(x => x.decision_id === id) || {};
+  fxSend(true, `Sending to ${supName(dec.supplier_id)}…`);
   const r = await fetch(`/api/lookahead/decisions/${encodeURIComponent(id)}/accept`, {method: "POST",
     headers: {"Content-Type": "application/json"}, body: JSON.stringify({approver})});
   shown.busy = false;
   note(r.ok ? "" : (await r.json().catch(() => ({}))).error || "Accept failed");
+  if (r.ok) { fxSend(true, `Sent to ${supName(dec.supplier_id)}`, true); setTimeout(() => fxSend(false), 1400); } else fxSend(false);
   load();
 }
 let REJ = null;

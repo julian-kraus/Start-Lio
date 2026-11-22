@@ -1,0 +1,23 @@
+// Grand Plan Lio: the prototype's two motion illustrations (analysis/design/grand-plan-lio):
+// "All clear" when nothing waits for a decision, and the paper plane while an accepted decision is sent.
+// The SVGs are design assets; every text shown comes from the records.
+"use strict";
+const FX_ALL_CLEAR = "<svg class=\"ac-ill\" width=\"260\" height=\"160\" viewBox=\"0 0 260 160\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\" role=\"img\" aria-label=\"Truck arriving at the warehouse\">\n<path d=\"M6 134 H254\" stroke=\"#d6d9e0\" stroke-width=\"1.5\"></path>\n<g class=\"ac-clock\"><circle cx=\"34\" cy=\"38\" r=\"13\" stroke=\"#191c26\" stroke-width=\"1.5\"></circle><path d=\"M34 30 V38 L40 34\" stroke=\"#191c26\" stroke-width=\"1.5\"></path></g>\n<path d=\"M146 72 L198 46 L250 72\" stroke=\"#191c26\" stroke-width=\"1.5\"></path>\n<path d=\"M152 69 V134 M244 69 V134\" stroke=\"#191c26\" stroke-width=\"1.5\"></path>\n<rect x=\"170\" y=\"88\" width=\"56\" height=\"46\" rx=\"2\" stroke=\"#191c26\" stroke-width=\"1.5\"></rect>\n<path d=\"M170 95 H226 M170 101 H226\" stroke=\"#d6d9e0\" stroke-width=\"1.5\"></path>\n<rect x=\"176\" y=\"114\" width=\"18\" height=\"18\" rx=\"2\" fill=\"#fff\" stroke=\"#191c26\" stroke-width=\"1.5\"></rect>\n<rect x=\"198\" y=\"114\" width=\"18\" height=\"18\" rx=\"2\" fill=\"#fff\" stroke=\"#191c26\" stroke-width=\"1.5\"></rect>\n<rect x=\"186\" y=\"104\" width=\"16\" height=\"10\" rx=\"2\" fill=\"rgba(77,75,158,.12)\" stroke=\"#4d4b9e\" stroke-width=\"1.5\"></rect>\n<path d=\"M198 46 V20\" stroke=\"#191c26\" stroke-width=\"1.5\"></path>\n<path class=\"ac-flag\" d=\"M198 21 H222 L216 28 L222 35 H198\" fill=\"rgba(77,75,158,.12)\" stroke=\"#4d4b9e\" stroke-width=\"1.5\"></path>\n<g class=\"ac-truck\">\n<rect x=\"58\" y=\"88\" width=\"84\" height=\"38\" rx=\"3\" fill=\"#fff\" stroke=\"#191c26\" stroke-width=\"1.5\"></rect>\n<path d=\"M70 100 H100 M70 108 H90\" stroke=\"#d6d9e0\" stroke-width=\"1.5\"></path>\n<path d=\"M58 98 H42 L30 112 V126 H58\" fill=\"#fff\" stroke=\"#191c26\" stroke-width=\"1.5\"></path>\n<path d=\"M42 102 L35 111 H52 V102 Z\" stroke=\"#191c26\" stroke-width=\"1.5\"></path>\n<circle cx=\"46\" cy=\"128\" r=\"6\" fill=\"#fff\" stroke=\"#191c26\" stroke-width=\"1.5\"></circle>\n<circle cx=\"110\" cy=\"128\" r=\"6\" fill=\"#fff\" stroke=\"#191c26\" stroke-width=\"1.5\"></circle>\n<circle cx=\"126\" cy=\"128\" r=\"6\" fill=\"#fff\" stroke=\"#191c26\" stroke-width=\"1.5\"></circle>\n</g>\n<g class=\"ac-check\"><circle cx=\"236\" cy=\"96\" r=\"12\" fill=\"#e7f0e8\" stroke=\"#47854f\" stroke-width=\"1.5\"></circle><path d=\"m230.5 96 4 4 7-7.5\" stroke=\"#47854f\" stroke-width=\"2\"></path></g>\n</svg>";
+const FX_SEND = "<svg class=\"sf-plane\" width=\"160\" height=\"110\" viewBox=\"0 0 160 110\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path class=\"sf-path\" d=\"M20 80 C 50 80, 60 40, 96 44\" stroke=\"#e4e7ee\" stroke-width=\"1.6\" stroke-dasharray=\"1 6\"></path><g class=\"sf-pl\"><path d=\"M96 30 L140 20 L120 62 L110 46 Z\" fill=\"rgba(77,75,158,.12)\" stroke=\"#4d4b9e\" stroke-width=\"1.6\"></path><path d=\"M110 46 L140 20\" stroke=\"#4d4b9e\" stroke-width=\"1.6\"></path></g><g class=\"sf-ck\"><circle cx=\"40\" cy=\"88\" r=\"12\" fill=\"rgba(71,133,79,.12)\" stroke=\"#47854f\" stroke-width=\"1.6\"></circle><path d=\"m34.5 88 4 4 7-7.5\" stroke=\"#47854f\" stroke-width=\"2\"></path></g></svg>";
+function fxAllClear() {   // the empty state of the decision column, with the plan's coverage
+  const cov = (S.plan || {}).coverage || {}, name = (S.launch || {}).name || "";
+  const done = cov.needed && cov.covered >= cov.needed;
+  const sub = !cov.needed ? "The agent keeps watching and will call you if needed." : done
+    ? `All ${num(cov.covered)} ${name} copies covered. The agent keeps watching and will call you if needed.`
+    : `${num(cov.covered)} of ${num(cov.needed)} ${name} copies covered. The agent keeps watching.`;
+  return `<article class="dq-card ac">${FX_ALL_CLEAR}<p class="ac-t">${done || !cov.needed ? "All clear" : "Nothing waiting for you"}</p><p class="ac-s">${esc(sub)}</p></article>`;
+}
+function fxSend(on, text, ok) {   // the sending overlay: on while the accept is posted, ok when it went through
+  let el = document.querySelector("#sendFx");
+  if (!el) {
+    document.body.insertAdjacentHTML("beforeend", `<div class="sendfx" id="sendFx" role="status" aria-live="polite"><div class="sf-box"><div class="sf-ic">${FX_SEND}</div><p class="sf-t"></p><p class="sf-s"></p></div></div>`);
+    el = document.querySelector("#sendFx");
+  }
+  el.querySelector(".sf-t").textContent = text || "";
+  el.classList.toggle("on", !!on); el.classList.toggle("ok", !!ok);
+}
