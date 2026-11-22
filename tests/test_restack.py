@@ -170,3 +170,16 @@ def test_line_prints_a_fork_point_the_branch_holds(repo, monkeypatch, capsys):
     Stub(monkeypatch)(monkeypatch, "2", "--line")
     sha = capsys.readouterr().out.strip().split("@")[1]
     assert git(repo, "merge-base", "--is-ancestor", sha, "origin/i2") == ""
+
+
+def test_next_restack_after_a_hand_restack_cuts_at_the_merge_base(repo, monkeypatch):
+    p1, _ = stack_child(repo)
+    git(repo, "switch", "-q", "i1")
+    (repo / "p1").write_text("amended\n"); git(repo, "commit", "-qa", "--amend", "-m", "p1 amended")
+    git(repo, "push", "-q", "--force", "origin", "i1")
+    git(repo, "rebase", "-q", "--onto", "i1", p1, "i2"); git(repo, "push", "-q", "--force", "origin", "i2")
+    git(repo, "switch", "-q", "i1")
+    (repo / "p1").write_text("third\n"); git(repo, "commit", "-qam", "p3"); git(repo, "push", "-q", "origin", "i1")
+    git(repo, "switch", "-q", "i2")
+    Stub(monkeypatch)(monkeypatch, "2")
+    assert git(repo, "diff", "--name-only", "origin/i1...origin/i2").split() == ["c1"]

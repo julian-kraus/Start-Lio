@@ -82,12 +82,12 @@ def resolve_fork(branch: str, parent: int, recorded: str, still_open: bool) -> s
     """The newest parent commit the branch still carries, or None when it carries none (already restacked onto
     main). While the parent exists, the merge base wins when it is newer than the recorded sha (a restack before
     the PR existed, a PR body copied from the claim commit); a force-pushed parent leaves the merge base older,
-    and then the recorded sha (its old tip) is the cut. After a squash merge, the parent PR's last head or commits
+    then the cut is the recorded sha (old tip) if still held. After a squash merge, the parent PR's last head or commits
     are tried before the recorded sha, so a branch restacked onto a newer parent tip without a marker cuts there."""
     tip = f"origin/{branch}"
     if still_open:
         base = run("git", "merge-base", f"origin/i{parent}", tip)
-        return base if is_ancestor(recorded, base) else recorded
+        return base if is_ancestor(recorded, base) or not is_ancestor(recorded, tip) else recorded
     for sha in [*merged_parent_shas(parent), recorded]:
         if run("git", "cat-file", "-t", sha, check=False) == "commit" and is_ancestor(sha, tip):
             return sha
@@ -143,8 +143,6 @@ def main() -> None:
         print(f"{branch} is no longer stacked (parent i{parent} merged, no parent commits left)")
         return
     if line_only:
-        if still_open and not is_ancestor(old, f"origin/{branch}"):
-            old = run("git", "merge-base", f"origin/i{parent}", f"origin/{branch}")   # only print a point it holds
         print(f"Stacked-on: i{parent}@{old}" if still_open else
               f"parent i{parent} merged but {branch} still carries its commits: run python ops/restack.py {n} first")
         return
