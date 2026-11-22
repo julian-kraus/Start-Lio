@@ -11,14 +11,19 @@ POST /api/lookahead/decisions/<id>/accept    {approver}; live mode approves and 
 POST /api/lookahead/advance | reset          rehearse mode only: next beat / start over
 POST /api/lookahead/clock                    {now}; rehearse mode, or forward on a running scenario clock
 POST /api/lookahead/clock/next               live scenario: jump to the launch record's next demo time
+
+Every POST must be application/json, and a browser's must come from the page itself (see `refuse_foreign_post`).
+Open the screen by IP address or as localhost: under any other host name its buttons are refused.
 """
 
 from __future__ import annotations
 
+import ipaddress
 import json
 import queue
 import re
 from pathlib import Path
+from urllib.parse import urlsplit
 
 from .lookahead import Lookahead, LookaheadError
 from .lookahead_clock import parse_time
@@ -33,6 +38,33 @@ HEARTBEAT = 15
 
 def dumps(obj) -> bytes:
     return json.dumps(obj, ensure_ascii=False).encode()
+
+
+def refuse_foreign_post(headers) -> None:
+    """Keep other web pages from using the operator's browser to press the screen's buttons.
+
+    JSON cannot be sent across origins without a preflight, which this server does not answer. An Origin, which
+    browsers add to every POST, must equal the Host asked for, and that host must be an IP address or localhost:
+    any other name can be pointed at this machine by whoever owns it.
+    """
+    if headers.get_content_type() != "application/json":
+        raise LookaheadError(415, "Content-Type must be application/json")
+    origins = headers.get_all("Origin")
+    if origins is None:
+        return  # not a browser
+    host = headers.get("Host", "").lower()
+    if [o.lower() for o in origins] != [f"http://{host}"] or not is_local_name(host):
+        raise LookaheadError(403, "POST is accepted only from this screen, opened by IP address or as localhost")
+
+
+def is_local_name(host: str) -> bool:
+    try:
+        name = urlsplit(f"//{host}").hostname or ""
+        if name != "localhost":
+            ipaddress.ip_address(name)
+    except ValueError:
+        return False
+    return True
 
 
 def lookahead_goal(la: Lookahead, body: dict) -> dict:
@@ -142,6 +174,7 @@ class LookaheadRoutes:
             if length > MAX_BODY:
                 raise LookaheadError(413, "body too large")
             raw = self.rfile.read(length) if length else b"{}"
+            refuse_foreign_post(self.headers)  # after the read: closing on an unread body can reset the connection
             try:
                 body = json.loads(raw or b"{}")
             except ValueError:
