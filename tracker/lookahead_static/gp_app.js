@@ -81,12 +81,37 @@ function feed() {
 }
 
 // ---------- decisions ----------
+// The signer is the card route's answer, as in decision_card.js: the one on the record is only a proposal.
+const SIG = new Map();
+let sigAsk = 0;
+const signerOf = d => SIG.get(d.decision_id) || {wait: true};
+function signerText(s) {
+  if (s.wait) return "Loading the signer…";
+  if (s.failed) return "Signer unavailable";
+  return [s.name, s.status === "needs_human" ? "needs_human" : ""].filter(Boolean).join(", ");
+}
+async function routedSigner(id) {
+  const r = await fetch(`/api/lookahead/decisions/${encodeURIComponent(id)}`);
+  if (!r.ok) throw new Error("no signer");
+  const card = await r.json(), s = card.signer || {};
+  return {...s, status: s.name ? ((card.approval || {}).status || s.status) : "needs_human"};
+}
+async function lookupSigners() {
+  const ask = ++sigAsk;
+  const found = await Promise.all(openDecisions().map(d =>
+    routedSigner(d.decision_id).catch(() => ({failed: true})).then(s => [d.decision_id, s])));
+  if (ask !== sigAsk) return;   // a newer state asked again
+  SIG.clear(); found.forEach(([id, s]) => SIG.set(id, s));
+  if (found.length) render();
+}
 function signerLine(d) {
-  const s = d.signer || {};
-  return `<div class="dc-sign"><span class="act-av${s.name ? "" : " empty"}">${esc(initials(s.name))}</span><span><b>${esc(s.name || s.role || "Signer unresolved")}</b> · ${esc(s.role || "")}</span></div>`;
+  const s = signerOf(d);
+  return `<div class="dc-sign"><span class="act-av${s.name ? "" : " empty"}">${esc(s.name ? initials(s.name) : "?")}</span><span><b>${esc(signerText(s))}</b> · ${esc(s.role || "")}</span></div>`;
 }
 function acts(d) {
-  return `<div class="dq-btns2"><button class="btn btn-ghost" data-rej="${esc(d.decision_id)}">Reject</button><button class="btn btn-primary" data-act="${esc(d.decision_id)}">${ic("check")}Accept and confirm</button></div>`;
+  const s = signerOf(d);
+  const label = s.wait || s.failed ? signerText(s) : s.name ? `Accept as ${s.name}` : "No signer can accept";
+  return `<div class="dq-btns2"><button class="btn btn-ghost" data-rej="${esc(d.decision_id)}">Reject</button><button class="btn btn-primary" data-act="${esc(d.decision_id)}"${s.name ? "" : " disabled"}>${ic("check")}${esc(label)}</button></div>`;
 }
 function dqCard(d) {
   const plan = (d.on_accept || []).map(t => `<li>${ic("send")}<span>${esc(t)}</span></li>`).join("");
@@ -114,7 +139,7 @@ function decCard(d) {
    <div><span>Copies protected</span><b>${num(d.impact && d.impact.units)}</b><small>${esc((S.launch || {}).name || "")}</small></div></div>
   <div class="dc2-cols"><section><p class="pd-h">${esc(supName(d.supplier_id))}</p><ol class="pd-steps">${steps}</ol></section>
    <section><p class="pd-h">${ic("sparkles")}Why the agent suggests this</p><dl class="pd-why">${why(d)}</dl></section></div>
-  <div class="dc2-foot"><div class="pd-sign"><span class="act-av${(d.signer || {}).name ? "" : " empty"}">${esc(initials((d.signer || {}).name))}</span><span><b>${esc((d.signer || {}).name || "Signer unresolved")}</b><small>${esc((d.signer || {}).rule || "")}</small></span></div>${acts(d)}</div></article>`;
+  <div class="dc2-foot"><div class="pd-sign"><span class="act-av${signerOf(d).name ? "" : " empty"}">${esc(signerOf(d).name ? initials(signerOf(d).name) : "?")}</span><span><b>${esc(signerText(signerOf(d)))}</b><small>${esc([signerOf(d).rule, signerOf(d).reason].filter(Boolean).join(". "))}</small></span></div>${acts(d)}</div></article>`;
 }
 function decisions() {
   const open = openDecisions();
@@ -131,11 +156,24 @@ function decisions() {
   document.querySelectorAll("[data-rej]").forEach(b => b.onclick = e => { e.stopPropagation(); openRej(b.dataset.rej); });
 }
 async function accept(id) {
-  const d = (S.decisions || []).find(x => x.decision_id === id);
-  const approver = (d && d.signer && d.signer.name) || prompt("Who signs this decision?");
-  if (!approver) return;
+  const shown = SIG.get(id);
+  if (!shown || !shown.name || shown.busy) return;
+  shown.busy = true;
+  let fresh;
+  try { fresh = await routedSigner(id); } catch (e) {
+    shown.busy = false;
+    alert("Could not confirm the signer. Nothing was sent; try again.");
+    return;
+  }
+  if (fresh.name !== shown.name || fresh.status !== shown.status) {
+    SIG.set(id, fresh); render();
+    alert("The signer changed. Nothing was sent; check the name and click again.");
+    return;
+  }
+  const approver = shown.name;
   const r = await fetch(`/api/lookahead/decisions/${encodeURIComponent(id)}/accept`, {method: "POST",
     headers: {"Content-Type": "application/json"}, body: JSON.stringify({approver})});
+  shown.busy = false;
   if (!r.ok) alert((await r.json().catch(() => ({}))).error || "Accept failed");
   load();
 }
@@ -187,8 +225,9 @@ function closeAll() { ["#drawer", "#scrim", "#rejModal"].forEach(s => $(s).class
 function header() {
   $("#deadlineBadge").textContent = S.launch ? "Deadline " + dhm(S.launch.deadline) : "";
   $("#clockBadge").textContent = S.clock ? "Now " + dhm(S.clock.now) : "";
-  const s = (openDecisions()[0] || (S.decisions || [])[0] || {}).signer || {};
-  $("#meBtn").textContent = initials(s.name); $("#meBtn").title = s.name ? `${s.name}, ${s.role}` : "";
+  const open = openDecisions()[0], last = (S.decisions || [])[0];
+  const s = open ? signerOf(open) : {name: last && last.decided_by};
+  $("#meBtn").textContent = initials(s.name); $("#meBtn").title = open ? signerText(s) : s.name || "";
 }
 function show(v) {
   VIEW = v;
@@ -207,6 +246,7 @@ function render() {
 async function load() {
   S = await (await fetch("/api/lookahead/state")).json();
   render();
+  lookupSigners();
 }
 document.querySelectorAll(".tab").forEach(t => t.onclick = () => show(t.dataset.view));
 document.querySelectorAll("[data-goview]").forEach(b => b.onclick = () => show(b.dataset.goview));
