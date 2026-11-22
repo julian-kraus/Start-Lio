@@ -265,14 +265,12 @@ def _cited_fact_ids(sources) -> set[str]:
     return ids
 
 
-def _statement_for(sources, by_fact: dict) -> promises.Statement | None:
-    """The cited statement for a register call, matched by the first cited fact id that is a known supplier
-    statement. `by_fact` is keyed by every fact id of each statement, so citing any fact of the email resolves it.
-    Returns None when no cited id is a known statement, so the register tool can refuse invented ids."""
-    for fid in _cited_fact_ids(sources):
-        if fid in by_fact:
-            return by_fact[fid]
-    return None
+def _statement_for(sources, by_fact: dict) -> promises.Statement | str | None:
+    """The one supplier statement a register call cites (`by_fact` is keyed by every fact id of each statement).
+    None when no cited id is known (invented ids are refused), "many" when the ids name more than one statement:
+    a promise rests on exactly one, so its clock never depends on set order (finding: random due times)."""
+    found = {frozenset(by_fact[f].all_fact_ids()): by_fact[f] for f in _cited_fact_ids(sources) if f in by_fact}
+    return None if not found else "many" if len(found) > 1 else next(iter(found.values()))
 
 
 def _norm(text) -> str:
@@ -318,6 +316,8 @@ def _register_tool(plan_conn, registered: list[dict], by_fact: dict):
             # Refuse an invented fact id: a promise must rest on a supplier statement the kb actually holds, or the
             # model could register a watched promise (with a model-written due) on nothing (finding: not grounded).
             return {"error": "none of the cited facts is a known supplier statement; a promise must cite one"}
+        if isinstance(st, str):
+            return {"error": "the cited facts name more than one supplier statement; cite exactly one per promise"}
         # A waiting id that already watches a different statement must not be overwritten: the model picks the id
         # without seeing the open ones, so reusing one would silently replace another promise (finding: a reused
         # waiting id deleted the first promise). Re-registering the same statement under its id is idempotent.

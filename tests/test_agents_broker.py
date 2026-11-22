@@ -310,3 +310,18 @@ def test_one_bad_register_call_does_not_lose_the_good_ones(plan_conn, mail_env):
     ids = [r["promise_id"] for r in plan_conn.execute(
         "SELECT promise_id FROM promises ORDER BY promise_id").fetchall()]
     assert ids == ["PR-good"] and [p["promise_id"] for p in reg] == ["PR-good"]
+
+
+@pytest.mark.parametrize("order", [("S-in", "S-offer"), ("S-offer", "S-in")])
+def test_a_call_citing_two_statements_saves_nothing(plan_conn, mail_env, order):
+    # The due must not depend on which of two cited mails a set happens to yield first (finding: the same call
+    # gave the check-in's clock in some processes and the offer's in others). Two statements: refused, in both orders.
+    check_in = Statement(kind="confirm", at=NOW.isoformat(), supplier_id="SUP-A", part_id="PART-A",
+                         fact_id="S-in", text="loads within 4 h")
+    offer = Statement(kind="confirm", at=NOW.isoformat(), supplier_id="SUP-A", part_id="PART-A",
+                      fact_id="S-offer", text="loads within 4 h")
+    registry, reg = _registry(plan_conn, mail_env, statements=[check_in, offer])
+    out = registry.call("register_promise", {"promise_id": "P1", "what": "loads", "within": "within 4 h",
+                                             "fallback": "call", "sources": [{"fact_id": f} for f in order]})
+    assert "error" in out and "exactly one" in out["error"] and reg == []
+    assert plan_conn.execute("SELECT count(*) AS n FROM promises").fetchone()["n"] == 0
