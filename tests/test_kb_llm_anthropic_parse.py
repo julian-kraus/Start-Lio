@@ -296,7 +296,7 @@ def test_extract_prompt_defines_positions_and_asks_for_every_attribute(tmp_path)
     client.extract(doc, Structure("delivery_note_scan", "", None, "core"), {}, CONTRACT)
     system = seen["system"] if isinstance(seen["system"], str) else json.dumps(seen["system"])
     assert "1-based" in system and "never a part" in system
-    assert "value null" in system
+    assert "use null only" in system
 
 
 def test_identifier_attributes_are_stated_from_the_subject():
@@ -342,3 +342,35 @@ def test_workbook_rows_reach_the_model_as_text(monkeypatch):
     assert text.splitlines() == ["# sheet Lines", "part\tqty", "P-X1\t5", "P-X2\t7"]
     monkeypatch.setattr(base, "XLSX_MAX_ROWS", 2)
     assert base.text_of("xlsx", buf.getvalue())[0].splitlines()[-1] == "[1 more rows in this sheet not shown]"
+
+
+@pytest.mark.parametrize("printed,expected", [("0.125 kg", 0.125), ("0.500 l", 0.5), ("0,250 kg", 0.25)])
+def test_a_leading_zero_fraction_with_a_unit_is_never_thousands(printed, expected):
+    env = _envelope({"facts": [fact(printed, attribute="qty_per")]}, "x", {})
+    assert env["facts"][0]["value"] == pytest.approx(expected)
+
+
+def test_sequential_line_numbers_one_to_twelve_are_kept():
+    facts = [fact(str(i), subject={"delivery_note": "DN-X1", "line": i}) for i in range(1, 13)]
+    assert _lines(_envelope({"facts": facts}, "delivery_note_scan", NUMERIC)) == list(range(1, 13))
+
+
+def test_a_null_date_takes_the_one_date_quoted_in_its_evidence():
+    f = {**fact(None, attribute="oc_date"), "evidence": "Order confirmation dated 2031-04-03"}
+    assert _envelope({"facts": [f]}, "x", {})["facts"][0]["value"] == "2031-04-03"
+    two = {**f, "evidence": "2031-04-03 replaces 2031-03-01"}
+    assert _envelope({"facts": [two]}, "x", {})["facts"][0]["value"] is None
+
+
+def test_prompt_forbids_null_for_a_quotable_value(tmp_path):
+    seen = {}
+
+    class Capture:
+        def create(self, request):
+            seen.update(request)
+            return Reply("end_turn", json.dumps({"facts": []}), {"input_tokens": 1, "output_tokens": 1})
+
+    client = AnthropicClient(api_key="test", store_dir=tmp_path, transport=Capture(), record=False)
+    client.extract(Document(path="x", sha256="b" * 64, container="txt", text="t"),
+                   Structure("order_confirmation", "", None, "core"), {}, CONTRACT)
+    assert "never for a value you can quote" in json.dumps(seen["system"])

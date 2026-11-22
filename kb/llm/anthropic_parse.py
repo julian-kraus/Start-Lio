@@ -51,7 +51,9 @@ _DATE_ATTR = re.compile(r"(?:^|_)date$")
 _FLAG_ATTR = re.compile(r"(?:_present$|^struck_through$|^is_|^has_)")
 _ISO = re.compile(r"(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})")
 _DMY = re.compile(r"(\d{1,2})([./])(\d{1,2})\2(\d{4})")
+_DATE_IN_TEXT = re.compile(r"(?<!\d)(?:\d{4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{1,2}([./])\d{1,2}\1\d{4})(?!\d)")
 # a measured value printed with its unit ("1 250 kg", "12 pcs"): number in value, unit in unit
+_FRACTION = re.compile(r"[+-]?0[.,]\d+")       # 0.125 is a fraction, never 125
 _MEASURE_ATTR = re.compile(r"(?:^|_)(?:weight|qty|quantity|packages)(?:_|$)")
 _WITH_UNIT = re.compile(r"\s*([+-]?\d[\d\s.,']*?)\s*([A-Za-z]{1,5}\.?)\s*")
 # languages whose slash dates put the day first; with English in the document a slash date stays ambiguous
@@ -182,8 +184,14 @@ def _iso_date(value: str, day_first: bool = False) -> str | None:
 
 
 def _typed_by_name(f: dict, day_first: bool = False) -> None:
-    """Dates to ISO and flags to booleans by attribute name, keeping the printed text as evidence."""
+    """Dates to ISO and flags to booleans by attribute name, keeping the printed text as evidence. A date attribute
+    left null whose evidence quotes exactly one readable date takes that date."""
     value, attr = f.get("value"), str(f.get("attribute") or "")
+    if value is None and _DATE_ATTR.search(attr) and isinstance(f.get("evidence"), str):
+        found = {d for m in _DATE_IN_TEXT.finditer(f["evidence"]) if (d := _iso_date(m.group(0), day_first))}
+        if len(found) == 1:
+            f["value"] = found.pop()
+        return
     if not isinstance(value, str):
         return
     new = None
@@ -193,7 +201,11 @@ def _typed_by_name(f: dict, day_first: bool = False) -> None:
         low = value.strip().lower()
         new = True if low in _YES else False if low in _NO else None
     elif _MEASURE_ATTR.search(attr) and (m := _WITH_UNIT.fullmatch(value)):
-        number = _coerce_number(m.group(1).strip(), count=bool(_QUANTITY_ATTR.search(attr)))
+        digits = m.group(1).strip()
+        if _FRACTION.fullmatch(digits):      # 0.125 / 0,500: a fraction below one, never thousands
+            number = float(digits.replace(",", "."))
+        else:
+            number = _coerce_number(digits, count=bool(_QUANTITY_ATTR.search(attr)))
         if number is not None:
             if not f.get("unit"):
                 f["unit"] = m.group(2).rstrip(".")
