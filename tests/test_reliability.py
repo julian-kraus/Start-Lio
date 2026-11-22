@@ -141,6 +141,22 @@ def test_unplaced_receipt_of_another_material_does_not_hide_a_short_line():
     assert card(facts)["score"]["inputs"][0]["in_full"] is False
 
 
+def test_quantities_on_a_line_not_judged_in_full_cite_their_facts():
+    facts = (line("A", 10) + receipt("G1", "A", 10, received=60)
+             + receipt("G2", "A", 3, received=40, part=None))
+    score = card(facts)["score"]
+    entry = score["inputs"][0]
+    cited = {"doc:po_line:A-10:qty", "doc:goods_receipt:G1:qty_received"}
+    assert "in_full" not in entry and (entry["ordered"], entry["received"]) == (100, 60)
+    assert cited <= set(entry["fact_ids"])
+    assert cited <= {s.get("fact_id") for s in score["sources"]}
+
+
+def test_ordered_quantity_without_a_receipt_cites_its_fact():
+    entry = card(line("A"))["score"]["inputs"][0]
+    assert entry["ordered"] == 100 and "doc:po_line:A-1:qty" in entry["fact_ids"]
+
+
 def test_failed_inspection_breaks_an_on_time_promise():
     record = card(line("A") + receipt("G1", "A") + inspection("G1", "Rejected"))
     assert record["score"]["history"] == {"kept": 0, "n": 1}

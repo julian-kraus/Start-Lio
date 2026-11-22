@@ -224,15 +224,17 @@ def _judge_line(key, line, supplier, receipt_keys, received, failed, may_miss_re
     if promised and actual:
         verdicts["on_time"] = actual <= promised
         supplier.checks["on_time"].append(Check(verdicts["on_time"], list(ids)))
+    qty_ids = _ids(line, "qty") if ordered is not None else []
+    ids += qty_ids   # a number on the card cites its fact, judged or not
     quantities = [received[k] for k in receipt_keys]
     if actual and ordered is not None and quantities and all(q is not None for q, _ in quantities):
         total = sum(q for q, _ in quantities)
         entry["received"] = total
+        received_ids = [i for _, found in quantities for i in found]
+        ids += received_ids
         if total >= ordered or not may_miss_receipt:   # a receipt we could not place may hold the rest
-            qty_ids = _ids(line, "qty") + [i for _, found in quantities for i in found]
             verdicts["in_full"] = total >= ordered
-            supplier.checks["in_full"].append(Check(verdicts["in_full"], qty_ids))
-            ids += qty_ids
+            supplier.checks["in_full"].append(Check(verdicts["in_full"], qty_ids + received_ids))
     bad = [i for k in receipt_keys for i in failed[k]]
     if bad:
         verdicts["quality"] = False
