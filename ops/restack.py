@@ -22,6 +22,7 @@ from pathlib import Path
 REPO = os.environ.get("LOOKAHEAD_REPO", "julian-kraus/Start-Lio")
 ROOT = Path(__file__).resolve().parent.parent
 LINE = re.compile(r"^Stacked-on: i(\d+)@([0-9a-f]{7,40})\s*$", re.M)
+DONE = re.compile(r"^Stacked-on: none\s*$", re.M)   # written once the branch sits on main
 
 
 def run(*args: str, cwd: Path = ROOT, check: bool = True) -> str:
@@ -49,12 +50,17 @@ def pr_of(branch: str) -> dict | None:
 
 
 def fork_point(branch: str, pr: dict | None) -> tuple[int, str] | None:
-    if pr and (m := LINE.search(pr["body"] or "")):
-        return int(m.group(1)), m.group(2)
+    if pr:
+        if (m := LINE.search(pr["body"] or "")):
+            return int(m.group(1)), m.group(2)
+        if pr["baseRefName"] == "main":
+            return None   # restacked onto main already (the line was removed then), or never stacked
     if not run("git", "ls-remote", "--heads", "origin", branch):
         raise SystemExit(f"origin has no branch {branch}; nothing to restack")
     msgs = run("git", "log", f"origin/main..origin/{branch}", "--format=%B%x00")
-    for msg in msgs.split("\x00"):
+    for msg in msgs.split("\x00"):          # newest first
+        if DONE.search(msg):
+            return None
         if (m := LINE.search(msg)):
             return int(m.group(1)), m.group(2)
     return None
@@ -88,7 +94,7 @@ def main() -> None:
     pr = pr_of(branch)
     fp = fork_point(branch, pr)
     if fp is None:
-        print(f"{branch} is not stacked (no Stacked-on line); use git rebase origin/main as usual")
+        print(f"{branch} is not stacked or no longer stacked; use git rebase origin/main as usual")
         return
     parent, recorded = fp
     still_open = parent_open(parent)
@@ -113,11 +119,17 @@ def main() -> None:
         subprocess.run(["git", "rebase", "--abort"], cwd=wt)
         raise SystemExit(f"conflict while running {plan}; aborted, branch unchanged.\n{r.stdout}{r.stderr}\n"
                          f"Resolve by hand in {wt} with the same command.")
-    if still_open and not pr:
-        # no PR body to rewrite yet: record the new fork point in the branch so the next restack cuts here
-        run("git", "commit", "--allow-empty", "-m", f"restack #{n} onto i{parent}",
-            "-m", f"Stacked-on: i{parent}@{new_base}", cwd=wt)
-    run("git", "push", "--force-with-lease", "origin", branch, cwd=wt)
+    if not pr:
+        # no PR body to rewrite yet: record the new state in the branch so the next restack reads it
+        marker = f"Stacked-on: i{parent}@{new_base}" if still_open else "Stacked-on: none"
+        run("git", "commit", "--allow-empty", "-m", f"restack #{n} onto {base_ref}", "-m", marker, cwd=wt)
+    old_head = run("git", "rev-parse", f"origin/{branch}")
+    push = subprocess.run(["git", "push", f"--force-with-lease={branch}:{old_head}", "origin", branch], cwd=wt,
+                          capture_output=True, text=True)
+    if push.returncode != 0:
+        raise SystemExit(f"push failed; the local {branch} in {wt} is rewritten but origin still has {old_head[:8]}.\n"
+                         f"{push.stderr.strip()}\nRetry: git -C {wt} push --force-with-lease={branch}:{old_head} "
+                         f"origin {branch}, or undo locally with git -C {wt} reset --keep {old_head}")
     if pr:
         body = pr["body"] or ""
         if still_open:
