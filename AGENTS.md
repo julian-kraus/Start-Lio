@@ -64,8 +64,8 @@ Work that is in review rarely changes its interfaces, so an issue may start on t
   comment `ready, stacked on #<m> (i<m>)`. Never stack on a PR that is itself stacked more than two levels deep.
 - Claim: see the stacked claim in step 2. Before the PR, run `python ops/restack.py <n>` instead of
   `git rebase origin/main` (it rebases onto the parent's current tip, or onto main once the parent merged).
-- PR: `gh pr create --base i<m>` with the line `Stacked-on: i<m>@<sha>` (the sha from your claim commit) as the
-  last line of the body, then `gh stack link <parent-pr> <your-pr>` so GitHub shows the stack.
+- PR: `gh pr create --base i<m>` with the line printed by `python ops/restack.py <n> --line` as the last line of
+  the body (not the sha from the claim commit, which a restack makes stale), then `gh stack link <parent-pr> <your-pr>` so GitHub shows the stack.
   Review covers only your diff against `i<m>`.
 - When the parent changes or merges: the repo squash-merges and deletes the head branch, so GitHub retargets your PR
   to main but your branch still holds the parent's old commits. Run `python ops/restack.py <n>` at the start of every
