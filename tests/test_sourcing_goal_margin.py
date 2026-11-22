@@ -170,3 +170,22 @@ def test_an_interview_goal_on_margin_is_still_read(limits):
               {"id": "team_window", "a": {"to": "2031-05-04T10:00:00+02:00"}}]
     for answers in ({"goal": said, "limits": limits}, stored):
         assert hedge.margin_line({"statement": said, "answers": answers})
+
+
+@pytest.mark.parametrize("said", [
+    "Protect margin. Both can wait.", "Protect margin. The bottom line can suffer.",
+    "Protect margin. All plans cancelled on time.", "Protect margin. Alpha can wait.",
+])
+def test_free_words_in_an_aside_are_refused(said):
+    for goal in ({"statement": said}, {"answers": {"limits": said}}):
+        with pytest.raises(ModelError, match="margin"):
+            hedge.margin_line(goal)
+
+
+@pytest.mark.parametrize("named", [
+    {"edition": "Alpha"}, {"unit_loss_by_edition": {"Alpha": 70}},
+    {"goal_lines": [{"field": "priority", "edition": "Alpha"}]},
+])
+def test_an_edition_the_goal_names_is_still_an_aside(named):
+    for said in ("All Alpha on time. Protect margin.", "Protect margin. Alpha copies can wait."):
+        assert hedge.margin_line({**named, "statement": said})

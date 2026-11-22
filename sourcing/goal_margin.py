@@ -33,18 +33,18 @@ PROTECTS = re.compile("|".join((
 )))
 NOT = (r"(?:cannot|will not|do not|does not|must not|should not|need not|never|stop|forget(?: about)?|"
        r"no need to|not)")
-# A word of an aside: none that negates, limits, sums up or points back at margin
-WORD = (r"(?!(?:not|no|never|nor|if|when|once|only|unless|except|but|it|this|that|which|those|these|they|such|above"
-        r"|rest|else|all|everything|anything|priority|goal|profit\w*|protect\w*|margins?)\b)"
-        r"[\w'-]+")
-ON_TIME = rf"(?:(?:all|every|each)(?: {WORD}){{0,3}} |everything )?(?:on time|by the deadline)"
+# An aside takes no free words: an edition is one the goal itself names, what may suffer is goodwill or an edition
+EDITION = r"<edition>(?: editions?)?(?: cop(?:y|ies))?"
+COPIES = rf"(?:{EDITION}|(?:first )?(?:cop(?:y|ies)|editions?|orders?))"
+ON_TIME = rf"(?:(?:all|every|each)(?: {COPIES})? |everything )?(?:on time|by the deadline)"
+MAY_SUFFER = rf"(?:(?:the|our) )?(?:(?:supplier|customer) )?goodwill|(?:the )?{EDITION}"
 SUM = r"(?:eur |\u20ac ?)?\d+(?:[., ]\d+)*k?(?: ?(?:eur|euros?|\u20ac))?"
 DAY = r"(?:today|tomorrow|tonight|(?:mon|tues|wednes|thurs|fri|satur|sun)day)"
 WHEN = rf"(?:(?:{DAY} )?\d\d?(?::\d\d)?(?: ?(?:am|pm))?|{DAY})"
 ASIDE = re.compile("|".join((
     ON_TIME,
     r"(?:do not|never|must not|cannot) (?:bankrupt (?:me|us)|overspend|miss (?:the |our )?(?:date|deadline))",
-    rf"{WORD}(?: {WORD}){{0,2}} {CAN} (?:suffer|wait|slip)",
+    rf"(?:{MAY_SUFFER}) {CAN} (?:suffer|wait|slip)",
     r"please|above all|at all costs",
     rf"(?:a|one|each|every) (?:(?:missing|late) (?:copy|one)|copy) (?:costs|is worth) {SUM}",
     rf"(?:a|one) (?:missing|late) one {SUM}",
@@ -123,6 +123,19 @@ def _asked(answers) -> Iterable[tuple[str, object]]:
                     yield str(key).replace("_", " "), item
 
 
+def _editions(goal: Mapping) -> re.Pattern | None:
+    """The edition names in the goal's own fields, as they read after `_plain`."""
+    found = [goal.get("edition")]
+    if isinstance(prices := goal.get("unit_loss_by_edition"), Mapping):
+        found += prices
+    found += [x.get("edition") for x in goal.get("goal_lines") or [] if isinstance(x, Mapping)]
+    names = {name for x in found if x and (name := _plain(str(x))) not in ("", "all", "both")}
+    if not names:
+        return None
+    either = "|".join(map(re.escape, sorted(names, key=len, reverse=True)))
+    return re.compile(rf"(?<![\w'-])(?:{either})(?![\w'-])")
+
+
 def read(goal: Mapping | None) -> tuple[str | None, str | None]:
     if not goal:
         return None, None
@@ -158,6 +171,7 @@ def read(goal: Mapping | None) -> tuple[str | None, str | None]:
     texts = list(_strings([goal.get("statement"), goal.get("answers")]))
     if not any(MARGIN.search(_plain(line)) for text in texts for line in SENTENCE.split(text)):
         return None, None
+    editions = _editions(goal)
     for text in texts:
         for sentence in SENTENCE.split(text):
             whole = _plain(sentence)
@@ -174,8 +188,10 @@ def read(goal: Mapping | None) -> tuple[str | None, str | None]:
                             protects.append(part.strip())
                         else:
                             return None, sentence.strip()
-                    elif said and not ASIDE.fullmatch(said):
-                        return None, sentence.strip()
+                    elif said:
+                        aside = editions.sub("<edition>", said) if editions else said
+                        if not ASIDE.fullmatch(aside):
+                            return None, sentence.strip()
                     negated = negated or bool(NEGATION.search(said))
     if protects and gives_up:
         return None, f"{protects[0]} / {gives_up[0]}"
