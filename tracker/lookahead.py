@@ -3,9 +3,14 @@
 Producers (the planning agent, the mail worker, a rehearsal) append JSON records to one log file, one per line.
 The web server tails that file, folds every record into `state()` and pushes each new record to open pages.
 
+Live mode shows only records whose `producer` is "agent", "agent:<role>" or "monitor", plus the human steps
+taken on the page ("app"). Everything else in the log, a rehearsal above all, is counted and never shown.
+Producers pass it on: append_records(path, records, producer="monitor"). The mode is the server's, never the
+log's: only a server started with a rehearsal script rehearses, and that one never sends mail.
+
 Record kinds:
-  launch    name, deadline, product, mode ("live" | "rehearse")
-  clock     now                                  scenario clock (rehearse mode only)
+  launch    name, deadline, product, mode ("live" | "rehearse"), demo_times[] (stops of the jump key)
+  clock     now                                  rehearse mode only; live mode follows plan.clock
   goal      statement, answers[], unit_loss_eur, budget_cap_eur, sacrifices[], edition
   plan      lanes[], coverage {covered, needed, unit}, summary      latest solve replaces the previous one
   supplier  supplier_id, ...persona and score fields                upsert by supplier_id
@@ -15,7 +20,7 @@ Record kinds:
   cue       label, wait_for?                                        rehearsal beat boundary, never shown
 
 CLI:
-  python -m tracker.lookahead append <log> <record.json | ->     append one record (or a JSON array)
+  python -m tracker.lookahead append <log> <record.json | -> [producer]     append one record (or a JSON array)
 """
 
 from __future__ import annotations
@@ -31,6 +36,8 @@ import time
 from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
+
+from .lookahead_view import plan_view, shown_live
 
 log = logging.getLogger("tracker.lookahead")
 KINDS = {"launch", "clock", "goal", "plan", "supplier", "event", "decision", "promise", "cue"}
@@ -57,10 +64,13 @@ def validate(record: dict) -> dict:
     return record
 
 
-def append_records(path: Path, records: list[dict]) -> None:
-    """Append records under an exclusive lock so concurrent producers never interleave lines."""
+def append_records(path: Path, records: list[dict], producer: str | None = None) -> None:
+    """Append records under an exclusive lock so concurrent producers never interleave lines.
+    `producer` is stamped on records that do not name one."""
     for r in records:
         validate(r)
+    if producer:
+        records = [{"producer": producer, **r} for r in records]
     path.parent.mkdir(parents=True, exist_ok=True)
     data = "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in records)
     with open(path, "a", encoding="utf-8") as f:
@@ -110,9 +120,13 @@ def fold(records: list[dict]) -> dict:
 class Lookahead:
     """Tails the log file, keeps the folded state and fans new records out to SSE subscribers."""
 
-    def __init__(self, log_path: Path, rehearsal: Path | None = None):
+    def __init__(self, log_path: Path, rehearsal: Path | None = None, clock=None):
+        from .lookahead_clock import PlanClock  # that module needs LookaheadError from this one
+
         self.path = log_path
         self.rehearsal = rehearsal
+        self.mode = "rehearse" if rehearsal else "live"
+        self.clock = clock or PlanClock()
         self.records: list[dict] = []
         self.offset = 0
         self.lock = threading.Lock()
@@ -184,7 +198,15 @@ class Lookahead:
         with self.lock:
             self.clients.discard(q)
 
+    def _shows(self, rec: dict) -> bool:
+        return self.mode == "rehearse" or shown_live(rec)
+
+    def _visible(self) -> list[dict]:
+        return [r for r in self.records if self._shows(r)]
+
     def _broadcast(self, rec: dict) -> None:
+        if rec["kind"] != "reset" and not self._shows(rec):
+            return
         with self.lock:
             for q in list(self.clients):
                 try:
@@ -194,33 +216,70 @@ class Lookahead:
 
     def since(self, after: int) -> list[dict]:
         with self.lock:
-            return [r for r in self.records if r["id"] > after]
+            return [r for r in self._visible() if r["id"] > after]
 
     # ---------- state ----------
 
     def state(self) -> dict:
         with self.lock:
-            st = fold(deepcopy(self.records))
-        mode = (st["launch"] or {}).get("mode", "live")
-        simulated = mode == "rehearse"
-        now = st["clock"] if simulated and st["clock"] else datetime.now(timezone.utc).isoformat()
-        st["clock"] = {"now": now, "simulated": simulated}
-        st["mode"] = mode
+            shown = self._visible()
+            hidden = len(self.records) - len(shown)
+            st = fold(deepcopy(shown))
+        st["clock"] = self.clock_status(st["launch"], st["clock"])
+        st["plan"] = plan_view(st["plan"], st["launch"])
+        st["mode"] = self.mode
+        st["hidden_records"] = hidden
         st["suppliers"] = list(st["suppliers"].values())
         st["decisions"] = list(st["decisions"].values())
         st["promises"] = list(st["promises"].values())
         st["rehearsal"] = self._rehearsal_status() if self.rehearsal else None
         return st
 
+    def _latest(self, kind: str) -> dict:
+        with self.lock:
+            return next((r for r in reversed(self._visible()) if r["kind"] == kind), {})
+
+    def now(self) -> str:
+        """The time to stamp on a record. Fails rather than stamping real time during a scenario."""
+        if self.mode == "rehearse":
+            return self._latest("clock").get("now") or datetime.now(timezone.utc).isoformat()
+        return self.clock.read()[0].isoformat()
+
+    def clock_status(self, launch: dict | None, recorded: str | None = None) -> dict:
+        real = datetime.now(timezone.utc).isoformat()
+        if self.mode == "rehearse":
+            return {"now": recorded or real, "simulated": True}
+        from .lookahead_clock import next_stop
+
+        try:
+            now, simulated = self.clock.read()
+        except LookaheadError as exc:
+            return {"now": real, "simulated": False, "error": str(exc)}
+        status = {"now": now.isoformat(), "simulated": simulated}
+        if simulated:
+            try:
+                stop = next_stop((launch or {}).get("demo_times") or [], now)
+                status["next"] = stop.isoformat() if stop else None
+            except LookaheadError as exc:
+                status["error"] = f"demo_times: {exc}"
+        return status
+
+    def live_clock(self) -> dict:
+        return self.clock_status(self._latest("launch"))
+
+    def move_clock(self, to=None) -> str:
+        return self.clock.move(to, self._latest("launch").get("demo_times")).isoformat()
+
     def event_detail(self, event_id: int) -> dict | None:
         with self.lock:
-            for r in self.records:
+            for r in self._visible():
                 if r["id"] == event_id and r["kind"] == "event":
                     return deepcopy(r)
         return None
 
-    def append(self, records: list[dict]) -> None:
-        append_records(self.path, records)
+    def append(self, records: list[dict], producer: str | None = None) -> None:
+        # unnamed, it is the page's own human step, which in a rehearsal is part of the rehearsal
+        append_records(self.path, records, producer or ("app" if self.mode == "live" else "rehearsal"))
         for rec in self._read_new():
             self._broadcast(rec)
 
@@ -228,7 +287,7 @@ class Lookahead:
 
     def decision(self, decision_id: str) -> dict | None:
         with self.lock:
-            st = fold(deepcopy(self.records))
+            st = fold(deepcopy(self._visible()))
         return st["decisions"].get(decision_id)
 
     def record_decision(self, decision_id: str, status: str, by: str, now: str) -> None:
@@ -261,8 +320,7 @@ class Lookahead:
             return sum(1 for r in self.records if r["kind"] == "cue")
 
     def _last_cue(self) -> dict:
-        with self.lock:
-            return next((r for r in reversed(self.records) if r["kind"] == "cue"), {})
+        return self._latest("cue")
 
     def _rehearsal_status(self) -> dict:
         done = self._beats_applied()
@@ -295,7 +353,7 @@ class Lookahead:
         blocked = self._blocked_by(self._last_cue())
         if blocked and not force:
             raise LookaheadError(409, blocked)
-        self.append(self._script[done])
+        self.append([{**r, "producer": "rehearsal"} for r in self._script[done]])
         return self._rehearsal_status()
 
     def after_human_step(self) -> None:
@@ -315,14 +373,14 @@ class Lookahead:
 
 
 def _cli(argv: list[str]) -> int:
-    if len(argv) != 3 or argv[0] != "append":
+    if len(argv) not in (3, 4) or argv[0] != "append":
         print(__doc__, file=sys.stderr)
         return 2
     raw = sys.stdin.read() if argv[2] == "-" else Path(argv[2]).read_text(encoding="utf-8")
     data = json.loads(raw)
     records = data if isinstance(data, list) else [data]
     try:
-        append_records(Path(argv[1]), records)
+        append_records(Path(argv[1]), records, argv[3] if len(argv) == 4 else None)
     except LookaheadError as exc:
         print(exc, file=sys.stderr)
         return 1
