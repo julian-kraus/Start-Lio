@@ -38,4 +38,6 @@
 .dc3 .dc2-foot{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:16px;padding-top:14px;border-top:1px solid var(--border)}
 .dc3 .dc2-foot .pd-sign{flex:1 1 240px}
 .dc3-more{display:inline-flex;align-items:center;gap:6px;color:var(--muted);margin-left:auto;white-space:nowrap}
+/* the compact card beside the timeline keeps its signer and buttons: the column grows with the card, it is not cut */
+.dq-in{position:static} .dq-list .dq-card{flex:none;overflow:visible}
 @media (max-width:900px){.dc3-body{grid-template-columns:1fr}.dc3-why{margin-left:0}}
