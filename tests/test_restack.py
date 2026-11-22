@@ -183,3 +183,14 @@ def test_next_restack_after_a_hand_restack_cuts_at_the_merge_base(repo, monkeypa
     git(repo, "switch", "-q", "i2")
     Stub(monkeypatch)(monkeypatch, "2")
     assert git(repo, "diff", "--name-only", "origin/i1...origin/i2").split() == ["c1"]
+
+
+def test_a_commit_only_origin_has_is_not_dropped(repo, monkeypatch):
+    stack_child(repo)
+    git(repo, "switch", "-q", "--detach"); fix = commit(repo, "fix")
+    git(repo, "push", "-q", "origin", "HEAD:i2")                # a review fix: the local i2 never had it
+    git(repo, "switch", "-q", "i1"); commit(repo, "p2"); git(repo, "push", "-q", "origin", "i1")
+    git(repo, "switch", "-q", "i2")
+    with pytest.raises(SystemExit, match="never had"):
+        Stub(monkeypatch)(monkeypatch, "2")
+    assert git(repo, "ls-remote", "origin", "i2").split()[0] == fix

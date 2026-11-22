@@ -161,6 +161,10 @@ def main() -> None:
     if run("git", "status", "--porcelain", cwd=wt):
         raise SystemExit(f"{wt} has uncommitted changes; commit or stash them first")
     old_head = run("git", "rev-parse", f"origin/{branch}")
+    local = f"refs/heads/{branch}"  # the rebase replays this ref: the push would drop what only origin has
+    if not is_ancestor(old_head, local) and old_head not in run("git", "rev-list", "-g", local).split():
+        raise SystemExit(f"origin/{branch} is at {old_head[:8]}, which the local {branch} never had (a review fix?). "
+                         f"Nothing changed. Take it first: git -C {wt} merge --ff-only origin/{branch}, then run again")
     r = subprocess.run(["git", "rebase", "--onto", new_base, old, branch], cwd=wt, capture_output=True, text=True)
     if r.returncode != 0:
         subprocess.run(["git", "rebase", "--abort"], cwd=wt, capture_output=True)
