@@ -1,0 +1,19 @@
+[
+  {"stop_reason": "tool_use", "tool_calls": [
+    {"name": "register_promise", "input": {
+      "promise_id": "PR-1", "supplier_id": "SUP-0028", "what": "loads the backup order",
+      "within": "within 4 h", "fallback": "call the supplier contact", "part_id": "PART-A",
+      "sources": [{"fact_id": "fact-1"}]}}
+  ]},
+  {"stop_reason": "tool_use", "tool_calls": [
+    {"name": "draft_email", "input": {
+      "supplier_id": "SUP-0028", "subject": "Zapytanie: oferta zapasowa", "lang": "pl",
+      "body_local": "Dzien dobry, prosimy o oferte zapasowa.", "body_en": "Hello, please send a backup offer.",
+      "cause": {"action_id": "A-1", "issue_key": "backup"}}},
+    {"name": "draft_email", "input": {
+      "supplier_id": "SUP-0028", "subject": "Przypomnienie: potwierdzenie zaladunku", "lang": "pl",
+      "body_local": "Dzien dobry, prosimy o potwierdzenie zaladunku.", "body_en": "Hello, please confirm loading.",
+      "cause": {"action_id": "A-2", "issue_key": "followup"}}}
+  ]},
+  {"stop_reason": "end_turn", "text": "{\"promises\": [\"PR-1\"], \"drafts\": [\"backup\", \"followup\"], \"note\": \"registered one promise and drafted a backup offer and a follow-up\"}"}
+]
