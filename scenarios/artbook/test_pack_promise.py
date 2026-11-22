@@ -33,8 +33,12 @@ VALUES = {"unit_loss": "7", "budget": "300", "part": "printed booklet", "offer_q
 
 
 class ReplayedAnswers(LLMClient):
-    """The answer an extractor gives for each mail of the pack: the statement, dated by the mail's Date header."""
+    """The statement an extractor gives for each mail of the pack. The extract prompt asks for no `as_of`, so only
+    the `dated` answers carry one (the time of the mail's Date header)."""
     name, needs_images = "pack-replay", False
+
+    def __init__(self, dated):
+        self.dated = dated
 
     def classify(self, document, kinds):
         return Routing("kind", "supplier_email", "replayed", self.label)
@@ -47,7 +51,8 @@ class ReplayedAnswers(LLMClient):
                 "spec_version": "1", "extracted_by": self.name, "doc_date": said, "unreadable": [],
                 "proposed_fact_types": [],
                 "facts": [{"fact_type": "supplier_statement", "subject": {"statement_no": "1"},
-                           "attribute": "promise_kind", "value": kind, "as_of": said, "confidence": "high",
+                           "attribute": "promise_kind", "value": kind,
+                           **({"as_of": said} if self.dated else {}), "confidence": "high",
                            "locator": {"line": 1}, "evidence": "replayed answer"}] if kind else []}
 
 
@@ -66,7 +71,8 @@ def demo_db():
             admin.execute(sql.SQL("DROP DATABASE {} WITH (FORCE)").format(sql.Identifier(name)))
 
 
-def test_the_replayed_cancellation_breaks_the_check_in_promise(demo_db, tmp_path):
+@pytest.mark.parametrize("dated", [True, False], ids=["answer_with_as_of", "answer_as_the_prompt_asks"])
+def test_the_replayed_cancellation_breaks_the_check_in_promise(demo_db, tmp_path, dated):
     pack, log, blobs = demo.load_pack(HERE), tmp_path / "log", tmp_path / "mail"
     structured, seed = tmp_path / "structured", tmp_path / "seed.yaml"
     shutil.copytree(ROOT / "structured" / "contract", structured / "contract")
@@ -74,7 +80,7 @@ def test_the_replayed_cancellation_breaks_the_check_in_promise(demo_db, tmp_path
     settings = KbSettings(database_url=demo_db, schema="kb", data_dir=tmp_path / "data",
                           structured_dir=structured, seed_path=seed, llm_adapter=None)
     demo.reset(demo_db, pack, "2031-03-09T20:00:00+01:00", VALUES, log)
-    source, client = MailSource("mail", blobs), ReplayedAnswers()
+    source, client = MailSource("mail", blobs), ReplayedAnswers(dated)
 
     def deliver(beat):
         assert demo.replay(demo_db, pack, beat, log, blobs).new
@@ -93,7 +99,7 @@ def test_the_replayed_cancellation_breaks_the_check_in_promise(demo_db, tmp_path
         assert check_in.supplier_id == pack["persona"]["persona_id"]
         promise = promises.promise_from_statement(
             promise_id="p", supplier_id=check_in.supplier_id, what="loads", fallback="use the backup",
-            made_at=check_in.at, within="within 4 h", sources=[check_in.source()])
+            made_at=check_in.at or clock.now(plan), within="within 4 h", sources=[check_in.source()])
         broker.save_promise(plan, promise)
         plan.commit()
         assert broker.apply_ledger(plan, [check_in]) == [], "a promise is not proven by the mail that made it"
@@ -101,5 +107,11 @@ def test_the_replayed_cancellation_breaks_the_check_in_promise(demo_db, tmp_path
 
         clock.set_scenario(plan, "2031-03-09T06:00:00+01:00", rate=0, by="test")
         plan.commit()
-        [broken] = broker.apply_ledger(plan, deliver("cancellation"))
+        statements = deliver("cancellation")
+        settled = broker.apply_ledger(plan, statements)
+        if not dated and all(statement.at is None for statement in statements):
+            assert settled == [], "a statement without a time settles nothing"
+            pytest.xfail("#171: kb carries no mail time, so the cancellation breaks no promise")
+        assert len(settled) == 1, "the cancellation broke no promise"
+        [broken] = settled
         assert broken["state"] == promises.BROKEN and broken["statement_kind"] == "cancel"
