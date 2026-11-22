@@ -43,3 +43,57 @@ function renderOverlay() {
     err));
   setTimeout(() => accept.focus(), 50);
 }
+
+function openRejectDialog(decision, translate) {
+  const tr = key => translate("decisions." + key);
+  const close = () => $("modal-root").replaceChildren();
+  const reason = el("textarea", {rows:"3", "aria-label":tr("reason")});
+  const error = el("p", {class:"decision-error",role:"alert"});
+  const submit = el("button", {class:"btn btn-primary",type:"button",disabled:true}, tr("regenerate"));
+  reason.addEventListener("input", () => { submit.disabled = !reason.value.trim(); });
+  submit.addEventListener("click", async () => {
+    const text=reason.value.trim();
+    if(!text){error.textContent=tr("reason_required");return}
+    submit.disabled=true;error.textContent="";
+    try {
+      const fresh=await api(`/api/lookahead/decisions/${encodeURIComponent(decision.decision_id)}`);
+      if(!fresh.approval || fresh.approval.status!=="resolved" || !fresh.signer ||
+         fresh.signer.name!==(decision.signer && decision.signer.name))throw new Error(tr("signer_unavailable"));
+      await api(`/api/lookahead/decisions/${encodeURIComponent(decision.decision_id)}/reject`,
+        {approver:decision.signer && decision.signer.name || "",reason:text});
+      close();await load();
+    } catch (failure) { error.textContent=failure.message;submit.disabled=false; }
+  });
+  const content=el("div",{class:"reject-box",role:"dialog","aria-modal":"true","aria-label":tr("reject_title")},
+    el("p",{class:"reject-title"},tr("reject_title")),el("p",{class:"reject-name"},decision.title||""),
+    el("p",{class:"reject-info"},tr("reject_info")),el("label",{class:"reject-field"},tr("reason"),reason),error,
+    el("div",{class:"reject-buttons"},el("button",{class:"btn btn-secondary",type:"button",onclick:close},tr("cancel")),submit));
+  $("modal-root").replaceChildren(el("div",{class:"decision-backdrop",onclick:event=>{if(event.target===event.currentTarget)close()}},content));
+  reason.focus();
+}
+
+window.decisionActions = function(decision, translate, error, signerLine) {
+  const tr = key => translate("decisions." + key);
+  const actions=el("div",{class:"dq-btns2"});
+  const unavailable=()=>actions.replaceChildren(
+    el("button",{class:"btn btn-secondary",type:"button",disabled:true},tr("reject")),
+    el("button",{class:"btn btn-primary",type:"button",disabled:true},tr("accept")));
+  unavailable();
+  api(`/api/lookahead/decisions/${encodeURIComponent(decision.decision_id)}`)
+    .then(routed=>{
+      const signer=routed && routed.signer;
+      if(!routed.approval || routed.approval.status!=="resolved" || !signer || !signer.name) {
+        error.textContent=tr("signer_unavailable");return;
+      }
+      signerLine.replaceChildren(document.createTextNode([signer.name,signer.role,signer.rule].filter(Boolean).join(" · ")));
+      let currentSigner=signer;
+      const reject=el("button",{class:"btn btn-secondary",type:"button",onclick:()=>openRejectDialog({...routed,signer:currentSigner},translate)},tr("reject"));
+      const accept=acceptButton(routed,error,()=>{},next=>{
+        currentSigner=next;
+        signerLine.replaceChildren(document.createTextNode([next.name,next.role,next.rule].filter(Boolean).join(" · ")));
+        reject.disabled=!next.name;
+      });accept.textContent=tr("accept");accept.className="btn btn-primary";
+      actions.replaceChildren(reject,accept);
+    }).catch(()=>{error.textContent=tr("signer_unavailable")});
+  return actions;
+};
