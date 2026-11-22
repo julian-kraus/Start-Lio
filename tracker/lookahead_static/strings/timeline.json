@@ -1,0 +1,13 @@
+{
+  "timeline.title":{"en":"Now to deadline","zh":"從現在到截止時間"},
+  "timeline.deadline":{"en":"Deadline","zh":"截止時間"},
+  "timeline.now":{"en":"Now","zh":"現在"},
+  "timeline.decisions":{"en":"Decision cards","zh":"決策卡"},
+  "timeline.all":{"en":"See all","zh":"查看全部"},
+  "timeline.feed":{"en":"What the agent did","zh":"Agent 已完成的工作"},
+  "timeline.pay":{"en":"To pay","zh":"待支付"},
+  "timeline.risk":{"en":"At risk","zh":"面臨風險"},
+  "timeline.reject":{"en":"Reject","zh":"拒絕"},
+  "timeline.accept_unavailable":{"en":"Accept","zh":"接受"},
+  "timeline.reject_unavailable":{"en":"Rejection is not available yet","zh":"目前無法拒絕"}
+}
