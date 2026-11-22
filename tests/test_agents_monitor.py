@@ -189,6 +189,7 @@ def test_the_cancellation_mail_becomes_a_hedged_decision_on_the_live_screen(demo
     assert cards["old"]["status"] == "superseded"
     assert [i for i, d in cards.items() if d["status"] == "open"] == [decision_id]
     card = cards[decision_id]
+    assert re.fullmatch(r"[\w.-]+", decision_id), "the accept route takes no other id"
     assert "name" not in card["signer"], "today's route takes a name on the card as the one signature"
     assert "warehouse" in card["signer"]["role"].lower(), "the release is shown next to the value approval"
     assert card["producer"] == "monitor" and card["offer_id"] == "BACKUP" and card["actions"]

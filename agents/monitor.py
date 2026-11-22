@@ -14,6 +14,7 @@ work under the same decision id instead of losing it.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import logging
 import threading
@@ -234,7 +235,8 @@ class Monitor:
     def _publish(self, promise: dict) -> str:
         now, state = clock.now(self.plan), screen_state(self.log)
         key, supplier = promise["promise_id"], promise["supplier_id"]
-        decision_id = f"promise-broken:{key}:{promise['broken_at'].isoformat()}"
+        broke = json.dumps([key, promise["broken_at"].timestamp()])
+        decision_id = f"promise-broken-{hashlib.sha256(broke.encode()).hexdigest()[:20]}"    # fits the accept route
         part, rec, why, category, site, card = promise.get("part_id"), None, None, None, None, None
         try:
             part = part_of(self.plan, promise)
