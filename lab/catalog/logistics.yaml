@@ -1,0 +1,52 @@
+family: logistics
+# Logistics: a transport mode booked, an air waybill document, a customs hold that stops a shipment.
+types:
+  - id: logistics.transport_booked
+    description: Supplier books a transport mode for a shipment on an order line.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      line: {type: ref, ref: order_line}
+      mode: {type: enum, values: [road, air, sea, rail]}
+      eta: {type: date}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject: "Transport booked for order {line.po_number}"
+        body:
+          en: "Dear team,\n\nWe booked {mode} transport for line {line.po_line} on order {line.po_number}, arriving around {eta}.\n\nKind regards"
+    expects:
+      - {fact_type: shipment, attribute: mode, change: new}
+
+  - id: logistics.air_waybill
+    description: Supplier sends an air waybill for an expedited shipment.
+    channel: document
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      line: {type: ref, ref: order_line}
+    produces:
+      document:
+        filename: "awb_{line.po_number}.pdf"
+        kind: pdf
+        body: "Air waybill from {supplier.supplier_id} for order {line.po_number} line {line.po_line}."
+    expects:
+      - {fact_type: shipment, attribute: mode, change: update}
+
+  - id: logistics.customs_hold
+    description: A shipment is held at customs and will miss its planned arrival.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      line: {type: ref, ref: order_line}
+      reason: {type: text, required: false}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject:
+          en: "Customs hold on order {line.po_number}"
+          pl: "Zatrzymanie celne zamowienia {line.po_number}"
+        body:
+          en: "Dear team,\n\nThe shipment for line {line.po_line} on order {line.po_number} is held at customs. Reason: {reason}.\n\nKind regards"
+          pl: "Szanowni Panstwo,\n\nPrzesylka dla pozycji {line.po_line} zamowienia {line.po_number} zostala zatrzymana przez urzad celny. Powod: {reason}.\n\nZ powazaniem"
+    expects:
+      - {fact_type: shipment, attribute: status, change: update}

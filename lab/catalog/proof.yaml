@@ -1,0 +1,48 @@
+family: proof
+# Proof of progress: a loading photo, a CMR waybill, a booked goods receipt. Evidence that a promise is moving.
+types:
+  - id: proof.loading_photo
+    description: Supplier sends a photo showing goods loaded for an order line.
+    channel: document
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      line: {type: ref, ref: order_line}
+    produces:
+      document:
+        filename: "loading_{line.po_number}.jpg"
+        kind: image
+        body: "Loading photo from {supplier.supplier_id} for order {line.po_number} line {line.po_line}."
+    expects:
+      - {fact_type: shipment, attribute: status, change: new}
+
+  - id: proof.cmr
+    description: Supplier sends a signed CMR consignment note for a shipment.
+    channel: document
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      line: {type: ref, ref: order_line}
+    produces:
+      document:
+        filename: "cmr_{line.po_number}.pdf"
+        kind: pdf
+        body: "CMR consignment note from {supplier.supplier_id}. Order {line.po_number} line {line.po_line} in transit."
+    expects:
+      - {fact_type: shipment, attribute: status, change: update}
+
+  - id: proof.goods_receipt
+    description: A goods receipt is booked in the receiving table for a delivered line.
+    channel: table
+    parameters:
+      line: {type: ref, ref: order_line}
+      gr_number: {type: text}
+      received_qty: {type: number}
+    produces:
+      table:
+        path: "erp/goods_receipts.csv"
+        row:
+          gr_number: "{gr_number}"
+          po_number: "{line.po_number}"
+          po_line: "{line.po_line}"
+          qty_received: "{received_qty}"
+    expects:
+      - {fact_type: goods_receipt, attribute: qty_received, change: new}

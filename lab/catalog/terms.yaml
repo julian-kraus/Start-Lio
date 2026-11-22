@@ -1,0 +1,49 @@
+family: terms
+# Price and terms changes: a price increase by mail, a price list document, a payment-terms change.
+types:
+  - id: terms.price_increase
+    description: Supplier announces a higher unit price for a part.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      part: {type: ref, ref: part}
+      new_price: {type: money}
+      effective: {type: date}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject: "Price change for part {part.material_id}"
+        body:
+          en: "Dear team,\n\nFrom {effective} the unit price for part {part.material_id} will be {new_price}.\n\nKind regards"
+    expects:
+      - {fact_type: price_change, attribute: new_price, change: update}
+
+  - id: terms.price_list_update
+    description: A new price list document changes the unit price for a part.
+    channel: document
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      part: {type: ref, ref: part}
+      new_price: {type: money}
+    produces:
+      document:
+        filename: "price_list_{part.material_id}.pdf"
+        kind: pdf
+        body: "Price list from {supplier.supplier_id}. Part {part.material_id} new unit price {new_price}."
+    expects:
+      - {fact_type: price_change, attribute: new_price, change: update}
+
+  - id: terms.payment_terms_change
+    description: Supplier changes the payment terms that apply to future orders.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      new_terms: {type: text}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject: "Updated payment terms"
+        body:
+          en: "Dear team,\n\nOur payment terms change to {new_terms} for future orders.\n\nKind regards"
+    expects:
+      - {fact_type: oc_header, attribute: payment_terms, change: update}

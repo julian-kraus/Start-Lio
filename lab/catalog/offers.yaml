@@ -1,0 +1,54 @@
+family: offers
+# Offers and quotes: a new price for a part, a quote document, a revised quote.
+types:
+  - id: offers.quote
+    description: Supplier quotes a unit price and lead time for a part.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      part: {type: ref, ref: part}
+      price: {type: money}
+      lead_time: {type: duration}
+      valid_until: {type: date}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject:
+          en: "Quote for part {part.material_id}"
+          pl: "Oferta na czesc {part.material_id}"
+        body:
+          en: "Dear team,\n\nFor part {part.material_id} we offer {price} per unit, lead time {lead_time}, valid until {valid_until}.\n\nKind regards"
+          pl: "Szanowni Panstwo,\n\nZa czesc {part.material_id} oferujemy {price} za sztuke, czas realizacji {lead_time}, oferta wazna do {valid_until}.\n\nZ powazaniem"
+    expects:
+      - {fact_type: offer, attribute: unit_price, change: new}
+      - {fact_type: offer, attribute: lead_time, change: new}
+
+  - id: offers.quote_sheet
+    description: Supplier sends a quotation document listing parts and prices.
+    channel: document
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      part: {type: ref, ref: part}
+    produces:
+      document:
+        filename: "quotation_{part.material_id}.pdf"
+        kind: pdf
+        body: "Quotation from {supplier.supplier_id}. Part {part.material_id}. Unit price and lead time per line."
+    expects:
+      - {fact_type: offer, attribute: unit_price, change: new}
+
+  - id: offers.revised_quote
+    description: Supplier revises an earlier quote with a new price.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      part: {type: ref, ref: part}
+      price: {type: money}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject: "Revised quote for part {part.material_id}"
+        body:
+          en: "Dear team,\n\nOur revised price for part {part.material_id} is {price} per unit. This supersedes our earlier quote.\n\nKind regards"
+    expects:
+      - {fact_type: offer, attribute: unit_price, change: update}

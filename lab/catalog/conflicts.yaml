@@ -1,0 +1,54 @@
+family: conflicts
+# Data conflicts: a supplier message contradicts a fact already on record (identified by its kb id). The
+# system must surface the contradiction, not silently overwrite. Each type points at the fact it disputes.
+types:
+  - id: conflicts.email_vs_portal_date
+    description: Supplier mail gives a delivery date that contradicts the date already on record for a line.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      line: {type: ref, ref: order_line}
+      disputed: {type: ref, ref: kb_id}
+      claimed_date: {type: date}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject: "Delivery date for order {line.po_number}"
+        body:
+          en: "Dear team,\n\nOur records show line {line.po_line} on order {line.po_number} arriving {claimed_date}, which differs from your portal record {disputed.fact_id}.\n\nKind regards"
+    expects:
+      - {fact_type: oc_line, attribute: confirmed_date, change: conflict}
+
+  - id: conflicts.email_vs_portal_qty
+    description: Supplier mail gives a shipped quantity that contradicts the delivery note on record.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      line: {type: ref, ref: order_line}
+      disputed: {type: ref, ref: kb_id}
+      claimed_qty: {type: number}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject: "Shipped quantity for order {line.po_number}"
+        body:
+          en: "Dear team,\n\nWe shipped {claimed_qty} units on line {line.po_line} of order {line.po_number}, which differs from record {disputed.fact_id}. Please reconcile.\n\nKind regards"
+    expects:
+      - {fact_type: delivery_note_line, attribute: final_qty, change: conflict}
+
+  - id: conflicts.price_disagreement
+    description: Supplier mail states a unit price that contradicts the price fact on record.
+    channel: mail
+    parameters:
+      supplier: {type: ref, ref: supplier}
+      part: {type: ref, ref: part}
+      disputed: {type: ref, ref: kb_id}
+      claimed_price: {type: money}
+    produces:
+      mail:
+        persona: "{supplier.persona}"
+        subject: "Unit price for part {part.material_id}"
+        body:
+          en: "Dear team,\n\nThe agreed unit price for part {part.material_id} is {claimed_price}, which differs from record {disputed.fact_id}.\n\nKind regards"
+    expects:
+      - {fact_type: supplier_part, attribute: unit_price, change: conflict}
