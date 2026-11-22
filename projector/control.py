@@ -12,6 +12,8 @@ from __future__ import annotations
 import copy
 import html
 import json
+import threading
+import time
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -39,25 +41,75 @@ def beats(records: list[dict]) -> list[list[dict]]:
     return out
 
 
+# The control page sends only what the world does. What the agent does in reply (weak spots once the goal is set,
+# the decision card once A cancels, the outcome once a person accepts) follows automatically, as in the product.
+# Beat indices of the art-book script: 0 base, 1 weak spots, 2 offer + hedge, 3 reply, 4 cancellation,
+# 5 decision card, 6 outcome after the accept.
+WORLD = [("Supplier A offers the missing art books", [2]), ("Karton Nowak confirms the truck", [3]),
+         ("Supplier A cancels", [4, 5])]
+AUTO = [("goal", "You set the goal on the screen", "the agent ranks the weak spots and plans", 1),
+        ("accept", "You accept the decision on the screen", "the plan updates and the outcome is shown", 6)]
+
+
 class Control:
     def __init__(self, world: World, scenario: dict, log: Path, base: Path, screen: str):
         self.world, self.scenario, self.log, self.base, self.screen = world, scenario, log, base, screen
-        self.sent = 1
+        self.done: set[int] = {0}
+        self.lock = threading.Lock()
         all_beats = beats(build(world, scenario))
         base.parent.mkdir(parents=True, exist_ok=True)
         base.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in all_beats[0]))
+        threading.Thread(target=self._follow, daemon=True).start()
 
-    def steps(self) -> list[tuple[str, list[dict]]]:
-        b = beats(build(self.world, self.scenario))
-        return [(b[i - 1][-1].get("label", f"step {i}"), b[i]) for i in range(1, len(b))]
+    def _beats(self) -> list[list[dict]]:
+        return beats(build(self.world, self.scenario))
+
+    def _append(self, idx: list[int]) -> int:
+        b, n = self._beats(), 0
+        for i in idx:
+            if i not in self.done:
+                append_records(self.log, b[i], producer="lab")
+                self.done.add(i)
+                n += len(b[i])
+        return n
+
+    def _state(self) -> dict:
+        with urllib.request.urlopen(f"{self.screen}/api/lookahead/state", timeout=5) as r:
+            return json.loads(r.read())
+
+    def _follow(self) -> None:
+        """Add the agent's replies to what a person did on the screen: the goal, an accepted decision."""
+        while True:
+            try:
+                s = self._state()
+                with self.lock:
+                    # what the screen already shows counts as sent, whoever sent it (a restart, another page)
+                    shown = {e.get("title") for e in s.get("events") or []}
+                    self.done = {0} | {i for i, beat in enumerate(self._beats()) if i and
+                                       (titles := {r["title"] for r in beat if r["kind"] == "event"})
+                                       and titles <= shown}
+                    if s.get("goal") and 1 not in self.done:
+                        self._append([1])
+                    if any(d.get("status") == "accepted" for d in s.get("decisions") or []) and 6 not in self.done:
+                        self._append([6])
+            except Exception:   # the screen may be restarting; try again
+                pass
+            time.sleep(1)
 
     def send(self, k: int) -> str:
-        steps = self.steps()
-        if not 1 <= k <= len(steps):
-            return f"no step {k}"
-        append_records(self.log, steps[k - 1][1], producer="lab")
-        self.sent = max(self.sent, k + 1)
-        return f"sent: {steps[k - 1][0]} ({len(steps[k - 1][1])} records)"
+        if not 1 <= k <= len(WORLD):
+            return f"no event {k}"
+        label, idx = WORLD[k - 1]
+        with self.lock:
+            if 1 not in self.done:
+                return "set the goal on the screen first: the agent needs it to rank the weak spots"
+            before = [i for j, (_, ix) in enumerate(WORLD) if j < k - 1 for i in ix]
+            if any(i not in self.done for i in before):
+                return f"send the events above first: {WORLD[k - 2][0]}"
+            if all(i in self.done for i in idx):
+                return f"already sent: {label}"
+            n = self._append(idx)
+        return f"sent: {label} ({n} records)"
 
     def reset(self) -> str:
         req = urllib.request.Request(f"{self.screen}/api/lookahead/reset", data=b"{}", method="POST",
@@ -66,8 +118,9 @@ class Control:
             urllib.request.urlopen(req, timeout=10).read()
         except Exception as exc:   # report it on the page; the screen may not be running
             return f"reset failed: {exc}"
-        self.sent = 1
-        return "reset: the screen starts again from the real data, waiting for the goal interview"
+        with self.lock:
+            self.done = {0}
+        return "reset: the screen starts again from the real data, waiting for the goal"
 
     def set_params(self, form: dict) -> str:
         scn = copy.deepcopy(self.scenario)
@@ -80,17 +133,22 @@ class Control:
         return "parameters saved; the next event uses them"
 
     def page(self, note: str = "") -> bytes:
-        rows = []
-        for i, (label, recs) in enumerate(self.steps(), 1):
-            done = i < self.sent
-            titles = "; ".join(r.get("title") or r.get("kind") for r in recs if r["kind"] in ("event", "decision"))
+        b, rows = self._beats(), []
+        for i, (label, idx) in enumerate(WORLD, 1):
+            done = all(x in self.done for x in idx)
+            titles = "; ".join(r.get("title") or r.get("kind") for x in idx for r in b[x]
+                               if r["kind"] in ("event", "decision"))
             rows.append(f"<tr class='{'done' if done else ''}'><td>{i}</td><td><b>{html.escape(label)}</b>"
                         f"<div class='s'>{html.escape(titles)}</div></td><td><form method='post' action='/send/{i}'>"
-                        f"<button>{'Send again' if done else 'Send'}</button></form></td></tr>")
+                        f"<button{' disabled' if done else ''}>{'Sent' if done else 'Send'}</button></form></td></tr>")
+        auto = "".join(f"<tr class='{'done' if beat in self.done else ''}'><td></td><td><b>{html.escape(who)}</b>"
+                       f"<div class='s'>then {html.escape(then)}"
+                       f"{' (done)' if beat in self.done else ' (automatic)'}</div></td><td></td></tr>"
+                       for _, who, then, beat in AUTO)
         fields = "".join(
             f"<label>{html.escape(lbl)}<input name='{g}.{k}' value='{html.escape(str(self.scenario[g][k]))}'></label>"
             for g, k, lbl, _ in EDITABLE)
-        body = f"""<!doctype html><html><head><meta charset="utf-8"><title>Scenario control</title><style>
+        body = f"""<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="refresh" content="4;url=/"><title>Scenario control</title><style>
 body{{font:15px/1.5 Inter,system-ui,sans-serif;background:#f6f7f9;color:#191c26;margin:0;padding:24px}}
 .card{{background:#fff;border:1px solid #e3e6ec;border-radius:12px;padding:20px;max-width:920px;margin:0 auto 16px}}
 h1{{font-size:20px;margin:0 0 4px}} .s{{color:#565b6f;font-size:13px}} table{{width:100%;border-collapse:collapse}}
@@ -104,7 +162,9 @@ input{{display:block;width:100%;padding:6px 8px;border:1px solid #e3e6ec;border-
 real data in kb; only the values below are scenario inputs.</div>
 {f'<p class="note">{html.escape(note)}</p>' if note else ''}
 <form method="post" action="/reset"><button class="reset">Reset to the real data</button></form></div>
-<div class="card"><h1>Events</h1><table>{''.join(rows)}</table></div>
+<div class="card"><h1>World events</h1><div class="s">What suppliers do. The agent's replies appear on the screen
+by themselves.</div><table>{''.join(rows)}</table></div>
+<div class="card"><h1>On the screen</h1><table>{auto}</table></div>
 <div class="card"><h1>Scenario inputs</h1><form method="post" action="/params">{fields}<button>Save</button></form></div>
 </body></html>"""
         return body.encode()
