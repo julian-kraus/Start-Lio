@@ -1,9 +1,12 @@
 """How a goal's words on margin are read (sourcing/goal_margin.py). Every value here is synthetic."""
 
+import json
+from pathlib import Path
+
 import pytest
 
 from sourcing import hedge
-from sourcing.hedge import ModelError
+from sourcing.hedge import Input, ModelError
 
 MARGIN = {"statement": "All copies on time. Protect margin."}
 
@@ -153,9 +156,9 @@ def test_words_in_another_sentence_are_not_dropped(said):
     {"answers": {"goal": "Protect margin", "limits": "Only if it is cheap"}},
     {"statement": "Protect margin", "answers": [{"id": "limits", "q": "How far will you go?", "a": "Maybe later"}]},
 ])
-def test_words_in_another_answer_are_not_dropped(goal):
-    with pytest.raises(ModelError, match="margin"):
-        hedge.margin_line(goal)
+def test_an_answer_that_does_not_name_margin_is_not_read(goal):
+    """The ruling on #154: a condition hidden in a separate answer is a known limit."""
+    assert hedge.margin_line(goal)
 
 
 @pytest.mark.parametrize("limits", [
@@ -207,3 +210,33 @@ def test_protecting_margin_where_possible_is_a_condition():
 def test_the_interview_question_that_also_asks_what_may_suffer_is_still_read():
     question = "How far will you go? The worth of one missing copy, what may suffer, the most to spend."
     assert hedge.margin_line({"answers": [{"id": "limits", "q": question, "a": "Protect margin"}]})
+
+
+LAUNCH = Path(__file__).parent / "fixtures" / "lookahead_rehearsal.jsonl"
+
+
+def screen_goal(add="", **typed):
+    """A goal as the screen stores it: every answer, the suggested one unless the person typed over it."""
+    asked = json.loads(LAUNCH.read_text(encoding="utf-8").splitlines()[0])["goal_questions"]
+    answers = {q["id"]: q.get("suggested", "") for q in asked} | typed
+    answers["goal"] = f"{answers['goal']} {add}".strip()
+    questions = [{"id": q["id"], "q": q["q"], "a": answers[q["id"]], "unit": q.get("unit")} for q in asked]
+    return {"statement": answers["goal"], "answers": answers, "questions": questions}
+
+
+def hedge_for(goal):
+    source = {"scenario_input": "synthetic"}
+    given = {"p_fail": 0.1, "copies_at_risk": 100, "loss_per_copy": 26, "units": 120, "unit_price": 10,
+             "units_per_copy": 1, "cost_model": "deposit_only", "deposit": 240}
+    return hedge.decide(**{name: Input(value, source) for name, value in given.items()}, goal=goal)
+
+
+@pytest.mark.parametrize("goal, protects", [
+    ({}, False), ({"add": "Protect margin."}, True), ({"goal": "Protect margin."}, True),
+    ({"goal": "Protect margin.", "sacrifice": "Nothing."}, True), ({"add": "Margin can suffer."}, False),
+    ({"sacrifice": "Margin can suffer."}, False), ({"add": "Protect margin. Team offline Sun 10:00."}, True),
+])
+def test_a_goal_from_the_screen_can_protect_margin(goal, protects):
+    result = hedge_for(screen_goal(**goal))
+    assert result["protect_margin"] is protects
+    assert result["hedge"] is not protects      # the same offer is a hedge until margin is protected

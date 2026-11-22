@@ -4,9 +4,10 @@
 are not among the recognised forms. Those are never guessed: the goal's `protect` list settles them. The same
 holds in every field: a sacrifice, a protect entry and the answer to a question on margin.
 
-Once margin is named, the statement and all answers are read as one: each sentence and clause must be a margin form
-or a known aside (on time, what may suffer, costs, limits, when the team can be asked), because a negation or a
-condition can sit in any of them. An answer is not read apart from a question that turns it around.
+Only a text that names margin is read: the statement or one answer. Each of its sentences and clauses must be a margin
+form or a known aside (on time, what may suffer, costs, limits, when the team can be asked), because a negation or a
+condition can sit next to it. A separate answer that does not name margin is not read (#154). An answer is never read
+apart from its question.
 """
 
 from __future__ import annotations
@@ -36,10 +37,13 @@ NOT = (r"(?:cannot|will not|do not|does not|must not|should not|need not|never|s
 # An aside takes no free words: an edition is one the goal itself names, what may suffer is goodwill or an edition
 EDITION = r"<edition>(?: editions?)?(?: cop(?:y|ies))?"
 COPIES = rf"(?:{EDITION}|(?:first )?(?:cop(?:y|ies)|editions?|orders?))"
-ON_TIME = rf"(?:(?:all|every|each)(?: {COPIES})? |everything )?(?:on time|by the deadline)"
+# one word may say which copies, as in a launch's own goal line
+WHICH = r"(?:[a-z][a-z'-]* )?cop(?:y|ies)"
+ON_TIME = (rf"(?:(?:all|every|each)(?: (?:{COPIES}|{WHICH}))?(?: (?:packed|shipped|delivered))? |everything )?"
+           r"(?:on time|by the deadline)")
 MAY_SUFFER = rf"(?:(?:the|our) )?(?:(?:supplier|customer) )?goodwill|(?:the )?{EDITION}"
 SUM = r"(?:eur |\u20ac ?)?\d+(?:[., ]\d+)*k?(?: ?(?:eur|euros?|\u20ac))?"
-DAY = r"(?:today|tomorrow|tonight|(?:mon|tues|wednes|thurs|fri|satur|sun)day)"
+DAY = r"(?:today|tomorrow|tonight|(?:mon|tues|wednes|thurs|fri|satur|sun)day|mon|tue|wed|thu|fri|sat|sun)"
 WHEN = rf"(?:(?:{DAY} )?\d\d?(?::\d\d)?(?: ?(?:am|pm))?|{DAY})"
 ASIDE = re.compile("|".join((
     ON_TIME,
@@ -50,6 +54,7 @@ ASIDE = re.compile("|".join((
     rf"(?:a|one) (?:missing|late) one {SUM}",
     rf"spend (?:at most|up to|no more than) {SUM}",
     rf"(?:the )?team (?:can be asked|is available|is offline|is online|offline) (?:until|from|at) {WHEN}",
+    rf"(?:the )?team (?:is )?offline {WHEN}",
     r"\d{4}-\d\d-\d\d[t ]\d\d:\d\d(?::\d\d)?(?:[+-]\d\d:\d\d|z)?",      # a stored team window
 )))
 GIVES_UP = re.compile("|".join((
@@ -169,8 +174,9 @@ def read(goal: Mapping | None) -> tuple[str | None, str | None]:
             gives_up.append(f"{question} {answer}")
         elif MARGIN.search(said) and TURNS.search(asked):
             return None, f"{question} {answer}"
-    texts = list(_strings([goal.get("statement"), goal.get("answers")]))
-    if not any(MARGIN.search(_plain(line)) for text in texts for line in SENTENCE.split(text)):
+    texts = [text for text in _strings([goal.get("statement"), goal.get("answers")])
+             if any(MARGIN.search(_plain(line)) for line in SENTENCE.split(text))]
+    if not texts:
         return None, None
     editions = _editions(goal)
     for text in texts:
