@@ -13,6 +13,9 @@ Pure: each spot validates against the weak_spot contract.
   rank            money at risk times the share no substitute saves (`exposure_eur`). It is the worst order in
                   which the shortage can fall, each after the lending that saves money. No order or lending plan
                   depends on the values, so a higher value can never lower the exposure
+  many editions   above SEARCHED editions on one part not every order is tried. The exposure is then an upper
+                  bound: no lending, and as many copies lost as the shortage allows at the smallest quantity per
+                  copy, the most valuable first. It can overstate, it cannot understate, and the reason says so
   critical        used only by the editions the goal values most, with at most one qualified source
 
 The goal is a goal record: `unit_loss_eur` with `edition`, or `unit_loss_by_edition` keyed by product id or edition
@@ -43,6 +46,7 @@ GIVEN_UP = (r"((all|every|each) )?{name}( copy| copies)? (can|could|may|might) "
             r"(wait|slip|be late|be later|be delayed|be postponed)")
 TRADE_OFF = re.compile(r"((supplier )?goodwill|margins?|costs?|budget) (can|could|may|might) (suffer|slip|rise)"
                        r"|(don't|do not) (bankrupt|overspend)( me| us)?")
+SEARCHED = 7                                    # orders to try grow as n!, above this the exposure is a bound
 SEVERITY = ("critical", "at_risk", "covered", "ok")
 
 
@@ -195,12 +199,30 @@ def _lend(units: dict[str, dict], policy: dict, retail: dict) -> set[str]:
     return used
 
 
+def _bound(gap, needs: dict, open_copies: dict, values: dict) -> dict[str, dict]:
+    """No order can lose more copies than the shortage holds at the smallest quantity per copy, or more of an
+    edition than it alone could lose. The most valuable copies within both limits are at least the worst order."""
+    qty = {product: needs[product] / open_copies[product] for product in needs}
+    left, out = _copies(gap, min(qty.values())), {}
+    for product in sorted(needs, key=lambda p: (-values[p], p)):
+        lost = min(left, open_copies[product], _copies(gap, qty[product]))
+        short = min(needs[product], lost * qty[product])
+        out[product] = {"short": short, "held": needs[product] - short, "substituted": 0, "displaced": 0,
+                        "qty_per": qty[product]}
+        left -= lost
+    return out
+
+
 def _plan(part: dict, values: dict, open_copies: dict, policy: dict, retail: dict) -> tuple[dict, set[str], float]:
     """(units per edition in the worst order after useful lending, who lent, money at risk without lending)."""
     needs = {a["product_id"]: a["need"]["value"] for a in part["allocation"] if a["need"]["value"] > 0}
     users = sorted(needs, key=lambda p: (-values[p] * open_copies[p] / needs[p], p))     # on a tie the first wins
     options, gap = [], part["gap_on_stock"]["value"]
-    for order in permutations(users):
+    if len(users) > SEARCHED:
+        units = _bound(gap, needs, open_copies, values)
+        cost = _cost(units, values)
+        options.append((cost, cost, units, set()))
+    for order in permutations(users) if len(users) <= SEARCHED else ():
         units = _filled(gap, order, needs, open_copies)
         before = _cost(units, values)
         lent = {product: dict(entry) for product, entry in units.items()}
@@ -239,7 +261,9 @@ def _why(status: str, good: list[str], out: list[str], unrecorded: list[str], ri
         text = (f"{risk['open_copies']:,} {' and '.join(names[p] for p in risk['editions'])} copies may have no "
                 f"stock on hand, " + (f"{round(risk['exposure']):,} EUR at risk" if risk["exposure"] else
                                         "and the goal puts no value on them"))
-        if risk["lenders"]:
+        if risk["bounded"]:
+            text += f" (upper bound, lending not tried across {risk['shared']} editions)"
+        elif risk["lenders"]:
             text += " after lending"
     lead = "No substitute, " if status == "critical" else ""
     return " ".join(f"{lead}{sources}: {text}.".split())
@@ -286,7 +310,8 @@ def _spot(facts: Facts, part: dict, coverage: dict, editions: dict, values: dict
         status = "covered" if copies else "ok"
     counted = {p: n for p, n in (lost if exposure else unmet).items() if n and (values[p] or not exposure)}
     risk = {"copies": copies, "open_copies": sum(counted.values()), "exposure": exposure,
-            "units": part["gap_on_stock"]["value"], "lenders": sorted(lenders), "editions": list(counted)}
+            "units": part["gap_on_stock"]["value"], "lenders": sorted(lenders), "editions": list(counted),
+            "bounded": len(short) > SEARCHED, "shared": len(short)}
     factor = exposure / money if money else (uncovered / copies if copies else 1)
 
     used = ids(basis, part["usable"]["fact_ids"], source_ids, lent_ids)
