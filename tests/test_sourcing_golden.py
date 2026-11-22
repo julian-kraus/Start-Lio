@@ -17,7 +17,7 @@ from kb.facts import fact_id
 from plan import contracts
 from sourcing import coverage, coverage_windows
 from sourcing.facts import Facts, day, number
-from test_sourcing_coverage import check_sources
+from sourcing_world import check_sources
 
 ROOT = Path(__file__).resolve().parent.parent
 MIRROR = Path(os.environ.get("TRACKER_DATA_DIR", ROOT / "data")) / "current"
