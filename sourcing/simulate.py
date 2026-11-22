@@ -13,7 +13,8 @@ Every action comes back in `actions` as feasible or with the reason it is not; o
 Added units follow the rule of inbound: what lands after the part ran out only helps in the pack hours left.
 Priority is the policy's, so a supply can move copies from later editions to an earlier one and the total can fall,
 also with equal use per copy: one copy of the earlier edition can displace one of each later edition.
-`min_quantity` holds for what an action gets. An earlier take can leave a later one under it, which then gets nothing.
+`min_quantity` holds for what an action gets. Where takes of one offer compete, the ones that make most units usable
+count, earlier first on a tie, so one more action never lowers copies in policy order.
 """
 
 from __future__ import annotations
@@ -187,15 +188,54 @@ def packed_by_deadline(on_hand, arrivals: list[tuple], burn: float,
     total = on_hand + sum(qty for _, qty in arrivals)
     if not burn or not windows:
         return int(total)
+    idle = _idle(on_hand, arrivals, burn, windows)
+    if not idle:
+        return int(total)
+    return int(min(total, burn * coverage_windows.hours(windows) - idle) + 1e-9)      # 1e-9: float noise
+
+
+def _idle(on_hand, arrivals: list[tuple], burn: float, windows: list[coverage_windows.Window]) -> float:
+    """What could have been packed while the part was out, up to its last arrival."""
     have, idle, by_time = on_hand, 0, defaultdict(int)
     for at, qty in arrivals:
         by_time[at] += qty
     for at in sorted(by_time):
         idle = max(idle, burn * coverage_windows.hours(windows, until=at) - have)
         have += by_time[at]
-    if not idle:
-        return int(total)
-    return int(min(total, burn * coverage_windows.hours(windows) - idle) + 1e-9)      # 1e-9: float noise
+    return idle
+
+
+def _best_takes(supplies: list[Supply], on_hand, arrivals: list[tuple], burn: float,
+                windows: list[coverage_windows.Window]) -> tuple[list[tuple], Counter]:
+    """(supply, units, units that count) for one part, and what that takes from each pool.
+
+    Earliest first, so one more action can never push a pool's units to a later hour. A minimum breaks that, as an
+    earlier take can clip a later one to nothing. Leaving a take out is then tried too, and the most usable wins.
+    Ways that leave the same pools, count and idle time are one way: no later take can tell them apart.
+    """
+    ways = [([], Counter(), [], packed_by_deadline(on_hand, arrivals, burn, windows), 0)]
+    for n, s in enumerate(supplies):
+        rivals = [r for r in supplies[n:] if r.pool == s.pool]
+        grown: dict = {}
+        for takes, taken, landed, packed, counted in ways:
+            units = min(s.quantity, max(0, s.limit - taken[s.pool]))
+            options = [units] if units and units >= s.minimum else [0]
+            after = taken[s.pool] + units + sum(r.quantity for r in rivals[1:])
+            if options[0] and any(r.minimum and after > r.limit for r in rivals[1:]):
+                options.append(0)                       # taking it may cost a later take its minimum
+            for got in options:
+                now_landed, now_taken, now_packed, counts = landed, taken, packed, 0
+                if got:
+                    now_landed, now_taken = [*landed, (s.at, got)], taken + Counter({s.pool: got})
+                    now_packed = packed_by_deadline(on_hand, [*arrivals, *now_landed], burn, windows)
+                    counts = min(got, max(0, now_packed - packed))
+                way = ([*takes, (s, got, counts)], now_taken, now_landed, now_packed, counted + counts)
+                so_far = [*(a for a in arrivals if a[0] <= s.at), *now_landed]
+                idle = _idle(on_hand, so_far, burn, windows) if burn and windows else 0
+                grown.setdefault((frozenset(now_taken.items()), way[4], idle), way)
+        ways = list(grown.values())
+    takes, taken, *_ = max(ways, key=lambda way: (way[4], sum(way[1].values())))
+    return takes, taken
 
 
 def simulate(facts: Facts, actions: list[dict], *, now: datetime, deadline: datetime,
@@ -246,23 +286,22 @@ def _count(plan: dict, result: dict, supplies: list[Supply], report: list[dict],
     shift_ids = ids(*(w.fact_ids for w in windows))
     arrivals = {m: [(datetime.fromisoformat(i["arrives_at"]), i["counts"]["value"])
                     for i in p["inbound"] if i["counts"]["value"]] for m, p in parts.items()}
-    added, taken = defaultdict(list), Counter()
-    # earliest first, so one more action can never push a pool's units to a later hour
+    by_part, chosen, taken = defaultdict(list), [], Counter()
     for s in sorted(supplies, key=lambda s: (s.at, s.index)):
-        part, entry = parts[s.material], report[s.index]
-        units = min(s.quantity, max(0, s.limit - taken[s.pool]))
+        by_part[s.material].append(s)
+    for material, offered in by_part.items():
+        burn = sum((e.rate or 0) * boms[e.product_id][material][0] for e in users[material] if e.open)
+        takes, used = _best_takes(offered, parts[material]["usable"]["value"], arrivals[material], burn, windows)
+        chosen += takes
+        taken += used
+
+    added = defaultdict(list)
+    for s, units, counts in chosen:
+        part, entry, using = parts[s.material], report[s.index], users[s.material]
         if not units:
-            entry.update(feasible=False, reason="already_used")
+            reason = "already_used" if taken[s.pool] >= s.limit else "below_min_quantity"
+            entry.update(feasible=False, reason=reason)
             continue
-        if units < s.minimum:                           # again, now that earlier takes have clipped it
-            entry.update(feasible=False, reason="below_min_quantity")
-            continue
-        taken[s.pool] += units
-        using, on_hand = users[s.material], part["usable"]["value"]
-        burn = sum((e.rate or 0) * boms[e.product_id][s.material][0] for e in using if e.open)
-        before = packed_by_deadline(on_hand, arrivals[s.material], burn, windows)
-        arrivals[s.material].append((s.at, units))
-        counts = min(units, max(0, packed_by_deadline(on_hand, arrivals[s.material], burn, windows) - before))
 
         given = ids(_input_ids(s.inputs), s.evidence)
         counted_ids = ids(given, part["available"]["fact_ids"], shift_ids,

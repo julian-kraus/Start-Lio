@@ -1,4 +1,4 @@
-"""Properties of adding a supply: copies in policy order never fall, as long as no offer has a minimum."""
+"""Properties of adding a supply: copies in policy order never fall, minimum quantities included."""
 
 import random
 from datetime import timedelta
@@ -58,9 +58,11 @@ def random_action(rng, part=None):
         return {"kind": "conditional_release", "part_id": "BOOK", "batch": "LOT",
                 "quantity": rng.randint(1, 700), "available_at": at, "sources": sources}
     quantity = rng.randint(1, 2500)
-    return {"kind": "offer", "quantity": rng.randint(1, quantity), "offer": {
+    take = rng.randint(1, quantity)
+    least = {"min_quantity": rng.randint(1, take)} if rng.random() < 0.5 else {}
+    return {"kind": "offer", "quantity": take, "offer": {
         "offer_id": f"O{rng.randint(1, 4)}", "supplier_id": "S2", "part_id": part or rng.choice(PARTS),
-        "quantity": quantity, "available_at": at, "sources": sources}}
+        "quantity": quantity, "available_at": at, "sources": sources, **least}}
 
 
 def one_more(seed, equal_share):
@@ -123,6 +125,65 @@ def test_three_editions_never_fall_in_policy_order(batch):
         after = simulate.simulate(facts, actions, now=NOW, deadline=DEADLINE)
         assert before["priority"]["order"] == list(products), seed
         assert [copies(after)[p] for p in products] >= [copies(before)[p] for p in products], seed
+
+
+def competing(quantity, least, take, hour, ref="O1"):
+    return {"kind": "offer", "quantity": take, "offer": {
+        "offer_id": ref, "supplier_id": "S2", "part_id": "CARD", "quantity": quantity, "min_quantity": least,
+        "available_at": (NOW + timedelta(hours=hour)).isoformat(), "sources": [{"scenario_input": "one offer"}]}}
+
+
+def test_an_earlier_take_does_not_cost_later_takes_their_minimum():
+    world = World()
+    world.drop("stock_batch", batch="B-CARD")
+    world.stock("CARD", 500)
+    facts = Facts(world.current, world.believed, world.issues)
+    takes = [competing(1000, 400, 500, 1), competing(1000, 400, 500, 2)]
+    before = simulate.simulate(facts, takes, now=NOW, deadline=DEADLINE)
+    after = simulate.simulate(facts, [competing(1000, 400, 650, 0), *takes], now=NOW, deadline=DEADLINE)
+    assert copies(after) == copies(before) == {"P-A": 1000, "P-B": 500}
+    assert [a.get("reason") for a in after["actions"]] == ["already_used", None, None]
+    assert [a["quantity"]["value"] for a in after["actions"][1:]] == [500, 500]
+
+
+@pytest.mark.parametrize("batch", range(10))
+def test_takes_competing_for_a_minimum_never_lower_the_part_or_the_copies(batch):
+    for seed in range(batch * 300, (batch + 1) * 300):
+        rng = random.Random(seed)
+        world = World()
+        world.drop("stock_batch", batch="B-CARD")
+        world.stock("CARD", rng.randint(0, 3000))
+        if rng.random() < 0.3:
+            world.ship(qty=rng.randint(1, 1500), eta="2030-01-06")
+        facts = Facts(world.current, world.believed, world.issues)
+        offers = {}
+        for ref in ("O1", "O2")[:rng.randint(1, 2)]:
+            quantity = rng.randint(100, 2000)
+            offers[ref] = (quantity, rng.randint(1, quantity))
+
+        def take():
+            ref, (quantity, least) = rng.choice(list(offers.items()))
+            return competing(quantity, least, rng.randint(least, quantity), rng.randint(0, 12), ref)
+
+        actions = [take() for _ in range(rng.randint(1, 5))]
+        before = simulate.simulate(facts, actions, now=NOW, deadline=DEADLINE)
+        actions.insert(rng.randint(0, len(actions)), take())
+        after = simulate.simulate(facts, actions, now=NOW, deadline=DEADLINE)
+        old, new = (next(p for p in r["parts"] if p["material_id"] == "CARD")["available"]["value"]
+                    for r in (before, after))
+        assert new >= old, seed
+        assert [copies(after)[p] for p in ("P-A", "P-B")] >= [copies(before)[p] for p in ("P-A", "P-B")], seed
+        used = dict.fromkeys(offers, 0)
+        for action, entry in zip(actions, after["actions"]):
+            quantity, least = offers[action["offer"]["offer_id"]]
+            if entry["feasible"]:
+                assert least <= entry["quantity"]["value"] <= action["quantity"], seed
+                used[action["offer"]["offer_id"]] += entry["quantity"]["value"]
+        assert all(used[ref] <= offers[ref][0] for ref in offers), seed
+        for entry, action in zip(after["actions"], actions):            # a refusal is true of what is left
+            if not entry["feasible"]:
+                quantity, least = offers[action["offer"]["offer_id"]]
+                assert quantity - used[action["offer"]["offer_id"]] < least, seed
 
 
 def test_pack_hours_match_an_hour_by_hour_count():
