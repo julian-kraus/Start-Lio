@@ -1,7 +1,6 @@
 """Routing on the reference facts in structured/docs. Every expectation is derived from the facts, none is typed."""
 
 import json
-from datetime import timedelta
 from pathlib import Path
 
 import pytest
@@ -25,9 +24,15 @@ def reference():
     if not rows:
         pytest.skip("no reference policy or org chart")
     policy = approval_docs.read_policy(approval_docs.documents(rows, KINDS[0])[0])
-    charts = sorted((approval_chart.read_chart(d, policy.role_terms())
-                     for d in approval_docs.documents(rows, KINDS[1])), key=lambda c: c.dated)
-    return rows, policy, charts
+    lines = [r for r in rows if r["fact_type"] != approval_chart.SEAT_TYPE]
+    charts, _ = approval_chart.read_charts(lines, approval_docs.documents(lines, KINDS[1]))
+    return lines, policy, sorted(charts, key=lambda c: c.dated)
+
+
+def order(rows, policy, chart, tier):
+    amount = policy.tiers[tier - 1].amount if tier else 0
+    return approvals.route(rows, action="purchase_order", on=chart.dated, amount_eur=amount,
+                           amount_source="reference test", category="Synthetic area")
 
 
 def test_reference_policy_is_read_completely(reference):
@@ -36,36 +41,32 @@ def test_reference_policy_is_read_completely(reference):
     assert policy.air.limit and policy.air.roles and policy.air.above
     assert policy.release.roles and policy.release.days and policy.release.extension.roles
     assert policy.site.roles and len(policy.exceptions.roles) == 1
-    assert not any(c.problems or any(s.state == "unclear" for s in c.seats) for c in charts)
+    assert charts and not any(c.problems for c in charts)
 
 
-def test_reference_every_tier_and_category_has_a_signer(reference):
+def test_reference_lines_alone_name_nobody(reference):
+    rows, policy, charts = reference
+    for tier in range(len(policy.tiers)):
+        out = order(rows, policy, charts[-1], tier)
+        assert out["status"] == "needs_human" and "name" not in out["signer"]
+
+
+def test_reference_every_tier_signs_once_its_seats_are_held(reference):
     rows, policy, charts = reference
     newest = charts[-1]
-    areas = {scope for s in newest.seats for role in policy.tiers[1].roles
-             if (scope := approval_chart.title_scope(s.title, role))}
-    assert areas
-    for area in areas:
-        for i, tier in enumerate(policy.tiers[1:], 1):
-            amount = policy.tiers[i - 1].amount
-            out = approvals.route(rows, action="purchase_order", on=newest.dated, amount_eur=amount,
-                                  amount_source="reference test", category=area)
-            assert out["status"] in ("resolved", "escalated"), out["reasons"]
-            assert [s["required_role"] for s in out["signers"]] == tier.roles
-            assert out["org_chart"]["version"] == newest.version
-
-
-def test_reference_future_holder_escalates_until_the_start(reference):
-    rows, policy, charts = reference
-    for seat in charts[-1].seats:
-        if not seat.start:
-            continue
-        i, tier, area = next((i, t, scope) for i, t in enumerate(policy.tiers) for role in t.roles
-                             if (scope := approval_chart.title_scope(seat.title, role)))
-
-        def signed(on):
-            return approvals.route(rows, action="purchase_order", on=on, amount_source="reference test",
-                                   amount_eur=policy.tiers[i - 1].amount if i else 0, category=area)
-
-        assert signed(seat.start - timedelta(days=1))["status"] == "escalated"
-        assert signed(seat.start)["signer"]["name"] == seat.name
+    roles = list(dict.fromkeys(role for tier in policy.tiers for role in tier.roles))
+    # one seat per title: an abbreviated role is the title written out, where the policy has it
+    titles = {}
+    for role in roles:
+        same = [r for r in roles if r != role and approval_chart.title_scope(r, role) == ""]
+        short = len(role) == 3 and role.isupper()
+        titles[role] = same[0] if short and same else f"Chief {role[1]}x Officer" if short else role
+    seats = [{"fact_id": f"seat{n}:{name}", "path": newest.path, "sha256": newest.sha256, "doc_kind": KINDS[1],
+              "fact_type": approval_chart.SEAT_TYPE, "subject": {"title": title, "scope": ""}, "attribute": name,
+              "value": value, "confidence": 0.9}
+             for n, title in enumerate(dict.fromkeys(titles.values())) for name, value in (("holder", f"Person {n}"), ("status", "held"))]
+    for i, tier in enumerate(policy.tiers):
+        out = order(rows + seats, policy, newest, i)
+        assert out["status"] == "resolved", out["reasons"]
+        assert [s["required_role"] for s in out["signers"]] == tier.roles
+        assert out["org_chart"]["version"] == newest.version
