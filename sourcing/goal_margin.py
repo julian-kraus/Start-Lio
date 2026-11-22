@@ -4,8 +4,9 @@
 are not among the recognised forms. Those are never guessed: the goal's `protect` list settles them. The same
 holds in every field: a sacrifice, a protect entry and the answer to a question on margin.
 
-A sentence on margin is read as a whole: each other part of it must be a known aside, because a negation or a
-condition can sit in any clause. An answer is not read apart from a question that turns it around.
+A sentence on margin, semicolons included, is read as a whole: each other part of it must be a known aside,
+because a negation or a condition can sit in any clause. An answer is not read apart from a question that turns
+it around. Not seen: a negation or condition in a separate sentence, other than a short withdrawal such as "Not."
 """
 
 from __future__ import annotations
@@ -58,7 +59,7 @@ GIVEN = re.compile(rf"(?:(?:some|lower|a bit of|a little) )?{M}|{GIVES_UP.patter
 KEPT = re.compile(rf"{M}|{PROTECTS.pattern}")
 ASKS = re.compile(rf"(?:(?:should|do|must) (?:we|i|you) (?:(?:want to|need to|have to) )?)?{V} {M}")
 NO = re.compile(r"no|nope|false")
-CLAUSE = re.compile(r"[,:]|\s[-\u2013]+\s|\u2014|(?<!anything )(?<!everything )(?<!nothing )\bbut\b", re.IGNORECASE)
+CLAUSE = re.compile(r"[,:;]|\s[-\u2013]+\s|\u2014|(?<!anything )(?<!everything )(?<!nothing )\bbut\b", re.IGNORECASE)
 
 
 def _strings(value) -> Iterable[str]:
@@ -146,7 +147,7 @@ def read(goal: Mapping | None) -> tuple[str | None, str | None]:
         elif MARGIN.search(said) and TURNS.search(asked):
             return None, f"{question} {answer}"
     for text in _strings([goal.get("statement"), goal.get("answers")]):
-        sentences = re.findall(r"[^.;!?\n]+[.;!?]?", text)
+        sentences = re.findall(r"[^.!?\n]+[.!?]?", text)
         if MARGIN.search(_plain(text)) and any(WITHDRAWN.fullmatch(_plain(x).rstrip(" .;!")) for x in sentences):
             return None, text.strip()
         for sentence in sentences:

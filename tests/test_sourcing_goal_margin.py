@@ -98,7 +98,8 @@ def test_an_answer_to_a_question_on_margin_is_not_dropped(answers):
     "Protect margin, that can wait",
     "Never, margin can suffer", "It is not true: margin can suffer", "Margin can suffer, if goodwill holds",
     "I would never choose speed rather than protect margin", "Protect margin. Actually no", "Protect margin... not",
-    "Don't. Protect margin",
+    "Don't. Protect margin", "If there is money left; protect margin", "Protect margin; only later",
+    "It is not true; margin can suffer",
 ])
 def test_words_elsewhere_in_the_sentence_are_not_dropped(said):
     for goal in ({"statement": said}, {"answers": {"limits": said}}):
