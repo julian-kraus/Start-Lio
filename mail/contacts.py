@@ -131,3 +131,28 @@ def revoke(conn, address: str, actor: str) -> bool:
     if cur.rowcount:
         db.audit(conn, actor, "contact_revoked", "contact", address, {"reason": "manual"})
     return bool(cur.rowcount)
+
+
+PERSONA_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$")
+
+
+def set_persona(conn, address: str, persona_id: str | None, actor: str) -> None:
+    """Let a test contact play a supplier persona. Only test contacts can carry one; None clears it."""
+    address = address.strip().lower()
+    if persona_id is not None and not PERSONA_ID.match(persona_id):
+        raise ValueError(f"not a persona id: {persona_id!r}")
+    row = conn.execute("SELECT is_test FROM contacts WHERE address = %s AND revoked_at IS NULL",
+                       (address,)).fetchone()
+    if row is None:
+        raise ValueError(f"no active contact: {address!r}")
+    if not row["is_test"]:
+        raise ValueError(f"only test contacts can carry a persona: {address!r}")
+    conn.execute("UPDATE contacts SET persona_id = %s, updated_at = now() WHERE address = %s", (persona_id, address))
+    db.audit(conn, actor, "contact_persona_set", "contact", address, {"persona_id": persona_id})
+
+
+def persona_of(conn, address: str) -> str | None:
+    """The persona id of an active test contact, or None for real contacts and test contacts without one."""
+    row = conn.execute("SELECT persona_id FROM contacts WHERE address = %s AND revoked_at IS NULL AND is_test",
+                       (address.strip().lower(),)).fetchone()
+    return row["persona_id"] if row else None

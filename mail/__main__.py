@@ -61,6 +61,12 @@ def cmd_add_contact(a, s, conn):
     print("added")
 
 
+def cmd_set_persona(a, s, conn):
+    contacts.set_persona(conn, a.address, None if a.clear else a.persona_id, f"cli:{a.by}")
+    conn.commit()
+    print("persona cleared" if a.clear else f"persona {a.persona_id} set")
+
+
 def cmd_revoke_contact(a, s, conn):
     print("revoked" if contacts.revoke(conn, a.address, f"cli:{a.by}") else "not found or already revoked")
     conn.commit()
@@ -179,6 +185,11 @@ def main(argv=None) -> None:
     g.add_argument("--supplier")
     x.add_argument("--language")
     sub.add_parser("revoke-contact").add_argument("address")
+    x = sub.add_parser("set-persona", help="let a test contact play a supplier persona in a scenario")
+    x.add_argument("address")
+    g = x.add_mutually_exclusive_group(required=True)
+    g.add_argument("persona_id", nargs="?")
+    g.add_argument("--clear", action="store_true")
     x = sub.add_parser("poll")
     x.add_argument("--once", action="store_true", default=True)
     sub.add_parser("run")
