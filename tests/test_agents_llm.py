@@ -71,6 +71,16 @@ def test_deterministic_result_wins_when_the_model_will_not_align():
     assert res.verdict["reason"] == "not changing it"            # non-numeric fields are kept
 
 
+def test_a_verdict_with_no_tool_result_is_refused_not_passed():
+    # the model never calls a tool and answers three times with its own number: nothing grounds it.
+    invented = '{"hedge": true, "expected_loss_eur": 5.0, "reason": "my own sum"}'
+    res = llm.run(llm.ReplayClient([{"stop_reason": "end_turn", "text": invented}] * 3), make_registry(),
+                  role="hedger", system=SYSTEM, prompt=PROMPT, schema=VERDICT_SCHEMA, guard=GUARD)
+    assert not res.ok and "no grounding tool result" in res.error
+    assert res.guard_failed is True and res.calls == []
+    assert "expected_loss_eur" not in res.verdict and "hedge" not in res.verdict   # the invented values are gone
+
+
 def test_an_exhausted_script_ends_the_run_with_an_error():
     # only a tool-use turn, no final answer: the loop asks for another reply and the script runs out.
     res = llm.run(llm.ReplayClient([{"stop_reason": "tool_use", "tool_calls": [{"name": "hedge", "input": {}}]}]),
