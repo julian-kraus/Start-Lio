@@ -57,6 +57,8 @@ function planView(S) {
   const units = f.canc && f.canc.impact ? f.canc.impact.units : null;
   const hp = st.ac === "bad" && units ? `<span class="pf-hp"><i><b></b></i><em>−${num(units)}</em></span>` : "";
   const aName = f.A ? f.A.name : "The first offer", bName = f.B ? f.B.name : "the backup";
+  // the outcomes of a hedge exist only once a hedge was placed: before that the plan names no supplier's future
+  const branches = !!(f.hedge && f.A);
   const next = P.find(p => p.state === "waiting");
   const flow = `<div class="pf-grid" id="pfGrid"><svg class="pf-svg" id="pfSvg"></svg>
     ${box(1, "1/2", "Goal interview", S.goal ? `${f.weak ? "At stake " + eur(f.weak.impact.eur) + ", " : ""}deadline ${dhm(S.launch.deadline)}` : "Waiting for the goal")}
@@ -64,10 +66,10 @@ function planView(S) {
     ${box(3, "3/2", "Critical points", crit.length ? crit.map(l => l.name).join(", ") + " critical" : "Ranked once the goal is set")}
     ${box(4, "4/2", f.hedge ? "Hedge placed" : "Hedge", f.hedge ? f.hedge.title : "Waiting for an offer to hedge")}
     ${box(5, "5/2", "Check-in: critical points on schedule?", next ? `Next proof: ${next.what}, ${dhm(next.next_check || next.due)}` : "Every promise needs a proof", flags)}
-    ${box("ad", "6/1", `${aName} delivers on time`, "Original plan, release the backup")}
-    ${box("ac", "6/2", `${aName} cancels`, units ? `${num(units)} copies at risk; ${bName} already moving` : "The backup carries the copies", hp)}
-    ${box("b", "7/2", f.dec ? f.dec.title : "Decision card", f.dec ? `${eur(f.dec.cost && f.dec.cost.eur)} to pay, ${(f.dec.signer || {}).name || "signer"} signs` : "One click for the signer", st.b === "cur" ? `<button class="btn btn-primary pf-go" data-goview="decisions">Review and confirm</button>` : "")}
-    ${box("g", "8/2", f.final ? (f.final.severity === "ok" ? "Goal met" : "Goal not met yet") : "Goal", f.final ? f.final.title : `All ${num((S.plan || {}).coverage ? S.plan.coverage.needed : null)} ${S.launch.name} copies ship on time`)}
+    ${branches ? box("ad", "6/1", f.canc ? `${aName} did not deliver` : `If ${aName} delivers`, f.canc ? "The original plan no longer holds" : `Release the ${bName} lot`) : ""}
+    ${branches ? box("ac", "6/2", f.canc ? `${aName} cancelled` : `If ${aName} fails`, f.canc ? (units ? `${num(units)} copies at risk; ${bName} already moving` : `${bName} already moving`) : `${bName} carries the copies`, hp) : ""}
+    ${f.dec || branches ? box("b", "7/2", f.dec ? f.dec.title : `Confirm the ${bName} lot`, f.dec ? `${eur(f.dec.cost && f.dec.cost.eur)} to pay, ${(f.dec.signer || {}).name || "signer"} signs` : `Only if ${aName} fails: one click for the signer`, st.b === "cur" ? `<button class="btn btn-primary pf-go" data-goview="decisions">Review and confirm</button>` : "") : ""}
+    ${box("g", branches || f.dec ? "8/2" : "6/2", f.final ? (f.final.severity === "ok" ? "Goal met" : "Goal not met yet") : "Goal", f.final ? f.final.title : `All ${num((S.plan || {}).coverage ? S.plan.coverage.needed : null)} ${S.launch.name} copies ship on time`)}
     <div class="pf-loop ${f.canc ? "on" : ""}" style="grid-area:3/3/6/4"><div><b>${f.canc ? "LEVEL UP" : "Learning"}</b><span>${f.canc && f.A ? `${aName}'s score is now ${pct(f.A)} after the broken promise, so the next hedge is sized with it` : "Every outcome updates the supplier scores"}</span>${f.canc ? '<i class="pf-xp"><b></b></i>' : ""}</div></div>
   </div>`;
   const badge = f.final ? (f.final.severity === "ok" ? B("g", "Goal met") : B("r", "Next weak spot open"))
@@ -86,15 +88,19 @@ function pfWires() {
   const paths = [], A = (d, c = "") => paths.push(`<path d="${d}" class="${c}" marker-end="url(#pfArr${c.includes("hot") || c.includes("crit") ? "H" : c.includes("red") ? "R" : ""})"/>`);
   const down = (a, b, c) => { const x = R(a), y = R(b);
     if (Math.abs(x.cx - y.cx) < 2) A(`M${x.cx} ${x.b} V${y.t - 2}`, c); else { const m = (x.b + y.t) / 2; A(`M${x.cx} ${x.b} V${m} H${y.cx} V${y.t - 2}`, c); } };
-  const st = id => document.getElementById("pf-" + id).className.replace("pf ", "");
+  const has = id => !!document.getElementById("pf-" + id);
+  const st = id => has(id) ? document.getElementById("pf-" + id).className.replace("pf ", "") : "";
   [[1, 2], [2, 3], [3, 4], [4, 5]].forEach(([a, b]) => down(a, b));
   { const a = R(3), b = R(5), x = a.l - 26; A(`M${a.l} ${a.cy} H${x} V${b.cy} H${b.l - 2}`, "crit");
     paths.push(`<text x="${x - 8}" y="${(a.cy + b.cy) / 2 - 4}" text-anchor="end" class="pf-lab"><tspan x="${x - 8}">Each critical point</tspan><tspan x="${x - 8}" dy="16">has a deadline</tspan></text>`); }
   const hit = st("ac") === "bad";
-  down(5, "ad", hit ? "dim" : "alt"); down(5, "ac", hit ? "red" : "alt"); down("ac", "b", hit ? "red" : "alt");
-  down("b", "g", st("b") === "done" ? "" : st("b") === "cur" ? "hot" : "alt");
-  { const a = R("ad"), gg = R("g"); A(`M${a.cx} ${a.b} V${gg.cy} H${gg.l - 2}`, hit ? "dim" : "alt"); }
-  { const a = R("ac"), t = R(2), x = G.width - 6; A(`M${a.r} ${a.cy} H${x} V${t.cy} H${t.r + 2}`, "loop" + (hit ? " on" : "")); }
+  if (has("ac")) {   // the hedge's two outcomes, then the decision
+    down(5, "ad", hit ? "dim" : "alt"); down(5, "ac", hit ? "red" : "alt"); down("ac", "b", hit ? "red" : "alt");
+    { const a = R("ad"), gg = R("g"); A(`M${a.cx} ${a.b} V${gg.cy} H${gg.l - 2}`, hit ? "dim" : "alt"); }
+    { const a = R("ac"), t = R(2), x = G.width - 6; A(`M${a.r} ${a.cy} H${x} V${t.cy} H${t.r + 2}`, "loop" + (hit ? " on" : "")); }
+  } else if (has("b")) down(5, "b", "alt");
+  if (has("b")) down("b", "g", st("b") === "done" ? "" : st("b") === "cur" ? "hot" : "alt");
+  else down(5, "g", "alt");
   svg.setAttribute("width", G.width); svg.setAttribute("height", G.height);
   svg.innerHTML = `<defs>${[["", "#b9bdc8"], ["H", "#4d4b9e"], ["R", "#d5544a"]].map(([k, c]) => `<marker id="pfArr${k}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="${c}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>`).join("")}</defs>${paths.join("")}`;
 }
