@@ -15,6 +15,11 @@ EPS = 1e-6                  # float noise: 1000 x 0.1 is still 1000 copies
 Lots = list[tuple[datetime | None, float]]
 
 
+def as_lots(available: Lots | float) -> Lots:
+    """A plain total is all on hand, so no line's hours limit it."""
+    return available if isinstance(available, list) else [(None, available)]
+
+
 def whole(value) -> int:
     return math.floor(value + EPS)
 
@@ -41,9 +46,10 @@ def take(lots: Lots, units: float) -> Lots:
     return left
 
 
-def share(lots: Lots, wants: dict[str, float], rates: dict[str, float], order: list[str] | None,
-          windows: list[Window]) -> dict[str, float]:
+def share(available: Lots | float, wants: dict[str, float], order: list[str] | None,
+          rates: dict[str, float] | None = None, windows: list[Window] = ()) -> dict[str, float]:
     """Split one part: in policy order, or in proportion to need when no policy decides."""
+    lots, rates = as_lots(available), rates or {}
     total, have = sum(wants.values()), sum(n for _, n in lots)
     units = all(float(w).is_integer() for w in wants.values())
     out, left = {}, lots
@@ -53,17 +59,17 @@ def share(lots: Lots, wants: dict[str, float], rates: dict[str, float], order: l
             pool = [(at, n * want / total) for at, n in lots]
             if total > have + EPS:
                 want = have * want / total
-        got = min(want, reach(pool, rates[product], windows))
+        got = min(want, reach(pool, rates.get(product, 0), windows))
         out[product] = whole(got) if units else round(got, 6)
         if order is not None:
             left = take(left, out[product])
     return out
 
 
-def packable(eds: list, boms: dict, lots: dict[str, Lots], order: list[str] | None, allocated: dict,
-             windows: list[Window]) -> dict[str, tuple[int, list[str]]]:
+def packable(eds: list, boms: dict, available: dict[str, Lots | float], order: list[str] | None, allocated: dict,
+             windows: list[Window] = ()) -> dict[str, tuple[int, list[str]]]:
     """Copies per edition and the parts that limit it."""
-    out, left = {}, dict(lots)
+    out, left = {}, {m: as_lots(v) for m, v in available.items()}
     by_id = {e.product_id: e for e in eds}
     for product in order or by_id:
         edition, bom = by_id[product], boms[product]

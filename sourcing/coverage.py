@@ -19,7 +19,8 @@ import re
 from dataclasses import dataclass
 from datetime import datetime
 
-from . import coverage_inbound, coverage_share, coverage_stock, coverage_windows, coverage_wording
+from . import coverage_inbound, coverage_stock, coverage_windows, coverage_wording
+from .coverage_share import packable, share
 from .facts import Facts, believed_ids, day, figure, ids, moment, number
 
 PRIORITY = re.compile(r"\bpriority\b", re.I)
@@ -225,7 +226,7 @@ def compute(facts: Facts, *, now: datetime, deadline: datetime, products: list[s
             (datetime.fromisoformat(i["arrives_at"]), i["counts"]["value"]) for i in inbound if i["counts"]["value"])
         part_ids[material] = have_ids
         rates = {e.product_id: (e.rate or 0) * boms[e.product_id][material][0] for e in users}
-        allocated[material] = coverage_share.share(lots[material], wants, rates, order, windows)
+        allocated[material] = share(lots[material], wants, order, rates, windows)
         split_ids = ids(policy_ids, *([*(e.rate_ids for e in users), shift_ids] if counted else []))
         parts.append({
             "material_id": material, "need": figure(need, need_ids), **stock, "inbound": inbound,
@@ -239,7 +240,7 @@ def compute(facts: Facts, *, now: datetime, deadline: datetime, products: list[s
                            for p, n in allocated[material].items()],
         })
 
-    packed = coverage_share.packable(eds, boms, lots, order, allocated, windows)
+    packed = packable(eds, boms, lots, order, allocated, windows)
     out_editions = []
     shown = [e for e in eds if e.product_id in wanted]
     for e in shown:
