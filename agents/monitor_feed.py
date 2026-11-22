@@ -4,7 +4,8 @@ Without this the screen stays still from the goal to the first broken promise, a
 reached plan.offers and a supplier's check-in is a watched promise. Each tick, every offer read from mail and every
 promise state the screen has not seen yet becomes records in the Lookahead log: an `event` for an offer, a `promise`
 record plus an `event` for a watched or kept promise. A broken promise is left to the monitor's re-plan, which
-publishes its own records.
+publishes its own records: promise records are upserts, so once that break is published, and for a cancelled promise,
+nothing is written here that would put it back to waiting.
 
 Once per item: a `screen_fed` row in plan.timeline_events marks what was shown, in the same transaction that is
 committed after the append, so a restart does not show it again. Names come from the supplier records already in the
@@ -20,9 +21,9 @@ from plan import clock
 from tracker.lookahead import append_records
 
 FED = "screen_fed"
-OFFER_RECEIVED = "offer_received"
-PROMISE_WATCHED = "promise_watched"
-PROMISE_KEPT = "promise_kept"
+# the event types the Overview story and the timeline already show
+OFFER_RECEIVED = "offer_in"
+PROMISE_WATCHED = PROMISE_KEPT = "check_in"
 
 
 def _iso(value):
@@ -55,6 +56,8 @@ def promise_records(promise: dict, state: str, name: str, now) -> list[dict]:
     shared = {"supplier_id": promise["supplier_id"], **({"lane": lane} if lane else {})}
     record = {**shared, "kind": "promise", "promise_id": promise["promise_id"], "state": state,
               "what": promise["what"], "due": _iso(promise["due"]), "sources": promise.get("sources") or []}
+    # the screen says from these what happens if the proof is missing, and when the monitor looks
+    record.update({k: _iso(promise[k]) for k in ("fallback", "proof", "next_check") if promise.get(k)})
     if state == "proven" and promise.get("proven_at"):
         record["proven_at"] = _iso(promise["proven_at"])
     if state == "waiting":
@@ -69,8 +72,9 @@ def promise_records(promise: dict, state: str, name: str, now) -> list[dict]:
     return [record, event]
 
 
-def pending(plan_conn, names: dict, now) -> list[tuple[str, str | None, list[dict]]]:
-    """(key, supplier_id, records) for each offer and promise state the screen has not been shown yet."""
+def pending(plan_conn, names: dict, now, handled: str) -> list[tuple[str, str | None, list[dict]]]:
+    """(key, supplier_id, records) for each offer and promise state the screen has not been shown yet. `handled` is
+    the timeline event type that marks a break the re-plan has published."""
     fed = {r["k"] for r in plan_conn.execute(
         "SELECT payload->>'key' AS k FROM timeline_events WHERE type = %s", (FED,))}
     out = []
@@ -79,7 +83,10 @@ def pending(plan_conn, names: dict, now) -> list[tuple[str, str | None, list[dic
         if key not in fed:
             name = names.get(offer["supplier_id"]) or offer["supplier_id"]
             out.append((key, offer["supplier_id"], offer_records(offer, name, now)))
-    for promise in plan_conn.execute("SELECT * FROM promises ORDER BY created_at, promise_id"):
+    for promise in plan_conn.execute(
+            "SELECT * FROM promises p WHERE state IN ('waiting', 'proven') OR (state = 'broken' AND NOT EXISTS ("
+            "SELECT 1 FROM timeline_events e WHERE e.type = %s AND e.payload->>'promise_id' = p.promise_id)) "
+            "ORDER BY created_at, promise_id", (handled,)):
         name = names.get(promise["supplier_id"]) or promise["supplier_id"]
         # a promise is shown as watched first, even if it broke or was kept in the same tick
         states = ["waiting"] + (["proven"] if promise["state"] == "proven" else [])
@@ -90,11 +97,11 @@ def pending(plan_conn, names: dict, now) -> list[tuple[str, str | None, list[dic
     return out
 
 
-def feed(plan_conn, log_path: Path, names: dict, producer: str) -> int:
+def feed(plan_conn, log_path: Path, names: dict, producer: str, handled: str) -> int:
     """Append what is pending, one item per transaction. Returns the number of items shown."""
     now = clock.now(plan_conn)
     shown = 0
-    for key, supplier, records in pending(plan_conn, names, now):
+    for key, supplier, records in pending(plan_conn, names, now, handled):
         plan_conn.execute("INSERT INTO timeline_events (at, type, title, severity, supplier_id, payload, scenario) "
                           "VALUES (%s, %s, %s, 'info', %s, %s, %s)",
                           (now, FED, key, supplier, Json({"key": key}), clock.is_scenario(plan_conn)))

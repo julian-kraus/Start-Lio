@@ -178,7 +178,7 @@ class Monitor:
         self.plan.commit()
         try:      # show offers and watched promises before any break, so the screen follows each mail
             names = {sid: s.get("name") for sid, s in screen_state(self.log)["suppliers"].items()}
-            monitor_feed.feed(self.plan, self.log, names, PRODUCER)
+            monitor_feed.feed(self.plan, self.log, names, PRODUCER, HANDLED)
         except Exception as exc:     # the screen lagging must not stop the re-plan
             self.plan.rollback()
             log.warning("screen feed not written (%s)", exc)

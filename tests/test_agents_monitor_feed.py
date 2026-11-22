@@ -52,6 +52,7 @@ def test_each_step_shows_once_on_the_screen(demo_run):
     [decision_id] = watch.tick()
     after = _monitor_lines(r.log)
     assert not [x for x in after[3:] if x.get("type") in (monitor_feed.OFFER_RECEIVED, monitor_feed.PROMISE_WATCHED)]
+    assert after[3:], "the break is published"
     state = screen(r.log).state()
     assert {x["promise_id"]: x for x in state["promises"]}["p"]["state"] == "broken"
     assert decision_id in {d["decision_id"] for d in state["decisions"]}
@@ -75,3 +76,51 @@ def test_a_kept_promise_says_so_and_names_come_from_the_log():
     [received] = monitor_feed.offer_records({"offer_id": "kb:x", "supplier_id": "sup-1", "part_id": "BOOK",
                                              "quantity": None, "unit_price_eur": None, "sources": []}, "sup-1", due)
     assert received["title"] == "Offer received from sup-1: BOOK" and received["source"] is None
+
+
+def test_a_published_break_stays_broken_when_the_feed_starts_later(demo_run, monkeypatch):
+    r, facts = demo_run, launch_facts()
+    with monkeypatch.context() as before_the_feed:
+        before_the_feed.setattr(monitor_feed, "feed", lambda *a, **k: 0)
+        r.deliver("cancellation")
+        assert _watch(r, facts).tick()
+    _watch(r, facts).tick()                    # restarted with the feed on the same database and log
+    assert [x["state"] for x in screen(r.log).state()["promises"]] == ["broken"]
+
+
+def test_a_failed_feed_append_does_not_undo_the_break(demo_run, monkeypatch):
+    r, facts = demo_run, launch_facts()
+    watch = _watch(r, facts)
+    r.deliver("cancellation")
+    with monkeypatch.context() as full_disk:
+        def fail(*args, **kwargs):
+            raise OSError("no space")
+        full_disk.setattr(monitor_feed, "append_records", fail)
+        assert watch.tick()
+    watch.tick()
+    assert [x["state"] for x in screen(r.log).state()["promises"]] == ["broken"]
+
+
+def test_a_cancelled_promise_is_not_shown_as_watched(demo_run):
+    r, facts = demo_run, launch_facts()
+    r.plan.execute("UPDATE promises SET state = 'cancelled'")
+    r.plan.commit()
+    _watch(r, facts).tick()
+    assert not _monitor_lines(r.log)
+
+
+def test_a_waiting_record_keeps_fallback_proof_and_next_check(demo_run):
+    r, facts = demo_run, launch_facts()
+    check = datetime(2100, 1, 1, tzinfo=timezone.utc)
+    r.plan.execute("UPDATE promises SET proof = 'loading note', next_check = %s", (check,))
+    r.plan.commit()
+    _watch(r, facts).tick()
+    [shown] = [x for x in _monitor_lines(r.log) if x["kind"] == "promise"]
+    assert (shown.get("fallback"), shown.get("proof")) == ("use the backup", "loading note")
+    assert datetime.fromisoformat(shown["next_check"]) == check
+
+
+def test_the_event_types_are_shown_in_the_overview_story():
+    script = (ROOT / "tracker" / "lookahead_static" / "overview.js").read_text()
+    main_types = set(json.loads(script.split("MAIN_TYPES = new Set(", 1)[1].split(")", 1)[0]))
+    assert {monitor_feed.OFFER_RECEIVED, monitor_feed.PROMISE_WATCHED, monitor_feed.PROMISE_KEPT} <= main_types
