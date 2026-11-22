@@ -33,6 +33,9 @@ code may name a part, supplier or scenario. Every number shown comes from `sourc
    A rejected push means someone else holds it: pick another issue. After a successful push, fetch and check
    that the tip of `origin/i<n>` is your claim. Then run `python ops/gh_status.py claim <n> <agent-id>`
    (assigns you, sets `status:claimed`, comments, updates the project).
+   Stacked claim: when the coordinator readied the issue with a comment `ready, stacked on #<m> (i<m>)`,
+   branch from the parent instead of main and record the fork point in the claim commit:
+   `git fetch origin && git switch -c i<n> origin/i<m> && git commit --allow-empty -m "claim #<n> <agent-id>" -m "Stacked-on: i<m>@$(git rev-parse origin/i<m>)" && git push origin i<n>`
 3. Work only in a fresh worktree for this issue, inside the repo: `git worktree add .worktrees/i<n> i<n>`
    (`.worktrees/` is git-ignored; paths outside the repo are not writable for headless agents). Never in the
    main checkout, never in another issue's worktree. Restart case: if the last claim on `origin/i<n>` is yours,
@@ -53,6 +56,37 @@ code may name a part, supplier or scenario. Every number shown comes from `sourc
    Then `python ops/gh_status.py review <n>`.
 9. Stop on an issue after 90 minutes, 3 failed checks, or 2 failed fixes of the same test:
    `python ops/gh_status.py block <n> "<what you found>"`, push, move on.
+
+## Stacked PRs (do not wait for a parent to merge)
+Work that is in review rarely changes its interfaces, so an issue may start on top of its blocker's open PR.
+- Ready rule (coordinator): an issue is stackable when every blocking issue is closed except exactly one, and that
+  one has an open PR from `i<m>` not labelled `status:blocked`. Ready it with `python ops/gh_status.py ready <n>` and
+  comment `ready, stacked on #<m> (i<m>)`. Never stack on a PR that is itself stacked more than two levels deep.
+- Claim: see the stacked claim in step 2. Before the PR, run `python ops/restack.py <n>` instead of
+  `git rebase origin/main` (it rebases onto the parent's current tip, or onto main once the parent merged).
+- PR: `gh pr create --base i<m>` with the line `Stacked-on: i<m>@<sha>` (the sha from your claim commit) as the
+  last line of the body, then `gh stack link <parent-pr> <your-pr>` so GitHub shows the stack.
+  Review covers only your diff against `i<m>`.
+- When the parent changes or merges: the repo squash-merges and deletes the head branch, so GitHub retargets your PR
+  to main but your branch still holds the parent's old commits. Run `python ops/restack.py <n>` at the start of every
+  round while your PR is stacked; it replays only your commits, pushes `i<n>` with `--force-with-lease`, and
+  retargets the PR. Never run `gh stack sync`, `gh stack push` or `gh stack rebase`: they push the parent's branch.
+- Merge (coordinator): merge only PRs whose base is `main`. A stacked PR with `review:pass` waits for its parent;
+  after the parent merges, its author restacks, the coordinator reruns the check and merges if it still passes
+  (a clean restack keeps `review:pass`; a restack with conflicts needs a new review).
+
+## Live runs (agents run them, nobody waits for a human)
+Acceptance items that need the live model are run by the author before the PR and again by the reviewer, on a
+machine whose agent clone has `secrets/anthropic.env` and `data/current`:
+- `python ops/live_run.py .worktrees/i<n> eval-extraction [--kind K] [--limit N]`, `... extract`,
+  `... llm-eval [tests]`. Each run builds a fresh database on the local throwaway Postgres from `data/current`
+  offline, runs your worktree's code with the key in the child process only, and prints the result.
+- Answers are cached and shared, so reruns are cheap. Keep `--limit` small (6 per kind is enough to judge).
+  `python ops/live_run.py --spend` shows the estimated spend; runs stop at the budget.
+- Paste counts, agreement and the run id into the PR, never values from the data.
+- No key or no `data/current` on your machine: mark the item `needs-live-run` with the exact command; a reviewer
+  on a machine that has them runs it. Only deployment and human decisions go to a `human-only` follow-up.
+- Never read, print, copy or log the key, and never write code that does. A diff containing `sk-ant-` is a stop.
 
 ## Never
 - Send email, approve drafts, or change `MAIL_SEND_MODE`. Approvals are human, by name.
@@ -75,8 +109,8 @@ code may name a part, supplier or scenario. Every number shown comes from `sourc
 
 ## LLM key and models
 - The Anthropic key lives only in `secrets/anthropic.env` as `LOOKAHEAD_ANTHROPIC_API_KEY` (git-ignored).
-  Agents never read it. Tests use recorded replay fixtures. Live runs go through `tests/live/llm_eval.py`, started by a
-  human or the coordinator on the laptop that has the key.
+  Agents never read it. Tests use recorded replay fixtures. Live runs go through `python ops/live_run.py`, which
+  passes the key to the child process only (see "Live runs").
 - Default model for development and tests: `claude-haiku-5-5` (`LOOKAHEAD_LLM_MODEL`). Switch a role to
   `claude-opus-5-5` only where a measured quality problem needs it.
 - Probe findings to respect: extract quantities verbatim as text and parse them in code (space-grouped numbers

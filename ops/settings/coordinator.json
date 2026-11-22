@@ -39,7 +39,10 @@
       "Bash(ls*)",
       "Bash(cat *)",
       "Bash(grep *)",
-      "Bash(rm -rf .worktrees/*)"
+      "Bash(rm -rf .worktrees/*)",
+      "Bash(gh stack link*)",
+      "Bash(gh stack view*)",
+      "Bash(python ops/restack.py*)"
     ],
     "deny": [
       "Read(./secrets/**)",
@@ -61,7 +64,12 @@
       "Bash(python -m mail send*)",
       "Bash(python -m mail approve*)",
       "Bash(*MAIL_SEND_MODE=*)",
-      "Bash(gh pr create*)"
+      "Bash(gh pr create*)",
+      "Bash(gh stack sync*)",
+      "Bash(gh stack push*)",
+      "Bash(gh stack rebase*)",
+      "Bash(gh stack submit*)",
+      "Bash(gh stack merge*)"
     ]
   }
 }
