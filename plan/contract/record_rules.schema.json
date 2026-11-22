@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lookahead.local/plan/contract/record_rules.schema.json",
+  "title": "record_rules",
+  "description": "Lookahead record kind 'rules': one whole set of agent rules saved by a person. The latest counts, earlier ones stay in the log. A null number was not set.",
+  "type": "object",
+  "required": [
+    "kind",
+    "at",
+    "source",
+    "autonomy",
+    "hedge",
+    "escalation"
+  ],
+  "properties": {
+    "kind": {
+      "const": "rules"
+    },
+    "at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source": {
+      "type": [
+        "string",
+        "object"
+      ],
+      "description": "Where the numbers of this record come from."
+    },
+    "autonomy": {
+      "type": "object",
+      "required": [
+        "quotes_and_holds",
+        "check_ins",
+        "reminders_and_calls",
+        "skip_hedge_with_substitute",
+        "binding_orders"
+      ],
+      "properties": {
+        "quotes_and_holds": {
+          "type": "boolean"
+        },
+        "check_ins": {
+          "type": "boolean"
+        },
+        "reminders_and_calls": {
+          "type": "boolean"
+        },
+        "skip_hedge_with_substitute": {
+          "type": "boolean"
+        },
+        "binding_orders": {
+          "const": false,
+          "description": "Paying or placing a binding order always needs a person."
+        }
+      },
+      "additionalProperties": false
+    },
+    "hedge": {
+      "type": "object",
+      "required": [
+        "min_share_pct",
+        "window_months",
+        "size_percentile",
+        "unit_loss"
+      ],
+      "properties": {
+        "min_share_pct": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "A hedge is proposed only when it costs less than this share of total refunds.",
+          "maximum": 100
+        },
+        "window_months": {
+          "enum": [
+            6,
+            12,
+            24,
+            null
+          ]
+        },
+        "size_percentile": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 50,
+          "maximum": 100
+        },
+        "unit_loss": {
+          "type": "object",
+          "required": [
+            "mode",
+            "value_eur"
+          ],
+          "properties": {
+            "mode": {
+              "enum": [
+                "refund",
+                "custom"
+              ]
+            },
+            "value_eur": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false,
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "custom"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value_eur": {
+                "type": "number"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "value_eur": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "escalation": {
+      "type": "object",
+      "required": [
+        "vacant_to_next_level",
+        "remind_hours_before",
+        "digest_hours_before",
+        "channels"
+      ],
+      "properties": {
+        "vacant_to_next_level": {
+          "type": "boolean"
+        },
+        "remind_hours_before": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "digest_hours_before": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "channels": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "email",
+              "teams",
+              "sms"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}
