@@ -5,14 +5,16 @@ fact rows and that the rules reach the model. It does not prove that a model fol
 """
 
 import json
+from copy import deepcopy
 from pathlib import Path
 
 import pytest
 
-from kb import validate
+from kb import facts, validate
 from kb.llm.anthropic import AnthropicClient, Reply
 from kb.llm.base import Document, Structure
 from kb.loader import DEFAULT_CONFIDENCE, envelope_facts
+from sourcing import approval_chart
 from tracker.config import PROJECT_ROOT
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures" / "replay_kb"
@@ -123,3 +125,23 @@ def test_every_seat_is_complete_grounded_and_stored_as_text(replayed):
         assert set(row["subject"]) == {"source_path", "title", "scope"}
         assert isinstance(row["value"], str) and row["evidence"] in text
         assert row["source_path"] == "org/synthetic.pdf"
+
+
+def test_two_charts_with_the_same_empty_key_stay_two_seats(replayed):
+    """The model is given no path, so two charts share subjects. Storage and routing must still keep them apart."""
+    first = replayed[0]
+    second = deepcopy(first)
+    second["source"] = {"path": "org/second.pdf", "sha256": "f" * 64}
+    for fact in second["facts"]:
+        if fact["subject"]["title"] == "Plant Director":
+            fact["value"] = {"holder": "", "status": "vacant"}.get(fact["attribute"], fact["value"])
+    stored = [*envelope_facts(first, DEFAULT_CONFIDENCE), *envelope_facts(second, DEFAULT_CONFIDENCE)]
+    assert {row["subject"]["source_path"] for row in stored} == {""}
+
+    ids = [facts.fact_id(row) for row in stored]
+    assert len(set(ids)) == len(ids), "the second chart would overwrite seats of the first"
+    current = [{**row, "fact_id": fid, "path": row["source_path"], "sha256": row["source_sha256"],
+                "doc_kind": approval_chart.CHART_KIND} for row, fid in zip(stored, ids)]     # as kb.current_facts
+    read = {path: [(s.state, s.name) for s in seats if s.title == "Plant Director"]
+            for (path, _), seats in approval_chart.read_seats(current).items()}
+    assert read == {"org/synthetic.pdf": [("held", "Alex Example")], "org/second.pdf": [("vacant", None)]}
