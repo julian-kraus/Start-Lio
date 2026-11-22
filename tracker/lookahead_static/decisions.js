@@ -48,7 +48,7 @@
       el("span",{},open.length?`${page+1} / ${open.length}`:""),el("button",{class:"btn btn-secondary",disabled:page>=open.length-1,"aria-label":tr(t,"next"),onclick:()=>{page++;renderAll()}},"›"));
     const waiting=el("section",{class:"card"},el("div",{class:"between"},el("h2",{class:"h-sm"},tr(t,"waiting")),pager));
     const grid=el("div",{class:"dgrid"});if(open[page])grid.append(card(open[page],t));waiting.append(grid);root.append(waiting);
-    const table=el("table",{class:"table"}),head=el("tr",{},["waiting","by","impact","amount","time","result"].map(k=>el("th",{},tr(t,k))),el("th",{},""));
+    const table=el("table",{class:"table"}),head=el("tr",{},["decision","by","impact","amount","time","result"].map(k=>el("th",{},tr(t,k))),el("th",{},""));
     table.append(el("thead",{},head));const body=el("tbody");
     done.forEach(d=>body.append(el("tr",{},el("td",{},d.title||""),el("td",{},d.decided_by||""),
       el("td",{},money(d.impact&&d.impact.eur)),el("td",{},money(d.cost&&d.cost.eur)),el("td",{},time(d.decided_at)),
