@@ -7,6 +7,7 @@ from datetime import datetime, timedelta, timezone
 import psycopg
 import pytest
 from psycopg import sql
+from psycopg.rows import dict_row, tuple_row
 
 from plan import clock, db
 
@@ -22,6 +23,7 @@ T0 = datetime(2030, 1, 10, 8, 0, tzinfo=timezone.utc)
 def conn(monkeypatch):
     monkeypatch.delenv(clock.ENV_VAR, raising=False)
     schema = f"plan_test_{uuid.uuid4().hex[:8]}"
+    monkeypatch.setenv("PLAN_SCHEMA", schema)
     c = db.connect(URL, schema)
     try:
         yield c, schema
@@ -70,6 +72,25 @@ def test_scenario_clock_roundtrip(conn):
     c.commit()
     assert not clock.is_scenario(c)
     assert abs(clock.now(c) - datetime.now(timezone.utc)) < timedelta(seconds=5)
+
+
+@pytest.mark.parametrize("factory", [dict_row, tuple_row])
+def test_clock_works_on_another_modules_connection(conn, factory):
+    c, schema = conn
+    db.migrate(c, schema)
+    c.commit()
+    with psycopg.connect(URL, row_factory=factory) as other:   # search_path without the plan schema
+        clock.set_scenario(other, T0)
+        assert clock.is_scenario(other) and clock.now(other) == T0
+        clock.set_real(other)
+        assert not clock.is_scenario(other)
+
+
+def test_clock_is_real_before_plan_is_migrated(conn):
+    c, _ = conn
+    assert not clock.is_scenario(c)
+    assert abs(clock.now(c) - datetime.now(timezone.utc)) < timedelta(seconds=5)
+    assert c.execute("SELECT 1 AS ok").fetchone()["ok"] == 1   # the caller's transaction is still usable
 
 
 def test_constraints_guard_the_contract(conn):
