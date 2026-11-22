@@ -75,6 +75,12 @@ def extract(conn, settings: KbSettings, reader: FileReader, llm, mail: mail_sour
     return drained, parked
 
 
+def _not_extracted(conn) -> set[tuple[str, str, str]]:
+    """Queue items that left `pending` without facts: they failed, or wait for review after the gate."""
+    rows = conn.execute("SELECT path, sha256, state FROM extraction_queue WHERE state IN ('failed', 'review')")
+    return {(r["path"], r["sha256"], r["state"]) for r in rows}
+
+
 def handle_event(conn, ev: dict, reader: FileReader, settings: KbSettings, confidence_map: dict,
                  llm=None) -> str | None:
     """Events can arrive late or twice; only the tracker's current version of a path is ever ingested."""
@@ -130,10 +136,12 @@ def catch_up(conn, settings: KbSettings, reader: FileReader, llm,
     stale_events = processed and not paths
     paths.extend(mail.catch_up(conn, settings.structured_dir, confidence_map))
     if llm is not None:
-        drained, parked = extract(conn, settings, reader, llm, mail, confidence_map)
+        before = _not_extracted(conn)
+        drained, _ = extract(conn, settings, reader, llm, mail, confidence_map)
         if drained["done"]:
             paths.append({"llm_extracted": drained["done"]})
-        paths.extend({"path": r["path"], "status": "failed"} for r in parked)
+        # A retry stays pending. Only a change of state, parked mail included, needs a reconcile.
+        paths.extend({"path": path, "status": state} for path, _, state in sorted(_not_extracted(conn) - before))
     if paths or stale_events:
         return reconcile.run(conn, "file_events", {"events": processed, "paths": paths[:200]})
     conn.commit()
